@@ -1,0 +1,26 @@
+{
+  "base": "1300815eae321d5de8e992958b2841f96ca47039",
+  "compiler": "xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -Isrc tests/unit/executable_image.cpp src/loader/executable_image.cpp -o build/executable-image-packet/baseline-test",
+  "compile_exit": 0,
+  "source_sha256": {
+    "src/loader/executable_image.cpp": "0f21f60ae1034911a271afe3de215683f6c4d5410965bdbfe6e67e4882d17c9b",
+    "src/loader/executable_image.hpp": "112d26830c0e807ee7b3c4bd5bb9b1600a86c9ee0e08a17ad733e99a7e6b22cd",
+    "tests/unit/executable_image.cpp": "7e6f11fd6d6e9a86c6ac9b53d1d625a9baefd3be179783870453abc2a964141b"
+  },
+  "runs": [
+    {
+      "arguments": "--valid",
+      "exit": 0,
+      "stdout": "valid checks 65630\n",
+      "meaning": "All file/rebased bytes, facts, exports/imports, OFT fallback, empty import size, zero tails, same/down/up base, two final blocks and modular data relocation match literal independently authored expected values."
+    },
+    {
+      "arguments": "--p2",
+      "exit": 1,
+      "stderr": "LB-1: final eight-byte header declaring ten-byte block must fail explicitly\n",
+      "meaning": "Old source accepted malformed relocation block instead of returning nullopt. Empty-optional precondition violation is source-backed; no deterministic crash claim."
+    }
+  ],
+  "pinned_tests": "Not run: local game/updated PC assets absent from assigned worktree. Existing judges unchanged.",
+  "limits": "Synthetic bounded PE32 contract, not Windows loader equivalence; malformed suite is expected red before rewrite. No gate/manifest refresh."
+}
