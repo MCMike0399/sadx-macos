@@ -104,5 +104,7 @@ def main():
     if leaf(pending,4):raise RuntimeError('Inactive native boundary probe rejected')
     boundary_match=ip==0x401000 and before==after and bytes(memory)==after and pending[0]==10 and pending[1]==ip and pending[2]==0 and pending[3]==1
     report['inactive_destroy_boundary']=dict(original_stop=hex(ip),source_arena_unchanged=before==after,native_pending_failure=pending[0],native_source_boundary=hex(pending[1]),native_task_retired=bool(pending[2]),native_work_retained=bool(pending[3]),source_arena_sha256=sha(after),native_arena_sha256=sha(bytes(memory)),state_and_explicit_boundary_match=boundary_match,original_return_observed=False,limits=['Real401000/CRT formatting not executed; no source cleanup or diagnostic success claimed'])
+    root=pathlib.Path(__file__).resolve().parents[2]
+    report['native_sources']={name:sha((root/name).read_bytes()) for name in ['src/engine/task.hpp', 'src/engine/task.cpp', 'src/engine/task_work.hpp', 'src/engine/task_work.cpp', 'src/guest/task_reference.hpp', 'src/player/player_auxiliary_effect.hpp', 'tests/probes/native_task_lifecycle_probe.cpp']}
     report['values_links_and_bytes_match']=all(s['callback_contexts_match'] and not s['trace_mismatches']and not s['byte_mismatches']for s in report['sequences']);a.output.write_text(json.dumps(report,indent=2)+'\n');return int(not report['values_links_and_bytes_match']or not boundary_match)
 if __name__=='__main__':raise SystemExit(main())

@@ -124,7 +124,7 @@ TaskWorkHandle allocate_zero(Context &, unsigned count, unsigned bytes);
 void initialize_cursors(Context &, const TaskWorkHandle &);
 // STUB: SONIC 0x4c5420 GammaLoadSetupResource
 void load_setup_resource(Context &);
-// STUB: SONIC 0x40b940 CreateChildTask
+// NOTSA: time-HUD composition remains unimplemented; creation belongs to TaskScheduler::create_child.
 void create_time_hud(Context &, unsigned level, const TaskHandle &);
 // STUB: SONIC 0x49fb10 GammaInitializeEffects
 void initialize_effects(Context &);
@@ -162,7 +162,7 @@ void calculate_collision_range(Context &, Primary);
 void enter_collision_list(Context &, Primary);
 // STUB: SONIC 0x446f10 RunUnderwaterStuff
 void underwater(Context &, Primary, const TaskWorkHandle &, const Player &);
-// STUB: SONIC 0x40b420 LoopTaskC
+// NOTSA: Gamma child-dispatch binding remains unimplemented; behavior belongs to TaskScheduler::run_children.
 void run_children(Context &, const TaskHandle &);
 // NOTSA: source stage and act are borrowed signed/unsigned 16-bit owners.
 std::int16_t stage(Context &);

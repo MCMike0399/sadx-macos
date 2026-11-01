@@ -1,3 +1,4 @@
+#include "guest/task_reference.hpp"
 #include "player/player_auxiliary_effect.hpp"
 #include <cstring>
 #include <vector>
@@ -23,7 +24,7 @@ extern "C" int sadx_native_player_auxiliary_effect(const std::uint8_t* table,std
     std::uint32_t* out,std::size_t count,std::uint8_t* memory,std::size_t memory_size){
     if(!table||table_size!=0x438||!w||words!=16||!out||count!=16||!memory||memory_size!=sadx::TaskWorkArena::usable_bytes+32||w[6]>4)return 1;
     try{
-        auto arena=std::make_shared<sadx::TaskWorkArena>(0x20000000);sadx::TaskScheduler scheduler;
+        auto arena=std::make_shared<sadx::TaskWorkArena>(sadx::task_reference::pointer_encoder(0x20000000));sadx::TaskScheduler scheduler;
         if(!scheduler.initialize_source_pool(arena,std::shared_ptr<void>{}))return 2;
         auto task=scheduler.create_element(2,2,&sadx::player_auxiliary_effect_initialize_callback).task;if(!task)return 2;
         const auto primary=task->primary_work;std::array<std::uint8_t,64> seed{};seed.fill(static_cast<std::uint8_t>(w[15]));
@@ -55,7 +56,7 @@ extern "C" int sadx_native_player_auxiliary_effect(const std::uint8_t* table,std
         else if(w[0]==2)result=sadx::update_player_auxiliary_effect(scheduler,task,runtime);
         else return 1;
         std::memset(out,0,16*4);std::memcpy(memory,arena->source_bytes().data(),memory_size);
-        out[0]=static_cast<std::uint32_t>(result.failure);out[1]=result.source_boundary;out[2]=result.nested_source_boundary;out[3]=static_cast<std::uint32_t>(result.work_failure);
+        out[0]=static_cast<std::uint32_t>(result.failure);out[1]=result.source_boundary;out[2]=result.task_step!=sadx::TaskStep::None?sadx::task_reference::source_boundary(result.task_step):result.nested_source_boundary;out[3]=static_cast<std::uint32_t>(result.work_failure);
         out[4]=callback(task->exec);out[5]=callback(task->destructor);out[6]=callback(task->display);out[7]=address(primary);
         if(task->auxiliary_effect_work && task->auxiliary_effect_work->selection_at_8){out[8]=*task->auxiliary_effect_work->selection_at_8?2:1;if(*task->auxiliary_effect_work->selection_at_8){out[9]=static_cast<std::uint32_t>((*task->auxiliary_effect_work->selection_at_8)->group);put(memory+primary->data_offset()+8,0x9275a0+out[9]*216);}}
         out[10]=arena->free_head()?0x20000000+*arena->free_head():0;out[11]=fp.control_word();out[12]=fp.exception_flags();

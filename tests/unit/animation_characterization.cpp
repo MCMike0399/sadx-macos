@@ -96,7 +96,7 @@ void record(const std::string& name, Fixture& fixture, const PlayerAnimationResu
     std::cout << "{\"case\":\"" << name << "\",\"result\":["
               << static_cast<unsigned>(result.failure) << ',' << result.source_boundary << ','
               << result.callee_address << ',' << result.nested_source_boundary << ','
-              << static_cast<unsigned>(result.work_failure.value_or(TaskWorkFailure::none)) << ','
+              << static_cast<unsigned>(result.work_failure.value_or(TaskWorkFailure::None)) << ','
               << result.work_failure.has_value() << ',' << result.completed << ',' << result.wrap_iterations << "],\"state\":["
               << fixture.player.animation_mode_at_120.value_or(-99) << ','
               << fixture.player.requested_animation_at_124.value_or(65535) << ','

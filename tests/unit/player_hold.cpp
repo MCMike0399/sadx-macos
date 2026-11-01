@@ -35,7 +35,7 @@ int main(){using namespace sadx;
     runtime.work_arena=arena;assert(arena->set_reference(held->primary_work,0x38,{}));check(query_player_hold(task,scene,runtime),0);
     assert(arena->set_reference(held->primary_work,0x38,cwp));
     auto unknown=arena->allocate(64).work;auto old=held->primary_work;held->primary_work=unknown;
-    auto unobserved=query_player_hold(task,scene,runtime);assert(!unobserved && unobserved.source_boundary==0x43ba22 && unobserved.work_failure!=TaskWorkFailure::none);
+    auto unobserved=query_player_hold(task,scene,runtime);assert(!unobserved && unobserved.source_boundary==0x43ba22 && unobserved.work_failure!=TaskWorkFailure::None);
     held->primary_work=old;
 
     task.orientation.flags=0;const auto before=lookups;

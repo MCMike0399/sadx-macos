@@ -1,0 +1,109 @@
+[
+  {
+    "command": [
+      "build/task-test"
+    ],
+    "exit": 0,
+    "stdout": "Task dispatch: eight lists, alias, mutation, deferred free, child traversal, nested context and native ownership passed.\nTask lifecycle has separate source tests; full game integration remains unfinished.\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "build/task-work-test"
+    ],
+    "exit": 0,
+    "stdout": "Task work arena: source limits, first-fit/reuse, coalescing, exact fit, payload and native references passed.\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "build/task-lifecycle-test"
+    ],
+    "exit": 0,
+    "stdout": "Source task creation, slots, work cleanup, partial failures and callback mutations passed.\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "build/task-display-test"
+    ],
+    "exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "build/task-callback-lifetime-test"
+    ],
+    "exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "build/task-scheduler-contract-test"
+    ],
+    "exit": 0,
+    "stdout": "availability-slot-zero 12 4241688 0 1\ncontext-table 1 0\nsaved-next-generation 2 0\nfailure-at-call 1 19 4239627 2\nfailure-at-call 2 19 4239627 1\nfailure-at-call 3 19 4239627 0\nhost-exception-context 1 1\ncleanup-read-prefix 1 4240919 1 1\ncleanup-read-prefix 2 4240936 2 1\ncreation-write-prefix 1 4241540 1 4095\ncreation-write-prefix 2 4241579 2 4095\ncreation-write-prefix 3 4241614 3 4095\ncreation-write-prefix 4 4241649 4 4095\npool-publication 7 4239415 4240573 4096\nnonowning-links 1\nlifetime-value-continuation 3 1\ndestructor-failure-prefix 1 0 4\ndestructor-failure-prefix 2 1 4\ndestructor-failure-prefix 3 2 4\noutermost-walk-reclamation 1 1\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "build/task-arena-transport-test"
+    ],
+    "exit": 0,
+    "stdout": "Arena transport: metadata/payload ordering, live null/redirect, interior/self aliases, released generation and saved allocation offset passed.\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "build/task-native-test"
+    ],
+    "exit": 0,
+    "stdout": "0 0 0 1 4095\n15 1 0 1 4095\n4294967040 0 0 1 4095\n4294967295 1 0 1 4095\nNative task boundary: full flag/list widths and isolated plain owners passed.\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "build/player-task-test"
+    ],
+    "exit": 0,
+    "stdout": "Player child-state factory: installed copy, explicit missing factory and unobserved boundary passed.\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "build/actor-current-test"
+    ],
+    "exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "build/player-startup-test",
+      "build/assets/player-parameters.bin"
+    ],
+    "exit": 0,
+    "stdout": "Player startup: real allocation/registration prefix, live aliases, source events and retained boundaries passed.\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "build/player-auxiliary-effect-test",
+      "build/assets/player-auxiliary-effect-table.bin",
+      "build/assets/player-parameters.bin"
+    ],
+    "exit": 0,
+    "stdout": "Auxiliary-effect init/resource callbacks: source table, live lookup, failure context, node cleanup and explicit renderer boundaries passed.\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "build/player-motion-graph-test"
+    ],
+    "exit": 0,
+    "stdout": "Native graph roundtrip retains canonical motion identity and values\n",
+    "stderr": ""
+  }
+]

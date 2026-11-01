@@ -1,0 +1,246 @@
+{
+  "source": "72d0e83ead1255aa658ef6b78220c04b1b737b93",
+  "runs": [
+    {
+      "command": [
+        "build/task-test"
+      ],
+      "exit": 0,
+      "stdout": "Task dispatch: eight lists, alias, mutation, deferred free, child traversal, nested context and native ownership passed.\nTask lifecycle has separate source tests; full game integration remains unfinished.\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "build/task-work-test"
+      ],
+      "exit": 0,
+      "stdout": "Task work arena: source limits, first-fit/reuse, coalescing, exact fit, payload and native references passed.\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "build/task-lifecycle-test"
+      ],
+      "exit": 0,
+      "stdout": "Source task creation, slots, work cleanup, partial failures and callback mutations passed.\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "build/task-display-test"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "build/task-callback-lifetime-test"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "build/task-scheduler-contract-test"
+      ],
+      "exit": 0,
+      "stdout": "availability-slot-zero 12 4241688 0 1\ncontext-table 1 0\nsaved-next-generation 2 0\nfailure-at-call 1 19 4239627 2\nfailure-at-call 2 19 4239627 1\nfailure-at-call 3 19 4239627 0\nhost-exception-context 1 1\ncleanup-read-prefix 1 4240919 1 1\ncleanup-read-prefix 2 4240936 2 1\ncreation-write-prefix 1 4241540 1 4095\ncreation-write-prefix 2 4241579 2 4095\ncreation-write-prefix 3 4241614 3 4095\ncreation-write-prefix 4 4241649 4 4095\npool-publication 7 4239415 4240573 4096\nnonowning-links 1\nlifetime-value-continuation 3 1\ndestructor-failure-prefix 1 0 4\ndestructor-failure-prefix 2 1 4\ndestructor-failure-prefix 3 2 4\noutermost-walk-reclamation 1 1\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "build/task-arena-transport-test"
+      ],
+      "exit": 0,
+      "stdout": "Arena transport: metadata/payload ordering, live null/redirect, interior/self aliases, released generation and saved allocation offset passed.\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "build/task-native-test"
+      ],
+      "exit": 0,
+      "stdout": "0 0 0 1 4095\n15 1 0 1 4095\n4294967040 0 0 1 4095\n4294967295 1 0 1 4095\nNative task boundary: full flag/list widths and isolated plain owners passed.\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "build/player-task-test"
+      ],
+      "exit": 0,
+      "stdout": "Player child-state factory: installed copy, explicit missing factory and unobserved boundary passed.\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "build/actor-current-test"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "build/player-startup-test",
+        "build/assets/player-parameters.bin"
+      ],
+      "exit": 0,
+      "stdout": "Player startup: real allocation/registration prefix, live aliases, source events and retained boundaries passed.\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "build/player-auxiliary-effect-test",
+        "build/assets/player-auxiliary-effect-table.bin",
+        "build/assets/player-parameters.bin"
+      ],
+      "exit": 0,
+      "stdout": "Auxiliary-effect init/resource callbacks: source table, live lookup, failure context, node cleanup and explicit renderer boundaries passed.\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "build/player-motion-graph-test"
+      ],
+      "exit": 0,
+      "stdout": "Native graph roundtrip retains canonical motion identity and values\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "build/game-scene-logic-test"
+      ],
+      "exit": 0,
+      "stdout": "Scene logic: real task ordering, shared arithmetic, stage reloads and required-owner failures passed.\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "build/collision-component-test"
+      ],
+      "exit": 0,
+      "stdout": "Canonical primary/motion, real scheduler cleanup/reentry, store prefix and allocation failures pass\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "build/player-initialization-test"
+      ],
+      "exit": 0,
+      "stdout": "Actual flags6/7 primary binding, canonical pose aliases, typed startup and explicit auxiliary boundary pass\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "build/player-hold-test"
+      ],
+      "exit": 0,
+      "stdout": "Player hold query passed source routes, live authority, availability order and12 untouched FP profiles\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "build/gamma-cursors-test"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "build/gamma-selection-core-test"
+      ],
+      "exit": 0,
+      "stdout": "PASS: real Gamma mode 0, ID 2, task/motion/PInitialize ownership and common tail\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "build/animation-characterization-test"
+      ],
+      "exit": 0,
+      "stdout": "{\"case\":\"current\",\"result\":[1,4499464,0,0,0,0,0,0],\"state\":[3,0,65535,77,65535,65535,1056964608,0,895],\"known\":[1,1,0,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,999,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"requested\",\"result\":[1,4499468,0,0,0,0,0,0],\"state\":[3,65535,0,77,65535,65535,1056964608,0,895],\"known\":[1,0,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,999,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"mode\",\"result\":[1,4499493,0,0,0,0,0,0],\"state\":[-99,0,0,0,0,65535,1056964608,0,895],\"known\":[0,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,999,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"timer\",\"result\":[1,4499522,0,0,0,0,0,0],\"state\":[3,0,0,0,0,65535,1056964608,0,895],\"known\":[1,1,1,1,1,0,1,1,1,1,1,1,1],\"allocated_header\":[1,1,999,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"table-unknown\",\"result\":[1,4499784,0,0,0,0,0,0],\"state\":[3,0,0,0,0,0,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,0,0,1,1],\"allocated_header\":[1,1,999,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"table-null\",\"result\":[2,4499784,0,0,0,0,0,0],\"state\":[3,0,0,0,0,0,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,0,1,1],\"allocated_header\":[1,1,999,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"row\",\"result\":[3,4499784,0,0,0,0,0,0],\"state\":[3,0,0,0,0,0,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,999,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"frame-step\",\"result\":[1,4499797,0,0,0,0,0,0],\"state\":[3,0,0,0,0,0,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,999,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"frame\",\"result\":[1,4499800,0,0,0,0,0,0],\"state\":[3,0,0,0,0,0,3267756032,0,895],\"known\":[1,1,1,1,1,1,0,1,1,1,1,1,1],\"allocated_header\":[1,1,999,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"action-unknown\",\"result\":[1,4499829,0,0,0,0,0,0],\"state\":[3,0,0,0,0,0,1065353216,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,999,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"action-null\",\"result\":[2,4499829,0,0,0,0,0,0],\"state\":[3,0,0,0,0,0,1065353216,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,999,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"action-unresolved\",\"result\":[3,4499829,0,0,0,0,0,0],\"state\":[3,0,0,0,0,0,1065353216,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,999,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"motion-unknown\",\"result\":[1,4499829,0,0,0,0,0,0],\"state\":[3,0,0,0,0,0,1065353216,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,999,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"motion-null\",\"result\":[2,4499829,0,0,0,0,0,0],\"state\":[3,0,0,0,0,0,1065353216,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,999,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"motion-unresolved\",\"result\":[3,4499829,0,0,0,0,0,0],\"state\":[3,0,0,0,0,0,1065353216,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,999,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"frame-count\",\"result\":[1,4499829,0,0,0,0,0,0],\"state\":[3,0,0,0,0,0,1065353216,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,999,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"transition\",\"result\":[1,4499745,0,0,0,0,0,0],\"state\":[2,0,0,0,0,0,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,999,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"target-mode\",\"result\":[1,4499771,0,0,0,0,0,0],\"state\":[2,0,0,0,0,0,1069547520,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,999,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"next\",\"result\":[1,4499724,0,0,0,0,0,0],\"state\":[2,0,0,0,0,0,1065353216,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,999,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"release-count\",\"result\":[1,4454912,0,0,0,0,0,0],\"state\":[14,0,0,0,0,0,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,999,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"arena-9\",\"result\":[4,4499968,0,0,0,0,0,0],\"state\":[9,0,0,0,0,0,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,999,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"allocation-9\",\"result\":[3,4499968,0,0,0,0,0,0],\"state\":[9,0,0,0,0,0,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,999,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"null-alias-9\",\"result\":[2,4499968,0,0,0,0,0,0],\"state\":[9,0,0,0,0,0,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,999,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"foreign-alias-9\",\"result\":[3,4499968,0,0,0,0,0,0],\"state\":[9,0,0,0,0,0,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,999,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"wrong-offset-9\",\"result\":[3,4499968,0,0,0,0,0,0],\"state\":[9,0,0,0,0,0,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,999,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"arena-10\",\"result\":[4,4500133,0,0,0,0,0,0],\"state\":[10,0,0,0,0,0,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,999,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"allocation-10\",\"result\":[3,4500133,0,0,0,0,0,0],\"state\":[10,0,0,0,0,0,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,999,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"null-alias-10\",\"result\":[2,4500133,0,0,0,0,0,0],\"state\":[10,0,0,0,0,0,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,999,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"foreign-alias-10\",\"result\":[3,4500133,0,0,0,0,0,0],\"state\":[10,0,0,0,0,0,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,999,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"wrong-offset-10\",\"result\":[3,4500133,0,0,0,0,0,0],\"state\":[10,0,0,0,0,0,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,999,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"arena-11\",\"result\":[4,4500306,0,0,0,0,0,0],\"state\":[11,0,0,0,0,0,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,999,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"allocation-11\",\"result\":[3,4500306,0,0,0,0,0,0],\"state\":[11,0,0,0,0,0,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,999,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"null-alias-11\",\"result\":[2,4500306,0,0,0,0,0,0],\"state\":[11,0,0,0,0,0,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,999,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"foreign-alias-11\",\"result\":[3,4500306,0,0,0,0,0,0],\"state\":[11,0,0,0,0,0,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,999,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"wrong-offset-11\",\"result\":[3,4500306,0,0,0,0,0,0],\"state\":[11,0,0,0,0,0,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,999,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"charge-unknown\",\"result\":[1,4500133,0,0,0,0,0,0],\"state\":[10,0,0,0,0,0,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,999,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"selected-object\",\"result\":[1,4453064,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,999,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"selected-object-null\",\"result\":[2,4431842,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,0,0,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"object-map\",\"result\":[3,4431842,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"object-record\",\"result\":[3,4431842,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"child\",\"result\":[1,4431842,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"sibling\",\"result\":[1,4431874,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"next-motion-type\",\"result\":[1,4453095,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"next-motion-data\",\"result\":[1,4453099,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"old-motion-type\",\"result\":[1,4453110,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"old-motion-data\",\"result\":[1,4453118,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"allocated-action\",\"result\":[1,4453043,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,0,0],\"allocated_header\":[0,0,0,0,0,0,0,0,0,0,0,0,0]}\n{\"case\":\"allocated-action-null\",\"result\":[2,4453076,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,0],\"allocated_header\":[0,0,0,0,0,0,0,0,0,0,0,0,0]}\n{\"case\":\"allocated-motion\",\"result\":[1,4453137,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,0,0,0,0,0,0,0,0,0,0]}\n{\"case\":\"allocated-motion-null\",\"result\":[2,4453140,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,0,0,0,0,0,0,0,0,0]}\n{\"case\":\"allocated-data\",\"result\":[1,4453140,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,0,0,1,2,1,3,1,2]}\n{\"case\":\"allocated-data-null\",\"result\":[2,4453254,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,1,0,1,2,1,3,1,2]}\n{\"case\":\"nodes-null\",\"result\":[2,4453212,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"nodes-unresolved\",\"result\":[3,4453212,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"node-row\",\"result\":[3,4453212,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"node-key\",\"result\":[1,4453212,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"key-unresolved\",\"result\":[3,4453272,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"node-count\",\"result\":[1,4453272,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"raw-scale-pointer\",\"result\":[1,4453276,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"key-backing-null\",\"result\":[11,4453272,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"key-frame-extent\",\"result\":[11,4453272,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"key-next-frame\",\"result\":[11,4453324,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"key-axis-y\",\"result\":[11,4453376,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,0,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"key-axis-z\",\"result\":[11,4453382,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,0,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"key-offset\",\"result\":[11,4453272,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"incoming-key\",\"result\":[11,4453536,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"hierarchy-cap\",\"result\":[9,4428830,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"blend-table-unknown\",\"result\":[1,4453061,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,0,0,1,1],\"allocated_header\":[1,1,999,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"blend-table-null\",\"result\":[2,4453061,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,0,1,1],\"allocated_header\":[1,1,999,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"blend-row\",\"result\":[3,4453061,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,999,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"blend-count\",\"result\":[1,4453163,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"blend-arena\",\"result\":[4,4453232,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"channel-old-key-0\",\"result\":[1,4453212,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"channel-new-key-0\",\"result\":[1,4453530,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"channel-old-count-0\",\"result\":[1,4453272,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"channel-old-backing-0\",\"result\":[11,4453272,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"channel-new-backing-0\",\"result\":[11,4453536,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"channel-pose-0\",\"result\":[1,4453272,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"channel-old-key-1\",\"result\":[1,4453639,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"channel-new-key-1\",\"result\":[1,4454023,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"channel-old-count-1\",\"result\":[1,4453708,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"channel-old-backing-1\",\"result\":[11,4453708,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"channel-new-backing-1\",\"result\":[11,4454030,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"channel-pose-1\",\"result\":[1,4453708,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"channel-old-key-2\",\"result\":[1,4454246,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"channel-new-key-2\",\"result\":[1,4454606,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"channel-old-count-2\",\"result\":[1,4454336,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"channel-old-backing-2\",\"result\":[11,4454336,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"channel-new-backing-2\",\"result\":[11,4454610,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"channel-pose-2\",\"result\":[1,4454336,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"arena-unobserved-alias\",\"result\":[5,4499968,0,0,7,1,0,0],\"state\":[9,0,0,0,0,0,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,999,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"arena-released-player\",\"result\":[5,4499968,0,0,4,1,0,0],\"state\":[9,0,0,0,0,0,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,999,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"reset-unreached-table\",\"result\":[0,0,0,0,0,0,1,0],\"state\":[3,0,0,77,65535,65535,1048576000,0,895],\"known\":[1,1,1,1,1,1,1,1,1,0,0,1,1],\"allocated_header\":[1,1,999,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"next-low-byte\",\"result\":[0,0,0,0,0,0,1,0],\"state\":[3,1,1,77,65535,65535,1048576000,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,999,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"live-alias-9\",\"result\":[0,0,0,0,0,0,1,0],\"state\":[9,0,0,0,0,1,1077936128,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,999,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"live-alias-10\",\"result\":[0,0,0,0,0,0,1,0],\"state\":[10,0,0,0,0,1,1080033280,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,999,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"live-alias-11\",\"result\":[0,0,0,0,0,0,1,0],\"state\":[11,0,0,0,0,1,1088421888,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,999,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"hierarchy-repeats\",\"result\":[0,0,0,0,0,0,1,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"object-publication-prefix\",\"result\":[2,4453212,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"axis-prefix-8\",\"result\":[11,4453376,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,0,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"axis-prefix-12\",\"result\":[11,4453382,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,0,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"null-release-count\",\"result\":[0,0,0,0,0,0,1,0],\"state\":[3,0,0,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,999,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"allocation-exhaustion-0\",\"result\":[2,4499584,0,0,0,0,0,0],\"state\":[1,0,0,0,0,0,0,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,0],\"allocated_header\":[0,0,0,0,0,0,0,0,0,0,0,0,0]}\n{\"case\":\"allocation-exhaustion-64\",\"result\":[2,4499608,0,0,0,0,0,0],\"state\":[1,0,0,0,0,0,0,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,0,0,0,0,0,0,0,0,0]}\n{\"case\":\"allocation-exhaustion-128\",\"result\":[0,0,0,0,0,0,1,0],\"state\":[1,0,0,0,0,0,0,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,1,0,1,2,1,3,1,2]}\n{\"case\":\"malloc-partial-action\",\"result\":[1,4499580,0,0,0,0,0,0],\"state\":[1,0,0,0,0,0,0,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[0,0,0,0,0,0,0,0,0,0,0,0,0]}\n{\"case\":\"malloc-partial-motion\",\"result\":[5,4499637,0,0,9,1,0,0],\"state\":[1,0,0,0,0,0,0,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,0,0,1,2,1,3,1,2]}\n{\"case\":\"release-order-prefix\",\"result\":[3,4454974,0,0,0,0,0,0],\"state\":[3,0,0,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,999,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"hierarchy-length-111\",\"result\":[0,0,0,0,0,0,1,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"hierarchy-length-112\",\"result\":[9,4428830,0,0,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,1,1,1,2,1,3,1,2]}\n{\"case\":\"nested-mdata2\",\"result\":[1,4483478,4453024,4453140,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,0,0,1,2,1,3,1,2]}\n{\"case\":\"nested-mdata3\",\"result\":[1,4483488,4453024,4453140,0,0,0,0],\"state\":[3,0,1,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,0,1,1,0,0,1,2,1,3,1,2]}\n{\"case\":\"release-requested-count-zero\",\"result\":[0,0,0,0,0,0,1,0],\"state\":[3,1,0,77,65535,65535,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,1],\"allocated_header\":[1,1,999,1,1,1,0,1,2,1,3,1,2]}\n{\"case\":\"default-release-order\",\"result\":[0,0,0,0,0,0,1,0],\"state\":[14,0,0,0,0,0,1056964608,0,895],\"known\":[1,1,1,1,1,1,1,1,1,1,1,1,0],\"allocated_header\":[0,0,0,0,0,0,0,0,0,0,0,0,0]}\n",
+      "stderr": "114 source-backed interface characterizations passed\n"
+    },
+    {
+      "command": [
+        "build/player-animation-test",
+        "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/system/CHRMODELS_orig.dll",
+        "build/assets/player-animation-constants.bin"
+      ],
+      "exit": 0,
+      "stdout": "Animation real DLL147-record table,73-node transition/key release and12 FP profiles passed; 146 actions, 139 motions, 223 objects, 3650 key arrays decoded\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "build/sonic-player-test",
+        "build/assets/sonic-player-constants.bin",
+        "build/assets/sonic-action-dispatch.bin",
+        "build/assets/ninja-trig.f32",
+        "build/assets/ninja-unit.f32"
+      ],
+      "exit": 0,
+      "stdout": "Sonic control dispatch and source availability tests passed across 12 explicit CW profiles\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "build/animation-sonic-composition-test",
+        "build/assets/sonic-player-constants.bin",
+        "build/assets/player-parameters.bin"
+      ],
+      "exit": 0,
+      "stdout": "0,0,4,4832779,0,1074790400,0\n1,0,6,4832784,0,1076887552,0\n1,1,18,4832779,4499522,1074790400,0\n2,0,6,4832784,0,1076887552,0\n2,1,18,4832779,4499522,1074790400,0\nattachment,0,3,4828004,16\nattachment,1,12,4827966,14\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "build/hle-task-bridge-test",
+        "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe",
+        "reference/oracle-reports/task_work.cases.bin",
+        "reference/oracle-reports/task_lifecycle.cases.bin"
+      ],
+      "exit": 0,
+      "stdout": "Task bridge: 16 complete oracle sequences, 4890 operations; 17 graph sequences/2302 operations; 18 dispatch scenarios; 6 lifetime callback scenarios; actual CRT/heap acquisition and repeated initialization; EAX allocation/global/exact HLE traces and full 16 MiB+32 arena bytes match with guest payload writes and sentinel padding; 2 work, 5 graph and 3 dispatch and 2 lifetime input mutants caught; corrupt metadata, wrap and unowned free stop explicitly\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "build/guest-task-graph-sync-test"
+      ],
+      "exit": 0,
+      "stdout": "Task synchronization: 128 callbacks, 2708 API reads, 54966380 bytes\nTask synchronization: 128 callbacks, 2708 API reads, 54966380 bytes\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "build/hle-task-inactive-lifetime-test",
+        "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe"
+      ],
+      "exit": 0,
+      "stdout": "Task lifetime: never-allocated, destroyed parent, recursively destroyed child and detached task reject destruction without stores; original/native full arena bytes and task globals match; null accepted and foreign identity rejected\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "build/task-bridge-contract-test"
+      ],
+      "exit": 0,
+      "stdout": "lazy-invalid-level 0\ntask bridge: missing arena global at 40b1a5\nlazy-zero-free 0\ntask bridge: missing field 38f6e08 at 40b460\ntask bridge: unreadable pool at 40b860 heads-and-free-unchanged\ntask bridge: pool native boundary 40b4bd prefix 12 3584\n00000000000000001042034000000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "build/game-runtime-test",
+        "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe",
+        "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/mods/sadx-input-mod/sadx-input-mod.dll"
+      ],
+      "exit": 0,
+      "stdout": "Game runtime: survey ran startup + 3 frames (5 unported owners); native execution stops at 40cad0>40c090>415000>422680.\n",
+      "stderr": ""
+    }
+  ]
+}

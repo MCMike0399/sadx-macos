@@ -272,7 +272,7 @@ def main():
         if differences:
             bad.append({'case':index,'input':values,'diff':differences})
             if len(bad)==8:break
-    root=Path(__file__).resolve().parents[2];paths=['src/engine/task.hpp','src/engine/task.cpp','tests/probes/native_task_delete_probe.cpp']
+    root=Path(__file__).resolve().parents[2];paths=['src/engine/task.hpp','src/engine/task.cpp','src/engine/task_work.cpp','src/guest/task_reference.hpp','src/engine/task_work.hpp','src/player/player_auxiliary_effect.hpp','tests/probes/native_task_delete_probe.cpp']
     report={'passed':not bad,'values_match':not bad,'cases':len(cases)-len(unsupported),'attempted_cases':len(cases),'mismatches':len(bad),'first_mismatches':bad,'seed':args.seed,'source_unsupported_cases':len(unsupported),'source_unsupported':unsupported,
             'source_sha256':image.sha256,'source_ranges':{'0x40b730-0x40b771':hashlib.sha256(image.read(0x40b730,0x41)).hexdigest()},
             'native_sources':{p:hashlib.sha256((root/p).read_bytes()).hexdigest() for p in paths},

@@ -15,7 +15,7 @@ enum class PlayerHoldFailure {
 struct PlayerHoldResult {
     PlayerHoldFailure failure=PlayerHoldFailure::none;
     std::uint32_t source_boundary=0;
-    TaskWorkFailure work_failure=TaskWorkFailure::none;
+    TaskWorkFailure work_failure=TaskWorkFailure::None;
     std::optional<std::uint32_t> flags;
     explicit operator bool()const noexcept{return failure==PlayerHoldFailure::none;}
 };

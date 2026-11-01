@@ -1,3 +1,4 @@
+#include "guest/task_reference.hpp"
 #include "engine/task.hpp"
 #include <cstddef>
 #include <cstdint>
@@ -9,7 +10,7 @@ static std::vector<std::uint32_t> callback_trace;
 class TaskSourceProbe {
     static constexpr std::uint32_t base=0x20000020;
     static std::uint32_t address(const TaskHandle& t) {return t && t->source_slot_?base+*t->source_slot_*52:0;}
-    static void observed_no_op(TaskScheduler& scheduler,const TaskHandle& task){callback_trace.push_back(address(task));callback_trace.push_back(callback(scheduler.context().current_function));callback_trace.push_back(scheduler.context().field30?0x30000000:0);callback_trace.push_back(task->parent_?callback(task->parent_->exec):0);}
+    static void observed_no_op(TaskScheduler& scheduler,const TaskHandle& task){callback_trace.push_back(address(task));callback_trace.push_back(callback(scheduler.context().current_function));callback_trace.push_back(scheduler.context().cooperative_thread?0x30000000:0);callback_trace.push_back(task->parent_?callback(task->parent_->exec):0);}
     static std::uint32_t callback(TaskCallback c) {
         if(c==&TaskScheduler::source_no_op||c==&observed_no_op)return 0x51f680;
         if(c==&TaskScheduler::destroy_callback)return 0x40b570;
@@ -21,7 +22,7 @@ public:
         std::size_t memory_size,std::uint32_t* trace,std::size_t trace_size) {
         if(!commands||words%4||!memory||memory_size!=TaskWorkArena::usable_bytes+32||!trace||trace_size!=words/4*3+11)return 1;
         callback_trace.clear();
-        TaskScheduler scheduler;auto arena=std::make_shared<TaskWorkArena>(0x20000000);
+        TaskScheduler scheduler;auto arena=std::make_shared<TaskWorkArena>(sadx::task_reference::pointer_encoder(0x20000000));
         auto resource=std::make_shared<int>(1);
         if(!scheduler.initialize_source_pool(arena,resource))return 2;
         std::vector<TaskHandle> allocations;
@@ -80,9 +81,9 @@ public:
             const auto& task=last_generation[slot];const auto start=32+slot*52;
             for(unsigned j=0;j<13;++j)put(static_cast<std::uint32_t>(start+j*4),0);
             if(task) {
-                put(start+48,task->field30?0x30000000:0);
+                put(start+48,task->cooperative_thread?0x30000000:0);
                 if(!task->retired_) {
-                    if(!task->linked_ && task->destruction_stage_==Task::DestructionStage::live) {
+                    if(!task->linked_ && task->destruction_stage_==Task::DestructionStage::Live) {
                         // AllocateTask7 deliberately retains the popped free
                         // node's old next pointer; its isolated node is not
                         // a native active-list edge.
@@ -105,7 +106,7 @@ public:
         const auto at=words/4*3;
         for(unsigned i=0;i<8;++i)trace[at+i]=address(scheduler.retain(scheduler.heads_[i]));
         trace[at+8]=callback(scheduler.context_.current_function);
-        trace[at+9]=scheduler.context_.field30?0x30000000:0;
+        trace[at+9]=scheduler.context_.cooperative_thread?0x30000000:0;
         trace[at+10]=arena->free_head()?0x20000000+*arena->free_head():0;
         return 0;
     }
@@ -122,7 +123,7 @@ extern "C" int sadx_native_task_inactive_boundary(std::uint32_t* output,std::siz
         if(!scheduler.initialize_source_pool(std::make_shared<sadx::TaskWorkArena>(),std::shared_ptr<void>{}))return 2;
         auto task=scheduler.create_element(2,7,nullptr).task;
         auto result=scheduler.destroy_task(task);
-        output[0]=static_cast<std::uint32_t>(result.failure);output[1]=result.source_boundary;
+        output[0]=static_cast<std::uint32_t>(result.failure);output[1]=sadx::task_reference::source_boundary(result);
         output[2]=task->retired()?1:0;output[3]=task->primary_work && !task->primary_work->released()?1:0;
         return 0;
     }catch(...){return 3;}

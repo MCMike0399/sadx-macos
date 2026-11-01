@@ -40,9 +40,9 @@ class TaskSourceProbe {
     }
     static void callback(TaskScheduler &s, const TaskHandle &task, std::uint32_t code) {
         const auto f = fixture(s);
-        f->trace.push_back({slot(task), code, callback_id(s.context_.current_function), marker(s.context_.field30)});
+        f->trace.push_back({slot(task), code, callback_id(s.context_.current_function), marker(s.context_.cooperative_thread)});
         if (++f->callbacks == f->fail_at)
-            TaskScheduler::raise_callback_failure({TaskFailure::callback_failed, task});
+            TaskScheduler::raise_callback_failure({TaskFailure::CallbackFailed, task});
         const auto index = *task->source_slot_;
         if (f->consumed[index]) return;
         f->consumed[index] = true;
@@ -80,7 +80,7 @@ class TaskSourceProbe {
             break;
         }
         case 8: task->display = display_two; break;
-        case 9: TaskScheduler::raise_callback_failure({TaskFailure::callback_failed, task});
+        case 9: TaskScheduler::raise_callback_failure({TaskFailure::CallbackFailed, task});
         case 10: if (target) accept(s.destroy_task(target)); break;
         }
     }
@@ -102,18 +102,18 @@ public:
                                 scheduler.create_element(0, static_cast<int>(row[0]), exec_marker);
             if (!made) return 0;
             made.task->display = row[2] == 1 ? display_one : (row[2] == 2 ? display_two : nullptr);
-            made.task->field30 = row[5] ? std::make_shared<Marker>(Marker{row[5]}) : nullptr;
+            made.task->cooperative_thread = row[5] ? std::make_shared<Marker>(Marker{row[5]}) : nullptr;
             tasks.push_back(made.task);
             f->actions[i] = row[3];
             f->targets[i] = row[4];
         }
         scheduler.context_.current_function = in[4] ? exec_marker : nullptr;
-        scheduler.context_.field30 = in[5] ? std::make_shared<Marker>(Marker{9000}) : nullptr;
+        scheduler.context_.cooperative_thread = in[5] ? std::make_shared<Marker>(Marker{9000}) : nullptr;
         TaskResult result;
         if (in[0] == 0) {
             result = scheduler.display_game_tasks([&] {
-                f->trace.push_back({0, 0, callback_id(scheduler.context_.current_function), marker(scheduler.context_.field30)});
-                if (in[7]) TaskScheduler::raise_callback_failure({TaskFailure::callback_failed, {}});
+                f->trace.push_back({0, 0, callback_id(scheduler.context_.current_function), marker(scheduler.context_.cooperative_thread)});
+                if (in[7]) TaskScheduler::raise_callback_failure({TaskFailure::CallbackFailed, {}});
             });
         } else if (in[0] == 1) {
             result = scheduler.display_index(static_cast<int>(in[1]));
@@ -121,11 +121,11 @@ public:
             result = scheduler.display_children(tasks.at(in[2]));
         }
         std::fill_n(out, capacity, 0);
-        out[0] = result.failure == TaskFailure::none ? 0 :
-                 (result.failure == TaskFailure::callback_failed ? 1 :
-                  (result.failure == TaskFailure::deleted_snapshot_next ? 2 : 100 + static_cast<unsigned>(result.failure)));
+        out[0] = result.failure == TaskFailure::None ? 0 :
+                 (result.failure == TaskFailure::CallbackFailed ? 1 :
+                  (result.failure == TaskFailure::DeletedSnapshotNext ? 2 : 100 + static_cast<unsigned>(result.failure)));
         out[1] = callback_id(scheduler.context_.current_function);
-        out[2] = marker(scheduler.context_.field30);
+        out[2] = marker(scheduler.context_.cooperative_thread);
         out[3] = static_cast<std::uint32_t>(f->trace.size());
         out[4] = static_cast<std::uint32_t>(scheduler.free_slots_.size());
         out[5] = scheduler.free_slots_.empty() ? 0 : scheduler.free_slots_.back() + 1U;
@@ -142,7 +142,7 @@ public:
             node[5] = callback_id(task->exec);
             node[6] = callback_id(task->display);
             node[7] = callback_id(task->destructor);
-            node[8] = marker(task->field30);
+            node[8] = marker(task->cooperative_thread);
         }
         auto cursor = out + 640;
         for (const auto &entry : f->trace) cursor = std::copy(entry.begin(), entry.end(), cursor);

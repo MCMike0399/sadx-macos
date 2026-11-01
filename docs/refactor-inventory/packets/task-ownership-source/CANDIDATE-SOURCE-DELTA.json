@@ -1,0 +1,90 @@
+{
+  "source": "72d0e83ead1255aa658ef6b78220c04b1b737b93",
+  "base_manifest": "CANDIDATE-SOURCE.json",
+  "base_manifest_sha256": "87364bb523066be94c64f6c1b980154885bfcdc1ee1cdfc93529d6c56c7fe63f",
+  "changed": {
+    "src/engine/collision_component.cpp": {
+      "before": "e6a9e37e956ebe2f7a54344f5b17e447f182c8e502432ee28aeef115717ee3e5",
+      "after": "dcc98cffb8e52f289f9bbe14a6340ffb972516eb55223b5256ee5a12d98d7b18"
+    },
+    "src/engine/collision_component.hpp": {
+      "before": "fa4fb6a7a96459b94cf173b32c0b0d96eb5d4b0dfd19a79139f828e70e91392c",
+      "after": "43c8c27b7ed6f6ff83a8f83a414b2e73bbb2a34e25c5e8230126118fc0fe8f0c"
+    },
+    "src/engine/task.cpp": {
+      "before": "8761bd22b6beb62047b25862aa11f95e8f9159b44449a5df38b64c5a2c883541",
+      "after": "d7360e20a0f310242af513852b819ae210621b748ffade06ad7b075f2a527675"
+    },
+    "src/engine/task.hpp": {
+      "before": "8ce0a49f40331d169d273a0da991aa9a76b7561f1b64760ee605178cf5d5bb26",
+      "after": "3aa7e066178e5bc901d01bab6cc52881f3610fbb98a58558497dc442520aa726"
+    },
+    "src/engine/task_work.cpp": {
+      "before": "0567cf392e7118f37c1a530314a735e7279508d0eca36590d281be3f82400b78",
+      "after": "7513b41eec91d55f24c6058c0904fc620be61c254cb493f938ad380e0be4a56c"
+    },
+    "src/engine/task_work.hpp": {
+      "before": "9d0c6a340b53a59a283de70d1c570c44bebcebf1893f5d18534e4fba6a893056",
+      "after": "f7d78c9979f63095bd47ad7c9ca1e56443b2b3863bb4d9bbf81157e3d72ee90d"
+    },
+    "src/guest/player_initialization_reference.cpp": {
+      "before": "11cd53b6f60365bf7f7ff87412e13231237588b501451f893fe3350c9af2fc1c",
+      "after": "8f4c65ff73d154d9dd997afd76f3e9094022fa8ecc0c8bc9d141743c9a7da9a3"
+    },
+    "src/guest/task_reference.hpp": {
+      "before": "46132ad9c4b10d1e4b3a331234ba95ad8dd4fa3d9da5fde84faa82bdd478a09a",
+      "after": "74bb1b232a071c54411aa7f9c805c47447c87f29de825a7448a92c947783abc5"
+    },
+    "src/hle/hle_task_bridge.cpp": {
+      "before": "6b6086868ae645c4db49220e2f73b5f73f0fbf913954ef2a6bfc4462c8bf7fca",
+      "after": "a4ba7cc8e5b23c4ddf12fe0a274ebdf44d364e713eee93ad0b8064893cf3420f"
+    },
+    "src/player/animation/animation_engine.hpp": {
+      "before": "007a0533a6c55bd33fc4e3b8d8a9c4da3c747141fa55f6e65cf3e7027497f222",
+      "after": "d600a6180d5872427fa921944da14b095522365dfda5112ab025f769845067c4"
+    },
+    "src/player/gamma_cursors.hpp": {
+      "before": "f44b3d5733ba89f2c1b139cb5bdb7a5b4d123a59534adfa48d5ab7a862f5889e",
+      "after": "ba1f87792521c6895909ca81af5769b788d1b7f9447e5f5add13dc4521b4aae0"
+    },
+    "src/player/player_auxiliary_effect.cpp": {
+      "before": "dffb8d7cebabb408f206d8f604b7627f5c268ad7be1d03792386bc11c78120a1",
+      "after": "8a140735f80c8ecea18444b7988ecf137ca28bd59194bcff5777f544104e298b"
+    },
+    "src/player/player_auxiliary_effect.hpp": {
+      "before": "b7a23070a88f2be63445448a998c09dfe7d674e955756a883ca849ad0b232d1d",
+      "after": "929b9a190b5c44bc963b578359f210e0316913d155f5563824ebb7b056271bd5"
+    },
+    "src/player/player_hold.cpp": {
+      "before": "a05c67631eb355dc6999806e8269788df92863399afcd36be2214458307d902d",
+      "after": "909cd849ff2c29fa5cd33eb8a454a69b4244e0b170ab018d0ef11a59b13d5504"
+    },
+    "src/player/player_hold.hpp": {
+      "before": "11cbf9f85a4b73d4b3525b3e8a50281e8e32848d5c96ee1ef5e223085c8b6b90",
+      "after": "12b258a7bb34d8b160284845810eca7d1684721a3e62e86685e90f108974e29d"
+    },
+    "src/player/player_initialization.hpp": {
+      "before": "2c618b5b9a53d73fb6dfded918b3335eae7a3c16e2d067aa6a6759e027de01f0",
+      "after": "91b394d607c29c2a38841f22d7b9a2ce0539fdcf28f14d15ebd1cf6c796fecbe"
+    },
+    "src/player/player_startup.hpp": {
+      "before": "caf9869ca53aa415652f368ed0228b7d712be8ead731fa467a51adfd2e7c3c32",
+      "after": "2ca2671df869540b51680445e9b199e67ef4018b1f18d5062dce465e5e55020b"
+    },
+    "src/player/player_task.cpp": {
+      "before": "b9a8cfd5b3c97c1e077fc240d9b5010f9887377cd40c9f146b46e6e266d4244c",
+      "after": "f702fad3c4b8f605ac1cdb490d719718a9550faea94d1ac86c3929a321d30bd3"
+    },
+    "src/player/sonic_player.cpp": {
+      "before": "57d7e0ad5eeca0a427809d538e22094e87a17acb6e0dfb70eb9d27da12d7397f",
+      "after": "4b170e197fe8a048e875cd83757dc93558129280156afa87f3137b550af9200f"
+    },
+    "src/runtime/native_title_scene.cpp": {
+      "before": "cbf4b20341e359a6f945e453834a6d9ef599685bef3c5b50115dc505d741e21e",
+      "after": "fb9e8e02c22c29834423a6eeaa1b31f59ec782d83d233a677a3ffc776f02bf73"
+    }
+  },
+  "all_other_source_files_unchanged": true,
+  "standards": "STANDARDS-RECHECK.md",
+  "runtime_status": "Final Source72 qualification complete within FINAL-QUALIFICATION.json; independent fidelity/reserved/integration acceptance remains Root owned"
+}

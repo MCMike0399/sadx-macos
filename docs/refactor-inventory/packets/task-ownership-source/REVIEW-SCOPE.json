@@ -1,0 +1,64 @@
+{
+  "source": "72d0e83",
+  "scope": [
+    {
+      "path": "src/guest/task_reference.hpp",
+      "sha256": "74bb1b232a071c54411aa7f9c805c47447c87f29de825a7448a92c947783abc5",
+      "lines": 142,
+      "review_scope": "complete body",
+      "proposed_disposition": "justified_reference_infrastructure",
+      "purpose": "Complete inline pointer encoding, lazy missing-default binding and diagnostic conversion; no allocator/scheduler policy"
+    },
+    {
+      "path": "tools/oracles/task_judges/mutate.py",
+      "sha256": "cd1efaef480a8c56a37fe0bf56a0fe0290bd0678bbc3b8c70507c577c46ea43c",
+      "lines": 176,
+      "review_scope": "complete body",
+      "proposed_disposition": "qualification_infrastructure_pending_spec_review",
+      "purpose": "Complete maintained helper including untouched historical faults, candidate anchors, unmodified controls, compile/run classification and report handling"
+    },
+    {
+      "path": "tools/oracles/task_judges/bridge_faults.py",
+      "sha256": "5bb5a429e62aaa2d8aa93d8919078247918caf009f62dc15f5b37bed9fce7c1c",
+      "lines": 58,
+      "review_scope": "complete body",
+      "proposed_disposition": "qualification_infrastructure_pending_spec_review",
+      "purpose": "Complete maintained actual-bridge fault helper, same three fault intents, current-source base and private link-map evidence"
+    },
+    {
+      "path": "tests/unit/task_arena_transport.cpp",
+      "sha256": "87d3c992d6dc68f9edf8f0f9fc0c9f327ecdc74a78a12b20c5c5c5d55cd19942",
+      "lines": 78,
+      "review_scope": "complete body",
+      "proposed_disposition": "reference_contract_pending_spec_review",
+      "purpose": "Complete added test body: metadata/payload order, live null/redirect, interior/self aliases, weak released generations and allocation offset"
+    },
+    {
+      "path": "tests/unit/task_native.cpp",
+      "sha256": "357fa1105954a468e3c91db02530f9f1aa09052edce1310edf3fa7aeee0febf4",
+      "lines": 52,
+      "review_scope": "complete body",
+      "proposed_disposition": "native_contract_pending_spec_review",
+      "purpose": "Complete added test body: full flag/index widths, source slot zero, detached/list aliases, native resource and arena/world isolation"
+    },
+    {
+      "path": "tests/unit/game_scene_logic.cpp",
+      "sha256": "594fe613ff6a83ed53b190310a61d08040847dfb8e2ca2c702aa19d4691f5ea6",
+      "lines": 51,
+      "review_scope": "complete body",
+      "proposed_disposition": "consumer_contract_pending_spec_review",
+      "purpose": "Complete existing unit with additive actual task-failure/prefix/context test; no old case removed"
+    },
+    {
+      "path": "tests/probes/task_scheduler_contract.hpp",
+      "sha256": "4d448bea49603c72a49984bc019324e119d798d4a18670fdc28b0a07d49450de",
+      "lines": 363,
+      "review_scope": "complete body",
+      "proposed_disposition": "foundation_contract_binding_pending_spec_review",
+      "purpose": "Complete inherited prepared contract, including lazy missingness adapter and exact original numeric boundary assertions; all old observations retained"
+    }
+  ],
+  "also_review": "All source/consumer changes from immutable bd22ee4, original comparison binding/fingerprint blocks, Make dependency additions and explicit native test registration; Source standards acceptance is separately bounded",
+  "root_owned_unreviewed": "Root generator, reserved observer, final runner/admission and reserved protocol are not approved by this packet; they remain Root-owned and unexecuted here",
+  "no_global_inventory_change": true
+}

@@ -1,3 +1,4 @@
+#include "guest/task_reference.hpp"
 #include "engine/task_work.hpp"
 #include <cstddef>
 #include <cstdint>
@@ -8,7 +9,7 @@ extern "C" int sadx_native_task_work(const std::uint32_t* commands,std::size_t w
     std::uint8_t* memory,std::size_t memory_size,std::uint32_t* trace,std::size_t trace_size) {
     if(!commands||words%2||!memory||memory_size!=sadx::TaskWorkArena::usable_bytes+32||!trace||trace_size!=words/2*3)return 1;
     try {
-        sadx::TaskWorkArena arena(0x20000000);
+        sadx::TaskWorkArena arena(sadx::task_reference::pointer_encoder(0x20000000));
         std::vector<sadx::TaskWorkHandle> allocations;
         for(std::size_t i=0;i<words;i+=2) {
             sadx::TaskWorkResult result;

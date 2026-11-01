@@ -27,7 +27,7 @@ void TitleScene::register_callback(TaskCallback callback) {
 TaskHandle TitleScene::create_task(std::uint32_t flags, int level, TaskCallback callback) {
     register_callback(callback);
     const auto created = session_.logo_.task_scheduler().create_element(flags, level, callback);
-    if (created.failure == TaskFailure::source_pool_exhausted)
+    if (created.failure == TaskFailure::SourcePoolExhausted)
         return {};
     if (!created)
         throw std::runtime_error("native title task creation failed");

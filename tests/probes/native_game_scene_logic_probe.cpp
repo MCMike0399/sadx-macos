@@ -1,3 +1,4 @@
+#include "guest/task_reference.hpp"
 #include "game/game_scene_logic.hpp"
 #include <algorithm>
 #include <cstring>
@@ -16,7 +17,7 @@ extern "C" int sadx_native_game_scene_logic(const std::uint32_t* input,std::size
         return sadx::GameSceneOwnerResult{{sadx::GameLogicOwnerState::completed,0},call.operation==sadx::GameSceneOperation::query_42fb00?std::optional<std::int32_t>{signed_word(input[4])}:std::optional<std::int32_t>{}};
     };
     const auto result=sadx::run_game_scene_logic(runtime);std::fill(output,output+32,0);
-    output[0]=static_cast<std::uint32_t>(result.failure);output[1]=result.source_boundary;output[2]=result.nested_source_boundary;
+    output[0]=static_cast<std::uint32_t>(result.failure);output[1]=result.source_boundary;output[2]=result.task_failure?sadx::task_reference::source_boundary(*result.task_failure):result.nested_source_boundary;
     output[3]=result.tasks_completed;output[4]=result.completed;output[5]=*state.byte_at_3b0ef40;output[6]=*state.byte_at_3b0f150;output[7]=*stage;output[8]=trace.size();
     std::copy(trace.begin(),trace.end(),output+9);return 1;
 }

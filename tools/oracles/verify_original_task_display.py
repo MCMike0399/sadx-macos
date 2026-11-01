@@ -290,7 +290,7 @@ def main():
     count, bad = compare(image, ctypes.CDLL(str(args.native_library.resolve())))
     sha = lambda data: hashlib.sha256(data).hexdigest()
     root = Path(__file__).resolve().parents[2]
-    names = ['src/engine/task.hpp', 'src/engine/task.cpp', 'src/engine/task_work.hpp',
+    names = ['src/engine/task.hpp', 'src/engine/task.cpp','src/guest/task_reference.hpp','src/player/player_auxiliary_effect.hpp', 'src/engine/task_work.hpp',
              'src/engine/task_work.cpp', 'tests/probes/native_task_display_probe.cpp']
     report = dict(source_sha256=image.sha256, native_library_sha256=sha(args.native_library.read_bytes()),
                   cases=count, mismatch_count=len(bad), mismatches=bad[:12],

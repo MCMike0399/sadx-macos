@@ -1,3 +1,4 @@
+#include "guest/task_reference.hpp"
 #include "engine/task.hpp"
 #include <cassert>
 #include <cstring>
@@ -29,7 +30,7 @@ void observed(TaskScheduler& scheduler, const TaskHandle& task) {
     assert(scheduler.context().current_function == observed);
     context->trace.push_back(*task->source_slot());
     if (++context->calls == context->fail_at)
-        TaskScheduler::raise_callback_failure({TaskFailure::callback_failed, task, {}, 0x40b10b});
+        TaskScheduler::raise_callback_failure({TaskFailure::CallbackFailed, task, {}, TaskStep::ExecutionCallback});
 }
 void replacement(TaskScheduler& scheduler, const TaskHandle& task) {
     auto context = std::static_pointer_cast<Context>(scheduler.callback_context(replacement));
@@ -60,21 +61,22 @@ void emit(const char* label, std::initializer_list<unsigned> words) {
 void availability() {
     TaskScheduler scheduler;
     auto arena = std::make_shared<TaskWorkArena>();
-    assert(scheduler.initialize_source_pool(arena));
+    sadx::task_reference::unavailable_default(scheduler);
+    assert(scheduler.initialize_source_pool(arena, std::shared_ptr<void>{}));
     auto missing = scheduler.create_element(15, 0, nullptr);
-    assert(missing.failure == TaskFailure::default_field30_unobserved);
-    assert(missing.source_boundary == 0x40b918 && missing.task && !missing.task->field30);
+    assert(missing.failure == TaskFailure::DefaultResourceUnavailable);
+    assert(sadx::task_reference::source_boundary(missing) == 0x40b918 && missing.task && !missing.task->cooperative_thread);
     assert(missing.task->primary_work && missing.task->motion_work && missing.task->force_work);
     assert(missing.task->auxiliary_work && scheduler.active_member(missing.task));
     assert(scheduler.source_free_slots() == 4095);
-    scheduler.set_default_field30(std::shared_ptr<void>{});
+    scheduler.set_default_cooperative_thread(std::shared_ptr<void>{});
     auto known_null = scheduler.create_element(0, 0, nullptr);
-    assert(known_null && !known_null.task->field30);
+    assert(known_null && !known_null.task->cooperative_thread);
     auto graph = scheduler.source_graph();
     assert(graph.heads[0] == 1 && graph.nodes[1].next == 0);
     assert(graph.nodes[0].slot == 0 && !graph.nodes[0].next);
     assert(graph.nodes[0].previous == 1 && !graph.nodes[0].parent);
-    emit("availability-slot-zero", {unsigned(missing.failure), missing.source_boundary,
+    emit("availability-slot-zero", {unsigned(missing.failure), sadx::task_reference::source_boundary(missing),
                                     *missing.task->source_slot(), *known_null.task->source_slot()});
 }
 void contexts() {
@@ -84,21 +86,21 @@ void contexts() {
     assert(first.scheduler.register_callback_context(observed, owner));
     assert(first.scheduler.register_callback_context(observed, owner));
     assert(first.scheduler.register_callback_context(observed, other).failure ==
-           TaskCallbackContextFailure::conflicting_owner);
+           TaskCallbackContextFailure::ConflictingOwner);
     assert(first.scheduler.register_callback_context(nullptr, owner).failure ==
-           TaskCallbackContextFailure::null_callback);
+           TaskCallbackContextFailure::NullCallback);
     assert(first.scheduler.register_callback_context(noop, {}).failure ==
-           TaskCallbackContextFailure::null_context);
+           TaskCallbackContextFailure::NullContext);
     assert(!second.scheduler.callback_context(observed));
     assert(second.scheduler.register_callback_context(observed, other));
     std::weak_ptr<Context> retained = owner;
     owner.reset();
     assert(!retained.expired());
     auto task = first.scheduler.allocate_task(0, observed).task;
-    task->field30 = std::make_shared<int>(7);
+    task->cooperative_thread = std::make_shared<int>(7);
     assert(first.scheduler.run_index(0));
     assert(retained.lock()->calls == 1 && other->calls == 0);
-    assert(!first.scheduler.context().field30 && !first.scheduler.context().current_function);
+    assert(!first.scheduler.context().cooperative_thread && !first.scheduler.context().current_function);
     emit("context-table", {retained.lock()->calls, other->calls});
 }
 void saved_next() {
@@ -112,7 +114,7 @@ void saved_next() {
     assert(s.run_index(0));
     assert((c->trace == std::vector<unsigned>{1, 0}));
     assert(c->target->source_slot() == 0 && !c->target->retired());
-    assert(!s.context().current_function && !s.context().field30);
+    assert(!s.context().current_function && !s.context().cooperative_thread);
     // Public continuation snapshots a native value. Graph import replaces handles;
     // the cursor must resolve the same slot's current generation on its next step.
     World external;
@@ -138,26 +140,26 @@ void callback_failures() {
         assert(s.register_callback_context(observed, c));
         for (unsigned i = 0; i != 3; ++i) assert(s.allocate_task(0, observed));
         auto result = s.run_index(0);
-        assert(result.failure == TaskFailure::callback_failed && result.source_boundary == 0x40b10b);
+        assert(result.failure == TaskFailure::CallbackFailed && sadx::task_reference::source_boundary(result) == 0x40b10b);
         assert(c->calls == fail_at && c->trace.size() == fail_at);
         assert(s.context().current_function == observed);
-        emit("failure-at-call", {fail_at, unsigned(result.failure), result.source_boundary,
+        emit("failure-at-call", {fail_at, unsigned(result.failure), sadx::task_reference::source_boundary(result),
                                  *result.task->source_slot()});
     }
     World world;
     auto& s = world.scheduler;
     auto root = s.allocate_task(0, throwing).task;
-    root->field30 = std::make_shared<int>(9);
+    root->cooperative_thread = std::make_shared<int>(9);
     try { s.run_index(0); assert(false); } catch (const std::runtime_error&) {}
-    assert(!s.context().current_function && !s.context().field30);
+    assert(!s.context().current_function && !s.context().cooperative_thread);
     auto graph = s.source_graph();
     graph.context.current_function = noop;
     assert(s.restore_source_graph(graph));
     root = s.source_task(0);
     auto child = s.create_child(0, throwing, root).task;
-    child->field30 = std::make_shared<int>(8);
+    child->cooperative_thread = std::make_shared<int>(8);
     try { s.run_children(root); assert(false); } catch (const std::runtime_error&) {}
-    assert(s.context().current_function == noop && !s.context().field30);
+    assert(s.context().current_function == noop && !s.context().cooperative_thread);
     child->destructor = throwing;
     try { s.destroy_task(child); assert(false); } catch (const std::runtime_error&) {}
     assert(s.active_member(child) && child->destructor == throwing && !child->retired());
@@ -188,18 +190,18 @@ void read_failures() {
             return true;
         }, {});
         const auto result = s.destroy_task(task);
-        assert(result.failure == TaskFailure::work_failure);
-        assert(result.work_failure == TaskWorkFailure::unobserved_live_field);
-        assert(result.source_boundary == (fail_at == 1 ? 0x40b617U : 0x40b628U));
+        assert(result.failure == TaskFailure::WorkFailure);
+        assert(result.work_failure == TaskWorkFailure::UnobservedLiveField);
+        assert(sadx::task_reference::source_boundary(result) == (fail_at == 1 ? 0x40b617U : 0x40b628U));
         assert(reads == fail_at && !s.active_member(task) && !task->retired());
         assert(!s.source_graph().nodes.front().linked);
         assert(task->primary_work == primary && released == 0);
         assert(offsets.front() == 56 && (fail_at == 1 || offsets.back() == 60));
-        assert(s.destroy_task(task).failure == TaskFailure::inactive_task);
+        assert(s.destroy_task(task).failure == TaskFailure::InactiveTask);
         world.arena->set_payload_transport({}, {});
         assert(s.resume_destruction(task));
         assert(task->retired() && released == 1);
-        emit("cleanup-read-prefix", {fail_at, result.source_boundary, reads, released});
+        emit("cleanup-read-prefix", {fail_at, sadx::task_reference::source_boundary(result), reads, released});
     }
 }
 void write_failures() {
@@ -210,17 +212,17 @@ void write_failures() {
             return ++calls != fail_at;
         });
         auto result = world.scheduler.create_element(15, 0, nullptr);
-        assert(result.failure == TaskFailure::work_failure && result.task);
+        assert(result.failure == TaskFailure::WorkFailure && result.task);
         const unsigned boundaries[] = {0x40b884, 0x40b8ab, 0x40b8ce, 0x40b8f1};
-        assert(result.source_boundary == boundaries[fail_at - 1]);
-        assert(result.work_failure == TaskWorkFailure::unobserved_live_field);
+        assert(sadx::task_reference::source_boundary(result) == boundaries[fail_at - 1]);
+        assert(result.work_failure == TaskWorkFailure::UnobservedLiveField);
         assert(calls == fail_at && world.scheduler.active_member(result.task));
         assert(result.task->primary_work);
         assert(bool(result.task->force_work) == (fail_at >= 2));
         assert(bool(result.task->motion_work) == (fail_at >= 3));
         assert(bool(result.task->auxiliary_work) == (fail_at >= 4));
         world.arena->set_payload_transport({}, {});
-        emit("creation-write-prefix", {fail_at, result.source_boundary, calls,
+        emit("creation-write-prefix", {fail_at, sadx::task_reference::source_boundary(result), calls,
                                        unsigned(world.scheduler.source_free_slots())});
     }
 }
@@ -233,24 +235,25 @@ void pool_and_graph() {
     }
     auto before = s.source_graph();
     const auto failure = s.create_element(15, 0, nullptr);
-    assert(failure.failure == TaskFailure::source_pool_exhausted && !failure.task);
-    assert(failure.source_boundary == 0x40b037 && s.source_free_slots() == 0);
+    assert(failure.failure == TaskFailure::SourcePoolExhausted && !failure.task);
+    assert(sadx::task_reference::source_boundary(failure) == 0x40b037 && s.source_free_slots() == 0);
     auto corrupt = before;
     corrupt.heads[0] = 0;
-    assert(s.restore_source_graph(corrupt).failure == TaskFailure::invalid_source_graph);
+    assert(s.restore_source_graph(corrupt).failure == TaskFailure::InvalidSourceGraph);
     assert(s.source_graph().heads == before.heads && s.source_task(0) && s.source_task(4095));
     World failed;
     // Pool fill fails after reservation/publication, before free-slot publication.
     TaskScheduler unpublished;
+    sadx::task_reference::unavailable_default(unpublished);
     auto arena = std::make_shared<TaskWorkArena>();
     arena->set_payload_transport({}, [](unsigned, const void*, unsigned) { return false; });
     auto partial = unpublished.initialize_source_pool(arena, std::shared_ptr<void>{});
-    assert(partial.failure == TaskFailure::work_failure && partial.source_boundary == 0x40b4bd);
+    assert(partial.failure == TaskFailure::WorkFailure && sadx::task_reference::source_boundary(partial) == 0x40b4bd);
     assert(unpublished.work_arena() == arena && unpublished.source_pool_work());
     assert(unpublished.source_free_slots() == 0);
-    assert(unpublished.initialize_source_pool(arena).failure == TaskFailure::source_pool_already_initialized);
-    emit("pool-publication", {unsigned(failure.failure), failure.source_boundary,
-                              partial.source_boundary, unsigned(before.nodes.size())});
+    assert(unpublished.initialize_source_pool(arena, std::shared_ptr<void>{}).failure == TaskFailure::SourcePoolAlreadyInitialized);
+    emit("pool-publication", {unsigned(failure.failure), sadx::task_reference::source_boundary(failure),
+                              sadx::task_reference::source_boundary(partial), unsigned(before.nodes.size())});
 }
 void lifetime_continuation() {
     World world;
@@ -261,13 +264,13 @@ void lifetime_continuation() {
     task->display = noop;
     auto cursor = s.begin_destruction(task);
     auto call = s.advance_lifetime(cursor);
-    assert(call.result && call.callee == TaskLifetimeCallee::destructor);
+    assert(call.result && call.callee == TaskLifetimeCallee::Destructor);
     assert(call.task == task && call.callback == noop && task->exec == noop);
     assert(s.destroy_task(neighbor));
     auto graph = s.source_graph();
     assert(s.restore_source_graph(graph));
     call = s.advance_lifetime(cursor);
-    assert(call.result && call.callee == TaskLifetimeCallee::free_children);
+    assert(call.result && call.callee == TaskLifetimeCallee::FreeChildren);
     assert(call.task != task && call.task->source_slot() == task->source_slot());
     assert(!call.task->exec && !call.task->display && !call.task->destructor);
     assert(!cursor.next && !cursor.previous);

@@ -1,3 +1,4 @@
+#include "guest/task_reference.hpp"
 #include "player/player_startup.hpp"
 #include "player/player_initialization.hpp"
 
@@ -14,16 +15,16 @@ float float_word(std::uint32_t w) {float v;std::memcpy(&v,&w,4);return v;}
 TaskWorkResult read_bytes(const std::shared_ptr<TaskWorkArena>& arena,
     const TaskWorkHandle& work,std::uint32_t offset,void* out,std::uint32_t count) {
     return arena ? arena->read(work,offset,out,count)
-                 : TaskWorkResult{TaskWorkFailure::foreign_work,work};
+                 : TaskWorkResult{TaskWorkFailure::ForeignWork,work};
 }
 
 }
 
 TaskWorkResult bind_player_task_primary(TaskScheduler& scheduler,const TaskHandle& task) {
-    if(!task)return {TaskWorkFailure::foreign_work,{}};
-    if(!task->primary_work)return {TaskWorkFailure::foreign_work,{}};
-    if(task->auxiliary_effect_work)return {TaskWorkFailure::conflicting_live_view,task->primary_work};
-    if(task->primary_state)return {TaskWorkFailure::none,task->primary_work};
+    if(!task)return {TaskWorkFailure::ForeignWork,{}};
+    if(!task->primary_work)return {TaskWorkFailure::ForeignWork,{}};
+    if(task->auxiliary_effect_work)return {TaskWorkFailure::ConflictingLiveView,task->primary_work};
+    if(task->primary_state)return {TaskWorkFailure::None,task->primary_work};
     const auto arena=scheduler.work_arena();
     std::array<std::uint8_t,12> bytes{};
     auto state=std::make_shared<PlayerTaskState>();
@@ -52,7 +53,7 @@ TaskWorkResult bind_player_task_primary(TaskScheduler& scheduler,const TaskHandl
     const auto pointer=read_bytes(arena,task->primary_work,0x10,bytes.data(),4);
     if(pointer && word(bytes.data())==0)
         state->path_resource=std::shared_ptr<const PlayerPathResource>{};
-    task->primary_state=std::move(state);return {TaskWorkFailure::none,task->primary_work};
+    task->primary_state=std::move(state);return {TaskWorkFailure::None,task->primary_work};
 }
 
 std::optional<const PlayerPhysicsState*> PlayerStartupRegistry::lookup_player(std::uint8_t index) const {
@@ -132,7 +133,7 @@ PlayerStartupResult initialize_player_startup(std::int32_t index,const TaskHandl
         switch(error.boundary) {
         case B::Task:result.failure=F::missing_task;result.source_boundary=0x442756;break;
         case B::Arena:result.failure=F::missing_arena;result.source_boundary=0x44276a;result.callee_boundary=0x40b2d0;break;
-        case B::Primary:result.failure=error.work_failure==TaskWorkFailure::none?F::missing_primary_work:F::work_failure;result.source_boundary=0x44276f;break;
+        case B::Primary:result.failure=error.work_failure==TaskWorkFailure::None?F::missing_primary_work:F::work_failure;result.source_boundary=0x44276f;break;
         case B::PlayerAllocation:result.failure=F::work_failure;result.source_boundary=0x442781;break;
         case B::ParameterRow:result.failure=F::unsupported_character_row;result.source_boundary=0x44278c;break;
         case B::Parameters:result.failure=F::missing_parameters;result.source_boundary=0x44278c;break;
@@ -146,7 +147,7 @@ PlayerStartupResult initialize_player_startup(std::int32_t index,const TaskHandl
         case B::RegistrationSlot:result.failure=F::unsupported_registration_slot;result.source_boundary=0x4427b1;break;
         case B::TaskId:result.failure=F::missing_task_id;result.source_boundary=0x44294c;break;
         case B::AuxiliaryCallback:result.failure=F::missing_auxiliary_effect_callback;result.source_boundary=0x44297b;result.callee_boundary=0x4a2b60;break;
-        case B::TaskCreation:result.failure=F::task_creation_failed;result.source_boundary=0x44297b;result.callee_boundary=error.task_failure.source_boundary;result.task_failure=error.task_failure;break;
+        case B::TaskCreation:result.failure=F::task_creation_failed;result.source_boundary=0x44297b;result.callee_boundary=task_reference::source_boundary(error.task_failure);result.task_failure=error.task_failure;break;
         default: {
             result.failure=F::work_failure;
             switch(error.boundary) {

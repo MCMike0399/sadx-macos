@@ -521,6 +521,16 @@ build/task-scheduler-contract-test: tests/unit/task_scheduler_contract.cpp tests
 build/task-bridge-contract-test: tests/unit/task_bridge_contract.cpp tests/probes/task_bridge_contract.hpp build/libsadx-guest.a build/libsadx-core.a
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -I$(UNICORN_DIR)/include tests/unit/task_bridge_contract.cpp $(GUEST_LINK) build/libsadx-core.a -o $@
 
+# Inline reference conversion is outside the native archive. Rebuild the actual
+# probe/unit consumers when diagnostic mapping or pointer encoding changes.
+TASK_REFERENCE_TARGETS := build/native-collision-component-probe.dylib \
+ build/native-game-scene-logic-probe.dylib build/native-player-auxiliary-effect-probe.dylib \
+ build/native-player-startup-probe.dylib build/native-task-lifecycle-probe.dylib \
+ build/native-task-work-probe.dylib build/player-auxiliary-effect-test build/player-task-test \
+ build/task-arena-transport-test build/game-scene-logic-test build/task-lifecycle-test build/task-work-test \
+ build/task-scheduler-contract-test
+$(TASK_REFERENCE_TARGETS): src/guest/task_reference.hpp src/player/player_auxiliary_effect.hpp
+
 # Before-source save owner characterization; explicit transitive headers.
 build/save-io-characterization-test: src/cpu/crt_integer.hpp src/cpu/fidelity_float.hpp src/cpu/x87_math.hpp src/cpu/x87_transcendental.hpp src/engine/character_resources.hpp src/engine/graphics_frame.hpp src/engine/native_texture_lifetime.hpp src/engine/ninja_texture.hpp src/engine/sprite_immediate.hpp src/engine/task.hpp src/engine/task_work.hpp src/game/file_select.cpp src/game/file_select.hpp src/game/game_bootstrap.hpp src/game/game_cleanup.hpp src/game/music_state.hpp src/game/save_data.cpp src/game/save_data.hpp src/game/save_file_list.cpp src/game/save_file_list.hpp src/game/save_file_name.hpp src/game/save_write.cpp src/game/save_write.hpp src/game/sound_initial_state.hpp src/game/title_menu.hpp src/math/ninja_math.hpp tests/unit/save_io_characterization.cpp
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -Wl,-dead_strip tests/unit/save_io_characterization.cpp src/game/save_write.cpp src/game/save_file_list.cpp src/game/save_data.cpp src/game/file_select.cpp -o $@

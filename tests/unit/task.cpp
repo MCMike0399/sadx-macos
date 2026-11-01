@@ -40,8 +40,8 @@ std::shared_ptr<Payload> payload(int number,
 }
 
 std::shared_ptr<Payload> check_context(TaskScheduler& scheduler, const TaskHandle& task) {
-    const auto data = std::static_pointer_cast<Payload>(task->field30);
-    require(scheduler.context().field30 == task->field30, "wrong field30 callback context");
+    const auto data = std::static_pointer_cast<Payload>(task->cooperative_thread);
+    require(scheduler.context().cooperative_thread == task->cooperative_thread, "wrong cooperative_thread callback context");
     require(scheduler.context().current_function == data->expected_function,
             "wrong current_function callback context");
     return data;
@@ -56,7 +56,7 @@ void retire_self(TaskScheduler& scheduler, const TaskHandle& task) {
     const auto data = check_context(scheduler, task);
     data->visits->push_back(data->number);
     require_ok(scheduler.retire(task));
-    require(scheduler.context().field30 == data, "self retirement lost active native work");
+    require(scheduler.context().cooperative_thread == data, "self retirement lost active native work");
 }
 
 void schedule_self_free(TaskScheduler& scheduler, const TaskHandle& task) {
@@ -91,7 +91,7 @@ void walk_children(TaskScheduler& scheduler, const TaskHandle& task) {
     const auto data = check_context(scheduler, task);
     data->visits->push_back(data->number);
     require_ok(scheduler.run_children(task));
-    require(!scheduler.context().field30, "child walker wrongly restored parent field30");
+    require(!scheduler.context().cooperative_thread, "child walker wrongly restored parent cooperative_thread");
     require(scheduler.context().current_function == &walk_children,
             "child walker modified current_function");
 }
@@ -100,7 +100,7 @@ void child_runs_top_level(TaskScheduler& scheduler, const TaskHandle& task) {
     const auto data = check_context(scheduler, task);
     data->visits->push_back(data->number);
     require_ok(scheduler.run_index(1));
-    require(!scheduler.context().field30 && !scheduler.context().current_function,
+    require(!scheduler.context().cooperative_thread && !scheduler.context().current_function,
             "nested top-level dispatch wrongly restored caller globals");
 }
 
@@ -110,18 +110,18 @@ void parent_with_nested_index(TaskScheduler& scheduler, const TaskHandle& task) 
     require_ok(scheduler.run_children(task));
     require(!scheduler.context().current_function,
             "child walker wrongly restored function cleared by nested index");
-    require(!scheduler.context().field30, "nested walker wrongly restored parent resource");
+    require(!scheduler.context().cooperative_thread, "nested walker wrongly restored parent resource");
 }
 
 void empty_nested_walks(TaskScheduler& scheduler, const TaskHandle& task) {
     const auto data = check_context(scheduler, task);
     require_ok(scheduler.run_index(6));
     require(scheduler.context().current_function == &empty_nested_walks &&
-            scheduler.context().field30 == data,
+            scheduler.context().cooperative_thread == data,
             "empty top-level walk must leave caller globals unchanged");
     require_ok(scheduler.run_children(task));
     require(scheduler.context().current_function == &empty_nested_walks &&
-            scheduler.context().field30 == data,
+            scheduler.context().cooperative_thread == data,
             "empty child walk must leave caller globals unchanged");
 }
 
@@ -158,9 +158,9 @@ void test_lists_and_nulls() {
     require_ok(scheduler.run_index(8));
     require(visits->back() == 7 && visits->size() == 9, "index eight aliases seven");
     for (int index : {-1, 9, std::numeric_limits<int>::min(), std::numeric_limits<int>::max()}) {
-        require(scheduler.run_index(index).failure == TaskFailure::invalid_list_index,
+        require(scheduler.run_index(index).failure == TaskFailure::InvalidListIndex,
                 "invalid list run must fail");
-        require(scheduler.append_task(index, nullptr).failure == TaskFailure::invalid_list_index,
+        require(scheduler.append_task(index, nullptr).failure == TaskFailure::InvalidListIndex,
                 "invalid list append must fail");
     }
     append(scheduler, 0, nullptr, payload(90, visits, nullptr));
@@ -168,7 +168,7 @@ void test_lists_and_nulls() {
     visits->clear();
     require_ok(scheduler.run_index(0));
     require(*visits == std::vector<int>({0, 91}), "top-level null must skip and continue");
-    require(!scheduler.context().field30 && !scheduler.context().current_function,
+    require(!scheduler.context().cooperative_thread && !scheduler.context().current_function,
             "top-level context must clear");
 }
 
@@ -179,7 +179,7 @@ void test_self_deletion_and_deferred_free() {
     auto next = append(scheduler, 0, &record, payload(2, visits, &record));
     require_ok(scheduler.run_index(0));
     require(*visits == std::vector<int>({1, 2}), "self deletion must keep captured next");
-    require(scheduler.retire(self).failure == TaskFailure::retired_task, "double retirement rejected");
+    require(scheduler.retire(self).failure == TaskFailure::RetiredTask, "double retirement rejected");
     visits->clear();
     require_ok(scheduler.run_index(0));
     require(*visits == std::vector<int>({2}), "retired task must unlink from next pass");
@@ -192,7 +192,7 @@ void test_self_deletion_and_deferred_free() {
     require_ok(scheduler.free_task(scheduled)); // repeated scheduling remains accepted
     require_ok(scheduler.run_index(0));
     require(visits->size() == 1, "next pass must retire rather than rerun game callback");
-    require(scheduler.free_task(scheduled).failure == TaskFailure::retired_task,
+    require(scheduler.free_task(scheduled).failure == TaskFailure::RetiredTask,
             "inactive FreeTask membership rejected");
 }
 
@@ -209,7 +209,7 @@ void test_callback_mutations() {
     first_data->expected_function = &retire_next;
     visits->clear();
     const auto deleted_next = scheduler.run_index(0);
-    require(deleted_next.failure == TaskFailure::deleted_snapshot_next && deleted_next.task == second,
+    require(deleted_next.failure == TaskFailure::DeletedSnapshotNext && deleted_next.task == second,
             "deleting captured next must fail explicitly without dangling access");
     require(*visits == std::vector<int>({1}), "retired next callback must not run");
 
@@ -239,9 +239,9 @@ void test_children_and_nested_context() {
     child(scheduler, second, &record, payload(4, visits, &record));
     require_ok(scheduler.run_index(0));
     require(*visits == std::vector<int>({1, 2, 3}), "children must snapshot next and not auto recurse");
-    require(scheduler.free_task(first).failure == TaskFailure::retired_task, "retired child membership");
+    require(scheduler.free_task(first).failure == TaskFailure::RetiredTask, "retired child membership");
     visits->clear();
-    std::static_pointer_cast<Payload>(second->field30)->expected_function = nullptr;
+    std::static_pointer_cast<Payload>(second->cooperative_thread)->expected_function = nullptr;
     require_ok(scheduler.run_children(parent));
     require(*visits == std::vector<int>({3}), "child walker outside caller must leave function null");
 
@@ -255,7 +255,7 @@ void test_children_and_nested_context() {
     append(nested, 1, &record, payload(7, visits, &record));
     require_ok(nested.run_index(0));
     require(*visits == std::vector<int>({5, 6, 7, 8}), "nested traversal visit order");
-    require(!nested.context().field30 && !nested.context().current_function,
+    require(!nested.context().cooperative_thread && !nested.context().current_function,
             "nested execution must not restore parent context");
 
     TaskScheduler empty_nested;
@@ -266,7 +266,7 @@ void test_children_and_nested_context() {
     auto null_parent = append(null_child, 0, nullptr, {});
     auto bad = child(null_child, null_parent, nullptr, {});
     const auto failed = null_child.run_children(null_parent);
-    require(failed.failure == TaskFailure::null_child_callback && failed.task == bad,
+    require(failed.failure == TaskFailure::NullChildCallback && failed.task == bad,
             "null child must model the original invalid indirect call");
 }
 
@@ -274,9 +274,9 @@ void test_native_ownership_and_exception_cleanup() {
     TaskScheduler scheduler;
     TaskScheduler other;
     auto foreign = other.append_task(0, nullptr).task;
-    require(scheduler.free_task(foreign).failure == TaskFailure::foreign_task, "foreign FreeTask");
-    require(scheduler.run_children(foreign).failure == TaskFailure::foreign_task, "foreign parent");
-    require(scheduler.retire({}).failure == TaskFailure::foreign_task, "null handle rejected");
+    require(scheduler.free_task(foreign).failure == TaskFailure::ForeignTask, "foreign FreeTask");
+    require(scheduler.run_children(foreign).failure == TaskFailure::ForeignTask, "foreign parent");
+    require(scheduler.retire({}).failure == TaskFailure::ForeignTask, "null handle rejected");
     auto visits = std::make_shared<std::vector<int>>();
     auto task = append(scheduler, 0, &callback_throws, payload(1, visits, &callback_throws));
     bool threw = false;
@@ -286,10 +286,10 @@ void test_native_ownership_and_exception_cleanup() {
         threw = true;
     }
     require(threw, "native callback exception must propagate");
-    require(!scheduler.context().field30 && !scheduler.context().current_function,
+    require(!scheduler.context().cooperative_thread && !scheduler.context().current_function,
             "native callback exception must release context");
     require_ok(scheduler.run_index(0));
-    require(scheduler.retire(task).failure == TaskFailure::retired_task,
+    require(scheduler.retire(task).failure == TaskFailure::RetiredTask,
             "exception unwinding must finish deferred scheduler reclamation");
 
     auto resource = std::make_shared<int>(9);
@@ -304,7 +304,7 @@ void test_native_ownership_and_exception_cleanup() {
     auto root = scheduler.append_task(0, nullptr).task;
     auto descendant = scheduler.append_child(root, nullptr).task;
     require_ok(scheduler.retire(root));
-    require(scheduler.retire(descendant).failure == TaskFailure::retired_task,
+    require(scheduler.retire(descendant).failure == TaskFailure::RetiredTask,
             "native subtree retirement must unlink all children");
 }
 
@@ -327,10 +327,10 @@ void test_game_task_order() {
     visits->clear();
     auto first=failure.append_task(7,&retire_next,payload(1,visits,&retire_next)).task;
     auto removed=failure.append_task(7,&record,payload(2,visits,&record)).task;
-    std::static_pointer_cast<Payload>(first->field30)->target=removed;
+    std::static_pointer_cast<Payload>(first->cooperative_thread)->target=removed;
     require_ok(failure.append_task(0,&record,payload(0,visits,&record)));
     const auto stopped=failure.run_game_tasks();
-    require(stopped.failure==TaskFailure::deleted_snapshot_next&&
+    require(stopped.failure==TaskFailure::DeletedSnapshotNext&&
             *visits==std::vector<int>({1}),
             "list7 walker failure must retain its reason and stop later lists");
 }

@@ -1,0 +1,153 @@
+[
+  {
+    "slug": "player_startup",
+    "compile": [
+      "xcrun",
+      "clang++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-Ibuild/task-source/immutable/src",
+      "-Itests/fixtures",
+      "-dynamiclib",
+      "build/task-source/immutable/tests/probes/native_player_startup_probe.cpp",
+      "build/task-source/old/libsadx-guest.a",
+      "build/task-source/old/libsadx-core.a",
+      "-o",
+      "build/task-source/extra/old-player_startup.dylib"
+    ],
+    "compile_exit": 0,
+    "runs": [
+      {
+        "kind": "old",
+        "command": [
+          "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+          "build/task-source/immutable/tools/oracles/verify_original_player_startup.py",
+          "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe",
+          "build/task-source/extra/old-player_startup.dylib",
+          "--output",
+          "build/task-source/extra/old-player_startup.json"
+        ],
+        "exit": 0,
+        "report": "build/task-source/extra/old-player_startup.json"
+      },
+      {
+        "kind": "current",
+        "command": [
+          "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+          "tools/oracles/verify_original_player_startup.py",
+          "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe",
+          "build/native-player-startup-probe.dylib",
+          "--output",
+          "build/task-source/extra/current-player_startup.json"
+        ],
+        "exit": 0,
+        "report": "build/task-source/extra/current-player_startup.json"
+      }
+    ]
+  },
+  {
+    "slug": "player_auxiliary_effect",
+    "compile": [
+      "xcrun",
+      "clang++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-Ibuild/task-source/immutable/src",
+      "-Itests/fixtures",
+      "-dynamiclib",
+      "build/task-source/immutable/tests/probes/native_player_auxiliary_effect_probe.cpp",
+      "build/task-source/old/libsadx-core.a",
+      "-o",
+      "build/task-source/extra/old-player_auxiliary_effect.dylib"
+    ],
+    "compile_exit": 0,
+    "runs": [
+      {
+        "kind": "old",
+        "command": [
+          "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+          "build/task-source/immutable/tools/oracles/verify_original_player_auxiliary_effect.py",
+          "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe",
+          "build/task-source/extra/old-player_auxiliary_effect.dylib",
+          "--output",
+          "build/task-source/extra/old-player_auxiliary_effect.json"
+        ],
+        "exit": 0,
+        "report": "build/task-source/extra/old-player_auxiliary_effect.json"
+      },
+      {
+        "kind": "current",
+        "command": [
+          "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+          "tools/oracles/verify_original_player_auxiliary_effect.py",
+          "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe",
+          "build/native-player-auxiliary-effect-probe.dylib",
+          "--output",
+          "build/task-source/extra/current-player_auxiliary_effect.json"
+        ],
+        "exit": 0,
+        "report": "build/task-source/extra/current-player_auxiliary_effect.json"
+      }
+    ]
+  },
+  {
+    "slug": "collision_component",
+    "compile": [
+      "xcrun",
+      "clang++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-Ibuild/task-source/immutable/src",
+      "-Itests/fixtures",
+      "-dynamiclib",
+      "build/task-source/immutable/tests/probes/native_collision_component_probe.cpp",
+      "build/task-source/old/libsadx-core.a",
+      "-o",
+      "build/task-source/extra/old-collision_component.dylib"
+    ],
+    "compile_exit": 0,
+    "runs": [
+      {
+        "kind": "old",
+        "command": [
+          "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+          "build/task-source/immutable/tools/oracles/verify_original_collision_component.py",
+          "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe",
+          "build/task-source/extra/old-collision_component.dylib",
+          "--output",
+          "build/task-source/extra/old-collision_component.json"
+        ],
+        "exit": 2,
+        "report": "build/task-source/extra/old-collision_component.json"
+      },
+      {
+        "kind": "current",
+        "command": [
+          "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+          "tools/oracles/verify_original_collision_component.py",
+          "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe",
+          "build/native-collision-component-probe.dylib",
+          "--output",
+          "build/task-source/extra/current-collision_component.json"
+        ],
+        "exit": 2,
+        "report": "build/task-source/extra/current-collision_component.json"
+      }
+    ]
+  }
+]

@@ -31,13 +31,13 @@ int main() {
         for (auto &node : omitted.nodes)
             if (node.slot == slot) node.motion_state.reset();
         const auto omission = scheduler.restore_source_graph(omitted);
-        if (omission.failure != TaskFailure::invalid_source_graph ||
+        if (omission.failure != TaskFailure::InvalidSourceGraph ||
             scheduler.source_task(slot) != restored || restored->motion_state != motion)
             throw std::runtime_error("raw-only import silently discarded canonical motion or mutated graph");
         auto replaced = scheduler.source_graph();
         for (auto &node : replaced.nodes)
             if (node.slot == slot) node.motion_state = std::make_shared<PlayerMotionState>();
-        if (scheduler.restore_source_graph(replaced).failure != TaskFailure::invalid_source_graph ||
+        if (scheduler.restore_source_graph(replaced).failure != TaskFailure::InvalidSourceGraph ||
             scheduler.source_task(slot) != restored)
             throw std::runtime_error("graph accepted a second motion owner for the same allocation");
         std::cout << "Native graph roundtrip retains canonical motion identity and values\n";

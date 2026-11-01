@@ -39,13 +39,15 @@ struct PlayerAuxiliaryEffectSprite {
 struct PlayerAuxiliaryEffectResult {
     PlayerAuxiliaryEffectFailure failure=PlayerAuxiliaryEffectFailure::none;
     std::uint32_t source_boundary=0,nested_source_boundary=0;
-    TaskWorkFailure work_failure=TaskWorkFailure::none;
+    TaskWorkFailure work_failure=TaskWorkFailure::None;
     std::optional<std::uint32_t> character;
     std::optional<std::size_t> selected_group;
     std::optional<PlayerAuxiliaryEffectSprite> pending_sprite;
     TaskWorkHandle pending_node;
     std::optional<X87Failure> fp_failure;
     std::uint16_t fp_exceptions=0;
+    // A nested scheduler diagnostic carries no additional task ownership.
+    TaskStep task_step = TaskStep::None;
     explicit operator bool()const noexcept{return failure==PlayerAuxiliaryEffectFailure::none;}
 };
 struct PlayerAuxiliaryEffectDiagnostic final:TaskCallbackDiagnostic {PlayerAuxiliaryEffectResult result;explicit PlayerAuxiliaryEffectDiagnostic(PlayerAuxiliaryEffectResult r):result(std::move(r)){};};

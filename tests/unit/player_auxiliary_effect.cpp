@@ -1,3 +1,4 @@
+#include "guest/task_reference.hpp"
 #include "player/player_auxiliary_effect.hpp"
 #include <fstream>
 #include <iostream>
@@ -19,28 +20,28 @@ void startup_to_shadow(const std::shared_ptr<const PlayerAuxiliaryEffectAssetTab
     auto auxiliary=startup.partial->auxiliary_task;check(s.run_index(2));
     check(auxiliary->auxiliary_effect_work && (*auxiliary->auxiliary_effect_work->selection_at_8)->group==2);
     check(auxiliary->exec==&player_auxiliary_effect_update_callback);
-    auto pending=s.run_index(2);check(pending.failure==TaskFailure::callback_failed);
+    auto pending=s.run_index(2);check(pending.failure==TaskFailure::CallbackFailed);
     const auto details=std::dynamic_pointer_cast<const PlayerAuxiliaryEffectDiagnostic>(pending.callback_diagnostic);
     check(details && details->result.source_boundary==0x4a2687 && details->result.nested_source_boundary==0x441b00);
     main->primary_state->secondary_mode_at_1=0x27;
     pending=s.run_index(2);const auto changed=std::dynamic_pointer_cast<const PlayerAuxiliaryEffectDiagnostic>(pending.callback_diagnostic);
     check(changed && changed->result.source_boundary==0x4a264d);
     std::uint8_t variant=0;check(arena->read(auxiliary->primary_work,3,&variant,1) && variant==2);
-    check(bind_player_task_primary(s,auxiliary).failure==TaskWorkFailure::conflicting_live_view);
+    check(bind_player_task_primary(s,auxiliary).failure==TaskWorkFailure::ConflictingLiveView);
 }
 void initialization(const std::shared_ptr<const PlayerAuxiliaryEffectAssetTable>& table){
     TaskScheduler s;check(s.initialize_source_pool(std::make_shared<TaskWorkArena>(),std::shared_ptr<void>{}));
     PlayerStartupRegistry registry;auto primary=std::make_shared<PlayerTaskState>();primary->character_id=0;registry.task_work[0]=primary;
     auto context=std::make_shared<PlayerAuxiliaryEffectRuntime>();context->players=&registry;context->table=table;
     check(install_player_auxiliary_effect_context(s,context));check(install_player_auxiliary_effect_context(s,context));
-    check(install_player_auxiliary_effect_context(s,std::make_shared<PlayerAuxiliaryEffectRuntime>()).failure==TaskCallbackContextFailure::conflicting_owner);
-    auto t=task(s);auto opaque=std::make_shared<int>(7);t->field30=opaque;
+    check(install_player_auxiliary_effect_context(s,std::make_shared<PlayerAuxiliaryEffectRuntime>()).failure==TaskCallbackContextFailure::ConflictingOwner);
+    auto t=task(s);auto opaque=std::make_shared<int>(7);t->cooperative_thread=opaque;
     std::weak_ptr<PlayerAuxiliaryEffectRuntime> retained=context;context.reset();check(!retained.expired());
     context=retained.lock(); // scheduler owns callback context lifetime
     check(s.run_index(2));check(t->auxiliary_effect_work && !t->primary_state);
     check(t->exec==&player_auxiliary_effect_update_callback && t->display==&player_auxiliary_effect_display_callback && t->destructor==&player_auxiliary_effect_destroy_callback);
     check((*t->auxiliary_effect_work->selection_at_8)->group==2 && (*t->auxiliary_effect_work->selection_at_8)->table==table);
-    check(t->field30==opaque); // source allocation context remains unchanged
+    check(t->cooperative_thread==opaque); // source allocation context remains unchanged
     primary->character_id=7;check(initialize_player_auxiliary_effect(s,t,*context));check((*t->auxiliary_effect_work->selection_at_8)->group==1);
     std::optional<std::uint16_t> character=5;registry.task_work[0]=std::shared_ptr<PlayerTaskState>{};context->current_character_at_3b22dc0=&character;
     check(initialize_player_auxiliary_effect(s,t,*context));check((*t->auxiliary_effect_work->selection_at_8)->group==4);
@@ -48,11 +49,11 @@ void initialization(const std::shared_ptr<const PlayerAuxiliaryEffectAssetTable>
     registry.task_work[0].reset();auto pending=initialize_player_auxiliary_effect(s,t,*context);
     check(pending.failure==PlayerAuxiliaryEffectFailure::unknown_registration && pending.source_boundary==0x4a2b21);
     t->exec=&player_auxiliary_effect_initialize_callback;auto transferred=s.run_index(2);
-    check(transferred.failure==TaskFailure::callback_failed && transferred.callback_diagnostic && transferred.source_boundary==0x4a2b21);
+    check(transferred.failure==TaskFailure::CallbackFailed && transferred.callback_diagnostic && sadx::task_reference::source_boundary(transferred)==0x4a2b21);
     const auto details=std::dynamic_pointer_cast<const PlayerAuxiliaryEffectDiagnostic>(transferred.callback_diagnostic);
     check(details && details->result.failure==PlayerAuxiliaryEffectFailure::unknown_registration);
-    check(s.context().current_function==&player_auxiliary_effect_initialize_callback && s.context().field30==opaque);
-    check(bind_player_task_primary(s,t).failure==TaskWorkFailure::conflicting_live_view);
+    check(s.context().current_function==&player_auxiliary_effect_initialize_callback && s.context().cooperative_thread==opaque);
+    check(bind_player_task_primary(s,t).failure==TaskWorkFailure::ConflictingLiveView);
     auto wrong=task(s);wrong->primary_state=std::make_shared<PlayerTaskState>();
     check(initialize_player_auxiliary_effect(s,wrong,*context).failure==PlayerAuxiliaryEffectFailure::conflicting_view);
 }

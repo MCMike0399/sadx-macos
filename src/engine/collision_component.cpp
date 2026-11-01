@@ -138,7 +138,7 @@ InitResult initialize(TaskWorkArena &arena, const TaskHandle &task, std::uint16_
     allocation.work->collision_state = std::make_shared<Work>();
     const auto bytes = static_cast<std::uint32_t>(count) * kInfoBytes;
     auto info_allocation = arena.allocate(bytes);
-    if (info_allocation.failure == TaskWorkFailure::size_wrap)
+    if (info_allocation.failure == TaskWorkFailure::SizeWrap)
         throw Error(Boundary::AllocationWrap, info_allocation.failure);
     if (!info_allocation) {
         // Original quirk: cleanup sees the old primary reference, still null.

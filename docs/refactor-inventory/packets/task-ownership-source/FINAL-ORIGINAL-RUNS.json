@@ -1,0 +1,53 @@
+{
+  "source": "72d0e83",
+  "runs": [
+    {
+      "slug": "task_work",
+      "command": [
+        "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+        "tools/oracles/task_judges/freeze.py",
+        "task_work",
+        "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe",
+        "build/task-source/final-libs/task_work.dylib",
+        "build/task-source/final"
+      ],
+      "exit": 0
+    },
+    {
+      "slug": "task_lifecycle",
+      "command": [
+        "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+        "tools/oracles/task_judges/freeze.py",
+        "task_lifecycle",
+        "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe",
+        "build/task-source/final-libs/task_lifecycle.dylib",
+        "build/task-source/final"
+      ],
+      "exit": 0
+    },
+    {
+      "slug": "task_display",
+      "command": [
+        "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+        "tools/oracles/task_judges/freeze.py",
+        "task_display",
+        "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe",
+        "build/task-source/final-libs/task_display.dylib",
+        "build/task-source/final"
+      ],
+      "exit": 0
+    },
+    {
+      "slug": "task_delete",
+      "command": [
+        "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+        "tools/oracles/task_judges/freeze.py",
+        "task_delete",
+        "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe",
+        "build/task-source/final-libs/task_delete.dylib",
+        "build/task-source/final"
+      ],
+      "exit": 0
+    }
+  ]
+}

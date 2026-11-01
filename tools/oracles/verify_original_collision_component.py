@@ -244,7 +244,9 @@ def main():
     partials += sum(r['fp_partial'] for r in lifecycle_rows)
     mismatches += scalar_rows['value_mismatches']
     partials += scalar_rows['fp_partials']
-    report = dict(source_sha256=image.sha256, native_library_sha256=sha(a.native_library.read_bytes()),
+    root = pathlib.Path(__file__).resolve().parents[2]
+    native_paths = ['src/engine/collision_component.hpp', 'src/engine/collision_component.cpp', 'src/engine/task.hpp', 'src/engine/task.cpp', 'src/engine/task_work.hpp', 'src/engine/task_work.cpp', 'src/guest/task_reference.hpp', 'src/player/player_auxiliary_effect.hpp', 'tests/probes/native_collision_component_probe.cpp']
+    report = dict(native_sources={name:sha((root/name).read_bytes()) for name in native_paths}, source_sha256=image.sha256, native_library_sha256=sha(a.native_library.read_bytes()),
                   case_blob_sha256=corpus.hexdigest(), holdout=a.holdout,
                   source_ranges={hex(x): dict(size=y-x, sha256=sha(image.read(x, y-x))) for x, y in RANGES},
                   cases=total + len(lifecycle_rows) + scalar_rows['cases'], numeric_cases=total,

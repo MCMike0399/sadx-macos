@@ -48,5 +48,7 @@ def main():
         if status:raise RuntimeError(f'Nativeprobe status{status}')
         actual_bytes=bytes(memory);expected_bytes=bytes(m.mem_read(ARENA,SIZE));trace_diffs=[i for i,(x,y)in enumerate(zip(trace,expected))if x!=y];byte_diffs=[i for i,(x,y)in enumerate(zip(actual_bytes,expected_bytes))if x!=y]
         item=dict(sequence=number,operations=len(ops),trace_mismatches=len(trace_diffs),byte_mismatches=len(byte_diffs),first_trace_indices=trace_diffs[:12],first_byte_offsets=[hex(i)for i in byte_diffs[:24]],original_arena_sha256=sha(expected_bytes),native_arena_sha256=sha(actual_bytes));report['sequences'].append(item);print(json.dumps(item),flush=True)
+    root=pathlib.Path(__file__).resolve().parents[2]
+    report['native_sources']={name:sha((root/name).read_bytes()) for name in ['src/engine/task.hpp', 'src/engine/task.cpp', 'src/engine/task_work.hpp', 'src/engine/task_work.cpp', 'src/guest/task_reference.hpp', 'src/player/player_auxiliary_effect.hpp', 'tests/probes/native_task_work_probe.cpp']}
     report['values_links_and_bytes_match']=all(not s['trace_mismatches']and not s['byte_mismatches']for s in report['sequences']);a.output.write_text(json.dumps(report,indent=2)+'\n');return int(not report['values_links_and_bytes_match'])
 if __name__=='__main__':raise SystemExit(main())

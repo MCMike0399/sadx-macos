@@ -1,0 +1,44 @@
+{
+  "source": "78702db",
+  "final_source_status": "bceff1b and subsequent Root enum correction await recompilation after gate release",
+  "artifact_hashes": {
+    "build/libsadx-core.a": {
+      "bytes": 4435248,
+      "sha256": "71328c4e41439a4fb5f26632540ddce47e483873a63d436cf5f62b2f95adb1e2"
+    },
+    "build/libsadx-guest.a": {
+      "bytes": 5108760,
+      "sha256": "45403cd748a3d24d701994990fe731dbddb7f1625bc9a5f10b5dcde2f2223488"
+    },
+    "build/libsadx-native.a": {
+      "bytes": 3263928,
+      "sha256": "402382abb4ba1506550a77dcc8844cfd074f14fe3a7b10baaa913a8522db07b0"
+    },
+    "build/sadx-native": {
+      "bytes": 2379848,
+      "sha256": "12ad5aafc8368633a947e9f2be7ac7be4a0d00eaaadea4d21a3c6efa12b5f1d2"
+    },
+    "build/sadx-native-closure": {
+      "bytes": 2426176,
+      "sha256": "148b71f7f3a40d6a2d48f20dc71d24c9f7ba368a0f030deb128458d1ca2c8cb8"
+    },
+    "build/task-source/old/libsadx-core.a": {
+      "bytes": 4424776,
+      "sha256": "93a92296e7e1e4feccd4ded7d427ee7336ffbbf898d4c7741b4a5c5670e8f481"
+    },
+    "build/task-source/old/libsadx-guest.a": {
+      "bytes": 5092696,
+      "sha256": "bae715972b35a0127ece92095ab529f8e85f4f5250520d7e8d63ab3eb5d57e01"
+    },
+    "build/task-source/compare_streams-9a6707e.py": {
+      "bytes": 4180,
+      "sha256": "4b935e04e6abcb1b4cdc675e3ffedcbe0175f6f450a3f5b03be09e1726d08bfe"
+    }
+  },
+  "builds": {
+    "baseline": "build/task-source/baseline-archives.log",
+    "current": "build/task-source/final-closure-build-retry.log",
+    "native_check": "build/task-source/native-closure-check.log"
+  },
+  "result": "native product and force-load compile, native closure PASS; current core/guest built from private maintained source; Main maintained archives were not borrowed"
+}

@@ -1,11 +1,15 @@
 #include "game/game_scene_logic.hpp"
+#include "guest/task_reference.hpp"
 #include <iostream>
 #include <stdexcept>
 #include <vector>
 namespace {
 void require(bool ok,const char* why){if(!ok)throw std::runtime_error(why);}
 struct Visit {int index;std::vector<std::uint32_t>* trace;};
-void task_visit(sadx::TaskScheduler&,const sadx::TaskHandle& task){auto v=std::static_pointer_cast<Visit>(task->field30);v->trace->push_back(0x80000000U|unsigned(v->index));}
+void task_visit(sadx::TaskScheduler&,const sadx::TaskHandle& task){auto v=std::static_pointer_cast<Visit>(task->cooperative_thread);v->trace->push_back(0x80000000U|unsigned(v->index));}
+void task_fail(sadx::TaskScheduler&,const sadx::TaskHandle& task){
+    sadx::TaskScheduler::raise_callback_failure({sadx::TaskFailure::CallbackFailed,task,{},sadx::TaskStep::ExecutionCallback});
+}
 void test(){
     std::optional<std::uint16_t> stage=15;std::optional<std::int32_t> mode=9;sadx::GameSceneLogicState state{stage,&mode,7,8};
     sadx::TaskScheduler scheduler;sadx::X87Context fp(0x7f);std::vector<std::uint32_t> calls;
@@ -28,6 +32,19 @@ void test(){
     require(result.failure==sadx::GameSceneLogicFailure::missing_owner&&result.source_boundary==0x413d40&&!result.tasks_completed,"Missing input owner stops before any task dispatch");
     runtime.invoke=[](const sadx::GameSceneCall&,sadx::X87Context&){return sadx::GameSceneOwnerResult{{sadx::GameLogicOwnerState::failed,0x123456},{}};};
     result=sadx::run_game_scene_logic(runtime);require(result.failure==sadx::GameSceneLogicFailure::owner_failed&&result.nested_source_boundary==0x123456&&result.pending_call.has_value(),"Nested source failure retained");
+    calls.clear();
+    auto thread=std::make_shared<int>(9);
+    auto failing=scheduler.append_task(7,&task_fail,thread).task;
+    runtime.invoke=[&](const sadx::GameSceneCall& call,sadx::X87Context&){calls.push_back(call.callee);return sadx::GameSceneOwnerResult{{sadx::GameLogicOwnerState::completed,0},{}};};
+    result=sadx::run_game_scene_logic(runtime);
+    require(result.failure==sadx::GameSceneLogicFailure::task_failed && result.source_boundary==0x413d58 &&
+            !result.tasks_completed && !result.completed && result.task_failure &&
+            result.task_failure->task==failing && result.task_failure->failure==sadx::TaskFailure::CallbackFailed &&
+            sadx::task_reference::source_boundary(*result.task_failure)==0x40b10b,
+            "Task failure preserves its task identity, diagnostic and scene boundary");
+    require(calls==std::vector<std::uint32_t>{0x40fdc0,0x4014b0,0x80000007U} &&
+            scheduler.context().current_function==&task_fail && scheduler.context().cooperative_thread==thread,
+            "Task failure stops before collision owners and retains live callback context");
     std::cout<<"Scene logic: real task ordering, shared arithmetic, stage reloads and required-owner failures passed.\n";
 }
 }

@@ -146,7 +146,7 @@ template <class Access> class Engine {
         access.state(v).frame = 0;
         require_arena(rt, Phase::AllocateAction);
         auto allocation = rt.arena->allocate(8);
-        if (!allocation && allocation.failure != TaskWorkFailure::exhausted)
+        if (!allocation && allocation.failure != TaskWorkFailure::Exhausted)
             arena_result(allocation, Phase::AllocateAction);
         (void)table(v, Phase::AllocationTable);
         std::shared_ptr<PlayerAnimationAllocatedAction> a;
@@ -162,7 +162,7 @@ template <class Access> class Engine {
             stop(Failure::NullResource, Phase::PublishObject);
         a->object = object;
         auto m_alloc = rt.arena->allocate(12);
-        if (!m_alloc && m_alloc.failure != TaskWorkFailure::exhausted)
+        if (!m_alloc && m_alloc.failure != TaskWorkFailure::Exhausted)
             arena_result(m_alloc, Phase::AllocateMotion);
         std::shared_ptr<PlayerAnimationAllocatedMotion> m;
         if (m_alloc.work) {
@@ -176,7 +176,7 @@ template <class Access> class Engine {
         m->type = 3;
         m->input_function = 2;
         auto data = rt.arena->allocate(111 * 24);
-        if (!data && data.failure != TaskWorkFailure::exhausted)
+        if (!data && data.failure != TaskWorkFailure::Exhausted)
             arena_result(data, Phase::AllocateNodeData);
         if (data.work)
             arena_result(rt.arena->fill(data.work, 0, 0, 111 * 24), Phase::AllocateNodeData);
@@ -874,7 +874,7 @@ template <class Access> class Engine {
         TaskWorkHandle output;
         if (old_ref.id || new_ref.id) {
             auto allocation = arena.allocate(32);
-            if (!allocation && allocation.failure != TaskWorkFailure::exhausted)
+            if (!allocation && allocation.failure != TaskWorkFailure::Exhausted)
                 arena_result(allocation, malloc_site);
             output = allocation.work;
         }

@@ -64,7 +64,7 @@ struct PlayerStartupRuntime {
 struct PlayerStartupResult {
     PlayerStartupFailure failure = PlayerStartupFailure::none;
     std::uint32_t source_boundary = 0,callee_boundary = 0;
-    TaskWorkFailure work_failure = TaskWorkFailure::none;
+    TaskWorkFailure work_failure = TaskWorkFailure::None;
     std::optional<TaskResult> task_failure;
     std::shared_ptr<PlayerStartupPlayer> partial;
     explicit operator bool() const noexcept { return failure==PlayerStartupFailure::none; }
