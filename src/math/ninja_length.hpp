@@ -3,6 +3,6 @@
 #include "math/ninja_math.hpp"
 
 namespace sadx {
-// FUNCTION: SONIC 0x787cc0 njScalor
+// NOTSA: typed vector wrapper; njScalor provenance belongs to the CPU return operation.
 fidelity::ExactFloat vector_length(const NinjaVector &, fidelity::Context &);
 } // namespace sadx
