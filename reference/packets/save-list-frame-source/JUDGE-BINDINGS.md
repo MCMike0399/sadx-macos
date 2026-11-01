@@ -13,3 +13,12 @@ reference-only lazy field proxies can call precisely the same expressions. Exist
 FrameStateView/FrameCalls and actual native message Context bindings are unchanged.
 Historical mutant text locations therefore require a separate rebinding runner;
 original specifications and prior successes/survivor remain immutable.
+
+`rebind_mutants.py` parses the immutable fourteen-fault specification as data.
+Payload release now targets clear_file(); frame policy faults target the shared
+header using an include overlay. Eager phase explicitly captures int32_t, because
+`auto` would copy the lazy proxy and accidentally defer the read. Reference eager
+exec captures the same optional before completion and substitutes it only for the
+exec load. Every variant must compile and fail the unchanged characterization;
+setup/compile failures cannot count as kills. Five completion faults use the
+unchanged historical runner/specification directly.
