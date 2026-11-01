@@ -1,0 +1,41 @@
+{
+  "base_commit": "b5b7e8a6d4b73ba63746715ce6da9620a3731df3",
+  "parent_entries": 1310,
+  "current_entries": 1319,
+  "added": {
+    "reference/packets/sse-readability/build.py": "6a90fe3025e34815bce12b8ffbfe58ff6fdb5069a70365fdeaa453e706e0a160",
+    "reference/packets/sse-readability/capture_pad.py": "813d2b949e56ed041aaaea08c588c2b59e76c8590c33a943bb44668081ebf3dd",
+    "reference/packets/sse-readability/capture_sse.py": "dc529367211d2e2e25da9c8f346124b2fa3f12e35711c4cee07b4c0c98908740",
+    "reference/packets/sse-readability/check_units.py": "90311a72e477ae1a6df3f047a5f55bd56b4bc53e44e64f3fb7d660b521831b91",
+    "reference/packets/sse-readability/compare.py": "187514f7e807d2d92a404e4d8469294f746793186254a3b61b85dfd2d46bf645",
+    "reference/packets/sse-readability/consumers.py": "dd795d090f9a824f57b3076d2f153b323b965e6ee21d3e35a9710561d07c6c2d",
+    "reference/packets/sse-readability/mutate.py": "65814d564bc243f2408ddcc464c17ae0e78b80ff4804da59937b407fd7ec0c3e",
+    "reference/packets/sse-readability/reserved.py": "b91d10e3827903a66367b6ca6de987d5d601ab431e593fd1ec23d0fb917beba7",
+    "tests/unit/sse_math_contract.cpp": "31492a130592300eecc94af7c42752b08357f980220882dc8070f4d9efc6d79a"
+  },
+  "changed": {
+    "Makefile": {
+      "before": "c49e460279b00d6b9775fbef8da5aac4c0ec5618277729d0e3637ab6640809da",
+      "after": "38bdc3d9ba31a03b868c23e4c181b6c1d6c5b79a063149527f1f8c66bbed6ed3"
+    },
+    "reference/constexpr-table-review.json": {
+      "before": "4a030f62923645c922978aea378fd0c88e8ac74f8ecb12a03d40100aba34a3ef",
+      "after": "10783f332ea0de675a80696a482e59a83f882ea37202a8b2ddc13a32be4405a8"
+    },
+    "tests/unit/manifest.tsv": {
+      "before": "0333d3006925d67bfc98f8112ec4dc442dabc193f8c9ca07fafcc5fdf2203f53",
+      "after": "2f3ad93dff21b6fe9489ba8e7e77929f135572c5201889a200e09fbf070c776c"
+    }
+  },
+  "removed": [],
+  "evidence": [
+    "reference/packets/sse-readability/ROOT-REVIEW.md",
+    "reference/packets/sse-readability/RESERVED-RESULT.json",
+    "reference/packets/sse-readability/ROOT-ROUNDING-TABLE.json"
+  ],
+  "scope": "Finite parent-preserving registration/helper union plus the reviewed unchanged numeric rounding-table fingerprint. No tolerance, expected value, baseline allowance or Source behavior change in this judge commit.",
+  "limits": [
+    "SSE Source is reviewed and final old/current outputs are exact; merged consumer/product/journey/gate qualification remains pending.",
+    "Prior animation report refresh remains Source-exact evidence after its recorded green gate."
+  ]
+}
