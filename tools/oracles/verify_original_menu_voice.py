@@ -7,7 +7,7 @@ from pe_image import PEImage
 from extract import SOURCE_SHA256
 from verify_original_math import Original,DATA,STACK,STOP
 TASK,OTHER,WORK=DATA+0x1000,DATA+0x2000,DATA+0x3000
-NATIVE_PATHS=['src/game/menu_voice.cpp', 'src/game/menu_voice.hpp', 'tests/probes/native_menu_voice_probe.cpp']
+NATIVE_PATHS=['src/game/music_state.hpp','src/game/menu_voice.cpp', 'src/game/menu_voice.hpp', 'tests/probes/native_menu_voice_probe.cpp']
 def native_sources():
     root=Path(__file__).resolve().parents[2]
     return {name:hashlib.sha256((root/name).read_bytes()).hexdigest() for name in NATIVE_PATHS}

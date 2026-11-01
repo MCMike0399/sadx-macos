@@ -318,7 +318,7 @@ def main():
         result = subprocess.run([sys.executable, str(reset_judge), str(args.exe),
                                  str(args.native_library), '--output', str(reset_report)], check=False, env=environment)
         reset = json.loads(reset_report.read_text())
-    sources = ['src/game/game_cleanup.cpp', 'src/game/game_cleanup.hpp',
+    sources = ['src/game/music_state.hpp','src/game/game_cleanup.cpp', 'src/game/game_cleanup.hpp',
                'tests/probes/native_game_cleanup_probe.cpp', 'src/game/save_data.cpp',
                'src/game/save_data.hpp', 'src/game/game_bootstrap.hpp',
                'src/game/game_bootstrap.cpp', 'src/game/sound_initial_state.hpp',
