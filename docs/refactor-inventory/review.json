@@ -442,38 +442,71 @@
         "SonicPlayerGlobals owns forced/stage/model/sound/task values; forced_at_3b29d08 explicitly borrows GameResetState. actor_current::State is composed rather than a second actor owner. Review full alias graph before migration."
       ]
     },
-    "src/player/sonic_animation_operations.hpp": {
-      "disposition": "needs_migration",
-      "reason": "SonicAnimationOperation stores instruction PCs and numeric field offsets in 1027 constexpr recipes; exemption from a lexical counter does not establish typed game initialization.",
-      "evidence": [
-        {
-          "path": "src/player/sonic_animation_operations.hpp",
-          "line": 5
-        },
-        {
-          "path": "docs/RESEARCH-complete-refactor-2026-10-31.md",
-          "line": 1
-        }
-      ],
-      "ownership_notes": [
-        "Generated immutable recipe table is code/diagnostic structure, not independent runtime state. Interpreter is sonic_animation_table.cpp; resource/content ownership remains in the imported animation owner."
-      ]
-    },
     "src/player/sonic_animation_table.cpp": {
-      "disposition": "needs_migration",
-      "reason": "Initializer interprets instruction recipes, fixture-availability optionals and source PC failures. Preserve interleaved reads/stores through reference diagnostics; native initialization must express named data.",
-      "evidence": [
+      "disposition": "already_conforming",
+      "reason": "Independent whole-file standards and fidelity review approve the current bounded native/shared implementation.",
+      "reviewed_source_sha256": "b1b9de5049667fbb38faf1033db6cdc631e07721e9cfa87da1a186c798279d3c",
+      "semantic_justification": "The native caller owns one table and passes exports. The initial 147-row BSS factory is distinct from retries and arbitrary reference fixtures. The sink immediately writes semantic fields and reports MissingExport at use, preserving canonical identity.",
+      "resolved_owners": [
         {
-          "path": "src/player/sonic_animation_table.cpp",
-          "line": 6
-        },
-        {
-          "path": "docs/RESEARCH-complete-refactor-2026-10-31.md",
-          "line": 1
+          "resolution": "Caller-owned canonical table, physics/tail, scene and arena identities remain borrowed. The packet ownership map identifies each producer and consumer; no second authoritative global or cache is introduced.",
+          "evidence": [
+            {
+              "path": "docs/refactor-inventory/packets/animation-contract/OWNERSHIP.md",
+              "sha256": "f7e743f8d6dbb0f550321196d975f04b362ccdb49fbe5cf5761f60b3855cf081"
+            }
+          ]
         }
       ],
-      "ownership_notes": [
-        "PlayerAnimationTable records are mutated in source operation order; SonicAnimationExport resource references are borrowed from source. Adapter must preserve partial publication and per-reached-read missingness."
+      "resolved_consumers": [
+        {
+          "resolution": "Typed Sonic initialization, import decoding, the actual Sonic updater and Gamma/startup bindings share the content and algorithms. Source paths outside the native archive remain in scope.",
+          "evidence": [
+            {
+              "path": "docs/refactor-inventory/reviews/animation-contract-standards.md",
+              "sha256": "28a6dea5720f8433731f5ebf41b52ffc9db32537784266a5dee3ae6b5bd3afe5"
+            },
+            {
+              "path": "docs/refactor-inventory/reviews/animation-contract-standards-recheck.md",
+              "sha256": "25769477f98bd3ade9a851a3fb04863ec8acbb64a31053831161b7ef926d5541"
+            },
+            {
+              "path": "docs/refactor-inventory/reviews/animation-contract-fidelity-recheck.md",
+              "sha256": "e1d3d25a1dc93748fe0a7a27b2f151fa85f9d78e531b10244e8e0fb3b3b275b9"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Independent reviews inspect 660 current source hashes, complete streams, thirteen inherited faults, consumer units and the 252-case reference-constant regression. This projection claims no fresh runtime execution.",
+          "evidence": [
+            {
+              "path": "docs/refactor-inventory/packets/animation-contract/ROOT-REQUALIFIED.json",
+              "sha256": "9b3f2c1d38362de83ee7b4d7f1c547de662a5b8a0900efba99e40c3527c4e782"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Exactly the five complete files named in the independent standards review conform within their bounded purpose. This does not approve every source file, whole player, Session or campaign.",
+        "Source/constexpr lineage, the Main protected-parent union and historical baseline scope ledger remain separate integration tasks.",
+        "Six stock and three plain native development streams match. FP partials and source-boundary outcomes retain their prior verdicts; final cohorts are checked separately.",
+        "Source-only product and closure builds pass. Gamma binding/weld/cursor, journeys and the integrated gate require their own receipts. Existing unrecovered playback/material/effect/matrix/draw seams remain explicit."
+      ],
+      "evidence": [
+        {
+          "path": "docs/refactor-inventory/reviews/animation-contract-standards.md",
+          "sha256": "28a6dea5720f8433731f5ebf41b52ffc9db32537784266a5dee3ae6b5bd3afe5"
+        },
+        {
+          "path": "docs/refactor-inventory/reviews/animation-contract-standards-recheck.md",
+          "sha256": "25769477f98bd3ade9a851a3fb04863ec8acbb64a31053831161b7ef926d5541"
+        },
+        {
+          "path": "docs/refactor-inventory/reviews/animation-contract-fidelity-recheck.md",
+          "sha256": "e1d3d25a1dc93748fe0a7a27b2f151fa85f9d78e531b10244e8e0fb3b3b275b9"
+        }
       ]
     },
     "src/player/player_scene_decode.cpp": {
@@ -27695,6 +27728,274 @@
           "sha256": "01b08d262279a42140d0cc301322baba861e72e6f5c4f332e4b26da6d88026b7"
         }
       ]
+    },
+    "src/player/animation/sonic_animation_content.hpp": {
+      "disposition": "already_conforming",
+      "reason": "Independent whole-file standards and fidelity review approve the current bounded native/shared implementation.",
+      "reviewed_source_sha256": "4a19944124840a61fa4a97aae8c6bfa6bfb39c76db76f958e8148ba48946da4a",
+      "semantic_justification": "All 147 typed rows encode export presence/index, object count, signed named mode, next, and exact transition/frame steps. These are content identities and scalars. The semantic initializer and decoder share this canonical content.",
+      "resolved_owners": [
+        {
+          "resolution": "Caller-owned canonical table, physics/tail, scene and arena identities remain borrowed. The packet ownership map identifies each producer and consumer; no second authoritative global or cache is introduced.",
+          "evidence": [
+            {
+              "path": "docs/refactor-inventory/packets/animation-contract/OWNERSHIP.md",
+              "sha256": "f7e743f8d6dbb0f550321196d975f04b362ccdb49fbe5cf5761f60b3855cf081"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Typed Sonic initialization, import decoding, the actual Sonic updater and Gamma/startup bindings share the content and algorithms. Source paths outside the native archive remain in scope.",
+          "evidence": [
+            {
+              "path": "docs/refactor-inventory/reviews/animation-contract-standards.md",
+              "sha256": "28a6dea5720f8433731f5ebf41b52ffc9db32537784266a5dee3ae6b5bd3afe5"
+            },
+            {
+              "path": "docs/refactor-inventory/reviews/animation-contract-standards-recheck.md",
+              "sha256": "25769477f98bd3ade9a851a3fb04863ec8acbb64a31053831161b7ef926d5541"
+            },
+            {
+              "path": "docs/refactor-inventory/reviews/animation-contract-fidelity-recheck.md",
+              "sha256": "e1d3d25a1dc93748fe0a7a27b2f151fa85f9d78e531b10244e8e0fb3b3b275b9"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Independent reviews inspect 660 current source hashes, complete streams, thirteen inherited faults, consumer units and the 252-case reference-constant regression. This projection claims no fresh runtime execution.",
+          "evidence": [
+            {
+              "path": "docs/refactor-inventory/packets/animation-contract/ROOT-REQUALIFIED.json",
+              "sha256": "9b3f2c1d38362de83ee7b4d7f1c547de662a5b8a0900efba99e40c3527c4e782"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Exactly the five complete files named in the independent standards review conform within their bounded purpose. This does not approve every source file, whole player, Session or campaign.",
+        "Source/constexpr lineage, the Main protected-parent union and historical baseline scope ledger remain separate integration tasks.",
+        "Six stock and three plain native development streams match. FP partials and source-boundary outcomes retain their prior verdicts; final cohorts are checked separately.",
+        "Source-only product and closure builds pass. Gamma binding/weld/cursor, journeys and the integrated gate require their own receipts. Existing unrecovered playback/material/effect/matrix/draw seams remain explicit."
+      ],
+      "evidence": [
+        {
+          "path": "docs/refactor-inventory/reviews/animation-contract-standards.md",
+          "sha256": "28a6dea5720f8433731f5ebf41b52ffc9db32537784266a5dee3ae6b5bd3afe5"
+        },
+        {
+          "path": "docs/refactor-inventory/reviews/animation-contract-standards-recheck.md",
+          "sha256": "25769477f98bd3ade9a851a3fb04863ec8acbb64a31053831161b7ef926d5541"
+        },
+        {
+          "path": "docs/refactor-inventory/reviews/animation-contract-fidelity-recheck.md",
+          "sha256": "e1d3d25a1dc93748fe0a7a27b2f151fa85f9d78e531b10244e8e0fb3b3b275b9"
+        }
+      ]
+    },
+    "src/player/animation/sonic_animation_initialize.hpp": {
+      "disposition": "already_conforming",
+      "reason": "Independent whole-file standards and fidelity review approve the current bounded native/shared implementation.",
+      "reviewed_source_sha256": "25c0d5cb6471832b66e9335feb22ebb5c0d2675545a50f77b60d39e1fd841ab9",
+      "semantic_justification": "Ordered field publications and reached export reads are explicit semantic operations. Per-row orders preserve 145 reads, 882 stores and untouched old rows after missing exports or retry. The sink transports native/reference publication without copying reset policy.",
+      "resolved_owners": [
+        {
+          "resolution": "Caller-owned canonical table, physics/tail, scene and arena identities remain borrowed. The packet ownership map identifies each producer and consumer; no second authoritative global or cache is introduced.",
+          "evidence": [
+            {
+              "path": "docs/refactor-inventory/packets/animation-contract/OWNERSHIP.md",
+              "sha256": "f7e743f8d6dbb0f550321196d975f04b362ccdb49fbe5cf5761f60b3855cf081"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Typed Sonic initialization, import decoding, the actual Sonic updater and Gamma/startup bindings share the content and algorithms. Source paths outside the native archive remain in scope.",
+          "evidence": [
+            {
+              "path": "docs/refactor-inventory/reviews/animation-contract-standards.md",
+              "sha256": "28a6dea5720f8433731f5ebf41b52ffc9db32537784266a5dee3ae6b5bd3afe5"
+            },
+            {
+              "path": "docs/refactor-inventory/reviews/animation-contract-standards-recheck.md",
+              "sha256": "25769477f98bd3ade9a851a3fb04863ec8acbb64a31053831161b7ef926d5541"
+            },
+            {
+              "path": "docs/refactor-inventory/reviews/animation-contract-fidelity-recheck.md",
+              "sha256": "e1d3d25a1dc93748fe0a7a27b2f151fa85f9d78e531b10244e8e0fb3b3b275b9"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Independent reviews inspect 660 current source hashes, complete streams, thirteen inherited faults, consumer units and the 252-case reference-constant regression. This projection claims no fresh runtime execution.",
+          "evidence": [
+            {
+              "path": "docs/refactor-inventory/packets/animation-contract/ROOT-REQUALIFIED.json",
+              "sha256": "9b3f2c1d38362de83ee7b4d7f1c547de662a5b8a0900efba99e40c3527c4e782"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Exactly the five complete files named in the independent standards review conform within their bounded purpose. This does not approve every source file, whole player, Session or campaign.",
+        "Source/constexpr lineage, the Main protected-parent union and historical baseline scope ledger remain separate integration tasks.",
+        "Six stock and three plain native development streams match. FP partials and source-boundary outcomes retain their prior verdicts; final cohorts are checked separately.",
+        "Source-only product and closure builds pass. Gamma binding/weld/cursor, journeys and the integrated gate require their own receipts. Existing unrecovered playback/material/effect/matrix/draw seams remain explicit."
+      ],
+      "evidence": [
+        {
+          "path": "docs/refactor-inventory/reviews/animation-contract-standards.md",
+          "sha256": "28a6dea5720f8433731f5ebf41b52ffc9db32537784266a5dee3ae6b5bd3afe5"
+        },
+        {
+          "path": "docs/refactor-inventory/reviews/animation-contract-standards-recheck.md",
+          "sha256": "25769477f98bd3ade9a851a3fb04863ec8acbb64a31053831161b7ef926d5541"
+        },
+        {
+          "path": "docs/refactor-inventory/reviews/animation-contract-fidelity-recheck.md",
+          "sha256": "e1d3d25a1dc93748fe0a7a27b2f151fa85f9d78e531b10244e8e0fb3b3b275b9"
+        }
+      ]
+    },
+    "src/player/player_animation_blend.cpp": {
+      "disposition": "already_conforming",
+      "reason": "Independent whole-file standards and fidelity review approve the current bounded native/shared implementation.",
+      "reviewed_source_sha256": "a1f6733277da77371fd705af198f5aad3480b62e26a5733a71a220361aa3e94a",
+      "semantic_justification": "The complete native entry binds NativeAccess to one shared engine. It owns no second motion state and duplicates no algorithm. It links without guest translation units and borrows existing scene, arena and tail lifetimes.",
+      "resolved_owners": [
+        {
+          "resolution": "Caller-owned canonical table, physics/tail, scene and arena identities remain borrowed. The packet ownership map identifies each producer and consumer; no second authoritative global or cache is introduced.",
+          "evidence": [
+            {
+              "path": "docs/refactor-inventory/packets/animation-contract/OWNERSHIP.md",
+              "sha256": "f7e743f8d6dbb0f550321196d975f04b362ccdb49fbe5cf5761f60b3855cf081"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Typed Sonic initialization, import decoding, the actual Sonic updater and Gamma/startup bindings share the content and algorithms. Source paths outside the native archive remain in scope.",
+          "evidence": [
+            {
+              "path": "docs/refactor-inventory/reviews/animation-contract-standards.md",
+              "sha256": "28a6dea5720f8433731f5ebf41b52ffc9db32537784266a5dee3ae6b5bd3afe5"
+            },
+            {
+              "path": "docs/refactor-inventory/reviews/animation-contract-standards-recheck.md",
+              "sha256": "25769477f98bd3ade9a851a3fb04863ec8acbb64a31053831161b7ef926d5541"
+            },
+            {
+              "path": "docs/refactor-inventory/reviews/animation-contract-fidelity-recheck.md",
+              "sha256": "e1d3d25a1dc93748fe0a7a27b2f151fa85f9d78e531b10244e8e0fb3b3b275b9"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Independent reviews inspect 660 current source hashes, complete streams, thirteen inherited faults, consumer units and the 252-case reference-constant regression. This projection claims no fresh runtime execution.",
+          "evidence": [
+            {
+              "path": "docs/refactor-inventory/packets/animation-contract/ROOT-REQUALIFIED.json",
+              "sha256": "9b3f2c1d38362de83ee7b4d7f1c547de662a5b8a0900efba99e40c3527c4e782"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Exactly the five complete files named in the independent standards review conform within their bounded purpose. This does not approve every source file, whole player, Session or campaign.",
+        "Source/constexpr lineage, the Main protected-parent union and historical baseline scope ledger remain separate integration tasks.",
+        "Six stock and three plain native development streams match. FP partials and source-boundary outcomes retain their prior verdicts; final cohorts are checked separately.",
+        "Source-only product and closure builds pass. Gamma binding/weld/cursor, journeys and the integrated gate require their own receipts. Existing unrecovered playback/material/effect/matrix/draw seams remain explicit."
+      ],
+      "evidence": [
+        {
+          "path": "docs/refactor-inventory/reviews/animation-contract-standards.md",
+          "sha256": "28a6dea5720f8433731f5ebf41b52ffc9db32537784266a5dee3ae6b5bd3afe5"
+        },
+        {
+          "path": "docs/refactor-inventory/reviews/animation-contract-standards-recheck.md",
+          "sha256": "25769477f98bd3ade9a851a3fb04863ec8acbb64a31053831161b7ef926d5541"
+        },
+        {
+          "path": "docs/refactor-inventory/reviews/animation-contract-fidelity-recheck.md",
+          "sha256": "e1d3d25a1dc93748fe0a7a27b2f151fa85f9d78e531b10244e8e0fb3b3b275b9"
+        }
+      ]
+    },
+    "src/player/animation/animation_state_binding.hpp": {
+      "disposition": "already_conforming",
+      "reason": "Independent whole-file standards and fidelity review approve the current bounded native/shared implementation.",
+      "reviewed_source_sha256": "302ef0630fbbe17cbf62c3bfed4a17cddfc8bd921b66eccbd126784f5a2814c7",
+      "semantic_justification": "The header declares the Speed/Charge distinction and live-read binding. It caches neither scalars nor allocation identity, preserving the original allocation and interior-reference ownership.",
+      "resolved_owners": [
+        {
+          "resolution": "Caller-owned canonical table, physics/tail, scene and arena identities remain borrowed. The packet ownership map identifies each producer and consumer; no second authoritative global or cache is introduced.",
+          "evidence": [
+            {
+              "path": "docs/refactor-inventory/packets/animation-contract/OWNERSHIP.md",
+              "sha256": "f7e743f8d6dbb0f550321196d975f04b362ccdb49fbe5cf5761f60b3855cf081"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Typed Sonic initialization, import decoding, the actual Sonic updater and Gamma/startup bindings share the content and algorithms. Source paths outside the native archive remain in scope.",
+          "evidence": [
+            {
+              "path": "docs/refactor-inventory/reviews/animation-contract-standards.md",
+              "sha256": "28a6dea5720f8433731f5ebf41b52ffc9db32537784266a5dee3ae6b5bd3afe5"
+            },
+            {
+              "path": "docs/refactor-inventory/reviews/animation-contract-standards-recheck.md",
+              "sha256": "25769477f98bd3ade9a851a3fb04863ec8acbb64a31053831161b7ef926d5541"
+            },
+            {
+              "path": "docs/refactor-inventory/reviews/animation-contract-fidelity-recheck.md",
+              "sha256": "e1d3d25a1dc93748fe0a7a27b2f151fa85f9d78e531b10244e8e0fb3b3b275b9"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Independent reviews inspect 660 current source hashes, complete streams, thirteen inherited faults, consumer units and the 252-case reference-constant regression. This projection claims no fresh runtime execution.",
+          "evidence": [
+            {
+              "path": "docs/refactor-inventory/packets/animation-contract/ROOT-REQUALIFIED.json",
+              "sha256": "9b3f2c1d38362de83ee7b4d7f1c547de662a5b8a0900efba99e40c3527c4e782"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Exactly the five complete files named in the independent standards review conform within their bounded purpose. This does not approve every source file, whole player, Session or campaign.",
+        "Source/constexpr lineage, the Main protected-parent union and historical baseline scope ledger remain separate integration tasks.",
+        "Six stock and three plain native development streams match. FP partials and source-boundary outcomes retain their prior verdicts; final cohorts are checked separately.",
+        "Source-only product and closure builds pass. Gamma binding/weld/cursor, journeys and the integrated gate require their own receipts. Existing unrecovered playback/material/effect/matrix/draw seams remain explicit."
+      ],
+      "evidence": [
+        {
+          "path": "docs/refactor-inventory/reviews/animation-contract-standards.md",
+          "sha256": "28a6dea5720f8433731f5ebf41b52ffc9db32537784266a5dee3ae6b5bd3afe5"
+        },
+        {
+          "path": "docs/refactor-inventory/reviews/animation-contract-standards-recheck.md",
+          "sha256": "25769477f98bd3ade9a851a3fb04863ec8acbb64a31053831161b7ef926d5541"
+        },
+        {
+          "path": "docs/refactor-inventory/reviews/animation-contract-fidelity-recheck.md",
+          "sha256": "e1d3d25a1dc93748fe0a7a27b2f151fa85f9d78e531b10244e8e0fb3b3b275b9"
+        }
+      ]
     }
   },
   "external_reference_sources": [
@@ -39994,9 +40295,355 @@
           "sha256": "298701e955489b8b8ada5aede75c143453471a1928f5e72b2a0f3dc74f971521"
         }
       ]
+    },
+    "src/player/animation/sonic_animation_content": {
+      "disposition": "already_conforming",
+      "reason": "Independent whole-file standards and fidelity review approve the current bounded native/shared implementation.",
+      "semantic_justification": "All 147 typed rows encode export presence/index, object count, signed named mode, next, and exact transition/frame steps. These are content identities and scalars. The semantic initializer and decoder share this canonical content.",
+      "resolved_owners": [
+        {
+          "resolution": "Caller-owned canonical table, physics/tail, scene and arena identities remain borrowed. The packet ownership map identifies each producer and consumer; no second authoritative global or cache is introduced.",
+          "evidence": [
+            {
+              "path": "docs/refactor-inventory/packets/animation-contract/OWNERSHIP.md",
+              "sha256": "f7e743f8d6dbb0f550321196d975f04b362ccdb49fbe5cf5761f60b3855cf081"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Typed Sonic initialization, import decoding, the actual Sonic updater and Gamma/startup bindings share the content and algorithms. Source paths outside the native archive remain in scope.",
+          "evidence": [
+            {
+              "path": "docs/refactor-inventory/reviews/animation-contract-standards.md",
+              "sha256": "28a6dea5720f8433731f5ebf41b52ffc9db32537784266a5dee3ae6b5bd3afe5"
+            },
+            {
+              "path": "docs/refactor-inventory/reviews/animation-contract-standards-recheck.md",
+              "sha256": "25769477f98bd3ade9a851a3fb04863ec8acbb64a31053831161b7ef926d5541"
+            },
+            {
+              "path": "docs/refactor-inventory/reviews/animation-contract-fidelity-recheck.md",
+              "sha256": "e1d3d25a1dc93748fe0a7a27b2f151fa85f9d78e531b10244e8e0fb3b3b275b9"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Independent reviews inspect 660 current source hashes, complete streams, thirteen inherited faults, consumer units and the 252-case reference-constant regression. This projection claims no fresh runtime execution.",
+          "evidence": [
+            {
+              "path": "docs/refactor-inventory/packets/animation-contract/ROOT-REQUALIFIED.json",
+              "sha256": "9b3f2c1d38362de83ee7b4d7f1c547de662a5b8a0900efba99e40c3527c4e782"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Exactly the five complete files named in the independent standards review conform within their bounded purpose. This does not approve every source file, whole player, Session or campaign.",
+        "Source/constexpr lineage, the Main protected-parent union and historical baseline scope ledger remain separate integration tasks.",
+        "Six stock and three plain native development streams match. FP partials and source-boundary outcomes retain their prior verdicts; final cohorts are checked separately.",
+        "Source-only product and closure builds pass. Gamma binding/weld/cursor, journeys and the integrated gate require their own receipts. Existing unrecovered playback/material/effect/matrix/draw seams remain explicit."
+      ],
+      "evidence": [
+        {
+          "path": "docs/refactor-inventory/reviews/animation-contract-standards.md",
+          "sha256": "28a6dea5720f8433731f5ebf41b52ffc9db32537784266a5dee3ae6b5bd3afe5"
+        },
+        {
+          "path": "docs/refactor-inventory/reviews/animation-contract-standards-recheck.md",
+          "sha256": "25769477f98bd3ade9a851a3fb04863ec8acbb64a31053831161b7ef926d5541"
+        },
+        {
+          "path": "docs/refactor-inventory/reviews/animation-contract-fidelity-recheck.md",
+          "sha256": "e1d3d25a1dc93748fe0a7a27b2f151fa85f9d78e531b10244e8e0fb3b3b275b9"
+        }
+      ],
+      "reviewed_members": {
+        "src/player/animation/sonic_animation_content.hpp": "4a19944124840a61fa4a97aae8c6bfa6bfb39c76db76f958e8148ba48946da4a"
+      }
+    },
+    "src/player/animation/sonic_animation_initialize": {
+      "disposition": "already_conforming",
+      "reason": "Independent whole-file standards and fidelity review approve the current bounded native/shared implementation.",
+      "semantic_justification": "Ordered field publications and reached export reads are explicit semantic operations. Per-row orders preserve 145 reads, 882 stores and untouched old rows after missing exports or retry. The sink transports native/reference publication without copying reset policy.",
+      "resolved_owners": [
+        {
+          "resolution": "Caller-owned canonical table, physics/tail, scene and arena identities remain borrowed. The packet ownership map identifies each producer and consumer; no second authoritative global or cache is introduced.",
+          "evidence": [
+            {
+              "path": "docs/refactor-inventory/packets/animation-contract/OWNERSHIP.md",
+              "sha256": "f7e743f8d6dbb0f550321196d975f04b362ccdb49fbe5cf5761f60b3855cf081"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Typed Sonic initialization, import decoding, the actual Sonic updater and Gamma/startup bindings share the content and algorithms. Source paths outside the native archive remain in scope.",
+          "evidence": [
+            {
+              "path": "docs/refactor-inventory/reviews/animation-contract-standards.md",
+              "sha256": "28a6dea5720f8433731f5ebf41b52ffc9db32537784266a5dee3ae6b5bd3afe5"
+            },
+            {
+              "path": "docs/refactor-inventory/reviews/animation-contract-standards-recheck.md",
+              "sha256": "25769477f98bd3ade9a851a3fb04863ec8acbb64a31053831161b7ef926d5541"
+            },
+            {
+              "path": "docs/refactor-inventory/reviews/animation-contract-fidelity-recheck.md",
+              "sha256": "e1d3d25a1dc93748fe0a7a27b2f151fa85f9d78e531b10244e8e0fb3b3b275b9"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Independent reviews inspect 660 current source hashes, complete streams, thirteen inherited faults, consumer units and the 252-case reference-constant regression. This projection claims no fresh runtime execution.",
+          "evidence": [
+            {
+              "path": "docs/refactor-inventory/packets/animation-contract/ROOT-REQUALIFIED.json",
+              "sha256": "9b3f2c1d38362de83ee7b4d7f1c547de662a5b8a0900efba99e40c3527c4e782"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Exactly the five complete files named in the independent standards review conform within their bounded purpose. This does not approve every source file, whole player, Session or campaign.",
+        "Source/constexpr lineage, the Main protected-parent union and historical baseline scope ledger remain separate integration tasks.",
+        "Six stock and three plain native development streams match. FP partials and source-boundary outcomes retain their prior verdicts; final cohorts are checked separately.",
+        "Source-only product and closure builds pass. Gamma binding/weld/cursor, journeys and the integrated gate require their own receipts. Existing unrecovered playback/material/effect/matrix/draw seams remain explicit."
+      ],
+      "evidence": [
+        {
+          "path": "docs/refactor-inventory/reviews/animation-contract-standards.md",
+          "sha256": "28a6dea5720f8433731f5ebf41b52ffc9db32537784266a5dee3ae6b5bd3afe5"
+        },
+        {
+          "path": "docs/refactor-inventory/reviews/animation-contract-standards-recheck.md",
+          "sha256": "25769477f98bd3ade9a851a3fb04863ec8acbb64a31053831161b7ef926d5541"
+        },
+        {
+          "path": "docs/refactor-inventory/reviews/animation-contract-fidelity-recheck.md",
+          "sha256": "e1d3d25a1dc93748fe0a7a27b2f151fa85f9d78e531b10244e8e0fb3b3b275b9"
+        }
+      ],
+      "reviewed_members": {
+        "src/player/animation/sonic_animation_initialize.hpp": "25c0d5cb6471832b66e9335feb22ebb5c0d2675545a50f77b60d39e1fd841ab9"
+      }
+    },
+    "src/player/sonic_animation_table": {
+      "disposition": "already_conforming",
+      "reason": "Independent whole-file standards and fidelity review approve the current bounded native/shared implementation.",
+      "semantic_justification": "The native caller owns one table and passes exports. The initial 147-row BSS factory is distinct from retries and arbitrary reference fixtures. The sink immediately writes semantic fields and reports MissingExport at use, preserving canonical identity.",
+      "resolved_owners": [
+        {
+          "resolution": "Caller-owned canonical table, physics/tail, scene and arena identities remain borrowed. The packet ownership map identifies each producer and consumer; no second authoritative global or cache is introduced.",
+          "evidence": [
+            {
+              "path": "docs/refactor-inventory/packets/animation-contract/OWNERSHIP.md",
+              "sha256": "f7e743f8d6dbb0f550321196d975f04b362ccdb49fbe5cf5761f60b3855cf081"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Typed Sonic initialization, import decoding, the actual Sonic updater and Gamma/startup bindings share the content and algorithms. Source paths outside the native archive remain in scope.",
+          "evidence": [
+            {
+              "path": "docs/refactor-inventory/reviews/animation-contract-standards.md",
+              "sha256": "28a6dea5720f8433731f5ebf41b52ffc9db32537784266a5dee3ae6b5bd3afe5"
+            },
+            {
+              "path": "docs/refactor-inventory/reviews/animation-contract-standards-recheck.md",
+              "sha256": "25769477f98bd3ade9a851a3fb04863ec8acbb64a31053831161b7ef926d5541"
+            },
+            {
+              "path": "docs/refactor-inventory/reviews/animation-contract-fidelity-recheck.md",
+              "sha256": "e1d3d25a1dc93748fe0a7a27b2f151fa85f9d78e531b10244e8e0fb3b3b275b9"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Independent reviews inspect 660 current source hashes, complete streams, thirteen inherited faults, consumer units and the 252-case reference-constant regression. This projection claims no fresh runtime execution.",
+          "evidence": [
+            {
+              "path": "docs/refactor-inventory/packets/animation-contract/ROOT-REQUALIFIED.json",
+              "sha256": "9b3f2c1d38362de83ee7b4d7f1c547de662a5b8a0900efba99e40c3527c4e782"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Exactly the five complete files named in the independent standards review conform within their bounded purpose. This does not approve every source file, whole player, Session or campaign.",
+        "Source/constexpr lineage, the Main protected-parent union and historical baseline scope ledger remain separate integration tasks.",
+        "Six stock and three plain native development streams match. FP partials and source-boundary outcomes retain their prior verdicts; final cohorts are checked separately.",
+        "Source-only product and closure builds pass. Gamma binding/weld/cursor, journeys and the integrated gate require their own receipts. Existing unrecovered playback/material/effect/matrix/draw seams remain explicit."
+      ],
+      "evidence": [
+        {
+          "path": "docs/refactor-inventory/reviews/animation-contract-standards.md",
+          "sha256": "28a6dea5720f8433731f5ebf41b52ffc9db32537784266a5dee3ae6b5bd3afe5"
+        },
+        {
+          "path": "docs/refactor-inventory/reviews/animation-contract-standards-recheck.md",
+          "sha256": "25769477f98bd3ade9a851a3fb04863ec8acbb64a31053831161b7ef926d5541"
+        },
+        {
+          "path": "docs/refactor-inventory/reviews/animation-contract-fidelity-recheck.md",
+          "sha256": "e1d3d25a1dc93748fe0a7a27b2f151fa85f9d78e531b10244e8e0fb3b3b275b9"
+        }
+      ],
+      "reviewed_members": {
+        "src/player/sonic_animation_table.cpp": "b1b9de5049667fbb38faf1033db6cdc631e07721e9cfa87da1a186c798279d3c"
+      }
+    },
+    "src/player/player_animation_blend": {
+      "disposition": "already_conforming",
+      "reason": "Independent whole-file standards and fidelity review approve the current bounded native/shared implementation.",
+      "semantic_justification": "The complete native entry binds NativeAccess to one shared engine. It owns no second motion state and duplicates no algorithm. It links without guest translation units and borrows existing scene, arena and tail lifetimes.",
+      "resolved_owners": [
+        {
+          "resolution": "Caller-owned canonical table, physics/tail, scene and arena identities remain borrowed. The packet ownership map identifies each producer and consumer; no second authoritative global or cache is introduced.",
+          "evidence": [
+            {
+              "path": "docs/refactor-inventory/packets/animation-contract/OWNERSHIP.md",
+              "sha256": "f7e743f8d6dbb0f550321196d975f04b362ccdb49fbe5cf5761f60b3855cf081"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Typed Sonic initialization, import decoding, the actual Sonic updater and Gamma/startup bindings share the content and algorithms. Source paths outside the native archive remain in scope.",
+          "evidence": [
+            {
+              "path": "docs/refactor-inventory/reviews/animation-contract-standards.md",
+              "sha256": "28a6dea5720f8433731f5ebf41b52ffc9db32537784266a5dee3ae6b5bd3afe5"
+            },
+            {
+              "path": "docs/refactor-inventory/reviews/animation-contract-standards-recheck.md",
+              "sha256": "25769477f98bd3ade9a851a3fb04863ec8acbb64a31053831161b7ef926d5541"
+            },
+            {
+              "path": "docs/refactor-inventory/reviews/animation-contract-fidelity-recheck.md",
+              "sha256": "e1d3d25a1dc93748fe0a7a27b2f151fa85f9d78e531b10244e8e0fb3b3b275b9"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Independent reviews inspect 660 current source hashes, complete streams, thirteen inherited faults, consumer units and the 252-case reference-constant regression. This projection claims no fresh runtime execution.",
+          "evidence": [
+            {
+              "path": "docs/refactor-inventory/packets/animation-contract/ROOT-REQUALIFIED.json",
+              "sha256": "9b3f2c1d38362de83ee7b4d7f1c547de662a5b8a0900efba99e40c3527c4e782"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Exactly the five complete files named in the independent standards review conform within their bounded purpose. This does not approve every source file, whole player, Session or campaign.",
+        "Source/constexpr lineage, the Main protected-parent union and historical baseline scope ledger remain separate integration tasks.",
+        "Six stock and three plain native development streams match. FP partials and source-boundary outcomes retain their prior verdicts; final cohorts are checked separately.",
+        "Source-only product and closure builds pass. Gamma binding/weld/cursor, journeys and the integrated gate require their own receipts. Existing unrecovered playback/material/effect/matrix/draw seams remain explicit."
+      ],
+      "evidence": [
+        {
+          "path": "docs/refactor-inventory/reviews/animation-contract-standards.md",
+          "sha256": "28a6dea5720f8433731f5ebf41b52ffc9db32537784266a5dee3ae6b5bd3afe5"
+        },
+        {
+          "path": "docs/refactor-inventory/reviews/animation-contract-standards-recheck.md",
+          "sha256": "25769477f98bd3ade9a851a3fb04863ec8acbb64a31053831161b7ef926d5541"
+        },
+        {
+          "path": "docs/refactor-inventory/reviews/animation-contract-fidelity-recheck.md",
+          "sha256": "e1d3d25a1dc93748fe0a7a27b2f151fa85f9d78e531b10244e8e0fb3b3b275b9"
+        }
+      ],
+      "reviewed_members": {
+        "src/player/player_animation_blend.cpp": "a1f6733277da77371fd705af198f5aad3480b62e26a5733a71a220361aa3e94a"
+      }
+    },
+    "src/player/animation/animation_state_binding": {
+      "disposition": "already_conforming",
+      "reason": "Independent whole-file standards and fidelity review approve the current bounded native/shared implementation.",
+      "semantic_justification": "The header declares the Speed/Charge distinction and live-read binding. It caches neither scalars nor allocation identity, preserving the original allocation and interior-reference ownership.",
+      "resolved_owners": [
+        {
+          "resolution": "Caller-owned canonical table, physics/tail, scene and arena identities remain borrowed. The packet ownership map identifies each producer and consumer; no second authoritative global or cache is introduced.",
+          "evidence": [
+            {
+              "path": "docs/refactor-inventory/packets/animation-contract/OWNERSHIP.md",
+              "sha256": "f7e743f8d6dbb0f550321196d975f04b362ccdb49fbe5cf5761f60b3855cf081"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Typed Sonic initialization, import decoding, the actual Sonic updater and Gamma/startup bindings share the content and algorithms. Source paths outside the native archive remain in scope.",
+          "evidence": [
+            {
+              "path": "docs/refactor-inventory/reviews/animation-contract-standards.md",
+              "sha256": "28a6dea5720f8433731f5ebf41b52ffc9db32537784266a5dee3ae6b5bd3afe5"
+            },
+            {
+              "path": "docs/refactor-inventory/reviews/animation-contract-standards-recheck.md",
+              "sha256": "25769477f98bd3ade9a851a3fb04863ec8acbb64a31053831161b7ef926d5541"
+            },
+            {
+              "path": "docs/refactor-inventory/reviews/animation-contract-fidelity-recheck.md",
+              "sha256": "e1d3d25a1dc93748fe0a7a27b2f151fa85f9d78e531b10244e8e0fb3b3b275b9"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Independent reviews inspect 660 current source hashes, complete streams, thirteen inherited faults, consumer units and the 252-case reference-constant regression. This projection claims no fresh runtime execution.",
+          "evidence": [
+            {
+              "path": "docs/refactor-inventory/packets/animation-contract/ROOT-REQUALIFIED.json",
+              "sha256": "9b3f2c1d38362de83ee7b4d7f1c547de662a5b8a0900efba99e40c3527c4e782"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Exactly the five complete files named in the independent standards review conform within their bounded purpose. This does not approve every source file, whole player, Session or campaign.",
+        "Source/constexpr lineage, the Main protected-parent union and historical baseline scope ledger remain separate integration tasks.",
+        "Six stock and three plain native development streams match. FP partials and source-boundary outcomes retain their prior verdicts; final cohorts are checked separately.",
+        "Source-only product and closure builds pass. Gamma binding/weld/cursor, journeys and the integrated gate require their own receipts. Existing unrecovered playback/material/effect/matrix/draw seams remain explicit."
+      ],
+      "evidence": [
+        {
+          "path": "docs/refactor-inventory/reviews/animation-contract-standards.md",
+          "sha256": "28a6dea5720f8433731f5ebf41b52ffc9db32537784266a5dee3ae6b5bd3afe5"
+        },
+        {
+          "path": "docs/refactor-inventory/reviews/animation-contract-standards-recheck.md",
+          "sha256": "25769477f98bd3ade9a851a3fb04863ec8acbb64a31053831161b7ef926d5541"
+        },
+        {
+          "path": "docs/refactor-inventory/reviews/animation-contract-fidelity-recheck.md",
+          "sha256": "e1d3d25a1dc93748fe0a7a27b2f151fa85f9d78e531b10244e8e0fb3b3b275b9"
+        }
+      ],
+      "reviewed_members": {
+        "src/player/animation/animation_state_binding.hpp": "302ef0630fbbe17cbf62c3bfed4a17cddfc8bd921b66eccbd126784f5a2814c7"
+      }
     }
   },
   "stub_binding_review_files": [
     "docs/refactor-inventory/reviews/save-warning-stub-bindings.json"
-  ]
+  ],
+  "source_lineage_receipt": "docs/refactor-inventory/source-lineage-receipt.json"
 }
