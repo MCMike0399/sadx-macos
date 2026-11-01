@@ -33,6 +33,6 @@ before source edits; it is not original Windows constructor parity.
 
 Reproduce locally with tools/testing/check_native_character_resources.py. The new
 owner unit is manifest-registered. Root retains fresh independent review, final cohort,
-actual private native journeys (currently running), composite union/registration and
+actual private native journeys (all three now pass), composite union/registration and
 full gate. No Main source changed by this packet; no push or new provider/host work.
 No whole character/regular/GPU/Session or campaign conformance claim.
