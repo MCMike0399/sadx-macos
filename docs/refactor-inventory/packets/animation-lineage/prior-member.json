@@ -1,0 +1,18 @@
+{
+  "historical_path": "src/player/sonic_animation_operations.hpp",
+  "source_sha256": "8af69713c6bf0807f92460079f675d0f05c123bb873090155f4244bf5ee775ea",
+  "member": {
+    "module": "src/player/sonic_animation_operations",
+    "prior_disposition": "needs_migration",
+    "remaining_debt": [
+      "SonicAnimationOperation stores instruction PCs and numeric field offsets in 1027 constexpr recipes; exemption from a lexical counter does not establish typed game initialization.",
+      "Generated immutable recipe table is code/diagnostic structure, not independent runtime state. Interpreter is sonic_animation_table.cpp; resource/content ownership remains in the imported animation owner."
+    ],
+    "observed_counts": {
+      "operations": 1027,
+      "read_operations": 145,
+      "store_operations": 882,
+      "raw_hex_tokens": 6162
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "disposition": "needs_migration",
+  "reason": "SonicAnimationOperation stores instruction PCs and numeric field offsets in 1027 constexpr recipes; exemption from a lexical counter does not establish typed game initialization.",
+  "evidence": [
+    {
+      "path": "src/player/sonic_animation_operations.hpp",
+      "line": 5
+    },
+    {
+      "path": "docs/RESEARCH-complete-refactor-2026-10-31.md",
+      "line": 1
+    }
+  ],
+  "ownership_notes": [
+    "Generated immutable recipe table is code/diagnostic structure, not independent runtime state. Interpreter is sonic_animation_table.cpp; resource/content ownership remains in the imported animation owner."
+  ]
+}
