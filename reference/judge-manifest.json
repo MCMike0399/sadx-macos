@@ -1,9 +1,9 @@
 {
   "change": {
-    "base_commit": "b5b7e8a6d4b73ba63746715ce6da9620a3731df3",
-    "evidence": "reference/packets/sse-readability/ROOT-PROTECTION-UNION.json",
-    "evidence_sha256": "efb7c44b49c16487ee19d9d24fbadc3b55343351734d00ae3a84b6c94992cadf",
-    "reason": "Register reviewed SSE contracts and exact reserved observer; retain all inherited protection."
+    "base_commit": "ed8fb70a4c76108e3441ad3712425659820dc52c",
+    "evidence": "reference/packets/sse-readability/MAIN-STREAMS.json",
+    "evidence_sha256": "2d10874df387c91f3952a03046cddc783d1fbe2000eebc54ed3c66db7950f1a3",
+    "reason": "Refresh three current Main SSE/input reports after exact full stream and identity comparison."
   },
   "files": {
     "Makefile": "38bdc3d9ba31a03b868c23e4c181b6c1d6c5b79a063149527f1f8c66bbed6ed3",
@@ -97,9 +97,9 @@
     "reference/oracle-reports/ground_acceleration.json": "137bff22c2b6965ac65a7639564c04c5dd2644f9936b04843097acd7e8a5f16d",
     "reference/oracle-reports/input_devices.json": "743599afddc46ccd5f05dbc905915c4977e507239befb406eb16199df8c3257e",
     "reference/oracle-reports/input_initial_state.json": "d7d86445f287357c641cae7d86cb6f8e3b34e2c3773b4383395599f32770841c",
-    "reference/oracle-reports/input_mod_axes.json": "77370efbb78668b9c7d2b11d5783c6b496e596503249000ff9a5cb15e112a4c2",
+    "reference/oracle-reports/input_mod_axes.json": "664b9d0f7391c91bf12b95c3aa2056d5aafa257eec434fe934f430645299333d",
     "reference/oracle-reports/input_mod_constants.json": "099791edfb29be91de4b4dc37e3d6d6b1bab9e59ea6c85a1fc40b3997be8966f",
-    "reference/oracle-reports/input_mod_pad.json": "1246340cb98f97e14eb6a16ba64ce4aaf6a0a7e6f28931b9f2455a8f00804799",
+    "reference/oracle-reports/input_mod_pad.json": "bdbefb5e117790c4e76c2de6568aba034d0211355ca413b96ab7509260143992",
     "reference/oracle-reports/keyboard.json": "ac045e8cfbb4a2cd0229b2d030999950f2e53eed66b64ddb042a581d72c34d29",
     "reference/oracle-reports/late_sprite.json": "db304a84373d6e84b94bce8eb4dac9cb991bd87673834aa15ca445bb8230ae17",
     "reference/oracle-reports/level_sounds.json": "209b84861c6464e20a8beb6c7be4e20107932a1afb4807c839317ad313af51be",
@@ -265,7 +265,7 @@
     "reference/oracle-reports/speedrun_limiter.json": "91200066a179a91a8a69dcf9e0277f7640fe8dbc196ae38cce56e63235478cbe",
     "reference/oracle-reports/speedrun_on_frame.json": "5b1bbb11b17f6d6a9f674f9fc9815446520cfc3dc0359351ffad093617b0d6b9",
     "reference/oracle-reports/sprite_immediate.json": "98ed989e8949ab0dadd8e3567d51ddad465b98eb385486312143d4f1e75f9b4a",
-    "reference/oracle-reports/sse_math.json": "d3d3b9ab2567c08532b0a0c9536b3e27e45f97791da038132a5fd54cbd5f9aaf",
+    "reference/oracle-reports/sse_math.json": "90c71a5f08938c88ce36b73102d2f61fd52e72b048c12c12464989db022e0431",
     "reference/oracle-reports/stage_lighting.json": "fc34ccae8ed9b0033ac7afa34772864bc39018b1746ba71d17ef2a4f85c06247",
     "reference/oracle-reports/startup_initial_state.json": "0c90a56cbe33273d587dc6290c3d358102950571f4dbace0d8485c713b40beb1",
     "reference/oracle-reports/stream_players.json": "f5aceb241356befe006199eedde6c2ee8c8d361009ee233ba0e001a8d97251cf",
