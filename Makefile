@@ -465,9 +465,15 @@ build/polybuff-initialization-test: tests/unit/polybuff_initialization.cpp tests
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -DPOLYBUFF_INITIALIZATION_NATIVE_BINDING tests/unit/polybuff_initialization.cpp tests/probes/native_polybuff_initialization_probe.cpp src/engine/polybuff_initialization.cpp src/engine/polybuff_initialization_binding.cpp src/engine/normal_uv_strip.cpp src/cpu/x87_math.cpp build/softfloat/softfloat.a -o $@
 
 # Frozen current-publication fixtures receive observation syntax only in their own TU.
-CURRENT_REFERENCE_UNITS := build/sonic-player-test build/sonic-actions-test build/player-scene-position-binding-test
+CURRENT_REFERENCE_UNITS := build/sonic-actions-test build/player-scene-position-binding-test
 $(CURRENT_REFERENCE_UNITS): build/%-test: tests/unit/$$(subst -,_,$$*).cpp tests/reference/actor_current_fixture.hpp build/libsadx-guest.a build/libsadx-core.a
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -include tests/reference/actor_current_fixture.hpp $< build/libsadx-guest.a build/libsadx-core.a -o $@
+# NativeGame layout must never see the forced SonicPlayerGlobals fixture macro.
+build/reset-composition-fixture.o: tests/probes/reset_composition_fixture.cpp tests/fixtures/reset_composition_fixture.hpp src/guest/native_game_reference.hpp
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -MMD -MP -c $< -o $@
+-include build/reset-composition-fixture.d
+build/sonic-player-test: tests/unit/sonic_player.cpp tests/reference/actor_current_fixture.hpp build/reset-composition-fixture.o build/libsadx-guest.a build/libsadx-core.a
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -include tests/reference/actor_current_fixture.hpp $< build/reset-composition-fixture.o build/libsadx-guest.a build/libsadx-core.a -o $@
 CURRENT_REFERENCE_PROBES := build/native-sonic-player-probe.dylib build/native-sonic-action-probe.dylib
 $(CURRENT_REFERENCE_PROBES): build/native-%-probe.dylib: tests/probes/native_$$(subst -,_,$$*)_probe.cpp tests/reference/actor_current_fixture.hpp build/libsadx-guest.a build/libsadx-core.a
 	$(CXX) $(CXXFLAGS) -dynamiclib $(INCLUDES) -include tests/reference/actor_current_fixture.hpp $< build/libsadx-guest.a build/libsadx-core.a -o $@

@@ -1,17 +1,10 @@
 #include "player/sonic_player.hpp"
-#include "guest/native_game_reference.hpp"
+#include "reset_composition_fixture.hpp"
 #include <cassert>
 #include <cstring>
 #include <fstream>
 #include <iostream>
 #include <iterator>
-namespace sadx {
-// NOTSA: inspect actual NativeGame owners without exposing a gameplay/test API.
-struct ResetCompositionFixture {
-    static GameResetState &reset(NativeGame &game) { return *game.reset_; }
-    static SonicPlayerGlobals &sonic(NativeGame &game) { return game.sonic_globals_; }
-};
-}
 namespace   {
     std::vector<std::uint8_t> read(const char* p)  {
         std::ifstream f(p,std::ios::binary);
@@ -172,15 +165,15 @@ int main(int argc,char** argv)  {
         // New bounded composition: actual NativeGame owner -> reset -> real Sonic reader.
         // This does not establish a playable Sonic route or arbitrary old native alias equivalence.
         {
-            NativeGame game(NativeGameConfig{});
-            auto &reset = ResetCompositionFixture::reset(game);
-            auto &sonic = ResetCompositionFixture::sonic(game);
-            assert(sonic.editor.aliases(reset.editor.borrow()));
+            ResetCompositionFixture composition;
+            auto &reset = composition.reset();
+            auto sonic_editor = composition.editor();
+            assert(sonic_editor.aliases(reset.editor.borrow()));
             reset.editor = 32768;
             reset.frame_message = 4294967295U;
             reset.heap_at_3b290d0 = 0;
             reset.heap_at_3b0e330 = 0;
-            f.globals.editor = sonic.editor;
+            f.globals.editor = sonic_editor;
             f.globals.forced_at_3b29d0c = 0;
             f.task->action_at_0 = 86;
             run_sonic_player(frame, rt, fp);

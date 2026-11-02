@@ -111,7 +111,7 @@ int main() {
     assert(output.loaded && output.loads == 2 && scene.tasks()->source_free_slots() == 4096);
     // Existing replacement semantics: the old scheduler retains the old arena only
     // until the following task initializer. External work handles do not retain it.
-    auto retained_task = scene.task_scheduler().create_element(1, 0, nullptr);
+    auto retained_task = scene.task_scheduler().create_element(2, 0, nullptr);
     assert(retained_task && retained_task.task->primary_work);
     auto external_music_task = retained_task.task;
     auto external_title_work = retained_task.task->primary_work;
