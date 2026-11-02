@@ -1,0 +1,41 @@
+{
+  "base": "05eaa6c3",
+  "unchanged_hashes": {
+    "src/player/sonic_player_internal.hpp": "35c11bd7ddf67aa84f9ec22b8cf11dbea38889c801cfbdf436b8c0c7451fa006",
+    "src/player/sonic_player.cpp": "c2b9cd7bd4772fc5e3411ec06c160f890201fff682162ae7e177717de8945fbf",
+    "src/player/sonic_player.hpp": "32bda755d727c02422709d00b92b8bbf98bd02e5103603611b8767b794e1bd46",
+    "src/guest/sonic_player_reference.cpp": "a7311aa1ebbff20a598becbd3ceb98bd4659b5c28307733795933655b8ead7e8",
+    "src/guest/sonic_player_reference.hpp": "37a969e44625b4d031916bfe3ee8c020702cfc38f54514517afde8b541e8a4f4",
+    "src/runtime/native_sonic_fields.hpp": "4e4dd882d8a092c2a5d8cfd3084a79d48b9007593320568dd75e06c27236c80a",
+    "src/runtime/native_sonic_events.cpp": "ebd7f3dde2281a4db687a7b68775b527e87a383de3d65ca67c8a79fcfe34f57c",
+    "src/game/game_reset.cpp": "2ff4f746fb3ef4b2cc0272af108f98e54caef38db2a40232f9955b5b4c9b384f",
+    "src/game/game_reset.hpp": "f5e13a2638df8a0f5bf8a437c1b5bbf40ea4e38338cb1fcb89ee19877496a733",
+    "src/game/game_cleanup.cpp": "024c23e264893b083234cd4acd187a9f08496a9aae650f21a446740cb8f46b9b",
+    "src/game/game_cleanup.hpp": "eabdca730d54ae33912d5696bac88673df02e1d894c2b572dd6762cd309dcd5d",
+    "src/runtime/native_session.cpp": "b35346aac89c4e0fe0c30181149717f9a0af3c9c50dddaac4fe1e685b93f3b13",
+    "src/runtime/native_input.cpp": "9f4127898ef0c1f67fd87a6121078d0cb88daa7d6c746e6925b42a8539eea114",
+    "src/runtime/native_input.hpp": "dee226a84a5375d0582b4c2689d612efac793a17d55b2bd3e1f2fa3099aa4b75",
+    "tests/unit/sonic_controller_native.cpp": "871d4edcfd17d038ae5c1bc640892ca84dc453c3453a33912b4d30d7fb34b888",
+    "tests/unit/sonic_physics_capture_native.cpp": "d66f87dc8283db63c22b227b1a6da8eaaa9edce7d680da5927c838cd5a635393",
+    "tests/unit/sonic_physics_capture_reference.cpp": "68cf014efd76a68bbc5ac14251515721ce48495dc84e0735b61a3a753129a4fd",
+    "tests/unit/sonic_controller_reference.cpp": "0c000a8a069498f5e92ef00f22083b7faba48b62633cf085b34e020a78bdfec2",
+    "tests/probes/native_sonic_player_probe.cpp": "d66392012a7b45086ff30b7a7da0422fc9b64c02a3028effbc0fcfd398a21a53",
+    "tools/oracles/verify_original_sonic_player.py": "36587afe4b988da56d1d3779538f31146d88377230096062ce10abf65cc899fc",
+    "docs/refactor-inventory/packets/sonic-controller-native/PHYSICS-CAPTURE-VERIFICATION.json": "06b0f3cf58b176223a9ddd038f39c6ce4975e6f67938e666e7f7a817bbf2b740"
+  },
+  "native_binding_existing_body_sha256": "334a4fd8579d4b1cc3900aef8528d8693ca42724c5d19a12a644be5b44a6f176",
+  "proof": "Removing only the added bind_editor_state function reproduces the complete base native binding byte for byte.",
+  "reused_observations": {
+    "default": 58992,
+    "extra": 3072,
+    "default_fp_partials": [
+      2840,
+      2172
+    ],
+    "extra_fp_partials": [
+      204,
+      219
+    ]
+  },
+  "not_rerun": "Full old/current numeric streams, original holdouts and inherited mutants; unchanged engine/reference/probe hashes preserve their accepted evidence."
+}

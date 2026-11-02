@@ -1,0 +1,26 @@
+{
+  "evidence_id": "ev_413f66ad8dac988f87d83972af3df82048e40a50aeed8aae832bf6f060a29a2c",
+  "subject": {
+    "architecture": "x86",
+    "digest": {
+      "sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74"
+    },
+    "format": "pe",
+    "local_path": "/Users/burbujamc/Developer/rea/Sonic Adventure DX/sonic.exe",
+    "name": "sonic.exe"
+  },
+  "assembly": [
+    "0x40bf40: PUSH ESI",
+    "0x40bf41: PUSH EDI",
+    "0x40bf42: CALL 0x0040cd10",
+    "0x40bf47: PUSH 0x1",
+    "0x40bf49: CALL 0x00401410",
+    "0x40bf4e: XOR EDI, EDI",
+    "0x40bf50: PUSH EDI",
+    "0x40bf51: CALL 0x00785330",
+    "0x40bf56: MOV dword ptr [0x03abdf80], EDI",
+    "0x40bf5c: MOV word ptr [0x03b29d08], DI",
+    "0x40bf63: CALL 0x00403e60",
+    "0x40bf68: CALL 0x004257c0"
+  ]
+}

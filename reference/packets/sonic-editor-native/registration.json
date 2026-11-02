@@ -1,0 +1,93 @@
+{
+  "base_commit": "05eaa6c3",
+  "source_commit": "9f6ec53b",
+  "base_protections": 1398,
+  "candidate_protections": 1403,
+  "omitted_inherited_paths": [],
+  "inherited_absent_paths_preserved": [
+    "reference/oracle-reports/air_acceleration.cases.bin",
+    "reference/oracle-reports/axis_projection.cases.bin",
+    "reference/oracle-reports/collision_shapes.cases.bin",
+    "reference/oracle-reports/floor_angles.cases.bin",
+    "reference/oracle-reports/frame_completion.cases.bin",
+    "reference/oracle-reports/game_frame_control.cases.bin",
+    "reference/oracle-reports/game_logic.cases.bin",
+    "reference/oracle-reports/game_loop.cases.bin",
+    "reference/oracle-reports/game_mode.cases.bin",
+    "reference/oracle-reports/game_scene_logic.cases.bin",
+    "reference/oracle-reports/ground_acceleration.cases.bin",
+    "reference/oracle-reports/ninja_queue_consumer.cases.bin",
+    "reference/oracle-reports/ninja_queue_lifecycle.cases.bin",
+    "reference/oracle-reports/ninja_render.cases.bin",
+    "reference/oracle-reports/ninja_sprite.cases.bin",
+    "reference/oracle-reports/ninja_sprite_display.cases.bin",
+    "reference/oracle-reports/ninja_sprite_queue.cases.bin",
+    "reference/oracle-reports/ninja_texture_selection.cases.bin",
+    "reference/oracle-reports/player_animation.constants.bin",
+    "reference/oracle-reports/player_auxiliary_effect.cases.bin",
+    "reference/oracle-reports/player_contact_attributes.cases.bin",
+    "reference/oracle-reports/player_contact_initializer.cases.bin",
+    "reference/oracle-reports/player_contact_response.constants.bin",
+    "reference/oracle-reports/player_coordinates.cases.bin",
+    "reference/oracle-reports/player_direction_reset.cases.bin",
+    "reference/oracle-reports/player_heading.angle-cases.bin",
+    "reference/oracle-reports/player_heading.cases.bin",
+    "reference/oracle-reports/player_input.cases.bin",
+    "reference/oracle-reports/player_input_producer.cases.bin",
+    "reference/oracle-reports/player_mesh_math.cases.bin",
+    "reference/oracle-reports/player_mesh_query.cases.bin",
+    "reference/oracle-reports/player_mesh_registry.cases.bin",
+    "reference/oracle-reports/player_movement.cases.bin",
+    "reference/oracle-reports/player_path.cases.bin",
+    "reference/oracle-reports/player_plane.cases.bin",
+    "reference/oracle-reports/player_position.cases.bin",
+    "reference/oracle-reports/player_reaction.cases.bin",
+    "reference/oracle-reports/player_rotation.cases.bin",
+    "reference/oracle-reports/player_scene.cases.bin",
+    "reference/oracle-reports/player_scene_helpers.cases.bin",
+    "reference/oracle-reports/player_scene_position.cases.bin",
+    "reference/oracle-reports/player_speed.cases.bin",
+    "reference/oracle-reports/player_startup.cases.bin",
+    "reference/oracle-reports/projection_angle.cases.bin",
+    "reference/oracle-reports/scene_input_producer.cases.bin",
+    "reference/oracle-reports/scene_mesh_bounds.cases.bin",
+    "reference/oracle-reports/sonic_actions.constants.bin",
+    "reference/oracle-reports/sonic_player.constants.bin",
+    "reference/oracle-reports/sonic_player.dispatch.bin",
+    "reference/oracle-reports/speedrun_limiter.cases.bin",
+    "reference/oracle-reports/task_lifecycle.cases.bin",
+    "reference/oracle-reports/task_work.cases.bin",
+    "reference/oracle-reports/x87_memory.cases.bin"
+  ],
+  "new_registrations": {
+    "reference/packets/sonic-editor-native/verify_faults.py": "6012e873eed7b602b337e57bd6539fd2a3dafd3d0652740561e40ad7aae152aa",
+    "reference/packets/sonic-editor-native/verify_source.py": "03b03c7319b7f557a318e2a254bb76db5463d336b01d7e661f0f36893bb1befe",
+    "tests/probes/native_editor_state_probe.cpp": "8f3d2caa4e971b723e6ac32913b994d08dbaf74f09a24fc5d28e9858167f0878",
+    "tests/unit/editor_state.cpp": "daeea718d41ed70c4001cefc7d976c7a3738d22c1da00ad00dbbb1eaab1d03f2",
+    "tests/unit/native_editor_binding.mm": "03e869cb78c5baf543fa40c8167d077195fb0edf1e6fa51f6fa9a8c2213eb79b"
+  },
+  "changed_judge_inputs": {
+    "Makefile": {
+      "old": "3134d52d4474ddd56f93e8dd1e855badc09012a0c8476851a2cf2cf09df04e12",
+      "new": "1e9290ddf3fea61568f74cbe854b97976d1f326c977b3080ca2c6ff5636aaee0"
+    },
+    "tests/unit/manifest.tsv": {
+      "old": "d060e736e50b580cba40807cb374cda24a59b2350fe5514cd850031cfd942d2d",
+      "new": "0d2f1ac30bbc91e37c503f76715bfb0454feb00c92eae59870118b8039c855e7"
+    },
+    "tests/unit/native_sonic_callback.mm": {
+      "old": "0e34e7c1786a09645c947df2f48097deb62a2fa20e479b3110b4f881b380b22d",
+      "new": "07e63806477aed5a9dbb5fc323cb33fa01af8b32ed14e786ab1b2eeeddf6e4a9"
+    },
+    "tests/unit/sonic_animation_integration.mm": {
+      "old": "6ec71f4ab89291d664bf951eb5dbd33c65f85b69241aa33846c3f3994602d85d",
+      "new": "0beb408844ca5262a1b1cc972d42f6f2fbf0070d028d03fc7754d703c125743d"
+    }
+  },
+  "reason": "Qualify recovered editor reads and actual callback progress; existing callback tests now require real initialization/table/model boundaries and retain their publication/event/lifetime assertions. Numeric expected values, tolerances, existing numeric inputs and mutants remain unchanged; the two obsolete missing-editor boundary assertions advance to independently verified initialization boundaries.",
+  "generated_command_evidence": "generated-commands.json",
+  "source_original_evidence": "source-comparison.json",
+  "compiled_fault_evidence": "faults.json",
+  "local_judge_expected_exit": 1,
+  "local_judge_expected_errors": "Exactly 53 inherited missing ignored binary evidence files, with no hash drift or omitted protection. No full gate claimed."
+}

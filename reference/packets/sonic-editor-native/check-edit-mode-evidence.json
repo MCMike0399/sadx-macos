@@ -1,0 +1,91 @@
+{
+  "evidence_id": "ev_077bb9d4b7606d3197657953e771e05f119ef83fc8a82c31d205c56b89691c1e",
+  "subject": {
+    "architecture": "x86",
+    "digest": {
+      "sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74"
+    },
+    "format": "pe",
+    "local_path": "/Users/burbujamc/Developer/sadx-macos/reference/updated-pc-reference/game/sonic.exe",
+    "name": "sonic.exe"
+  },
+  "provider": {
+    "id": "ghidra",
+    "name": "Ghidra",
+    "version": "12.1.4"
+  },
+  "analysis_profile": {
+    "digest": "406a6ba816fc8af1fba763ff4a56179df146625ad8f1fcb7324d60039e0bd7fb",
+    "parameters": {
+      "analysis_seeds": {
+        "configured_path": "/Users/burbujamc/Developer/sadx-macos/build/symbols/rea-seeds.tsv",
+        "entries": {
+          "code": 0,
+          "function": 3855,
+          "label": 249015
+        },
+        "format": "rea-ghidra-seeds-v1",
+        "path": "/Users/burbujamc/Developer/sadx-macos/build/symbols/rea-seeds.tsv",
+        "sha256": "d0271701893821b2c226a0329b7ae7ede380a1358a22068ab0fddcd9d0e8a8d7"
+      },
+      "analyzer_preset": "ghidra-default",
+      "annotation_policy": "atomic-function-entry-metadata-v1",
+      "architecture": "x86",
+      "available_architectures": [
+        "x86"
+      ],
+      "compiler_spec_id": "auto-default",
+      "decompiler_jump_loads": true,
+      "executable_role": "application",
+      "function_body_evidence": "complete-inclusive-ranges-v1",
+      "function_boundary_observations": "ghidra-terminal-call-limitations-v1",
+      "function_references": "complete-body-and-entry-reference-manager-v2",
+      "import_mode": "ephemeral-source-immutable",
+      "instruction_flow_evidence": "decoded-return-pcode-v1",
+      "jump_table_evidence": "typed-case-default-blocks-v1",
+      "language_id": "auto-from-header",
+      "load_image_observations": "source-mappings-entry-context-v2",
+      "loader": "auto-from-header",
+      "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+      "managed": false,
+      "native_aot_metadata": {
+        "contract_revision": "rtr-9.1-x64-pe-read-only-v3",
+        "report_bytes": 4194304,
+        "source_bytes": 134217728,
+        "work_units": 67108864,
+        "working_memory_bytes": 67108864
+      },
+      "no_return_repair": "returning-imports-decoded-return-v2",
+      "process_launch": "inspected-jvm-launch-support-v1",
+      "string_inventory_evidence": "defined-data-coverage-v1",
+      "target_format": "pe",
+      "target_kind": "executable"
+    },
+    "provider": {
+      "id": "ghidra",
+      "name": "Ghidra",
+      "version": "12.1.4"
+    }
+  },
+  "operation": "analyze_function",
+  "parameters": {
+    "procedure": "0x4258f0"
+  },
+  "value": {
+    "assembly": [
+      "0x4258f0: MOVSX EAX, word ptr [0x03b29d0c]",
+      "0x4258f7: MOVSX ECX, word ptr [0x03b29d08]",
+      "0x4258fe: OR EAX, ECX",
+      "0x425900: RET"
+    ],
+    "basic_blocks": [
+      {
+        "end": "0x425901",
+        "start": "0x4258f0",
+        "successors": []
+      }
+    ],
+    "callees": [],
+    "pseudocode": "\nint CheckEditMode(void)\n\n{\n  return (int)(short)(ssMiEditorStatus | ssEditorStatus);\n}\n\n"
+  }
+}

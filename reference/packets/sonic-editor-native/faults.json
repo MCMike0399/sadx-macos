@@ -1,0 +1,400 @@
+{
+  "faults": [
+    {
+      "name": "zero-extended-words",
+      "commands": [
+        [
+          "xcrun",
+          "clang++",
+          "-I/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5cf04a5b/build/editor-faults/zero-extended-words",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-Isrc",
+          "-dynamiclib",
+          "tests/probes/native_editor_state_probe.cpp",
+          "-o",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5cf04a5b/build/editor-faults/zero-extended-words/probe.dylib"
+        ],
+        [
+          "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5cf04a5b/reference/packets/sonic-editor-native/verify_source.py",
+          "/Users/burbujamc/Developer/sadx-macos/reference/updated-pc-reference/game/sonic.exe",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5cf04a5b/build/editor-faults/zero-extended-words/probe.dylib",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5cf04a5b/build/editor-native.tsv",
+          "--output",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5cf04a5b/build/editor-faults/zero-extended-words/comparison.json"
+        ]
+      ],
+      "changed_source_sha256": "23ea7a2719a6556d03b12584b3529a5f083f20c18268d22081b98ad907fb658d",
+      "exit": 1,
+      "output_sha256": "ddc436a13bf655744f66db1bb7b973110666513792db641e47081d76a2a5c862",
+      "caught": true
+    },
+    {
+      "name": "normalized-bool",
+      "commands": [
+        [
+          "xcrun",
+          "clang++",
+          "-I/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5cf04a5b/build/editor-faults/normalized-bool",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-Isrc",
+          "-dynamiclib",
+          "tests/probes/native_editor_state_probe.cpp",
+          "-o",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5cf04a5b/build/editor-faults/normalized-bool/probe.dylib"
+        ],
+        [
+          "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5cf04a5b/reference/packets/sonic-editor-native/verify_source.py",
+          "/Users/burbujamc/Developer/sadx-macos/reference/updated-pc-reference/game/sonic.exe",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5cf04a5b/build/editor-faults/normalized-bool/probe.dylib",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5cf04a5b/build/editor-native.tsv",
+          "--output",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5cf04a5b/build/editor-faults/normalized-bool/comparison.json"
+        ]
+      ],
+      "changed_source_sha256": "bbd8a712d4893968600af8ec8c94641454c7bcb06de70c7cf84abe816f5f3e9e",
+      "exit": 1,
+      "output_sha256": "abc04aac03c18c82652ef3f8c5912557010e119abb62661d19d73d07939318a6",
+      "caught": true
+    },
+    {
+      "name": "omit-editor-word",
+      "commands": [
+        [
+          "xcrun",
+          "clang++",
+          "-I/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5cf04a5b/build/editor-faults/omit-editor-word",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-Isrc",
+          "-dynamiclib",
+          "tests/probes/native_editor_state_probe.cpp",
+          "-o",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5cf04a5b/build/editor-faults/omit-editor-word/probe.dylib"
+        ],
+        [
+          "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5cf04a5b/reference/packets/sonic-editor-native/verify_source.py",
+          "/Users/burbujamc/Developer/sadx-macos/reference/updated-pc-reference/game/sonic.exe",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5cf04a5b/build/editor-faults/omit-editor-word/probe.dylib",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5cf04a5b/build/editor-native.tsv",
+          "--output",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5cf04a5b/build/editor-faults/omit-editor-word/comparison.json"
+        ]
+      ],
+      "changed_source_sha256": "719f54d6db5c451154979e764ee1252cc986cd2a943589906c33e68c3a45ffb3",
+      "exit": 1,
+      "output_sha256": "b2ae0bbd3d713d3c4fc3cc02cdbc56de6e939d1d2eddff1d6f47187d99319c1e",
+      "caught": true
+    },
+    {
+      "name": "swapped-native-owners",
+      "commands": [
+        [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-Isrc",
+          "-c",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5cf04a5b/build/editor-faults/swapped-native-owners/fault.cpp",
+          "-o",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5cf04a5b/build/editor-faults/swapped-native-owners/fault.o"
+        ],
+        [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-Isrc",
+          "-fobjc-arc",
+          "tests/unit/native_editor_binding.mm",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5cf04a5b/build/editor-faults/swapped-native-owners/fault.o",
+          "build/libsadx-native.a",
+          "-framework",
+          "Foundation",
+          "-o",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5cf04a5b/build/editor-faults/swapped-native-owners/test"
+        ],
+        [
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5cf04a5b/build/editor-faults/swapped-native-owners/test",
+          "/Users/burbujamc/Developer/sadx-macos/game/imported",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5cf04a5b/build/editor-faults/swapped-native-owners/native.tsv"
+        ]
+      ],
+      "changed_source_sha256": "aa3b906bda8d90dd0d434e3b545be65fe57c225ce8414ad5733c088817f1171b",
+      "exit": -6,
+      "output_sha256": "a6d7d1ded657b64995d7dfa258acbbb33286d085981874fc6f613ceb4349ebc0",
+      "caught": true
+    },
+    {
+      "name": "snapshot-native-words",
+      "commands": [
+        [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-Isrc",
+          "-c",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5cf04a5b/build/editor-faults/snapshot-native-words/fault.cpp",
+          "-o",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5cf04a5b/build/editor-faults/snapshot-native-words/fault.o"
+        ],
+        [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-Isrc",
+          "-fobjc-arc",
+          "tests/unit/native_editor_binding.mm",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5cf04a5b/build/editor-faults/snapshot-native-words/fault.o",
+          "build/libsadx-native.a",
+          "-framework",
+          "Foundation",
+          "-o",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5cf04a5b/build/editor-faults/snapshot-native-words/test"
+        ],
+        [
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5cf04a5b/build/editor-faults/snapshot-native-words/test",
+          "/Users/burbujamc/Developer/sadx-macos/game/imported",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5cf04a5b/build/editor-faults/snapshot-native-words/native.tsv"
+        ]
+      ],
+      "changed_source_sha256": "172c80f6473444b8bbfbbe0a988557ec3935a86dd818126d6c9cd62da92da239",
+      "exit": -6,
+      "output_sha256": "a6d7d1ded657b64995d7dfa258acbbb33286d085981874fc6f613ceb4349ebc0",
+      "caught": true
+    },
+    {
+      "name": "remove-production-editor-binding",
+      "commands": [
+        [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-Isrc",
+          "-c",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5cf04a5b/build/editor-faults/remove-production-editor-binding/fault.cpp",
+          "-o",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5cf04a5b/build/editor-faults/remove-production-editor-binding/fault.o"
+        ],
+        [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-Isrc",
+          "-fobjc-arc",
+          "tests/unit/native_editor_binding.mm",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5cf04a5b/build/editor-faults/remove-production-editor-binding/fault.o",
+          "build/libsadx-native.a",
+          "-framework",
+          "Foundation",
+          "-o",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5cf04a5b/build/editor-faults/remove-production-editor-binding/test"
+        ],
+        [
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5cf04a5b/build/editor-faults/remove-production-editor-binding/test",
+          "/Users/burbujamc/Developer/sadx-macos/game/imported",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5cf04a5b/build/editor-faults/remove-production-editor-binding/native.tsv"
+        ]
+      ],
+      "changed_source_sha256": "8cb7d04b54a6040a1900598cd1e8cd3378671f2478a787e4439579834a4877ec",
+      "exit": -6,
+      "output_sha256": "996fa6b4f5e3c5e41e6038087210a2faab35d8434c4a6f73f6c7379ec4c49b26",
+      "caught": true
+    },
+    {
+      "name": "remove-production-metal-binding",
+      "commands": [
+        [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-Isrc",
+          "-c",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5cf04a5b/build/editor-faults/remove-production-metal-binding/fault.cpp",
+          "-o",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5cf04a5b/build/editor-faults/remove-production-metal-binding/fault.o"
+        ],
+        [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-Isrc",
+          "-fobjc-arc",
+          "tests/unit/native_editor_binding.mm",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5cf04a5b/build/editor-faults/remove-production-metal-binding/fault.o",
+          "build/libsadx-native.a",
+          "-framework",
+          "Foundation",
+          "-o",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5cf04a5b/build/editor-faults/remove-production-metal-binding/test"
+        ],
+        [
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5cf04a5b/build/editor-faults/remove-production-metal-binding/test",
+          "/Users/burbujamc/Developer/sadx-macos/game/imported",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5cf04a5b/build/editor-faults/remove-production-metal-binding/native.tsv"
+        ]
+      ],
+      "changed_source_sha256": "e0240bde0b75f3cd5b41fd19b6e7cab8c515532fc401e845cf11331689e2a824",
+      "exit": -6,
+      "output_sha256": "996fa6b4f5e3c5e41e6038087210a2faab35d8434c4a6f73f6c7379ec4c49b26",
+      "caught": true
+    },
+    {
+      "name": "normalize-gamma-result",
+      "commands": [
+        [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-Isrc",
+          "-c",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5cf04a5b/build/editor-faults/normalize-gamma-result/fault.cpp",
+          "-o",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5cf04a5b/build/editor-faults/normalize-gamma-result/fault.o"
+        ],
+        [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-Isrc",
+          "-fobjc-arc",
+          "tests/unit/native_editor_binding.mm",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5cf04a5b/build/editor-faults/normalize-gamma-result/fault.o",
+          "build/libsadx-native.a",
+          "-framework",
+          "Foundation",
+          "-o",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5cf04a5b/build/editor-faults/normalize-gamma-result/test"
+        ],
+        [
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5cf04a5b/build/editor-faults/normalize-gamma-result/test",
+          "/Users/burbujamc/Developer/sadx-macos/game/imported",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5cf04a5b/build/editor-faults/normalize-gamma-result/native.tsv"
+        ]
+      ],
+      "changed_source_sha256": "86b774078cdd40400599ded2f54e1ef9f6a768f867ebfa79991e7b54cfefcee4",
+      "exit": -6,
+      "output_sha256": "0b366e33ce88a44232e81939ca69deeb145d79883b5f19d23e3af7c9de76a814",
+      "caught": true
+    }
+  ],
+  "count": 8,
+  "caught": true
+}

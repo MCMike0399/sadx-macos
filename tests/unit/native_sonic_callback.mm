@@ -25,24 +25,19 @@ struct SonicCallbackProbe {
         bool stopped = false;
         try { task->exec(scheduler, task); }
         catch (const sonic::Unavailable &error) {
-            stopped = std::string(error.what()) == "sonic_check_edit_mode_editor";
+            stopped = std::string(error.what()) == "sonic_animation_table";
         }
         assert(stopped);
         assert(session.players_.current.primary == primary);
         assert(!session.players_.current.player);
-        assert(session.players_.registry.allocations.empty());
-        assert(display.arithmetic().control_word() == cw);
-        player_initialization::NativeAccess access(session.players_.gamma_assets->parameters,
-            session.bootstrap_.event_work, TitleScene::initialize_player_auxiliary);
-        player_initialization::PlayerHandle player;
-        player_initialization::initialize(0, task,
-            player_initialization::bind_existing_motion(task), scheduler,
-            session.players_.registry, access, display.arithmetic(), player);
+        const auto player = session.players_.registry.players[0];
         assert(player && player->stage == player_initialization::Stage::Complete);
+        assert(session.players_.registry.allocations.at(player->allocation.get()) == player);
+        assert(display.arithmetic().control_word() == cw);
         stopped = false;
         try { task->exec(scheduler, task); }
         catch (const sonic::Unavailable &error) {
-            stopped = std::string(error.what()) == "sonic_check_edit_mode_editor";
+            stopped = std::string(error.what()) == "sonic_animation_table";
         }
         assert(stopped && session.players_.current.primary == primary);
         assert(session.players_.current.player == player->allocation);
@@ -105,7 +100,7 @@ int main(int argc, char **argv) {
         const native::TitleAssets titles{};
         native::TitleScene scene(session, display, titles);
         native::SonicCallbackProbe::run(session, scene, display);
-        std::cout << "Real Sonic callback publishes canonical current owners before the editor stop; "
+        std::cout << "Real Sonic callback publishes canonical current owners before real initialization reaches the animation-table stop; "
                      "captured event mode/path bindings survive primary replacement and reject release\n";
     }
 }

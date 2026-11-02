@@ -26,19 +26,23 @@ struct SonicCallbackProbe {
         const auto task = scene.create_task(7, 1, TitleScene::exec_selection_sonic);
         player_initialization::establish_zeroed_primary(scheduler, task);
         player_initialization::establish_zeroed_motion(scheduler, task);
-        auto editor_stop = [&] {
+        auto initialization_stop = [&](const char *boundary) {
             const auto cw = display.arithmetic().control_word();
             bool stopped = false;
             try { task->exec(scheduler, task); }
             catch (const sonic::Unavailable &error) {
-                stopped = std::string(error.what()) == "sonic_check_edit_mode_editor";
+                stopped = std::string(error.what()) == boundary;
             }
             assert(stopped && display.arithmetic().control_word() == cw);
             assert(session.players_.current.primary == task->primary_work);
-            assert(!session.players_.current.player);
-            assert(session.players_.registry.allocations.empty());
+            const auto player = session.players_.registry.players[0];
+            assert(player && player->stage == player_initialization::Stage::Complete);
+            assert(player->physics && player->task == task);
+            assert(session.players_.registry.allocations.at(player->allocation.get()) == player);
         };
-        editor_stop(); // Metadata absent: preserve the ordered pre-animation boundary.
+        initialization_stop("sonic_animation_table");
+        // Entry-time publication stays null even though initialization allocated a player.
+        assert(!session.players_.current.player);
         auto assets = app::load_sonic_animation_assets(directory, pack);
         const auto *owner = assets.get();
         const auto *table_member = &assets->table();
@@ -49,7 +53,10 @@ struct SonicCallbackProbe {
         assert(!assets && session.players_.sonic_animation_assets.get() == owner);
         assert(&owner->table() == table_member && owner->table() == table);
         assert(&owner->resources() == resources);
-        editor_stop(); // Present metadata must not invent editor/forced/alternate inputs.
+        const auto entry_player = session.players_.registry.players[0]->allocation;
+        initialization_stop("sonic_model_graph");
+        assert(session.players_.current.player == entry_player);
+        assert(session.players_.registry.players[0]->physics->animation_tail.table_at_140 == table);
         rejected = false;
         try { session.load_sonic_animation_assets(app::load_sonic_animation_assets(directory, pack)); }
         catch (const std::runtime_error &) { rejected = true; }
@@ -58,7 +65,7 @@ struct SonicCallbackProbe {
         try { session.load_sonic_animation_assets(nullptr); }
         catch (const std::runtime_error &) { rejected = true; }
         assert(rejected && session.players_.sonic_animation_assets.get() == owner);
-        editor_stop();
+        initialization_stop("sonic_model_graph");
         assert(&owner->resources() == resources && &owner->table() == table_member);
         // The invocation runtime only borrows: repeated callback destruction keeps backing alive.
         for (const auto &entry : resources->key_arrays)
@@ -83,6 +90,6 @@ int main(int argc, char **argv) {
         native::TitleScene scene(session, display, titles);
         native::SonicCallbackProbe::run(session, scene, display, directory, *pack);
         std::cout << "Session rejects null/replacement; stable Sonic owner/table/resources; actual "
-                     "callback preserves editor stop with absent/present metadata\n";
+                     "callback initializes real player/table and reaches explicit model stop\n";
     }
 }

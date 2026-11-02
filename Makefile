@@ -615,3 +615,10 @@ build/particle-lifecycle-test: tests/unit/particle_lifecycle.cpp src/engine/part
 	$(CXX) $(CXXFLAGS) $(INCLUDES) $< build/libsadx-native.a -o $@
 build/native-particle-lifecycle-probe.dylib: tests/probes/native_particle_lifecycle_probe.cpp src/engine/particle_pool.hpp src/engine/particle_pool_lifecycle_native.cpp src/engine/task.cpp src/engine/task_work.cpp src/cpu/x87_math.cpp src/cpu/crt_integer.cpp build/softfloat/softfloat.a
 	$(CXX) $(CXXFLAGS) -dynamiclib $(INCLUDES) tests/probes/native_particle_lifecycle_probe.cpp src/engine/particle_pool_lifecycle_native.cpp src/engine/task.cpp src/engine/task_work.cpp src/cpu/x87_math.cpp src/cpu/crt_integer.cpp build/softfloat/softfloat.a -o $@
+
+build/editor-state-test: tests/unit/editor_state.cpp src/game/editor_state.hpp
+	$(CXX) $(CXXFLAGS) $(INCLUDES) $< -o $@
+build/native-editor-state-probe.dylib: tests/probes/native_editor_state_probe.cpp src/game/editor_state.hpp
+	$(CXX) $(CXXFLAGS) -dynamiclib $(INCLUDES) $< -o $@
+build/native-editor-binding-test: tests/unit/native_editor_binding.mm build/libsadx-native.a
+	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) $< build/libsadx-native.a -framework Foundation -o $@
