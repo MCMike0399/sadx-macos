@@ -7,7 +7,7 @@ namespace sadx::native {
 // Zero denotes a source NULL; nonzero values identify the first aliased export plus one.
 struct SonicActionDeclaration {
     std::uint16_t identity = 0;
-    animation::ActionResource action;
+    animation::ActionResource action{animation::ResourceStatus::Unavailable, 0, {}};
 };
 // NOTSA: one immutable imported Sonic table and reached payload closure. Players retain
 // the shared table; animation runtimes borrow this owner's resources for the session lifetime.

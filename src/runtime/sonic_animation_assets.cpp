@@ -64,7 +64,8 @@ void SonicAnimationAssets::import_action(const character_pack::CharacterPack &pa
         return;
     const auto motion = pack.motion(action.motion);
     resources_.motions.emplace(action.motion,
-        animation::Motion{motion.frame_count, motion.channels, motion.interpolation, {{motion.tracks}}});
+        animation::Motion{motion.frame_count, motion.channels,
+                          motion.interpolation, {{motion.tracks}}});
     const auto &tracks = pack.record(motion.tracks).payload;
     std::vector<animation::Node> nodes;
     for (std::uint32_t index = 0; index < word(tracks, 0); ++index) {
@@ -77,9 +78,11 @@ void SonicAnimationAssets::import_action(const character_pack::CharacterPack &pa
             node.keys[channel].id = key;
             if (resources_.key_arrays.count(key))
                 continue;
-            auto backing = std::make_shared<const std::vector<std::uint8_t>>(pack.record(key).payload);
+            auto backing =
+                std::make_shared<const std::vector<std::uint8_t>>(pack.record(key).payload);
             // Pack arrays have a four-byte count followed by unchanged 16-byte source keys.
-            resources_.key_arrays.emplace(key, animation::KeyBytes{backing, 4, backing->size() - 4});
+            resources_.key_arrays.emplace(
+                key, animation::KeyBytes{backing, 4, backing->size() - 4});
         }
         nodes.push_back(std::move(node));
     }

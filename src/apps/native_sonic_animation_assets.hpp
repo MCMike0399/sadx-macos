@@ -24,7 +24,8 @@ load_sonic_animation_assets(const std::filesystem::path &directory,
         const auto status = string(row[@"status"], "Sonic action status");
         if (status == "loaded") {
             action.status = animation::ResourceStatus::Loaded;
-            action.identity = integer(row[@"action"], 1, pack.record_count(), "Sonic action resource");
+            action.identity =
+                integer(row[@"action"], 1, pack.record_count(), "Sonic action resource");
             if (row[@"resource_boundary"] != NSNull.null)
                 throw std::runtime_error("loaded Sonic action has boundary");
         } else {
@@ -36,7 +37,8 @@ load_sonic_animation_assets(const std::filesystem::path &directory,
                     throw std::runtime_error("null Sonic action has boundary");
             } else if (status == "unavailable") {
                 action.status = animation::ResourceStatus::Unavailable;
-                const auto boundary = dictionary(row[@"resource_boundary"], "Sonic action boundary");
+                const auto boundary =
+                    dictionary(row[@"resource_boundary"], "Sonic action boundary");
                 for (NSString *key in @[@"component", @"source_address", @"reason"]) {
                     const auto value = string(boundary[key], "Sonic missing resource");
                     if (value.empty())
@@ -54,7 +56,8 @@ load_sonic_animation_assets(const std::filesystem::path &directory,
     if (declarations[1].action.status != animation::ResourceStatus::Loaded ||
         declarations[1].action.identity != static_cast<std::size_t>(initial) ||
         integer(actor[@"initial_animation_export_index"], 1, 1, "Sonic actor Stand export") != 1 ||
-        integer(actor[@"initial_animation_action"], initial, initial, "Sonic actor Stand identity") != initial)
+        integer(actor[@"initial_animation_action"], initial, initial,
+                "Sonic actor Stand identity") != initial)
         throw std::runtime_error("Sonic animation Stand differs from actor import");
     return std::make_unique<SonicAnimationAssets>(pack, std::move(declarations));
 }
