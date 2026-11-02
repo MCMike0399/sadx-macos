@@ -1,8 +1,7 @@
-"""Run unchanged default judges and retain every native ABI buffer and original observation.
+"""Capture unchanged default reset-consumer judges without changing their inputs or verdicts.
 
-Development only: no input generation, filtering, tolerance, expected value or seed changes.
-Original methods retain their return/fault behavior. WinMain's local comparison is captured
-at its existing comparison line. Binary streams are framed per call and gzip compressed.
+Every call retains ordered identity, every scalar/byte/array argument, its exact extent,
+return value and complete post-call buffers. Original observations are retained separately.
 """
 import ctypes
 import gzip
@@ -13,81 +12,107 @@ from pathlib import Path
 import struct
 import sys
 
-slug, library, output = sys.argv[1:]
-output = Path(output)
-output.mkdir(parents=True, exist_ok=True)
-script = Path('tools/oracles') / f'verify_original_{slug}.py'
-spec = importlib.util.spec_from_file_location('reset_capture_judge', script)
-module = importlib.util.module_from_spec(spec)
-spec.loader.exec_module(module)
-abi = gzip.GzipFile(
-    filename=str(output / f'{slug}.abi.gz'), mode='wb', mtime=0)
-observations = gzip.GzipFile(filename=str(output / f'{slug}.original.gz'), mode='wb', mtime=0)
-count = 0
-real_cdll = ctypes.CDLL
+
+def argument(value):
+    if isinstance(value, ctypes.Array):
+        data = bytes(value)
+        return {'kind': 'array', 'bytes': len(data), 'data': data.hex()}
+    if isinstance(value, bytes):
+        return {'kind': 'bytes', 'bytes': len(value), 'data': value.hex()}
+    if isinstance(value, int):
+        return {'kind': 'integer', 'value': value}
+    raise TypeError(f'Uncaptured ABI argument type: {type(value)}')
+
 
 class Function:
-    def __init__(self, function):
+    def __init__(self, function, capture):
         object.__setattr__(self, 'function', function)
+        object.__setattr__(self, 'capture', capture)
+
     def __setattr__(self, name, value):
         setattr(self.function, name, value)
+
     def __getattr__(self, name):
         return getattr(self.function, name)
+
     def __call__(self, *args):
-        global count
-        inputs = [bytes(a) for a in args if isinstance(a, ctypes.Array)]
+        inputs = [argument(a) for a in args]
+        ordinal = self.capture['count']
         result = self.function(*args)
-        outputs = [bytes(a) for a in args if isinstance(a, ctypes.Array)]
-        data = json.dumps({'function': self.function.__name__, 'result': result,
-                           'inputs': [a.hex() for a in inputs],
-                           'outputs': [a.hex() for a in outputs]}, separators=(',', ':')).encode()
-        abi.write(struct.pack('<I', len(data)) + data)
-        count += 1
+        outputs = [argument(a) for a in args]
+        data = json.dumps({'ordinal': ordinal, 'function': self.function.__name__,
+                           'argument_count': len(args), 'result': result,
+                           'inputs': inputs, 'outputs': outputs}, separators=(',', ':')).encode()
+        self.capture['stream'].write(struct.pack('<I', len(data)) + data)
+        self.capture['count'] += 1
         return result
 
-class Library:
-    def __init__(self, *args, **kwargs):
-        self.library = real_cdll(*args, **kwargs)
-    def __getattr__(self, name):
-        return Function(getattr(self.library, name))
 
-def record(value):
-    observations.write((json.dumps(value, sort_keys=True, separators=(',', ':')) + '\n').encode())
+def main():
+    slug, library, destination = sys.argv[1:]
+    output = Path(destination)
+    output.mkdir(parents=True, exist_ok=True)
+    script = Path('tools/oracles') / f'verify_original_{slug}.py'
+    spec = importlib.util.spec_from_file_location('reset_capture_judge', script)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    abi = gzip.GzipFile(filename=str(output / f'{slug}.abi.gz'), mode='wb', mtime=0)
+    observations = gzip.GzipFile(filename=str(output / f'{slug}.original.gz'), mode='wb', mtime=0)
+    capture = {'stream': abi, 'count': 0}
+    real_cdll = ctypes.CDLL
 
-for value in list(vars(module).values()):
-    if isinstance(value, type) and value.__module__ == module.__name__ and hasattr(value, 'run'):
-        original = value.run
-        def run(self, *args, _original=original, **kwargs):
-            result = _original(self, *args, **kwargs)
-            record({'class': type(self).__name__, 'input': args, 'result': result})
-            return result
-        value.run = run
+    class Library:
+        def __init__(self, *args, **kwargs):
+            self.library = real_cdll(*args, **kwargs)
 
-# WinMain performs its instruction observation inline instead of through Source.run.
-if slug == 'game_winmain':
-    lines = script.read_text().splitlines()
-    line = next(i + 1 for i, text in enumerate(lines) if 'd=[i for i in range(256)' in text)
-    def trace(frame, event, arg):
-        if event == 'line' and frame.f_code.co_filename == str(script) and frame.f_lineno == line:
-            values = frame.f_locals
-            record({'case': values['n'], 'source': values['e'],
-                    'source_trace': values['st']['trace'], 'native_comparison': values['got_cmp']})
-        return trace
-    sys.settrace(trace)
-ctypes.CDLL = Library
-sys.argv = [str(script), '/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe',
-            library, '--output', str(output / f'{slug}.json')]
-try:
-    status = module.main()
-finally:
-    sys.settrace(None)
-    abi.close()
-    observations.close()
-    ctypes.CDLL = real_cdll
-receipt = {'slug': slug, 'exit': int(status), 'calls': count,
-           'files': {p.name: hashlib.sha256(p.read_bytes()).hexdigest()
-                     for p in output.glob(f'{slug}.*')},
-           'limits': 'Complete default native ABI and original observations; no reserved inputs.'}
-(output / f'{slug}.capture.json').write_text(json.dumps(receipt, indent=2) + '\n')
-print(json.dumps(receipt))
-raise SystemExit(status)
+        def __getattr__(self, name):
+            return Function(getattr(self.library, name), capture)
+
+    def record(value):
+        observations.write((json.dumps(value, sort_keys=True, separators=(',', ':')) + '\n').encode())
+
+    for value in list(vars(module).values()):
+        if isinstance(value, type) and value.__module__ == module.__name__ and hasattr(value, 'run'):
+            original = value.run
+
+            def run(self, *args, _original=original, **kwargs):
+                result = _original(self, *args, **kwargs)
+                record({'class': type(self).__name__, 'input': args, 'result': result})
+                return result
+
+            value.run = run
+
+    # WinMain's original instruction observation is inline rather than in Source.run.
+    if slug == 'game_winmain':
+        lines = script.read_text().splitlines()
+        line = next(i + 1 for i, text in enumerate(lines) if 'd=[i for i in range(256)' in text)
+
+        def trace(frame, event, arg):
+            if event == 'line' and frame.f_code.co_filename == str(script) and frame.f_lineno == line:
+                values = frame.f_locals
+                record({'case': values['n'], 'source': values['e'],
+                        'source_trace': values['st']['trace'], 'native_comparison': values['got_cmp']})
+            return trace
+
+        sys.settrace(trace)
+    ctypes.CDLL = Library
+    sys.argv = [str(script), '/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe',
+                library, '--output', str(output / f'{slug}.json')]
+    try:
+        status = module.main()
+    finally:
+        sys.settrace(None)
+        abi.close()
+        observations.close()
+        ctypes.CDLL = real_cdll
+    receipt = {'slug': slug, 'exit': int(status), 'calls': capture['count'], 'schema': 2,
+               'files': {p.name: hashlib.sha256(p.read_bytes()).hexdigest()
+                         for p in output.glob(f'{slug}.*')},
+               'limits': 'Complete default native ABI and original observations; no reserved inputs.'}
+    (output / f'{slug}.capture.json').write_text(json.dumps(receipt, indent=2) + '\n')
+    print(json.dumps(receipt))
+    return status
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())
