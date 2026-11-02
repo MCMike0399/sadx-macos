@@ -1,4 +1,5 @@
 #include "game/game_cleanup.hpp"
+#include "guest/reset_buffer_tokens.hpp"
 #include <algorithm>
 #include <array>
 #include <cstddef>
@@ -13,8 +14,9 @@ extern "C" int sadx_native_game_reset(const std::uint32_t *in, std::size_t size,
         return 0;
     std::uint32_t status = in[0], seed = in[4];
     std::uint16_t editor = static_cast<std::uint16_t>(in[1]);
-    void *first = reinterpret_cast<void *>(static_cast<std::uintptr_t>(in[2]));
-    void *second = reinterpret_cast<void *>(static_cast<std::uintptr_t>(in[3]));
+    sadx::reference::ResetBufferTokens tokens;
+    void *first = tokens.host(in[2]);
+    void *second = tokens.host(in[3]);
     sadx::cleanup::State state{status, editor, first, second, seed};
     std::vector<std::array<std::uint32_t, 3>> trace;
     const auto record = [&](std::uint32_t target, std::uint32_t site, std::uint32_t arg = 0) {
@@ -34,7 +36,7 @@ extern "C" int sadx_native_game_reset(const std::uint32_t *in, std::size_t size,
     services.close_media = [&](std::uint32_t a) { record(0x40cff0, a == 0 ? 0x40bf7f : 0x40bf86, a); };
     services.setup_screen = [&] { record(0x4208e0, 0x40bf8b); };
     services.display_message = [&](void *a) {
-        record(0x40d490, 0x40bf91, static_cast<std::uint32_t>(reinterpret_cast<std::uintptr_t>(a)));
+        record(0x40d490, 0x40bf91, tokens.guest(a));
     };
     services.initialize_heap = [&] { record(0x40b1a0, 0x40bf99); };
     services.initialize_tasks = [&] { record(0x40b460, 0x40bf9e); };
@@ -43,7 +45,7 @@ extern "C" int sadx_native_game_reset(const std::uint32_t *in, std::size_t size,
     unsigned released = 0;
     services.release_buffer = [&](void *a) {
         const auto site = in[2] != 0 && released++ == 0 ? 0x40bfc3 : 0x40bfdb;
-        record(0x780fb0, site, static_cast<std::uint32_t>(reinterpret_cast<std::uintptr_t>(a)));
+        record(0x780fb0, site, tokens.guest(a));
     };
     services.enable_fog = [&] { record(0x411af0, 0x40c00e); };
     std::uint32_t failure = 0, boundary = 0;
@@ -55,8 +57,8 @@ extern "C" int sadx_native_game_reset(const std::uint32_t *in, std::size_t size,
     }
     std::fill_n(out, 128, 0);
     const std::uint32_t values[]{failure, boundary, failure == 0, status, editor,
-                                 static_cast<std::uint32_t>(reinterpret_cast<std::uintptr_t>(first)),
-                                 static_cast<std::uint32_t>(reinterpret_cast<std::uintptr_t>(second)),
+                                 tokens.guest(first),
+                                 tokens.guest(second),
                                  seed, static_cast<std::uint32_t>(trace.size())};
     auto cursor = std::copy(std::begin(values), std::end(values), out);
     for (const auto &call : trace)
