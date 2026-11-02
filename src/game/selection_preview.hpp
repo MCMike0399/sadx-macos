@@ -1,5 +1,6 @@
 #pragma once
 #include "engine/task.hpp"
+#include "engine/character_resources.hpp"
 #include "game/regular_textures.hpp"
 #include <optional>
 #include <string>
@@ -81,7 +82,7 @@ struct Calls {
     virtual void release_actor_textures(std::uint16_t character) = 0;
     virtual void destroy_task(const TaskHandle &) = 0;
     virtual void set_perspective(std::int32_t) = 0;
-    // STUB: SONIC 0x512910 CharSel_KeepCharactersFromFalling
+    // NOTSA: delegates to update_actions with the canonical event-action owners.
     virtual void update_actor_actions(Work &) = 0;
 };
 // NOTSA: archive declarations borrow the same texlist identities and loaded counters as cleanup.
@@ -113,4 +114,43 @@ void release_actors(Work &, Assets, Calls &);
 void destroy(const TaskHandle &, Assets, Calls &);
 // FUNCTION: SONIC 0x512c20 DeleteCharSel
 void remove(State &, Calls &);
+} // namespace sadx::selection_preview
+
+namespace sadx {
+// NOTSA: opaque borrow of the canonical EVENT_ACTION_LIST node. Root supplies
+// its definition with the event-action owner; preview never owns or copies it.
+struct PlayerEventActionNode;
+}
+
+namespace sadx::selection_preview {
+struct ActionState {
+    // GLOBAL: SONIC 0x3c5ff68 CharSelActionTails size=24
+    std::array<PlayerEventActionNode *, 6> tails{};
+};
+// NOTSA: accesses imported sequences and live owners at each source read. In
+// particular, a queued action may mutate work, selection, or the event list.
+struct ActionCalls {
+    virtual ~ActionCalls() = default;
+    virtual std::shared_ptr<PlayerTaskState> primary(const TaskHandle &task) = 0;
+    // STUB: SONIC 0x441260 SetInputP
+    virtual void set_input(std::uint8_t player, std::int8_t mode) = 0;
+    virtual std::int32_t &miles_counter() = 0;
+    // The imported sequence includes a null terminator. Signed indices retain
+    // source byte semantics; an unavailable index is an explicit asset boundary.
+    virtual ActionHandle action(std::size_t actor, std::int32_t index) = 0;
+    virtual regular_textures::List &textures(std::size_t actor) = 0;
+    virtual std::int32_t link_frames(std::size_t actor, std::int32_t index) = 0;
+    // STUB: SONIC 0x42fe00 EV_SetAction
+    virtual void set_action(const TaskHandle &task, ActionHandle action,
+                            regular_textures::List &textures, float speed,
+                            bool loop, std::int32_t link_frames) = 0;
+    // Missing event work or a null list must fail at this boundary. The source
+    // dereferences both; neither means an empty successful animation update.
+    virtual PlayerEventActionNode *action_head(const std::shared_ptr<PlayerTaskState> &primary) = 0;
+    virtual PlayerEventActionNode *next_action(PlayerEventActionNode *node) = 0;
+};
+// FUNCTION: SONIC 0x512910 CharSel_KeepCharactersFromFalling
+void update_actions(Work &work, ActionState &state, const std::uint8_t &selected, ActionCalls &calls);
+// FUNCTION: SONIC 0x512c40 FUN_00512c40
+void select_motion(State &state, std::int32_t motion);
 } // namespace sadx::selection_preview

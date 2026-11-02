@@ -830,3 +830,10 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Current native app build check exits 0 (up to date). Normal input with isolated saves stops at native_gamma_load_setup_resource at frame 1332, exit 1. Inspected image remains outgoing title; no completed actor frame. Receipt: reference/production-integration-20261101/native-route-review.json. Prior frame 1382 evidence retains its different input schedule.
 * No game implementation, existing judge or tolerance changed. No full gate, oracles, mutants, clean source rebuild or new hardware test ran. Last actual full gate remains bf61403; existing failures and partials remain open.
 * Reset packet stays preserved and unmerged; its four adequacy findings and eight unconsumed reserved vectors are unchanged. Schedules and storage work remain stopped. Next: Sol workers prepare bounded source packets; Root reviews and integrates toward a real N3b journey.
+
+### 2026-11-01 — Preview action and motion candidate (no gate)
+
+* packet/preview-actions-native recovers the actual preview input/action queue order, motion byte setter and six borrowed tail publications. Existing upper preview behavior is unchanged; runtime bindings remain Root-owned.
+* New original comparison: 3,837 development and 6,837 final holdout cases pass exactly; 7 of 7 action mutants are caught. Unchanged upper preview: 3,608 development and 5,608 holdout cases pass strictly. Direct source-only scheduler/owner lower-stop test passes.
+* Readability, layers and unique legacy owners pass; profile has zero UNHANDLED overlaps. Stock provenance needs the proposed CharSelActionTails symbol row. Shared registration/judge files were intentionally untouched.
+* reference/packets/preview-actions-native/PACKET.md supplies exact bindings, texture identities, source evidence, checks and remaining EV_SetAction/event-owner seams. No event engine, actor/render completion, visible N3b progress, full gate or app run is claimed; inherited failures/partials remain open.

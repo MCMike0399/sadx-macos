@@ -1,0 +1,991 @@
+{
+  "base": "ca640c5",
+  "kind": "bounded new recovery, unbound native integration",
+  "reports": {
+    "dev": {
+      "passed": true,
+      "cases": 3837,
+      "seed": 512910,
+      "outcomes": {
+        "0": 2671,
+        "2": 336,
+        "4": 310,
+        "3": 307,
+        "5": 22,
+        "7": 7,
+        "8": 7,
+        "6": 177
+      },
+      "failures": [],
+      "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "native_library_sha256": "1119f808cc5030b24f9fda618270271b003fcf6ae909979fd13cecf8782792ad",
+      "input_stream_sha256": "b690db59de7cd30b1b2a6b8b26f9285b293a537a0f58868fab6a64350af1e1fe",
+      "complete_observation_sha256": "469cafcdf3bf8ad55d4c1140995418a681de55629189b9e48aff86e839aa4cb1",
+      "native_sources": {
+        "src/game/selection_preview.hpp": "c73ab9d52c526bb129918ad1f1275dffb46181412199c46b9b341b1960434671",
+        "src/game/selection_preview_actions.cpp": "9d2a4b19ae4f02c49b0d3c5146adee5790f424bb23c9dab9b0d751f0944f8349",
+        "tests/probes/native_selection_preview_actions_probe.cpp": "d27423f42d5c0f36e6fb2ea772550556fb78c233b6845c700593522b42ea918f"
+      },
+      "source_ranges": {
+        "0x512910-0x512a69": "650b886e25a9bdcde7953529bac144124217237417fbae7b41d7c69546ffea5b",
+        "0x512c40-0x512c50": "aced1909fda0dd3354f6c88244d309137e87b39af3856415bb2e0738790dce80"
+      },
+      "limits": [
+        "EV_SetAction is an ordered receipt, not a qualified native event engine.",
+        "SetInputP runs original instructions; native receipt mirrors its writes.",
+        "All fields and call arguments compare exactly, including failure prefixes.",
+        "No floating-point arithmetic or FP status mutation in the recovered bodies."
+      ]
+    },
+    "holdout": {
+      "passed": true,
+      "cases": 6837,
+      "seed": 2026110173,
+      "outcomes": {
+        "0": 4947,
+        "2": 512,
+        "4": 509,
+        "3": 484,
+        "5": 22,
+        "7": 7,
+        "8": 7,
+        "6": 349
+      },
+      "failures": [],
+      "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "native_library_sha256": "1119f808cc5030b24f9fda618270271b003fcf6ae909979fd13cecf8782792ad",
+      "input_stream_sha256": "f87629fcb85cf222618f1de1da96e6cd3d9f027aaa379f5105e6af1c7f4d8d32",
+      "complete_observation_sha256": "bc93f2ec79017a56ba68da8767211bda1714cb06ef7f50c02ec8d06a692e2e69",
+      "native_sources": {
+        "src/game/selection_preview.hpp": "c73ab9d52c526bb129918ad1f1275dffb46181412199c46b9b341b1960434671",
+        "src/game/selection_preview_actions.cpp": "9d2a4b19ae4f02c49b0d3c5146adee5790f424bb23c9dab9b0d751f0944f8349",
+        "tests/probes/native_selection_preview_actions_probe.cpp": "d27423f42d5c0f36e6fb2ea772550556fb78c233b6845c700593522b42ea918f"
+      },
+      "source_ranges": {
+        "0x512910-0x512a69": "650b886e25a9bdcde7953529bac144124217237417fbae7b41d7c69546ffea5b",
+        "0x512c40-0x512c50": "aced1909fda0dd3354f6c88244d309137e87b39af3856415bb2e0738790dce80"
+      },
+      "limits": [
+        "EV_SetAction is an ordered receipt, not a qualified native event engine.",
+        "SetInputP runs original instructions; native receipt mirrors its writes.",
+        "All fields and call arguments compare exactly, including failure prefixes.",
+        "No floating-point arithmetic or FP status mutation in the recovered bodies."
+      ]
+    },
+    "upper": {
+      "passed": true,
+      "values_match": true,
+      "cases": 3608,
+      "tested": 3608,
+      "mismatches": 0,
+      "fp_flag_mismatches": 0,
+      "first_mismatches": [],
+      "seed": 512840,
+      "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "source_ranges": {
+        "0x512550-0x51259c": "1b39be715c58b893ccb53e0ff927531c6a4785740c4e3af74207a5b1d9118412",
+        "0x512640-0x512910": "0bfb09ea166cfb12c5bac461c44e66481c7858ba925dd313c62893100ca65fd0",
+        "0x512a70-0x512c3d": "b746432f1fd0a01c056cd9d00eb9abd2772a00c2b1e718c4072bbb1a7898452a"
+      },
+      "native_sources": {
+        "src/game/selection_preview.hpp": "c73ab9d52c526bb129918ad1f1275dffb46181412199c46b9b341b1960434671",
+        "src/game/selection_preview.cpp": "9d74427c8233549dc9aeedd2bb29f24922d88ca916b241ffb4827bf612d81960",
+        "src/game/selection_preview_textures.cpp": "4e19679f3a49301c4796787eafc611d98036370902459fd312faf9932336ce7f",
+        "tests/probes/native_selection_preview_probe.cpp": "ef6c6e2f505058720b4571acdc572a0e6ea7c4696edba9c3e6580c320f8ece22"
+      },
+      "native_library_sha256": "afff5f7023fa64a54fbcd388505dea83dcd4faed8d3ced2595daf0080a069edd",
+      "limits": [
+        "Factory/task allocation, palette2, actual camera/player callbacks, PVM loaders, FOV calculation and event animation are ordered lower service receipts; no player rendering or native CharacterSelect completion claim.",
+        "Full original upper entries execute, including inline512550 texture-count behavior and512a70 release-count behavior. Every native actor/camera must bind its actual callback or fail explicitly; fixture tasks are only oracle-owned objects.",
+        "All seven actor pose stores, old/new task fields, canonical task publication, signed warmup byte, source texture counter wrap, actor/camera absence and allocation-failure prefixes are compared.",
+        "FP status-only differences stay partial; no flags masked from report. Producer-selected indices0..6 are compared; a native out-of-range selected index is a tagged boundary."
+      ]
+    },
+    "upper-holdout": {
+      "passed": true,
+      "values_match": true,
+      "cases": 5608,
+      "tested": 5608,
+      "mismatches": 0,
+      "fp_flag_mismatches": 0,
+      "first_mismatches": [],
+      "seed": 20261123,
+      "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "source_ranges": {
+        "0x512550-0x51259c": "1b39be715c58b893ccb53e0ff927531c6a4785740c4e3af74207a5b1d9118412",
+        "0x512640-0x512910": "0bfb09ea166cfb12c5bac461c44e66481c7858ba925dd313c62893100ca65fd0",
+        "0x512a70-0x512c3d": "b746432f1fd0a01c056cd9d00eb9abd2772a00c2b1e718c4072bbb1a7898452a"
+      },
+      "native_sources": {
+        "src/game/selection_preview.hpp": "c73ab9d52c526bb129918ad1f1275dffb46181412199c46b9b341b1960434671",
+        "src/game/selection_preview.cpp": "9d74427c8233549dc9aeedd2bb29f24922d88ca916b241ffb4827bf612d81960",
+        "src/game/selection_preview_textures.cpp": "4e19679f3a49301c4796787eafc611d98036370902459fd312faf9932336ce7f",
+        "tests/probes/native_selection_preview_probe.cpp": "ef6c6e2f505058720b4571acdc572a0e6ea7c4696edba9c3e6580c320f8ece22"
+      },
+      "native_library_sha256": "afff5f7023fa64a54fbcd388505dea83dcd4faed8d3ced2595daf0080a069edd",
+      "limits": [
+        "Factory/task allocation, palette2, actual camera/player callbacks, PVM loaders, FOV calculation and event animation are ordered lower service receipts; no player rendering or native CharacterSelect completion claim.",
+        "Full original upper entries execute, including inline512550 texture-count behavior and512a70 release-count behavior. Every native actor/camera must bind its actual callback or fail explicitly; fixture tasks are only oracle-owned objects.",
+        "All seven actor pose stores, old/new task fields, canonical task publication, signed warmup byte, source texture counter wrap, actor/camera absence and allocation-failure prefixes are compared.",
+        "FP status-only differences stay partial; no flags masked from report. Producer-selected indices0..6 are compared; a native out-of-range selected index is a tagged boundary."
+      ]
+    }
+  },
+  "mutants": [
+    {
+      "name": "miles-speed",
+      "caught": true,
+      "exit_status": 1,
+      "failed_cases": 333,
+      "first_case": {
+        "case": 0,
+        "input": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          4294967295,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          3,
+          3,
+          3,
+          3,
+          4,
+          3,
+          0,
+          0,
+          1,
+          2,
+          3,
+          4,
+          1,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "diff": [
+          [
+            86,
+            2,
+            1
+          ]
+        ],
+        "source_fault": null
+      },
+      "compiled_source_sha256": "070abd828f29a9698a74559278d99d83379d40f9b5bbb41940a0c97ce0512a09"
+    },
+    {
+      "name": "miles-flag",
+      "caught": true,
+      "exit_status": 1,
+      "failed_cases": 593,
+      "first_case": {
+        "case": 0,
+        "input": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          4294967295,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          3,
+          3,
+          3,
+          3,
+          4,
+          3,
+          0,
+          0,
+          1,
+          2,
+          3,
+          4,
+          1,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "diff": [
+          [
+            3,
+            3758096383,
+            4026531839
+          ]
+        ],
+        "source_fault": null
+      },
+      "compiled_source_sha256": "3eefb68bedc2ed6c98b96705af913765004df72bf65f8ae1d2e44600ab81e989"
+    },
+    {
+      "name": "captured-primary",
+      "caught": true,
+      "exit_status": 1,
+      "failed_cases": 15,
+      "first_case": {
+        "case": 837,
+        "input": [
+          0,
+          2,
+          143,
+          32,
+          0,
+          0,
+          0,
+          0,
+          0,
+          23,
+          43,
+          7,
+          7,
+          0,
+          false,
+          731885983,
+          127,
+          1,
+          0,
+          2,
+          0,
+          1,
+          1,
+          0,
+          7,
+          7,
+          2,
+          6,
+          7,
+          7,
+          0,
+          0,
+          2,
+          4,
+          3,
+          4,
+          2,
+          4,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "diff": [
+          [
+            0,
+            0,
+            2
+          ],
+          [
+            12,
+            1,
+            0
+          ],
+          [
+            19,
+            12,
+            0
+          ],
+          [
+            20,
+            12,
+            0
+          ],
+          [
+            27,
+            16,
+            0
+          ],
+          [
+            28,
+            16,
+            0
+          ],
+          [
+            34,
+            19,
+            0
+          ],
+          [
+            35,
+            28,
+            0
+          ],
+          [
+            36,
+            34,
+            0
+          ],
+          [
+            40,
+            36,
+            22
+          ],
+          [
+            86,
+            1,
+            0
+          ],
+          [
+            87,
+            3,
+            0
+          ],
+          [
+            88,
+            12,
+            0
+          ],
+          [
+            90,
+            1,
+            0
+          ],
+          [
+            91,
+            4,
+            0
+          ],
+          [
+            92,
+            12,
+            0
+          ],
+          [
+            94,
+            2,
+            0
+          ],
+          [
+            95,
+            4,
+            0
+          ],
+          [
+            96,
+            65,
+            0
+          ],
+          [
+            98,
+            1,
+            0
+          ],
+          [
+            99,
+            1,
+            0
+          ]
+        ],
+        "source_fault": null
+      },
+      "compiled_source_sha256": "ec1bc1ab3b1c845db47c4c575c5703635d36921f338046d9e239d5f2e5b09ffa"
+    },
+    {
+      "name": "terminal-loop",
+      "caught": true,
+      "exit_status": 1,
+      "failed_cases": 59,
+      "first_case": {
+        "case": 7,
+        "input": [
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          4294967295,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          3,
+          3,
+          3,
+          3,
+          4,
+          3,
+          0,
+          0,
+          1,
+          2,
+          3,
+          4,
+          1,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "diff": [
+          [
+            73,
+            0,
+            1
+          ],
+          [
+            79,
+            1,
+            0
+          ]
+        ],
+        "source_fault": null
+      },
+      "compiled_source_sha256": "c54186792d2f94a29f1b080e94604ddb5de83d280d91933fd5eb7c055ec4192d"
+    },
+    {
+      "name": "consume-selection",
+      "caught": true,
+      "exit_status": 1,
+      "failed_cases": 63,
+      "first_case": {
+        "case": 7,
+        "input": [
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          4294967295,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          3,
+          3,
+          3,
+          3,
+          4,
+          3,
+          0,
+          0,
+          1,
+          2,
+          3,
+          4,
+          1,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "diff": [
+          [
+            2,
+            0,
+            2
+          ]
+        ],
+        "source_fault": null
+      },
+      "compiled_source_sha256": "b58d2baea2f9601d6477033de0132921368417c28c2e1c61c1b6814f6824bea0"
+    },
+    {
+      "name": "tail-traversal",
+      "caught": true,
+      "exit_status": 1,
+      "failed_cases": 501,
+      "first_case": {
+        "case": 0,
+        "input": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          4294967295,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          3,
+          3,
+          3,
+          3,
+          4,
+          3,
+          0,
+          0,
+          1,
+          2,
+          3,
+          4,
+          1,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "diff": [
+          [
+            34,
+            19,
+            18
+          ],
+          [
+            35,
+            28,
+            26
+          ]
+        ],
+        "source_fault": null
+      },
+      "compiled_source_sha256": "8008d6bd46ad400e13af8d43ee54b272b259c6ddd22d43d28e036b756dc02293"
+    },
+    {
+      "name": "selection-gate",
+      "caught": true,
+      "exit_status": 1,
+      "failed_cases": 110,
+      "first_case": {
+        "case": 7,
+        "input": [
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          4294967295,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          3,
+          3,
+          3,
+          3,
+          4,
+          3,
+          0,
+          0,
+          1,
+          2,
+          3,
+          4,
+          1,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "diff": [
+          [
+            8,
+            3,
+            1
+          ],
+          [
+            9,
+            1,
+            3
+          ],
+          [
+            68,
+            2,
+            1
+          ],
+          [
+            69,
+            0,
+            1
+          ],
+          [
+            70,
+            2,
+            12
+          ],
+          [
+            71,
+            4,
+            0
+          ],
+          [
+            73,
+            0,
+            1
+          ],
+          [
+            74,
+            2,
+            49
+          ],
+          [
+            76,
+            3,
+            2
+          ],
+          [
+            77,
+            5,
+            1
+          ],
+          [
+            78,
+            1,
+            18
+          ],
+          [
+            79,
+            1,
+            14
+          ],
+          [
+            80,
+            1,
+            2
+          ],
+          [
+            81,
+            1,
+            0
+          ],
+          [
+            82,
+            12,
+            2
+          ],
+          [
+            83,
+            0,
+            1
+          ],
+          [
+            84,
+            1,
+            19
+          ],
+          [
+            85,
+            1,
+            15
+          ],
+          [
+            86,
+            49,
+            2
+          ],
+          [
+            87,
+            0,
+            1
+          ]
+        ],
+        "source_fault": null
+      },
+      "compiled_source_sha256": "ca154eb50a5b4bfcddbc8a3553ab9b690cdc315396899852feb96b90a606e05d"
+    }
+  ],
+  "checks": {
+    "native_unit": "pass; direct source compile, real TaskScheduler; no original input/library in closure",
+    "readability": "0 regressions",
+    "layers": "0 violations",
+    "legacy_owners": "0 duplicate owners",
+    "profile": {
+      "patches": 618,
+      "active_patches": 121,
+      "active_unhandled_patches": 79,
+      "reports": 6,
+      "declared_exe_ranges": 10,
+      "unhandled_overlaps": 0,
+      "handled_overlaps": 0,
+      "undetermined_overlaps": 0,
+      "reports_without_addressed_ranges": [
+        "profile-final.json",
+        "profile.json"
+      ]
+    },
+    "stock_provenance": "1 error: CharSelActionTails absent from shared symbol database; exact proposed override in packet",
+    "repo_hygiene": "4754 tracked/staged files, 0 violations; no binaries/assets staged",
+    "diff_check": "pass"
+  },
+  "commands": [
+    "clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -Isrc -dynamiclib src/game/selection_preview_actions.cpp src/engine/task.cpp src/engine/task_work.cpp tests/probes/native_selection_preview_actions_probe.cpp -o build/preview-actions/probe.dylib",
+    "clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -Isrc tests/unit/selection_preview_actions.cpp src/game/selection_preview_actions.cpp src/engine/task.cpp src/engine/task_work.cpp -o build/preview-actions/native-test",
+    "build/preview-actions/native-test",
+    "REFERENCE_PYTHON tools/oracles/verify_original_selection_preview_actions.py EXE build/preview-actions/probe.dylib --output build/preview-actions/dev.json --cases 3000",
+    "REFERENCE_PYTHON reference/packets/preview-actions-native/verify_mutants.py EXE",
+    "REFERENCE_PYTHON tools/oracles/verify_original_selection_preview_actions.py EXE build/preview-actions/probe.dylib --output build/preview-actions/holdout.json --seed 2026110173 --cases 6000",
+    "clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -Isrc -dynamiclib tests/probes/native_selection_preview_probe.cpp src/game/selection_preview.cpp src/game/selection_preview_textures.cpp ROOT/build/libsadx-core.a -o build/preview-actions/upper.dylib",
+    "REFERENCE_PYTHON tools/oracles/verify_original_selection_preview.py EXE build/preview-actions/upper.dylib --output build/preview-actions/upper.json --cases 3000",
+    "REFERENCE_PYTHON tools/oracles/verify_original_selection_preview.py EXE build/preview-actions/upper.dylib --output build/preview-actions/upper-holdout.json --seed 20261123 --cases 5000",
+    "python3 tools/gate/check_profile_patches.py --build-dir build/preview-actions --json",
+    "python3 tools/gate/check_readability.py",
+    "python3 tools/gate/check_layers.py",
+    "python3 tools/gate/check_global_owners.py",
+    "python3 tools/gate/check_provenance.py --database ROOT/build/symbols/symbols.json"
+  ],
+  "input_locations": {
+    "ROOT": "/Users/burbujamc/Developer/sadx-macos",
+    "EXE": "ROOT/game/Sonic Adventure DX/sonic.exe",
+    "REFERENCE_PYTHON": "ROOT/reference/python/bin/python"
+  },
+  "limits": [
+    "No full gate, native app/render/journey run, actor-controller qualification, hardware input or audio proof.",
+    "Upper regression probe reused Root core archive read-only for unchanged dependencies; it is not a cold source-only build. New action probe and unit compile directly from source without it.",
+    "Original EV_SetAction is intercepted as an ordered lower receipt. No production queue, event-action owner, stepping, or rendering substitute is implemented.",
+    "Existing upper-source bodies/probe/oracle unchanged; old historical seven upper mutants were not rerun (no upper rewrite); new seven target recovered action behavior.",
+    "Stock judge manifest and shared registrations intentionally untouched; Root must register additions, proposed symbol, source inclusion and bindings before the coherent gate.",
+    "Existing inherited fails/FP partials outside the strict-passing preview judges remain open and were not rerun."
+  ],
+  "failure_classes": {
+    "0": "source returned",
+    "2": "captured actor primary is null",
+    "3": "captured primary event work is null",
+    "4": "event action list is null",
+    "5": "deliberate lower-service stop after ordered call receipt",
+    "6": "Miles registered primary is null after SetInputP",
+    "7": "preview task is null at selection",
+    "8": "preview work is null at selection"
+  }
+}

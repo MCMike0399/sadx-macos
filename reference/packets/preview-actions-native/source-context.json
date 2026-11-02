@@ -1,0 +1,836 @@
+{
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "cached_call_evidence": "ev_386942168b7f965037441ed40f3c2aeb73266c445fbd9ff228f98c561c098dd6",
+  "limits": [
+    "Cached REA resolves callees but has no body dossier. No fresh Ghidra session: Gamma owns that slot. Instructions below decode exact PEImage bytes with Capstone; original execution is the behavior judge."
+  ],
+  "ranges": {
+    "0x512910-0x512a69": {
+      "sha256": "650b886e25a9bdcde7953529bac144124217237417fbae7b41d7c69546ffea5b",
+      "instructions": [
+        {
+          "address": "0x512910",
+          "instruction": "sub esp, 8"
+        },
+        {
+          "address": "0x512913",
+          "instruction": "push ebx"
+        },
+        {
+          "address": "0x512914",
+          "instruction": "push ebp"
+        },
+        {
+          "address": "0x512915",
+          "instruction": "mov ebp, dword ptr [esp + 0x14]"
+        },
+        {
+          "address": "0x512919",
+          "instruction": "push esi"
+        },
+        {
+          "address": "0x51291a",
+          "instruction": "push edi"
+        },
+        {
+          "address": "0x51291b",
+          "instruction": "xor edi, edi"
+        },
+        {
+          "address": "0x51291d",
+          "instruction": "lea ecx, [ecx]"
+        },
+        {
+          "address": "0x512920",
+          "instruction": "mov ebx, dword ptr [ebp + edi*4]"
+        },
+        {
+          "address": "0x512924",
+          "instruction": "test ebx, ebx"
+        },
+        {
+          "address": "0x512926",
+          "instruction": "je 0x512a57"
+        },
+        {
+          "address": "0x51292c",
+          "instruction": "cmp edi, 6"
+        },
+        {
+          "address": "0x51292f",
+          "instruction": "mov eax, dword ptr [ebx + 0x20]"
+        },
+        {
+          "address": "0x512932",
+          "instruction": "mov dword ptr [esp + 0x14], eax"
+        },
+        {
+          "address": "0x512936",
+          "instruction": "je 0x512a57"
+        },
+        {
+          "address": "0x51293c",
+          "instruction": "mov esi, edi"
+        },
+        {
+          "address": "0x51293e",
+          "instruction": "push 0xc"
+        },
+        {
+          "address": "0x512940",
+          "instruction": "shl esi, 4"
+        },
+        {
+          "address": "0x512943",
+          "instruction": "push edi"
+        },
+        {
+          "address": "0x512944",
+          "instruction": "add esi, 0x7f0788"
+        },
+        {
+          "address": "0x51294a",
+          "instruction": "call 0x441260"
+        },
+        {
+          "address": "0x51294f",
+          "instruction": "add esp, 8"
+        },
+        {
+          "address": "0x512952",
+          "instruction": "cmp edi, 1"
+        },
+        {
+          "address": "0x512955",
+          "instruction": "jne 0x512970"
+        },
+        {
+          "address": "0x512957",
+          "instruction": "mov eax, dword ptr [0x3b42e14]"
+        },
+        {
+          "address": "0x51295c",
+          "instruction": "mov cl, byte ptr [eax + 0xf]"
+        },
+        {
+          "address": "0x51295f",
+          "instruction": "and cl, 0xdf"
+        },
+        {
+          "address": "0x512962",
+          "instruction": "push 0x31"
+        },
+        {
+          "address": "0x512964",
+          "instruction": "push edi"
+        },
+        {
+          "address": "0x512965",
+          "instruction": "mov byte ptr [eax + 0xf], cl"
+        },
+        {
+          "address": "0x512968",
+          "instruction": "call 0x441260"
+        },
+        {
+          "address": "0x51296d",
+          "instruction": "add esp, 8"
+        },
+        {
+          "address": "0x512970",
+          "instruction": "cmp edi, 1"
+        },
+        {
+          "address": "0x512973",
+          "instruction": "mov dword ptr [esp + 0x10], 0x3e800000"
+        },
+        {
+          "address": "0x51297b",
+          "instruction": "jne 0x512985"
+        },
+        {
+          "address": "0x51297d",
+          "instruction": "mov dword ptr [esp + 0x10], 0x3f000000"
+        },
+        {
+          "address": "0x512985",
+          "instruction": "mov al, byte ptr [edi + ebp + 0x2d]"
+        },
+        {
+          "address": "0x512989",
+          "instruction": "test al, al"
+        },
+        {
+          "address": "0x51298b",
+          "instruction": "jne 0x5129b0"
+        },
+        {
+          "address": "0x51298d",
+          "instruction": "mov ecx, dword ptr [esp + 0x10]"
+        },
+        {
+          "address": "0x512991",
+          "instruction": "mov edx, dword ptr [esi + 4]"
+        },
+        {
+          "address": "0x512994",
+          "instruction": "mov eax, dword ptr [esi + 8]"
+        },
+        {
+          "address": "0x512997",
+          "instruction": "push 0"
+        },
+        {
+          "address": "0x512999",
+          "instruction": "push 1"
+        },
+        {
+          "address": "0x51299b",
+          "instruction": "push ecx"
+        },
+        {
+          "address": "0x51299c",
+          "instruction": "mov ecx, dword ptr [eax]"
+        },
+        {
+          "address": "0x51299e",
+          "instruction": "push edx"
+        },
+        {
+          "address": "0x51299f",
+          "instruction": "push ecx"
+        },
+        {
+          "address": "0x5129a0",
+          "instruction": "push ebx"
+        },
+        {
+          "address": "0x5129a1",
+          "instruction": "call 0x42fe00"
+        },
+        {
+          "address": "0x5129a6",
+          "instruction": "add esp, 0x18"
+        },
+        {
+          "address": "0x5129a9",
+          "instruction": "mov byte ptr [edi + ebp + 0x2d], 1"
+        },
+        {
+          "address": "0x5129ae",
+          "instruction": "jmp 0x512a26"
+        },
+        {
+          "address": "0x5129b0",
+          "instruction": "cmp al, 1"
+        },
+        {
+          "address": "0x5129b2",
+          "instruction": "jne 0x512a26"
+        },
+        {
+          "address": "0x5129b4",
+          "instruction": "mov al, byte ptr [ebp + 0x34]"
+        },
+        {
+          "address": "0x5129b7",
+          "instruction": "test al, al"
+        },
+        {
+          "address": "0x5129b9",
+          "instruction": "je 0x512a26"
+        },
+        {
+          "address": "0x5129bb",
+          "instruction": "movzx edx, byte ptr [0x3b2a2fd]"
+        },
+        {
+          "address": "0x5129c2",
+          "instruction": "cmp edx, edi"
+        },
+        {
+          "address": "0x5129c4",
+          "instruction": "jne 0x512a26"
+        },
+        {
+          "address": "0x5129c6",
+          "instruction": "mov ecx, dword ptr [esi + 8]"
+        },
+        {
+          "address": "0x5129c9",
+          "instruction": "mov edx, dword ptr [ecx + 4]"
+        },
+        {
+          "address": "0x5129cc",
+          "instruction": "test edx, edx"
+        },
+        {
+          "address": "0x5129ce",
+          "instruction": "mov eax, 4"
+        },
+        {
+          "address": "0x5129d3",
+          "instruction": "je 0x512a22"
+        },
+        {
+          "address": "0x5129d5",
+          "instruction": "mov cl, byte ptr [edi + ebp + 0x2d]"
+        },
+        {
+          "address": "0x5129d9",
+          "instruction": "inc cl"
+        },
+        {
+          "address": "0x5129db",
+          "instruction": "mov byte ptr [edi + ebp + 0x2d], cl"
+        },
+        {
+          "address": "0x5129df",
+          "instruction": "mov dl, cl"
+        },
+        {
+          "address": "0x5129e1",
+          "instruction": "mov ecx, dword ptr [esi + 8]"
+        },
+        {
+          "address": "0x5129e4",
+          "instruction": "movsx edx, dl"
+        },
+        {
+          "address": "0x5129e7",
+          "instruction": "cmp dword ptr [ecx + edx*4], 0"
+        },
+        {
+          "address": "0x5129eb",
+          "instruction": "mov edx, dword ptr [esi + 0xc]"
+        },
+        {
+          "address": "0x5129ee",
+          "instruction": "mov edx, dword ptr [eax + edx]"
+        },
+        {
+          "address": "0x5129f1",
+          "instruction": "mov eax, dword ptr [eax + ecx]"
+        },
+        {
+          "address": "0x5129f4",
+          "instruction": "push edx"
+        },
+        {
+          "address": "0x5129f5",
+          "instruction": "mov edx, dword ptr [esp + 0x14]"
+        },
+        {
+          "address": "0x5129f9",
+          "instruction": "je 0x5129ff"
+        },
+        {
+          "address": "0x5129fb",
+          "instruction": "push 0"
+        },
+        {
+          "address": "0x5129fd",
+          "instruction": "jmp 0x512a01"
+        },
+        {
+          "address": "0x5129ff",
+          "instruction": "push 1"
+        },
+        {
+          "address": "0x512a01",
+          "instruction": "push edx"
+        },
+        {
+          "address": "0x512a02",
+          "instruction": "mov edx, dword ptr [esi + 4]"
+        },
+        {
+          "address": "0x512a05",
+          "instruction": "push edx"
+        },
+        {
+          "address": "0x512a06",
+          "instruction": "push eax"
+        },
+        {
+          "address": "0x512a07",
+          "instruction": "push ebx"
+        },
+        {
+          "address": "0x512a08",
+          "instruction": "call 0x42fe00"
+        },
+        {
+          "address": "0x512a0d",
+          "instruction": "movsx eax, byte ptr [edi + ebp + 0x2d]"
+        },
+        {
+          "address": "0x512a12",
+          "instruction": "mov ecx, dword ptr [esi + 8]"
+        },
+        {
+          "address": "0x512a15",
+          "instruction": "shl eax, 2"
+        },
+        {
+          "address": "0x512a18",
+          "instruction": "mov edx, dword ptr [eax + ecx]"
+        },
+        {
+          "address": "0x512a1b",
+          "instruction": "add esp, 0x18"
+        },
+        {
+          "address": "0x512a1e",
+          "instruction": "test edx, edx"
+        },
+        {
+          "address": "0x512a20",
+          "instruction": "jne 0x5129d5"
+        },
+        {
+          "address": "0x512a22",
+          "instruction": "mov byte ptr [ebp + 0x34], 0"
+        },
+        {
+          "address": "0x512a26",
+          "instruction": "mov edx, dword ptr [esp + 0x14]"
+        },
+        {
+          "address": "0x512a2a",
+          "instruction": "mov eax, dword ptr [edx + 0x3c]"
+        },
+        {
+          "address": "0x512a2d",
+          "instruction": "test eax, eax"
+        },
+        {
+          "address": "0x512a2f",
+          "instruction": "lea ecx, [eax + 0x40]"
+        },
+        {
+          "address": "0x512a32",
+          "instruction": "je 0x512a4e"
+        },
+        {
+          "address": "0x512a34",
+          "instruction": "mov eax, dword ptr [ecx]"
+        },
+        {
+          "address": "0x512a36",
+          "instruction": "mov edx, dword ptr [eax + 0x10]"
+        },
+        {
+          "address": "0x512a39",
+          "instruction": "add eax, 0x10"
+        },
+        {
+          "address": "0x512a3c",
+          "instruction": "test edx, edx"
+        },
+        {
+          "address": "0x512a3e",
+          "instruction": "je 0x512a4e"
+        },
+        {
+          "address": "0x512a40",
+          "instruction": "mov ecx, eax"
+        },
+        {
+          "address": "0x512a42",
+          "instruction": "mov eax, dword ptr [ecx]"
+        },
+        {
+          "address": "0x512a44",
+          "instruction": "mov edx, dword ptr [eax + 0x10]"
+        },
+        {
+          "address": "0x512a47",
+          "instruction": "add eax, 0x10"
+        },
+        {
+          "address": "0x512a4a",
+          "instruction": "test edx, edx"
+        },
+        {
+          "address": "0x512a4c",
+          "instruction": "jne 0x512a40"
+        },
+        {
+          "address": "0x512a4e",
+          "instruction": "mov eax, dword ptr [ecx]"
+        },
+        {
+          "address": "0x512a50",
+          "instruction": "mov dword ptr [edi*4 + 0x3c5ff68], eax"
+        },
+        {
+          "address": "0x512a57",
+          "instruction": "inc edi"
+        },
+        {
+          "address": "0x512a58",
+          "instruction": "cmp edi, 7"
+        },
+        {
+          "address": "0x512a5b",
+          "instruction": "jl 0x512920"
+        },
+        {
+          "address": "0x512a61",
+          "instruction": "pop edi"
+        },
+        {
+          "address": "0x512a62",
+          "instruction": "pop esi"
+        },
+        {
+          "address": "0x512a63",
+          "instruction": "pop ebp"
+        },
+        {
+          "address": "0x512a64",
+          "instruction": "pop ebx"
+        },
+        {
+          "address": "0x512a65",
+          "instruction": "add esp, 8"
+        },
+        {
+          "address": "0x512a68",
+          "instruction": "ret "
+        }
+      ]
+    },
+    "0x512c40-0x512c50": {
+      "sha256": "aced1909fda0dd3354f6c88244d309137e87b39af3856415bb2e0738790dce80",
+      "instructions": [
+        {
+          "address": "0x512c40",
+          "instruction": "mov eax, dword ptr [0x3c5ff80]"
+        },
+        {
+          "address": "0x512c45",
+          "instruction": "mov ecx, dword ptr [eax + 0x2c]"
+        },
+        {
+          "address": "0x512c48",
+          "instruction": "mov dl, byte ptr [esp + 4]"
+        },
+        {
+          "address": "0x512c4c",
+          "instruction": "mov byte ptr [ecx + 0x34], dl"
+        },
+        {
+          "address": "0x512c4f",
+          "instruction": "ret "
+        }
+      ]
+    }
+  },
+  "symbols": [
+    {
+      "address": "0x42fe00",
+      "alternative_names": [
+        "FUN_0042fe00",
+        "InitCutsceneObjectAction"
+      ],
+      "alternatives": [
+        {
+          "address": "0x42fe00",
+          "declaration": "FunctionPointer(void, EV_SetAction, (task* tp, NJS_ACTION* ap, NJS_TEXLIST* lp, float speed, int mode, int linkframe), 0x42FE00)",
+          "kind": "function",
+          "line": 1313,
+          "macro": "FunctionPointer",
+          "module": "SONIC",
+          "name": "EV_SetAction",
+          "priority": 10,
+          "signature": "(task* tp, NJS_ACTION* ap, NJS_TEXLIST* lp, float speed, int mode, int linkframe)",
+          "size": null,
+          "source": "reference/sadx-mod-loader/SADXModLoader/include/SADXFunctionsNew.h",
+          "type": "void"
+        },
+        {
+          "address": "0x42fe00",
+          "declaration": "FunctionPointer(void, InitCutsceneObjectAction, (ObjectMaster *a1, NJS_ACTION *a2, NJS_TEXLIST *a3, float a4, char a5, char a6), 0x42FE00)",
+          "kind": "function",
+          "line": 417,
+          "macro": "FunctionPointer",
+          "module": "SONIC",
+          "name": "InitCutsceneObjectAction",
+          "priority": 20,
+          "signature": "(ObjectMaster *a1, NJS_ACTION *a2, NJS_TEXLIST *a3, float a4, char a5, char a6)",
+          "size": null,
+          "source": "reference/sadx-mod-loader/SADXModLoader/include/SADXFunctions.h",
+          "type": "void"
+        },
+        {
+          "address": "0x42fe00",
+          "kind": "function",
+          "module": "SONIC",
+          "name": "FUN_0042fe00",
+          "priority": 40,
+          "signature": null,
+          "size": null,
+          "source": "reference/inventory/functions.json",
+          "type": null
+        }
+      ],
+      "declaration": "FunctionPointer(void, EV_SetAction, (task* tp, NJS_ACTION* ap, NJS_TEXLIST* lp, float speed, int mode, int linkframe), 0x42FE00)",
+      "kind": "function",
+      "line": 1313,
+      "macro": "FunctionPointer",
+      "module": "SONIC",
+      "name": "EV_SetAction",
+      "signature": "(task* tp, NJS_ACTION* ap, NJS_TEXLIST* lp, float speed, int mode, int linkframe)",
+      "size": null,
+      "source": "reference/sadx-mod-loader/SADXModLoader/include/SADXFunctionsNew.h",
+      "type": "void"
+    },
+    {
+      "address": "0x441260",
+      "alternative_names": [
+        "FUN_00441260",
+        "ForcePlayerAction"
+      ],
+      "alternatives": [
+        {
+          "address": "0x441260",
+          "declaration": "FunctionPointer(void, SetInputP, (uint8_t pno, int8_t mode), 0x441260)",
+          "kind": "function",
+          "line": 257,
+          "macro": "FunctionPointer",
+          "module": "SONIC",
+          "name": "SetInputP",
+          "priority": 10,
+          "signature": "(uint8_t pno, int8_t mode)",
+          "size": null,
+          "source": "reference/sadx-mod-loader/SADXModLoader/include/SADXFunctionsNew.h",
+          "type": "void"
+        },
+        {
+          "address": "0x441260",
+          "declaration": "FunctionPointer(void, ForcePlayerAction, (unsigned __int8 playerNum, char action), 0x441260)",
+          "kind": "function",
+          "line": 516,
+          "macro": "FunctionPointer",
+          "module": "SONIC",
+          "name": "ForcePlayerAction",
+          "priority": 20,
+          "signature": "(unsigned __int8 playerNum, char action)",
+          "size": null,
+          "source": "reference/sadx-mod-loader/SADXModLoader/include/SADXFunctions.h",
+          "type": "void"
+        },
+        {
+          "address": "0x441260",
+          "kind": "function",
+          "module": "SONIC",
+          "name": "FUN_00441260",
+          "priority": 40,
+          "signature": null,
+          "size": null,
+          "source": "reference/inventory/functions.json",
+          "type": null
+        }
+      ],
+      "declaration": "FunctionPointer(void, SetInputP, (uint8_t pno, int8_t mode), 0x441260)",
+      "kind": "function",
+      "line": 257,
+      "macro": "FunctionPointer",
+      "module": "SONIC",
+      "name": "SetInputP",
+      "signature": "(uint8_t pno, int8_t mode)",
+      "size": null,
+      "source": "reference/sadx-mod-loader/SADXModLoader/include/SADXFunctionsNew.h",
+      "type": "void"
+    },
+    {
+      "address": "0x512910",
+      "alternative_names": [
+        "FUN_00512910"
+      ],
+      "alternatives": [
+        {
+          "address": "0x512910",
+          "declaration": "FunctionPointer(void, CharSel_KeepCharactersFromFalling, (void *a1), 0x512910)",
+          "kind": "function",
+          "line": 1155,
+          "macro": "FunctionPointer",
+          "module": "SONIC",
+          "name": "CharSel_KeepCharactersFromFalling",
+          "priority": 20,
+          "signature": "(void *a1)",
+          "size": null,
+          "source": "reference/sadx-mod-loader/SADXModLoader/include/SADXFunctions.h",
+          "type": "void"
+        },
+        {
+          "address": "0x512910",
+          "kind": "function",
+          "module": "SONIC",
+          "name": "FUN_00512910",
+          "priority": 40,
+          "signature": null,
+          "size": null,
+          "source": "reference/inventory/functions.json",
+          "type": null
+        }
+      ],
+      "declaration": "FunctionPointer(void, CharSel_KeepCharactersFromFalling, (void *a1), 0x512910)",
+      "kind": "function",
+      "line": 1155,
+      "macro": "FunctionPointer",
+      "module": "SONIC",
+      "name": "CharSel_KeepCharactersFromFalling",
+      "signature": "(void *a1)",
+      "size": null,
+      "source": "reference/sadx-mod-loader/SADXModLoader/include/SADXFunctions.h",
+      "type": "void"
+    },
+    {
+      "address": "0x512c40",
+      "alternative_names": [],
+      "alternatives": [
+        {
+          "address": "0x512c40",
+          "kind": "function",
+          "module": "SONIC",
+          "name": "FUN_00512c40",
+          "priority": 40,
+          "signature": null,
+          "size": null,
+          "source": "reference/inventory/functions.json",
+          "type": null
+        }
+      ],
+      "kind": "function",
+      "module": "SONIC",
+      "name": "FUN_00512c40",
+      "signature": null,
+      "size": null,
+      "source": "reference/inventory/functions.json",
+      "type": null
+    },
+    {
+      "address": "0x7f0788",
+      "alternative_names": [],
+      "alternatives": [
+        {
+          "address": "0x7f0788",
+          "declaration": "DataArray(CharSelData, CharSelDataList, 0x7F0788, 7)",
+          "kind": "global",
+          "line": 33,
+          "macro": "DataArray",
+          "module": "SONIC",
+          "name": "CharSelDataList",
+          "priority": 20,
+          "signature": "7",
+          "size": null,
+          "source": "reference/sadx-mod-loader/SADXModLoader/include/SADXVariables.h",
+          "type": "CharSelData"
+        }
+      ],
+      "declaration": "DataArray(CharSelData, CharSelDataList, 0x7F0788, 7)",
+      "kind": "global",
+      "line": 33,
+      "macro": "DataArray",
+      "module": "SONIC",
+      "name": "CharSelDataList",
+      "signature": "7",
+      "size": null,
+      "source": "reference/sadx-mod-loader/SADXModLoader/include/SADXVariables.h",
+      "type": "CharSelData"
+    }
+  ],
+  "owners": {
+    "preview": "selection_preview::State/Work, existing Task.auxiliary_native_work",
+    "actors": "Task.primary_state, PlayerTaskState, motion_state and player_initialization::Registry (borrow only)",
+    "assets": "runtime::CharacterSelectionAssets.sequences, single CharacterPack, existing texture-lifetime Lists",
+    "event_actions": "Root must supply canonical EVENT_ACTION_LIST node owner; the new forward declaration is opaque, never allocated by production preview",
+    "tails": "ActionState uniquely owns six borrowed tail references, source 0x3c5ff68..0x3c5ff80; task pointer at end is separate State.task"
+  },
+  "types": {
+    "CharMdlWk": {
+      "actors": 0,
+      "camera": 28,
+      "warmup_frames": 44,
+      "motion_counts": 45,
+      "selected_motion": 52,
+      "allocation_bytes": 56
+    },
+    "task": {
+      "twp": 32,
+      "auxiliary_work": 44
+    },
+    "taskwk": {
+      "counter": 12,
+      "eventwk": 60
+    },
+    "eventwk": {
+      "action_head": 64
+    },
+    "EVENT_ACTION_LIST": {
+      "next": 16
+    },
+    "CharSelData": {
+      "bytes": 16,
+      "textures": 4,
+      "sequence": 8,
+      "link_frames": 12
+    }
+  },
+  "style_model": [
+    "src/game/selection_preview.cpp",
+    "src/player/player_initialization.hpp"
+  ],
+  "callers": {
+    "0x512910": "CharSel_Display 0x512b60 after perspective and warmup >=2",
+    "0x512c40": "CharacterSelect menu confirmation; source menu oracle binds 0x512c40 as select_preview"
+  },
+  "profile_policy": "tools/gate/check_profile_patches.py over exact source range hashes; saved qualification.json records zero UNHANDLED",
+  "texture_binding_map": [
+    {
+      "slot": 0,
+      "character": 0,
+      "binding_index": 0,
+      "resource_name": "sonic",
+      "source_texlist": "0x91cb58"
+    },
+    {
+      "slot": 1,
+      "character": 2,
+      "binding_index": 0,
+      "resource_name": "tails",
+      "source_texlist": "0x91a9c8"
+    },
+    {
+      "slot": 2,
+      "character": 3,
+      "binding_index": 1,
+      "resource_name": "knuckles",
+      "source_texlist": "0x91bd20"
+    },
+    {
+      "slot": 3,
+      "character": 5,
+      "binding_index": 0,
+      "resource_name": "amy",
+      "source_texlist": "0x91c800"
+    },
+    {
+      "slot": 4,
+      "character": 7,
+      "binding_index": 1,
+      "resource_name": "big",
+      "source_texlist": "0x91c910"
+    },
+    {
+      "slot": 5,
+      "character": 6,
+      "binding_index": 0,
+      "resource_name": "gamma",
+      "source_texlist": "0x91c560"
+    }
+  ]
+}
