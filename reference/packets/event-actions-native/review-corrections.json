@@ -1,0 +1,230 @@
+{
+  "reviewed_candidate": "b05ab74",
+  "review_task": "028f986d-2cba-41e6-9a50-d00fd713c588",
+  "scope": "Two P3 verification corrections; game source unchanged",
+  "formatting": {
+    "cpp_token_sequence_unchanged": [
+      "tests/probes/native_event_actions_probe.cpp",
+      "tests/unit/event_actions.cpp"
+    ],
+    "python_ast_unchanged": [
+      "tools/oracles/verify_original_event_actions.py",
+      "reference/packets/event-actions-native/verify_mutants.py"
+    ],
+    "before_sha256": {
+      "tests/probes/native_event_actions_probe.cpp": "d137091f0ad4b9624be5423ecbf311e2e9db065efb28f64a9b269b4feab26e18",
+      "tests/unit/event_actions.cpp": "c64d46031303a2d945dcc5517a07903dae260f2e5b09081c7f8b94c7bbed9a2c",
+      "tools/oracles/verify_original_event_actions.py": "5bb434381af55f03a54adcbec69ff7d6e3f4992875897ebf232de6a23c24e81a",
+      "reference/packets/event-actions-native/verify_mutants.py": "327d0b269aaada743f61a3a05a8538bbf7322b3900f95cd0e7ebef9b935876c2"
+    },
+    "formatted_sha256": {
+      "tests/probes/native_event_actions_probe.cpp": "7c66f017d79f5e179400304f91865f6397f3e7ac6392b4a4aee787a9c9fac155",
+      "tests/unit/event_actions.cpp": "d97f34d97e9558f0c51aeb3363384cd34e0e56ecc0fbd4ad92392483aba212e9",
+      "tools/oracles/verify_original_event_actions.py": "0dab5080a28f68e89a63e0be7c52daa91c2614e708866c7566e56d9c1b6332e6",
+      "reference/packets/event-actions-native/verify_mutants.py": "5fbc37e04e38c0b893cf568ab240962746a8b7b93dab6dbd4854dd4d755540cc"
+    },
+    "formatter": "clang-format18 and ephemeral Black26.10.1; no product/source/build dependency added"
+  },
+  "source_sha256": {
+    "src/player/event_actions.cpp": "c66d92f5008847667e0823b8b3072644768da39655b9e769a6fb90dc2f5820d9",
+    "src/player/event_actions.hpp": "67b9beed86b5a7dab204a43095725ba73866bc59040218612266cd09897a1dd1",
+    "src/runtime/native_event_actions_context.cpp": "cdabbd1c9a09ce2832ff7b1d94911a763fab0274788f06f7dc9c3af6c5a35f02",
+    "src/runtime/native_event_actions_context.hpp": "c6f29fee5b02d9bcf6fcecb25c2110d68ce651132e67cb2eaff2b70bbc240f20",
+    "src/engine/task_work.hpp": "a8dea63eb5176a0955b085dcc0248b9aba78665663912eba44e759052d682687",
+    "src/game/selection_preview.hpp": "a38087d4e49f3ca39bb44258a6d1f218532e941af5efeadae5b69990328e2847"
+  },
+  "changed_judge_sha256": {
+    "tests/probes/native_event_actions_probe.cpp": "93e8f4167f6c5c0d7adac7375db871a3b60e655130b0fee3ee3f2fc2dc2c9ac6",
+    "tests/unit/event_actions.cpp": "d97f34d97e9558f0c51aeb3363384cd34e0e56ecc0fbd4ad92392483aba212e9",
+    "tools/oracles/verify_original_event_actions.py": "fbc0fc09d1b5a3de407ad3fb66a1cfc9a0791ee4f0988f25714678b0ce4efd57",
+    "reference/packets/event-actions-native/verify_mutants.py": "bef693c3a2f320acdda2e737b06a23b6fee6938143d265748533db2d6a214d8b"
+  },
+  "input_preservation": {
+    "method": "AST-extracted old/current generators; exact prefix equality",
+    "development_retained": 2630,
+    "holdout_retained": 4630,
+    "new_nonzero_primary_cases_each": 630
+  },
+  "reports": {
+    "development": {
+      "passed": true,
+      "cases": 3260,
+      "executed": 3260,
+      "seed": 417239,
+      "outcomes": {
+        "0": 2373,
+        "1": 234,
+        "2": 167,
+        "4": 71,
+        "5": 88,
+        "6": 39,
+        "3": 116,
+        "7": 172
+      },
+      "failures": [],
+      "input_stream_sha256": "a0cd2010a91fa39fae54425a0e6e4b2ecff4c73dbe94019711282d4381aee9bd",
+      "complete_observation_sha256": "7a3a237324019b94c253fccd1e903f1f236e05ea073ddbd436437d0e79ff6ee9",
+      "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "native_library_sha256": "6a842db755449d78ecc39b849286e7d814ff87c6d70c45eb40459b5908267bac",
+      "source_ranges": {
+        "0x417e80-0x417ea0": "26fabc5d2513033969f64f29086c4de90fdebae7ae14f4724e4f6b82003887fd",
+        "0x417ea0-0x417ee2": "43987ffc448288dc06345a7bb10df78071b1151333a661d3b4801f616a6b1d77",
+        "0x417ef0-0x417f48": "9360136315574feae94583d069596305ea2ef4cc74aa1494854aab19bfb47bb8",
+        "0x42fe00-0x42fe15": "ebcdff387a97f0a3c12714d8a7f08315f173f3299312f68e8b294a9534ecdbfd",
+        "0x42fe40-0x42fe55": "b261f363af7b42800458baecd1fa672d6142439dc17b2aa829b09b9360980500",
+        "0x441260-0x44127c": "f3d9f1d72c0cc8d08044dacaf90faf6c948acaace8d162ea1b96760e62b0e5c8",
+        "0x40b2d0-0x40b304": "b1910d7f567983b9d942b334f0d918441ffeccf600eda82d45745d838918205f"
+      },
+      "native_sources": {
+        "src/player/event_actions.hpp": "67b9beed86b5a7dab204a43095725ba73866bc59040218612266cd09897a1dd1",
+        "src/player/event_actions.cpp": "c66d92f5008847667e0823b8b3072644768da39655b9e769a6fb90dc2f5820d9",
+        "src/engine/task_work.hpp": "a8dea63eb5176a0955b085dcc0248b9aba78665663912eba44e759052d682687",
+        "tests/probes/native_event_actions_probe.cpp": "93e8f4167f6c5c0d7adac7375db871a3b60e655130b0fee3ee3f2fc2dc2c9ac6"
+      },
+      "limits": [
+        "Queue/admission and cleanup only; no animation stepping, controller or render qualification.",
+        "Void ABI: return/stop and all modeled state/call/allocation/failure observations; incidental caller-saved registers are not API results.",
+        "Source CAlloc executes; MAlloc/FreeMemory are recorded allocation boundaries. Native adapter delegates to the real TaskWorkArena.",
+        "Duplicate free is a stopped allocator contract violation on both adapters, not a claim about original heap-corruption behavior.",
+        "SetInputP registry slots 0..7, including byte-truncated input words; arbitrary beyond-registry memory is unavailable natively."
+      ]
+    },
+    "holdout": {
+      "passed": true,
+      "cases": 5260,
+      "executed": 5260,
+      "seed": 2026110223,
+      "outcomes": {
+        "0": 3699,
+        "1": 410,
+        "2": 332,
+        "4": 129,
+        "5": 150,
+        "6": 44,
+        "3": 183,
+        "7": 313
+      },
+      "failures": [],
+      "input_stream_sha256": "2b108740ccfd61dbb9b4d10fd18eee1ff4cd294072bf0676eb34a693b5f62f41",
+      "complete_observation_sha256": "d90f56f07c23f29019ae1044644568c2bf33e5d309b52c9924801a55c2c4ecd4",
+      "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "native_library_sha256": "6a842db755449d78ecc39b849286e7d814ff87c6d70c45eb40459b5908267bac",
+      "source_ranges": {
+        "0x417e80-0x417ea0": "26fabc5d2513033969f64f29086c4de90fdebae7ae14f4724e4f6b82003887fd",
+        "0x417ea0-0x417ee2": "43987ffc448288dc06345a7bb10df78071b1151333a661d3b4801f616a6b1d77",
+        "0x417ef0-0x417f48": "9360136315574feae94583d069596305ea2ef4cc74aa1494854aab19bfb47bb8",
+        "0x42fe00-0x42fe15": "ebcdff387a97f0a3c12714d8a7f08315f173f3299312f68e8b294a9534ecdbfd",
+        "0x42fe40-0x42fe55": "b261f363af7b42800458baecd1fa672d6142439dc17b2aa829b09b9360980500",
+        "0x441260-0x44127c": "f3d9f1d72c0cc8d08044dacaf90faf6c948acaace8d162ea1b96760e62b0e5c8",
+        "0x40b2d0-0x40b304": "b1910d7f567983b9d942b334f0d918441ffeccf600eda82d45745d838918205f"
+      },
+      "native_sources": {
+        "src/player/event_actions.hpp": "67b9beed86b5a7dab204a43095725ba73866bc59040218612266cd09897a1dd1",
+        "src/player/event_actions.cpp": "c66d92f5008847667e0823b8b3072644768da39655b9e769a6fb90dc2f5820d9",
+        "src/engine/task_work.hpp": "a8dea63eb5176a0955b085dcc0248b9aba78665663912eba44e759052d682687",
+        "tests/probes/native_event_actions_probe.cpp": "93e8f4167f6c5c0d7adac7375db871a3b60e655130b0fee3ee3f2fc2dc2c9ac6"
+      },
+      "limits": [
+        "Queue/admission and cleanup only; no animation stepping, controller or render qualification.",
+        "Void ABI: return/stop and all modeled state/call/allocation/failure observations; incidental caller-saved registers are not API results.",
+        "Source CAlloc executes; MAlloc/FreeMemory are recorded allocation boundaries. Native adapter delegates to the real TaskWorkArena.",
+        "Duplicate free is a stopped allocator contract violation on both adapters, not a claim about original heap-corruption behavior.",
+        "SetInputP registry slots 0..7, including byte-truncated input words; arbitrary beyond-registry memory is unavailable natively."
+      ]
+    }
+  },
+  "mutants": [
+    {
+      "name": "input-pending-flag",
+      "compiled": true,
+      "caught": true,
+      "exit_status": 1,
+      "failed_cases": 8,
+      "compiled_source_sha256": "c7f431e4ca9c4d58a5f3be43c58d2f030bff76c8f8d49654f5dafbf2aee6e766",
+      "library_sha256": "62f440de7a2e8d71004a12467744d888cac5fc160c485fd38a7bc9103b98421e"
+    },
+    {
+      "name": "unrelated-primary-zero-store",
+      "compiled": true,
+      "caught": true,
+      "exit_status": 1,
+      "failed_cases": 8,
+      "compiled_source_sha256": "4dd8137a1c151f384e2c6400ee88b790a49e122c94906428bfeea881b7369f54",
+      "library_sha256": "2a494152d01c6602fb27891c76ff5a3c84756bd71c3a27f7aead9f57c5089042"
+    },
+    {
+      "name": "tail-traversal",
+      "compiled": true,
+      "caught": true,
+      "exit_status": 1,
+      "failed_cases": 8,
+      "compiled_source_sha256": "a7043ff7fcb28407fbd66f5d26595c1dba06b29be4ec2abaca6d1b35b9315d69",
+      "library_sha256": "e9e7d8c217f8086a9b8248cfd46e4a4e305c241ff5a035996a33bf904d665c17"
+    },
+    {
+      "name": "link-byte",
+      "compiled": true,
+      "caught": true,
+      "exit_status": 1,
+      "failed_cases": 8,
+      "compiled_source_sha256": "afc23e3f401cb40909722724ee7ec69e47c1027afbc94f7d92f240f7b1129090",
+      "library_sha256": "6deb90521c5e432b2a7d6328c8e0ffd39f13ea9e09e14c055ff8d81cc16ed560"
+    },
+    {
+      "name": "action-copy-order",
+      "compiled": true,
+      "caught": true,
+      "exit_status": 1,
+      "failed_cases": 8,
+      "compiled_source_sha256": "749d82802fb8910895e5f2d6a236c77edcd075bfc3288d35480f8aa0d6975acd",
+      "library_sha256": "2a07e0ba30ede26bbc9fcca55629c6b4b3dc5cfea3538901899120d778c736da"
+    },
+    {
+      "name": "initialize-primary-recapture",
+      "compiled": true,
+      "caught": true,
+      "exit_status": 1,
+      "failed_cases": 8,
+      "compiled_source_sha256": "ccbfb11bf59336352aceed9999100f6ee176d977ffc0998ad9eff901b0504c96",
+      "library_sha256": "af4c7221ebb68c5dac0ec5341769e267343d2bee3562c82c2b6e4d58526b0dc6"
+    },
+    {
+      "name": "allocation-failure-publication",
+      "compiled": true,
+      "caught": true,
+      "exit_status": 1,
+      "failed_cases": 8,
+      "compiled_source_sha256": "7947a9efef221be87fad535387a745d0bcbb7f65a4037c48faf35455ade3d24e",
+      "library_sha256": "b2bba2dda4d1a8ad93b144b8a63ed869af9ebffffb27cc82484cd42426ac45aa"
+    },
+    {
+      "name": "cleanup-head-order",
+      "compiled": true,
+      "caught": true,
+      "exit_status": 1,
+      "failed_cases": 8,
+      "compiled_source_sha256": "e8a1679b966f0f8084ffc08d69fce821011704f99fa9ef5f998a024938d57d69",
+      "library_sha256": "2847a220f6ab72404e8d712d8268e8c1b2e94afc43a0850d4b4d0ab7e2a14a6f"
+    }
+  ],
+  "native_program": {
+    "exit_status": 0,
+    "binary_sha256": "f59aa2ade361a02da9d05957598ad955aa017cb5eacfe77b2f7221eb481a97cc",
+    "log": "build/event-actions/review-corrections/native-test.log",
+    "log_sha256": "deb3a5c3359d93843fc969599a10c001e703287033e5f764ca5b89c213f26343"
+  },
+  "blind_spot_proof": {
+    "mutant": "unrelated-primary-zero-store",
+    "all_2630_old_cases_pass": true,
+    "first_failure": 2686,
+    "new_failures_have_nonzero_sentinels": true,
+    "report": "build/event-actions/review-corrections/zero-store-gap.json",
+    "sha256": "6a401d79151b5adffbe4fb34ea5f2d3edb19671f5729f04c985c8d86526fd922"
+  },
+  "limits": [
+    "Original qualification and artifacts remain intact; this supplement does not replace their histories.",
+    "Native event/preview product code is unchanged; original preview preservation evidence is reused.",
+    "No Main merge, full app, full gate, animation or N3b acceptance.",
+    "Formatter tooling installed only under ignored build/review-format-tools; not a product or shared environment dependency."
+  ]
+}

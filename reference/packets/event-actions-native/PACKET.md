@@ -123,3 +123,14 @@ actual source ranges with zero UNHANDLED/undetermined overlaps.
 Reproduce the focused native build and original comparisons with the exact commands
 in qualification.json; all outputs stay under this worktree's ignored build tree.
 Root arranges independent review, app bindings, connected N3b journeys and the gate.
+
+## Root review corrections
+
+Review 028f986d accepted the bounded core with two P3 findings. Root reformatted
+the probe/unit and Python witnesses, proving unchanged C++ token sequences and
+Python ASTs before adding sentinel cases. All 2,630 development and 4,630 held
+inputs remain exact prefixes, followed by 630 distinct nonzero-primary cases.
+The expanded 3,260/5,260 comparisons pass, as do the native composed program and
+eight mutants. A new unrelated-zero-store fault passes every old development case
+and fails on the new sentinels. Product source is byte-identical to b05ab74.
+The supplement is review-corrections.json; native app/integration remain pending.
