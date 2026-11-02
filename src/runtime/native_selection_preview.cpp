@@ -193,19 +193,7 @@ void TitleScene::exec_selection_sonic(TaskScheduler &scheduler, const TaskHandle
     // has no native owner yet; Gamma's animation table cannot supply it.
     if (scene.session_.players_.gamma_assets)
         context.parameters = &scene.session_.players_.gamma_assets->parameters;
-    const auto primary = capture_event_primary(task);
-    const auto arena = scheduler.work_arena();
-    if (!arena)
-        throw sonic::Unavailable("sonic_task_arena");
-    context.read_event_mode = [arena, primary] {
-        return event_actions::move_mode(*arena, primary.allocation);
-    };
-    context.write_event_mode = [arena, primary](std::uint8_t mode) {
-        event_actions::set_move_mode(*arena, primary.allocation, mode);
-    };
-    context.read_event_link = [arena, primary] {
-        return event_actions::has_path(*arena, primary.allocation);
-    };
+    sonic::bind_event_work(context);
     sonic::run(context);
 }
 void TitleScene::exec_selection_miles(TaskScheduler &, const TaskHandle &) {

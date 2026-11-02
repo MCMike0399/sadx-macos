@@ -55,6 +55,8 @@ struct Context {
     std::function<bool()> read_event_link{};
 };
 // NOTSA: native-facing entry points execute the same template body as the reference adapter.
+// NOTSA: bind event reads/stores to the callback's captured primary allocation.
+void bind_event_work(Context &);
 void run(Context &);
 Reply action_checks(Context &);
 Reply action_predicate(Context &, Predicate, std::optional<std::uint32_t> argument = {});
