@@ -54,6 +54,8 @@ struct Context {
     std::function<std::uint8_t()> read_event_mode{};
     std::function<void(std::uint8_t)> write_event_mode{};
     std::function<bool()> read_event_link{};
+    // NOTSA: borrows the Sonic owner's declarations and the session's live scene.
+    native::SonicModelAssets *model = nullptr;
 };
 // NOTSA: native-facing entry points execute the same template body as the reference adapter.
 // NOTSA: bind event reads/stores to the callback's captured primary allocation.

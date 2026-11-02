@@ -1,6 +1,7 @@
 #pragma once
 #include "apps/native_assets.hpp"
 #include "runtime/sonic_animation_assets.hpp"
+#include "apps/native_sonic_model_assets.hpp"
 
 namespace sadx::native::app {
 // NOTSA: complete declarations, bounded payloads. The canonical initializer supplies all
@@ -59,6 +60,8 @@ load_sonic_animation_assets(const std::filesystem::path &directory,
         integer(actor[@"initial_animation_action"], initial, initial,
                 "Sonic actor Stand identity") != initial)
         throw std::runtime_error("Sonic animation Stand differs from actor import");
-    return std::make_unique<SonicAnimationAssets>(pack, std::move(declarations));
+    auto result = std::make_unique<SonicAnimationAssets>(pack, std::move(declarations));
+    result->install_model(load_sonic_model_assets(actor, pack));
+    return result;
 }
 } // namespace sadx::native::app

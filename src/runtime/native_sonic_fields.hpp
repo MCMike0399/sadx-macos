@@ -23,6 +23,7 @@ struct Player {
         &current_animation, &previous_animation, &idle_timer;
     std::optional<std::int16_t> &release_timer, &release_phase, &jump_timer;
     std::optional<float> &charge;
+    std::optional<std::int16_t> &join_mode;
 };
 // NOTSA: borrow canonical fields without eager reads.
 inline Player player(PlayerPhysicsState &state) {
@@ -43,7 +44,8 @@ inline Player player(PlayerPhysicsState &state) {
             release_timer,
             release_phase,
             jump_timer,
-            charge};
+            charge,
+            join_mode};
 }
 // NOTSA: borrow canonical fields without eager reads.
 inline std::optional<std::int32_t> &motion_angle(PlayerMotionState &state, unsigned axis) {

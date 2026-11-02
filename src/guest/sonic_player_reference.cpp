@@ -832,7 +832,7 @@ struct Context {
             target = 0x495fa0;
         stop(SonicPlayerFailure::unimplemented_action, site, target);
     }
-    [[noreturn]] void missing_model(Site site) {
+    [[noreturn]] void initialize_model(Site site) {
         stop(SonicPlayerFailure::unresolved_resource, site);
     }
     void character_id(std::uint8_t value) { f.task->character_id = value; }

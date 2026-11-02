@@ -1,6 +1,7 @@
 #pragma once
 #include "engine/character_pack.hpp"
 #include "player/animation/animation.hpp"
+#include "runtime/sonic_model_assets.hpp"
 
 namespace sadx::native {
 // NOTSA: export identity is retained even when its payload is outside the imported closure.
@@ -21,11 +22,14 @@ class SonicAnimationAssets {
     const std::shared_ptr<const animation::TableStorage> &table() const { return table_; }
     const animation::Resources &resources() const { return resources_; }
     const std::array<ActionHandle, 3> &preview() const { return preview_; }
+    SonicModelAssets *model() const { return model_.get(); }
+    void install_model(std::unique_ptr<SonicModelAssets>);
 
   private:
     Declarations declarations_;
     std::shared_ptr<const animation::TableStorage> table_;
     animation::Resources resources_;
     std::array<ActionHandle, 3> preview_{};
+    std::unique_ptr<SonicModelAssets> model_;
 };
 } // namespace sadx::native

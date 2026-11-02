@@ -998,7 +998,7 @@ template <class C> typename C::Result dispatch(C &c) {
         c.bind_animation(p, Site::InitializeAnimation);
         c.word(p, Word::RequestedAnimation, 0);
         const auto alternate = c.alternate(Site::InitializeAlternate);
-        c.missing_model(alternate ? Site::InitializeAlternateModel : Site::InitializeModel);
+        c.initialize_model(alternate ? Site::InitializeAlternateModel : Site::InitializeModel);
     }
     auto p = c.require_player(c.body_site(mode));
     const bool recovered = mode == static_cast<std::uint8_t>(Mode::Stand) ||

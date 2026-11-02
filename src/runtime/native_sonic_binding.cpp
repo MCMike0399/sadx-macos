@@ -555,7 +555,40 @@ struct Binding {
         (void)site;
     }
     [[noreturn]] void unrecovered(Site, Operation) { missing("sonic_unrecovered_body"); }
-    [[noreturn]] void missing_model(Site) { missing("sonic_model_graph"); }
+    [[noreturn]] void initialize_model(Site site) {
+        if (!context.model)
+            missing("sonic_model_graph");
+        auto &model = *context.model;
+        const auto p = player_unchecked();
+        auto &state = physics(p);
+        auto fields = native_fields::player(state);
+        auto primary = native_fields::primary(task());
+        struct ModelCalls final : sonic_model::Calls {
+            Binding &binding;
+            const Player &player;
+            native::SonicModelAssets &model;
+            ModelCalls(Binding &binding, const Player &player, native::SonicModelAssets &model)
+                : binding(binding), player(player), model(model) {}
+            void join_vertices() override { missing("sonic_PJoinVertexes"); }
+            void initialize_collision() override {
+                (void)collision_component::initialize(binding.arena(), binding.object,
+                    binding.orientation().flags, model.collision(), 2, 0, binding.fp());
+            }
+            void store_collision_height() override {
+                const auto collision = collision_component::component(binding.arena(),
+                                                                      binding.primary_allocation);
+                if (!collision || collision->info.empty())
+                    missing("sonic_model_collision_info");
+                collision->info[0].a = player.record->parameters.height;
+            }
+        } calls(*this, p, model);
+        sonic_model::Player view{require(state.animation_tail.join_table, "sonic_join_table"),
+            require(fields.join_mode, "sonic_join_mode"),
+            require(fields.idle_timer, "sonic_idle_timer"), require(primary.mode, "sonic_mode")};
+        sonic_model::initialize_prefix(model.state(), model.objects(), model.attach(), model.root(),
+                                      view, site == Site::InitializeAlternateModel, calls);
+        missing("sonic_LoadCharTextures");
+    }
     void character_id(std::uint8_t value) { task().character_id = value; }
     void initialize(Site) {
         if (!context.parameters || !context.events)

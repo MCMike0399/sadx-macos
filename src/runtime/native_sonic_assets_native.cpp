@@ -7,6 +7,8 @@ void Session::load_sonic_animation_assets(std::unique_ptr<SonicAnimationAssets> 
         throw std::runtime_error("native Sonic animation assets are null");
     if (players_.sonic_animation_assets)
         throw std::runtime_error("native Sonic animation assets already loaded");
+    if (assets->model())
+        assets->model()->bind_scene(character_scene_.objects);
     players_.sonic_animation_assets = std::move(assets);
 }
 } // namespace sadx::native

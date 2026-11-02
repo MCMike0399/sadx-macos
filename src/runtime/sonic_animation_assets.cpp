@@ -3,6 +3,11 @@
 #include <stdexcept>
 
 namespace sadx::native {
+void SonicAnimationAssets::install_model(std::unique_ptr<SonicModelAssets> model) {
+    if (!model || model_)
+        throw std::runtime_error("invalid Sonic model installation");
+    model_ = std::move(model);
+}
 SonicAnimationAssets::SonicAnimationAssets(const character_pack::CharacterPack &pack,
                                          Declarations declarations)
     : declarations_(std::move(declarations)) {
