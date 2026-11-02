@@ -52,6 +52,7 @@ class Function:
 def observation_trace(origin, line, record, kind="game_winmain"):
     resolved = str(Path(origin).resolve())
     filenames = {resolved, str(Path(origin)), os.path.relpath(resolved)}
+    observed_cases = set()
     def trace(frame, event, arg):
         if frame.f_code.co_filename not in filenames:
             return None
@@ -60,7 +61,12 @@ def observation_trace(origin, line, record, kind="game_winmain"):
             if kind == 'stream_players':
                 record({'source': values['e'], 'native_comparison': values['got']})
             else:
-                record({'case': values['n'], 'source': values['e'],
+                # Python 3.14 inlines comprehensions: repeated line events occur in main.
+                case = values['n']
+                if case in observed_cases:
+                    return trace
+                observed_cases.add(case)
+                record({'case': case, 'source': values['e'],
                         'source_trace': values['st']['trace'], 'native_comparison': values['got_cmp']})
         return trace
     return trace
