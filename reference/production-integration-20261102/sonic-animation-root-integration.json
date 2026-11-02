@@ -1,0 +1,141 @@
+{
+  "schema": 1,
+  "source_commit": "e527ab0d8b37e095fd80151007a43c6b51570ba6",
+  "candidate": "fa58a1bf",
+  "reviews": {
+    "standards": "9fd1a62f",
+    "fidelity": "f90358e8"
+  },
+  "source_build_and_manifest_identical_to_reviewed_candidate": true,
+  "native_build_exit": 0,
+  "native_force_load_closure_exit": 0,
+  "static_check_exit": 0,
+  "judge": {
+    "protected_files": 1389,
+    "violations": 0,
+    "inherited_protections_removed": 0
+  },
+  "inventory_check_exit": 0,
+  "checks": [
+    {
+      "command": [
+        "build/sonic-animation-assets-test",
+        "game/imported",
+        "build/sonic-animation-root/table.tsv"
+      ],
+      "exit_status": 0,
+      "stdout": "",
+      "stderr": "149 declarations, 147 rows, imported preview closure, seven invalid declarations, two real Sonic binds and Stand playback pass\n"
+    },
+    {
+      "command": [
+        "build/sonic-animation-integration-test",
+        "game/imported"
+      ],
+      "exit_status": 0,
+      "stdout": "Session rejects null/replacement; stable Sonic owner/table/resources; actual callback preserves editor stop with absent/present metadata\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "build/native-sonic-callback-test",
+        "game/imported"
+      ],
+      "exit_status": 0,
+      "stdout": "Real Sonic callback publishes canonical current owners before the editor stop; captured event mode/path bindings survive primary replacement and reject release\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "build/native-gamma-effects-test",
+        "game/imported"
+      ],
+      "exit_status": 0,
+      "stdout": "Real Gamma/PInitialize/setup/material caller reaches PSetMotion with shared hit list and pool\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "reference/python/bin/python",
+        "reference/packets/sonic-animation-native/verify_imported.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "game/Sonic Adventure DX/system/CHRMODELS_orig.dll",
+        "game/imported/characters",
+        "build/sonic-animation-root/table.tsv",
+        "build/sonic-animation-root/original-table.json"
+      ],
+      "exit_status": 0,
+      "stdout": "{\n  \"source_game_sha256\": \"6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74\",\n  \"source_dll_sha256\": \"76bbaa1b6aa23872648e6f1f39642e4262403e372b4c4b32f20f0ec89780c2a5\",\n  \"pack_sha256\": \"c414e173bf4bf9f803f24d61642e233ff9650fe9276d70da2ac3939fee2b5d7f\",\n  \"export_sha256\": \"cca605d27263951f0649d79b26c6602e3731b735c8098c1cbc3c9f1162e12ce9\",\n  \"producer_sha256\": \"4fb64e48d45e6008328627f24c9065e89240ec2b5458cedfb73a6ce26d183944\",\n  \"output_sha256\": \"9ec5d1a6049136911067fa3347351462023986acefdcbd0a32f8644eea345ca9\",\n  \"source_ranges\": {\n    \"0x7cec90\": {\n      \"size\": 7674,\n      \"sha256\": \"4fb64e48d45e6008328627f24c9065e89240ec2b5458cedfb73a6ce26d183944\"\n    }\n  },\n  \"declaration_slots\": 149,\n  \"table_rows\": 147,\n  \"compared_bytes\": 2352,\n  \"byte_mismatches\": 0,\n  \"counts\": {\n    \"loaded\": 4,\n    \"known_null\": 3,\n    \"unavailable\": 142\n  },\n  \"loaded_exports\": [\n    1,\n    5,\n    100,\n    101\n  ],\n  \"null_exports\": [\n    24,\n    25,\n    26\n  ],\n  \"source_alias_groups\": [],\n  \"appended_records\": 0,\n  \"pack_reconstruction_exact\": true,\n  \"limits\": [\n    \"Original producer comparison is table initialization, not an actor frame or animation pose sampler.\",\n    \"Payload decoder uses the already inverse-proved MDATA2 pack closure; MDATA3 remains unavailable.\"\n  ]\n}\n",
+      "stderr": ""
+    }
+  ],
+  "original_table": {
+    "source_game_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+    "source_dll_sha256": "76bbaa1b6aa23872648e6f1f39642e4262403e372b4c4b32f20f0ec89780c2a5",
+    "pack_sha256": "c414e173bf4bf9f803f24d61642e233ff9650fe9276d70da2ac3939fee2b5d7f",
+    "export_sha256": "cca605d27263951f0649d79b26c6602e3731b735c8098c1cbc3c9f1162e12ce9",
+    "producer_sha256": "4fb64e48d45e6008328627f24c9065e89240ec2b5458cedfb73a6ce26d183944",
+    "output_sha256": "9ec5d1a6049136911067fa3347351462023986acefdcbd0a32f8644eea345ca9",
+    "source_ranges": {
+      "0x7cec90": {
+        "size": 7674,
+        "sha256": "4fb64e48d45e6008328627f24c9065e89240ec2b5458cedfb73a6ce26d183944"
+      }
+    },
+    "declaration_slots": 149,
+    "table_rows": 147,
+    "compared_bytes": 2352,
+    "byte_mismatches": 0,
+    "counts": {
+      "loaded": 4,
+      "known_null": 3,
+      "unavailable": 142
+    },
+    "loaded_exports": [
+      1,
+      5,
+      100,
+      101
+    ],
+    "null_exports": [
+      24,
+      25,
+      26
+    ],
+    "source_alias_groups": [],
+    "appended_records": 0,
+    "pack_reconstruction_exact": true,
+    "limits": [
+      "Original producer comparison is table initialization, not an actor frame or animation pose sampler.",
+      "Payload decoder uses the already inverse-proved MDATA2 pack closure; MDATA3 remains unavailable."
+    ]
+  },
+  "normal_input": {
+    "command": [
+      "build/sadx-native",
+      "--assets",
+      "game/imported",
+      "--offscreen",
+      "--paced",
+      "--exit-after",
+      "1550",
+      "--save-directory",
+      "build/sonic-animation-root/savedata",
+      "--key-events",
+      "500:13:down,501:13:up,750:13:down,751:13:up,950:13:down,951:13:up,1050:13:down,1051:13:up,1300:13:down,1301:13:up",
+      "--screenshot",
+      "build/sonic-animation-root/frontier.ppm"
+    ],
+    "exit_status": 1,
+    "frames": 1332,
+    "stop": "native session stopped: native_gamma_set_motion",
+    "app_sha256": "2b91f71658630acaf20df542e5e27149b09bb6eecf3474ee0b5e1224af2f62db",
+    "screenshot_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427"
+  },
+  "limits": [
+    "Focused Main integration only; last complete gate/cold qualification remains daa443e4.",
+    "Actual Sonic callback stops at missing editor before animation consumption; controlled init/Stand proof is separate.",
+    "Hierarchy objects/MDATA3 and model/common-tail, Gamma PSetMotion and other actors remain explicit boundaries.",
+    "No new completed actor frame, N3b, hardware proof or full gate."
+  ]
+}

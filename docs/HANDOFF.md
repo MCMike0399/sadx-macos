@@ -920,3 +920,11 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * The clean app reaches the same native_gamma_set_motion stop at frame 1332, exit 1, with identical outgoing-title image. This certifies a connected dependency checkpoint, not a completed actor frame or N3b.
 * native-actors-integration-gate.json, native-actors-qualified-rasters.json and native-actors-source-only.json preserve exact commands, hashes and limits. STATUS is regenerated from the real gate.
 * The Sonic animation worker's build slot is released. Next: real Gamma motion/pose consumers, Sonic animation integration and remaining actor lifecycles, retaining all inherited failures and explicit unknowns.
+
+### 2026-11-02 — Sonic animation owner wired on Main (focused qualification)
+
+* Both asset reviews and current-tree integration reviews 9fd1a62f/f90358e8 accept the bounded changes. Main wiring bb2f7fd7 installs one stable owner and borrows its table/resources for the actual callback invocation.
+* Metadata import leaves the combined 3,328-record pack byte-identical. The 149 export declarations retain four loaded, three null and 142 unavailable entries; all 147 table rows remain canonical.
+* Main native app/force-load closure, four focused programs, the exact 2,352-byte original table comparison and make check pass. Main's judge reports 1,389 files and zero violations, preserving all inherited protections; inventory drift is reconciled.
+* Actual Sonic callback still stops at missing editor input before animation consumption. Normal input still stops at Gamma motion, frame 1332, exit 1, with the identical previously inspected title image. No actor frame or N3b claim.
+* sonic-animation-root-integration.json preserves the new checks. The last full gate and cold-source qualification remain daa443e4; next coherent gate follows the reached motion/lifecycle work.
