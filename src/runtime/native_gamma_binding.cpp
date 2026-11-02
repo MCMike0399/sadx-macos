@@ -248,6 +248,16 @@ void create_time_hud(Context &, unsigned, const TaskHandle &) {
 void initialize_effects(Context &context) {
     if (!context.players.gamma_effects_asset)
         missing("native_gamma_effects_import");
+    // NOTSA: the source scheduler exists here; callbacks borrow this live FP owner.
+    const auto existing = std::dynamic_pointer_cast<particles::Binding>(
+        context.scheduler.callback_context(particles::update_task));
+    if (existing) {
+        if (&existing->arithmetic != &context.rendering.arithmetic())
+            missing("native_particle_arithmetic_owner_conflict");
+    } else if (!context.scheduler.register_callback_context(particles::update_task,
+                   std::make_shared<particles::Binding>(context.rendering.arithmetic()))) {
+        missing("native_particle_arithmetic_registration");
+    }
     gamma_effects::initialize(context.players.gamma_effects, *context.players.gamma_effects_asset,
         context.scheduler, arena(context), context.rendering.arithmetic());
 }

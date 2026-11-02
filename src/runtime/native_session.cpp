@@ -2,7 +2,6 @@
 #include "runtime/movie_scene.hpp"
 #include "runtime/native_display.hpp"
 #include "runtime/native_title_scene.hpp"
-#include "engine/particle_pool.hpp"
 #include "game/level_sounds.hpp"
 #include <iostream>
 #include <cstring>
@@ -29,10 +28,6 @@ Session::Session(LogoOutput &output, std::shared_ptr<const character_pack::Chara
     services_{[this](std::uint16_t character) { unload_character_textures(character); },
                 std::move(stop)}, timing_(mode),
       logo_(output, timing_, renderer_, saves_.current, rings_, frame, fp), character_resources_(textures) {
-    // NOTSA: particle callbacks borrow the same live arithmetic owner as the session.
-    if (!logo_.task_scheduler().register_callback_context(
-            particles::update_task, std::make_shared<particles::Binding>(fp)))
-        throw std::runtime_error("native particle arithmetic binding is unavailable");
     character_resources_.initialize();
     apply_frame_rate_setting(frame_rate_setting);
     // OnInitGameLoop consumes the earlier WinMain profile setting before its first handler call.
