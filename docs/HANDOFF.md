@@ -938,3 +938,12 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Imported motion comparison retains 465 rows, zero value failures and two FP partials, strict exit 2. Particle comparison retains 1,109 cases, zero value failures and all 237 individual FP partials, strict exit 2. Unchanged broader preservation/holdouts/mutants remain reviewed packet evidence.
 * Judge sealing preserves all inherited paths: 1,398 protections, zero drift. Headerless symbol proposals required a corrected registration of both rows; provenance now passes. Inventory is reconciled.
 * motion-particle-integration.json retains exact checks, failures and scope limits. Particle rendering/spawning, Gamma release, vertex welding and later common-tail calls remain open. Root integration review precedes the next gate; last full gate/cold source remains daa443e4.
+
+### 2026-11-02 — Motion and particle combined gate and cold build pass
+
+* Full gate at e1946df8 exits 0: 324 native programs, 617 Python tests, reference R1–R4, three native menu/save journeys and sixteen startup comparisons. Its seven skips remain reported.
+* The first gate failed at a missing observation-output argument. Two unit rows now put all arguments in the second TSV field; generated commands pass. Failed log and correction receipt remain preserved; game code and comparisons were unchanged.
+* A separate same-source run passes all six qualified offline raster checks. Only the inherited volume case-alias capability remains skipped across these checks.
+* Fresh git-export native build and force-load closure pass without original executable/DLL or prebuilt game objects; only copied public SDL3/libusb is reused. The app reaches PJoinVertexes at frame 1332, exit 1, with identical outgoing-title image.
+* motion-particle-gate.json, motion-particle-qualified-rasters.json and motion-particle-source-only.json retain exact scope. STATUS is regenerated from this real gate; no completed actor frame, N3b or gameplay claim follows.
+* Weld worker 75ca9e77 was explicitly released for heavy execution after the gate, continuation 8db8effd. Next: actual welding and source-backed Sonic editor-state binding; preserve renderer/release and all inherited numeric limits.

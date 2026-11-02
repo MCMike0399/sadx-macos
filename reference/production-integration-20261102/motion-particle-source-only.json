@@ -1,0 +1,51 @@
+{
+  "revision": "e1946df8b4fbd30971e6ed3d9a8d177ef0ddfd81",
+  "source_directory": "/Users/burbujamc/Developer/sadx-macos/build/motion-particle-source-only-pja8ni96/source",
+  "qualification_directory": "/Users/burbujamc/Developer/sadx-macos/build/motion-particle-source-only-pja8ni96/qualification",
+  "archive_sha256": "0bc03570703ef1e7eb5cf087ce4a44eb26e53719302f150a0372a75e5772c00d",
+  "initial_original_binaries": 0,
+  "initial_prebuilt_game_objects": 0,
+  "reused_dependency": "Copied pinned public SDL3/libusb headers/libraries only; all game and numerical objects rebuilt.",
+  "command": [
+    "make",
+    "-C",
+    "/Users/burbujamc/Developer/sadx-macos/build/motion-particle-source-only-pja8ni96/source",
+    "-j2",
+    "-o",
+    "build/native-controller-deps/include/SDL3/SDL.h",
+    "build/sadx-native",
+    "native-closure"
+  ],
+  "build_exit_status": 0,
+  "build_log_sha256": "8e335c604ce02640fb46ccc6f421b265f097443d5996259bc9d8f0bb0390d4fa",
+  "app_command": [
+    "/Users/burbujamc/Developer/sadx-macos/build/motion-particle-source-only-pja8ni96/source/build/sadx-native",
+    "--assets",
+    "/Users/burbujamc/Developer/sadx-macos/game/imported",
+    "--offscreen",
+    "--paced",
+    "--exit-after",
+    "1550",
+    "--save-directory",
+    "/Users/burbujamc/Developer/sadx-macos/build/motion-particle-source-only-pja8ni96/qualification/savedata",
+    "--key-events",
+    "500:13:down,501:13:up,750:13:down,751:13:up,950:13:down,951:13:up,1050:13:down,1051:13:up,1300:13:down,1301:13:up",
+    "--screenshot",
+    "/Users/burbujamc/Developer/sadx-macos/build/motion-particle-source-only-pja8ni96/qualification/frontier.ppm"
+  ],
+  "app_exit_status": 1,
+  "stop": "native session stopped: native_gamma_join_vertices",
+  "state": {
+    "frames": 1332,
+    "sprite_registry_count": 1,
+    "gamma_setup_assets_loaded": true,
+    "gamma_setup_registered": true
+  },
+  "app_sha256": "11688bea30da76cf21f7f6691d434e5daab6831d588976042e0073e8dee25fd4",
+  "screenshot_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427",
+  "matches_integrated_image": true,
+  "limits": [
+    "Fresh source archive contains no original executable/DLL or prebuilt game objects; copied public dependencies and external imported assets only.",
+    "Reached vertex-welding stop only; no completed actor frame, N3b or full gameplay qualification."
+  ]
+}

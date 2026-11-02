@@ -1,0 +1,10 @@
+{
+  "source_commit": "e1946df8",
+  "command": "SADX_CONTENT_CORPUS=\"$PWD\" PYTHONPATH=tools/lib:tools/oracles reference/python/bin/python -m unittest discover -s tests/python -p test_capture_content_offline.py",
+  "exit_status": 0,
+  "tests": 6,
+  "skipped": 0,
+  "log": "build/motion-particle-qualified-rasters.log",
+  "log_sha256": "d6c2727a66c4d598e6028beacfc9062d1c2636ca9fdb7cbcc961dbe5dbbbdc31",
+  "relationship": "Runs six qualified offline-raster checks omitted by default617-test gate. Actual gate retains seven skips; inherited volume case-alias remains unqualified."
+}
