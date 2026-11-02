@@ -2,6 +2,8 @@
 import ctypes
 import importlib.util
 import io
+import hashlib
+import tempfile
 import json
 from pathlib import Path
 import struct
@@ -74,6 +76,45 @@ class CaptureTests(unittest.TestCase):
         finally:
             sys.settrace(None)
         self.assertEqual(seen, [{'source': [0, 123], 'native_comparison': [0, 123]}])
+
+    def test_exclusive_destination(self):
+        with tempfile.TemporaryDirectory() as directory:
+            destination = Path(directory) / 'capture'
+            capture.new_destination(destination)
+            (destination / 'partial').write_text('retained')
+            with self.assertRaises(FileExistsError):
+                capture.new_destination(destination)
+            self.assertEqual((destination / 'partial').read_text(), 'retained')
+
+    def test_independent_nonempty_domain(self):
+        empty_digest = hashlib.sha256()
+        contract = {'native_calls': 2, 'original_observations': 2, 'symbols': {'one': 1, 'two': 1},
+                    'symbol_sequence_sha256': hashlib.sha256(b'one\ntwo').hexdigest(),
+                    'inputs_sha256': empty_digest.hexdigest()}
+        valid = {'count': 2, 'sequence': ['one', 'two'], 'inputs': empty_digest}
+        capture.validate_domain(valid, [0, 1], contract)
+        for count, sequence, observed in [(0, [], []), (1, ['one'], [0]),
+                                         (2, ['two', 'one'], [0, 1]),
+                                         (2, ['one', 'two'], [0, 0]),
+                                         (2, ['one', 'two'], [1, 0]),
+                                         (2, ['one', 'two'], [0])]:
+            with self.assertRaises(ValueError):
+                capture.validate_domain({'count': count, 'sequence': sequence,
+                                         'inputs': empty_digest}, observed, contract)
+        with self.assertRaises(ValueError):
+            capture.validate_domain(valid, [0, 1], dict(contract, inputs_sha256='wrong'))
+        with self.assertRaises(ValueError):
+            capture.validate_domain({'count': 0, 'sequence': [], 'inputs': empty_digest}, [],
+                                    dict(contract, native_calls=0, original_observations=0))
+
+    def test_argument_schema_rejects_wrong_symbol_type_and_scalar(self):
+        contract = {'signatures': {'fake': [{'kind': 'integer', 'value': 2}]}}
+        capture.validate_arguments('fake', [{'kind': 'integer', 'value': 2}], contract)
+        for name, arguments in [('other', [{'kind': 'integer', 'value': 2}]),
+                                ('fake', []), ('fake', [{'kind': 'integer', 'value': 3}]),
+                                ('fake', [{'kind': 'bytes', 'value': 2}])]:
+            with self.assertRaises(ValueError):
+                capture.validate_arguments(name, arguments, contract)
 
     def test_truncated_reordered_and_unknown_fail_closed(self):
         data = self.run_fake(2, 2)

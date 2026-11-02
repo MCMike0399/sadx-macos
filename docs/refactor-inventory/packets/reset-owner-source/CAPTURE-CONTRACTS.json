@@ -1,0 +1,216 @@
+{
+  "game_loop": {
+    "native_calls": 688,
+    "original_observations": 688,
+    "symbols": {
+      "sadx_native_game_loop": 688
+    },
+    "signatures": {
+      "sadx_native_game_loop": [
+        {
+          "kind": "array",
+          "bytes": 256,
+          "element_type": "c_uint"
+        },
+        {
+          "kind": "integer",
+          "value": 64
+        },
+        {
+          "kind": "array",
+          "bytes": 2048,
+          "element_type": "c_uint"
+        },
+        {
+          "kind": "integer",
+          "value": 512
+        }
+      ]
+    },
+    "symbol_sequence_sha256": "5569a2a86b317d0f0cd06c802f704880155e682931d070d1adbb49f3253c65af",
+    "inputs_sha256": "3f0bc9e6a4cb35b8b1e91ac75a94018aac60c0b2065adbe6aa8abcbab8ebd8e6",
+    "old_abi": "build/reset-consumer-old-v2/game_loop.abi.gz",
+    "old_abi_sha256": "945b950eb75c55a67a1654c13dd20efdc3a4bfb7ae9deb2c5f52d967d18436f1",
+    "old_original": "build/reset-consumer-old-v2/game_loop.original.gz",
+    "old_original_sha256": "08c725a5218fe747cb009ff293822b400358e9308f3fcb419185e920b1df4019",
+    "immutable_old_base": "6255cc6cabcf14adb32867ea011f7491dbbddd2d",
+    "old_judge_sha256": "50dbb4081cc1ce1adf15c5e1f20166447c6bc93a1a840793d7ea3275c15899e6",
+    "structure": "Exactly one original observation and one native call per committed default case; Sonic has two ordered export cohorts. This is not a general original/native count equivalence.",
+    "recovered_after_source_edits": false
+  },
+  "sonic_player": {
+    "native_calls": 28800,
+    "original_observations": 28800,
+    "symbols": {
+      "sadx_native_sonic_player": 24768,
+      "sadx_native_sonic_ground_input": 4032
+    },
+    "signatures": {
+      "sadx_native_sonic_player": [
+        {
+          "kind": "array",
+          "bytes": 52,
+          "element_type": "c_ubyte"
+        },
+        {
+          "kind": "integer",
+          "value": 52
+        },
+        {
+          "kind": "array",
+          "bytes": 144,
+          "element_type": "c_uint"
+        },
+        {
+          "kind": "array",
+          "bytes": 160,
+          "element_type": "c_uint"
+        }
+      ],
+      "sadx_native_sonic_ground_input": [
+        {
+          "kind": "array",
+          "bytes": 52,
+          "element_type": "c_ubyte"
+        },
+        {
+          "kind": "integer",
+          "value": 52
+        },
+        {
+          "kind": "array",
+          "bytes": 52,
+          "element_type": "c_uint"
+        },
+        {
+          "kind": "array",
+          "bytes": 32,
+          "element_type": "c_uint"
+        }
+      ]
+    },
+    "symbol_sequence_sha256": "6bda475d01cbaf8e235136f24d6d4d0a7e96e1b7db6972d137357c84f4d7cd87",
+    "inputs_sha256": "9adb0df58ba6b5c55f66c00284af8ce1e21f86010215f69327304caf99f6c52b",
+    "old_abi": "build/reset-consumer-old-v2/sonic_player.abi.gz",
+    "old_abi_sha256": "7b12f6bde948622432c7d8a208a99ba9324701bd96d6dff1ce08ef33527fbb86",
+    "old_original": "build/reset-consumer-old-v2/sonic_player.original.gz",
+    "old_original_sha256": "539c80de01cf71345828446b9eff3c8869ce2bb1a70aedbc703519f8f6cccb56",
+    "immutable_old_base": "6255cc6cabcf14adb32867ea011f7491dbbddd2d",
+    "old_judge_sha256": "d5b661520a090a7a4f4e4e6db71221c0e6bee1a24c9c8a01363f67af22f44c0a",
+    "structure": "Exactly one original observation and one native call per committed default case; Sonic has two ordered export cohorts. This is not a general original/native count equivalence.",
+    "recovered_after_source_edits": false
+  },
+  "game_winmain": {
+    "native_calls": 3000,
+    "original_observations": 3000,
+    "symbols": {
+      "sadx_native_game_winmain": 3000
+    },
+    "signatures": {
+      "sadx_native_game_winmain": [
+        {
+          "kind": "array",
+          "bytes": 212,
+          "element_type": "c_uint"
+        },
+        {
+          "kind": "bytes"
+        },
+        {
+          "kind": "array",
+          "bytes": 1024,
+          "element_type": "c_uint"
+        },
+        {
+          "kind": "array",
+          "bytes": 65536,
+          "element_type": "c_char"
+        },
+        {
+          "kind": "integer",
+          "value": 65536
+        }
+      ]
+    },
+    "symbol_sequence_sha256": "9900885282418cc082c8426192b7dca1ff074ca7592fe740d44d1345c0cc4a35",
+    "inputs_sha256": "b599b1a276c07792a6b05ee122359f45950ee476831c091feaa2e046f67019d6",
+    "old_abi": "build/reset-consumer-old-v2/game_winmain.abi.gz",
+    "old_abi_sha256": "dc89c45f3d60cc13f5724ef612dd1ecddaa256f933de603554c26c6c461ee0b8",
+    "old_original": "build/reset-consumer-old-v7/game_winmain.original.gz",
+    "old_original_sha256": "80f75ddde6700bf372e9b19dde77b74e077e1872f952844fabe293d9044408e6",
+    "immutable_old_base": "6255cc6cabcf14adb32867ea011f7491dbbddd2d",
+    "old_judge_sha256": "0f219e36bd3896d51931e3faa295e8b070fb12e489c0549509d54750e67c1f95",
+    "structure": "Exactly one original observation and one native call per committed default case; Sonic has two ordered export cohorts. This is not a general original/native count equivalence.",
+    "recovered_after_source_edits": true
+  },
+  "stream_players": {
+    "native_calls": 600,
+    "original_observations": 600,
+    "symbols": {
+      "sadx_native_stream_players": 600
+    },
+    "signatures": {
+      "sadx_native_stream_players": [
+        {
+          "kind": "array",
+          "bytes": 36,
+          "element_type": "c_uint"
+        },
+        {
+          "kind": "integer",
+          "value": 9
+        },
+        {
+          "kind": "array",
+          "bytes": 40,
+          "element_type": "c_uint"
+        },
+        {
+          "kind": "integer",
+          "value": 10
+        }
+      ]
+    },
+    "symbol_sequence_sha256": "a8ef871e19fbd80fe97c4f11a442a21d3b1a36a11e900e46d31706e76cc969a7",
+    "inputs_sha256": "720c3ca9342ffedc6509ece4d718d2f78dfb81d43749402257143a841671638c",
+    "old_abi": "build/reset-consumer-old-v2/stream_players.abi.gz",
+    "old_abi_sha256": "a54049bc54d049d82436f2dbd0442cc46a444b2e34df84038059f2b8b09f8f38",
+    "old_original": "build/reset-consumer-old-v4/stream_players.original.gz",
+    "old_original_sha256": "3eb1948702494611d8fc276f08d334f66c6df5b95287de657c5896fd3adc2be7",
+    "immutable_old_base": "6255cc6cabcf14adb32867ea011f7491dbbddd2d",
+    "old_judge_sha256": "f055a1b6c310fc04624ee79fad177c98c9416c07f721a309a6b5f2ee1e34341a",
+    "structure": "Exactly one original observation and one native call per committed default case; Sonic has two ordered export cohorts. This is not a general original/native count equivalence.",
+    "recovered_after_source_edits": true
+  },
+  "sound_server": {
+    "native_calls": 1956,
+    "original_observations": 1956,
+    "symbols": {
+      "sadx_native_sound_server_probe": 1956
+    },
+    "signatures": {
+      "sadx_native_sound_server_probe": [
+        {
+          "kind": "array",
+          "bytes": 2948,
+          "element_type": "c_uint"
+        },
+        {
+          "kind": "array",
+          "bytes": 131072,
+          "element_type": "c_uint"
+        }
+      ]
+    },
+    "symbol_sequence_sha256": "235feb804aebfd0b7bcdad2fb002355ed73dc8c5923026d955da8e59e79be81e",
+    "inputs_sha256": "c603bec4993151ca0a15bf8ccc298d9934653667f1fd6b4f0459349f45d06599",
+    "old_abi": "build/reset-consumer-old-v2/sound_server.abi.gz",
+    "old_abi_sha256": "fa093578950351c3e4e73c2cb306486f9ce0bc947ddadc4311195568d1633550",
+    "old_original": "build/reset-consumer-old-v2/sound_server.original.gz",
+    "old_original_sha256": "a7105e2c42176d2358488cf6c740fc89edf157c0291e307f053867fc96359f06",
+    "immutable_old_base": "6255cc6cabcf14adb32867ea011f7491dbbddd2d",
+    "old_judge_sha256": "9d56c2fbb52635fcb67e64c51467bcf6c8141817f5abcbbd248fe4abf465070a",
+    "structure": "Exactly one original observation and one native call per committed default case; Sonic has two ordered export cohorts. This is not a general original/native count equivalence.",
+    "recovered_after_source_edits": false
+  }
+}
