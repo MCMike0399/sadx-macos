@@ -111,6 +111,9 @@ build/sadx-controller-qualify: src/apps/controller_qualify.mm build/libsadx-maco
 	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) $< build/libsadx-macos.a build/libsadx-core.a $(MAC_FRAMEWORKS) -o $@
 build/sadx-native: src/apps/sadx_native.mm build/libsadx-native.a $(NATIVE_PLATFORM_OBJECTS)
 	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) $< $(NATIVE_PLATFORM_OBJECTS) build/libsadx-native.a $(MAC_FRAMEWORKS) -o $@
+# Fake process-lifetime adequacy only; no game code is linked.
+build/reset-final-parent-fake: tests/fixtures/reset_final_parent_fake.cpp tests/fixtures/reset_final_parent.hpp
+	$(CXX) $(CXXFLAGS) $(INCLUDES) $< -o $@
 # Registered Sonic fixture include applies to this separately built reader binding.
 build/reset-sonic-final: tests/fixtures/reset_sonic_final.cpp tests/reference/actor_current_fixture.hpp build/libsadx-guest.a build/libsadx-core.a
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -include tests/reference/actor_current_fixture.hpp -MMD -MP $< build/libsadx-guest.a build/libsadx-core.a -o $@

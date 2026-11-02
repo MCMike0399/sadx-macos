@@ -1,0 +1,24 @@
+{
+  "status": "PREPARED_UNREVIEWED_NOT_ADMITTED",
+  "freeze_sha256": "56eb59c06c38d539ce6cdec697cb52ea5b56d70cf6984428c4a7f0226c1861e5",
+  "pin_count": 1435,
+  "freeze_bytes": 255694,
+  "models": 5,
+  "probe_models": 4,
+  "fake_tests": 17,
+  "fake_exit": 0,
+  "fake_scope": "Read-only retained developmental records and synthetic JSON/admission cases; isolated no-game parent-guard process checks. No original execution or frozen reserved input.",
+  "checks": [
+    "Exact one-record and nonempty expected domain",
+    "Truncation/reorder/duplicate/scalar-type and optional payload rejection",
+    "Receiver identity, callback state, original padding/return/STOP evidence",
+    "False/null admission before output/model execution",
+    "Exclusive writes; parent EOF, wrong PID and non-pipe refusal"
+  ],
+  "artifacts": {
+    "build/root-reset-collector-fakes-final.log": "7a5ebb8aee2e8b1a07161d07e214188ea03e67a8ff103df7dbd7c496b9b2ec6c",
+    "build/root-reset-parent-fake-build.log": "c6dce2f85fddbc585a2b41e23e23acf3dca977f8e2cd105fa583f859464ed781",
+    "build/root-reset-final-prepare.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "remaining": "Fresh independent Standards/Spec adequacy review, any evidenced corrections and distinct committed affirmative admission. Original and frozen reserved vectors remain UNRUN."
+}
