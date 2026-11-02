@@ -1,0 +1,1395 @@
+{
+  "functions": [
+    {
+      "address": "0x4c5420",
+      "evidence_id": "ev_16a829531fcc5f2e5cf5390f37eda98b66445273e2bd9f256f5879deabd81d7c",
+      "raw_envelope_sha256": "367c08163fb7332a6018479ee840b904ff4864cd6d9f678304647586fccb8e0e",
+      "subject": {
+        "name": "sonic.exe",
+        "digest": {
+          "sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74"
+        },
+        "format": "pe",
+        "architecture": "x86",
+        "local_path": "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe"
+      },
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "procedure": {
+        "address": "0x4c5420",
+        "name": "GammaLoadSetupResource",
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x4c5420",
+              "end": "0x4c5435"
+            }
+          ],
+          "total_bytes": 22,
+          "span_bytes": 22,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "signature": "undefined GammaLoadSetupResource()",
+        "locals": []
+      },
+      "pseudocode": "\nvoid GammaLoadSetupResource(void)\n\n{\n  DAT_00982154 = FUN_00456c50(PTR_PTR_00982148,0);\n  return;\n}\n\n",
+      "assembly": [
+        "0x4c5420: MOV EAX, [0x00982148]",
+        "0x4c5425: PUSH 0x0",
+        "0x4c5427: PUSH EAX",
+        "0x4c5428: CALL 0x00456c50",
+        "0x4c542d: ADD ESP, 0x8",
+        "0x4c5430: MOV [0x00982154], EAX",
+        "0x4c5435: RET"
+      ],
+      "callers": [
+        {
+          "address": "0x483430",
+          "name": "E102"
+        }
+      ],
+      "callees": [
+        {
+          "address": "0x456c50",
+          "name": "FUN_00456c50"
+        }
+      ],
+      "native_value_flow_truncated": false,
+      "limitations": [
+        "Unresolved computed or indirect flows without target addresses are not represented as reference edges.",
+        "Thunk and external classifications are Ghidra FunctionManager observations; they do not resolve targetless calls.",
+        "Pseudocode and assembly are Ghidra-specific representations, not original source or Hopper-equivalent text.",
+        "Synthetic Ghidra entry-point references without actionable memory sources are omitted."
+      ]
+    },
+    {
+      "address": "0x456cd0",
+      "evidence_id": "ev_a8cc3aa1a5daa91981caf688ce65ca4371f0a7cbd958ff3def7739214b084a9e",
+      "raw_envelope_sha256": "8b2616092e4d877fb6dd174eacf84681ecd6271c094e9b1d1a0fdfa73da087a5",
+      "subject": {
+        "name": "sonic.exe",
+        "digest": {
+          "sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74"
+        },
+        "format": "pe",
+        "architecture": "x86",
+        "local_path": "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe"
+      },
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "procedure": {
+        "address": "0x456cd0",
+        "name": "SpLoopOnlyDisplay",
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x456cd0",
+              "end": "0x456ddf"
+            }
+          ],
+          "total_bytes": 272,
+          "span_bytes": 272,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "signature": "undefined SpLoopOnlyDisplay()",
+        "locals": []
+      },
+      "pseudocode": "\n/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */\n\nvoid SpLoopOnlyDisplay(void)\n\n{\n  undefined4 *puVar1;\n  undefined4 *puVar2;\n  undefined4 *puVar3;\n  int iVar4;\n  \n  iVar4 = 0;\n  ___njFogDisable();\n  (**(code **)(*DAT_03d128b0 + 200))(DAT_03d128b0,0x1d,0);\n  for (puVar3 = DAT_03c4858c; puVar3 != (undefined4 *)0x0; puVar3 = (undefined4 *)*puVar3) {\n    puVar1 = (undefined4 *)puVar3[4];\n    _DAT_03c4857c = *puVar1;\n    puVar2 = (undefined4 *)puVar3[1];\n    _DAT_03c48580 = puVar1[1];\n    njColorBlendingMode(0,puVar1[3]);\n    njColorBlendingMode(1,puVar1[4]);\n    for (; puVar2 != (undefined4 *)0x0; puVar2 = (undefined4 *)*puVar2) {\n      if (puVar2[1] != 0) {\n        ___njSetConstantMaterial(puVar2 + 0xc);\n        _CurrentSpriteTableEntry = puVar2[6];\n        _DAT_03c48568 = puVar2[7];\n        _DAT_03c4856c = puVar2[8];\n        _DAT_03c48570 = puVar2[5];\n        _DAT_03c48578 = puVar2[3];\n        late_z_ofs___ = puVar2[0x10];\n        _DAT_03c48574 = _DAT_03c48570;\n        late_DrawSprite3D(&CurrentSpriteTableEntry,(int)*(short *)((int)puVar2 + 10),0x33,\n                          *(byte *)(puVar2 + 0x13) | 4);\n        late_z_ofs___ = 0;\n        iVar4 = iVar4 + 1;\n      }\n    }\n  }\n  ResetMaterial();\n  njColorBlendingMode(0,8);\n  njColorBlendingMode(1,6);\n  ___njFogEnable();\n  SPR_NUM = iVar4;\n  return;\n}\n\n",
+      "assembly": [
+        "0x456cd0: PUSH EBX",
+        "0x456cd1: PUSH EBP",
+        "0x456cd2: XOR EBP, EBP",
+        "0x456cd4: CALL 0x00411b40",
+        "0x456cd9: MOV EAX, [0x03d128b0]",
+        "0x456cde: MOV ECX, dword ptr [EAX]",
+        "0x456ce0: PUSH EBP",
+        "0x456ce1: PUSH 0x1d",
+        "0x456ce3: PUSH EAX",
+        "0x456ce4: CALL dword ptr [ECX + 0xc8]",
+        "0x456cea: MOV EBX, dword ptr [0x03c4858c]",
+        "0x456cf0: TEST EBX, EBX",
+        "0x456cf2: JZ 0x00456db8",
+        "0x456cf8: PUSH ESI",
+        "0x456cf9: PUSH EDI",
+        "0x456cfa: LEA EBX, [EBX]",
+        "0x456d00: MOV EDI, dword ptr [EBX + 0x10]",
+        "0x456d03: MOV EDX, dword ptr [EDI]",
+        "0x456d05: MOV ESI, dword ptr [EBX + 0x4]",
+        "0x456d08: MOV dword ptr [0x03c4857c], EDX",
+        "0x456d0e: MOV EAX, dword ptr [EDI + 0x4]",
+        "0x456d11: MOV [0x03c48580], EAX",
+        "0x456d16: MOV ECX, dword ptr [EDI + 0xc]",
+        "0x456d19: PUSH ECX",
+        "0x456d1a: PUSH 0x0",
+        "0x456d1c: CALL 0x004030d0",
+        "0x456d21: MOV EDX, dword ptr [EDI + 0x10]",
+        "0x456d24: PUSH EDX",
+        "0x456d25: PUSH 0x1",
+        "0x456d27: CALL 0x004030d0",
+        "0x456d2c: ADD ESP, 0x10",
+        "0x456d2f: TEST ESI, ESI",
+        "0x456d31: JZ 0x00456dac",
+        "0x456d33: MOV EAX, dword ptr [ESI + 0x4]",
+        "0x456d36: TEST EAX, EAX",
+        "0x456d38: JZ 0x00456da6",
+        "0x456d3a: LEA EAX, [ESI + 0x30]",
+        "0x456d3d: PUSH EAX",
+        "0x456d3e: CALL 0x00402f40",
+        "0x456d43: LEA ECX, [ESI + 0x18]",
+        "0x456d46: MOV EDX, dword ptr [ECX]",
+        "0x456d48: MOV dword ptr [0x03c48564], EDX",
+        "0x456d4e: MOV EAX, dword ptr [ECX + 0x4]",
+        "0x456d51: MOV [0x03c48568], EAX",
+        "0x456d56: MOV ECX, dword ptr [ECX + 0x8]",
+        "0x456d59: MOV dword ptr [0x03c4856c], ECX",
+        "0x456d5f: FLD float ptr [ESI + 0x14]",
+        "0x456d62: FST float ptr [0x03c48574]",
+        "0x456d68: FSTP float ptr [0x03c48570]",
+        "0x456d6e: MOV EDX, dword ptr [ESI + 0xc]",
+        "0x456d71: MOV dword ptr [0x03c48578], EDX",
+        "0x456d77: MOV EAX, dword ptr [ESI + 0x40]",
+        "0x456d7a: MOV [0x03abd9c0], EAX",
+        "0x456d7f: MOVZX ECX, byte ptr [ESI + 0x4c]",
+        "0x456d83: MOVSX EDX, word ptr [ESI + 0xa]",
+        "0x456d87: OR ECX, 0x4",
+        "0x456d8a: PUSH ECX",
+        "0x456d8b: PUSH 0x33",
+        "0x456d8d: PUSH EDX",
+        "0x456d8e: PUSH 0x3c48564",
+        "0x456d93: CALL 0x00404760",
+        "0x456d98: ADD ESP, 0x14",
+        "0x456d9b: MOV dword ptr [0x03abd9c0], 0x0",
+        "0x456da5: INC EBP",
+        "0x456da6: MOV ESI, dword ptr [ESI]",
+        "0x456da8: TEST ESI, ESI",
+        "0x456daa: JNZ 0x00456d33",
+        "0x456dac: MOV EBX, dword ptr [EBX]",
+        "0x456dae: TEST EBX, EBX",
+        "0x456db0: JNZ 0x00456d00",
+        "0x456db6: POP EDI",
+        "0x456db7: POP ESI",
+        "0x456db8: CALL 0x004128f0",
+        "0x456dbd: PUSH 0x8",
+        "0x456dbf: PUSH 0x0",
+        "0x456dc1: CALL 0x004030d0",
+        "0x456dc6: PUSH 0x6",
+        "0x456dc8: PUSH 0x1",
+        "0x456dca: CALL 0x004030d0",
+        "0x456dcf: ADD ESP, 0x10",
+        "0x456dd2: CALL 0x00411af0",
+        "0x456dd7: MOV dword ptr [0x03c48584], EBP",
+        "0x456ddd: POP EBP",
+        "0x456dde: POP EBX",
+        "0x456ddf: RET"
+      ],
+      "callers": [
+        {
+          "address": "0x413f20",
+          "name": "FUN_00413f20"
+        },
+        {
+          "address": "0x415420",
+          "name": "DisplayPauseMenu"
+        },
+        {
+          "address": "0x415af0",
+          "name": "GameStateHandler_Mission"
+        },
+        {
+          "address": "0x416610",
+          "name": "GameStateHandler_Trial"
+        },
+        {
+          "address": "0x4173b0",
+          "name": "GameStateHandler_Adventure"
+        },
+        {
+          "address": "0x456ec0",
+          "name": "FUN_00456ec0"
+        },
+        {
+          "address": "0x458d00",
+          "name": "PauseMenu_CameraIGuess"
+        },
+        {
+          "address": "0x458f90",
+          "name": "PauseMenu_SetControls"
+        }
+      ],
+      "callees": [
+        {
+          "address": "0x402f40",
+          "name": "___njSetConstantMaterial"
+        },
+        {
+          "address": "0x4030d0",
+          "name": "njColorBlendingMode"
+        },
+        {
+          "address": "0x404760",
+          "name": "late_DrawSprite3D"
+        },
+        {
+          "address": "0x411af0",
+          "name": "___njFogEnable"
+        },
+        {
+          "address": "0x411b40",
+          "name": "___njFogDisable"
+        },
+        {
+          "address": "0x4128f0",
+          "name": "ResetMaterial"
+        }
+      ],
+      "native_value_flow_truncated": false,
+      "limitations": [
+        "Unresolved computed or indirect flows without target addresses are not represented as reference edges.",
+        "Thunk and external classifications are Ghidra FunctionManager observations; they do not resolve targetless calls.",
+        "Pseudocode and assembly are Ghidra-specific representations, not original source or Hopper-equivalent text.",
+        "Synthetic Ghidra entry-point references without actionable memory sources are omitted."
+      ]
+    },
+    {
+      "address": "0x456de0",
+      "evidence_id": "ev_5c85b4d452d2608d0fa1d7f7e3262839537ec8076c4ac4515eb58e9f2007f765",
+      "raw_envelope_sha256": "3f58aad2592bee27948c9c415afb58edfdb9eb6795eabf1086f4377605f6f72e",
+      "subject": {
+        "name": "sonic.exe",
+        "digest": {
+          "sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74"
+        },
+        "format": "pe",
+        "architecture": "x86",
+        "local_path": "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe"
+      },
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "procedure": {
+        "address": "0x456de0",
+        "name": "ClearSpriteTable",
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x456de0",
+              "end": "0x456e45"
+            }
+          ],
+          "total_bytes": 102,
+          "span_bytes": 102,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "signature": "undefined ClearSpriteTable()",
+        "locals": []
+      },
+      "pseudocode": "\nvoid ClearSpriteTable(void)\n\n{\n  undefined4 *puVar1;\n  undefined4 *puVar2;\n  int iVar3;\n  int *piVar4;\n  int *piVar5;\n  int iVar6;\n  \n  iVar6 = SPR_MAX;\n  piVar5 = SpriteTable_ptr;\n  DAT_03c48594 = SpriteTable_ptr;\n  SPR_MAX_dupe = SPR_MAX;\n  piVar4 = SpriteTable_ptr;\n  iVar3 = SPR_MAX;\n  while (iVar3 = iVar3 + -1, iVar3 != 0) {\n    *piVar4 = (int)(piVar4 + 0x14);\n    piVar4 = piVar4 + 0x14;\n  }\n  piVar5[iVar6 * 0x14 + -0x14] = 0;\n  puVar2 = DAT_03c4858c;\n  while (puVar2 != (undefined4 *)0x0) {\n    puVar1 = (undefined4 *)*puVar2;\n    FreeMemory(puVar2);\n    puVar2 = puVar1;\n  }\n  DAT_03c4858c = (undefined4 *)0x0;\n  SpriteCount = 0;\n  return;\n}\n\n",
+      "assembly": [
+        "0x456de0: MOV EDX, dword ptr [0x03c48598]",
+        "0x456de6: PUSH EBX",
+        "0x456de7: PUSH ESI",
+        "0x456de8: PUSH EDI",
+        "0x456de9: MOV EDI, dword ptr [0x03c48588]",
+        "0x456def: LEA ECX, [EDX + -0x1]",
+        "0x456df2: XOR EBX, EBX",
+        "0x456df4: CMP ECX, EBX",
+        "0x456df6: MOV dword ptr [0x03c48594], EDI",
+        "0x456dfc: MOV dword ptr [0x03c48560], EDX",
+        "0x456e02: JBE 0x00456e12",
+        "0x456e04: MOV EAX, EDI",
+        "0x456e06: MOV ESI, ECX",
+        "0x456e08: DEC ESI",
+        "0x456e09: LEA ECX, [EAX + 0x50]",
+        "0x456e0c: MOV dword ptr [EAX], ECX",
+        "0x456e0e: MOV EAX, ECX",
+        "0x456e10: JNZ 0x00456e08",
+        "0x456e12: LEA EAX, [EDX + EDX*0x4]",
+        "0x456e15: SHL EAX, 0x4",
+        "0x456e18: MOV dword ptr [EAX + EDI*0x1 + -0x50], EBX",
+        "0x456e1c: MOV EAX, [0x03c4858c]",
+        "0x456e21: CMP EAX, EBX",
+        "0x456e23: JZ 0x00456e36",
+        "0x456e25: MOV ESI, dword ptr [EAX]",
+        "0x456e27: PUSH EAX",
+        "0x456e28: CALL 0x0040b310",
+        "0x456e2d: ADD ESP, 0x4",
+        "0x456e30: CMP ESI, EBX",
+        "0x456e32: MOV EAX, ESI",
+        "0x456e34: JNZ 0x00456e25",
+        "0x456e36: POP EDI",
+        "0x456e37: POP ESI",
+        "0x456e38: MOV dword ptr [0x03c4858c], EBX",
+        "0x456e3e: MOV dword ptr [0x03c48590], EBX",
+        "0x456e44: POP EBX",
+        "0x456e45: RET"
+      ],
+      "callers": [
+        {
+          "address": "0x413f70",
+          "name": "FUN_00413f70"
+        },
+        {
+          "address": "0x414070",
+          "name": "FUN_00414070"
+        },
+        {
+          "address": "0x414dc0",
+          "name": "FUN_00414dc0"
+        },
+        {
+          "address": "0x415150",
+          "name": "FUN_00415150"
+        },
+        {
+          "address": "0x4173b0",
+          "name": "GameStateHandler_Adventure"
+        }
+      ],
+      "callees": [
+        {
+          "address": "0x40b310",
+          "name": "FreeMemory"
+        }
+      ],
+      "native_value_flow_truncated": false,
+      "limitations": [
+        "Unresolved computed or indirect flows without target addresses are not represented as reference edges.",
+        "Thunk and external classifications are Ghidra FunctionManager observations; they do not resolve targetless calls.",
+        "Pseudocode and assembly are Ghidra-specific representations, not original source or Hopper-equivalent text.",
+        "Synthetic Ghidra entry-point references without actionable memory sources are omitted."
+      ]
+    },
+    {
+      "address": "0x456e50",
+      "evidence_id": "ev_6f2a42c9d2be7447440e4d204ee51cee8e2290d9a90e0e4b27615da6802e338d",
+      "raw_envelope_sha256": "9087a47d674f095cce8e9a5912aa04ffb2e8638aa0de3c174a477f6220cab0f0",
+      "subject": {
+        "name": "sonic.exe",
+        "digest": {
+          "sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74"
+        },
+        "format": "pe",
+        "architecture": "x86",
+        "local_path": "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe"
+      },
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "procedure": {
+        "address": "0x456e50",
+        "name": "FUN_00456e50",
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x456e50",
+              "end": "0x456e7c"
+            },
+            {
+              "start": "0x456e80",
+              "end": "0x456ead"
+            }
+          ],
+          "total_bytes": 91,
+          "span_bytes": 94,
+          "non_contiguous": true,
+          "contains_entry": true
+        },
+        "signature": "undefined FUN_00456e50()",
+        "locals": []
+      },
+      "pseudocode": "\nvoid FUN_00456e50(void)\n\n{\n  int *piVar1;\n  int iVar2;\n  undefined4 *puVar3;\n  \n  for (puVar3 = DAT_03c4858c; puVar3 != (undefined4 *)0x0; puVar3 = (undefined4 *)*puVar3) {\n    piVar1 = (int *)puVar3[1];\n    if (piVar1 != (int *)0x0) {\n      iVar2 = *piVar1;\n      while (iVar2 != 0) {\n        piVar1[1] = 0;\n        piVar1 = (int *)*piVar1;\n        iVar2 = *piVar1;\n      }\n      *piVar1 = DAT_03c48594;\n      DAT_03c48594 = puVar3[1];\n      SPR_MAX_dupe = SPR_MAX_dupe + puVar3[3];\n      puVar3[1] = 0;\n      puVar3[3] = 0;\n    }\n  }\n  return;\n}\n\n",
+      "assembly": [
+        "0x456e50: MOV ECX, dword ptr [0x03c4858c]",
+        "0x456e56: XOR EDX, EDX",
+        "0x456e58: CMP ECX, EDX",
+        "0x456e5a: JZ 0x00456ead",
+        "0x456e5c: PUSH ESI",
+        "0x456e5d: MOV ESI, dword ptr [0x03c48594]",
+        "0x456e63: PUSH EDI",
+        "0x456e64: MOV EDI, dword ptr [0x03c48560]",
+        "0x456e6a: LEA EBX, [EBX]",
+        "0x456e70: MOV EAX, dword ptr [ECX + 0x4]",
+        "0x456e73: CMP EAX, EDX",
+        "0x456e75: JZ 0x00456e99",
+        "0x456e77: CMP dword ptr [EAX], EDX",
+        "0x456e79: JZ 0x00456e89",
+        "0x456e7b: JMP 0x00456e80",
+        "0x456e80: MOV dword ptr [EAX + 0x4], EDX",
+        "0x456e83: MOV EAX, dword ptr [EAX]",
+        "0x456e85: CMP dword ptr [EAX], EDX",
+        "0x456e87: JNZ 0x00456e80",
+        "0x456e89: MOV dword ptr [EAX], ESI",
+        "0x456e8b: MOV EAX, dword ptr [ECX + 0xc]",
+        "0x456e8e: MOV ESI, dword ptr [ECX + 0x4]",
+        "0x456e91: ADD EDI, EAX",
+        "0x456e93: MOV dword ptr [ECX + 0x4], EDX",
+        "0x456e96: MOV dword ptr [ECX + 0xc], EDX",
+        "0x456e99: MOV ECX, dword ptr [ECX]",
+        "0x456e9b: CMP ECX, EDX",
+        "0x456e9d: JNZ 0x00456e70",
+        "0x456e9f: MOV dword ptr [0x03c48560], EDI",
+        "0x456ea5: POP EDI",
+        "0x456ea6: MOV dword ptr [0x03c48594], ESI",
+        "0x456eac: POP ESI",
+        "0x456ead: RET"
+      ],
+      "callers": [
+        {
+          "address": "0x431290",
+          "name": "EV_CanselThread"
+        }
+      ],
+      "callees": [],
+      "native_value_flow_truncated": false,
+      "limitations": [
+        "Unresolved computed or indirect flows without target addresses are not represented as reference edges.",
+        "Thunk and external classifications are Ghidra FunctionManager observations; they do not resolve targetless calls.",
+        "Pseudocode and assembly are Ghidra-specific representations, not original source or Hopper-equivalent text.",
+        "Synthetic Ghidra entry-point references without actionable memory sources are omitted."
+      ]
+    },
+    {
+      "address": "0x40b2d0",
+      "evidence_id": "ev_73d5f861036bbfa8d0d25dba079c6deb4289c34a21bd8981b1ecdb06f9c9a48d",
+      "raw_envelope_sha256": "b01d34be295e04522e1806ac029c4acc4e8f10218eedf1cec81636eead59693e",
+      "subject": {
+        "name": "sonic.exe",
+        "digest": {
+          "sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74"
+        },
+        "format": "pe",
+        "architecture": "x86",
+        "local_path": "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe"
+      },
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "procedure": {
+        "address": "0x40b2d0",
+        "name": "CAlloc",
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x40b2d0",
+              "end": "0x40b303"
+            }
+          ],
+          "total_bytes": 52,
+          "span_bytes": 52,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "signature": "undefined CAlloc()",
+        "locals": []
+      },
+      "pseudocode": "\nundefined4 * CAlloc(int param_1,int param_2)\n\n{\n  undefined4 *puVar1;\n  uint uVar2;\n  undefined4 *puVar3;\n  \n  uVar2 = (param_2 + 3U & 0xfffffffc) * param_1;\n  puVar1 = (undefined4 *)MAlloc(uVar2);\n  if ((puVar1 != (undefined4 *)0x0) && (uVar2 = uVar2 >> 2, puVar3 = puVar1, uVar2 != 0)) {\n    for (; uVar2 != 0; uVar2 = uVar2 - 1) {\n      *puVar3 = 0;\n      puVar3 = puVar3 + 1;\n    }\n  }\n  return puVar1;\n}\n\n",
+      "assembly": [
+        "0x40b2d0: PUSH ESI",
+        "0x40b2d1: MOV ESI, dword ptr [ESP + 0xc]",
+        "0x40b2d5: ADD ESI, 0x3",
+        "0x40b2d8: AND ESI, 0xfffffffc",
+        "0x40b2db: IMUL ESI, dword ptr [ESP + 0x8]",
+        "0x40b2e0: PUSH ESI",
+        "0x40b2e1: CALL 0x0040b220",
+        "0x40b2e6: MOV EDX, EAX",
+        "0x40b2e8: ADD ESP, 0x4",
+        "0x40b2eb: TEST EDX, EDX",
+        "0x40b2ed: JZ 0x0040b300",
+        "0x40b2ef: SHR ESI, 0x2",
+        "0x40b2f2: MOV ECX, ESI",
+        "0x40b2f4: TEST ECX, ECX",
+        "0x40b2f6: JZ 0x0040b300",
+        "0x40b2f8: PUSH EDI",
+        "0x40b2f9: XOR EAX, EAX",
+        "0x40b2fb: MOV EDI, EDX",
+        "0x40b2fd: STOSD.REP ES:EDI",
+        "0x40b2ff: POP EDI",
+        "0x40b300: MOV EAX, EDX",
+        "0x40b302: POP ESI",
+        "0x40b303: RET"
+      ],
+      "callers": [
+        {
+          "address": "0x417e80",
+          "name": "FUN_00417e80"
+        },
+        {
+          "address": "0x417ef0",
+          "name": "FUN_00417ef0"
+        },
+        {
+          "address": "0x417f50",
+          "name": "FUN_00417f50"
+        },
+        {
+          "address": "0x4182b0",
+          "name": "FUN_004182b0"
+        },
+        {
+          "address": "0x418a70",
+          "name": "FUN_00418a70"
+        },
+        {
+          "address": "0x41c540",
+          "name": "FUN_0041c540"
+        },
+        {
+          "address": "0x41caf0",
+          "name": "CCL_Init"
+        },
+        {
+          "address": "0x421ab0",
+          "name": "FUN_00421ab0"
+        },
+        {
+          "address": "0x442750",
+          "name": "PInitialize"
+        },
+        {
+          "address": "0x44a800",
+          "name": "PSetMotion"
+        },
+        {
+          "address": "0x456c50",
+          "name": "FUN_00456c50"
+        },
+        {
+          "address": "0x483430",
+          "name": "E102"
+        },
+        {
+          "address": "0x4b36d0",
+          "name": "SetDisplayBossName"
+        },
+        {
+          "address": "0x4b7030",
+          "name": "LoadSonicBossAI"
+        },
+        {
+          "address": "0x4b7920",
+          "name": "FUN_004b7920"
+        },
+        {
+          "address": "0x4bd420",
+          "name": "BInitialize"
+        },
+        {
+          "address": "0x4be220",
+          "name": "BSetMotion"
+        },
+        {
+          "address": "0x4c07d0",
+          "name": "ObjectItemboxAir"
+        },
+        {
+          "address": "0x4cbde0",
+          "name": "Object_Dynamite"
+        },
+        {
+          "address": "0x4cc990",
+          "name": "EnemyInitialize"
+        },
+        {
+          "address": "0x4cf090",
+          "name": "FUN_004cf090"
+        },
+        {
+          "address": "0x4d5cf0",
+          "name": "LoadGammaBossAI"
+        },
+        {
+          "address": "0x4d6590",
+          "name": "LoadKnucklesBossAI"
+        },
+        {
+          "address": "0x4d7100",
+          "name": "SpawnItemBox"
+        },
+        {
+          "address": "0x4d7190",
+          "name": "FUN_004d7190"
+        },
+        {
+          "address": "0x4ef270",
+          "name": "FUN_004ef270"
+        },
+        {
+          "address": "0x505600",
+          "name": "FileSelect_Load"
+        },
+        {
+          "address": "0x505900",
+          "name": "FUN_00505900"
+        },
+        {
+          "address": "0x5059f0",
+          "name": "FUN_005059f0"
+        },
+        {
+          "address": "0x505b90",
+          "name": "FUN_00505b90"
+        },
+        {
+          "address": "0x505e00",
+          "name": "FUN_00505e00"
+        },
+        {
+          "address": "0x5084a0",
+          "name": "tv_settings_create"
+        },
+        {
+          "address": "0x509860",
+          "name": "OptionsMenu_Load"
+        },
+        {
+          "address": "0x50a6c0",
+          "name": "SubGameLevelList_Load"
+        },
+        {
+          "address": "0x50b490",
+          "name": "LevelSelect_Load"
+        },
+        {
+          "address": "0x50bf30",
+          "name": "title_menu_create"
+        },
+        {
+          "address": "0x50d470",
+          "name": "internet_demo_create"
+        },
+        {
+          "address": "0x50e020",
+          "name": "EmblemResultMenu_Load"
+        },
+        {
+          "address": "0x50e270",
+          "name": "explanation_create"
+        },
+        {
+          "address": "0x510390",
+          "name": "title_new_create"
+        },
+        {
+          "address": "0x511400",
+          "name": "SoundTest_Load"
+        },
+        {
+          "address": "0x5124a0",
+          "name": "CharacterSelectMenu_Load"
+        },
+        {
+          "address": "0x512bc0",
+          "name": "CharSel_LoadA"
+        },
+        {
+          "address": "0x51af60",
+          "name": "FUN_0051af60"
+        },
+        {
+          "address": "0x5205d0",
+          "name": "FUN_005205d0"
+        },
+        {
+          "address": "0x520c70",
+          "name": "FUN_00520c70"
+        },
+        {
+          "address": "0x525760",
+          "name": "FUN_00525760"
+        },
+        {
+          "address": "0x529630",
+          "name": "FUN_00529630"
+        },
+        {
+          "address": "0x529e70",
+          "name": "FUN_00529e70"
+        },
+        {
+          "address": "0x536400",
+          "name": "FUN_00536400"
+        },
+        {
+          "address": "0x536520",
+          "name": "FUN_00536520"
+        },
+        {
+          "address": "0x5366a0",
+          "name": "FUN_005366a0"
+        },
+        {
+          "address": "0x536800",
+          "name": "normal_wara_wara_asi_l2"
+        },
+        {
+          "address": "0x543a20",
+          "name": "FUN_00543a20"
+        },
+        {
+          "address": "0x543b60",
+          "name": "FUN_00543b60"
+        },
+        {
+          "address": "0x543dc0",
+          "name": "FUN_00543dc0"
+        },
+        {
+          "address": "0x543f20",
+          "name": "FUN_00543f20"
+        },
+        {
+          "address": "0x54fc90",
+          "name": "FUN_0054fc90"
+        },
+        {
+          "address": "0x552960",
+          "name": "Chaos4_Main"
+        },
+        {
+          "address": "0x552c40",
+          "name": "FUN_00552c40"
+        },
+        {
+          "address": "0x5535d0",
+          "name": "FUN_005535d0"
+        },
+        {
+          "address": "0x553c60",
+          "name": "FUN_00553c60"
+        },
+        {
+          "address": "0x5543e0",
+          "name": "FUN_005543e0"
+        },
+        {
+          "address": "0x555430",
+          "name": "FUN_00555430"
+        },
+        {
+          "address": "0x555e10",
+          "name": "FUN_00555e10"
+        },
+        {
+          "address": "0x556220",
+          "name": "mdata_reon2_kihon_reon2"
+        },
+        {
+          "address": "0x572460",
+          "name": "FUN_00572460"
+        },
+        {
+          "address": "0x5748d0",
+          "name": "FUN_005748d0"
+        },
+        {
+          "address": "0x574cb0",
+          "name": "FUN_00574cb0"
+        },
+        {
+          "address": "0x574f60",
+          "name": "FUN_00574f60"
+        },
+        {
+          "address": "0x575190",
+          "name": "FUN_00575190"
+        },
+        {
+          "address": "0x5756a0",
+          "name": "FUN_005756a0"
+        },
+        {
+          "address": "0x57c1c0",
+          "name": "FUN_0057c1c0"
+        },
+        {
+          "address": "0x57c2d0",
+          "name": "FUN_0057c2d0"
+        },
+        {
+          "address": "0x581400",
+          "name": "FUN_00581400"
+        },
+        {
+          "address": "0x581640",
+          "name": "FUN_00581640"
+        },
+        {
+          "address": "0x581a40",
+          "name": "FUN_00581a40"
+        },
+        {
+          "address": "0x581ae0",
+          "name": "FUN_00581ae0"
+        },
+        {
+          "address": "0x581b10",
+          "name": "FUN_00581b10"
+        },
+        {
+          "address": "0x582b20",
+          "name": "FUN_00582b20"
+        },
+        {
+          "address": "0x582b60",
+          "name": "FUN_00582b60"
+        },
+        {
+          "address": "0x583810",
+          "name": "FUN_00583810"
+        },
+        {
+          "address": "0x594b90",
+          "name": "FUN_00594b90"
+        },
+        {
+          "address": "0x5afe10",
+          "name": "ColliGacha"
+        },
+        {
+          "address": "0x5aff30",
+          "name": "FUN_005aff30"
+        },
+        {
+          "address": "0x5b5d20",
+          "name": "FUN_005b5d20"
+        },
+        {
+          "address": "0x5c63d0",
+          "name": "OKaizs"
+        },
+        {
+          "address": "0x5c6ec0",
+          "name": "OKaizc"
+        },
+        {
+          "address": "0x5c79b0",
+          "name": "OKaizb"
+        },
+        {
+          "address": "0x5c8560",
+          "name": "OKaiza"
+        },
+        {
+          "address": "0x5ffb00",
+          "name": "FUN_005ffb00"
+        },
+        {
+          "address": "0x5ffc30",
+          "name": "FUN_005ffc30"
+        },
+        {
+          "address": "0x6348b0",
+          "name": "FUN_006348b0"
+        },
+        {
+          "address": "0x634a00",
+          "name": "FUN_00634a00"
+        },
+        {
+          "address": "0x634c80",
+          "name": "FUN_00634c80"
+        },
+        {
+          "address": "0x634de0",
+          "name": "LoadSSMessages"
+        },
+        {
+          "address": "0x640b20",
+          "name": "FUN_00640b20"
+        },
+        {
+          "address": "0x642790",
+          "name": "FUN_00642790"
+        },
+        {
+          "address": "0x643d40",
+          "name": "LoadRecapBackground"
+        },
+        {
+          "address": "0x64fc80",
+          "name": "EventSe_Init"
+        },
+        {
+          "address": "0x6fa820",
+          "name": "FUN_006fa820"
+        },
+        {
+          "address": "0x716ba0",
+          "name": "GBAManagerCreate"
+        },
+        {
+          "address": "0x71a980",
+          "name": "al_confirmsave"
+        },
+        {
+          "address": "0x71ac10",
+          "name": "al_confirmload"
+        },
+        {
+          "address": "0x725610",
+          "name": "FUN_00725610"
+        },
+        {
+          "address": "0x72a570",
+          "name": "AL_CreateNormalCameraTask"
+        },
+        {
+          "address": "0x72b0c0",
+          "name": "FUN_0072b0c0"
+        },
+        {
+          "address": "0x72b960",
+          "name": "FUN_0072b960"
+        },
+        {
+          "address": "0x72cb40",
+          "name": "AL_EntranceMenuCreate"
+        },
+        {
+          "address": "0x72cbc0",
+          "name": "AL_JoyInputStart"
+        },
+        {
+          "address": "0x72dcc0",
+          "name": "FUN_0072dcc0"
+        },
+        {
+          "address": "0x732030",
+          "name": "FUN_00732030"
+        },
+        {
+          "address": "0x733860",
+          "name": "FUN_00733860"
+        },
+        {
+          "address": "0x745710",
+          "name": "FUN_00745710"
+        },
+        {
+          "address": "0x745940",
+          "name": "FUN_00745940"
+        },
+        {
+          "address": "0x746150",
+          "name": "FUN_00746150"
+        },
+        {
+          "address": "0x747690",
+          "name": "FUN_00747690"
+        },
+        {
+          "address": "0x747980",
+          "name": "FUN_00747980"
+        },
+        {
+          "address": "0x7491d0",
+          "name": "FUN_007491d0"
+        },
+        {
+          "address": "0x7493b0",
+          "name": "FUN_007493b0"
+        },
+        {
+          "address": "0x74a9e0",
+          "name": "FUN_0074a9e0"
+        },
+        {
+          "address": "0x74bc60",
+          "name": "FUN_0074bc60"
+        },
+        {
+          "address": "0x7521b0",
+          "name": "FUN_007521b0"
+        },
+        {
+          "address": "0x7688a0",
+          "name": "FUN_007688a0"
+        },
+        {
+          "address": "0x768c90",
+          "name": "FUN_00768c90"
+        },
+        {
+          "address": "0x769970",
+          "name": "FUN_00769970"
+        },
+        {
+          "address": "0x76a9d0",
+          "name": "FUN_0076a9d0"
+        },
+        {
+          "address": "0x76cd60",
+          "name": "FUN_0076cd60"
+        },
+        {
+          "address": "0x7a9700",
+          "name": "pgS_2_windy001_daih_daih"
+        },
+        {
+          "address": "0x7ad4c0",
+          "name": "FUN_007ad4c0"
+        },
+        {
+          "address": "0x7ae0b0",
+          "name": "FUN_007ae0b0"
+        },
+        {
+          "address": "0x7ae2c0",
+          "name": "FUN_007ae2c0"
+        },
+        {
+          "address": "0x7aeaf0",
+          "name": "FUN_007aeaf0"
+        },
+        {
+          "address": "0x7b5cf0",
+          "name": "EV_EggViperArawaru"
+        }
+      ],
+      "callees": [
+        {
+          "address": "0x40b220",
+          "name": "MAlloc"
+        }
+      ],
+      "native_value_flow_truncated": false,
+      "limitations": [
+        "Unresolved computed or indirect flows without target addresses are not represented as reference edges.",
+        "Thunk and external classifications are Ghidra FunctionManager observations; they do not resolve targetless calls.",
+        "Pseudocode and assembly are Ghidra-specific representations, not original source or Hopper-equivalent text.",
+        "Synthetic Ghidra entry-point references without actionable memory sources are omitted."
+      ]
+    }
+  ],
+  "xrefs": [
+    {
+      "address": "0x9820f8",
+      "evidence_id": "ev_f7413f21d467f7929aaedd155dc6013620fbc367f23e322402fa273c824dd6ee",
+      "references": [
+        "0x4c5427",
+        "0x982148"
+      ],
+      "raw_sha256": "3a0709bf02180002a41b105c2adc940fb39af143e517024ed02ab9cbbedaafe9"
+    },
+    {
+      "address": "0x982148",
+      "evidence_id": "ev_1599c4e6f0529b7cd3db7507be257717bc0f46111433ae567f4a659c70b806e7",
+      "references": [
+        "0x4c5420"
+      ],
+      "raw_sha256": "9282601cf86e1c36eac561a585b7d0cd6b429befceb0db43e313974f6019bb2e"
+    },
+    {
+      "address": "0x982154",
+      "evidence_id": "ev_4b917155605bc399e3b9b8588b42f22d889ef4fed58cd4eb0e2afa5b7a6d97b8",
+      "references": [
+        "0x4c5361",
+        "0x4c5430"
+      ],
+      "raw_sha256": "ed03cb3e0eeed377506c9e539ffde68a0bd51a94c69d9f46f5340e0240629ad0"
+    }
+  ],
+  "rejected_missing_procedures": [
+    {
+      "address": "0x456b80",
+      "error": {
+        "code": "invalid_request",
+        "category": "invalid_input",
+        "message": "Analysis input is invalid. Check the arguments and try again.",
+        "retryable": true,
+        "remediation": {
+          "action": "Correct the listed arguments and retry."
+        },
+        "details": {
+          "operation": "analyze_function",
+          "issues": [
+            {
+              "path": [],
+              "reason": "invalid_value",
+              "message": "No procedure exists at the requested address: 0x456b80"
+            }
+          ]
+        }
+      },
+      "raw_envelope_sha256": "6cb9e96fd777ed474379572b5eaad14314f6d50c4cfc4c613b94d23aa985d3d1"
+    },
+    {
+      "address": "0x4c52c0",
+      "error": {
+        "code": "invalid_request",
+        "category": "invalid_input",
+        "message": "Analysis input is invalid. Check the arguments and try again.",
+        "retryable": true,
+        "remediation": {
+          "action": "Correct the listed arguments and retry."
+        },
+        "details": {
+          "operation": "analyze_function",
+          "issues": [
+            {
+              "path": [],
+              "reason": "invalid_value",
+              "message": "No procedure exists at the requested address: 0x4c52c0"
+            }
+          ]
+        }
+      },
+      "raw_envelope_sha256": "b53e1621f431bbd599ffd9211b27891ad0a3aacc8f0dc83a6d6c9c2965550dc8"
+    },
+    {
+      "address": "0x4c5360",
+      "error": {
+        "code": "invalid_request",
+        "category": "invalid_input",
+        "message": "Analysis input is invalid. Check the arguments and try again.",
+        "retryable": true,
+        "remediation": {
+          "action": "Correct the listed arguments and retry."
+        },
+        "details": {
+          "operation": "analyze_function",
+          "issues": [
+            {
+              "path": [],
+              "reason": "invalid_value",
+              "message": "No procedure exists at the requested address: 0x4c5360"
+            }
+          ]
+        }
+      },
+      "raw_envelope_sha256": "2d8181ea16edc903e8fa33e4385ecac72b704c6454ba467c5d32fb2a96588383"
+    }
+  ],
+  "supplemental_raw_context": [
+    {
+      "range": [
+        "0x4c52c0",
+        "0x4c5357"
+      ],
+      "source_bytes_sha256": "6b37c3775a2ff9e4d9c265363b3403ddcb84ea7a870135eecb0882924c590ff3",
+      "source": "PEImage exact bytes, Capstone disassembly; context only, no Ghidra procedure or native port claimed",
+      "assembly": [
+        "0x4c52c0: push esi",
+        "0x4c52c1: mov esi, dword ptr [esp + 8]",
+        "0x4c52c5: fld dword ptr [esi + 0x10]",
+        "0x4c52c8: push edi",
+        "0x4c52c9: mov edi, dword ptr [esi + 0x44]",
+        "0x4c52cc: call 0x644340",
+        "0x4c52d1: mov ecx, dword ptr [esp + 0x10]",
+        "0x4c52d5: mov word ptr [esi + 0xa], ax",
+        "0x4c52d9: mov edx, dword ptr [ecx + 0x10]",
+        "0x4c52dc: xor ecx, ecx",
+        "0x4c52de: mov cx, word ptr [edx + 8]",
+        "0x4c52e2: cmp ax, cx",
+        "0x4c52e5: jge 0x4c52f0",
+        "0x4c52e7: mov al, byte ptr [0x3b290ca]",
+        "0x4c52ec: test al, al",
+        "0x4c52ee: jne 0x4c5301",
+        "0x4c52f0: dec ecx",
+        "0x4c52f1: push esi",
+        "0x4c52f2: mov word ptr [esi + 0xa], cx",
+        "0x4c52f6: call 0x456c40",
+        "0x4c52fb: add esp, 4",
+        "0x4c52fe: pop edi",
+        "0x4c52ff: pop esi",
+        "0x4c5300: ret ",
+        "0x4c5301: fld dword ptr [edi + 8]",
+        "0x4c5304: fadd dword ptr [esi + 0x10]",
+        "0x4c5307: fstp dword ptr [esi + 0x10]",
+        "0x4c530a: fld dword ptr [edi + 0xc]",
+        "0x4c530d: fsubr dword ptr [0x7dcb10]",
+        "0x4c5313: fld st(0)",
+        "0x4c5315: fmul dword ptr [esi + 0x24]",
+        "0x4c5318: fst dword ptr [esi + 0x24]",
+        "0x4c531b: fld st(1)",
+        "0x4c531d: fmul dword ptr [esi + 0x28]",
+        "0x4c5320: fadd dword ptr [edi + 0x10]",
+        "0x4c5323: fstp dword ptr [esi + 0x28]",
+        "0x4c5326: fxch st(1)",
+        "0x4c5328: fmul dword ptr [esi + 0x2c]",
+        "0x4c532b: fst dword ptr [esp + 0xc]",
+        "0x4c532f: fstp dword ptr [esi + 0x2c]",
+        "0x4c5332: fadd dword ptr [esi + 0x18]",
+        "0x4c5335: fstp dword ptr [esi + 0x18]",
+        "0x4c5338: fld dword ptr [esi + 0x28]",
+        "0x4c533b: fadd dword ptr [esi + 0x1c]",
+        "0x4c533e: fstp dword ptr [esi + 0x1c]",
+        "0x4c5341: fld dword ptr [esp + 0xc]",
+        "0x4c5345: fadd dword ptr [esi + 0x20]",
+        "0x4c5348: fstp dword ptr [esi + 0x20]",
+        "0x4c534b: fld dword ptr [edi + 4]",
+        "0x4c534e: pop edi",
+        "0x4c534f: fadd dword ptr [esi + 0x14]",
+        "0x4c5352: fstp dword ptr [esi + 0x14]",
+        "0x4c5355: pop esi",
+        "0x4c5356: ret "
+      ]
+    },
+    {
+      "range": [
+        "0x4c5360",
+        "0x4c5413"
+      ],
+      "source_bytes_sha256": "13ae70181f9b67f38e7095691f691f12f05c6b18783a5e36d631f6efb1baa481",
+      "source": "PEImage exact bytes, Capstone disassembly; context only, no Ghidra procedure or native port claimed",
+      "assembly": [
+        "0x4c5360: push ecx",
+        "0x4c5361: mov eax, dword ptr [0x982154]",
+        "0x4c5366: push esi",
+        "0x4c5367: push 0x4c52c0",
+        "0x4c536c: push eax",
+        "0x4c536d: call 0x456bf0",
+        "0x4c5372: mov esi, eax",
+        "0x4c5374: add esp, 8",
+        "0x4c5377: test esi, esi",
+        "0x4c5379: je 0x4c5410",
+        "0x4c537f: mov ecx, dword ptr [esp + 0xc]",
+        "0x4c5383: mov edx, dword ptr [ecx]",
+        "0x4c5385: lea eax, [esi + 0x18]",
+        "0x4c5388: mov dword ptr [eax], edx",
+        "0x4c538a: mov edx, dword ptr [ecx + 4]",
+        "0x4c538d: mov dword ptr [eax + 4], edx",
+        "0x4c5390: mov ecx, dword ptr [ecx + 8]",
+        "0x4c5393: mov dword ptr [eax + 8], ecx",
+        "0x4c5396: mov eax, dword ptr [esp + 0x10]",
+        "0x4c539a: mov ecx, dword ptr [eax]",
+        "0x4c539c: lea edx, [esi + 0x24]",
+        "0x4c539f: mov dword ptr [edx], ecx",
+        "0x4c53a1: mov ecx, dword ptr [eax + 4]",
+        "0x4c53a4: mov dword ptr [edx + 4], ecx",
+        "0x4c53a7: mov eax, dword ptr [eax + 8]",
+        "0x4c53aa: mov ecx, dword ptr [esp + 0x14]",
+        "0x4c53ae: mov dword ptr [edx + 8], eax",
+        "0x4c53b1: mov dword ptr [esi + 0x14], ecx",
+        "0x4c53b4: call 0x6443bf",
+        "0x4c53b9: mov dword ptr [esp + 4], eax",
+        "0x4c53bd: fild dword ptr [esp + 4]",
+        "0x4c53c1: fmul dword ptr [0x7dd53c]",
+        "0x4c53c7: fmul dword ptr [0x7dcc74]",
+        "0x4c53cd: fstp dword ptr [esi + 0x10]",
+        "0x4c53d0: call 0x6443bf",
+        "0x4c53d5: mov dword ptr [esp + 4], eax",
+        "0x4c53d9: fild dword ptr [esp + 4]",
+        "0x4c53dd: fmul dword ptr [0x7dd53c]",
+        "0x4c53e3: fmul dword ptr [0x7e0170]",
+        "0x4c53e9: call 0x644340",
+        "0x4c53ee: mov edx, 0x2000",
+        "0x4c53f3: sub edx, eax",
+        "0x4c53f5: mov eax, 0x3f800000",
+        "0x4c53fa: mov dword ptr [esi + 0xc], edx",
+        "0x4c53fd: mov dword ptr [esi + 0x30], eax",
+        "0x4c5400: mov dword ptr [esi + 0x34], eax",
+        "0x4c5403: mov dword ptr [esi + 0x38], eax",
+        "0x4c5406: mov dword ptr [esi + 0x3c], eax",
+        "0x4c5409: mov dword ptr [esi + 0x44], 0x98210c",
+        "0x4c5410: pop esi",
+        "0x4c5411: pop ecx",
+        "0x4c5412: ret "
+      ]
+    },
+    {
+      "range": [
+        "0x456b80",
+        "0x456be9"
+      ],
+      "source_bytes_sha256": "ae365df528028b2d914de4b0587c4ae4e376a09329de736b4452ee253a42e4a9",
+      "source": "PEImage exact bytes, Capstone disassembly; context only, no Ghidra procedure or native port claimed",
+      "assembly": [
+        "0x456b80: mov edx, dword ptr [esp + 8]",
+        "0x456b84: push esi",
+        "0x456b85: mov esi, dword ptr [esp + 8]",
+        "0x456b89: lea ecx, [edx - 1]",
+        "0x456b8c: test ecx, ecx",
+        "0x456b8e: mov dword ptr [0x3c48588], esi",
+        "0x456b94: mov dword ptr [0x3c48598], edx",
+        "0x456b9a: mov dword ptr [0x3c48594], esi",
+        "0x456ba0: mov dword ptr [0x3c48560], edx",
+        "0x456ba6: jbe 0x456bbb",
+        "0x456ba8: push edi",
+        "0x456ba9: mov eax, esi",
+        "0x456bab: mov edi, ecx",
+        "0x456bad: lea ecx, [ecx]",
+        "0x456bb0: dec edi",
+        "0x456bb1: lea ecx, [eax + 0x50]",
+        "0x456bb4: mov dword ptr [eax], ecx",
+        "0x456bb6: mov eax, ecx",
+        "0x456bb8: jne 0x456bb0",
+        "0x456bba: pop edi",
+        "0x456bbb: lea eax, [edx + edx*4]",
+        "0x456bbe: shl eax, 4",
+        "0x456bc1: mov dword ptr [eax + esi - 0x50], 0",
+        "0x456bc9: mov dword ptr [0x3c4858c], 0",
+        "0x456bd3: mov dword ptr [0x3c48590], 0",
+        "0x456bdd: mov dword ptr [0x3c4859c], 0",
+        "0x456be7: pop esi",
+        "0x456be8: ret "
+      ]
+    }
+  ],
+  "source_only_context_ranges_not_ported": [
+    "0x456b80",
+    "0x456cd0",
+    "0x456de0",
+    "0x456e50",
+    "0x4c52c0",
+    "0x4c5360"
+  ],
+  "owned_provider_closed": true,
+  "max_java_heap": "2G",
+  "initial_gamma_result_zero": true
+}

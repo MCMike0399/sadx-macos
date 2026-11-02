@@ -1,0 +1,77 @@
+{
+  "source_commit": "1671539",
+  "constructor_dependency": "db3aa61",
+  "judge_compatibility_fix": "9e3bd1b",
+  "source_sha256": {
+    "src/engine/sprite_definition.hpp": "bdc24be91b7ff1ae17c9b24571612b396b6ff12c8371c4f53350870b2e2aed8a",
+    "src/engine/sprite_registry.hpp": "60719270894bddec793610eb6d02048c28957b979199163da20d15a0643fd2c6",
+    "src/engine/sprite_registry.cpp": "3557d4ed904dcc11cc9d74694c66f6c8cd08f597704805ee7819a712e0963cd2",
+    "src/engine/gamma_setup_allocation_native.cpp": "c3c77740bd7ca697d9ef494b8a76434e83ecf162b93f61fcb1d1957ed28aaad3",
+    "src/player/gamma_setup_resource.hpp": "ef102ccfcf8c18108decf63796fd3ef2e528461c2e37fc0da1d7189492764711",
+    "src/player/gamma_setup_resource.cpp": "f8900b313b373365722b1368abf5ad31b978ec20347dfc51140b22b59b71ee94",
+    "tests/probes/native_gamma_setup_resource_probe.cpp": "5d76a3599fdca306f62dfbea0aaab8595d351cec6ab7e3a71c4559071bd9fde4",
+    "tests/unit/gamma_setup_resource.cpp": "980e0cf4a79f1b2fef2b4b4644f19666580dcbfba5cfdbf8bc8bc2f1cd150be7",
+    "tests/unit/gamma_setup_allocation.cpp": "22376a311a6d45c4f88aedf5c21eba486b87a38e916f80702e335f1ac1391c77",
+    "tests/unit/gamma_setup_caller.cpp": "5efbe3cef27bd17ef6da10a96b3a08566060f4357ac6835a880236d8a9bcf38a",
+    "tests/python/test_gamma_setup_resource.py": "250b8ae17060f591617cd3e679b6375abbd209b4543812b00126d13f076bcbd1",
+    "tools/import/gamma_setup_resource.py": "6740141fc933c42f933e9d1892354905b63f58b2aeb11051ecac0e340f1a7143",
+    "tools/oracles/verify_original_gamma_setup_resource.py": "e5ef982169bd7ef1c64051fcc37e410d31ad735cfc3b04fe28254a5eb0db12f1",
+    "tools/oracles/mutate_gamma_setup_resource.py": "1a630db7783b2ef9eef9fd59786563bca1efde3eeac9568af056aab03b244979"
+  },
+  "checks": {
+    "focused_recipe_exit": 0,
+    "native_programs": [
+      "gamma-setup-resource (synthetic and actual imported bytes)",
+      "gamma-setup-allocation (real allocator exhaustion)",
+      "gamma-setup-caller (real Gamma mode0, real Task/PInitialize, stop at material; other lower seams retain inherited receipts)"
+    ],
+    "python_tests": 5,
+    "gamma_setup_development": 704,
+    "gamma_setup_holdout": 2048,
+    "gamma_setup_mutants_caught": 6,
+    "inherited_constructor_development": 1136,
+    "inherited_constructor_holdout": 2048,
+    "inherited_constructor_mutants_caught": 7,
+    "unchanged_gamma_selection_cases": 1422,
+    "unchanged_gamma_selection_value_failures": 0,
+    "unchanged_gamma_selection_fp_partials": 498,
+    "unchanged_gamma_selection_strict_exit": 2,
+    "private_symbols_provenance_exit": 0,
+    "private_symbols_conditional": true,
+    "readability_regressions": 0,
+    "layer_violations": 0,
+    "duplicate_legacy_owners": 0,
+    "profile_unhandled_overlaps": 0
+  },
+  "failed_setup_attempts": [
+    {
+      "step": "inherited constructor baseline",
+      "result": "compile error after TaskWorkFailure enum rename; isolated fix(judge) commit 9e3bd1b; complete comparisons and mutants rerun"
+    },
+    {
+      "step": "owned Ghidra using parent snapshot",
+      "result": "evidence_integrity_mismatch/profile_mismatch; discarded only the local snapshot copy and imported fresh; Root inputs unchanged"
+    },
+    {
+      "step": "native caller initial link",
+      "result": "missing player_initial_shadow_scale; added player_state.cpp to local recipe; intermediate typo naming nonexistent player_initialization_scale.cpp also failed; final complete recipe passes"
+    },
+    {
+      "step": "private provenance setup",
+      "result": "string sizes/alias alternatives in temporary symbol DB and direct pointer owner declaration rejected; converted private sizes to numbers, preserved aliases, used ordinary DefinitionPointer alias; final conditional check passes"
+    },
+    {
+      "step": "source-context Ghidra dossiers",
+      "result": "No Ghidra procedures at456b80,4c52c0,4c5360; rejected envelopes retained. Context only, not new ports. Pinned-byte hashes and complete Capstone spans prove consumed layout. No callback/pool function is claimed ported."
+    }
+  ],
+  "limits": [
+    "Worker tests/observers await fresh independent Root review.",
+    "Original CAlloc interception is not a new qualification of MAlloc.",
+    "No full gate, shared manifest refresh, app composition, GPU test or normal-input journey.",
+    "No N3b or later frame frontier claim; native caller stops at first material.",
+    "Source-only focused builds used only this worktree outputs; original inputs were read-only.",
+    "Existing FP partials stay partial and have individual identities.",
+    "Root owns canonical symbols, manifest/source registrations, asset loading, shared owners and binding."
+  ]
+}

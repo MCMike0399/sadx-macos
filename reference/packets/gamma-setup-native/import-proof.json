@@ -1,0 +1,36 @@
+{
+  "schema": "SDXGSP01",
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "pack_sha256": "e1814676525022ba2458bfa9f85059490253fbe5c1d72967243ba96b53bd8dc0",
+  "pack_bytes": 244,
+  "inverse_exact": true,
+  "texture_binding": "E102EFFECT",
+  "texture_count": 12,
+  "source_ranges": [
+    {
+      "address": "0x9820f8",
+      "size": 80,
+      "sha256": "191cb8939d8e1de77dac9b86a1eb539f69013379726be8368a3e21873b2ccfb9"
+    },
+    {
+      "address": "0x982058",
+      "size": 160,
+      "sha256": "d165d8c4c2a46a8a11ea2a0c39078550574bf61213968048b632935d5c2a7ff8"
+    },
+    {
+      "address": "0x91c570",
+      "size": 8,
+      "sha256": "1a648e2a24b4c58bf286ebe7e8a8dba53dd0ce41c40e9ca3841608fdbbd5013f"
+    },
+    {
+      "address": "0x982148",
+      "size": 4,
+      "sha256": "79d6dbacc7b6284e869c67d982d98e1e0fd859fea83c1cc9a60dc72ed6f8da78"
+    }
+  ],
+  "limits": [
+    "Texture memory is acquired by the existing character loader.",
+    "No image pixels or runtime texture handles are manufactured.",
+    "Particle update, spawn, display and shared registry cleanup are not ported."
+  ]
+}

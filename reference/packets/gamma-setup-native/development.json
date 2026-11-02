@@ -1,0 +1,19 @@
+{
+  "oracle": "gamma_setup_resource",
+  "passed": true,
+  "cases": 704,
+  "seed": 5420,
+  "holdout": false,
+  "mismatches": [],
+  "stream_sha256": "c5db61808181fe54b23665e48b64a144f90b7cdf628f3b06c3993df0dfb0ca40",
+  "source_ranges": {
+    "0x4c5420-0x4c5436": "b6fbb51beab3d38800a84fe3b140c42419ba33755fdc6a4810ade1c4257caf22",
+    "0x456c50-0x456ca1": "0fa30c3ff99ef4a7d0f07319edd21692228239ed62574cfb08cee6a3c936526f"
+  },
+  "limits": [
+    "CAlloc intercepted; lower allocator behavior not independently qualified.",
+    "Host bad_alloc and arbitrary memory faults not qualified.",
+    "Definition payload qualified by separate inverse-byte import test.",
+    "No native app or actor display claim."
+  ]
+}

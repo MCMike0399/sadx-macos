@@ -52,3 +52,10 @@ Complete retained source summaries and hashes are in source-context.json. Local 
 REA envelopes remain in reference/gamma-setup-local/evidence. A parent snapshot
 profile mismatch was retained; the successful owned import used a fresh snapshot
 and GHIDRA_HEADLESS_MAXMEM=2G, then closed before the supplemental owned session.
+
+Ghidra rejected three context addresses (456b80, 4c52c0, 4c5360) because it has no
+procedures there; this is not a successful dossier. source-context.json retains
+each rejection plus exact pinned-byte hashes and complete Capstone instruction
+spans, including spawn's callback/parameter pointer stores. The recovered wrapper,
+display header consumer and CAlloc have complete successful Ghidra dossiers.
+No callback/pool function is claimed ported, and no third import was needed.
