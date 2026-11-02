@@ -24,6 +24,7 @@ WRAPPER, CONSTRUCTOR, ALLOC = 0x4c5420, 0x456c50, 0x40b2d0
 POINTER, RESULT, HEAD, COUNT = 0x982148, 0x982154, 0x3c4858c, 0x3c48590
 BUFFER, STACK, STOP = 0x11000000, 0x12000800, 0x13000000
 DEFINITION, OLD, MARKER = 0x9820f8, 0x20000000, 0x22000000
+OTHER_DEFINITION = 0x23000000
 MASK = 0xffffffff
 
 
@@ -38,7 +39,7 @@ class Source:
         if self.wrapper.hex() != 'a1482198006a0050e82318f9ff83c408a354219800c3':
             raise ValueError('Gamma wrapper source changed')
         self.m = m = uc.Uc(uc.UC_ARCH_X86, uc.UC_MODE_32)
-        for address in (WRAPPER, CONSTRUCTOR, ALLOC, POINTER, HEAD, BUFFER, STACK, STOP):
+        for address in (WRAPPER, CONSTRUCTOR, ALLOC, POINTER, HEAD, BUFFER, STACK, STOP, OTHER_DEFINITION):
             m.mem_map(address & ~4095, 4096)
         m.mem_write(WRAPPER, self.wrapper)
         m.mem_write(CONSTRUCTOR, self.constructor)
@@ -53,8 +54,9 @@ class Source:
         self.m.mem_write(address, struct.pack('<I', value & MASK))
 
     def read(self, m, access, address, size, value, user):
-        if address < DEFINITION + 80 and DEFINITION < address + size:
-            raise AssertionError("setup read definition payload")
+        for definition in (DEFINITION, OTHER_DEFINITION):
+            if address < definition + 80 and definition < address + size:
+                raise AssertionError("setup read definition payload")
 
     def write(self, m, access, address, size, value, user):
         if address == RESULT:
@@ -72,8 +74,12 @@ class Source:
             self.put(COUNT, self.case[4])
             self.put(HEAD, MARKER if self.case[6] else 0)
             self.put(RESULT, MARKER)
-        if self.case[8]:
+        if self.case[8] == 1:
             self.put(POINTER, 0)
+        if self.case[8] == 2:
+            self.put(POINTER, OTHER_DEFINITION)
+        if self.case[8] == 3:
+            self.put(POINTER, DEFINITION)
         result = 0 if self.case[1] else BUFFER + 256 * self.allocations
         if result:
             self.allocations += 1
@@ -87,7 +93,8 @@ class Source:
         self.calls = self.allocations = self.observed_result = self.observed_definition = 0
         self.args = [0, 0]
         self.publications = []
-        self.put(POINTER, DEFINITION if case[0] else 0)
+        definition = OTHER_DEFINITION if case[0] == 2 else DEFINITION
+        self.put(POINTER, definition if case[0] else 0)
         self.put(RESULT, MARKER)
         self.put(HEAD, OLD if case[5] else 0)
         self.put(COUNT, case[2])
@@ -123,6 +130,11 @@ def cases(seed, count, holdout):
         yield [rng.randrange(2), rng.randrange(2), rng.getrandbits(32), rng.randrange(2),
                rng.getrandbits(32), rng.randrange(2), rng.randrange(2), rng.randrange(1, 4),
                rng.randrange(2)]
+    # Preserve the original cohort, then exercise two distinct non-null identities.
+    import itertools
+    for defined, fail, mutate, head, repeat, change in itertools.product(
+            (1, 2), range(2), range(2), range(2), (1, 2, 3), (0, 2, 3)):
+        yield [defined, fail, MASK, mutate, MASK - 1, head, 1, repeat, change]
 
 
 def main():
@@ -143,12 +155,14 @@ def main():
     for index, case in enumerate(cases(args.seed, args.count, args.holdout)):
         expected = source.run(case)
         actual = (ctypes.c_uint32 * len(expected))()
-        assert probe((ctypes.c_uint32 * 9)(*case), actual) == 1
+        assert probe((ctypes.c_uint32 * 9)(*case), actual) == 1, 'probe rejected an unexpected identity'
         streams.update(struct.pack('<' + 'I' * len(expected), *expected))
         if list(actual) != expected:
             failures.append({'case_id': index, 'input': case, 'original': expected, 'native': list(actual)})
     report = {'oracle': 'gamma_setup_resource', 'passed': not failures,
               'cases': index + 1, 'seed': args.seed, 'holdout': args.holdout,
+              'definition_identities': [DEFINITION, OTHER_DEFINITION],
+              'native_probe_sha256': hashlib.sha256(Path(args.probe).read_bytes()).hexdigest(),
               'mismatches': failures, 'stream_sha256': streams.hexdigest(),
               'source_ranges': {f'{WRAPPER:#x}-{WRAPPER+22:#x}': hashlib.sha256(source.wrapper).hexdigest(),
                                 f'{CONSTRUCTOR:#x}-{CONSTRUCTOR+81:#x}': hashlib.sha256(source.constructor).hexdigest()},

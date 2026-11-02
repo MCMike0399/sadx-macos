@@ -1,4 +1,4 @@
-"""Six compiled setup faults, judged by complete unchanged original observations."""
+"""Seven compiled setup faults, including distinct non-null definition forwarding."""
 import argparse
 import hashlib
 import json
@@ -12,8 +12,9 @@ ROOT = Path(__file__).resolve().parents[2]
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--exe', required=True)
+    parser.add_argument('--output-dir', default='build/gamma-setup/mutants')
     args = parser.parse_args()
-    destination = ROOT / 'build/gamma-setup/mutants'
+    destination = ROOT / args.output_dir
     destination.mkdir(parents=True, exist_ok=True)
     original = (ROOT / 'src/player/gamma_setup_resource.cpp').read_text()
     assignment = 'state.sprite = sprite_registry::register_sprite(registry, arena, definition, 0);'
@@ -30,6 +31,9 @@ def main():
         'releases_previous_allocation': ('const auto *definition = state.definition;',
             'const auto *definition = state.definition;\n'
             '    if (state.sprite && state.sprite->allocation) arena.release(state.sprite->allocation);'),
+        'wrong_nonnull_definition': ('const auto *definition = state.definition;',
+            'const auto *definition = state.definition && registry.head && registry.head->definition\n'
+            '        ? registry.head->definition : state.definition;'),
     }
     results = []
     for name, (before, after) in faults.items():
