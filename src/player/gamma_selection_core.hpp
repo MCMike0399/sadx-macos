@@ -128,7 +128,7 @@ void load_setup_resource(Context &);
 void create_time_hud(Context &, unsigned level, const TaskHandle &);
 // FUNCTION: SONIC 0x49fb10 GammaInitializeEffects
 void initialize_effects(Context &);
-// STUB: SONIC 0x44a800 PSetMotion
+// FUNCTION: SONIC 0x44a800 PSetMotion
 void set_motion(Context &, const Player &);
 // STUB: SONIC 0x43fa90 PJoinVertexes
 void join_vertices(Context &, Primary, const TaskWorkHandle &, const Player &);

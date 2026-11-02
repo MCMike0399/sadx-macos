@@ -43,7 +43,9 @@ void Session::load_player_assets(GammaActorAssets assets,
     if (effects_definition)
         bind_gamma_effects_resources(players_, character_resources_.assets(),
                                      character_resources_.lists(), *effects_definition);
+    auto motion = std::make_unique<GammaMotionAssets>(*character_pack_, assets);
     bind_gamma_resources(players_, character_scene_, assets);
+    players_.gamma_motion_assets = std::move(motion);
     players_.gamma_assets = std::make_unique<GammaActorAssets>(std::move(assets));
 }
 } // namespace sadx::native

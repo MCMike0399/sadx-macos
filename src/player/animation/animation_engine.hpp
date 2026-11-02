@@ -10,6 +10,7 @@ namespace sadx::animation::detail {
 // NOTSA: shared algorithms use lazy access bindings for native values and reference facts.
 template <class Access> class Engine {
     using ExactFloat = fidelity::ExactFloat;
+    using SceneObject = typename Access::SceneObject;
     static constexpr std::uint32_t kAngleTurn = 65536;
     Access &access;
     using PlayerAnimationView = typename Access::PlayerAnimationView;
@@ -601,16 +602,9 @@ template <class Access> class Engine {
                (std::uint32_t(bytes[2]) << 16) | (std::uint32_t(bytes[3]) << 24);
     }
     // NOTSA: resolve the existing scene object identity.
-    const SceneGeometryObject &object(const SceneResourceReference &ref,
-                                      const PlayerAnimationRuntime &rt, Phase at) {
-        if (!ref.id)
-            stop(Failure::NullResource, at);
-        if (!rt.resources.objects)
-            stop(Failure::UnresolvedResource, at);
-        auto i = rt.resources.objects->find(*ref.id);
-        if (i == rt.resources.objects->end())
-            stop(Failure::UnresolvedResource, at);
-        return i->second;
+    decltype(auto) object(const SceneResourceReference &ref,
+                         const PlayerAnimationRuntime &rt, Phase at) {
+        return access.object(ref, rt, at);
     }
     // Original pre-order traversal writes a fixed 111-object stack.
     // Repeated identities are visited repeatedly; a cycle reaches that actual
@@ -622,10 +616,10 @@ template <class Access> class Engine {
             stop(Failure::ObjectCapacity, root ? Phase::RootCapacity : Phase::ChildCapacity);
         output.push_back(ref);
         const auto &o = object(ref, rt, root ? Phase::RootChild : Phase::ChildChild);
-        const auto child = read_value(o.child, root ? Phase::RootChild : Phase::ChildChild);
+        const auto child = access.child(o, root ? Phase::RootChild : Phase::ChildChild);
         if (child.id)
             hierarchy(child, rt, output, false);
-        const auto sibling = read_value(o.sibling, root ? Phase::RootSibling : Phase::ChildSibling);
+        const auto sibling = access.sibling(o, root ? Phase::RootSibling : Phase::ChildSibling);
         if (sibling.id)
             hierarchy(sibling, rt, output, false);
     }
@@ -718,20 +712,15 @@ template <class Access> class Engine {
         return (numerator / denominator);
     }
     // NOTSA: extract one semantic channel from the borrowed scene object.
-    std::array<std::uint32_t, 3> pose(const SceneGeometryObject &o, unsigned channel, Phase at) {
-        if (channel == 1) {
-            auto a = read_value(o.angles, at);
-            return {word(a[0]), word(a[1]), word(a[2])};
-        }
-        const auto p = channel == 0 ? read_value(o.position, at) : read_value(o.scale, at);
-        return {word(p.x), word(p.y), word(p.z)};
+    std::array<std::uint32_t, 3> pose(const SceneObject &o, unsigned channel, Phase at) {
+        return access.pose(o, channel, at);
     }
     // Source writes each component before loading/interpolating the next. The
     // angle coefficient alone spills tobinary32 before its three FILD/FMUL/ftol.
     // NOTSA: retain sampled-channel arithmetic and per-axis publication.
     void sampled(TaskWorkArena &arena, const TaskWorkHandle &output,
                  const PlayerAnimationKeyBytes *input, const PlayerAnimationNode &n,
-                 unsigned channel, const SceneGeometryObject &object,
+                 unsigned channel, const SceneObject &object,
                  const PlayerAnimationMotion &m, PlayerAnimationView &v,
                  const PlayerAnimationRuntime &rt, fidelity::Context &fp, Phase at) {
         if (!input) {
@@ -782,7 +771,7 @@ template <class Access> class Engine {
     }
     // NOTSA: publish the first key or borrowed pose in source order.
     void first(TaskWorkArena &arena, const TaskWorkHandle &output,
-               const PlayerAnimationKeyBytes *input, const SceneGeometryObject &o, unsigned channel,
+               const PlayerAnimationKeyBytes *input, const SceneObject &o, unsigned channel,
                Phase at) {
         if (input) {
             for (unsigned axis = 0; axis < 3; ++axis)
@@ -840,7 +829,7 @@ template <class Access> class Engine {
     void build_channel(PlayerAnimationView &v, PlayerAnimationRuntime &rt, fidelity::Context &fp,
                        const TransitionSources &sources, TaskWorkArena &arena, TaskWorkHandle data,
                        std::uint32_t cursor, unsigned n, unsigned channel,
-                       const SceneGeometryObject &o) {
+                       const SceneObject &o) {
         const auto &old_motion = sources.outgoing;
         const auto &next_motion = sources.incoming;
         const auto old_channels = sources.outgoing_channels;

@@ -16,6 +16,41 @@ struct ReferenceAccess {
     using PlayerAnimationAllocatedAction = sadx::PlayerAnimationAllocatedAction;
     using PlayerAnimationAllocatedMotion = sadx::PlayerAnimationAllocatedMotion;
     using AnimationResourceReference = sadx::AnimationResourceReference;
+    using SceneObject = SceneGeometryObject;
+    // NOTSA: retain lazy reference-fixture reads at their original reached phase.
+    const SceneObject &object(const SceneResourceReference &ref,
+                              const PlayerAnimationRuntime &rt, animation::Phase at) {
+        auto stop = [&](animation::Failure kind) -> void {
+            animation::Outcome result;
+            result.failure = kind;
+            result.phase = at;
+            throw animation::Stop{result};
+        };
+        if (!ref.id) stop(animation::Failure::NullResource);
+        if (!rt.resources.objects) stop(animation::Failure::UnresolvedResource);
+        const auto found = rt.resources.objects->find(*ref.id);
+        if (found == rt.resources.objects->end()) stop(animation::Failure::UnresolvedResource);
+        return found->second;
+    }
+    SceneResourceReference child(const SceneObject &o, animation::Phase at) {
+        return read(o.child, at);
+    }
+    SceneResourceReference sibling(const SceneObject &o, animation::Phase at) {
+        return read(o.sibling, at);
+    }
+    std::array<std::uint32_t, 3> pose(const SceneObject &o, unsigned channel, animation::Phase at) {
+        auto word = [](auto value) {
+            std::uint32_t bits;
+            std::memcpy(&bits, &value, 4);
+            return bits;
+        };
+        if (channel == 1) {
+            const auto a = read(o.angles, at);
+            return {word(a[0]), word(a[1]), word(a[2])};
+        }
+        const auto p = channel == 0 ? read(o.position, at) : read(o.scale, at);
+        return {word(p.x), word(p.y), word(p.z)};
+    }
     // NOTSA: preserve supplied legacy reference values at each reached arithmetic use.
     float zero(const PlayerAnimationRuntime &runtime) const { return runtime.constants.zero; }
     // NOTSA: this reference contract may substitute values without adding native pool state.

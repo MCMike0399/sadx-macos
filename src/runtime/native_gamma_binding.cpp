@@ -252,8 +252,19 @@ void initialize_effects(Context &context) {
         context.scheduler, arena(context), context.rendering.arithmetic());
 }
 // NOTSA: native boundary for PSetMotion; source seam declared in the Gamma core.
-void set_motion(Context &, const Player &) {
-    missing("native_gamma_set_motion");
+void set_motion(Context &context, const Player &player) {
+    if (!context.players.gamma_motion_assets)
+        missing("native_gamma_set_motion");
+    const auto result = native::update_gamma_motion({physics(player), player_allocation(context, player)},
+        arena(context), *context.players.gamma_motion_assets, context.scene.objects,
+        context.rendering.arithmetic());
+    if (!result) {
+        const auto boundary = "native_gamma_motion_phase_" +
+            std::to_string(static_cast<unsigned>(result.phase)) + "_failure_" +
+            std::to_string(static_cast<unsigned>(result.failure)) + ":" +
+            result.unavailable_resource_reason;
+        throw flow::UnrecoveredGameFlowCall(boundary.c_str());
+    }
 }
 // NOTSA: native boundary for PJoinVertexes; source seam declared in the Gamma core.
 void join_vertices(Context &, Primary, const TaskWorkHandle &, const Player &) {

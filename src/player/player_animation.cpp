@@ -1,8 +1,62 @@
 #include "player/animation/animation_engine.hpp"
 #include "player/animation/animation_native_access.hpp"
 #include "player/animation/animation_state_binding.hpp"
+#include <limits>
+#include <stdexcept>
 
 namespace sadx::animation::detail {
+NativeAccess::SceneObject NativeAccess::object(const SceneResourceReference &ref, const Runtime &rt,
+                                             Phase at) {
+    if (!ref.id)
+        fail(Failure::NullResource, at);
+    if (rt.scene_objects) {
+        if (*ref.id > std::numeric_limits<character_pack::ResourceId>::max())
+            fail(Failure::UnresolvedResource, at);
+        try {
+            return {&rt.scene_objects->object(static_cast<character_pack::ResourceId>(*ref.id)),
+                    nullptr};
+        } catch (const std::runtime_error &) {
+            fail(Failure::UnresolvedResource, at);
+        }
+    }
+    if (!rt.resources.objects)
+        fail(Failure::UnresolvedResource, at);
+    const auto found = rt.resources.objects->find(*ref.id);
+    if (found == rt.resources.objects->end())
+        fail(Failure::UnresolvedResource, at);
+    return {nullptr, &found->second};
+}
+SceneResourceReference NativeAccess::child(const SceneObject &o, Phase at) {
+    if (!o.native)
+        return read(o.reference->child, at);
+    return {o.native->child ? std::optional<std::size_t>(o.native->child) : std::nullopt};
+}
+SceneResourceReference NativeAccess::sibling(const SceneObject &o, Phase at) {
+    if (!o.native)
+        return read(o.reference->sibling, at);
+    return {o.native->sibling ? std::optional<std::size_t>(o.native->sibling) : std::nullopt};
+}
+std::array<std::uint32_t, 3> NativeAccess::pose(const SceneObject &o, unsigned channel, Phase at) {
+    auto word = [](auto value) {
+        std::uint32_t bits;
+        std::memcpy(&bits, &value, 4);
+        return bits;
+    };
+    if (o.native) {
+        if (channel == 1) {
+            const auto &a = o.native->rotation;
+            return {word(a[0]), word(a[1]), word(a[2])};
+        }
+        const auto &p = channel == 0 ? o.native->position : o.native->scale;
+        return {word(p[0]), word(p[1]), word(p[2])};
+    }
+    if (channel == 1) {
+        const auto a = read(o.reference->angles, at);
+        return {word(a[0]), word(a[1]), word(a[2])};
+    }
+    const auto p = channel == 0 ? read(o.reference->position, at) : read(o.reference->scale, at);
+    return {word(p.x), word(p.y), word(p.z)};
+}
 float read_live_multiplier(const View &view, TaskWorkArena *arena, Multiplier kind, Phase phase) {
     NativeAccess access;
     if (!arena)

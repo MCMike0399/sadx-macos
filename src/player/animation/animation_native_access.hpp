@@ -19,6 +19,17 @@ struct NativeAccess {
     using PlayerAnimationAllocatedMotion = sadx::PlayerAnimationAllocatedMotion;
     using AnimationResourceReference = ResourceReference;
 
+    // NOTSA: non-owning alternatives preserve existing development fixtures while
+    // native callers borrow the authoritative mutable ObjectState directly.
+    struct SceneObject {
+        const character_pack::ObjectResource *native = nullptr;
+        const SceneGeometryObject *reference = nullptr;
+    };
+    SceneObject object(const SceneResourceReference &, const Runtime &, Phase);
+    SceneResourceReference child(const SceneObject &, Phase);
+    SceneResourceReference sibling(const SceneObject &, Phase);
+    std::array<std::uint32_t, 3> pose(const SceneObject &, unsigned channel, Phase);
+
     // NOTSA: native arithmetic uses the pinned compiler literals; no constant-pool state.
     float zero(const Runtime &) const { return 0.0f; }
     // NOTSA: the reference binding separately preserves its supplied-value contract.

@@ -23,7 +23,6 @@ class SonicAnimationAssets {
     const std::array<ActionHandle, 3> &preview() const { return preview_; }
 
   private:
-    void import_action(const character_pack::CharacterPack &, ActionHandle);
     Declarations declarations_;
     std::shared_ptr<const animation::TableStorage> table_;
     animation::Resources resources_;

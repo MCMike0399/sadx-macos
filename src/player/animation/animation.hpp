@@ -1,6 +1,7 @@
 #pragma once
 
 #include "cpu/fidelity_float.hpp"
+#include "engine/character_pack.hpp"
 #include "engine/scene_resource_reference.hpp"
 #include "player/animation/animation_content.hpp"
 #include "player/animation/animation_outcome.hpp"
@@ -49,6 +50,7 @@ struct View {
 struct Runtime {
     TaskWorkArena *arena;
     const Resources &resources;
+    const character_pack::ObjectState *scene_objects = nullptr;
 };
 Outcome update(View &, Runtime &, fidelity::Context &);
 Outcome reset_frame(View &, const Runtime &, fidelity::Context &);
