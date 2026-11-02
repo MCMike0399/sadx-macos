@@ -1,0 +1,121 @@
+{
+  "cases": 1109,
+  "value_failures": 108,
+  "seed": 476210,
+  "holdout": false,
+  "stream_sha256": "ecefc97dc73ddec16abfbaa73162f9413d903460e0c7f736bd35c8242945d8e2",
+  "probe_sha256": "da3ce426658fc66942d4a0f4800e453ed5b41784b95979d96b3754e52ffc61a0",
+  "exit_status": 1,
+  "reason": "Ordinary float physics candidate loses source values on the unchanged development inputs. Retain readable ExactFloat operators; the source has no ftol conversions here.",
+  "examples": [
+    {
+      "case_id": 2,
+      "fp_control": "0xc7f",
+      "differences": [
+        [
+          46,
+          4212075979,
+          4212075980
+        ],
+        [
+          47,
+          1084507544,
+          1084507545
+        ],
+        [
+          48,
+          3148858824,
+          3148858825
+        ],
+        [
+          50,
+          1082952114,
+          1082952115
+        ],
+        [
+          51,
+          3147418895,
+          3147418896
+        ]
+      ]
+    },
+    {
+      "case_id": 3,
+      "fp_control": "0xc7f",
+      "differences": [
+        [
+          23,
+          3574040956,
+          3574040957
+        ],
+        [
+          24,
+          1634919012,
+          1634919013
+        ],
+        [
+          26,
+          3184315596,
+          3184315597
+        ],
+        [
+          34,
+          3775340033,
+          3775340034
+        ],
+        [
+          35,
+          705691504,
+          705691505
+        ]
+      ]
+    },
+    {
+      "case_id": 4,
+      "fp_control": "0x47f",
+      "differences": [
+        [
+          34,
+          3708522325,
+          3708522324
+        ],
+        [
+          35,
+          1716428693,
+          1716428694
+        ],
+        [
+          36,
+          875338619,
+          875338620
+        ],
+        [
+          38,
+          1048575999,
+          1048576000
+        ],
+        [
+          59,
+          4276165504,
+          4276165503
+        ]
+      ]
+    },
+    {
+      "case_id": 62,
+      "fp_control": "0x47f",
+      "differences": [
+        [
+          22,
+          1516760840,
+          1516760841
+        ],
+        [
+          24,
+          3360349261,
+          3360349260
+        ]
+      ]
+    }
+  ]
+}

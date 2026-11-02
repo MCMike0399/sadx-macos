@@ -1,0 +1,67 @@
+{
+  "mutants": [
+    {
+      "name": "retained-frame-pointer",
+      "caught": true,
+      "exit_status": 1,
+      "value_failures": 52,
+      "cases": 185,
+      "source_sha256": "b5be4d26bb923939359edcb6c1e09694c02b31f94a67fb85823ab3c24b01465b",
+      "probe_sha256": "75e4026a91113cec5caa0903b51da5c51cee96385caea4ad141ede72451df4c0"
+    },
+    {
+      "name": "discard-existing-task",
+      "caught": true,
+      "exit_status": 1,
+      "value_failures": 24,
+      "cases": 185,
+      "source_sha256": "84e86373d1c2b9341d2506223bbca45e6911cc6b431f1ee4f03488fa34bb9e22",
+      "probe_sha256": "fa0ae907d7cae2f452593486af9dc8947d2b51ee3d179e766b8b6194474d9027"
+    },
+    {
+      "name": "wrong-pool-capacity",
+      "caught": true,
+      "exit_status": 1,
+      "value_failures": 52,
+      "cases": 185,
+      "source_sha256": "559cfedf1f3aa6164c7ac38ecf3434ab5bcb994f5132387098cc4329102acdef",
+      "probe_sha256": "e94e8194ffdda6aab2bbf791d297941e2af8e5313a4f68e85157f8e1e473d030"
+    },
+    {
+      "name": "swap-parameters",
+      "caught": true,
+      "exit_status": 1,
+      "value_failures": 52,
+      "cases": 185,
+      "source_sha256": "f65bf872304dfc6097c08d4ed591cba6fff5514a2abec145a2cfe00181732c54",
+      "probe_sha256": "94ae015175aed3fa0d36798f2d96085008e953c42aeaf75701b2fb85477eb02f"
+    },
+    {
+      "name": "wrong-free-index",
+      "caught": true,
+      "exit_status": 1,
+      "value_failures": 71,
+      "cases": 185,
+      "source_sha256": "8324ff26f0863794bfd3c5f783e77004010fd7a579aff7f02c08b338cb84aaa1",
+      "probe_sha256": "f5bde4a1c578d73f328268f4c24123a9490380645e9455cb3fbd7479bd2ab4bd"
+    },
+    {
+      "name": "first-texture-for-all",
+      "caught": true,
+      "exit_status": 1,
+      "value_failures": 103,
+      "cases": 185,
+      "source_sha256": "397169880356ef37e6ae9926af42c42496a3f96d51024633d6f85ad3a82d55ad",
+      "probe_sha256": "2b50c909043ae91bc45363a5756b41a6b056544630d1076c65a3d6f292b7a219"
+    },
+    {
+      "name": "early-null-buffer-return",
+      "caught": true,
+      "exit_status": 1,
+      "value_failures": 25,
+      "cases": 185,
+      "source_sha256": "04eff0331ec4966287145960c0d9eb2d85b3c5bb61ebd4543853a544716fa409",
+      "probe_sha256": "d784a9b5236ac3717d61e7e0eca261abdfb9aee04b0190268e86040f22ae5a97"
+    }
+  ]
+}

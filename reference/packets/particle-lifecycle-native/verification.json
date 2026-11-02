@@ -1,0 +1,335 @@
+{
+  "base": "76b44198362aa6ab125dd64ae47621aa2938dca2",
+  "source_commit": "897f2f02",
+  "judge_commits": [
+    "0657b5a7",
+    "fcbfa8ff"
+  ],
+  "lifecycle": {
+    "development": {
+      "cases": 1109,
+      "value_failures": 0,
+      "seed": 476210,
+      "holdout": false,
+      "stream_sha256": "4284d0e486b6f9bed75b1b0e0dfb9b6fa266fb69b35d6c6d1e8fbb6d738a1005",
+      "probe_sha256": "3bea38be388dd9148b223abc9b758521007dde9007db7c83d7248c17e6ae1d78",
+      "coverage": {
+        "routine_0": 262,
+        "boundary_0_field_0": 1090,
+        "routine_1": 208,
+        "reentry_1": 130,
+        "reentry_2": 120,
+        "routine_2": 254,
+        "routine_3": 189,
+        "boundary_6_field_0": 1,
+        "boundary_3_field_0": 3,
+        "boundary_4_field_0": 1,
+        "boundary_2_field_0": 1,
+        "boundary_1_field_0": 3,
+        "boundary_8_field_0": 1,
+        "reentry_4": 3,
+        "boundary_5_field_0": 1,
+        "boundary_5_field_4": 1,
+        "boundary_5_field_8": 1,
+        "boundary_5_field_12": 1,
+        "boundary_5_field_16": 1,
+        "boundary_5_field_20": 1,
+        "boundary_5_field_32": 1,
+        "boundary_5_field_40": 1,
+        "boundary_5_field_44": 1,
+        "routine_4": 196,
+        "animation_result_0": 157,
+        "animation_result_4294967295": 30,
+        "animation_result_4294967294": 9
+      },
+      "fp_partial_count": 237,
+      "exit_status": 2,
+      "full_records": "development.json",
+      "raw_report_sha256": "06c5af9ddb630e116afe60590bbe038b63e25b70b3460b8e5a33fddd09d45350"
+    },
+    "holdout": {
+      "cases": 2048,
+      "value_failures": 0,
+      "seed": 773129,
+      "holdout": true,
+      "stream_sha256": "793d948fba26d714b6f7ed0a9feda630b434ac24159c51c57a0b77acc47b95a8",
+      "probe_sha256": "3bea38be388dd9148b223abc9b758521007dde9007db7c83d7248c17e6ae1d78",
+      "coverage": {
+        "routine_4": 444,
+        "boundary_0_field_0": 2048,
+        "animation_result_0": 373,
+        "routine_3": 376,
+        "reentry_2": 236,
+        "routine_1": 438,
+        "routine_2": 398,
+        "reentry_1": 241,
+        "routine_0": 392,
+        "animation_result_4294967295": 58,
+        "animation_result_4294967294": 13
+      },
+      "fp_partial_count": 372,
+      "exit_status": 2,
+      "full_records": "holdout.json",
+      "raw_report_sha256": "7b561c39b79af380dd07ecb745b623be720337798017f48e036251338d040cc3"
+    }
+  },
+  "new_mutants": {
+    "mutants": [
+      {
+        "name": "corrupt-capacity",
+        "caught": true,
+        "exit_status": 1,
+        "cases": 149,
+        "value_failures": 9,
+        "source_sha256": "c0ef83782e4f36f6f99755f3485bec5739a44d623ac552be00b1012ca55f5e03",
+        "probe_sha256": "2fb8aecdf9ba30dbc2b4e3842a00da7eed5ac754ec86a4b6ab3762983612aef2",
+        "report_sha256": "a4af72157c393bfe1dfae0ee2007fbf18d82c969f7dfe778ca0027293c0d8b07"
+      },
+      {
+        "name": "unsigned-count",
+        "caught": true,
+        "exit_status": 1,
+        "cases": 149,
+        "value_failures": 6,
+        "source_sha256": "7a33d2555d9808e7293743397fd92e05cd20af57a20fd30df961c5b8e332561f",
+        "probe_sha256": "14f590d2d4761f11ba478b7b351447cdda3959dde00ec31f06787742cb15eeae",
+        "report_sha256": "82ca321fb8b8e71dbc7936caf28b8002ee42dbaf98beba71626acf98d3b85a4d"
+      },
+      {
+        "name": "skip-update-display",
+        "caught": true,
+        "exit_status": 1,
+        "cases": 149,
+        "value_failures": 20,
+        "source_sha256": "bc546f8e4f5e847fac96e89f2aa4c01db1ab7aa9be7c99a92b4d01afdb67dbfb",
+        "probe_sha256": "a41b25ef0c83d8d051ad9de008147e9cdab8bdb7a46a968fb8511141f6719be3",
+        "report_sha256": "39119e65c33933414ecfcc2597ef93bb9ab7772319f55d1c9a172a8b9da5d28d"
+      },
+      {
+        "name": "skip-swapped-slot",
+        "caught": true,
+        "exit_status": 1,
+        "cases": 149,
+        "value_failures": 2,
+        "source_sha256": "6da48134045aff7478f502b48c3ea6c5f985c6b5349d8e6277ab18b1a103382e",
+        "probe_sha256": "0be0c5b68a23af093660581515d1d46bf03d8192739fe3bf60d1e66626ecb109",
+        "report_sha256": "f2458dcb7ad17085af390601b605c78884bfcba5369286343e077ab034171406"
+      },
+      {
+        "name": "invert-custom-liveness",
+        "caught": true,
+        "exit_status": 1,
+        "cases": 149,
+        "value_failures": 10,
+        "source_sha256": "fa280677ea046faeda50be534d3e2b63aa5b5f55a1a72648c72bf89b59979995",
+        "probe_sha256": "76f14413e714ab684a42b98e3844f175a62d03e3866b030c12e278df22f39602",
+        "report_sha256": "feb3e6f284e94094d09d4f7993b5d5dc68c5c4287a0afa988eba9a4aed062929"
+      },
+      {
+        "name": "wrong-free-slot",
+        "caught": true,
+        "exit_status": 1,
+        "cases": 149,
+        "value_failures": 4,
+        "source_sha256": "a9e1ee214353520789380b68fb6100779103d22b3a4c819c00d9303526203218",
+        "probe_sha256": "ad5d5a8ce6d51911c7996e97f8900682700d4279f9390e031be9e75e664252b1",
+        "report_sha256": "661ac2273e69e45ac97e867dc8b05912ba92c9caf235e7dfd038cbb4f354ed49"
+      },
+      {
+        "name": "drop-vertical-acceleration",
+        "caught": true,
+        "exit_status": 1,
+        "cases": 149,
+        "value_failures": 12,
+        "source_sha256": "4eba884a688e3e4d97ca26fd967fc3295e3b55d3d872ad970d0e35626f6e9b2f",
+        "probe_sha256": "0b26c9636538cbf44db5ad7c78426418d93ebca284d3569022855202885b5649",
+        "report_sha256": "8fe2fb1d55bac9168b59c843ba980e4718804f712fc4309f5e3265dccecb0a40"
+      },
+      {
+        "name": "reverse-release-order",
+        "caught": true,
+        "exit_status": 1,
+        "cases": 149,
+        "value_failures": 26,
+        "source_sha256": "ad75064ea20dc9a5155bba5b87ec3e77a26dbad71ec032da8ebbd1deffc6a627",
+        "probe_sha256": "31bf4fb5c1eafce3d37ebf4762994ab65ad484e6bcf0b4d0ef67b9695a7a0695",
+        "report_sha256": "c8fcfa45c286f687378643a8f62b3168ea47378aa67e3b80263cadc3d59be5a1"
+      },
+      {
+        "name": "skip-loop-counter",
+        "caught": true,
+        "exit_status": 1,
+        "cases": 149,
+        "value_failures": 4,
+        "source_sha256": "3574dcad089e66d0424967681c2284cc7c9506a9b32f55b347fd10586c75e18e",
+        "probe_sha256": "5e40ec6a8b5fbfdf98285c23f941bc9d38c00a03ba3800f047aacec4dd02c4a2",
+        "report_sha256": "79876cc701f2cb43e0f577784b69efff45715104a8eccc3c7a9004428e645d11"
+      }
+    ]
+  },
+  "initializer": {
+    "development": {
+      "cases": 1145,
+      "value_failures": 0,
+      "fp_partial_count": 559,
+      "same_individual_records": true,
+      "stream_sha256": "489b1505389f0a8c8bf043222b5171922e8b6a1ff47a574a9bee52557b22fe45",
+      "exit_status": 2,
+      "report_sha256": "66e02f01265332bfe2e115ae5831bcfe2a4973b61e5c37d4a987feff65e55118",
+      "probe_sha256": "9b97c4f3592fb8cba698e6eabbc074ce4495756d268013a7eebd04ba1e490fbc"
+    },
+    "holdout": {
+      "cases": 2048,
+      "value_failures": 0,
+      "fp_partial_count": 1115,
+      "same_individual_records": true,
+      "stream_sha256": "658450030cc203165f47bb7d8eeb2ab6503355e2b3f1ff812223fc2c62c43589",
+      "exit_status": 2,
+      "report_sha256": "f5eb90389565beb52285468796516566862ee69ee1c235aa9c7fb17b84a391c0",
+      "probe_sha256": "9b97c4f3592fb8cba698e6eabbc074ce4495756d268013a7eebd04ba1e490fbc"
+    }
+  },
+  "initializer_mutants": {
+    "mutants": [
+      {
+        "name": "retained-frame-pointer",
+        "caught": true,
+        "exit_status": 1,
+        "value_failures": 52,
+        "cases": 185,
+        "source_sha256": "b5be4d26bb923939359edcb6c1e09694c02b31f94a67fb85823ab3c24b01465b",
+        "probe_sha256": "75e4026a91113cec5caa0903b51da5c51cee96385caea4ad141ede72451df4c0"
+      },
+      {
+        "name": "discard-existing-task",
+        "caught": true,
+        "exit_status": 1,
+        "value_failures": 24,
+        "cases": 185,
+        "source_sha256": "84e86373d1c2b9341d2506223bbca45e6911cc6b431f1ee4f03488fa34bb9e22",
+        "probe_sha256": "fa0ae907d7cae2f452593486af9dc8947d2b51ee3d179e766b8b6194474d9027"
+      },
+      {
+        "name": "wrong-pool-capacity",
+        "caught": true,
+        "exit_status": 1,
+        "value_failures": 52,
+        "cases": 185,
+        "source_sha256": "559cfedf1f3aa6164c7ac38ecf3434ab5bcb994f5132387098cc4329102acdef",
+        "probe_sha256": "e94e8194ffdda6aab2bbf791d297941e2af8e5313a4f68e85157f8e1e473d030"
+      },
+      {
+        "name": "swap-parameters",
+        "caught": true,
+        "exit_status": 1,
+        "value_failures": 52,
+        "cases": 185,
+        "source_sha256": "f65bf872304dfc6097c08d4ed591cba6fff5514a2abec145a2cfe00181732c54",
+        "probe_sha256": "94ae015175aed3fa0d36798f2d96085008e953c42aeaf75701b2fb85477eb02f"
+      },
+      {
+        "name": "wrong-free-index",
+        "caught": true,
+        "exit_status": 1,
+        "value_failures": 71,
+        "cases": 185,
+        "source_sha256": "8324ff26f0863794bfd3c5f783e77004010fd7a579aff7f02c08b338cb84aaa1",
+        "probe_sha256": "f5bde4a1c578d73f328268f4c24123a9490380645e9455cb3fbd7479bd2ab4bd"
+      },
+      {
+        "name": "first-texture-for-all",
+        "caught": true,
+        "exit_status": 1,
+        "value_failures": 103,
+        "cases": 185,
+        "source_sha256": "397169880356ef37e6ae9926af42c42496a3f96d51024633d6f85ad3a82d55ad",
+        "probe_sha256": "2b50c909043ae91bc45363a5756b41a6b056544630d1076c65a3d6f292b7a219"
+      },
+      {
+        "name": "early-null-buffer-return",
+        "caught": true,
+        "exit_status": 1,
+        "value_failures": 25,
+        "cases": 185,
+        "source_sha256": "04eff0331ec4966287145960c0d9eb2d85b3c5bb61ebd4543853a544716fa409",
+        "probe_sha256": "d784a9b5236ac3717d61e7e0eca261abdfb9aee04b0190268e86040f22ae5a97"
+      }
+    ]
+  },
+  "native_programs": [
+    {
+      "command": [
+        "build/particle-lifecycle-test"
+      ],
+      "exit_status": 0,
+      "stdout": "particle lifecycle: scheduler, pending replacement, borrowed slots, cleanup and explicit rendering boundary pass\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "build/gamma-effects-test",
+        "game/imported/gamma-effects.bin"
+      ],
+      "exit_status": 0,
+      "stdout": "Imported frame inverse, canonical arena/task ownership, cache/reentry and scheduler particle lifecycle pass\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "build/native-gamma-effects-test",
+        "game/imported"
+      ],
+      "exit_status": 0,
+      "stdout": "Real Gamma/PInitialize/setup/material caller reaches PSetMotion with shared hit list and pool\n",
+      "stderr": ""
+    }
+  ],
+  "source_build": {
+    "command": "make -j2 -o build/native-controller-deps/include/SDL3/SDL.h build/sadx-native native-closure build/native-gamma-effects-test build/native-gamma-effects-probe.dylib",
+    "exit_status": 0,
+    "log_sha256": "90f983b1007118cc74e267e92518fd519f4a2d73cc1d33aeb6a8e7557ff4aa0a",
+    "native_app_sha256": "1ddcb3809384230ad2de6e63ef66dcc799e1eba64a381ee0e803163fce94ef66",
+    "native_archive_sha256": "f814a24fce17e40aaa898bc98061dcc2032f1622617d84bdf78f60b686bbdd52",
+    "source_only": "Worktree build started without build/, rebuilt all game/numerical code locally. Only public SDL/libusb products were copied with symlinks dereferenced. No prebuilt game object or binary was copied."
+  },
+  "checks": [
+    {
+      "name": "readability",
+      "exit_status": 0,
+      "output": "Readability: 537 files, {'hex_literals': 2368, 'address_identifiers': 1188, 'address_calls': 61, 'goto': 0, 'address_labels': 0, 'long_lines': 932, 'multi_statement_lines': 1536, 'large_decimal_literals': 231, 'emulator_arithmetic': 3103, 'address_comments': 1029}, 0 regressions\n"
+    },
+    {
+      "name": "layers",
+      "exit_status": 0,
+      "output": "12 layers, 0 known exceptions, 0 violations\n"
+    },
+    {
+      "name": "owners",
+      "exit_status": 0,
+      "output": "159059 owned bytes, 0 with more than one owner struct\n"
+    },
+    {
+      "name": "provenance",
+      "exit_status": 0,
+      "output": "Provenance: {'FUNCTION': 540, 'GLOBAL': 103, 'STUB': 103, 'PATCH': 2, 'DATA': 7}, 167492 legacy/annotated byte identities, 0 errors\n"
+    },
+    {
+      "name": "hygiene",
+      "exit_status": 0,
+      "output": "4945 tracked files, 0 violations\n"
+    }
+  ],
+  "profile": "5 complete recovered ranges; zero UNHANDLED or undetermined overlaps (profile.json)",
+  "inherited_gamma_regressions": "Existing Gamma summaries prove counts only. Not rerun here; no individual partial-identity claim. Existing bodies, tolerances, summaries and manifests remain unchanged.",
+  "full_gate": "Not run by instruction; last recorded Main gate remains daa443e4.",
+  "independent_review": "Root-owned, not run; no subagents used.",
+  "normal_input": "Main accepted PSetMotion1332 remains the route evidence. Optional local baseline produced no output and was terminated; no screenshot or app-frontier advance is claimed.",
+  "limits": [
+    "DisplayParticle is an explicit typed renderer boundary; observer sinks do not certify rendering.",
+    "Particle spawning, NeonuLoadTexture flags and Gamma global-release/PlayerSystem binding remain open.",
+    "Malformed frame bounds, cross-allocation negative-index aliases, arbitrary concurrent/released-work aliases, host allocation failures and unmasked/deferred hardware FP faults are not qualified.",
+    "This proves a connected particle dependency checkpoint, not a complete Gamma actor frame or N3b."
+  ],
+  "retained_judge_manifest_sha256": "ddb1b109a564e1e9c71f1804fbdaa7077b8bf3c85d64b6f28cc66030b00ef9b0",
+  "retained_existing_initializer_mutant_receipt_sha256": "43667ec23922ce8caa7e80a4fd6b6245a0002fdbb00e3852ca52a0e035e7dd23"
+}

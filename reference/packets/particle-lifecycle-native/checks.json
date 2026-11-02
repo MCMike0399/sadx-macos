@@ -1,0 +1,27 @@
+[
+  {
+    "name": "readability",
+    "exit_status": 0,
+    "output": "Readability: 537 files, {'hex_literals': 2368, 'address_identifiers': 1188, 'address_calls': 61, 'goto': 0, 'address_labels': 0, 'long_lines': 932, 'multi_statement_lines': 1536, 'large_decimal_literals': 231, 'emulator_arithmetic': 3103, 'address_comments': 1029}, 0 regressions\n"
+  },
+  {
+    "name": "layers",
+    "exit_status": 0,
+    "output": "12 layers, 0 known exceptions, 0 violations\n"
+  },
+  {
+    "name": "owners",
+    "exit_status": 0,
+    "output": "159059 owned bytes, 0 with more than one owner struct\n"
+  },
+  {
+    "name": "provenance",
+    "exit_status": 0,
+    "output": "Provenance: {'FUNCTION': 540, 'GLOBAL': 103, 'STUB': 103, 'PATCH': 2, 'DATA': 7}, 167492 legacy/annotated byte identities, 0 errors\n"
+  },
+  {
+    "name": "hygiene",
+    "exit_status": 0,
+    "output": "4945 tracked files, 0 violations\n"
+  }
+]
