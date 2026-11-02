@@ -73,7 +73,7 @@ def main():
                           native_exit=native.returncode, oracle_exit=oracle.returncode,
                           original_cases=report['cases'], original_mismatches=report['mismatch_count'])
             killed = matrix.returncode == 0 and matrix.stdout != expected
-            killed |= native.returncode != 0
+            killed |= native.returncode == -6 and b"Assertion failed" in native.stderr
             killed |= report['cases'] == 300 and report['mismatch_count'] > 0
             record['status'] = 'CAUGHT' if killed else 'SURVIVED'
             results.append(record)
