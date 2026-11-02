@@ -1019,3 +1019,11 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * All 909 development cases and both streams match, including 733 complete FP partial identities, strict exit 2. Accepted 4,493-case holdout with 3,434 partial identities and eleven compiled faults are reused under unchanged contracts.
 * Finite judge union retains all 1,441 protections and adds nine. Two registration hashes change; 53 absent ignored inputs remain protected. Local judge exit 1 reports only those absences. Generated inventory passes; authored dispositions and open debt stay unchanged.
 * gamma-fan-integration.json and packet/gamma-fan-integration record commands, app state/image, source/judge hashes and limits. Main remains untouched; Root owns adoption and coherent gate. No full gate, cold proof, original runtime witness rerun or Sonic continuation is included.
+
+### 2026-11-02 — Gamma fan integration adopted on Main
+
+* Main fast-forwards to 08884f1d after Root confirms accepted fan source bytes and exact reviewed Display wiring. No algorithm changed during integration.
+* Root judge check verifies all 1,450 local protected inputs with zero violations; inventory accounting and make check pass. An initial inventory invocation used the wrong directory; the correct tools/inventory command passes.
+* The same admitted commit has nine passing native programs, shipping app/force-load closure and normal-input Display boundary at frame 1332, exit 1, with unchanged title image, qualified in the integration worktree. Main binaries have not been rebuilt this turn.
+* All 909 development observations and 733 FP partial identities are preserved, strict exit 2. Last full gate/cold source remains e9bf38a8; no actor frame or N3b acceptance.
+* Sonic integrator bfa7ff8a is explicitly released at max -j2; Gamma display worker 53a0367d retains the other build slot and sole Ghidra ownership.
