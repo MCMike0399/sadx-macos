@@ -29,6 +29,9 @@ class Caller(Source):
         if address in (0x40b2d0, 0x4c3780, 0x4c2e10, 0x4c5420, 0x49fb10,
                        0x44a800, 0x43fa90, 0x4c3870, 0x4b82d0):
             self.entered.append(hex(address))
+        if address == 0x40b2d0:
+            sp = m.reg_read(UC_X86_REG_ESP)
+            assert [self.get(sp + 4), self.get(sp + 8)] == [1, 580]
         if address == 0x4c3870:
             sp = m.reg_read(UC_X86_REG_ESP)
             self.extra, self.player = self.get(sp + 4), self.get(sp + 8)
