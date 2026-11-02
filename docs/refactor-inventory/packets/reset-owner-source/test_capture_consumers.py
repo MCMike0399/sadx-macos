@@ -53,10 +53,10 @@ class CaptureTests(unittest.TestCase):
 
     def test_real_trace_relative_filename(self):
         origin = 'build/reset-fake-observer.py'
-        source = "n=0; e=[1]; st={'trace':['original']}; got_cmp=[1]\ne=e\n"
+        source = "def main():\n n=0; e=[1]; st={'trace':['original']}; got_cmp=[1]\n d=[i for i in range(256)]\nmain()\n"
         # compile uses a relative filename; the observer binds an absolute module origin.
         seen = []
-        sys.settrace(capture.observation_trace(str(Path(origin).resolve()), 2, seen.append))
+        sys.settrace(capture.observation_trace(str(Path(origin).resolve()), 3, seen.append))
         try:
             exec(compile(source, origin, 'exec'), {})
         finally:
@@ -66,9 +66,9 @@ class CaptureTests(unittest.TestCase):
 
     def test_stream_inline_trace(self):
         origin = 'build/reset-fake-stream.py'
-        source = "e=[0,123]; got=[0,123]\ngot=got\n"
+        source = "def main():\n e=[0,123]; got=[0,123]\n got=got\nmain()\n"
         seen = []
-        sys.settrace(capture.observation_trace(origin, 2, seen.append, 'stream_players'))
+        sys.settrace(capture.observation_trace(origin, 3, seen.append, 'stream_players'))
         try:
             exec(compile(source, str(Path(origin).resolve()), 'exec'), {})
         finally:

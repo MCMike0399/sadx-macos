@@ -55,7 +55,7 @@ def observation_trace(origin, line, record, kind="game_winmain"):
     def trace(frame, event, arg):
         if frame.f_code.co_filename not in filenames:
             return None
-        if event == 'line' and frame.f_lineno == line:
+        if event == 'line' and frame.f_lineno == line and frame.f_code.co_name == 'main':
             values = frame.f_locals
             if kind == 'stream_players':
                 record({'source': values['e'], 'native_comparison': values['got']})
