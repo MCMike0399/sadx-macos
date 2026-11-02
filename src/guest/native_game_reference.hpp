@@ -16,8 +16,8 @@
 #include "game/sound_manager.hpp"
 #include "game/game_frame_owners.hpp"
 #include "guest/caption_frame_reference.hpp"
-#include "game/game_reset.hpp"
-#include "game/game_reset_leaves.hpp"
+#include "guest/game_reset_reference.hpp"
+#include "guest/game_reset_leaves_reference.hpp"
 #include "guest/music_state_reference.hpp"
 #include "game/game_startup.hpp"
 #include "game/game_view.hpp"
@@ -161,6 +161,7 @@ public:
     // Borrow the source GetDeviceCaps result; unknown bytes remain explicit before device setup.
     const SourceBytes<0x3d127c0,0xd4>& device_caps()const noexcept{return device_.caps_at_3d127c0;}
 private:
+    friend struct ResetCompositionFixture; // reference-only bounded composition inspection
     NativeGameConfig config_;
     // Engine state owners.
     GameLogicTimingState timing_;GameLogicState logic_{timing_,{},{}};

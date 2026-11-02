@@ -1,4 +1,5 @@
 #include "platform/mac/mac_audio_playback.hpp"
+#include "game/game_cleanup_internal.hpp"
 #include <cmath>
 #include <utility>
 
@@ -190,18 +191,31 @@ bool create_media_players(MediaState &state, const PcmState &pcm, const AudioCon
         error = "native media cold initialization cannot replace existing player owners";
         return false;
     }
-    if (pcm.initialized != 0 && config.music_enabled) {
-        report.music_attempted = true;
-        state.music_player = StreamPlayer::create({}, report.music_error);
-    }
-    state.music_open = 0;
-    state.music_looping = 0;
-    state.music_status = 0;
-    state.shared_status = 0;
-    if (pcm.initialized != 0 && config.voice_enabled) {
-        report.voice_attempted = true;
-        state.voice_player = StreamPlayer::create({}, report.voice_error);
-    }
+    // [platform:audio] preserve cold-start support and real backend creation reports.
+    struct Access {
+        MediaState &state;
+        const PcmState &pcm;
+        const AudioConfiguration &configuration;
+        MediaInitialization &report;
+        bool audio_ready() { return pcm.initialized != 0; }
+        bool music_enabled() { return configuration.music_enabled; }
+        bool voice_enabled() { return configuration.voice_enabled; }
+        void create_music() {
+            report.music_attempted = true;
+            state.music_player = StreamPlayer::create({}, report.music_error);
+        }
+        void create_voice() {
+            report.voice_attempted = true;
+            state.voice_player = StreamPlayer::create({}, report.voice_error);
+        }
+        void clear_music_player() { state.music_player.reset(); }
+        void clear_voice_player() { state.voice_player.reset(); }
+        void clear_music_open() { state.music_open = 0; }
+        void clear_music_looping() { state.music_looping = 0; }
+        void clear_music_status() { state.music_status = 0; }
+        void clear_shared_status() { state.shared_status = 0; }
+    } access{state, pcm, config, report};
+    cleanup::detail::initialize_media(access);
     return true;
 }
 } // namespace sadx::audio::mac

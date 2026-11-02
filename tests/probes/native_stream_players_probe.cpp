@@ -1,4 +1,4 @@
-#include "game/game_reset_leaves.hpp"
+#include "guest/game_reset_leaves_reference.hpp"
 #include <algorithm>
 // Native 40d0d0 (4253c0 thunk) with the layout of tools/verify_original_stream_players.py.
 // in: 0 3b0ef2c, 1 3a7cf3c, 2 38f6ec0, 3..8 3abdf94/9c/a0/a4/98/a8.

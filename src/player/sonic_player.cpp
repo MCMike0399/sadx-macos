@@ -1548,8 +1548,14 @@ namespace sadx  {
         }
         else flags&=0xfffd;
         if(!rt.globals.forced_at_3b29d0c)return fail(SonicPlayerFailure::unknown_field,0x4258f0);
-        if(!rt.globals.forced_at_3b29d08||!*rt.globals.forced_at_3b29d08)return fail(SonicPlayerFailure::unknown_field,0x4258f7);
-        const auto forced=static_cast<std::int32_t>(*rt.globals.forced_at_3b29d0c)|static_cast<std::int32_t>(static_cast<std::int16_t>(**rt.globals.forced_at_3b29d08));
+        const auto forced_word = static_cast<std::int32_t>(*rt.globals.forced_at_3b29d0c);
+        std::int32_t editor_status;
+        try {
+            editor_status = rt.globals.editor.signed_status();
+        } catch (const control::EditorReadUnavailable &) {
+            return fail(SonicPlayerFailure::unknown_field,0x4258f7);
+        }
+        const auto forced = forced_word | editor_status;
         if(forced)f.task->action_at_0=87;
         else  {
             if(!f.task->action_at_0)return fail(SonicPlayerFailure::unknown_field,0x49aa2c);

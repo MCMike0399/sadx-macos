@@ -1,6 +1,6 @@
 #pragma once
 
-#include "game/game_reset_leaves.hpp"
+#include "guest/game_reset_leaves_reference.hpp"
 #include "game/music_state.hpp"
 #include <array>
 #include <functional>

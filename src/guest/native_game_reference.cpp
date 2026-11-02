@@ -40,7 +40,8 @@ void NativeGame::initialize_source_facts(){
     // Render queue facts.
     const auto f32=[&](std::uint32_t a)->std::optional<float>{const auto v=u32(a);if(!v)return std::nullopt;float x;std::memcpy(&x,&*v,4);return x;};
     rng_.seed_at_2bcbdf8=u32(0x2bcbdf8);
-    {std::optional<std::uint16_t> w;if(const auto lo=u8(0x3b29d08),hi=u8(0x3b29d09);lo&&hi)w=static_cast<std::uint16_t>(*lo|(*hi<<8));reset_.emplace(GameResetState{loop_.word_at_3abdf80,w,u32(0x3b290d0),u32(0x3b0e330),rng_});}
+    {std::optional<std::uint16_t> w;if(const auto lo=u8(0x3b29d08),hi=u8(0x3b29d09);lo&&hi)w=static_cast<std::uint16_t>(*lo|(*hi<<8));reset_.emplace(GameResetState{loop_.frame_message,w,u32(0x3b290d0),u32(0x3b0e330),rng_});}
+    sonic_globals_.editor = reset_->editor.borrow();
     window_at_3a8b088_=u32(0x3a8b088);
     queue_runtime_.display_switch_at_3b1117c=&timing_.pending_logic_ticks;
     // D3D8 device owner: native state table (identity 1 = the one source device).
@@ -934,7 +935,7 @@ std::array<std::optional<std::uint32_t>, 51> NativeGame::control_facts() const {
         word(loop_.counter_at_3b291b2),
         word(loop_.pending_at_3abdf76),
         word(loop_.pending_at_3abdf79),
-        word(loop_.word_at_3abdf80),
+        loop_.frame_message.fact(),
         word(loop_.frames_at_3abdf58),
         word(loop_.frames_at_3abdf5c),
         word(loop_.word_at_3c85804),
@@ -993,7 +994,7 @@ void NativeGame::initialize_control_defaults() {
         loop_.counter_at_3b291b2 = values.loop.save_count;
         loop_.pending_at_3abdf76 = values.loop.save_pending;
         loop_.pending_at_3abdf79 = values.loop.texture_pending;
-        loop_.word_at_3abdf80 = values.loop.late_frame_work_enabled;
+        loop_.frame_message = values.loop.late_frame_work_enabled;
         loop_.frames_at_3abdf58 = values.loop.game_frame_count;
         loop_.frames_at_3abdf5c = values.loop.local_frame_count;
         loop_.word_at_3c85804 = values.loop.shutdown_cleanup_enabled;
@@ -1056,7 +1057,7 @@ void NativeGame::initialize_control_defaults() {
     loop_.counter_at_3b291b2=u8(0x3b291b2);
     loop_.pending_at_3abdf76=u8(0x3abdf76);
     loop_.pending_at_3abdf79=u8(0x3abdf79);
-    loop_.word_at_3abdf80=u32(0x3abdf80);
+    loop_.frame_message=u32(0x3abdf80);
     loop_.frames_at_3abdf58=u32(0x3abdf58);
     loop_.frames_at_3abdf5c=u32(0x3abdf5c);
     loop_.word_at_3c85804=u32(0x3c85804);

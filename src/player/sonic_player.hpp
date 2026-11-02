@@ -1,4 +1,5 @@
 #pragma once
+#include "engine/reset_control.hpp"
 #include "player/actor_current.hpp"
 #include "engine/game_controller.hpp"
 #include "player/player_startup.hpp"
@@ -58,7 +59,7 @@ SonicPlayerFrameBinding bind_sonic_player_frame(const TaskHandle&,const TaskWork
     std::shared_ptr<PlayerMotionState>,const PlayerStartupRegistry&,PlayerPositionCollisionScene*);
 struct SonicPlayerGlobals {
     std::optional<std::int16_t> forced_at_3b29d0c;
-    const std::optional<std::uint16_t>* forced_at_3b29d08=nullptr; // borrowed GameResetState word; null is unknown
+    control::EditorView editor{};
     std::optional<std::uint16_t> stage_at_3b22dcc;
     std::optional<std::uint8_t> alternate_model_at_3b18db5;
     std::optional<std::uint8_t> sound_latch_at_3c55d44;

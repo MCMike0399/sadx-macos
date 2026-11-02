@@ -12,10 +12,10 @@
 #include <vector>
 
 namespace sadx::cleanup {
-// The wider meaning of reset_status and the two temporary buffers remains unrecovered.
+// The wider meaning of frame_message_work and the two temporary buffers remains unrecovered.
 // They are live session owners, not copies that can diverge during service callbacks.
 struct State {
-    std::uint32_t &reset_status;
+    std::uint32_t &frame_message_work;
     std::uint16_t &editor_status;
     void *&temporary_buffer;
     void *&secondary_buffer;

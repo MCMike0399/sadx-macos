@@ -1,5 +1,5 @@
-#include "game/game_reset.hpp"
-#include "game/game_reset_leaves.hpp"
+#include "guest/game_reset_reference.hpp"
+#include "guest/game_reset_leaves_reference.hpp"
 #include "game/game_cleanup.hpp"
 #include "game/audio_playback.hpp"
 #include <iostream>
@@ -66,7 +66,7 @@ int main() {
         emit(std::to_string(n).c_str(),r,f,calls);
     }
     for (unsigned n=0;n<40;++n) {
-        std::optional<std::uint32_t> frame=7;sadx::CrtRandState rng;
+        sadx::reference::FrameMessageFact frame=7;sadx::CrtRandState rng;
         sadx::GameResetState s{frame,65535,n==0?std::optional<std::uint32_t>{}:42,42,rng};
         std::vector<sadx::GameResetCall> calls;
         sadx::GameResetRuntime rt{s,[&](const auto &c){
@@ -80,7 +80,7 @@ int main() {
             n==8?sadx::GameLogicOwnerState::cancelled:sadx::GameLogicOwnerState::unavailable,456,{}};};
         const auto r=sadx::run_game_reset_40bf40(rt);
         std::cout<<"reset"<<n<<' '<<static_cast<int>(r.failure)<<' '<<r.source_boundary<<' '
-                 <<r.nested_source_boundary<<' '<<frame.value_or(123)<<' '<<s.word_at_3b29d08.value_or(123)
+                 <<r.nested_source_boundary<<' '<<frame.value_or(123)<<' '<<s.editor.value_or(123)
                  <<' '<<s.heap_at_3b290d0.value_or(123)<<' '<<s.heap_at_3b0e330.value_or(123)
                  <<' '<<rng.seed_at_2bcbdf8.value_or(123)<<' '<<bool(r.pending_call);
         for(auto c:calls) std::cout<<" call:"<<c.source_call<<':'<<c.callee<<':'<<c.argument.value_or(0);

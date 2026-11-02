@@ -137,7 +137,7 @@ void TitleScene::release_message_textures() {
 void Session::complete_menu_messages() {
     if (!title_)
         throw flow::UnrecoveredGameFlowCall("native_menu_message_services");
-    if (text_window_pending_ != 0)
+    if (frame_message_.work != 0)
         throw flow::UnrecoveredGameFlowCall("native_pending_text_window");
     title_->render_messages();
 }

@@ -1,4 +1,7 @@
 #include "runtime/logo_scene.hpp"
+#include "game/game_cleanup.hpp"
+#include "player/actor_current.hpp"
+#include "player/player_startup.hpp"
 #include <cassert>
 #include <iostream>
 #include <stdexcept>
@@ -106,6 +109,41 @@ int main() {
     assert(scene.state().mode == logo::Mode::Inactive);
     scene.initialize();
     assert(output.loaded && output.loads == 2 && scene.tasks()->source_free_slots() == 4096);
+    // Existing replacement semantics: the old scheduler retains the old arena only
+    // until the following task initializer. External work handles do not retain it.
+    auto retained_task = scene.task_scheduler().create_element(1, 0, nullptr);
+    assert(retained_task && retained_task.task->primary_work);
+    auto external_music_task = retained_task.task;
+    auto external_title_work = retained_task.task->primary_work;
+    actor_current::State current;
+    actor_current::set_primary(current, external_title_work);
+    PlayerStartupRegistry registry;
+    registry.allocations[external_title_work.get()] = std::make_shared<PlayerStartupPlayer>();
+    std::weak_ptr<TaskWorkArena> old_arena = scene.task_scheduler().work_arena();
+    scene.initialize_heap();
+    assert(!old_arena.expired());
+    scene.initialize_tasks();
+    assert(old_arena.expired());
+    // Observe a later level callback without dereferencing a work handle's dead arena.
+    unsigned observations = 0;
+    std::uint32_t *set_count = nullptr;
+    cleanup::PlacementEntry *set_entries = nullptr;
+    std::array<void *, 6> sets{}, cameras{};
+    auto observe = [&] {
+        assert(external_music_task == retained_task.task);
+        assert(actor_current::read_primary(current) == external_title_work);
+        assert(registry.allocations.count(external_title_work.get()) == 1);
+        assert(old_arena.expired());
+        ++observations;
+    };
+    cleanup::LevelDestructor callback = [](void *context) {
+        (*static_cast<decltype(observe) *>(context))();
+    };
+    void *context = &observe;
+    std::string debug;
+    cleanup::LevelState level{set_count, set_entries, sets, cameras, callback, context, debug};
+    cleanup::run_level_destructor(1, level, {});
+    assert(observations == 1 && callback == nullptr);
     std::cout << "Native logo scene: asset failure prefix, task reset, profile save, frame control, "
                  "immediate draw order and release/re-entry pass; boot is separate.\n";
 }

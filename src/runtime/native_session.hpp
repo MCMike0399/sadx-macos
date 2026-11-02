@@ -1,4 +1,5 @@
 #pragma once
+#include "engine/reset_control.hpp"
 #include "engine/character_pack.hpp"
 #include "runtime/native_player_system.hpp"
 #include "engine/character_geometry.hpp"
@@ -266,7 +267,7 @@ class Session final : private flow::NativeServices {
     menu_caption::Context saving_message_;
     std::uint8_t skip_message_mipmaps_ = 0;
     // Native BSS storage: SONIC 0x3abdf80; source conditional4326f0 caller.
-    std::uint32_t text_window_pending_ = 0;
+    control::FrameMessageState frame_message_{};
     // Native BSS storage: SONIC 0x3b2c584; source42f990 deferred list owner.
     void *lazy_texture_release_list_ = nullptr;
     // GLOBAL: SONIC 0x3c5e8c4 FileSelectionBackup size=2
@@ -318,8 +319,8 @@ class Session final : private flow::NativeServices {
     std::uint8_t hide_hud_ = 0;
     // File-backed default; LoadSave subsequently writes the saved vibration byte.
     std::uint8_t rumble_enabled_ = 1;
-    std::uint16_t editor_status_ = 0;
-    std::uint32_t reset_status_ = 0, reset_work_ = 0, saved_stage_ = 0, market_rings_ = 0;
+    control::EditorState editor_{};
+    std::uint32_t reset_work_ = 0, saved_stage_ = 0, market_rings_ = 0;
     std::int16_t act_ = 0, previous_stage_ = 0;
     std::uint32_t previous_act_ = 0;
     std::array<std::uint8_t, 60> missions_{};

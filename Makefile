@@ -216,6 +216,13 @@ build/input-test build/mac-input-test: tests/fixtures/input_keyboard_goldens.hpp
 build/ninja-queue-consumer-test: tests/fixtures/ninja_sprite_test_fixture.hpp
 build/native-player-path-probe.dylib build/native-player-direction-reset-probe.dylib: tests/fixtures/path_probe_data.hpp
 
+# Reset compatibility APIs bind to the shared game algorithm through reference transport.
+RESET_REFERENCE_UNITS := build/game-reset-test build/reset-order-characterization-test
+$(RESET_REFERENCE_UNITS): build/%-test: tests/unit/$$(subst -,_,$$*).cpp build/libsadx-guest.a build/libsadx-core.a
+	$(CXX) $(CXXFLAGS) $(INCLUDES) $< build/libsadx-guest.a build/libsadx-core.a -o $@
+build/native-game-reset-probe.dylib build/native-stream-players-probe.dylib: build/native-%-probe.dylib: tests/probes/native_$$(subst -,_,$$*)_probe.cpp build/libsadx-guest.a build/libsadx-core.a
+	$(CXX) $(CXXFLAGS) -dynamiclib $(INCLUDES) $< build/libsadx-guest.a build/libsadx-core.a -o $@
+
 # Native probes: tests/probes/native_<x>_probe.cpp -> build/native-<x>-probe.dylib, called by the Unicorn oracles.
 REFERENCE_PLAYER_PROBES := build/native-player-animation-probe.dylib build/native-player-animation-blend-probe.dylib build/native-sonic-animation-table-probe.dylib build/native-animation-table-characterization-probe.dylib build/native-game-reset-composed-probe.dylib build/native-ninja-texture-selection-probe.dylib build/native-ninja-sprite-display-probe.dylib build/native-library-init-probe.dylib build/native-player-scene-helpers-probe.dylib build/native-player-scene-position-probe.dylib build/native-fov-probe.dylib build/native-ninja-queue-color-probe.dylib build/native-game-frame-owners-probe.dylib build/native-fog-probe.dylib build/native-ninja-queue-consumer-probe.dylib build/native-game-view-probe.dylib  build/native-game-frame-control-probe.dylib build/native-speedrun-limiter-probe.dylib build/native-game-startup-probe.dylib build/native-game-logic-support-probe.dylib build/native-game-logic-probe.dylib build/native-game-loop-probe.dylib build/native-frame-completion-probe.dylib build/native-ninja-queue-lifecycle-probe.dylib build/native-ground-acceleration-probe.dylib build/native-alternate-acceleration-probe.dylib build/native-player-startup-probe.dylib
 $(REFERENCE_PLAYER_PROBES): build/native-%-probe.dylib: tests/probes/native_$$(subst -,_,$$*)_probe.cpp build/libsadx-guest.a build/libsadx-core.a

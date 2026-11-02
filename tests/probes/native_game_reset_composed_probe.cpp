@@ -1,5 +1,5 @@
-#include "game/game_reset.hpp"
-#include "game/game_reset_leaves.hpp"
+#include "guest/game_reset_reference.hpp"
+#include "guest/game_reset_leaves_reference.hpp"
 #include "guest/music_state_reference.hpp"
 #include <algorithm>
 #include <cstring>
@@ -14,7 +14,7 @@ struct Memory {std::vector<std::uint8_t> b;
 }
 extern "C" int sadx_native_game_reset_composed(const std::uint8_t* pages,std::size_t size,std::uint32_t fail,std::uint8_t* out_pages,std::uint32_t* out,std::size_t capacity){
     if(size!=14*4096||capacity<200)return 0;Memory m{std::vector<std::uint8_t>(pages,pages+size)};
-    std::optional<std::uint32_t> w80=m.w(0x3abdf80),depth=m.w(0x8928c8),qmode=m.w(0x3ab98ac),init=m.w(0x3b0ef2c);std::optional<std::int32_t> t18c=static_cast<std::int32_t>(m.w(0x3b1118c));
+    sadx::reference::FrameMessageFact w80=m.w(0x3abdf80);std::optional<std::uint32_t> depth=m.w(0x8928c8),qmode=m.w(0x3ab98ac),init=m.w(0x3b0ef2c);std::optional<std::int32_t> t18c=static_cast<std::int32_t>(m.w(0x3b1118c));
     std::array<std::optional<std::uint32_t>,36> rec;for(unsigned i=0;i<36;++i)rec[i]=m.w(0x3b292fc+0x38*i);
     sadx::CrtRandState rng{m.w(0x2bcbdf8)};sadx::GameResetState s{w80,m.h(0x3b29d08),m.w(0x3b290d0),m.w(0x3b0e330),rng};
     sadx::reference::MusicTracks tracks;
@@ -35,8 +35,8 @@ extern "C" int sadx_native_game_reset_composed(const std::uint8_t* pages,std::si
         if(leaf.outcome==sadx::ResetLeafOutcome::not_a_leaf)return fixture(c.callee,c.source_call,c.argument.value_or(0));
         leaf_stop=leaf.source_boundary;return sadx::GameLogicOwnerResult{sadx::GameLogicOwnerState::failed,leaf.source_boundary,{}};}};
     const auto r=sadx::run_game_reset_40bf40(rt);
-    m.put(0x3abdf80,w80);m.put(0x8928c8,depth);m.put(0x3ab98ac,qmode);m.put(0x3b0ef2c,init);m.put(0x3b1118c,t18c);m.put(0x2bcbdf8,rng.seed_at_2bcbdf8);
-    m.put(0x3b29d08,s.word_at_3b29d08);m.put(0x3b290d0,s.heap_at_3b290d0);m.put(0x3b0e330,s.heap_at_3b0e330);
+    m.put(0x3abdf80,w80.fact());m.put(0x8928c8,depth);m.put(0x3ab98ac,qmode);m.put(0x3b0ef2c,init);m.put(0x3b1118c,t18c);m.put(0x2bcbdf8,rng.seed_at_2bcbdf8);
+    m.put(0x3b29d08,s.editor ? std::optional<std::uint16_t>{*s.editor} : std::nullopt);m.put(0x3b290d0,s.heap_at_3b290d0);m.put(0x3b0e330,s.heap_at_3b0e330);
     m.put(0x3abdf90,L.word_at_3abdf90);m.put(0x3abdfac,L.word_at_3abdfac);
     tracks.export_source([&](std::uint32_t at, std::optional<std::uint32_t> word) { m.put(at, word); });
     m.put(0x3b11190,L.word_at_3b11190);m.put(0x3b291b4,L.callback_at_3b291b4);

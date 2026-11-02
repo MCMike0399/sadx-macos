@@ -1,5 +1,5 @@
 #include "guest/music_state_reference.hpp"
-#include "game/game_reset.hpp"
+#include "guest/game_reset_reference.hpp"
 #include <cassert>
 #include <cstring>
 
@@ -114,7 +114,7 @@ void reset_failure_prefixes() {
         reference::MusicTracks owner;
         const TrackWords initial{11, 12, 13, 14, 15, 16};
         owner.import_words(initial);
-        std::optional<std::uint32_t> status = 7;
+        reference::FrameMessageFact status = 7;
         CrtRandState rng{5};
         GameResetState state{status, 3, 0, 0, rng};
         GameResetRuntime runtime{state, [&](const GameResetCall &call) {

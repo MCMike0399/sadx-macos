@@ -117,7 +117,7 @@ void Session::clear_game() {
 void Session::reset_game() {
     if (!display_ || !audio_configuration_)
         throw flow::UnrecoveredGameFlowCall("native_cleanup_owners");
-    cleanup::State state{reset_status_, editor_status_, temporary_buffer_, secondary_buffer_,
+    cleanup::State state{frame_message_.work, editor_.status, temporary_buffer_, secondary_buffer_,
                          bootstrap_.random_seed};
     const auto stop_pcm = [this](std::int32_t channel) {
         if (!audio::stop_pcm(pcm_, channel))

@@ -1,17 +1,27 @@
 #include "game/game_cleanup.hpp"
+#include "game/game_cleanup_internal.hpp"
 #include <algorithm>
 #include <stdexcept>
 namespace sadx::cleanup {
-void resume_voice_volume(std::int32_t &current, const std::int32_t &saved) { current = saved; }
+void resume_voice_volume(std::int32_t &current, const std::int32_t &saved) {
+    struct Access {
+        std::int32_t &current;
+        const std::int32_t &saved;
+        std::int32_t saved_voice_volume() { return saved; }
+        void store_voice_volume(std::int32_t volume) { current = volume; }
+    } access{current, saved};
+    detail::resume_voice_volume(access);
+}
 std::int32_t stop_all_sounds(AudioQueueView &state,
                              const std::function<void(std::int32_t)> &stop_pcm) {
-    for (std::size_t index = 0; index < state.records.size(); ++index) {
-        state.records[index].timer = 0;
-        state.records[index].flags |= 16;
-        stop_pcm(static_cast<std::int32_t>(index));
-        state.positional_tasks[index] = {};
-    }
-    return 0;
+    struct Access {
+        AudioQueueView &state;
+        std::uint32_t sound_flags(std::size_t i) { return state.records[i].flags; }
+        void clear_sound_timer(std::size_t i) { state.records[i].timer = 0; }
+        void store_sound_flags(std::size_t i, std::uint32_t flags) { state.records[i].flags = flags; }
+        void clear_positional_task(std::size_t i) { state.positional_tasks[i] = {}; }
+    } access{state};
+    return detail::stop_all_sounds(access, stop_pcm);
 }
 
 void set_player_number(std::uint16_t &current, std::uint16_t number) { current = number; }
@@ -73,47 +83,49 @@ void load_save(const save::Data &save, LoadSaveState &state) {
 void mission_level_destructor(void *) {
     throw std::runtime_error("LevelDestructor_MissionMode is not recovered");
 }
-void release_set_files(LevelState &state, const std::function<void(void *)> &release_buffer) {
-    // The source debug formatter receives this constant, with no conversions.
-    state.debug_message = "ReleaseSetFile\n";
-    state.set_entry_count = nullptr;
-    state.set_entries = nullptr;
-    for (auto &file : state.set_files) {
-        if (file != nullptr) {
-            release_buffer(file);
-            file = nullptr;
-        }
+namespace {
+// NOTSA: plain native access to the borrowed level owners.
+struct LevelAccess {
+    LevelState &state;
+    void print_debug(const char *text) { detail::format_literal_debug(text, state.debug_message); }
+    void clear_set_count() { state.set_entry_count = nullptr; }
+    void clear_set_entries() { state.set_entries = nullptr; }
+    void *set_file(std::size_t i) { return state.set_files[i]; }
+    void *camera_file(std::size_t i) { return state.camera_files[i]; }
+    void clear_set_file(std::size_t i) { state.set_files[i] = nullptr; }
+    void clear_camera_file(std::size_t i) { state.camera_files[i] = nullptr; }
+    bool is_mission_destructor() { return state.destructor == mission_level_destructor; }
+    void invoke_level_destructor() {
+        if (const auto callback = state.destructor)
+            callback(state.destructor_context);
     }
+    void clear_level_destructor() {
+        state.destructor = nullptr;
+        state.destructor_context = nullptr;
+    }
+};
+}
+void release_set_files(LevelState &state, const std::function<void(void *)> &release_buffer) {
+    LevelAccess access{state};
+    detail::release_set_files(access, release_buffer);
 }
 void release_camera_files(LevelState &state, const std::function<void(void *)> &release_buffer) {
-    state.debug_message = "ReleaseCamFile\n";
-    for (auto &file : state.camera_files) {
-        if (file != nullptr) {
-            release_buffer(file);
-            file = nullptr;
-        }
-    }
+    LevelAccess access{state};
+    detail::release_camera_files(access, release_buffer);
 }
 void run_level_destructor(std::uint32_t mode, LevelState &state,
-                           const std::function<void(void *)> &release_buffer) {
-    if (mode == 0) {
-        release_set_files(state, release_buffer);
-        release_camera_files(state, release_buffer);
-    } else if (mode == 5 && state.destructor == mission_level_destructor) {
-        return;
-    }
-    const auto destructor = state.destructor;
-    if (destructor != nullptr)
-        destructor(state.destructor_context);
-    state.destructor = nullptr;
-    state.destructor_context = nullptr;
+                          const std::function<void(void *)> &release_buffer) {
+    LevelAccess access{state};
+    detail::run_level_destructor(mode, access, release_buffer);
 }
 void reset_loop_state(LoopState &state, const std::function<void()> &clear_list) {
-    const auto list = state.list_data;
-    state.reset_work = 0;
-    state.loop_count = 0;
-    if (list != nullptr)
-        clear_list();
+    struct Access {
+        LoopState &state;
+        bool list_present() { return state.list_data != nullptr; }
+        void clear_reset_work() { state.reset_work = 0; }
+        void clear_loop_count() { state.loop_count = 0; }
+    } access{state};
+    detail::reset_loop_state(access, clear_list);
 }
 void release_regular_object_textures(TextureState &state, const ReleaseTextureList &release) {
     if (state.common != nullptr) {
@@ -193,7 +205,11 @@ void display_message(const Message *message, MessageState &state,
                       const std::uint8_t &control_message_gate,
                       const std::int32_t &pending_logic_ticks) {
     if (message == nullptr) {
-        state.count = 0;
+        struct Access {
+            MessageState &state;
+            void clear_message_count() { state.count = 0; }
+        } access{state};
+        detail::clear_messages(access);
         return;
     }
     const auto count = static_cast<std::int32_t>(state.count);
@@ -224,34 +240,16 @@ void prepare_title(TitleState &state, TitleServices &services) {
 }
 
 void reset(State &state, Services &services) {
-    services.resume_voice_volume();
-    services.set_depth_compare_mode(1);
-    services.stop_vibration(0);
-    state.reset_status = 0;
-    state.editor_status = 0;
-    services.set_blank_queue_mode();
-    services.reset_song_state();
-    services.reset_current_voice();
-    services.stop_all_sounds();
-    services.stop_pcm(-1);
-    services.close_media(0);
-    services.close_media(1);
-    services.setup_screen();
-    services.display_message(nullptr);
-    services.initialize_heap();
-    services.initialize_tasks();
-    for (std::uint32_t level = 0; level < 10; ++level)
-        services.run_level_destructor(level);
-    services.reset_loop_state();
-    if (state.temporary_buffer != nullptr) {
-        services.release_buffer(state.temporary_buffer);
-        state.temporary_buffer = nullptr;
-    }
-    if (state.secondary_buffer != nullptr) {
-        services.release_buffer(state.secondary_buffer);
-        state.secondary_buffer = nullptr;
-    }
-    services.enable_fog();
-    state.random_seed = 3735882923U;
+    struct Access {
+        State &state;
+        void clear_frame_message_work() { state.frame_message_work = 0; }
+        void clear_editor_status() { state.editor_status = 0; }
+        void *temporary_buffer() { return state.temporary_buffer; }
+        void *secondary_buffer() { return state.secondary_buffer; }
+        void clear_temporary_buffer() { state.temporary_buffer = nullptr; }
+        void clear_secondary_buffer() { state.secondary_buffer = nullptr; }
+        void seed_random(std::uint32_t seed) { state.random_seed = seed; }
+    } access{state};
+    detail::reset(access, services);
 }
 } // namespace sadx::cleanup

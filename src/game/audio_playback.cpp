@@ -1,4 +1,5 @@
 #include "game/audio_playback.hpp"
+#include "game/game_cleanup_internal.hpp"
 #include <algorithm>
 
 namespace sadx::audio {
@@ -75,25 +76,37 @@ PlaybackResult stop_pcm(PcmState &state, std::int32_t channel) {
     return {};
 }
 PlaybackResult close_media(MediaState &state, std::uint32_t mode) {
-    if (mode == 0 && state.music_open != 0) {
-        if (!state.music_player)
-            return {PlaybackFailure::MissingMusicPlayer};
-        state.music_player->stop();
-        // The source reloads the canonical player after the stop callback.
-        if (!state.music_player)
-            return {PlaybackFailure::MissingMusicPlayer};
-        state.music_player->reset();
-        state.music_open = 0;
-        state.music_status = 0;
-    } else if (mode == 1 && state.voice_player) {
-        state.voice_player->stop();
-        if (!state.voice_player)
-            return {PlaybackFailure::MissingVoicePlayer};
-        state.voice_player->reset();
+    struct MissingPlayer {
+        PlaybackFailure failure;
+    };
+    struct Access {
+        MediaState &state;
+        bool music_open() { return state.music_open != 0; }
+        bool voice_present() { return state.voice_player != nullptr; }
+        StreamPlayer &music() {
+            if (!state.music_player) throw MissingPlayer{PlaybackFailure::MissingMusicPlayer};
+            return *state.music_player;
+        }
+        StreamPlayer &voice() {
+            if (!state.voice_player) throw MissingPlayer{PlaybackFailure::MissingVoicePlayer};
+            return *state.voice_player;
+        }
+        void stop_music() { music().stop(); }
+        void reset_music() { music().reset(); }
+        void stop_voice() { voice().stop(); }
+        void reset_voice() { voice().reset(); }
+        void clear_music_open() { state.music_open = 0; }
+        void clear_music_status() { state.music_status = 0; }
+        void clear_shared_status() { state.shared_status = 0; }
+    } access{state};
+    try {
+        cleanup::detail::close_media(mode, access);
+    } catch (const MissingPlayer &missing) {
+        return {missing.failure};
     }
-    state.shared_status = 0;
     return {};
 }
+
 AudioConfiguration normalize_audio_configuration(const RawAudioConfiguration &raw) {
     const auto music_percent = std::clamp(raw.music_percent, 0, 100);
     const auto voice_percent = std::clamp(raw.voice_percent, 0, 100);

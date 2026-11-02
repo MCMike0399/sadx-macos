@@ -1,9 +1,17 @@
 #include "player/sonic_player.hpp"
+#include "guest/native_game_reference.hpp"
 #include <cassert>
 #include <cstring>
 #include <fstream>
 #include <iostream>
 #include <iterator>
+namespace sadx {
+// NOTSA: inspect actual NativeGame owners without exposing a gameplay/test API.
+struct ResetCompositionFixture {
+    static GameResetState &reset(NativeGame &game) { return *game.reset_; }
+    static SonicPlayerGlobals &sonic(NativeGame &game) { return game.sonic_globals_; }
+};
+}
 namespace   {
     std::vector<std::uint8_t> read(const char* p)  {
         std::ifstream f(p,std::ios::binary);
@@ -21,7 +29,8 @@ namespace   {
     std::shared_ptr<sadx::PlayerMotionState> world=std::make_shared<sadx::PlayerMotionState>();
     std::shared_ptr<sadx::PlayerStartupPlayer> player=std::make_shared<sadx::PlayerStartupPlayer>();
     sadx::PlayerPositionCollisionScene scene;
-    std::optional<std::uint16_t> forced_3b29d08;sadx::SonicPlayerGlobals globals;
+    sadx::control::EditorState editor{};bool editor_known=true;
+sadx::SonicPlayerGlobals globals;
     sadx::PlayerStartupRegistry players;
     Fixture(const Fixture&)=delete; // globals borrow forced_3b29d08
     Fixture()  {
@@ -38,7 +47,7 @@ namespace   {
         world->target_yaw=0xabcd8765;
         scene.task_collision=sadx::PositionResourceRef{};
         globals.forced_at_3b29d0c=0;
-        forced_3b29d08=0;globals.forced_at_3b29d08=&forced_3b29d08;
+        editor.status=0;globals.editor=sadx::control::EditorView(editor,[this]{if(!editor_known)throw sadx::control::EditorReadUnavailable{};});
         globals.stage_at_3b22dcc=0;
         player->player->source_flags_at_6=0;
         player->player->equipment_at_4=0;
@@ -157,9 +166,48 @@ int main(int argc,char** argv)  {
         assert(f.scene.info_tables[4].records[0].damage==0xaf&&f.scene.info_tables[4].records[1].attributes==0x10&&f.player->player->timer_at_7e==0);
         assert(f.globals.range_at_3c55d45==0);
         f.globals.forced_at_3b29d0c=1;
-        f.forced_3b29d08.reset();
+        f.editor_known=false;
         stopped(run_sonic_player(frame,rt,fp),SonicPlayerFailure::unknown_field,0x4258f7);
         assert(f.task->action_at_0==86);
+        // New bounded composition: actual NativeGame owner -> reset -> real Sonic reader.
+        // This does not establish a playable Sonic route or arbitrary old native alias equivalence.
+        {
+            NativeGame game(NativeGameConfig{});
+            auto &reset = ResetCompositionFixture::reset(game);
+            auto &sonic = ResetCompositionFixture::sonic(game);
+            assert(sonic.editor.aliases(reset.editor.borrow()));
+            reset.editor = 32768;
+            reset.frame_message = 4294967295U;
+            reset.heap_at_3b290d0 = 0;
+            reset.heap_at_3b0e330 = 0;
+            f.globals.editor = sonic.editor;
+            f.globals.forced_at_3b29d0c = 0;
+            f.task->action_at_0 = 86;
+            run_sonic_player(frame, rt, fp);
+            assert(f.task->action_at_0 == 87 && *reset.editor == 32768);
+            GameResetRuntime reset_runtime{reset, [](const auto &) {
+                return GameLogicOwnerResult{GameLogicOwnerState::completed, 0, {}};
+            }};
+            assert(run_game_reset_40bf40(reset_runtime));
+            assert(*reset.frame_message == 0 && *reset.editor == 0);
+            f.task->action_at_0 = 86;
+            run_sonic_player(frame, rt, fp);
+            assert(f.task->action_at_0 == 86);
+            // Both reads occur even when the separate forced word is nonzero.
+            unsigned observations = 0;
+            f.globals.editor = control::EditorView(f.editor, [&] {
+                ++observations; throw control::EditorReadUnavailable{};
+            });
+            f.globals.forced_at_3b29d0c.reset();
+            stopped(run_sonic_player(frame, rt, fp), SonicPlayerFailure::unknown_field, 0x4258f0);
+            assert(observations == 0);
+            f.globals.forced_at_3b29d0c = 1;
+            stopped(run_sonic_player(frame, rt, fp), SonicPlayerFailure::unknown_field, 0x4258f7);
+            assert(observations == 1 && f.task->action_at_0 == 86);
+            f.globals.editor = control::EditorView(f.editor, [&] {
+                if (!f.editor_known) throw control::EditorReadUnavailable{};
+            });
+        }
         // signed OR still reads both globals
         f.task->orientation.flags=0;
         f.player->parameters.reset();

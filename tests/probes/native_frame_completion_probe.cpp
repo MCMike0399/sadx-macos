@@ -1,5 +1,5 @@
 #include "guest/frame_control_reference.hpp"
-#include "game/game_loop.hpp"
+#include "guest/game_loop_reference.hpp"
 #include <algorithm>
 #include <vector>
 // Native 411d00 matching tools/verify_original_frame_completion.py.

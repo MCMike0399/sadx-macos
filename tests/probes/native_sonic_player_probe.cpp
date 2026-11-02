@@ -63,7 +63,7 @@ const std::uint32_t* in,std::uint32_t* out)  {
     sadx::SonicPlayerGlobals globals;
     globals.stage_at_3b22dcc=static_cast<std::uint16_t>(in[27]);
     globals.forced_at_3b29d0c=static_cast<std::int16_t>(in[28]);
-    std::optional<std::uint16_t> forced_3b29d08=static_cast<std::uint16_t>(in[29]);globals.forced_at_3b29d08=&forced_3b29d08;
+    sadx::control::EditorState editor{static_cast<std::uint16_t>(in[29])};globals.editor=sadx::control::EditorView(editor);
     sadx::PlayerStartupRegistry registry;
     sadx::SonicPlayerRuntime rt{globals,scheduler,registry,nullptr,nullptr,*k,{}};
     sadx::SonicPlayerResult r;

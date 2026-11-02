@@ -1,5 +1,5 @@
 #pragma once
-#include "game/game_loop.hpp"
+#include "guest/game_loop_reference.hpp"
 #include <array>
 #include <cstdint>
 #include <functional>

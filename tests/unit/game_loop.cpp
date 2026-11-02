@@ -1,5 +1,5 @@
 #include "guest/frame_control_reference.hpp"
-#include "game/game_loop.hpp"
+#include "guest/game_loop_reference.hpp"
 #include <iostream>
 #include <stdexcept>
 #include <vector>
@@ -13,7 +13,7 @@ struct Fixture {
         state.exit_at_3abdf7c=0;state.focus_at_8929d4=1;state.special_flags_at_909eb4=&special;state.fog_flag_at_3abdcfe=&fog;
         state.fog_range_at_3abdca0=1;state.fog_range_at_3abdca4=2;state.fog_range_at_3abdc70=3;state.fog_range_at_3abdc74=4;
         state.request_at_3b291ad=0;state.counter_at_3b291b2=0;state.save_phase_at_3b291a4=0;state.pending_at_3abdf76=0;state.pending_at_3abdf79=0;
-        state.word_at_3abdf80=0;state.mode_at_3b28114=2;state.frames_at_3abdf58=0;state.frames_at_3abdf5c=0;state.game_mode_at_3b22de4=4;state.word_at_3c85804=0;
+        state.frame_message=0;state.mode_at_3b28114=2;state.frames_at_3abdf58=0;state.frames_at_3abdf5c=0;state.game_mode_at_3b22de4=4;state.word_at_3c85804=0;
         runtime.invoke=[this](const sadx::GameLoopCall& c)->sadx::GameLoopOwnerResult{calls.push_back(c);
             if(c.operation==GameLoopOperation::keys_40ef30)return {{sadx::GameLogicOwnerState::completed,0},keys};
             if(c.operation==GameLoopOperation::key_40ef20)return {{sadx::GameLogicOwnerState::completed,0},key};

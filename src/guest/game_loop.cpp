@@ -1,5 +1,5 @@
 #include "guest/frame_control_reference.hpp"
-#include "game/game_loop.hpp"
+#include "guest/game_loop_reference.hpp"
 #include "game/save_frame.hpp"
 #include "engine/speedrun.hpp"
 
@@ -94,7 +94,7 @@ struct Body {
         }
         auto save_before = save_frame_state(false);
         save::detail::before_frame_completion(save_before, *this);
-        if(need(st.word_at_3abdf80,0x40cbf2)!=0)call(GameLoopOperation::work_4326f0,0x40cbfa,0x4326f0);
+        if(need(st.frame_message.fact(),0x40cbf2)!=0)call(GameLoopOperation::work_4326f0,0x40cbfa,0x4326f0);
         call(GameLoopOperation::work_40d4d0,0x40cbff,0x40d4d0);call(GameLoopOperation::work_40eab0,0x40cc04,0x40eab0);
         call(GameLoopOperation::work_42f990,0x40cc09,0x42f990);call(GameLoopOperation::work_40d3c0,0x40cc0e,0x40d3c0);
         call(GameLoopOperation::work_420840,0x40cc13,0x420840);call(GameLoopOperation::frame_411d00,0x40cc18,0x411d00);

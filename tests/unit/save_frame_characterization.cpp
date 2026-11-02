@@ -1,6 +1,6 @@
 // Actual legacy loop routing compared to the native split, including completion.
 #include "guest/frame_control_reference.hpp"
-#include "game/game_loop.hpp"
+#include "guest/game_loop_reference.hpp"
 #include "game/save_frame.hpp"
 #include <array>
 #include <cassert>
@@ -56,7 +56,7 @@ struct Reference {
     Reference(Words w,int m,int f,int u):mutation(m),fail(f),missing(u) {
         state.exit_at_3abdf7c=0;state.focus_at_8929d4=1;
         state.special_flags_at_909eb4=&special;state.fog_flag_at_3abdcfe=&fog;
-        state.word_at_3abdf80=0;state.frames_at_3abdf58=0;state.frames_at_3abdf5c=0;state.game_mode_at_3b22de4=4;
+        state.frame_message=0;state.frames_at_3abdf58=0;state.frames_at_3abdf5c=0;state.game_mode_at_3b22de4=4;
         store(w);
         runtime.invoke=[this](const sadx::GameLoopCall &c) {
             output << "route:" << static_cast<unsigned>(c.operation) << ',' << c.source_call << ',' << c.callee << '\n';
