@@ -253,7 +253,7 @@ int main(int argc, char **argv) {
     try {
         gamma_selection::run(context, task);
     } catch (const flow::UnrecoveredGameFlowCall &error) {
-        assert(std::string(error.what()) == "native_gamma_update_laser_targets");
+        assert(std::string(error.what()) == "native_gamma_normalized_input_owner");
         stopped = true;
     }
     assert(stopped && players.gamma_effects.burst_task && pose.status == 1);

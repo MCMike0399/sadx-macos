@@ -630,3 +630,9 @@ build/native-player-vertex-weld-probe.dylib: tests/probes/native_player_vertex_w
 	$(CXX) $(CXXFLAGS) -dynamiclib $(INCLUDES) tests/probes/native_player_vertex_weld_probe.cpp src/player/player_vertex_weld.cpp src/engine/character_pack.cpp src/engine/character_geometry.cpp src/engine/task_work.cpp -o $@
 build/native-gamma-vertex-weld-test: tests/unit/native_gamma_vertex_weld.mm src/apps/native_gamma_actor_assets.hpp src/runtime/native_player_system.hpp build/libsadx-native.a
 	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) $< build/libsadx-native.a -framework Foundation -o $@
+
+build/native-gamma-input-buffer-test: tests/unit/native_gamma_input_buffer.mm src/apps/native_gamma_actor_assets.hpp src/runtime/native_player_system.hpp build/libsadx-native.a
+	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) $< build/libsadx-native.a -framework Foundation -o $@
+
+build/native-gamma-input-buffer-probe.dylib: tests/probes/native_gamma_input_buffer_probe.cpp src/player/gamma_input_buffer.cpp src/player/gamma_input_buffer.hpp
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -shared -fPIC $< src/player/gamma_input_buffer.cpp -o $@
