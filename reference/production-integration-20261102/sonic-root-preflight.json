@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "source_commit": "fe42a37884f5c070897b018495fd995d8d69213a",
+  "candidate": "7b1bb9f72fa6d998636eadde085656df873505e3",
+  "source_and_native_membership_identical_to_candidate": true,
+  "build": {
+    "command": "make -j2 -o build/native-controller-deps/include/SDL3/SDL.h build/sadx-native native-closure build/native-sonic-callback-test build/sonic-controller-native-test",
+    "exit_status": 0,
+    "log": "build/sonic-root-preflight.log",
+    "log_sha256": "03be3c758f65427fd35768e5fd52ff110ec4a5d0fc1cdf41e932d35c10cf1f5b"
+  },
+  "check": {
+    "command": "make -j2 check",
+    "exit_status": 0,
+    "log": "build/sonic-root-check.log",
+    "log_sha256": "9b03ec43cb9bcea46d10bceaa847d11919c5b9b126c5dbd6f9fcc238c0a1ca04"
+  },
+  "programs": [
+    {
+      "command": [
+        "build/native-sonic-callback-test",
+        "game/imported"
+      ],
+      "exit_status": 0,
+      "stdout": "Real Sonic callback publishes canonical current owners before the editor stop; captured event mode/path bindings survive primary replacement and reject release\n",
+      "stderr": "",
+      "executable_sha256": "4c256f00e85ac2bf55ec871ee67a7da421a234ea446eb02e76f9f8f8963996f7"
+    },
+    {
+      "command": [
+        "build/sonic-controller-native-test"
+      ],
+      "exit_status": 0,
+      "stdout": "Controlled native Sonic ownership/order harness passed\n",
+      "stderr": "",
+      "executable_sha256": "f372031fe531589f74b6250a8af5939e0804fe699f28f7f7950dea1fe9359d0b"
+    }
+  ],
+  "limits": [
+    "Focused Main preflight only. Combined full gate waits for worker compilation to finish.",
+    "Callback reaches the explicit missing editor binding; it does not complete a Sonic frame.",
+    "Normal app frontier remains previously observed Gamma effects at frame 1332; no new app execution in this receipt.",
+    "No original or reserved cohorts rerun; accepted packet results and partial identities are retained."
+  ]
+}
