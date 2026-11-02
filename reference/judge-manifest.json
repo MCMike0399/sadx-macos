@@ -1,9 +1,10 @@
 {
   "change": {
-    "base_commit": "c94ef72f512fe15fd84309c25d55330fac3e00d9",
-    "evidence": "reference/production-integration-20261101/task-owner-main-integration.json",
-    "evidence_sha256": "b248f6c4f9fd63da0ca63929d5062c5fbca034dd39bd0917fa836bc35d6687b9",
-    "reason": "Integrate independently reviewed Task source bindings, exact native preservation, current Main canonical reports and lowered readability allowances. Preserve original sourceFAIL207 and all parent paths; only reviewed finite judge bindings change."
+    "base_commit": "2b0953ad2f0e91bc47361f920f1097705e50d886",
+    "evidence": "reference/production-integration-20261101/preview-actions-admission.json",
+    "evidence_sha256": "bcc148500f4edb9b0721359c8e23693272fd4db0ea57669768d0cd25f4b32562",
+    "mode": "additions-only",
+    "reason": "Register independently accepted preview action witnesses and exact integrated oracle report"
   },
   "files": {
     "Makefile": "d5c06fa100b152bad8efe7eca55c9dfa39d15f3cf5363ae12d4f31a1a4b08a4a",
@@ -246,6 +247,7 @@
     "reference/oracle-reports/screen_distance.json": "c66ae48b9786f678bcf89f7e8367cdf15a36d2e272bad8c069ca33d6a163d7d6",
     "reference/oracle-reports/screen_init.json": "3543f06e4954fb0c709bf2dafc6e06c689c1370a2da153810ccb21c6de85df7e",
     "reference/oracle-reports/screen_polygon.json": "0bae51c34a88853dfe6e37e20befcb798f487edfb2d53f7f3381cbc57f9abf9d",
+    "reference/oracle-reports/selection_preview_actions.json": "3023cce116052f43be7875aeca79dc36c308e419691755c199f82931f921430e",
     "reference/oracle-reports/session_control_defaults.json": "d9f6ce6738ec6b7cf2d51cda8242d012b1d30cbd3c4f4ede8227efbbbb1c97c4",
     "reference/oracle-reports/sonic_action.json": "03d98c9aa05fb67163e4ac8dc4ea71d2891d0fea85d60571d8af7a660749dec4",
     "reference/oracle-reports/sonic_actions.constants.bin": "cac3a43b8a00509706505b79771f4f9c2ec6b500a925b2cb4820b611fffe34b7",
@@ -294,6 +296,7 @@
     "reference/oracle-reports/x87_memory.cases.bin": "dfa27fbf3d01632b5e305e90d80ecfcada68df7ba313766f9a41cbefb7e37e5c",
     "reference/oracle-reports/x87_memory.json": "20c980d394546ef0deadbc49f022f8b501e59bcab94ad80954190976c5ec29b1",
     "reference/oracle-reports/x87_transcendental.json": "f81cf50fc44791d8a68b17d9303457273cee9817a6cbeb3cb0a09fd764903885",
+    "reference/packets/preview-actions-native/verify_mutants.py": "7ce631a5bda608cf67a7e6e4dee32db557715143b25daac849fd3546a5e70a73",
     "reference/packets/save-completion/mutants.py": "74d50b40a4705eb7ec5d1ce1dd172e3e297714ca29a77cbe175378c5365d3b51",
     "reference/packets/save-completion/qualify.py": "c46fac4b1445c455013186a9ddf1ff06722d6fce4548be7e3560468ca641425c",
     "reference/packets/save-io-frame-judges/build.py": "2e17a955b3366b65743b07f9e011091e983c945631c336d25c2d5a2778331ebf",
@@ -571,6 +574,7 @@
     "tests/probes/native_screen_polygon_probe.cpp": "dcd4d808f68dcf8ad2b92d8f32e3bc3e1ac82734633e1edbe2b2209327ce8325",
     "tests/probes/native_selection_camera_probe.cpp": "39632ae98b8463d91cad9b677d2c0778c1874f2eb412d315b76afc73d81de1e1",
     "tests/probes/native_selection_player_queries_probe.cpp": "52db7a55773982a58653b18bb4a17abb303469f9ed4c6b0caf24d6e0cc9af32d",
+    "tests/probes/native_selection_preview_actions_probe.cpp": "eb96812da4e7e45369f1633bc5f713bad0270be43cea729e18d85c395536d60b",
     "tests/probes/native_selection_preview_probe.cpp": "ef6c6e2f505058720b4571acdc572a0e6ea7c4696edba9c3e6580c320f8ece22",
     "tests/probes/native_selection_question_probe.cpp": "2c63fa62fb2e7217bc3d7515e4ec7059cfb1af1f286a64efd78970f3e5346946",
     "tests/probes/native_session_control_defaults_probe.cpp": "09f4e19da8c5dfaf065dafe128879e0fdfef9e313b7b88e2da293897b9487a16",
@@ -818,7 +822,7 @@
     "tests/unit/main_menu_content.cpp": "9ae62d33ab3981c4050da8fd8ede955a08c2ecbcfd91d865de895e5d39c49145",
     "tests/unit/main_menu_eligibility.cpp": "0769bb1cd5d58da859399c2dc7082ca05d3ed8bd3704838e1c528b49ef9896cc",
     "tests/unit/main_menu_profile.cpp": "5c9e473de4a1fecaf1e1cbd9e14072919973cb8719c724de52cc95900ba9dace",
-    "tests/unit/manifest.tsv": "362b5fbdc10532f8954b786365734ffb0c5980691802a49bb2761d7aca43571d",
+    "tests/unit/manifest.tsv": "f9bca34fcb4b79e562d6a5ad8817c26ec3aaa4b7b39bc3448499129f60e73d4d",
     "tests/unit/material_correction.cpp": "e866358fc8165d70c48a71b77ee5479198900842c3cfcd4de4ce65701d1f1a3a",
     "tests/unit/menu_dialog_control.cpp": "dcf53f00372f20ade1fcb0714f1fd184052077a5ac9709afd91840a0ffe6cb1a",
     "tests/unit/menu_draw_primitives.cpp": "e11ef8ad54979d33773aaecb47e1d1bbf115bd8e2b7f5115582a8718ed85543f",
@@ -964,6 +968,7 @@
     "tests/unit/scene_input_producer.cpp": "4e196bb8bdbc49529a5c1459a44ee90ed42a231b7adb79ad90ac3af8df4a65ce",
     "tests/unit/selection_character_pack.cpp": "82d2719a87d914511636cde313c5e3f28d7a154867d7829a2f89b7b18d0e7c74",
     "tests/unit/selection_player_queries.cpp": "e7b5b8a8645bfafab1db452d58da6afafe4e6f7f09a0c0fac716a25a5797cd13",
+    "tests/unit/selection_preview_actions.cpp": "75db85b8556f4bcb8fd604718781d1c80a987260380d43fa3f617c61eda227f4",
     "tests/unit/selection_question.cpp": "24408421691f250137fa8166e1d09cd8bcbbd27927e77ab9b4520830f7b2e303",
     "tests/unit/session_control_defaults.cpp": "dfa1d59b06e60b9fc48e2292baab0bbb4362f10c95bbff3d40d5a07d2eb32993",
     "tests/unit/sonic_actions.cpp": "09124d809199c0f196c4ad729d0e359bb9ea5788826a5c90961020896677831d",
@@ -1300,6 +1305,7 @@
     "tools/oracles/verify_original_selection_camera.py": "00f1dc05261f4b2ec388671f4b8e38cd09b6cc0c546045ec38b77af4c675a6e1",
     "tools/oracles/verify_original_selection_player_queries.py": "5a6642aeb290ca48e767637399a9f64b11f70878459054057ea09ba7cacb8c74",
     "tools/oracles/verify_original_selection_preview.py": "3d14e7e5ddbd82730eecd4a68b6a6f173a9158149a38e1726a12ea9ebb1aaf8c",
+    "tools/oracles/verify_original_selection_preview_actions.py": "d3a878aac3e8ddf82f454bfbb2ff841f74618355f8ef5ac21d929ce7ec88c7ce",
     "tools/oracles/verify_original_selection_question.py": "28077bbaad71c612a405e5c960842b64952f474b75b7e1a1db13203325047118",
     "tools/oracles/verify_original_session_control_defaults.py": "0135a005267b13919da3272dc89085722bc73682fd431ca379d6b40c4d9a31e0",
     "tools/oracles/verify_original_sonic_actions.py": "d4076e926d22b4a2cfc0a5f4a4cf58b889f338a5019e0cf3d0a4b98a4560faf6",

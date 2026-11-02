@@ -1,0 +1,39 @@
+{
+  "source_candidate": "4914274acb2cfa96aea9d2d96cee66ab7426bb6e",
+  "correction_candidate": "5fed7225150114c6b4a80d28033bb53942b52011",
+  "main_commits": [
+    "9628635",
+    "580f787"
+  ],
+  "independent_reviews": {
+    "core": "95528acf-2873-4f42-8b4c-5098cea3a220; no demonstrated core defect; three observation gaps",
+    "correction": "9b7bbaee-c595-40b6-9ae5-e540425fd9ea; all three gaps closed; bounded acceptance"
+  },
+  "qualification": "reference/packets/preview-actions-native/review-corrections.json",
+  "registration": [
+    "native source list",
+    "one no-argument unit manifest row",
+    "CharSelActionTails symbol override",
+    "automatic probe/oracle discovery"
+  ],
+  "limits": [
+    "Core integration only; native event engine and runtime action binding remain open.",
+    "No new full gate or N3b claim."
+  ],
+  "integrated_checks": {
+    "native_app_and_force_load_build_exit_status": 0,
+    "native_closure": "PASS",
+    "unit_exit_status": 0,
+    "oracle_exit_status": 0,
+    "oracle_cases": 4013,
+    "oracle_report": "build/oracles/selection_preview_actions.json",
+    "provenance_errors": 0,
+    "readability_regressions": 0,
+    "layer_violations": 0
+  },
+  "integration_source_adjustment": "ActionTail alias and = {} initializer preserve the exact pointer-array type while making its GLOBAL owner declaration parse under the existing provenance checker. No checker changed.",
+  "setup_history": [
+    "Initial provenance check rejected the raw-pointer template/braced declaration; corrected declaration passes.",
+    "Initial oracle command used system Python and failed to import Unicorn before execution; rerun under reference/python/bin/python passed."
+  ]
+}

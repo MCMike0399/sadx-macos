@@ -1,0 +1,42 @@
+{
+ "passed": true,
+ "cases": 4013,
+ "seed": 512910,
+ "outcomes": {
+  "0": 2822,
+  "2": 336,
+  "4": 316,
+  "3": 313,
+  "5": 35,
+  "7": 7,
+  "8": 7,
+  "6": 177
+ },
+ "observation_schema": 2,
+ "failures": [],
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "06d2fdbc85af9dafd117ef8c24aaf098ee289a235117de86f497539a30d40eac",
+ "input_stream_sha256": "5889e2774b4d9c6464a9c12c39fb56414498137c366d2ae1ff3055bcc3859fb8",
+ "complete_observation_sha256": "8fdd518e1deca2bc76fbe09db27c18effea005dce558626abfb495e307c3eefc",
+ "native_sources": {
+  "src/game/selection_preview.hpp": "2fa554438a9b9a0aac52f9214da35903a64ee92c5ce24e432d12d62ac5390b34",
+  "src/game/selection_preview_actions.cpp": "9d2a4b19ae4f02c49b0d3c5146adee5790f424bb23c9dab9b0d751f0944f8349",
+  "tests/probes/native_selection_preview_actions_probe.cpp": "eb96812da4e7e45369f1633bc5f713bad0270be43cea729e18d85c395536d60b"
+ },
+ "source_ranges": {
+  "0x512910-0x512a69": "650b886e25a9bdcde7953529bac144124217237417fbae7b41d7c69546ffea5b",
+  "0x512c40-0x512c50": "aced1909fda0dd3354f6c88244d309137e87b39af3856415bb2e0738790dce80"
+ },
+ "limits": [
+  "EV_SetAction is an ordered receipt, not a qualified native event engine.",
+  "SetInputP runs original instructions; native receipt mirrors its writes.",
+  "All fields and call arguments compare exactly, including failure prefixes.",
+  "No floating-point arithmetic or FP status mutation in the recovered bodies."
+ ],
+ "tracked_summary": {
+  "full_sha256": "d1eb910b8abfa6ba6efe659bb71b9ac07465460b8dd029aa1b4bf42ea52f0f29",
+  "full_bytes": 1536,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

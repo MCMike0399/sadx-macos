@@ -845,3 +845,11 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Expanded development 4,013 and retained holdout 7,013 pass; all seven original plus six new mutations are caught. Scheduler lower-stop/task-reentry test preserves old tails. Whitespace/input preservation checks pass.
 * One initial unit link included unrelated upper-preview source without its numerical dependencies and failed; the corrected focused recipe passes. Original reports remain intact; review-corrections.json records the supplement.
 * No new game behavior, app run, full gate or N3b completion. Imported texture binding, event ownership and native lower calls remain open. Fresh correction review and Gamma packet review precede integration.
+
+### 2026-11-01 — Reviewed preview core integrated (N3b dependency, gate pending)
+
+* Accepted preview source 4914274 and observation correction 5fed722 are integrated as 9628635/580f787. Independent correction review 9b7bbaee closes all three P2 findings; native event queue and app bindings remain open.
+* Source 2b0953a adds native build membership and the tail symbol. An equivalent ActionTail alias and explicit initializer satisfy the existing GLOBAL declaration grammar; no checker or behavior was changed.
+* Actual Main unit, native app build and force-load closure pass. Original comparison rerun on the integrated probe passes all 4,013 cases; provenance/layers have zero violations, readability zero regressions and profile zero UNHANDLED overlaps. Thirteen mutants and 7,013 retained holdouts remain the reviewed packet evidence; they were not rerun for declaration syntax.
+* Initial provenance failure and system-Python missing-Unicorn setup failure are recorded in preview-actions-admission.json; corrected checks pass. New unit/probe/oracle and report registration preserve all parent protected inputs. Refactor inventory remains open and is regenerated for tracked scope.
+* Full gate, new native journey, event engine, menu cancellation and N3b completion remain pending. Gamma setup review and the real event-action queue are next; existing Sonic rewrite continues.
