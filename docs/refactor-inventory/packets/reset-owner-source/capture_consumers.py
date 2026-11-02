@@ -48,13 +48,16 @@ class Function:
         return result
 
 
-def observation_trace(origin, line, record):
+def observation_trace(origin, line, record, kind="game_winmain"):
     resolved = str(Path(origin).resolve())
     def trace(frame, event, arg):
         if event == 'line' and str(Path(frame.f_code.co_filename).resolve()) == resolved and frame.f_lineno == line:
             values = frame.f_locals
-            record({'case': values['n'], 'source': values['e'],
-                    'source_trace': values['st']['trace'], 'native_comparison': values['got_cmp']})
+            if kind == 'stream_players':
+                record({'source': values['e'], 'native_comparison': values['got']})
+            else:
+                record({'case': values['n'], 'source': values['e'],
+                        'source_trace': values['st']['trace'], 'native_comparison': values['got_cmp']})
         return trace
     return trace
 
@@ -81,7 +84,8 @@ def main():
 
     observed = []
     def record(value):
-        observed.append(value.get('case', len(observed)))
+        value.setdefault('case', len(observed))
+        observed.append(value['case'])
         observations.write((json.dumps(value, sort_keys=True, separators=(',', ':')) + '\n').encode())
 
     for value in list(vars(module).values()):
@@ -96,11 +100,12 @@ def main():
             value.run = run
 
     # WinMain's original instruction observation is inline rather than in Source.run.
-    if slug == 'game_winmain':
+    if slug in ('game_winmain', 'stream_players'):
         lines = script.read_text().splitlines()
-        line = next(i + 1 for i, text in enumerate(lines) if 'd=[i for i in range(256)' in text)
+        marker = 'd=[i for i in range(256)' if slug == 'game_winmain' else 'if got!=e:'
+        line = next(i + 1 for i, text in enumerate(lines) if marker in text)
 
-        sys.settrace(observation_trace(spec.origin, line, record))
+        sys.settrace(observation_trace(spec.origin, line, record, slug))
     ctypes.CDLL = Library
     sys.argv = [str(script), '/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe',
                 library, '--output', str(output / f'{slug}.json')]

@@ -64,6 +64,17 @@ class CaptureTests(unittest.TestCase):
         self.assertEqual(seen, [{'case': 0, 'source': [1], 'source_trace': ['original'],
                                  'native_comparison': [1]}])
 
+    def test_stream_inline_trace(self):
+        origin = 'build/reset-fake-stream.py'
+        source = "e=[0,123]; got=[0,123]\ngot=got\n"
+        seen = []
+        sys.settrace(capture.observation_trace(origin, 2, seen.append, 'stream_players'))
+        try:
+            exec(compile(source, str(Path(origin).resolve()), 'exec'), {})
+        finally:
+            sys.settrace(None)
+        self.assertEqual(seen, [{'source': [0, 123], 'native_comparison': [0, 123]}])
+
     def test_truncated_reordered_and_unknown_fail_closed(self):
         data = self.run_fake(2, 2)
         with self.assertRaises(ValueError):
