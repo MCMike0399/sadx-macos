@@ -1,0 +1,23 @@
+{
+  "pack_unchanged": true,
+  "deterministic_metadata": true,
+  "deterministic_provenance": true,
+  "failure_prefix_metadata_unchanged": true,
+  "failures": [
+    {
+      "name": "wrong-dll",
+      "rejected": true,
+      "diagnostic": "unsupported Sonic animation source hashes"
+    },
+    {
+      "name": "wrong-exe",
+      "rejected": true,
+      "diagnostic": "unsupported Sonic animation source hashes"
+    },
+    {
+      "name": "changed-pack",
+      "rejected": true,
+      "diagnostic": "existing combined pack differs; never renumber or replace it"
+    }
+  ]
+}

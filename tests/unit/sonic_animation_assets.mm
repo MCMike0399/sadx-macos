@@ -73,7 +73,8 @@ std::array<player_initialization::PlayerHandle, 2> composition(const std::filesy
     PlayerEventFlags events{};
     // Existing importer owns the common parameter table. Only that input is borrowed;
     // Gamma's animation table is never supplied to Sonic.
-    const auto common = native::app::load_gamma_actor_assets(directory, pack);
+    players.gamma_assets = std::make_unique<native::GammaActorAssets>(
+        native::app::load_gamma_actor_assets(directory, pack));
     std::array<player_initialization::PlayerHandle, 2> records;
     for (unsigned index = 0; index < records.size(); ++index) {
         auto task = scheduler.create_element(7, 3, nullptr).task;
@@ -84,7 +85,7 @@ std::array<player_initialization::PlayerHandle, 2> composition(const std::filesy
         sonic::Context context{players, scheduler, task, fp};
         context.stage = &stage;
         context.alternate_model = &alternate;
-        context.parameters = &common.parameters;
+        context.parameters = &players.gamma_assets->parameters;
         context.events = &events;
         context.auxiliary = auxiliary;
         context.animation_table = &assets.table();
@@ -178,7 +179,7 @@ int main(int argc, char **argv) {
                             bound_motion.data.id == motion.tracks,
                         "exact motion identity/metadata");
             }
-            for (unsigned fault = 0; fault < 6; ++fault) {
+            for (unsigned fault = 0; fault < 7; ++fault) {
                 auto declarations = assets->declarations();
                 switch (fault) {
                 case 0: declarations[1].action.identity = pack.record_count() + 1; break;
@@ -187,6 +188,7 @@ int main(int argc, char **argv) {
                 case 3: declarations[0].action.unavailable_reason.clear(); break;
                 case 4: declarations[1].action.identity = 2; break; // wrong resource kind
                 case 5: declarations[1].action.status = animation::ResourceStatus::KnownNull; break;
+                case 6: declarations = {}; break; // unfilled declarations are unavailable, never guessed nulls
                 }
                 bool rejected = false;
                 try { native::SonicAnimationAssets invalid(pack, std::move(declarations)); }
@@ -228,7 +230,7 @@ int main(int argc, char **argv) {
                         retained->records.at(0).action.status == animation::ResourceStatus::Loaded &&
                         keys.bytes && keys.byte_extent > 0,
                     "table and retained key backing outlive asset wrapper");
-            std::cerr << "149 declarations, 147 rows, imported preview closure, six invalid declarations, "
+            std::cerr << "149 declarations, 147 rows, imported preview closure, seven invalid declarations, "
                          "two real Sonic binds and Stand playback pass\n";
             return 0;
         } catch (const std::exception &error) {

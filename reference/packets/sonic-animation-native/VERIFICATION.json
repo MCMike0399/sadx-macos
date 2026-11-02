@@ -1,0 +1,396 @@
+{
+  "base_main": "08820f79",
+  "source_commits": [
+    "a77d7110",
+    "02a6d9a4"
+  ],
+  "source_hashes": {
+    "src/apps/native_sonic_animation_assets.hpp": "dace0c61e03134a8628e75819b9541779737b34c186fff28b85b0675fc8ca6c8",
+    "src/runtime/sonic_animation_assets.cpp": "f3667068e2b6f3018bd1362746a9e5bbc3224f1ad1eace29994a87cb1364b175",
+    "src/runtime/sonic_animation_assets.hpp": "45aef415e83f6ee6c5f4af8b8794ff65b16ab8f356aac525ad2013ea489ffe56",
+    "tests/unit/sonic_animation_assets.mm": "12f1449f9ab2bc956128fe9efb4386f78f2ef1f28f3b7b96d9fda2002d778a94",
+    "tools/import/sonic_animation_resources.py": "72c7f23e936a09162b58eedbe0cb7add40b1ab0fb3a5052b3e32933d5e21fcde",
+    "reference/packets/sonic-animation-native/verify_faults.py": "5ea96d40e3c8a8a785d6a84ec7c6a717b1de29110a74b455e1f667a0af7bfc7d",
+    "reference/packets/sonic-animation-native/verify_imported.py": "8782a8c04ae161309487993ce97100f1c0c51bdb4ca22905f60efb3494769b06",
+    "reference/packets/sonic-animation-native/verify_importer.py": "5730a3bca4967d0a4bb4f40afa0e10a8079fbdc82a64f5d581742f93f9e66520"
+  },
+  "verification_commands": [
+    {
+      "name": "owner-compile",
+      "command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-Isrc",
+        "-c",
+        "src/runtime/sonic_animation_assets.cpp",
+        "-o",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-2993746c/build/sonic-animation-native/assets.o"
+      ],
+      "exit": 0,
+      "log": "build/sonic-animation-native/owner-compile.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "witness-compile",
+      "command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-Isrc",
+        "-fobjc-arc",
+        "tests/unit/sonic_animation_assets.mm",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-2993746c/build/sonic-animation-native/assets.o",
+        "build/libsadx-native.a",
+        "-framework",
+        "Foundation",
+        "-o",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-2993746c/build/sonic-animation-native/assets-test"
+      ],
+      "exit": 0,
+      "log": "build/sonic-animation-native/witness-compile.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "native-witness",
+      "command": [
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-2993746c/build/sonic-animation-native/assets-test",
+        "game/imported",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-2993746c/build/sonic-animation-native/table.tsv"
+      ],
+      "exit": 0,
+      "log": "build/sonic-animation-native/native-witness.log",
+      "log_sha256": "1fcfab172a2bba562d9b5a1622b7a16afd2717065c31d0114943444bb1a822cf"
+    },
+    {
+      "name": "ubsan-owner-compile",
+      "command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-Isrc",
+        "-O1",
+        "-g",
+        "-fsanitize=undefined",
+        "-fno-sanitize-recover=all",
+        "-c",
+        "src/runtime/sonic_animation_assets.cpp",
+        "-o",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-2993746c/build/sonic-animation-native/assets-ubsan.o"
+      ],
+      "exit": 0,
+      "log": "build/sonic-animation-native/ubsan-owner-compile.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "ubsan-witness-compile",
+      "command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-Isrc",
+        "-O1",
+        "-g",
+        "-fsanitize=undefined",
+        "-fno-sanitize-recover=all",
+        "-fobjc-arc",
+        "tests/unit/sonic_animation_assets.mm",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-2993746c/build/sonic-animation-native/assets-ubsan.o",
+        "build/libsadx-native.a",
+        "-framework",
+        "Foundation",
+        "-o",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-2993746c/build/sonic-animation-native/assets-ubsan-test"
+      ],
+      "exit": 0,
+      "log": "build/sonic-animation-native/ubsan-witness-compile.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "ubsan-witness",
+      "command": [
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-2993746c/build/sonic-animation-native/assets-ubsan-test",
+        "game/imported",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-2993746c/build/sonic-animation-native/ubsan-table.tsv"
+      ],
+      "exit": 0,
+      "log": "build/sonic-animation-native/ubsan-witness.log",
+      "log_sha256": "1fcfab172a2bba562d9b5a1622b7a16afd2717065c31d0114943444bb1a822cf"
+    },
+    {
+      "name": "legacy-table-unit-compile",
+      "command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-Isrc",
+        "tests/unit/sonic_animation_table.cpp",
+        "src/guest/sonic_animation_table_reference.cpp",
+        "-o",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-2993746c/build/sonic-animation-native/legacy-table-test"
+      ],
+      "exit": 0,
+      "log": "build/sonic-animation-native/legacy-table-unit-compile.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "legacy-table-unit",
+      "command": [
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-2993746c/build/sonic-animation-native/legacy-table-test"
+      ],
+      "exit": 0,
+      "log": "build/sonic-animation-native/legacy-table-unit.log",
+      "log_sha256": "61ed2ab308a3fe99342ab08c84b358cad357ab3f1420cc9f844af72236f9ea66"
+    },
+    {
+      "name": "publication-unit",
+      "command": [
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-2993746c/build/sonic-animation-native/publication-test"
+      ],
+      "exit": 0,
+      "log": "build/sonic-animation-native/publication-unit.log",
+      "log_sha256": "ac2e525003882b851e5a5e6b48cb5e6bce85005960f6801f23f5cc29a06fdadd"
+    },
+    {
+      "name": "gamma-assets-unit",
+      "command": [
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-2993746c/build/sonic-animation-native/gamma-assets-test",
+        "game/imported"
+      ],
+      "exit": 0,
+      "log": "build/sonic-animation-native/gamma-assets-unit.log",
+      "log_sha256": "6b68ca54e7da093323b304bffa86ebab0c361105e232c949f27c2126ca128242"
+    },
+    {
+      "name": "sonic-controller-unit",
+      "command": [
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-2993746c/build/sonic-animation-native/sonic-controller-test"
+      ],
+      "exit": 0,
+      "log": "build/sonic-animation-native/sonic-controller-unit.log",
+      "log_sha256": "710ef34ccf535beeecd804af2cae246ce67bddaf941216c3fd7a4534007d30b7"
+    },
+    {
+      "name": "original-imported",
+      "command": [
+        "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-2993746c/reference/packets/sonic-animation-native/verify_imported.py",
+        "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe",
+        "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/system/CHRMODELS_orig.dll",
+        "game/imported/characters",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-2993746c/build/sonic-animation-native/table.tsv",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-2993746c/reference/packets/sonic-animation-native/original-imported.json"
+      ],
+      "exit": 0,
+      "log": "build/sonic-animation-native/original-imported.log",
+      "log_sha256": "bba9a196b63189e3afaa45299194623122f071243c08cdb2c903a6c7d9f92f71"
+    },
+    {
+      "name": "original-table",
+      "command": [
+        "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+        "tools/oracles/verify_original_sonic_animation_table.py",
+        "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-2993746c/build/sonic-animation-native/table-probe.dylib",
+        "--output",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-2993746c/reference/packets/sonic-animation-native/original-table.json"
+      ],
+      "exit": 0,
+      "log": "build/sonic-animation-native/original-table.log",
+      "log_sha256": "c86022b5b93322193a67e23f51949311dd6854ece2f268b1416e31e41fa7cc17"
+    },
+    {
+      "name": "importer",
+      "command": [
+        "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-2993746c/reference/packets/sonic-animation-native/verify_importer.py",
+        "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/system/CHRMODELS_orig.dll",
+        "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe",
+        "game/imported/characters/sonic-selection.actions",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-2993746c/reference/packets/sonic-animation-native/importer.json"
+      ],
+      "exit": 0,
+      "log": "build/sonic-animation-native/importer.log",
+      "log_sha256": "9c6a302a80be639575757c3cf1eeec12264e8790b91d009611833ea9db874c86"
+    },
+    {
+      "name": "compiled-faults",
+      "command": [
+        "python3",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-2993746c/reference/packets/sonic-animation-native/verify_faults.py",
+        "game/imported",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-2993746c/reference/packets/sonic-animation-native/faults.json"
+      ],
+      "exit": 0,
+      "log": "build/sonic-animation-native/compiled-faults.log",
+      "log_sha256": "5c17a25c3b789f7db0b91787ef92a2d36836a4aad211863985cadeb52f7ec44e"
+    },
+    {
+      "name": "profile",
+      "command": [
+        "python3",
+        "tools/gate/check_profile_patches.py",
+        "--build-dir",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-2993746c/reference/packets/sonic-animation-native",
+        "--json"
+      ],
+      "exit": 0,
+      "log": "build/sonic-animation-native/profile.log",
+      "log_sha256": "d1667e9858ea138f75d217dfc20a46dad1496135e1bd3bd7b4d75be7350f7b25"
+    },
+    {
+      "name": "readability",
+      "command": [
+        "python3",
+        "tools/gate/check_readability.py"
+      ],
+      "exit": 0,
+      "log": "build/sonic-animation-native/readability.log",
+      "log_sha256": "9d0fb32e4921a4ab5115a5c18ba9e10df6b19580bd545e791cc6124f6d47b0e0"
+    },
+    {
+      "name": "layers",
+      "command": [
+        "python3",
+        "tools/gate/check_layers.py"
+      ],
+      "exit": 0,
+      "log": "build/sonic-animation-native/layers.log",
+      "log_sha256": "5562fcfa762d63394b722a04826cf794222f4159fcc351b88a899e461deb0dfa"
+    },
+    {
+      "name": "owners",
+      "command": [
+        "python3",
+        "tools/gate/check_global_owners.py"
+      ],
+      "exit": 0,
+      "log": "build/sonic-animation-native/owners.log",
+      "log_sha256": "5d8703c5613218fb62e6a1f258cd6b2ac704a0a283b69fdc687d54fe56e12de0"
+    },
+    {
+      "name": "provenance",
+      "command": [
+        "python3",
+        "tools/gate/check_provenance.py",
+        "--database",
+        "/Users/burbujamc/Developer/sadx-macos/build/symbols/symbols.json"
+      ],
+      "exit": 0,
+      "log": "build/sonic-animation-native/provenance.log",
+      "log_sha256": "35c41c1e44ccf8c58c3c7fad32b4df0230af79c819fea625d385e521bda77076"
+    }
+  ],
+  "all_command_exits_zero": true,
+  "initial_native_build": {
+    "command": [
+      "make",
+      "-j2",
+      "-o",
+      "build/native-controller-deps/include/SDL3/SDL.h",
+      "build/libsadx-native.a"
+    ],
+    "exit": 0,
+    "log": "build/sonic-animation-native/build.log",
+    "log_sha256": "9de9e2eb051d887f0374e32b12ae1f5abd5c98d983d9eb461bba8639c2b1cc72",
+    "dependencies": "Public SDL/libusb copied locally with symlinks dereferenced; no writable build symlink to Root"
+  },
+  "native_programs": {
+    "source_programs": 5,
+    "optimized_programs": [
+      "sonic_animation_assets",
+      "sonic_animation_table",
+      "animation_table_publication",
+      "animation_gamma_assets",
+      "sonic_controller_native"
+    ],
+    "ubsan_variant": "sonic_animation_assets; test and new owner instrumented; existing native archive not instrumented",
+    "typed_invalid_inputs": 7,
+    "json_invalid_inputs": 12,
+    "actual_sonic_initializations": 2
+  },
+  "original_table": {
+    "cases": 103,
+    "byte_mismatches": 0,
+    "fp_mismatches": 0,
+    "passed": true
+  },
+  "original_imported": {
+    "rows": 147,
+    "export_declarations": 149,
+    "compared_bytes": 2352,
+    "byte_mismatches": 0
+  },
+  "profile": {
+    "patches": 618,
+    "active_patches": 121,
+    "active_unhandled_patches": 79,
+    "reports": 5,
+    "declared_exe_ranges": 1,
+    "unhandled_overlaps": 0,
+    "handled_overlaps": 0,
+    "undetermined_overlaps": 0,
+    "reports_without_addressed_ranges": [
+      "faults.json",
+      "importer.json",
+      "original-table.json",
+      "unchanged-inputs.json"
+    ]
+  },
+  "compiled_faults": 6,
+  "compiled_before_case": {
+    "before_source": "a77d7110",
+    "name": "default-null-before",
+    "exit": 1,
+    "diagnostic": "invalid declaration must fail before publication",
+    "old_inputs": "all six previous typed negatives and twelve malformed JSON cases retained; seventh typed case adds empty declarations"
+  },
+  "shared_files_unchanged_from_base": "unchanged-inputs.json",
+  "existing_judges_modified": [],
+  "manifest_updated": false,
+  "manifest_owner": "Root; preserve every inherited entry and register additions on newer Main",
+  "preserved_attempts": "ATTEMPTS.md",
+  "coordination": {
+    "hold_honored": true,
+    "root_reported_gate_main": "daa443e4",
+    "root_reported_gate_exit": 0,
+    "explicit_slot_release_received": true,
+    "own_full_gate_run": false
+  },
+  "limits": [
+    "Root independent review, shared owner/app binding and Main gate remain Root-owned.",
+    "No source archive, app run, N3b, actor frame, PSetMotion, model, common tail, other actor or hardware claim.",
+    "Existing floor_angles/player_reaction failures and FP partials not rerun; accepted sources unchanged.",
+    "No MDATA3 payload or contiguous adjacent-source backing is supplied; hierarchy transition requires shared object composition."
+  ]
+}

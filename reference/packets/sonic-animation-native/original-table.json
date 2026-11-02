@@ -1,0 +1,30 @@
+{
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "native_library_sha256": "f525a8c3777bc83f25af4d6a496b69fc3d6c86f6d3ba055ecd4548fdfa8e8dcc",
+  "source_body": {
+    "address": "0x7cec90",
+    "bytes": 7674,
+    "sha256": "4fb64e48d45e6008328627f24c9065e89240ec2b5458cedfb73a6ce26d183944"
+  },
+  "records": 147,
+  "export_slots": 149,
+  "cases": 103,
+  "byte_mismatches": 0,
+  "fp_mismatches": 0,
+  "examples": [],
+  "limits": [
+    "Export identities are experimental native/source fixture tokens; no DLL or game startup is executed",
+    "Actual export loader401ac0 resolves___SONIC_ACTIONS; its runtime success is a separate prerequisite",
+    "147 output records follow actual source stores; SDK count146 is not the authority"
+  ],
+  "native_sources": {
+    "src/player/sonic_animation_table.hpp": "30e86aaf6b9311f9863dfd98907e44fcd163a8d09cea9f0f69a5a22a13a25e11",
+    "src/player/sonic_animation_table.cpp": "b1b9de5049667fbb38faf1033db6cdc631e07721e9cfa87da1a186c798279d3c",
+    "src/player/sonic_animation_table_data.hpp": "ade9fe6c0b0d78b25315c288c7ff1174164aa4d50954476fae71ba2ea956f765",
+    "tools/emit/emit_sonic_animation_table.py": "d7c54380504d11c6059c0f2ac54f8205ff4d4d71160ad0ebd7eaf742e669c29b",
+    "tests/probes/native_sonic_animation_table_probe.cpp": "6cd92c22f9e11c0112c3aecd9643c14baff8cae4ea8547fb093e9e1442fdc675",
+    "tools/oracles/verify_original_sonic_animation_table.py": "84f040bb0d77253e85602b5a79fb2fab205c09a42ce34b56b0fa0c3b749d1090"
+  },
+  "case_sha256": "1bc18a9f2b701b7c8485a872bf5965722dc69498c37a181b95745cd1ffd14cfe",
+  "passed": true
+}
