@@ -8,6 +8,7 @@ import gzip
 import hashlib
 import importlib.util
 import json
+import os
 from pathlib import Path
 import struct
 import sys
@@ -50,8 +51,11 @@ class Function:
 
 def observation_trace(origin, line, record, kind="game_winmain"):
     resolved = str(Path(origin).resolve())
+    filenames = {resolved, str(Path(origin)), os.path.relpath(resolved)}
     def trace(frame, event, arg):
-        if event == 'line' and str(Path(frame.f_code.co_filename).resolve()) == resolved and frame.f_lineno == line:
+        if frame.f_code.co_filename not in filenames:
+            return None
+        if event == 'line' and frame.f_lineno == line:
             values = frame.f_locals
             if kind == 'stream_players':
                 record({'source': values['e'], 'native_comparison': values['got']})
