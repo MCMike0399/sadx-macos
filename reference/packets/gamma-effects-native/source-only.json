@@ -1,0 +1,50 @@
+{
+  "commit": "643584cb25a4672d51e8d8524bae875845f73d5e",
+  "source_archive_sha256": "7c3b1b6413ba0bf33fb6e24c2ede4221d420c54e578b2a9e14be896f20ead4a7",
+  "source_files": 4867,
+  "forbidden_original_or_prebuilt_files": [],
+  "dependency_copy": "APFS clone of worktree-local pinned SDL/libusb; no symlinks",
+  "command": [
+    "make",
+    "-j2",
+    "-o",
+    "build/native-controller-deps/include/SDL3/SDL.h",
+    "build/sadx-native",
+    "native-closure"
+  ],
+  "build_exit_status": 0,
+  "run": {
+    "command": [
+      "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-7aa0da94/build/gamma-effects/source-only/build/sadx-native",
+      "--assets",
+      "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-7aa0da94/build/gamma-effects/imported",
+      "--offscreen",
+      "--paced",
+      "--exit-after",
+      "1550",
+      "--save-directory",
+      "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-7aa0da94/build/gamma-effects/source-only-run/savedata",
+      "--key-events",
+      "500:13:down,501:13:up,750:13:down,751:13:up,950:13:down,951:13:up,1050:13:down,1051:13:up,1300:13:down,1301:13:up",
+      "--screenshot",
+      "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-7aa0da94/build/gamma-effects/source-only-run/frontier.ppm"
+    ],
+    "exit_status": 1,
+    "stderr": "native session stopped: native_gamma_set_motion\n",
+    "app_sha256": "33f3bf9da212d05744ee2d00a1cce3ad18c26ddab5995bafeee883850ed046df",
+    "screenshot_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427",
+    "state": {
+      "frames": 1332,
+      "sprite_registry_count": 1,
+      "gamma_setup_registered": true,
+      "gamma_setup_assets_loaded": true
+    },
+    "raw_directory": "build/gamma-effects/source-only-run"
+  },
+  "limits": [
+    "Only pinned public SDL/libusb build products copied; all maintained and numerical code rebuilt.",
+    "Original EXE/DLL and prebuilt game objects absent from source archive; external imported assets supplied to native app.",
+    "No full gate, actor frame or N3b claim."
+  ],
+  "game_src_tree": "f17511a8c925231548e38501ed29ac5b3a5b743a"
+}

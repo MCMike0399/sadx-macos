@@ -144,7 +144,8 @@ class Session final : private flow::NativeServices {
     void attach_main_menu(MainMenuAssets);
     void attach_character_selection(CharacterSelectionAssets);
     void load_player_assets(GammaActorAssets assets,
-                            std::optional<std::vector<std::uint8_t>> setup_definition = {});
+                            std::optional<std::vector<std::uint8_t>> setup_definition = {},
+                            std::optional<std::vector<std::uint8_t>> effects_definition = {});
     void attach_character_completion(character_completion::Catalog catalog) {
         if (character_completion_)
             throw std::runtime_error("native character completion resources already attached");

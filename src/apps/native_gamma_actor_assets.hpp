@@ -17,6 +17,18 @@ load_gamma_setup_definition(const std::filesystem::path &directory) {
     return std::vector<std::uint8_t>{std::istreambuf_iterator<char>(stream), {}};
 }
 
+// NOTSA: required imported effects fail at the asset boundary before session publication.
+inline std::vector<std::uint8_t>
+load_gamma_effects_definition(const std::filesystem::path &directory) {
+    const auto path = directory / "gamma-effects.bin";
+    if (!std::filesystem::exists(path))
+        throw std::runtime_error("missing imported Gamma effects definition");
+    std::ifstream stream(path, std::ios::binary);
+    if (!stream)
+        throw std::runtime_error("cannot read imported Gamma effects definition");
+    return std::vector<std::uint8_t>{std::istreambuf_iterator<char>(stream), {}};
+}
+
 // NOTSA: exact word decoding at the imported-content boundary, without FP arithmetic.
 inline float actor_scalar(std::uint32_t word) {
     float value;

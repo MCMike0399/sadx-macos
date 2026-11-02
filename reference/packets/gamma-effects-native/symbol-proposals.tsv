@@ -1,0 +1,11 @@
+module	address	kind	name	type	signature	size	evidence_id	reason
+SONIC	0x4cc330	function	BindParticleFrames		void(NJS_TEXLIST*,Frame*,uint32_t)	173	ev_ae82f6e860f2b28e6a519d7dca2ada6125842cf8c92ab3563d22efb54628fc7c	Complete source frame binding; semantic descriptive name
+SONIC	0x4cc210	function	CreateParticlePool		Task*(int32_t,Parameters*,Frame*,Update)	199	ev_3eedefe5a6de8d9f7601dda9794a87f216abd2e02f196c59305f41116022c072	Complete source task and buffer constructor; semantic descriptive name
+SONIC	0x49f9f0	function	InitializeGammaBurst		void()	76	ev_d29397a5381721ce16bfb4a42cd16fada9b052d9f62a7ad9b2becad05ba85b82	Guarded Gamma burst task publication; semantic descriptive name
+SONIC	0x4cc080	function	UpdateParticlePool			203	ev_246ea0a95b0f525ed41be5c81613bed5d8ae75ffe297ba60c317f7dbbf103835	Named unrecovered particle update callback
+SONIC	0x4cc150	function	UpdateCustomParticlePool			131	ev_aa0b8c50120facc47a3464c48d889c6482bd8a491411918014e14c144b908193	Named unrecovered custom particle update callback
+SONIC	0x4cc040	function	DisplayParticlePool			63	ev_9f59b33d70d2129695df1b9bfe928542822d91bea92f1cc5820bb452f7193c27	Named unrecovered display callback
+SONIC	0x4cc1e0	function	DestroyParticlePool			42	ev_3eedefe5a6de8d9f7601dda9794a87f216abd2e02f196c59305f41116022c072	Constructor callback identity and exact pinned-byte span; no Ghidra procedure exists here
+SONIC	0x91d168	data	GammaHitFrames	particle frames		748	ev_23c9733a8e8b40e3ffd00f1310e17501100ea5a4ef1f4421b500f44560c3fcad	First actual frame declaration including sentinel; inverse import
+SONIC	0x91d458	data	GammaBurstFrames	particle frames		220	ev_d29397a5381721ce16bfb4a42cd16fada9b052d9f62a7ad9b2becad05ba85b82	Guarded burst frame declaration including sentinel; inverse import
+SONIC	0x3c56df0	global	GammaBurstTask	native TaskHandle		4	ev_8e06c4947745aaf711c9f3b668e8076175e5919a8a19b414722b3d99f51c28ab	Single zero-initialized source task owner; spawn and separate release borrower remain unrecovered

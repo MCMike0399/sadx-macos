@@ -1,0 +1,329 @@
+{
+  "baseline": {
+    "command": [
+      "build/sadx-native",
+      "--assets",
+      "game/imported",
+      "--offscreen",
+      "--paced",
+      "--exit-after",
+      "1550",
+      "--save-directory",
+      "build/gamma-effects/baseline/savedata",
+      "--key-events",
+      "500:13:down,501:13:up,750:13:down,751:13:up,950:13:down,951:13:up,1050:13:down,1051:13:up,1300:13:down,1301:13:up",
+      "--screenshot",
+      "build/gamma-effects/baseline/frontier.ppm"
+    ],
+    "exit_status": 1,
+    "stderr": "native session stopped: native_gamma_initialize_effects\n",
+    "app_sha256": "24eaf30b65edfaa52137b11d8af86b3546df6f579f63442f3ca04aa963ea66db",
+    "state": {
+      "frames": 1332,
+      "sprite_registry_count": 1,
+      "gamma_setup_registered": true,
+      "gamma_setup_assets_loaded": true,
+      "preview_actors": [
+        {
+          "retired": false,
+          "mode": 0,
+          "id": 0,
+          "player_index": 0,
+          "character": 0,
+          "status": 0,
+          "position": [
+            400,
+            0,
+            -20
+          ],
+          "rotation": [
+            0,
+            16384,
+            0
+          ],
+          "aim_y": 16384
+        },
+        {
+          "retired": false,
+          "mode": 0,
+          "id": 0,
+          "player_index": 1,
+          "character": 2,
+          "status": 0,
+          "position": [
+            400,
+            0,
+            -20
+          ],
+          "rotation": [
+            0,
+            16384,
+            0
+          ],
+          "aim_y": 0
+        },
+        {
+          "retired": false,
+          "mode": 0,
+          "id": 0,
+          "player_index": 2,
+          "character": 3,
+          "status": 0,
+          "position": [
+            400,
+            0,
+            -20
+          ],
+          "rotation": [
+            0,
+            16384,
+            0
+          ],
+          "aim_y": 0
+        },
+        {
+          "retired": false,
+          "mode": 0,
+          "id": 0,
+          "player_index": 3,
+          "character": 5,
+          "status": 0,
+          "position": [
+            400,
+            0,
+            -20
+          ],
+          "rotation": [
+            0,
+            16384,
+            0
+          ],
+          "aim_y": 0
+        },
+        {
+          "retired": false,
+          "mode": 0,
+          "id": 0,
+          "player_index": 4,
+          "character": 7,
+          "status": 0,
+          "position": [
+            400,
+            0,
+            -20
+          ],
+          "rotation": [
+            0,
+            16384,
+            0
+          ],
+          "aim_y": 0
+        },
+        {
+          "retired": false,
+          "mode": 1,
+          "id": 2,
+          "player_index": 5,
+          "character": 6,
+          "status": 0,
+          "position": [
+            400,
+            0,
+            -20
+          ],
+          "rotation": [
+            0,
+            16384,
+            0
+          ],
+          "aim_y": 0
+        },
+        {
+          "retired": false,
+          "mode": 0,
+          "id": 0,
+          "player_index": 6,
+          "character": 0,
+          "status": 0,
+          "position": [
+            400,
+            0,
+            -20
+          ],
+          "rotation": [
+            0,
+            17112,
+            0
+          ],
+          "aim_y": 0
+        }
+      ]
+    },
+    "screenshot_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427",
+    "raw_directory": "build/gamma-effects/baseline"
+  },
+  "candidate": {
+    "command": [
+      "build/sadx-native",
+      "--assets",
+      "build/gamma-effects/imported",
+      "--offscreen",
+      "--paced",
+      "--exit-after",
+      "1550",
+      "--save-directory",
+      "build/gamma-effects/candidate/savedata",
+      "--key-events",
+      "500:13:down,501:13:up,750:13:down,751:13:up,950:13:down,951:13:up,1050:13:down,1051:13:up,1300:13:down,1301:13:up",
+      "--screenshot",
+      "build/gamma-effects/candidate/frontier.ppm"
+    ],
+    "exit_status": 1,
+    "stderr": "native session stopped: native_gamma_set_motion\n",
+    "app_sha256": "a7c4373cc5b7fbdb68cadba829f8854873279707fc06a4a46a511ac6224a7196",
+    "state": {
+      "frames": 1332,
+      "sprite_registry_count": 1,
+      "gamma_setup_registered": true,
+      "gamma_setup_assets_loaded": true,
+      "preview_actors": [
+        {
+          "retired": false,
+          "mode": 0,
+          "id": 0,
+          "player_index": 0,
+          "character": 0,
+          "status": 0,
+          "position": [
+            400,
+            0,
+            -20
+          ],
+          "rotation": [
+            0,
+            16384,
+            0
+          ],
+          "aim_y": 16384
+        },
+        {
+          "retired": false,
+          "mode": 0,
+          "id": 0,
+          "player_index": 1,
+          "character": 2,
+          "status": 0,
+          "position": [
+            400,
+            0,
+            -20
+          ],
+          "rotation": [
+            0,
+            16384,
+            0
+          ],
+          "aim_y": 0
+        },
+        {
+          "retired": false,
+          "mode": 0,
+          "id": 0,
+          "player_index": 2,
+          "character": 3,
+          "status": 0,
+          "position": [
+            400,
+            0,
+            -20
+          ],
+          "rotation": [
+            0,
+            16384,
+            0
+          ],
+          "aim_y": 0
+        },
+        {
+          "retired": false,
+          "mode": 0,
+          "id": 0,
+          "player_index": 3,
+          "character": 5,
+          "status": 0,
+          "position": [
+            400,
+            0,
+            -20
+          ],
+          "rotation": [
+            0,
+            16384,
+            0
+          ],
+          "aim_y": 0
+        },
+        {
+          "retired": false,
+          "mode": 0,
+          "id": 0,
+          "player_index": 4,
+          "character": 7,
+          "status": 0,
+          "position": [
+            400,
+            0,
+            -20
+          ],
+          "rotation": [
+            0,
+            16384,
+            0
+          ],
+          "aim_y": 0
+        },
+        {
+          "retired": false,
+          "mode": 1,
+          "id": 2,
+          "player_index": 5,
+          "character": 6,
+          "status": 1,
+          "position": [
+            400,
+            0,
+            -20
+          ],
+          "rotation": [
+            0,
+            16384,
+            0
+          ],
+          "aim_y": 0
+        },
+        {
+          "retired": false,
+          "mode": 0,
+          "id": 0,
+          "player_index": 6,
+          "character": 0,
+          "status": 0,
+          "position": [
+            400,
+            0,
+            -20
+          ],
+          "rotation": [
+            0,
+            17112,
+            0
+          ],
+          "aim_y": 0
+        }
+      ]
+    },
+    "screenshot_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427",
+    "raw_directory": "build/gamma-effects/candidate"
+  },
+  "image_inspected": "Outgoing title, byte-identical. No actor frame or N3b claim."
+}

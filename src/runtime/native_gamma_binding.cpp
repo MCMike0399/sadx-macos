@@ -245,8 +245,11 @@ void create_time_hud(Context &, unsigned, const TaskHandle &) {
     missing("native_gamma_create_time_hud");
 }
 // NOTSA: native boundary for GammaInitializeEffects; source seam declared in the Gamma core.
-void initialize_effects(Context &) {
-    missing("native_gamma_initialize_effects");
+void initialize_effects(Context &context) {
+    if (!context.players.gamma_effects_asset)
+        missing("native_gamma_effects_import");
+    gamma_effects::initialize(context.players.gamma_effects, *context.players.gamma_effects_asset,
+        context.scheduler, arena(context), context.rendering.arithmetic());
 }
 // NOTSA: native boundary for PSetMotion; source seam declared in the Gamma core.
 void set_motion(Context &, const Player &) {

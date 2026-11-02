@@ -1,0 +1,88 @@
+{
+  "reason": "STYLE arithmetic choice: the ordinary float candidate loses source rounding/conversion semantics on the unchanged development domain. Source stays at fidelity arithmetic; no judge input or tolerance changed.",
+  "cases": 1145,
+  "value_failures": 230,
+  "exit_status": 1,
+  "examples": [
+    {
+      "case_id": 125,
+      "fp_control": "0x87f",
+      "differences": [
+        {
+          "word": 46,
+          "original": 1301313793,
+          "plain_float": 1301313792
+        },
+        {
+          "word": 47,
+          "original": 1317472474,
+          "plain_float": 1317472473
+        },
+        {
+          "word": 48,
+          "original": 1292925185,
+          "plain_float": 1292925184
+        },
+        {
+          "word": 49,
+          "original": 1309083866,
+          "plain_float": 1309083865
+        }
+      ]
+    },
+    {
+      "case_id": 132,
+      "fp_control": "0x47f",
+      "differences": [
+        {
+          "word": 95,
+          "original": 1326307337,
+          "plain_float": 1326307338
+        },
+        {
+          "word": 97,
+          "original": 1317918729,
+          "plain_float": 1317918730
+        },
+        {
+          "word": 261,
+          "original": 1316903792,
+          "plain_float": 1316903793
+        },
+        {
+          "word": 263,
+          "original": 1308515184,
+          "plain_float": 1308515185
+        }
+      ]
+    },
+    {
+      "case_id": 133,
+      "fp_control": "0xc7f",
+      "differences": [
+        {
+          "word": 2256,
+          "original": 1326253279,
+          "plain_float": 1326253280
+        },
+        {
+          "word": 2257,
+          "original": 1324312572,
+          "plain_float": 1324312573
+        },
+        {
+          "word": 2258,
+          "original": 1317864671,
+          "plain_float": 1317864672
+        },
+        {
+          "word": 2259,
+          "original": 1315923964,
+          "plain_float": 1315923965
+        }
+      ]
+    }
+  ],
+  "plain_source_sha256": "eff614e517c239045e2a97195ec2b625be7f9451a00898082c2392bdb0b1122b",
+  "raw_report_sha256": "7dad895d32fe3378f134849f5a860dfbd3471afe6e11f901d35ba9e0e46f7a93"
+}

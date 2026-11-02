@@ -5,6 +5,7 @@
 #include "player/actor_current.hpp"
 #include "player/gamma_selection_core.hpp"
 #include "player/gamma_setup_resource.hpp"
+#include "player/gamma_effects.hpp"
 #include "game/game_bootstrap.hpp"
 #include "game/character_textures.hpp"
 
@@ -32,11 +33,16 @@ struct PlayerSystem {
     std::unique_ptr<GammaActorAssets> gamma_assets;
     std::unique_ptr<const gamma_setup::Asset> gamma_setup_asset;
     gamma_setup::State gamma_setup;
+    std::unique_ptr<gamma_effects::Asset> gamma_effects_asset;
+    gamma_effects::State gamma_effects;
 };
 // NOTSA: existing session asset load binds imported declarations to its shared scene owners.
 void bind_gamma_resources(PlayerSystem &, character_pack::SceneState &, const GammaActorAssets &);
 // NOTSA: bind imported setup content to the same character texlist used by rendering.
 void bind_gamma_setup_resources(PlayerSystem &, const CharacterTextureAssets &,
+    std::array<std::vector<regular_textures::List>, 9> &, const std::vector<std::uint8_t> &);
+// NOTSA: imported effects borrow the existing E102HIT list and stable mutable declarations.
+void bind_gamma_effects_resources(PlayerSystem &, const CharacterTextureAssets &,
     std::array<std::vector<regular_textures::List>, 9> &, const std::vector<std::uint8_t> &);
 } // namespace sadx::native
 

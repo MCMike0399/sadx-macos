@@ -126,7 +126,7 @@ void initialize_cursors(Context &, const TaskWorkHandle &);
 void load_setup_resource(Context &);
 // NOTSA: time-HUD composition remains unimplemented; creation belongs to TaskScheduler::create_child.
 void create_time_hud(Context &, unsigned level, const TaskHandle &);
-// STUB: SONIC 0x49fb10 GammaInitializeEffects
+// FUNCTION: SONIC 0x49fb10 GammaInitializeEffects
 void initialize_effects(Context &);
 // STUB: SONIC 0x44a800 PSetMotion
 void set_motion(Context &, const Player &);
