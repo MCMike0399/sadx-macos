@@ -173,7 +173,7 @@ def main():
                'source_git_base': __import__('subprocess').check_output(['git','rev-parse','HEAD'],text=True).strip(),
                'helper_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
                'contract_sha256': hashlib.sha256(Path(__file__).with_name('CAPTURE-CONTRACTS.json').read_bytes()).hexdigest(),
-               'compiled_old_base': contract['immutable_old_base'],
+               'comparison_old_base': contract['immutable_old_base'],
                'compiled_model_sha256': hashlib.sha256(Path(library).read_bytes()).hexdigest(),
                'executed_judge_sha256': hashlib.sha256(script.read_bytes()).hexdigest(),
                'source_freeze': {str(p.relative_to(source_root)):hashlib.sha256(p.read_bytes()).hexdigest()
