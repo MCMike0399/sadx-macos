@@ -1,0 +1,168 @@
+{
+  "schema": 1,
+  "source_commit": "b464aaadba978022fcabe4c2f6c1c623e3b532ea",
+  "candidate": "ba5aa52b",
+  "reviews": {
+    "standards": "7e04ef7d",
+    "fidelity": "241ba1c8"
+  },
+  "correction": "Name three known flag masks without changing values, arithmetic or evaluation order.",
+  "merge": "Preserve all Sonic and Gamma effects source-list entries; Session changes merged in place.",
+  "save_warning_rebinding": {
+    "old_header_sha256": "3d83bca901f115ff9d1983c9743aa837829e37d3a99b4aa2322dcc2c52eb030c",
+    "new_header_sha256": "8f29c2373deaba366346d7c6dd892b2cb332383b2153cc26a4782351539a9043",
+    "owner_declaration_unchanged": true,
+    "scope": "Two header evidence hashes only; warning debt remains open."
+  },
+  "scope": "Gamma effects initialization only. Source callbacks for particle lifecycle remain explicit stops.",
+  "limits": [
+    "No new full gate or completed actor frame claimed.",
+    "Inherited Gamma summaries retain counts only; they do not prove individual partial identity preservation.",
+    "Arbitrary published-work mutation and texture/frame aliasing remain outside observation coverage."
+  ],
+  "main_validation": {
+    "native_build_exit": 0,
+    "native_force_load_closure_exit": 0,
+    "programs": [
+      {
+        "command": [
+          "build/gamma-effects-test",
+          "game/imported/gamma-effects.bin"
+        ],
+        "exit_status": 0,
+        "stdout": "Imported frame inverse, canonical arena/task ownership, cache/reentry and explicit callbacks pass\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "build/native-gamma-effects-test",
+          "game/imported"
+        ],
+        "exit_status": 0,
+        "stdout": "Real Gamma/PInitialize/setup/material caller reaches PSetMotion with shared hit list and pool\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "build/native-gamma-binding-test",
+          "game/imported"
+        ],
+        "exit_status": 0,
+        "stdout": "PASS: imported Gamma -> canonical collision/ordinary textures/cursors -> setup boundary\nPASS: imported Gamma -> canonical collision/ordinary textures/cursors -> setup boundary\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "build/native-sonic-callback-test",
+          "game/imported"
+        ],
+        "exit_status": 0,
+        "stdout": "Real Sonic callback publishes canonical current owners before the editor stop; captured event mode/path bindings survive primary replacement and reject release\n",
+        "stderr": ""
+      }
+    ],
+    "original": {
+      "exit_status": 2,
+      "cases": 1145,
+      "value_failures": 0,
+      "fp_partials": 559,
+      "individual_partials_equal_reviewed_candidate": true,
+      "stream_sha256": "489b1505389f0a8c8bf043222b5171922e8b6a1ff47a574a9bee52557b22fe45",
+      "raw_report_sha256": "66e02f01265332bfe2e115ae5831bcfe2a4973b61e5c37d4a987feff65e55118"
+    },
+    "mutants": {
+      "mutants": [
+        {
+          "name": "retained-frame-pointer",
+          "caught": true,
+          "exit_status": 1,
+          "value_failures": 52,
+          "cases": 185,
+          "source_sha256": "b5be4d26bb923939359edcb6c1e09694c02b31f94a67fb85823ab3c24b01465b",
+          "probe_sha256": "2f826f195bd48512adf5b75a43db08e27a510454dd5043da463da8f4fa98a649"
+        },
+        {
+          "name": "discard-existing-task",
+          "caught": true,
+          "exit_status": 1,
+          "value_failures": 24,
+          "cases": 185,
+          "source_sha256": "84e86373d1c2b9341d2506223bbca45e6911cc6b431f1ee4f03488fa34bb9e22",
+          "probe_sha256": "9e265ff4214bc841f97ec3fa9072cdb859c5455e6629bc025ee3bc6a0ea3b72e"
+        },
+        {
+          "name": "wrong-pool-capacity",
+          "caught": true,
+          "exit_status": 1,
+          "value_failures": 52,
+          "cases": 185,
+          "source_sha256": "559cfedf1f3aa6164c7ac38ecf3434ab5bcb994f5132387098cc4329102acdef",
+          "probe_sha256": "c7df31106682a0d2d894420d22c028b59b3ad73e813924d5128c593adc25ee9b"
+        },
+        {
+          "name": "swap-parameters",
+          "caught": true,
+          "exit_status": 1,
+          "value_failures": 52,
+          "cases": 185,
+          "source_sha256": "f65bf872304dfc6097c08d4ed591cba6fff5514a2abec145a2cfe00181732c54",
+          "probe_sha256": "580f2641621989277cba182e37a3a5d7c39fbba092a374f39d0fa245ca6dd99b"
+        },
+        {
+          "name": "wrong-free-index",
+          "caught": true,
+          "exit_status": 1,
+          "value_failures": 71,
+          "cases": 185,
+          "source_sha256": "8324ff26f0863794bfd3c5f783e77004010fd7a579aff7f02c08b338cb84aaa1",
+          "probe_sha256": "0d7d8e13124a944e1715c49b55da917fced54266e4ed73a1f48844856a1389e3"
+        },
+        {
+          "name": "first-texture-for-all",
+          "caught": true,
+          "exit_status": 1,
+          "value_failures": 103,
+          "cases": 185,
+          "source_sha256": "397169880356ef37e6ae9926af42c42496a3f96d51024633d6f85ad3a82d55ad",
+          "probe_sha256": "607ebc06d8c8e8328caa482bd0b9d10f5a4cc40b300b73a9b49ad200c0be0a42"
+        },
+        {
+          "name": "early-null-buffer-return",
+          "caught": true,
+          "exit_status": 1,
+          "value_failures": 25,
+          "cases": 185,
+          "source_sha256": "04eff0331ec4966287145960c0d9eb2d85b3c5bb61ebd4543853a544716fa409",
+          "probe_sha256": "de004317814619d82d883068760eb0f2018dc4c171bf3836d93711438fe4197c"
+        }
+      ]
+    },
+    "normal_input": {
+      "command": [
+        "build/sadx-native",
+        "--assets",
+        "game/imported",
+        "--offscreen",
+        "--paced",
+        "--exit-after",
+        "1550",
+        "--save-directory",
+        "build/gamma-effects-root/savedata",
+        "--key-events",
+        "500:13:down,501:13:up,750:13:down,751:13:up,950:13:down,951:13:up,1050:13:down,1051:13:up,1300:13:down,1301:13:up",
+        "--screenshot",
+        "build/gamma-effects-root/frontier.ppm"
+      ],
+      "exit_status": 1,
+      "stderr": "native session stopped: native_gamma_set_motion\n",
+      "frames": 1332,
+      "screenshot_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427",
+      "app_sha256": "f4a7d67ccb6867bae398c7655deb3580800e5edbaaef2c39bd53d8487c8d4ecd"
+    },
+    "static_check": {
+      "command": "make -j2 check",
+      "exit_status": 0
+    },
+    "image_inspected": "Outgoing title, unchanged; no completed actor frame."
+  }
+}

@@ -1,0 +1,82 @@
+{
+ "oracle": "gamma_effects",
+ "cases": 1145,
+ "passed": false,
+ "value_failures": 0,
+ "fp_partials": [
+  {
+   "case_id": 122,
+   "original_flags": 0,
+   "native_flags": 32
+  },
+  {
+   "case_id": 124,
+   "original_flags": 0,
+   "native_flags": 32
+  },
+  {
+   "case_id": 125,
+   "original_flags": 0,
+   "native_flags": 34
+  },
+  {
+   "case_id": 126,
+   "original_flags": 0,
+   "native_flags": 32
+  },
+  {
+   "case_id": 130,
+   "original_flags": 0,
+   "native_flags": 32
+  },
+  {
+   "case_id": 131,
+   "original_flags": 0,
+   "native_flags": 32
+  },
+  {
+   "case_id": 132,
+   "original_flags": 0,
+   "native_flags": 32
+  },
+  {
+   "case_id": 133,
+   "original_flags": 0,
+   "native_flags": 32
+  },
+  {
+   "case_id": 134,
+   "original_flags": 0,
+   "native_flags": 50
+  },
+  {
+   "case_id": 135,
+   "original_flags": 0,
+   "native_flags": 32
+  }
+ ],
+ "mismatches": [],
+ "seed": 499910,
+ "holdout": false,
+ "stream_sha256": "489b1505389f0a8c8bf043222b5171922e8b6a1ff47a574a9bee52557b22fe45",
+ "source_ranges": {
+  "0x49fb10-0x49fb29": "640587874714fff946ca09220a4d5f42fc428bd20dcd3a2cd2aeb0ae0704cbc6",
+  "0x49f9f0-0x49fa3c": "b08008e545ab93d407af9fa0c5cea8ddd84aec74e19e5531017510e9d30ea8dc",
+  "0x4cc330-0x4cc3dd": "a06c4ef6ba02026222ee5272445746741e266ec7246b454c424dc41fa2f2460c",
+  "0x4cc210-0x4cc2d7": "90b651fac768464ab4659abf957940372a9864056f9cd7cbab50bb1ef78f09ad"
+ },
+ "probe_sha256": "9b97c4f3592fb8cba698e6eabbc074ce4495756d268013a7eebd04ba1e490fbc",
+ "limits": [
+  "Four lower APIs intercepted; actual arena/scheduler/caller tested separately.",
+  "Complete frame/work/allocated-buffer data compared; no particle callbacks run.",
+  "Host allocation exceptions/arbitrary source memory aliases not qualified."
+ ],
+ "tracked_summary": {
+  "full_sha256": "66e02f01265332bfe2e115ae5831bcfe2a4973b61e5c37d4a987feff65e55118",
+  "full_bytes": 49730,
+  "lists_cut_to": 10,
+  "cut_lists": {
+   "fp_partials": 559
+  }
+ }
+}

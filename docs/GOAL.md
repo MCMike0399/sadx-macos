@@ -187,7 +187,7 @@ EXE/DLL, no prebuilt game objects) runs it from imported assets.
 | N1 | SEGA/Sonic Team logos | done (16 states + images vs reference) |
 | N2 | Intro movie (play and Skipma), title, audible Start | done |
 | N3a | FileSelect, dialog, MainMenu, fresh save/load/restart, empty profile | done (`native-file-select`, `native-main-menu`, `native-fresh-save`) |
-| N3b | **CharacterSelect**: all preview actors initialised, updated and drawn; cursor/cancel/reentry; music/voice; Sonic confirmed → story entry | **in progress**: material/event integration `013c2ed` reaches `native_gamma_initialize_effects`, frame 1332, exit 1. Image remains outgoing title. Last full gate/cold qualification is earlier `7bcfd78`; the newer combined gate is pending. |
+| N3b | **CharacterSelect**: all preview actors initialised, updated and drawn; cursor/cancel/reentry; music/voice; Sonic confirmed → story entry | **in progress**: effects/Sonic integration `e8f58f38` reaches `native_gamma_set_motion`, frame 1332, exit 1. Image remains outgoing title. Last full gate/cold qualification is earlier `7bcfd78`; the newer combined gate is pending. |
 | N4 | Story entry: the opening event (played or skipped as the profile does) → Station Square drawn from the imported pack with the real camera | open |
 | N5 | Sonic controllable at Chaos 0: run, jump, spin/homing attack, hurt, rings, with the boss active; first frames match the reference trace | open |
 | N6 | Chaos 0 defeated → natural story return → save progression | open |

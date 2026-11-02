@@ -902,3 +902,12 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Candidate verification retains 58,992 default and 3,072 extra exact observations, 2,840/2,172 inherited FP partials, eleven affected programs and ten mutation checks. These are reviewed packet results; Main's combined gate is pending.
 * Actual normal input still stops at Gamma effects, frame 1332, before Sonic. Editor, Sonic animation, model/common-tail and other actors remain open; no completed actor frame or N3b claim. Next: Root preflight, Gamma effects integration and a coherent gate.
 * Main preflight at fe42a378 passes the native app build, force-load closure, make check and both actual callback/ownership programs. sonic-root-preflight.json retains commands, hashes and exact limits; the last full gate remains 7bcfd78.
+
+### 2026-11-02 — Gamma effects initialization integrated (coherent gate next)
+
+* Standards review 7e04ef7d and fidelity review 241ba1c8 accept the bounded initialization. Root named the three known flag masks, preserving their values and evaluation order, and integrated source as e8f58f38 with the separate diagnostic adaptation b464aaad.
+* Main's actual normal-input app now reaches native_gamma_set_motion at frame 1332, exit 1. The inspected image remains outgoing title. E102HIT frames borrow list 6/4; the real particle task and arena buffers use existing owners.
+* Native app/force-load closure, four focused native programs and make check pass. The unchanged original comparison has 1,145 cases, zero value failures and exactly the same 559 individual FP partials. All seven compiled mutations remain caught.
+* Inherited Gamma regression summaries preserve counts, not per-case partial observations; no stronger identity claim is made. Particle update/display/destruction, Gamma release, actor rendering and N3b remain open.
+* Source-list conflict resolution retains both Sonic and effects entries. New registrations preserve every old judge path, including the 53 local corpus protections. gamma-effects-integration.json records the current checks and limits.
+* The animation worker cleared its build slot. Next is the serialized combined full gate; last recorded full gate remains 7bcfd78 until that succeeds.
