@@ -1,0 +1,621 @@
+[
+  {
+    "slug": "gamma_cursors",
+    "exit_status": 0,
+    "drift": [],
+    "before_sha256": "7b91d25a6449bb0a66e6ff411a9de8e1ffcc1db5add2f8edfe8c287e17db2145",
+    "after_sha256": "fb6075b9b61e704d2ceac13c452dc9ef5befadba2c3b5da9445f7041eb8b91ac",
+    "verdict": [
+      "pass",
+      "passed"
+    ],
+    "semantic_counters": {
+      "passed": true,
+      "values_match": true,
+      "cases": 768,
+      "holdout": false,
+      "mismatch_count": 0,
+      "allocator_receipts": 1920,
+      "failure_prefix_cases": 444
+    },
+    "metadata_differences": {},
+    "unchanged_base_source_fingerprints": {},
+    "baseline_kind": "tracked-summary-counts-only",
+    "individual_partial_lists": {
+      "mismatches": {
+        "retained": true,
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      }
+    },
+    "original_keys": [
+      "allocator_receipts",
+      "cases",
+      "failure_prefix_cases",
+      "holdout",
+      "limits",
+      "mismatch_count",
+      "mismatches",
+      "original_ranges_sha256",
+      "passed",
+      "slug",
+      "tracked_summary",
+      "values_match"
+    ]
+  },
+  {
+    "slug": "gamma_setup_resource",
+    "exit_status": 0,
+    "drift": [],
+    "before_sha256": "78d771206caa947dcbf0f9419e197b59dee2c82ce04f11b138c8e8396e6d7603",
+    "after_sha256": "a7ad9edb8fadb77d9c444a2c7f3672aafd864bbd581553b5bac94e98bdb1be2f",
+    "verdict": [
+      "pass",
+      "passed"
+    ],
+    "semantic_counters": {
+      "passed": true,
+      "cases": 848,
+      "seed": 5420,
+      "holdout": false
+    },
+    "metadata_differences": {
+      "native_probe_sha256": {
+        "before": "68b2eb90f95edae7a905f4f6ea512f9285936c7a3382069701161370c814c4d5",
+        "after": "fed8f90ce32d473ca4ec6cd477bda475f559e05d1bd013796848862d376b8d80"
+      }
+    },
+    "unchanged_base_source_fingerprints": {},
+    "baseline_kind": "raw",
+    "individual_partial_lists": {
+      "mismatches": {
+        "retained": true,
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      }
+    },
+    "original_keys": [
+      "cases",
+      "definition_identities",
+      "holdout",
+      "limits",
+      "mismatches",
+      "native_probe_sha256",
+      "oracle",
+      "passed",
+      "seed",
+      "source_ranges",
+      "stream_sha256"
+    ]
+  },
+  {
+    "slug": "gamma_effects",
+    "exit_status": 2,
+    "drift": [],
+    "before_sha256": "66e02f01265332bfe2e115ae5831bcfe2a4973b61e5c37d4a987feff65e55118",
+    "after_sha256": "66e02f01265332bfe2e115ae5831bcfe2a4973b61e5c37d4a987feff65e55118",
+    "verdict": [
+      "partial",
+      "values match; passed=false (strict claim; see limits)"
+    ],
+    "semantic_counters": {
+      "cases": 1145,
+      "passed": false,
+      "value_failures": 0,
+      "seed": 499910,
+      "holdout": false
+    },
+    "metadata_differences": {},
+    "unchanged_base_source_fingerprints": {},
+    "baseline_kind": "raw",
+    "individual_partial_lists": {
+      "fp_partials": {
+        "retained": true,
+        "count": 559,
+        "sha256": "aa39dc34e12cbeb325e6a81a21067f5c6bfb795c38f73e5858e9cfbb6872796d"
+      },
+      "mismatches": {
+        "retained": true,
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      }
+    },
+    "original_keys": [
+      "cases",
+      "fp_partials",
+      "holdout",
+      "limits",
+      "mismatches",
+      "oracle",
+      "passed",
+      "probe_sha256",
+      "seed",
+      "source_ranges",
+      "stream_sha256",
+      "value_failures"
+    ]
+  },
+  {
+    "slug": "gamma_input_buffer",
+    "exit_status": 0,
+    "drift": [],
+    "before_sha256": "2097a8c981065aeceeef2ca8cecd0727ad1061b6ba93ee9426629cb52897cf05",
+    "after_sha256": "2097a8c981065aeceeef2ca8cecd0727ad1061b6ba93ee9426629cb52897cf05",
+    "verdict": [
+      "pass",
+      "mismatch_count=0"
+    ],
+    "semantic_counters": {
+      "cases": 636,
+      "failure_prefixes": 469,
+      "mismatch_count": 0,
+      "values_match": true,
+      "seed": 4995184
+    },
+    "metadata_differences": {},
+    "unchanged_base_source_fingerprints": {},
+    "baseline_kind": "raw",
+    "individual_partial_lists": {
+      "mismatches": {
+        "retained": true,
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      }
+    },
+    "original_keys": [
+      "cases",
+      "failure_prefixes",
+      "limits",
+      "mismatch_count",
+      "mismatches",
+      "native_sha256",
+      "original_sha256",
+      "seed",
+      "source_ranges",
+      "source_sha256",
+      "values_match"
+    ]
+  },
+  {
+    "slug": "gamma_selection_core",
+    "exit_status": 2,
+    "drift": [],
+    "before_sha256": "41495160e0305e03aca0f90bf760be70d0d4eb4f9850bac9b36c51c52b7da4b0",
+    "after_sha256": "35514daa74e361dd7f63ba7128e513d24617a688af55fcf13d9b7d621d04eb36",
+    "verdict": [
+      "partial",
+      "values match; flag_mismatches=498 (see limits)"
+    ],
+    "semantic_counters": {
+      "case_count": 1422,
+      "value_failures": 0,
+      "fp_flag_partials": 498,
+      "passed": false,
+      "values_match": true,
+      "flag_mismatches": 498,
+      "holdout": false
+    },
+    "metadata_differences": {
+      "native_library_sha256": {
+        "before": "60f2edc12c015cb8f4c9dc07724865aaac66ac9e429033785116386fa89f02e9",
+        "after": "1fe5bbae1fdf1c3dc5d6ca69f171727103612f0cddf2b96d6b5c1ddda7b90983"
+      }
+    },
+    "unchanged_base_source_fingerprints": {},
+    "baseline_kind": "raw",
+    "individual_partial_lists": {},
+    "original_keys": [
+      "case_count",
+      "failures",
+      "flag_mismatches",
+      "fp_flag_partials",
+      "holdout",
+      "limits",
+      "native_library_sha256",
+      "original_ranges_sha256",
+      "passed",
+      "profile",
+      "source_sha256",
+      "value_failures",
+      "values_match"
+    ]
+  },
+  {
+    "slug": "model_matrices",
+    "exit_status": 2,
+    "drift": [],
+    "before_sha256": "226d53ef35af234cf594651994d5c222a85ce2868090113ebc7b1d44e4b9ceae",
+    "after_sha256": "226d53ef35af234cf594651994d5c222a85ce2868090113ebc7b1d44e4b9ceae",
+    "verdict": [
+      "partial",
+      "values match; flag_mismatches=957 (see limits)"
+    ],
+    "semantic_counters": {
+      "cases": 1223,
+      "failure_prefixes": 27,
+      "value_mismatches": 0,
+      "fp_partials": 957,
+      "flag_mismatches": 957,
+      "passed": false,
+      "values_match": true,
+      "seed": 4948464
+    },
+    "metadata_differences": {},
+    "unchanged_base_source_fingerprints": {},
+    "baseline_kind": "raw",
+    "individual_partial_lists": {
+      "mismatches": {
+        "retained": true,
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "individual_fp_partials": {
+        "retained": true,
+        "count": 957,
+        "sha256": "2db1e8362a35ae89e5311131695d69320a764731b3cbca3cdd7b1bc7665f41a9"
+      }
+    },
+    "original_keys": [
+      "cases",
+      "failure_prefixes",
+      "fixture_sha256",
+      "flag_mismatches",
+      "fp_partials",
+      "individual_fp_partials",
+      "limits",
+      "mismatches",
+      "observations_sha256",
+      "passed",
+      "seed",
+      "source_sha256",
+      "value_mismatches",
+      "values_match"
+    ]
+  },
+  {
+    "slug": "player_vertex_weld",
+    "exit_status": 0,
+    "drift": [],
+    "before_sha256": "c98db0d2d99aa9bc1aa6c610f92f4d32bc40351290951a098451d2e7a844a95f",
+    "after_sha256": "c98db0d2d99aa9bc1aa6c610f92f4d32bc40351290951a098451d2e7a844a95f",
+    "verdict": [
+      "pass",
+      "passed"
+    ],
+    "semantic_counters": {
+      "cases": 1200,
+      "seed": 1196903492,
+      "observer_schema": 2,
+      "passed": true,
+      "mismatch_count": 0,
+      "values_match": true,
+      "failure_prefix_cases": 248,
+      "active_matrix_boundary_cases": 170,
+      "allocator_receipts": 258
+    },
+    "metadata_differences": {},
+    "unchanged_base_source_fingerprints": {},
+    "baseline_kind": "raw",
+    "individual_partial_lists": {
+      "mismatches": {
+        "retained": true,
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      }
+    },
+    "original_keys": [
+      "active_matrix_boundary_cases",
+      "all_inputs_sha256",
+      "allocator_receipts",
+      "cases",
+      "exe_ranges",
+      "failure_prefix_cases",
+      "imported_gamma",
+      "limits",
+      "mismatch_count",
+      "mismatches",
+      "native_stream_sha256",
+      "node_stream_sha256",
+      "observer_schema",
+      "original_development_cohort",
+      "original_ranges_sha256",
+      "passed",
+      "probe_sha256",
+      "seed",
+      "slug",
+      "source_sha256",
+      "source_stream_sha256",
+      "values_match"
+    ]
+  },
+  {
+    "slug": "sonic_model",
+    "exit_status": 2,
+    "drift": [],
+    "before_sha256": "fea1acdde01f545d74e68fb729bea693ad24ee9313e5f459466a75ca1b1aaa52",
+    "after_sha256": "fea1acdde01f545d74e68fb729bea693ad24ee9313e5f459466a75ca1b1aaa52",
+    "verdict": [
+      "partial",
+      "values match; passed=false (strict claim; see limits)"
+    ],
+    "semantic_counters": {
+      "cases": 80,
+      "holdout": false,
+      "observation_schema": 2,
+      "output_words": 1024,
+      "values_match": true,
+      "passed": false
+    },
+    "metadata_differences": {},
+    "unchanged_base_source_fingerprints": {},
+    "baseline_kind": "raw",
+    "individual_partial_lists": {
+      "partials": {
+        "retained": true,
+        "count": 34,
+        "sha256": "0c61fed4398fb7ccf29b04c2ae881a754a21b27cd5827a56c6dc7810e8d60dd9"
+      }
+    },
+    "original_keys": [
+      "cases",
+      "construction",
+      "failures",
+      "holdout",
+      "limits",
+      "observation_schema",
+      "observations",
+      "original_ranges_sha256",
+      "output_words",
+      "partials",
+      "passed",
+      "source_dll_sha256",
+      "source_game_sha256",
+      "values_match"
+    ]
+  },
+  {
+    "slug": "player_animation",
+    "exit_status": 0,
+    "drift": [],
+    "before_sha256": "549bd20127c5ed3e722b2f5dfbb64765dcabb0461e3d90093ea57623d671d7d1",
+    "after_sha256": "8290762f4ab33b44db16550cd70c449c7d8a25315a860235a5fa39baba8309be",
+    "verdict": [
+      "partial",
+      "values match; status_mismatches=4140 (see limits)"
+    ],
+    "semantic_counters": {
+      "cases": 16440,
+      "stored_mismatches": 0,
+      "status_mismatches": 4140,
+      "boundary_mismatches": 0,
+      "stored_state_matches": true,
+      "passed": false
+    },
+    "metadata_differences": {
+      "seconds": {
+        "before": 11.217258041724563,
+        "after": 10.092830000445247
+      },
+      "native_library_sha256": {
+        "before": "118a2de92c113bba2471cec201298aca347b776c73d288107eec2e71f41249c2",
+        "after": "df8279f8fe0dca8c3dc32041a05c0b725353f55de6871bbe4aa360074564b24f"
+      },
+      "native_sources": {
+        "before": {
+          "src/player/player_animation.hpp": "256a63398aa93f7b84ca103c9195f44f0604cd30b41df38f28e39b3106fa744a",
+          "src/player/player_animation.cpp": "265c63289743277f1cb6509a30ef40fe54e8dca2d2333ea996adb1067bd7e0c5",
+          "tests/probes/native_player_animation_probe.cpp": "9dd13ebcf928a54f9fd4736b1e62ce710573caba4795032a9b2b968a5d89ccdc",
+          "tools/oracles/verify_original_player_animation.py": "3501d8cd23af6671f3b70ebd13c762d4723a22091b0627d701821c52809331cf"
+        },
+        "after": {
+          "src/player/player_animation.hpp": "256a63398aa93f7b84ca103c9195f44f0604cd30b41df38f28e39b3106fa744a",
+          "src/player/player_animation.cpp": "48eefd19e6d65f20c0c41729a9484d938c84df419d7156eed1b33e1e255a5497",
+          "tests/probes/native_player_animation_probe.cpp": "9dd13ebcf928a54f9fd4736b1e62ce710573caba4795032a9b2b968a5d89ccdc",
+          "tools/oracles/verify_original_player_animation.py": "3501d8cd23af6671f3b70ebd13c762d4723a22091b0627d701821c52809331cf"
+        }
+      }
+    },
+    "unchanged_base_source_fingerprints": {
+      "src/player/player_animation.hpp": "256a63398aa93f7b84ca103c9195f44f0604cd30b41df38f28e39b3106fa744a",
+      "src/player/player_animation.cpp": "48eefd19e6d65f20c0c41729a9484d938c84df419d7156eed1b33e1e255a5497",
+      "tests/probes/native_player_animation_probe.cpp": "9dd13ebcf928a54f9fd4736b1e62ce710573caba4795032a9b2b968a5d89ccdc",
+      "tools/oracles/verify_original_player_animation.py": "3501d8cd23af6671f3b70ebd13c762d4723a22091b0627d701821c52809331cf"
+    },
+    "baseline_kind": "raw",
+    "individual_partial_lists": {},
+    "original_keys": [
+      "boundary_mismatches",
+      "case_sha256",
+      "cases",
+      "constants",
+      "examples",
+      "limits",
+      "native_library_sha256",
+      "native_sources",
+      "passed",
+      "seconds",
+      "source_ranges",
+      "source_sha256",
+      "status_examples",
+      "status_mismatches",
+      "stored_mismatches",
+      "stored_state_matches"
+    ]
+  },
+  {
+    "slug": "player_animation_blend",
+    "exit_status": 0,
+    "drift": [],
+    "before_sha256": "722b19e787f1457c242226023944ba7769b25cabe3277f0034b1132a33b81430",
+    "after_sha256": "bd7d846833ed6305ca0bc005d721f827ddbe42b5c1b40887bc725e89d2774ef2",
+    "verdict": [
+      "partial",
+      "values match; status_mismatches=1668 (see limits)"
+    ],
+    "semantic_counters": {
+      "cases": 7944,
+      "stored_mismatches": 0,
+      "status_mismatches": 1668,
+      "stored_state_matches": true,
+      "passed": false
+    },
+    "metadata_differences": {
+      "seconds": {
+        "before": 8.871148416772485,
+        "after": 6.574678584001958
+      },
+      "native_library_sha256": {
+        "before": "d695cdb3748a7ad1acd9901e2a34d2c2923603673ab97f32f55b36bcde918d3c",
+        "after": "17a9edb185c56b0a28bd73d4cfefff0ba6688544705b2223069590ad3caf5dce"
+      }
+    },
+    "unchanged_base_source_fingerprints": {
+      "src/player/player_animation.hpp": "256a63398aa93f7b84ca103c9195f44f0604cd30b41df38f28e39b3106fa744a",
+      "src/player/player_animation_blend.cpp": "a1f6733277da77371fd705af198f5aad3480b62e26a5733a71a220361aa3e94a",
+      "tests/probes/native_player_animation_blend_probe.cpp": "da87dbc6f10d89a6ded7a6ec942896a70fa40abead3fdef8c9e24003188a108a",
+      "tools/oracles/verify_original_player_animation_blend.py": "1cb4fdd24fe6ad64083b05ed5f85123f6b6fae794fc1f22a88a3b62c9b4e5dc9"
+    },
+    "baseline_kind": "raw",
+    "individual_partial_lists": {},
+    "original_keys": [
+      "case_sha256",
+      "cases",
+      "examples",
+      "limits",
+      "native_library_sha256",
+      "native_sources",
+      "passed",
+      "seconds",
+      "source_range",
+      "source_sha256",
+      "status_examples",
+      "status_mismatches",
+      "stored_mismatches",
+      "stored_state_matches"
+    ]
+  },
+  {
+    "slug": "sonic_player",
+    "exit_status": 0,
+    "drift": [],
+    "before_sha256": "7d5bf608217b8909329f92281a5351fe73d1aae12d187c4714c152bbb70e13f8",
+    "after_sha256": "a54e749859f8438df8ee8f59ae69fc2aced4622b1c97f3cbbe5dbc6cc10f856c",
+    "verdict": [
+      "partial",
+      "values match; status_mismatches=2840, ground_prefix_status_mismatches=1632 (see limits)"
+    ],
+    "semantic_counters": {
+      "cases": 28800,
+      "stored_mismatches": 0,
+      "status_mismatches": 2840,
+      "ground_prefix_cases": 4032,
+      "ground_prefix_stored_mismatches": 0,
+      "ground_prefix_status_mismatches": 1632,
+      "stored_state_matches": true,
+      "passed": false
+    },
+    "metadata_differences": {
+      "seconds": {
+        "before": 23.008460416458547,
+        "after": 16.172246666625142
+      },
+      "native_library_sha256": {
+        "before": "d7fbd2886b53ef6f5958267073540bb6e8c66c58af2e4faf874d090e850c2b84",
+        "after": "eda73c0ffe200af111f2d9ca043a37a2956f328e6fa5155d2304162b6affb976"
+      },
+      "native_sources": {
+        "before": {
+          "src/player/sonic_player.hpp": "cd6c2556f5944cee132e040e80ae878ada8b0f388f7faa6e914a96df73842f87",
+          "src/player/sonic_player.cpp": "4b170e197fe8a048e875cd83757dc93558129280156afa87f3137b550af9200f",
+          "tests/probes/native_sonic_player_probe.cpp": "ea27199dca1c3f9ea726e9e1be159ed14b4ec35ab594d975fe80d2f9cd25ca60",
+          "tools/oracles/verify_original_sonic_player.py": "d5b661520a090a7a4f4e4e6db71221c0e6bee1a24c9c8a01363f67af22f44c0a",
+          "src/player/ground_acceleration.hpp": "35bde538be42156764534857ec3458a443932ab20a6f77832f87a649119f288f",
+          "src/player/ground_acceleration.cpp": "c79890f79d3d092eb5bf45c73223467bc6bc20105199830f32a5fba44b4cecf0",
+          "src/player/ground_acceleration_internal.hpp": "c9938bc44091750a8faeca2c6915b298295ff1e5dc2774718bef183657824595",
+          "src/player/ground_acceleration_native.cpp": "f1729d583f165daf41bf49296fb839b3b9d0badbc73c5b13977060c0670eece9",
+          "src/player/ground_arithmetic.hpp": "703a0c6c05cc2d1a6ee2e694ea48b7cc094b3ff8ca6f3dfc786791870272e7c9",
+          "src/player/ground_friction.cpp": "63ef1ec097115555b2e7bcb33f212d3678efe69a3cb326b8db2edfd5af01b58d",
+          "src/guest/ground_acceleration_reference.hpp": "2da1d2ac5be19c17e4b71cdee209e07956b3ebebb0fdf03716044382e0e5471a",
+          "src/guest/player_acceleration_ground.cpp": "2dfdea7e29e79b2d6b95897b38165246821e7ccf5ff98e7a73f2acad1eaf4f75",
+          "src/guest/player_acceleration_friction.cpp": "c2b099a18a612ab4d8c11670827bea33b9066d262e79d65844f493a2ac7e2ad1",
+          "src/player/player_acceleration_ground.hpp": "2b8bc9a2115dffbb8c442c24dfd82ec31d807dae04478e40b5b02d9a47e0e9f6",
+          "src/player/player_acceleration_friction.hpp": "fc27f80b502de6f0bcdf4ac8dd840eb9a176f6d04d6a8a57dea609cc8e11c705",
+          "src/cpu/fidelity_float.hpp": "c96aadce5ca6caa699fb3e9a0b44f791e1ac0420b31ceed31b5fca48118afb98"
+        },
+        "after": {
+          "src/player/sonic_player.hpp": "32bda755d727c02422709d00b92b8bbf98bd02e5103603611b8767b794e1bd46",
+          "src/player/sonic_player.cpp": "c2b9cd7bd4772fc5e3411ec06c160f890201fff682162ae7e177717de8945fbf",
+          "src/player/sonic_player_internal.hpp": "4960d3c64eb6d5e11ae5ed74f93ff1302709ca21a10d96d780a869e28bdfa827",
+          "src/player/sonic_player_sites.hpp": "1d6f4f979f3e0b0769ee91e14b773c5f305b7f258c89be7fa3396a26dedee8aa",
+          "src/player/sonic_player_seams.hpp": "7c26d94ffbef26442b7d375785aa07ab08a6ece5d5881fb90bd7d6a39117445d",
+          "src/guest/sonic_player_reference.cpp": "0847b4cbe5238333fd8259358e566c7a67171274ef737ef055a9ce11aef5e6f7",
+          "src/guest/sonic_player_reference.hpp": "37a969e44625b4d031916bfe3ee8c020702cfc38f54514517afde8b541e8a4f4",
+          "src/guest/sonic_player_sites.hpp": "33b652ae868523e93bd722f3a6bd43cf33fa79ef6c0d42ab7a18db13bb1c8d4f",
+          "tests/probes/native_sonic_player_probe.cpp": "d66392012a7b45086ff30b7a7da0422fc9b64c02a3028effbc0fcfd398a21a53",
+          "tools/oracles/verify_original_sonic_player.py": "36587afe4b988da56d1d3779538f31146d88377230096062ce10abf65cc899fc",
+          "src/player/ground_acceleration.hpp": "35bde538be42156764534857ec3458a443932ab20a6f77832f87a649119f288f",
+          "src/player/ground_acceleration.cpp": "c79890f79d3d092eb5bf45c73223467bc6bc20105199830f32a5fba44b4cecf0",
+          "src/player/ground_acceleration_internal.hpp": "c9938bc44091750a8faeca2c6915b298295ff1e5dc2774718bef183657824595",
+          "src/player/ground_acceleration_native.cpp": "f1729d583f165daf41bf49296fb839b3b9d0badbc73c5b13977060c0670eece9",
+          "src/player/ground_arithmetic.hpp": "703a0c6c05cc2d1a6ee2e694ea48b7cc094b3ff8ca6f3dfc786791870272e7c9",
+          "src/player/ground_friction.cpp": "63ef1ec097115555b2e7bcb33f212d3678efe69a3cb326b8db2edfd5af01b58d",
+          "src/guest/ground_acceleration_reference.hpp": "2da1d2ac5be19c17e4b71cdee209e07956b3ebebb0fdf03716044382e0e5471a",
+          "src/guest/player_acceleration_ground.cpp": "2dfdea7e29e79b2d6b95897b38165246821e7ccf5ff98e7a73f2acad1eaf4f75",
+          "src/guest/player_acceleration_friction.cpp": "c2b099a18a612ab4d8c11670827bea33b9066d262e79d65844f493a2ac7e2ad1",
+          "src/player/player_acceleration_ground.hpp": "2b8bc9a2115dffbb8c442c24dfd82ec31d807dae04478e40b5b02d9a47e0e9f6",
+          "src/player/player_acceleration_friction.hpp": "fc27f80b502de6f0bcdf4ac8dd840eb9a176f6d04d6a8a57dea609cc8e11c705",
+          "src/cpu/fidelity_float.hpp": "c96aadce5ca6caa699fb3e9a0b44f791e1ac0420b31ceed31b5fca48118afb98"
+        }
+      }
+    },
+    "unchanged_base_source_fingerprints": {
+      "src/player/sonic_player.hpp": "32bda755d727c02422709d00b92b8bbf98bd02e5103603611b8767b794e1bd46",
+      "src/player/sonic_player.cpp": "c2b9cd7bd4772fc5e3411ec06c160f890201fff682162ae7e177717de8945fbf",
+      "src/player/sonic_player_internal.hpp": "4960d3c64eb6d5e11ae5ed74f93ff1302709ca21a10d96d780a869e28bdfa827",
+      "src/player/sonic_player_sites.hpp": "1d6f4f979f3e0b0769ee91e14b773c5f305b7f258c89be7fa3396a26dedee8aa",
+      "src/player/sonic_player_seams.hpp": "7c26d94ffbef26442b7d375785aa07ab08a6ece5d5881fb90bd7d6a39117445d",
+      "src/guest/sonic_player_reference.cpp": "0847b4cbe5238333fd8259358e566c7a67171274ef737ef055a9ce11aef5e6f7",
+      "src/guest/sonic_player_reference.hpp": "37a969e44625b4d031916bfe3ee8c020702cfc38f54514517afde8b541e8a4f4",
+      "src/guest/sonic_player_sites.hpp": "33b652ae868523e93bd722f3a6bd43cf33fa79ef6c0d42ab7a18db13bb1c8d4f",
+      "tests/probes/native_sonic_player_probe.cpp": "d66392012a7b45086ff30b7a7da0422fc9b64c02a3028effbc0fcfd398a21a53",
+      "tools/oracles/verify_original_sonic_player.py": "36587afe4b988da56d1d3779538f31146d88377230096062ce10abf65cc899fc",
+      "src/player/ground_acceleration.hpp": "35bde538be42156764534857ec3458a443932ab20a6f77832f87a649119f288f",
+      "src/player/ground_acceleration.cpp": "c79890f79d3d092eb5bf45c73223467bc6bc20105199830f32a5fba44b4cecf0",
+      "src/player/ground_acceleration_internal.hpp": "c9938bc44091750a8faeca2c6915b298295ff1e5dc2774718bef183657824595",
+      "src/player/ground_acceleration_native.cpp": "f1729d583f165daf41bf49296fb839b3b9d0badbc73c5b13977060c0670eece9",
+      "src/player/ground_arithmetic.hpp": "703a0c6c05cc2d1a6ee2e694ea48b7cc094b3ff8ca6f3dfc786791870272e7c9",
+      "src/player/ground_friction.cpp": "63ef1ec097115555b2e7bcb33f212d3678efe69a3cb326b8db2edfd5af01b58d",
+      "src/guest/ground_acceleration_reference.hpp": "2da1d2ac5be19c17e4b71cdee209e07956b3ebebb0fdf03716044382e0e5471a",
+      "src/guest/player_acceleration_ground.cpp": "2dfdea7e29e79b2d6b95897b38165246821e7ccf5ff98e7a73f2acad1eaf4f75",
+      "src/guest/player_acceleration_friction.cpp": "c2b099a18a612ab4d8c11670827bea33b9066d262e79d65844f493a2ac7e2ad1",
+      "src/player/player_acceleration_ground.hpp": "2b8bc9a2115dffbb8c442c24dfd82ec31d807dae04478e40b5b02d9a47e0e9f6",
+      "src/player/player_acceleration_friction.hpp": "fc27f80b502de6f0bcdf4ac8dd840eb9a176f6d04d6a8a57dea609cc8e11c705",
+      "src/cpu/fidelity_float.hpp": "c96aadce5ca6caa699fb3e9a0b44f791e1ac0420b31ceed31b5fca48118afb98"
+    },
+    "baseline_kind": "raw",
+    "individual_partial_lists": {},
+    "original_keys": [
+      "by_entry",
+      "case_sha256",
+      "cases",
+      "constants",
+      "dispatch_sha256",
+      "examples",
+      "ground_prefix_cases",
+      "ground_prefix_status_mismatches",
+      "ground_prefix_stored_mismatches",
+      "limits",
+      "native_library_sha256",
+      "native_sources",
+      "passed",
+      "profile",
+      "seconds",
+      "source_ranges",
+      "source_sha256",
+      "status_mismatches",
+      "stored_examples",
+      "stored_mismatches",
+      "stored_state_matches"
+    ]
+  }
+]
