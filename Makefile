@@ -217,7 +217,7 @@ build/ninja-queue-consumer-test: tests/fixtures/ninja_sprite_test_fixture.hpp
 build/native-player-path-probe.dylib build/native-player-direction-reset-probe.dylib: tests/fixtures/path_probe_data.hpp
 
 # Reset compatibility APIs bind to the shared game algorithm through reference transport.
-RESET_REFERENCE_UNITS := build/game-reset-test build/reset-order-characterization-test
+RESET_REFERENCE_UNITS := build/game-reset-test build/reset-order-characterization-test build/reset-pending-contract-test build/reset-leaf-contract-test
 $(RESET_REFERENCE_UNITS): build/%-test: tests/unit/$$(subst -,_,$$*).cpp build/libsadx-guest.a build/libsadx-core.a
 	$(CXX) $(CXXFLAGS) $(INCLUDES) $< build/libsadx-guest.a build/libsadx-core.a -o $@
 build/native-game-reset-probe.dylib build/native-stream-players-probe.dylib: build/native-%-probe.dylib: tests/probes/native_$$(subst -,_,$$*)_probe.cpp build/libsadx-guest.a build/libsadx-core.a
