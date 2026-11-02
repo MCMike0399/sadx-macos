@@ -571,3 +571,6 @@ build/native-sprite-registry-prefix-probe.dylib: tools/oracles/build_sprite_regi
 	$(REFERENCE_PYTHON) tools/oracles/build_sprite_registry_probe.py --output $@
 build/native-gamma-setup-resource-probe.dylib: tests/probes/native_gamma_setup_resource_probe.cpp src/player/gamma_setup_resource.cpp src/engine/sprite_registry.cpp src/engine/task_work.cpp src/player/gamma_setup_resource.hpp src/engine/sprite_definition.hpp src/engine/sprite_registry.hpp src/engine/task_work.hpp
 	$(CXX) $(CXXFLAGS) -dynamiclib $(INCLUDES) $(filter %.cpp,$^) -o $@
+
+build/native-preview-events-test: tests/unit/native_preview_events.mm src/apps/native_character_selection_assets.hpp src/apps/native_gamma_actor_assets.hpp src/runtime/native_event_actions_context.hpp build/libsadx-native.a
+	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) $< build/libsadx-native.a -framework Foundation -o $@

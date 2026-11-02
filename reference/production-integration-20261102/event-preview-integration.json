@@ -1,0 +1,155 @@
+{
+  "packet": "b05ab74",
+  "correction": "f44cd4a",
+  "reviews": [
+    "028f986d: bounded core acceptance",
+    "280f39da: correction acceptance"
+  ],
+  "main_commits": [
+    "2509a3e",
+    "9b2e253"
+  ],
+  "scope": "Canonical Session event state and retained preview tails; real preview action and selected-motion caller bindings; source-backed texture/primary field adapters.",
+  "native_checks": [
+    {
+      "command": [
+        "build/event-actions-test"
+      ],
+      "exit_status": 0,
+      "stdout": "event actions: native scheduler/arena/registry/preview composition passed\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "build/native-preview-events-test",
+        "game/imported"
+      ],
+      "exit_status": 0,
+      "stdout": "Imported preview bindings and real PInitialize event allocations feed six queues; retained tails survive cleanup\n",
+      "stderr": ""
+    }
+  ],
+  "texture_fault": {
+    "fault": "Use first instead of second source texture list for Knuckles and Big",
+    "caught": true,
+    "source_sha256": "0c9e88a1913fea627aed7e9af7120c73e988f8ec2b36b1d1f4c8a986dd5ee2e5",
+    "mutated_sha256": "0c09e9e37fd8909906f761036fe9addf9ab99f7567589240aee424eeeb262d87",
+    "results": [
+      {
+        "command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-Isrc",
+          "-c",
+          "build/event-preview-mapping-mutation/native_event_actions_context.cpp",
+          "-o",
+          "build/event-preview-mapping-mutation/binding.o"
+        ],
+        "exit_status": 0,
+        "stderr": ""
+      },
+      {
+        "command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-fobjc-arc",
+          "-Isrc",
+          "tests/unit/native_preview_events.mm",
+          "build/event-preview-mapping-mutation/binding.o",
+          "build/libsadx-native.a",
+          "-framework",
+          "Foundation",
+          "-o",
+          "build/event-preview-mapping-mutation/test"
+        ],
+        "exit_status": 0,
+        "stderr": ""
+      },
+      {
+        "command": [
+          "build/event-preview-mapping-mutation/test",
+          "game/imported"
+        ],
+        "exit_status": -6,
+        "stdout": "",
+        "stderr": "Assertion failed: (textures[slot] == &characters.lists()[character][binding]), function main, file native_preview_events.mm, line 32.\n"
+      }
+    ]
+  },
+  "oracle": {
+    "passed": true,
+    "cases": 2760,
+    "executed": 2760,
+    "seed": 417239,
+    "outcomes": {
+      "0": 2029,
+      "1": 185,
+      "2": 128,
+      "4": 54,
+      "5": 76,
+      "6": 38,
+      "3": 108,
+      "7": 142
+    },
+    "failures": [],
+    "input_stream_sha256": "4f18b288ecf7a5d7176544b503fc5c702db441db6ddd090fe06938f515c477f7",
+    "complete_observation_sha256": "bc07116f5afa03ce2794cdd113f739f1ec510cbd51d5488b3f5958fae32e3d92",
+    "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+    "native_library_sha256": "173cf9721a60e2085089a9dc2cfdfc6b5312edc99e0c67ba4e2a2c66aba418ab",
+    "source_ranges": {
+      "0x417e80-0x417ea0": "26fabc5d2513033969f64f29086c4de90fdebae7ae14f4724e4f6b82003887fd",
+      "0x417ea0-0x417ee2": "43987ffc448288dc06345a7bb10df78071b1151333a661d3b4801f616a6b1d77",
+      "0x417ef0-0x417f48": "9360136315574feae94583d069596305ea2ef4cc74aa1494854aab19bfb47bb8",
+      "0x42fe00-0x42fe15": "ebcdff387a97f0a3c12714d8a7f08315f173f3299312f68e8b294a9534ecdbfd",
+      "0x42fe40-0x42fe55": "b261f363af7b42800458baecd1fa672d6142439dc17b2aa829b09b9360980500",
+      "0x441260-0x44127c": "f3d9f1d72c0cc8d08044dacaf90faf6c948acaace8d162ea1b96760e62b0e5c8",
+      "0x40b2d0-0x40b304": "b1910d7f567983b9d942b334f0d918441ffeccf600eda82d45745d838918205f"
+    },
+    "native_sources": {
+      "src/player/event_actions.hpp": "67b9beed86b5a7dab204a43095725ba73866bc59040218612266cd09897a1dd1",
+      "src/player/event_actions.cpp": "c66d92f5008847667e0823b8b3072644768da39655b9e769a6fb90dc2f5820d9",
+      "src/engine/task_work.hpp": "a8dea63eb5176a0955b085dcc0248b9aba78665663912eba44e759052d682687",
+      "tests/probes/native_event_actions_probe.cpp": "93e8f4167f6c5c0d7adac7375db871a3b60e655130b0fee3ee3f2fc2dc2c9ac6"
+    },
+    "limits": [
+      "Queue/admission and cleanup only; no animation stepping, controller or render qualification.",
+      "Void ABI: return/stop and all modeled state/call/allocation/failure observations; incidental caller-saved registers are not API results.",
+      "Source CAlloc executes; MAlloc/FreeMemory are recorded allocation boundaries. Native adapter delegates to the real TaskWorkArena.",
+      "Duplicate free is a stopped allocator contract violation on both adapters, not a claim about original heap-corruption behavior.",
+      "SetInputP registry slots 0..7, including byte-truncated input words; arbitrary beyond-registry memory is unavailable natively."
+    ]
+  },
+  "build": "Main native application and force-load closure passed before final registration; no original-game dependency introduced.",
+  "limits": [
+    "Actual normal-input frontier remains earlier Gamma material binding; event preview update is not yet demonstrated in a completed app actor frame.",
+    "No new full gate or N3b acceptance.",
+    "Root integration review and current inventory/judge reconciliation remain pending."
+  ],
+  "source_integration_commit": "8a1427d",
+  "final_closure": {
+    "exit_status": 0,
+    "log": "build/event-preview-final-closure.log",
+    "log_sha256": "bec28e73cf8b0d09c8203b9cb43e97cf1211c163f74e730673c2c43d852d90da"
+  },
+  "retained_inventory": "TaskWork header/module temporarily open pending whole-current-module integration review; no historical qualification or failure retired. Only two save-warning header evidence pointers rebound, with exact unchanged declarations and seven borrower files."
+}

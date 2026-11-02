@@ -877,3 +877,11 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Material candidate 4116566 reports the next effects boundary but remains unmerged pending review. Its first build modified four Root libusb cache files through a shared symlink. Root preserved those incident copies and restored the files from retained Root build/source outputs; SDL runtime bytes stayed unchanged during repair.
 * controller-cache-recovery.json records exact paths/hashes and limits. Worker guidance now requires local dependency copies and the make old-header option. No Root game source or assets changed in this incident; no new hardware qualification is claimed.
 * Last actual full gate remains 7bcfd78 (311 native programs, 612 Python tests), with the separately recorded raster and cold-build supplements. Main still stops at the material binding; no new N3b claim.
+
+### 2026-11-02 — Native preview event calls connected (N3b dependency, gate pending)
+
+* Reviewed event source b05ab74/correction f44cd4a are integrated as 2509a3e/9b2e253. Source 8a1427d binds Session-owned event identities and persistent preview tails, real input/action callbacks and source motion selection. Existing actor stops remain.
+* A new imported-assets witness runs real PInitialize for six players, preserves the same 124-byte event owners, queues real imported actions and checks exact six texture identities, secondary modes, Miles counter masking and retained tails after cleanup. It and the existing composed event program pass.
+* Main native app and force-load closure pass; the integrated default oracle passes all 2,760 cases. A compiled first-list-for-all texture mutation fails the actual binding assertion. The larger 3,260/5,260 comparisons and eight faults remain reviewed packet evidence.
+* Original native frame validation still stops earlier at the material binding; event execution is not yet established in a complete app actor frame. No new gate or N3b claim. TaskWork's current module classification remains open for integration review; its old qualified evidence and case 207 failure remain intact.
+* Source/test registration and finite save-warning metadata rebinding are recorded separately. Next: independent integration review, then combine accepted material/event work and run a coherent gate.

@@ -1,0 +1,49 @@
+{
+ "passed": true,
+ "cases": 2760,
+ "executed": 2760,
+ "seed": 417239,
+ "outcomes": {
+  "0": 2029,
+  "1": 185,
+  "2": 128,
+  "4": 54,
+  "5": 76,
+  "6": 38,
+  "3": 108,
+  "7": 142
+ },
+ "failures": [],
+ "input_stream_sha256": "4f18b288ecf7a5d7176544b503fc5c702db441db6ddd090fe06938f515c477f7",
+ "complete_observation_sha256": "bc07116f5afa03ce2794cdd113f739f1ec510cbd51d5488b3f5958fae32e3d92",
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "173cf9721a60e2085089a9dc2cfdfc6b5312edc99e0c67ba4e2a2c66aba418ab",
+ "source_ranges": {
+  "0x417e80-0x417ea0": "26fabc5d2513033969f64f29086c4de90fdebae7ae14f4724e4f6b82003887fd",
+  "0x417ea0-0x417ee2": "43987ffc448288dc06345a7bb10df78071b1151333a661d3b4801f616a6b1d77",
+  "0x417ef0-0x417f48": "9360136315574feae94583d069596305ea2ef4cc74aa1494854aab19bfb47bb8",
+  "0x42fe00-0x42fe15": "ebcdff387a97f0a3c12714d8a7f08315f173f3299312f68e8b294a9534ecdbfd",
+  "0x42fe40-0x42fe55": "b261f363af7b42800458baecd1fa672d6142439dc17b2aa829b09b9360980500",
+  "0x441260-0x44127c": "f3d9f1d72c0cc8d08044dacaf90faf6c948acaace8d162ea1b96760e62b0e5c8",
+  "0x40b2d0-0x40b304": "b1910d7f567983b9d942b334f0d918441ffeccf600eda82d45745d838918205f"
+ },
+ "native_sources": {
+  "src/player/event_actions.hpp": "67b9beed86b5a7dab204a43095725ba73866bc59040218612266cd09897a1dd1",
+  "src/player/event_actions.cpp": "c66d92f5008847667e0823b8b3072644768da39655b9e769a6fb90dc2f5820d9",
+  "src/engine/task_work.hpp": "a8dea63eb5176a0955b085dcc0248b9aba78665663912eba44e759052d682687",
+  "tests/probes/native_event_actions_probe.cpp": "93e8f4167f6c5c0d7adac7375db871a3b60e655130b0fee3ee3f2fc2dc2c9ac6"
+ },
+ "limits": [
+  "Queue/admission and cleanup only; no animation stepping, controller or render qualification.",
+  "Void ABI: return/stop and all modeled state/call/allocation/failure observations; incidental caller-saved registers are not API results.",
+  "Source CAlloc executes; MAlloc/FreeMemory are recorded allocation boundaries. Native adapter delegates to the real TaskWorkArena.",
+  "Duplicate free is a stopped allocator contract violation on both adapters, not a claim about original heap-corruption behavior.",
+  "SetInputP registry slots 0..7, including byte-truncated input words; arbitrary beyond-registry memory is unavailable natively."
+ ],
+ "tracked_summary": {
+  "full_sha256": "2bfcddf0169a3cabc609e688058baa58bbeaa305e2a7cc8069c4ce85ff15cc4f",
+  "full_bytes": 2397,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}
