@@ -885,3 +885,11 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Main native app and force-load closure pass; the integrated default oracle passes all 2,760 cases. A compiled first-list-for-all texture mutation fails the actual binding assertion. The larger 3,260/5,260 comparisons and eight faults remain reviewed packet evidence.
 * Original native frame validation still stops earlier at the material binding; event execution is not yet established in a complete app actor frame. No new gate or N3b claim. TaskWork's current module classification remains open for integration review; its old qualified evidence and case 207 failure remain intact.
 * Source/test registration and finite save-warning metadata rebinding are recorded separately. Next: independent integration review, then combine accepted material/event work and run a coherent gate.
+
+### 2026-11-02 — Shared materials integrated with preview events (N3b dependency, gate pending)
+
+* Independently accepted material source 4116566 is integrated as fb0bcb2/17c5a0a/013c2ed. Gamma and the actual renderer borrow one stable mutable array per imported identity; prior event integration review a2d19476 also accepts current TaskWork coding conformance, separately from its old fidelity limits.
+* Actual Main native app and force-load closure pass. The same normal input now reaches native_gamma_initialize_effects at frame 1332, exit 1, with one setup sprite. The outgoing-title image is unchanged; this is not a completed actor frame.
+* Existing Gamma, weld, animation, asset, setup, model and event witnesses pass. Initial model-binding invocation omitted its second argument and failed; only that invocation was corrected and rerun. Original renderer 2,427 cases retain zero value failures and 172 FP partials; Gamma 1,422 retains zero value failures and 498 FP partials. Both make targets exit 2.
+* Source and judge adaptations remain separate. The fixture prerequisite and retained current reports are registered; material-event-integration.json records exact attempts and limits. No new combined gate, cold export, N3b or hardware qualification is claimed.
+* Next: integrate the accepted corrected Sonic controller against this tree and recover the actual reached effects cluster. Preserve the earlier libusb incident/recovery receipt and use isolated dependency copies.

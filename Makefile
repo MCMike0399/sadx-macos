@@ -574,3 +574,5 @@ build/native-gamma-setup-resource-probe.dylib: tests/probes/native_gamma_setup_r
 
 build/native-preview-events-test: tests/unit/native_preview_events.mm src/apps/native_character_selection_assets.hpp src/apps/native_gamma_actor_assets.hpp src/runtime/native_event_actions_context.hpp build/libsadx-native.a
 	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) $< build/libsadx-native.a -framework Foundation -o $@
+
+build/native-gamma-binding-test: tests/fixtures/character_material_consumer.hpp

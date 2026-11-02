@@ -1,0 +1,146 @@
+{
+  "source_commits": [
+    "fb0bcb2",
+    "17c5a0a",
+    "013c2ed"
+  ],
+  "accepted_candidate": "4116566",
+  "independent_review": "745f1ca2-8875-4018-b28a-8a139e5720e9",
+  "scope": "Canonical materials composed with already integrated native event/preview state.",
+  "native_build_exit_status": 0,
+  "native_closure": "PASS",
+  "unit_attempts": [
+    {
+      "command": [
+        "build/native-gamma-binding-test",
+        "game/imported"
+      ],
+      "exit_status": 0,
+      "stdout": "PASS: imported Gamma -> canonical collision/ordinary textures/cursors -> setup boundary\nPASS: imported Gamma -> canonical collision/ordinary textures/cursors -> setup boundary\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "build/native-gamma-weld-cursors-test",
+        "game/imported"
+      ],
+      "exit_status": 0,
+      "stdout": "PASS: canonical Gamma weld store and real cursor allocations reach setup boundary\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "build/animation-gamma-shared-binding-test",
+        "game/imported"
+      ],
+      "exit_status": 0,
+      "stdout": "Two real Gamma players share one imported table; isolated state and failed-binding prefixes pass\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "build/animation-gamma-assets-test",
+        "game/imported"
+      ],
+      "exit_status": 0,
+      "stdout": "0 0 2 3303 77 3 0 1031798784 1050253722 \n1 2 0 0 77 9 1 1048576000 1050253722 CHRMODELS:0x10214cdc:payload outside reached constructor closure\n2 2 0 0 77 9 2 1048576000 1050253722 CHRMODELS:0x10217bc4:payload outside reached constructor closure\n3 2 0 0 77 4 5 1048576000 1050253722 CHRMODELS:0x1021aecc:payload outside reached constructor closure\n4 2 0 0 77 9 4 1048576000 1050253722 CHRMODELS:0x1021cae4:payload outside reached constructor closure\n5 2 0 0 77 9 5 1040187392 1050253722 CHRMODELS:0x1021cae4:payload outside reached constructor closure\n6 2 0 0 77 3 6 1048576000 1050253722 CHRMODELS:0x10223024:payload outside reached constructor closure\n7 2 0 0 77 4 8 1040187392 1050253722 CHRMODELS:0x10224c6c:payload outside reached constructor closure\n8 2 0 0 77 3 8 1048576000 1050253722 CHRMODELS:0x102267b4:payload outside reached constructor closure\n9 2 0 0 77 4 0 1048576000 1050253722 CHRMODELS:0x1022837c:payload outside reached constructor closure\n10 0 2 3303 77 4 0 1048576000 1090519040 \n11 2 0 0 77 4 12 1040187392 1077936128 CHRMODELS:0x10243fa4:payload outside reached constructor closure\n12 2 0 0 77 3 12 1048576000 1065353216 CHRMODELS:0x10246e5c:payload outside reached constructor closure\n13 2 0 0 77 5 14 1048576000 1065353216 CHRMODELS:0x10278fb4:payload outside reached constructor closure\n14 2 0 0 77 4 0 1048576000 1065353216 CHRMODELS:0x1027fbcc:payload outside reached constructor closure\n15 0 2 3303 77 3 15 1048576000 1065353216 \n16 0 2 3303 77 3 16 1031798784 1065353216 \n17 2 0 0 77 4 18 1056964608 1065353216 CHRMODELS:0x1023ca0c:payload outside reached constructor closure\n18 0 2 3303 77 4 0 1031798784 1065353216 \n19 2 0 0 77 4 0 1065353216 1063675494 CHRMODELS:0x10230144:payload outside reached constructor closure\n20 0 2 3303 77 3 20 1031798784 1065353216 \n21 2 0 0 77 4 25 1056964608 1065353216 CHRMODELS:0x102adf04:payload outside reached constructor closure\n22 2 0 0 77 3 22 1056964608 1065353216 CHRMODELS:0x102b3d14:payload outside reached constructor closure\n23 2 0 0 77 4 25 1065353216 1065353216 CHRMODELS:0x1024ad8c:payload outside reached constructor closure\n24 2 0 0 77 4 55 1056964608 1065353216 CHRMODELS:0x102be4d4:payload outside reached constructor closure\n25 2 0 0 77 3 25 1031798784 1036831949 CHRMODELS:0x1024ad8c:payload outside reached constructor closure\n26 2 0 0 77 3 26 1056964608 1065353216 CHRMODELS:0x102b0e1c:payload outside reached constructor closure\n27 2 0 0 77 3 27 1056964608 1065353216 CHRMODELS:0x102497e4:payload outside reached constructor closure\n28 2 0 0 77 3 28 1056964608 1056964608 CHRMODELS:0x102410ec:payload outside reached constructor closure\n29 2 0 0 77 4 30 1056964608 1065353216 CHRMODELS:0x1023f944:payload outside reached constructor closure\n30 2 0 0 77 3 30 1056964608 0 CHRMODELS:0x102410ec:payload outside reached constructor closure\n31 2 0 0 77 3 31 1056964608 1065353216 CHRMODELS:0x1029d8b4:payload outside reached constructor closure\n32 2 0 0 77 4 33 1056964608 1065353216 CHRMODELS:0x1029f42c:payload outside reached constructor closure\n33 2 0 0 77 3 33 1056964608 1065353216 CHRMODELS:0x102a0bd4:payload outside reached constructor closure\n34 2 0 0 77 4 25 1056964608 1065353216 CHRMODELS:0x102a279c:payload outside reached constructor closure\n35 2 0 0 77 4 0 1056964608 1065353216 CHRMODELS:0x102557d4:payload outside reached constructor closure\n36 2 0 0 77 4 0 1056964608 1065353216 CHRMODELS:0x10259e7c:payload outside reached constructor closure\n37 2 0 0 77 4 8 1056964608 1065353216 CHRMODELS:0x102557d4:payload outside reached constructor closure\n38 2 0 0 77 4 8 1056964608 1065353216 CHRMODELS:0x10259e7c:payload outside reached constructor closure\n39 2 0 0 77 6 0 1056964608 1065353216 CHRMODELS:0x102adf04:payload outside reached constructor closure\n40 2 0 0 77 4 6 1048576000 1065353216 CHRMODELS:0x102216bc:payload outside reached constructor closure\n41 2 0 0 77 4 31 1048576000 1065353216 CHRMODELS:0x1029c3cc:payload outside reached constructor closure\n42 2 0 0 77 4 43 1042983595 1056964608 CHRMODELS:0x10210b6c:payload outside reached constructor closure\n43 0 2 2410 77 4 43 1042983595 1056964608 \n44 2 0 0 77 4 46 1048576000 1069547520 CHRMODELS:0x10235814:payload outside reached constructor closure\n45 2 0 0 77 4 46 1048576000 1069547520 CHRMODELS:0x10239564:payload outside reached constructor closure\n46 2 0 0 77 3 46 1065353216 1065353216 CHRMODELS:0x1023e0fc:payload outside reached constructor closure\n47 2 0 0 77 4 5 1048576000 1065353216 CHRMODELS:0x1022b4e4:payload outside reached constructor closure\n48 2 0 0 77 4 49 1048576000 1065353216 CHRMODELS:0x1025bd04:payload outside reached constructor closure\n49 2 0 0 77 3 49 1048576000 1065353216 CHRMODELS:0x1025d53c:payload outside reached constructor closure\n50 2 0 0 77 4 52 1048576000 1069547520 CHRMODELS:0x102a760c:payload outside reached constructor closure\n51 2 0 0 77 4 52 1048576000 1065353216 CHRMODELS:0x102aa14c:payload outside reached constructor closure\n52 2 0 0 77 3 52 1048576000 1065353216 CHRMODELS:0x102ab67c:payload outside reached constructor closure\n53 2 0 0 77 9 53 1048576000 1056964608 CHRMODELS:0x102b3d14:payload outside reached constructor closure\n54 2 0 0 77 4 55 1048576000 1061997773 CHRMODELS:0x102b6ccc:payload outside reached constructor closure\n55 2 0 0 77 9 55 1048576000 1056964608 CHRMODELS:0x102b83f4:payload outside reached constructor closure\n56 0 2 3303 77 6 10 1031798784 1065353216 \n57 2 0 0 77 6 25 1065353216 1065353216 CHRMODELS:0x102b6ccc:payload outside reached constructor closure\n58 2 0 0 77 6 5 1048576000 1069547520 CHRMODELS:0x10239564:payload outside reached constructor closure\n59 2 0 0 77 6 55 1048576000 1069547520 CHRMODELS:0x102a760c:payload outside reached constructor closure\n60 2 0 0 77 4 5 1065353216 1063675494 CHRMODELS:0x1022e67c:payload outside reached constructor closure\n61 2 0 0 77 4 57 1065353216 1065353216 CHRMODELS:0x102be4d4:payload outside reached constructor closure\n62 2 0 0 77 6 63 1048576000 1065353216 CHRMODELS:0x1024db84:payload outside reached constructor closure\n63 2 0 0 77 4 62 1048576000 1065353216 CHRMODELS:0x1024db84:payload outside reached constructor closure\n64 2 0 0 77 6 65 1042983595 1065353216 CHRMODELS:0x10250d3c:payload outside reached constructor closure\n65 2 0 0 77 4 64 1048576000 1065353216 CHRMODELS:0x10250d3c:payload outside reached constructor closure\n66 2 0 0 77 12 66 1040187392 1065353216 CHRMODELS:0x102c1dbc:payload outside reached constructor closure\n67 2 0 0 77 5 67 1065353216 1051931443 CHRMODELS:0x1026dd8c:payload outside reached constructor closure\n68 2 0 0 77 4 0 1065353216 1051931443 CHRMODELS:0x1026fab4:payload outside reached constructor closure\n69 2 0 0 77 5 69 1048576000 1065353216 CHRMODELS:0x10275d9c:payload outside reached constructor closure\n70 0 2 3303 77 4 69 1048576000 1065353216 \n71 0 2 3303 77 4 69 1048576000 1065353216 \n72 2 0 0 77 5 72 1048576000 1065353216 constructed_action:0x3c5d530:recipe72 payload outside reached request0 closure\n73 2 0 0 77 4 74 1042983595 1048576000 CHRMODELS:0x10283264:payload outside reached constructor closure\n74 2 0 0 77 4 75 1042983595 1048576000 CHRMODELS:0x1028731c:payload outside reached constructor closure\n75 2 0 0 77 6 0 1042983595 1048576000 CHRMODELS:0x10283264:payload outside reached constructor closure\n76 2 0 0 77 4 77 1042983595 1056964608 CHRMODELS:0x102c3de4:payload outside reached constructor closure\n77 2 0 0 77 4 77 1042983595 1056964608 CHRMODELS:0x102c628c:payload outside reached constructor closure\n78 2 0 0 77 4 0 1042983595 1056964608 CHRMODELS:0x102c8eb4:payload outside reached constructor closure\n79 2 0 0 77 4 80 1042983595 1056964608 CHRMODELS:0x102cb03c:payload outside reached constructor closure\n80 2 0 0 77 4 80 1042983595 1056964608 CHRMODELS:0x102cd8c4:payload outside reached constructor closure\n81 2 0 0 77 4 0 1042983595 1056964608 CHRMODELS:0x102d068c:payload outside reached constructor closure\n82 2 0 0 77 4 83 1042983595 1056964608 CHRMODELS:0x102d2224:payload outside reached constructor closure\n83 2 0 0 77 3 83 1042983595 1056964608 CHRMODELS:0x102d3c6c:payload outside reached constructor closure\n84 2 0 0 77 4 25 1042983595 1056964608 CHRMODELS:0x102d5954:payload outside reached constructor closure\n85 2 0 0 77 3 85 1042983595 1065353216 CHRMODELS:0x102946dc:payload outside reached constructor closure\n86 2 0 0 77 3 86 1042983595 1065353216 CHRMODELS:0x10295944:payload outside reached constructor closure\n87 2 0 0 77 4 88 1065353216 1065353216 CHRMODELS:0x1029693c:payload outside reached constructor closure\n88 2 0 0 77 3 88 1065353216 1056964608 CHRMODELS:0x10297794:payload outside reached constructor closure\n89 2 0 0 77 4 0 1065353216 1065353216 CHRMODELS:0x10298cdc:payload outside reached constructor closure\n90 2 0 0 77 4 0 1065353216 1065353216 CHRMODELS:0x1029aa74:payload outside reached constructor closure\n",
+      "stderr": "91 Gamma imported metadata/status rows characterized; PSetMotion remains unrecovered\n"
+    },
+    {
+      "command": [
+        "build/model-binding-test",
+        "game/imported"
+      ],
+      "exit_status": -6,
+      "stdout": "",
+      "stderr": "Assertion failed: (argc == 3), function main, file model_binding.cpp, line 86.\n"
+    },
+    {
+      "command": [
+        "build/basic-model-test"
+      ],
+      "exit_status": 0,
+      "stdout": "Material byte channels, source call order, live reset mask, constant packing, singular preservation, distinct reset source and tagged stop pass.\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "build/native-preview-events-test",
+        "game/imported"
+      ],
+      "exit_status": 0,
+      "stdout": "Imported preview bindings and real PInitialize event allocations feed six queues; retained tails survive cleanup\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "build/model-binding-test",
+        "game/imported/characters/sonic-selection.actions",
+        "game/imported/system"
+      ],
+      "exit_status": 0,
+      "log": "build/material-model-binding-corrected.log",
+      "note": "Corrected initial invocation which omitted the second required argument; original setup failure retained."
+    },
+    {
+      "command": [
+        "build/gamma-setup-caller-test",
+        "game/imported/gamma-setup.bin"
+      ],
+      "exit_status": 0
+    }
+  ],
+  "oracle_attempts": [
+    {
+      "target": "oracle-basic-model",
+      "exit_status": 2,
+      "log": "build/material-integrated-oracle-basic-model.log"
+    },
+    {
+      "target": "oracle-gamma-selection-core",
+      "exit_status": 2,
+      "log": "build/material-integrated-oracle-gamma-selection-core.log"
+    }
+  ],
+  "frontier": {
+    "source_commit": "013c2ede09184d7c37336f9340113953195bb21f",
+    "source_edits": "none; only new fixture prerequisite is uncommitted",
+    "command": [
+      "/Users/burbujamc/Developer/sadx-macos/build/sadx-native",
+      "--assets",
+      "/Users/burbujamc/Developer/sadx-macos/game/imported",
+      "--offscreen",
+      "--paced",
+      "--exit-after",
+      "1550",
+      "--save-directory",
+      "/Users/burbujamc/Developer/sadx-macos/build/material-event-frontier-em5o2lrx/savedata",
+      "--key-events",
+      "500:13:down,501:13:up,750:13:down,751:13:up,950:13:down,951:13:up,1050:13:down,1051:13:up,1300:13:down,1301:13:up",
+      "--capture-directory",
+      "/Users/burbujamc/Developer/sadx-macos/build/material-event-frontier-em5o2lrx/captures",
+      "--capture-at",
+      "1300,1380,1381,1382",
+      "--screenshot",
+      "/Users/burbujamc/Developer/sadx-macos/build/material-event-frontier-em5o2lrx/frontier.ppm"
+    ],
+    "app_sha256": "24eaf30b65edfaa52137b11d8af86b3546df6f579f63442f3ca04aa963ea66db",
+    "exit_status": 1,
+    "state": {
+      "frames": 1332,
+      "sprite_registry_count": 1,
+      "gamma_setup_assets_loaded": true,
+      "gamma_setup_registered": true
+    },
+    "stop": "native session stopped: native_gamma_initialize_effects",
+    "screenshot_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427",
+    "image_unchanged": true,
+    "raw_output_directory": "build/material-event-frontier-em5o2lrx"
+  },
+  "limits": [
+    "Initial model-binding invocation omitted its second argument and failed; corrected actual invocation passed.",
+    "Recorded next effects stop and identical title image are dependency progress, not a completed actor frame.",
+    "No new combined full gate or combined cold export yet.",
+    "Original partials remain partial and old verifier scripts/cases/tolerances are unchanged."
+  ]
+}
