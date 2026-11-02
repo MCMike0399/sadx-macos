@@ -607,3 +607,6 @@ build/sonic-animation-integration-test: tests/unit/sonic_animation_integration.m
 build/sadx-native build/sadx-native-closure: src/apps/native_sonic_animation_assets.hpp src/runtime/sonic_animation_assets.hpp src/runtime/native_session.hpp src/runtime/native_player_system.hpp
 # These existing Objective-C++ test recipes also include shared owners directly.
 build/native-sonic-callback-test build/native-preview-events-test build/native-gamma-binding-test build/native-gamma-weld-cursors-test build/native-gamma-effects-test build/animation-gamma-shared-binding-test: src/runtime/native_session.hpp src/runtime/native_player_system.hpp src/runtime/sonic_animation_assets.hpp
+
+build/native-gamma-motion-test: tests/unit/native_gamma_motion.mm src/apps/native_gamma_actor_assets.hpp src/runtime/native_player_system.hpp src/runtime/gamma_motion.hpp build/libsadx-native.a
+	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) $< build/libsadx-native.a -framework Foundation -o $@

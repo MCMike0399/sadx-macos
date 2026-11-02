@@ -1,0 +1,44 @@
+[
+  {
+    "name": "initial-frame",
+    "compiled": true,
+    "caught": true,
+    "exit_status": -6,
+    "stderr": "Assertion failed: (tail.frame_at_130 == 0 && tail.start_at_134 == 0 && tail.timer_at_12c == 1 && tail.flags_at_12e == 0), function main, file native_gamma_motion.mm, line 283."
+  },
+  {
+    "name": "live-pose",
+    "compiled": true,
+    "caught": true,
+    "exit_status": -6,
+    "stderr": "Assertion failed: (static_cast<std::int32_t>(read_word(arena, output.work, 4 + axis * 4)) == pose.rotation[axis]), function verify_transition, file native_gamma_motion.mm, line 85."
+  },
+  {
+    "name": "decoder-count",
+    "compiled": true,
+    "caught": true,
+    "exit_status": 1,
+    "stderr": "node declarations exact"
+  },
+  {
+    "name": "table-identity",
+    "compiled": true,
+    "caught": true,
+    "exit_status": -6,
+    "stderr": "Assertion failed: (tail.table_at_140 == table && table->records.size() == 91), function main, file native_gamma_motion.mm, line 279."
+  },
+  {
+    "name": "skip-motion",
+    "compiled": true,
+    "caught": true,
+    "exit_status": -6,
+    "stderr": "Assertion failed: (state.current_animation_at_126 == 0 && state.requested_animation_at_124 == 0 && state.previous_animation_at_128 == 0 && state.animation_mode_at_120 == 1), function main, file native_gamma_motion.mm, line 281."
+  },
+  {
+    "name": "charge-alias",
+    "compiled": true,
+    "caught": true,
+    "exit_status": -6,
+    "stderr": "Assertion failed: (word(*tail.frame_at_130) == word(0.6f)), function verify_playback, file native_gamma_motion.mm, line 135."
+  }
+]

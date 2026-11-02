@@ -1,0 +1,47 @@
+{
+  "scenarios": 3,
+  "compared_rows": 465,
+  "failures": [],
+  "fp_partials": [
+    {
+      "scenario": "idle_pose_a",
+      "row": 0,
+      "field": 9,
+      "source": 0,
+      "native": 32
+    },
+    {
+      "scenario": "idle_pose_b",
+      "row": 0,
+      "field": 9,
+      "source": 0,
+      "native": 32
+    }
+  ],
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "dll_sha256": "76bbaa1b6aa23872648e6f1f39642e4262403e372b4c4b32f20f0ec89780c2a5",
+  "observation_sha256": "3bcab50e1e0d58096e2b1c174c20c0ad4fed6cb4ce9bc6800fed66ed008fca34",
+  "source_ranges": {
+    "0x44a800": {
+      "bytes": 1601,
+      "sha256": "fd780fe989ab1a2162b99383dee2fb6765f1a7223cbccad1c1bb2d98905a79dc"
+    },
+    "0x43f2a0": {
+      "bytes": 1872,
+      "sha256": "3f838787e21b95594cb3ad0647c4d48f1b7edbecb900f2989eb3b4cbbbadc8c9"
+    },
+    "0x446950": {
+      "bytes": 87,
+      "sha256": "1c2020014b22835480dbdb268e356de7b5ea3bc662565ce19507858402bcebea"
+    },
+    "0x439fc0": {
+      "bytes": 80,
+      "sha256": "f99fc24e7a17ec5f7d6b13b5eb1d6187301b589566621733ec546779e6cce830"
+    }
+  },
+  "limits": [
+    "Real imported Stand and preview actions; deterministic allocator supplier.",
+    "Controlled post-initialization transitions supplement the real Gamma caller.",
+    "No physical Windows, complete actor frame or allocator-policy claim."
+  ]
+}

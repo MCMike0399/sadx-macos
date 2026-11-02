@@ -1,0 +1,43 @@
+diff --git a/native-sources.txt b/native-sources.txt
+index 770edce9..77be18e2 100644
+--- a/native-sources.txt
++++ b/native-sources.txt
+@@ -151,3 +151,5 @@ src/player/sonic_player.cpp
+ src/engine/particle_pool.cpp
+ src/player/gamma_effects.cpp
+ src/runtime/sonic_animation_assets.cpp
++src/runtime/animation_resources.cpp
++src/runtime/gamma_motion.cpp
+diff --git a/src/runtime/native_gamma_assets_native.cpp b/src/runtime/native_gamma_assets_native.cpp
+index 99460f5b..2173ae51 100644
+--- a/src/runtime/native_gamma_assets_native.cpp
++++ b/src/runtime/native_gamma_assets_native.cpp
+@@ -43,7 +43,9 @@ void Session::load_player_assets(GammaActorAssets assets,
+     if (effects_definition)
+         bind_gamma_effects_resources(players_, character_resources_.assets(),
+                                      character_resources_.lists(), *effects_definition);
++    auto motion = std::make_unique<GammaMotionAssets>(*character_pack_, assets);
+     bind_gamma_resources(players_, character_scene_, assets);
++    players_.gamma_motion_assets = std::move(motion);
+     players_.gamma_assets = std::make_unique<GammaActorAssets>(std::move(assets));
+ }
+ } // namespace sadx::native
+diff --git a/src/runtime/native_player_system.hpp b/src/runtime/native_player_system.hpp
+index 623fb662..af63a3b1 100644
+--- a/src/runtime/native_player_system.hpp
++++ b/src/runtime/native_player_system.hpp
+@@ -1,5 +1,6 @@
+ #pragma once
+ #include "runtime/gamma_actor_assets.hpp"
++#include "runtime/gamma_motion.hpp"
+ #include "runtime/sonic_animation_assets.hpp"
+ #include "runtime/character_texture_assets.hpp"
+ #include "engine/character_geometry.hpp"
+@@ -32,6 +33,7 @@ struct PlayerSystem {
+     gamma_cursors::Templates gamma_cursor_templates;
+     std::deque<GammaExtraWork> gamma_work;
+     std::unique_ptr<GammaActorAssets> gamma_assets;
++    std::unique_ptr<GammaMotionAssets> gamma_motion_assets;
+     std::unique_ptr<SonicAnimationAssets> sonic_animation_assets;
+     std::unique_ptr<const gamma_setup::Asset> gamma_setup_asset;
+     gamma_setup::State gamma_setup;
