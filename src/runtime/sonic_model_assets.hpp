@@ -34,6 +34,7 @@ class SonicModelAssets {
     }
 
   private:
+    friend struct SonicModelProbeAccess; // NOTSA: read canonical pair storage in isolated judges.
     SonicModelDeclarations declarations_;
     sonic_model::State state_;
     character_pack::ObjectState *objects_ = nullptr;
