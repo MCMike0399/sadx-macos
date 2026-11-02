@@ -1,0 +1,123 @@
+{
+  "base": "06f6d652",
+  "source_commit": "0c3f6a2197fe2413b91c9bba4796c79c792503a5",
+  "candidate": "8db28ca7",
+  "reviews": {
+    "standards": "b0a1211e",
+    "fidelity": "91b4b5a8"
+  },
+  "consumer_rebinding": {
+    "path": "src/runtime/native_input.cpp",
+    "before_sha256": "9f4127898ef0c1f67fd87a6121078d0cb88daa7d6c746e6925b42a8539eea114",
+    "after_sha256": "d9aee6b59a5d23c10cea951c7ecf1353d3e763ddfce4f1fc7d343f6dffc621af",
+    "entries": [
+      "masks",
+      "directions"
+    ],
+    "change": "Only the borrowing method is added; declaration fingerprints/classifications are unchanged."
+  },
+  "limits": [
+    "Focused integration only; no new full gate/cold-source/actor-frame acceptance.",
+    "The historical laser-target name denotes buffered input restoration. Matrix producer and later history producer remain explicit."
+  ],
+  "warning_rebinding": {
+    "path": "src/runtime/native_title_scene.hpp",
+    "old_sha256": "14cfe2c9ad7900a3e2a4237d9d4bd28f1b4235af6ab30b5e8a45cd867e938019",
+    "new_sha256": "2d8d493f5d59b90e9d4b30315411de9a8d9f4dc70b8ea43a786bbbef6f0ecdb8",
+    "review_evidence_references": 2,
+    "generated_mirror_and_file_fingerprints": 4,
+    "save_warning_declarations_unchanged": true,
+    "debt": "unrecovered_open_debt"
+  },
+  "build_exit": 0,
+  "native_closure_exit": 0,
+  "programs": [
+    {
+      "command": [
+        "/usr/bin/time",
+        "-p",
+        "./build/native-gamma-input-buffer-test",
+        "game/imported"
+      ],
+      "exit_status": 0,
+      "stdout": "Actual Gamma common tail restores the canonical input owner and reaches model matrices; captured null alias and active matrix boundary preserved\n",
+      "stderr": "real 0.31\nuser 0.01\nsys 0.01\n"
+    },
+    {
+      "command": [
+        "/usr/bin/time",
+        "-p",
+        "./build/native-gamma-motion-test",
+        "game/imported",
+        "build/gamma-motion-observations.tsv"
+      ],
+      "exit_status": 0,
+      "stdout": "Real Gamma initialization reaches PJoinVertexes; canonical motion, live scene, keys and aliases pass\n",
+      "stderr": "real 0.19\nuser 0.01\nsys 0.01\n"
+    },
+    {
+      "command": [
+        "/usr/bin/time",
+        "-p",
+        "./build/native-gamma-vertex-weld-test",
+        "game/imported",
+        "build/gamma-weld/imported-topology.tsv"
+      ],
+      "exit_status": 0,
+      "stdout": "Actual Gamma common tail initializes canonical weld nodes and reaches laser targets; captured null alias and active matrix boundary preserved\n",
+      "stderr": "real 0.18\nuser 0.01\nsys 0.01\n"
+    },
+    {
+      "command": [
+        "/usr/bin/time",
+        "-p",
+        "./build/native-editor-binding-test",
+        "game/imported",
+        "build/editor-native.tsv"
+      ],
+      "exit_status": 0,
+      "stdout": "81 production callback editor pairs; shared Gamma signed results; missing read order; initialized player/table; actual cleanup uses canonical word\n",
+      "stderr": "real 0.21\nuser 0.01\nsys 0.01\n"
+    }
+  ],
+  "oracle": {
+    "report_sha256": "2097a8c981065aeceeef2ca8cecd0727ad1061b6ba93ee9426629cb52897cf05",
+    "cases": 636,
+    "mismatch_count": 0,
+    "failure_prefixes": 469,
+    "values_match": true
+  },
+  "normal_input": {
+    "command": [
+      "build/sadx-native",
+      "--assets",
+      "game/imported",
+      "--offscreen",
+      "--paced",
+      "--exit-after",
+      "1550",
+      "--save-directory",
+      "build/gamma-input-root/savedata",
+      "--key-events",
+      "500:13:down,501:13:up,750:13:down,751:13:up,950:13:down,951:13:up,1050:13:down,1051:13:up,1300:13:down,1301:13:up",
+      "--screenshot",
+      "build/gamma-input-root/frontier.ppm"
+    ],
+    "exit_status": 1,
+    "frames": 1332,
+    "stop": "native session stopped: native_gamma_get_model_matrix",
+    "app_sha256": "4d36485d4df183afefe38542094426eba5415625facd2fdc0807fedf381b662d",
+    "screenshot_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427"
+  },
+  "proof_script_protection": "Register tools/analysis/prove_gamma_input_buffer_initialization.py explicitly in protected FILES; script body unchanged.",
+  "static_check_exit": 0,
+  "judge_tests": {
+    "tests": 17,
+    "exit_status": 0
+  },
+  "judge": {
+    "protected_paths": 1418,
+    "violations": 0,
+    "inherited_paths_removed": 0
+  }
+}

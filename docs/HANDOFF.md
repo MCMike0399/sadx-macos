@@ -965,3 +965,12 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Source/judge separation is retained. Makefile and unit registrations were appended around the current Sonic additions and corrected argument rows. The evidenced helper symbol is registered; all 1,412 protections are present, with none removed.
 * gamma-weld-root-integration.json records exact checks and limits. Accepted holdout/mutant evidence is reused; allocator correctness, exact fault PCs and arbitrary alias mutations remain unqualified. Last full gate/cold source remains e1946df8.
 * Sonic model initialization continues independently. Next required Gamma work includes laser targets, model matrices and the remaining common tail, followed by an integrated actor-frame check.
+
+### 2026-11-02 — Gamma input restoration reaches model matrices
+
+* Reviews b0a1211e/91b4b5a8 accept the actual 4c3870 body: two ordered raw buffered-input copies, not laser targeting. Main source ebb6e313 borrows the existing E102WK allocation and Input normalized array.
+* Main normal input reaches native_gamma_get_model_matrix at frame 1332, exit 1, with the unchanged title image. No matrix values, actor frame or N3b completion are supplied.
+* Native app/force-load, four generated caller checks and make check pass. The 636-case source comparison has zero mismatches, including 469 failure prefixes. Seventeen judge tests pass.
+* Only unchanged input-declaration consumer hashes and existing warning-header evidence were rebound. The original-caller proof script is explicitly protected; all 1,418 protections are retained with zero drift.
+* gamma-input-root-integration.json preserves commands, identities and limits. The later history producer, matrices and actor work remain explicit; last full gate/cold source is e1946df8.
+* Sonic model-prefix observer and callback-dependency corrections are committed separately in its candidate branch and awaiting fresh recheck.
