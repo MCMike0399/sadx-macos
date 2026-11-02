@@ -1,0 +1,43 @@
+{
+  "review_commit": "1f5bd302",
+  "finding": "R1 P2 compressed test statements; related scenario naming heuristic",
+  "before_head": "e8984111fc218cfcf2d57bc0471c1db6ab75a1dc",
+  "production_source": "744d313ed6a7f02c7c3c5b47ecb78078dca592aa",
+  "scope": "Only two test bodies: expanded statements and named existing scenarios; frozen numeric output IDs, payloads and expectations unchanged. No production Source or helper change.",
+  "tests": {
+    "tests/unit/reset_order_characterization.cpp": {
+      "before_sha256": "5ef27c87b103a2c3789e3c13783d977066fe61a46d05899e7da9067301d5a6c3",
+      "after_sha256": "d73baeee9cc797740162e70ec49e799515948de359da6f37d93b5f398b8975c9"
+    },
+    "tests/unit/reset_leaf_contract.cpp": {
+      "before_sha256": "7410d465209f4bdcdb691e4c20c3532eafcf57430ebf0ac0d8df51412d1e98d0",
+      "after_sha256": "958bcc301dfc7f5fb7f51f1707669437b4060d790a166d3404d9673225b0663c"
+    }
+  },
+  "verification": {
+    "registered_make_build_exit": 0,
+    "program_exits": [
+      0,
+      0
+    ],
+    "order_output_lines": 55,
+    "order_matches": "docs/refactor-inventory/packets/reset-owner-source/old-order.txt",
+    "leaf_output_lines": 15,
+    "leaf_matches": [
+      "build/old-leaf.txt",
+      "build/current-leaf.txt"
+    ],
+    "comparison_exit": 0,
+    "production_source_diff": []
+  },
+  "artifacts": {
+    "build/root-reset-style-plan.log": "5d348ab9b479df129f0b0045e81a9ebbaa90d2d223e2e5992df6a7ea705b0363",
+    "build/root-reset-style-build.log": "5d348ab9b479df129f0b0045e81a9ebbaa90d2d223e2e5992df6a7ea705b0363",
+    "build/root-reset-style-order.txt": "6f67e39f498fb639745bbdb113de4cbe4063b006d326d808a6a6df9185c0a534",
+    "build/root-reset-style-leaf.txt": "4ced0242fc6338cc0d9c12e723c6c91d83fb00f41e84d2503d43c3d66aac096c",
+    "build/old-leaf.txt": "4ced0242fc6338cc0d9c12e723c6c91d83fb00f41e84d2503d43c3d66aac096c",
+    "build/current-leaf.txt": "4ced0242fc6338cc0d9c12e723c6c91d83fb00f41e84d2503d43c3d66aac096c"
+  },
+  "attempt_limit": "Initial command completed builds and both programs plus frozen order comparison, then cmp exited2 because Root guessed nonexistent build/reset-leaf-old.txt. Corrected comparison ONLY used existing build/old-leaf.txt/current-leaf.txt and passed; programs were not rerun.",
+  "remaining": "Fresh Standards recheck; Spec review of original frozen packet pending. No reserved inputs, original executions, library loads through Python, broad oracle reruns, gate or Main changes."
+}
