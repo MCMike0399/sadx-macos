@@ -22,12 +22,13 @@ This file does not change a milestone definition, the fidelity policy or the lic
 
 ## 0. The prompt (what `/goal` injects)
 
-**Active priority (2026-11-01):** complete
-[`PROMPT-complete-refactor.md`](PROMPT-complete-refactor.md) before further game
-development, as authorized by [ADR-0009](decisions/ADR-0009-complete-refactor-prerequisite.md).
-Its inventory and ownership order supersede the route-first scheduling below until
-its full completion criteria are verified. Existing native/reference journeys remain
-regression checks. The product and milestone definitions below remain in force.
+**Active priority (2026-11-01):** deliver N3b, native CharacterSelect, with readable
+system implementations and real caller bindings, then continue the Sonic route.
+[ADR-0010](decisions/ADR-0010-readable-native-checkpoints.md) supersedes ADR-0009's
+exhaustive-refactor prerequisite following the user's renewed direction to achieve
+game results and readable code together. Retain the inventory and open debt;
+migrate affected owners and borrowers as the route needs them. Section 6.1 gives
+the current dependency plan. Product and milestone definitions remain unchanged.
 
 ```
 You are continuing sadx-macos: a native Apple Silicon port of Sonic Adventure DX (2004 PC,
@@ -39,12 +40,12 @@ no original DLL and no x86 runtime (ADR-0005). The code reads like a game codeba
 disassembly (ADR-0006/0007, docs/STYLE.md). The hybrid guest is the development judge, not
 the product.
 
-The active prerequisite is the COMPLETE maintained-code readability and modularity
-refactor in docs/PROMPT-complete-refactor.md (ADR-0009). Read that brief and follow
-its inventory, baseline, dependency order and completion criteria before advancing
-gameplay or adding features. Include recovered behavior outside the native source
-list and in reference composition. Preserve existing journeys as regression checks.
-The route below resumes after the complete refactor is verified.
+Deliver the next native checkpoint and refactor the systems it actually needs
+(ADR-0010). Preserve the inventory, existing behavior and exact regression evidence.
+Include recovered behavior outside the native source list and in reference
+composition when migrating an affected owner. Unrelated cleanup remains open;
+it does not suspend the route. Readability and fidelity are acceptance requirements
+of every delivered slice.
 
 The acceptance target is one connected, normal-input NATIVE Sonic story route (GOAL §1.2):
 start → create or load a save → character select → Chaos 0 defeated → Emerald Coast
@@ -55,9 +56,9 @@ screen and proved by an automated check.
 
 Read AGENTS.md, docs/GOAL.md, docs/STYLE.md, the top of docs/STATUS.md and the last
 docs/HANDOFF.md entry. Then take the first open item in GOAL §6 (or the item the user
-named), and work through the GOAL §7 loop. During ADR-0009's campaign, the refactor
-inventory and shared ownership dependencies decide the work. After it completes,
-integrate before you recover: the next checkpoint's first missing call decides the work.
+named), and work through the GOAL §7 loop. The next checkpoint's actual callers
+and shared ownership dependencies decide the work. Integrate before you recover:
+consume maintained implementations and durable packets before new recovery.
 Game code must stay readable. No address
 calls, `*_at_<hex>` names, emulator-style x87 calls or constants fetched from the EXE in
 the game tier. If the route needs a legacy module, migrate it under its unchanged oracle;
@@ -181,12 +182,12 @@ target), plus an automated check in `make native-journeys`. That check:
 A checkpoint is done when that check passes in a full gate, and a source-only build (no
 EXE/DLL, no prebuilt game objects) runs it from imported assets.
 
-| Row | Checkpoint | State at HEAD `0881b5e` |
+| Row | Checkpoint | State (current retained N3b evidence; other rows retain their earlier qualification) |
 |---|---|---|
 | N1 | SEGA/Sonic Team logos | done (16 states + images vs reference) |
 | N2 | Intro movie (play and Skipma), title, audible Start | done |
 | N3a | FileSelect, dialog, MainMenu, fresh save/load/restart, empty profile | done (`native-file-select`, `native-main-menu`, `native-fresh-save`) |
-| N3b | **CharacterSelect**: all preview actors initialised, updated and drawn; cursor/cancel/reentry; music/voice; Sonic confirmed → story entry | **in progress**: init, palette, seven actor tasks and camera run; stops at `native_basic_object_renderer`, frame 1382 |
+| N3b | **CharacterSelect**: all preview actors initialised, updated and drawn; cursor/cancel/reentry; music/voice; Sonic confirmed → story entry | **in progress**: current-source diagnostic run stops at `native_gamma_load_setup_resource`, frame 1332, exit 1; image remains outgoing title. Prior source-only receipt reached the same stop at frame 1382 with its input schedule. |
 | N4 | Story entry: the opening event (played or skipped as the profile does) → Station Square drawn from the imported pack with the real camera | open |
 | N5 | Sonic controllable at Chaos 0: run, jump, spin/homing attack, hurt, rings, with the boss active; first frames match the reference trace | open |
 | N6 | Chaos 0 defeated → natural story return → save progression | open |
@@ -350,7 +351,10 @@ before.
 * **Readable but wrong is the default failure** of agent decompilation. Readability is
   judged by the same oracle and mutants, never by eye.
 
-## 5. Where things stand (2026-10-26, HEAD `0881b5e`)
+## 5. Historical baseline (2026-10-26, HEAD `0881b5e`)
+
+This preserves the earlier baseline, not current HEAD status. Current gate facts
+are in STATUS; the current assessment and retained frontier are in section 6.1.
 
 * **Native app** (`build/sadx-native --assets game/imported`). It runs normal input from
   start through the logos, movie (Skipma), title, FileSelect, dialog and MainMenu, and
@@ -387,8 +391,66 @@ before.
 
 ## 6. What is next, in order
 
-Take the first open item. Items 0–3 are setup; from item 4 on, each item is one or more
-steps.
+### 6.1 Current execution plan (2026-11-01 assessment at `75f5a20`)
+
+The last actual gate is `bf61403`, recorded by
+`reference/production-integration-20261101/task-owner-gate.json`: 306 native
+programs and 607 Python tests. Native FileSelect/MainMenu/fresh-save and reference
+R1–R4 pass within their recorded limits. Source-only receipt
+`reference/production-integration-20261101/native-source-only-frontier.json`
+observed Gamma setup at frame 1382 on its named older revision. Source inspection
+at `75f5a20` retains that seam. The current app reproduces it with normal input and
+isolated saves at frame 1332, exit 1, recorded in
+`reference/production-integration-20261101/native-route-review.json`. Its inspected
+image remains outgoing title. `make -j2 build/sadx-native` reported up to date;
+this was not a clean rebuild or a new full gate. Preserve the differing input
+schedules and frame numbers rather than claiming aligned frame parity.
+
+First delivery target: a complete native CharacterSelect frame with real scheduled
+actors, then repeated updates, cursor/motion, cancel/reentry and Sonic confirmation.
+Advancing one missing call is dependency progress only.
+
+| Caller | Canonical owner | Packet assignment | Integration check |
+|---|---|---|---|
+| Gamma mode zero → setup resource | sprite registry and Gamma result; imported definition | A: complete setup subsystem; bounded constructor `packet/gamma-setup-sprite@da73181` is only a starting component | Real Gamma caller passes setup; original ordered comparison and imported-byte checks; no dummy definition |
+| Scheduler → Sonic controller | existing PlayerSystem/current-player, task arena and animation owners | B: readable recovered Sonic controller and reference adapter, preserving all existing behavior | Complete unchanged oracle observations, failure identities and mutants; native closure with explicit missing callees |
+| Preview update/selection → actions and motion | preview work, actor tasks and existing animation state | C: source-backed preview action/motion operations and lifecycle coverage; actor algorithms remain separately owned | Callback/order comparison, cancellation/reentry checks and native binding contract |
+| Gamma setup → materials/effects/common tail/display | mutable scene and shared player/animation/geometry state | Integrator sequences returned packets and assigns reached leaves | Real repeated actor frame; live material aliasing and full reached common tail |
+| Scheduler → Miles/Knuckles/Amy/Big | shared player contracts and each actor's state | Subsequent independent actor packets after common contracts stabilize | All scheduled actors initialize, update, draw and destroy |
+| Confirmation → summary/story entry | Session flow, sequence and stage owners | Integrator binds the actual native caller chain | New N3b normal-input journey, content/state/audio checks, draw-suppression mutant, source-only build and full gate |
+
+Reproduce the retained frontier with a fresh binary and isolated save output before
+behavior-bearing edits. Keep input, state, image and actual exit status. Existing
+native journeys do not certify N3b; add its checker in a separate evidenced judge
+change. Voice 2047 and unavailable animations remain explicit until resolved.
+Use actual reached assets to choose missing mesh/animation formats.
+
+Root owns Session, Display, shared player interfaces, callback registration and
+integration. Workers own disjoint packets in T3-created worktrees. Use GPT-6.1 Sol,
+medium effort, priority service tier; at most three workers and `-j2` per worker.
+One owner runs full gates after worker compilation has finished. Review source,
+preserved observations and STYLE; fix concrete findings. Gate coherent integrated
+slices rather than every receipt or naming edit.
+
+After N3b, follow N4 story entry/Station Square, N5 controllable Sonic/Chaos 0,
+then N6–N10. Start gameplay cadence measurement at N5; full profile and route
+acceptance remain. Keep the reset packet preserved; resolve its four collector
+findings before use and keep its reserved vectors separate. Unrelated exhaustive
+tooling review is deferred, not completed.
+
+Consult community knowledge before new recovery: existing sa_tools/SA3D asset
+schemas, [X-Hax's recovered SADX event scripts](https://github.com/X-Hax/SADX-cutscene-decompilation)
+and [Dreamcast source](https://github.com/reshaped/sonic-adventure) can inform
+investigation. Verify against pinned PC/profile evidence; upstream existence
+establishes neither PC parity nor permission to copy gameplay source. Continue
+using the existing Metal backend and imported resource graph.
+
+### 6.2 Detailed route backlog
+
+Take the first open item after checking current code. Items 0–3 below describe
+historical setup, much already completed; do not repeat it because an old checklist
+still describes its original gaps. Section 6.1 sets current assignments. From
+item 4 on, each item is one or more steps.
 
 0. **DiveMac orientation (once).** Run the environment check in §9:
    * `rea doctor`;

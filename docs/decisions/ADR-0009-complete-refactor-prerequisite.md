@@ -3,6 +3,11 @@
 Date: 2026-11-01. Status: accepted by the user's invocation of
 [`PROMPT-complete-refactor.md`](../PROMPT-complete-refactor.md).
 
+Scheduling superseded by [ADR-0010](ADR-0010-readable-native-checkpoints.md) following
+the user's renewed direction to pursue readable code and game results together.
+The inventory, preservation requirements and open debt remain; exhaustive
+completion is no longer a gameplay prerequisite.
+
 ## Context
 
 The user requested that all existing maintained code become readable, modular and

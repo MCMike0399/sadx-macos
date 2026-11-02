@@ -1,0 +1,48 @@
+{
+  "source_commit": "75f5a205fe114095e5803ca28a906085908f0bbc",
+  "command": [
+    "/Users/burbujamc/Developer/sadx-macos/build/sadx-native",
+    "--assets",
+    "/Users/burbujamc/Developer/sadx-macos/game/imported",
+    "--offscreen",
+    "--paced",
+    "--exit-after",
+    "1550",
+    "--save-directory",
+    "/Users/burbujamc/Developer/sadx-macos/build/native-route-review-sigtjg4w/savedata",
+    "--key-events",
+    "500:13:down,501:13:up,750:13:down,751:13:up,950:13:down,951:13:up,1050:13:down,1051:13:up,1300:13:down,1301:13:up",
+    "--capture-directory",
+    "/Users/burbujamc/Developer/sadx-macos/build/native-route-review-sigtjg4w/captures",
+    "--capture-at",
+    "1300,1380,1381,1382",
+    "--screenshot",
+    "/Users/burbujamc/Developer/sadx-macos/build/native-route-review-sigtjg4w/frontier.ppm"
+  ],
+  "app_sha256": "12ad5aafc8368633a947e9f2be7ac7be4a0d00eaaadea4d21a3c6efa12b5f1d2",
+  "source_edits": "documentation only",
+  "limits": [
+    "Diagnostic frontier only; not N3b completion or a full gate."
+  ],
+  "exit_status": 1,
+  "state": {
+    "execution": "native",
+    "frames": 1332,
+    "game_mode": 12,
+    "game_state": 21,
+    "main_menu_phase": 3,
+    "sequence_mode": 1,
+    "character_select_next": 8
+  },
+  "stop": "native session stopped: native_gamma_load_setup_resource",
+  "screenshot_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427",
+  "observation": "Inspected image remains outgoing title; no completed CharacterSelect actor frame.",
+  "build_check": {
+    "command": "make -j2 build/sadx-native",
+    "exit_status": 0,
+    "result": "up to date; not a fresh source-only rebuild"
+  },
+  "raw_output_directory": "build/native-route-review-sigtjg4w",
+  "prior_receipt": "reference/production-integration-20261101/native-source-only-frontier.json",
+  "timing_note": "This run used its recorded input schedule and stopped at frame 1332; prior receipt frame 1382 is retained, not realigned."
+}

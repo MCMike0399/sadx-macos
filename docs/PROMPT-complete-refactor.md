@@ -1,5 +1,11 @@
 # Complete the readability refactor before further game development
 
+**Scheduling superseded:** [ADR-0010](decisions/ADR-0010-readable-native-checkpoints.md)
+restores native checkpoint delivery with required system refactors alongside it.
+This document retains the exhaustive refactor scope and completion contract; its
+former requirement to finish all that scope before gameplay is inactive. Use
+`GOAL.md` for current work order. Open debt is not declared complete.
+
 This is an implementation goal for sadx-macos. Make the entire existing maintained
 codebase readable, modular and maintainable before resuming new gameplay, route
 advancement or feature development. Continue through implementation, verification
