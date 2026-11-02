@@ -184,6 +184,8 @@ class Session final : private flow::NativeServices {
 
   private:
     friend class TitleScene;
+    // NOTSA: test-only borrow of the real reset/message owner; no alternate storage.
+    friend struct ResetSessionFixture;
     void attach_logo_scaling(Display &);
     flow::GameFlowState flow_;
     std::uint32_t global_timer_ = 0;

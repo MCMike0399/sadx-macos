@@ -1,0 +1,37 @@
+{
+  "kind": "reserved_native_session_test_binding_v1",
+  "status": "BUILD_ONLY_NOT_ADMITTED",
+  "root_admitted": false,
+  "reviewed_production_source": "744d313ed6a7f02c7c3c5b47ecb78078dca592aa",
+  "source_delta": "Only a test friend declaration/comment in Session. Removing exact addition restores reviewed header byte-for-byte; no fields, function bodies, alternate storage or runtime branch added.",
+  "reviewed_header_restored_exactly": true,
+  "header_before_sha256": "e26e273edee5f2eff6b8c21e150c54542065f7335c738b29f7476f7c7c66fbd2",
+  "files": {
+    "src/runtime/native_session.hpp": "e8d4c538ddd514572749c13a0d054720e416d5e2d0eec38d757ad137e58b5f1f",
+    "Makefile": "2f6ff900674191d34b8c48d42673e7118abf0b3d0db59c4d10a238309bfa2939",
+    "tests/fixtures/reset_native_session_final.cpp": "0812cd79f9125c5ce6b6328666e0951e911deb1f7a543d254ae4b43941134d14"
+  },
+  "purpose": "Build a real current Session, Display, TitleScene and imported owned CharacterPack; inject nonzero canonical frame work, observe actual native_pending_text_window, then actual reset clears the same owner. Expected empty texture declarations are unused by this prefix; no fake object/pointer or reference runtime. This is a new bounded composition, not arbitrary old divergent-state equivalence.",
+  "build": {
+    "command": "make -j2 -o Makefile -o build/softfloat/softfloat.a -o build/softfloat_sse/softfloat-sse.a -o build/bochs_fpatan/libbochs_fpatan.a build/reset-native-session-final",
+    "exit": 0,
+    "plan_commands": 22,
+    "dependency_fetch_or_builder_commands": 0,
+    "archive": "Private build/libsadx-native.a plus current native platform objects; no guest/core Main archive borrowed.",
+    "resource_preflight": "31 percent memory free; df70GiB available. No storage operation."
+  },
+  "artifacts": {
+    "build/root-reset-session-final-plan.log": "1bdf45b8ebd52c957f7dec5c29daa7843b98a009858439fd92b9f6879c36df28",
+    "build/root-reset-session-final-build.log": "ce28c3844dc28468be81ca801c879af100a295550a99147b1ba893647ebdf0c8",
+    "build/root-reset-session-final-build.exit": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "build/reset-native-session-final": "5d9114f1362ee729691966d3c1d1e84764cd7696e760e804ecd7a0e2bb6036a4",
+    "build/reset-native-session-final.d": "68bd7d92c4eae021fdb19e58e3294cb656e9e66c69245c5a5f781c629cf5bb54"
+  },
+  "execution": {
+    "program_runs": 0,
+    "reserved_cases_attempted": 0,
+    "assets_loaded": false,
+    "original_runs": 0
+  },
+  "remaining": "Complete finite eight-case runner/bindings and fake adequacy; obtain fresh independent binding/runner review and distinct sealed Root admission. This build does not authorize execution or qualify the new path."
+}
