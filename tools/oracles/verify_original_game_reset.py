@@ -45,5 +45,6 @@ def main():
         if fn((ctypes.c_uint32*6)(*c),6,out,128)!=1:raise RuntimeError('Native rejected')
         if list(out)!=e:bad.append(dict(case=n,input=[hex(x) for x in c],fields=[i for i,(x,y) in enumerate(zip(out,e)) if x!=y][:10]))
     report=dict(source_sha256=image.sha256,native_library_sha256=sha(a.native_library.read_bytes()),original_range_sha256=sha(image.read(0x40bf40,0xe3)),cases=len(cases),mismatch_count=len(bad),mismatches=bad[:20],order_stores_seed_match=not bad,limits=__doc__)
+    report['source_files'] = {name: sha((pathlib.Path(__file__).resolve().parents[2] / name).read_bytes()) for name in ['src/engine/reset_control.hpp', 'src/game/game_cleanup_internal.hpp', 'src/game/game_cleanup.hpp', 'src/game/game_cleanup.cpp', 'src/guest/reset_buffer_tokens.hpp', 'src/guest/reset_control_reference.hpp', 'src/guest/game_reset_reference.hpp', 'src/guest/game_reset_reference.cpp', 'src/guest/game_reset_leaves_reference.hpp', 'src/guest/game_reset_leaves_reference.cpp', 'src/guest/game_loop_reference.hpp', 'tests/probes/native_game_reset_probe.cpp', 'tools/oracles/verify_original_game_reset.py', 'src/cpu/crt_rand.hpp', 'src/cpu/crt_rand.cpp']}
     a.output.write_text(json.dumps(report,indent=1)+'\n');print(json.dumps(dict(cases=len(cases),mismatches=len(bad))));return int(bool(bad))
 if __name__=='__main__':raise SystemExit(main())

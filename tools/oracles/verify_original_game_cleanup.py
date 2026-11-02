@@ -326,7 +326,7 @@ def main():
     sha = lambda data: hashlib.sha256(data).hexdigest()
     report = dict(source_sha256=image.sha256,
                   native_library_sha256=sha(args.native_library.read_bytes()),
-                  native_sources={name: sha((root / name).read_bytes()) for name in sources},
+                  native_sources={name: sha((root / name).read_bytes()) for name in sources + ['src/game/game_cleanup_internal.hpp']},
                   source_ranges={f'{hex(start)}-{hex(end)}': sha(image.read(start, end - start))
                       for start, end in [(0x40bf30, 0x40bf40), (0x40bf40, 0x40c023),
                         (0x40cd10, 0x40cd1b), (0x40d490, 0x40d4d0),

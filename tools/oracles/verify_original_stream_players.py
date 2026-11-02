@@ -38,7 +38,8 @@ def main():
         if fn((ctypes.c_uint32*9)(*c),9,out,10)!=1:raise RuntimeError('Native rejected')
         got=list(out)[:8];key=f"completed{e[0]}:site{e[1]:#x}";outcomes[key]=outcomes.get(key,0)+1
         if got!=e:bad.append(dict(input=[hex(x) for x in c],source=[hex(x) for x in e],native=[hex(x) for x in got]))
-    names=['src/game/game_reset_leaves.hpp','src/game/game_reset_leaves.cpp','tests/probes/native_stream_players_probe.cpp','tools/oracles/verify_original_stream_players.py']
+    names=['src/game/game_reset_leaves.hpp','src/guest/game_reset_leaves_reference.cpp','tests/probes/native_stream_players_probe.cpp','tools/oracles/verify_original_stream_players.py']
+    names += ['src/engine/reset_control.hpp', 'src/game/game_cleanup_internal.hpp', 'src/game/game_cleanup.hpp', 'src/game/game_cleanup.cpp', 'src/guest/reset_buffer_tokens.hpp', 'src/guest/reset_control_reference.hpp', 'src/guest/game_reset_reference.hpp', 'src/guest/game_reset_reference.cpp', 'src/guest/game_reset_leaves_reference.hpp', 'src/guest/game_reset_leaves_reference.cpp', 'src/guest/game_loop_reference.hpp']
     report=dict(source_sha256=image.sha256,native_library_sha256=sha(a.native_library.read_bytes()),source_files={x:sha((pathlib.Path(__file__).resolve().parents[2]/x).read_bytes()) for x in names},
         original_range_sha256=sha(image.read(0x40d0d0,0x11b)+image.read(0x4253c0,5)+image.read(0x40ff10,6)),cases=len(cases),source_outcomes=outcomes,mismatch_count=len(bad),mismatches=bad[:20],stores_match=not bad,limits=__doc__)
     a.output.write_text(json.dumps(report,indent=1)+'\n');print(json.dumps(dict(cases=len(cases),outcomes=outcomes,mismatches=len(bad))))

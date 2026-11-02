@@ -103,6 +103,7 @@ def main():
         if list(out)!=expected:bad.append(dict(case=number,fields=[i for i,(x,y) in enumerate(zip(out,expected)) if x!=y][:20],source=expected[:60],native=list(out)[:60]))
     blob=b''.join(struct.pack('<64I',*c) for c in cases);a.output.with_suffix('.cases.bin').write_bytes(blob)
     names=['src/game/game_loop.hpp','src/guest/game_loop.cpp','tests/probes/native_game_loop_probe.cpp','tools/oracles/verify_original_game_loop.py']
+    names += ['src/engine/reset_control.hpp', 'src/game/game_cleanup_internal.hpp', 'src/game/game_cleanup.hpp', 'src/game/game_cleanup.cpp', 'src/guest/reset_buffer_tokens.hpp', 'src/guest/reset_control_reference.hpp', 'src/guest/game_reset_reference.hpp', 'src/guest/game_reset_reference.cpp', 'src/guest/game_reset_leaves_reference.hpp', 'src/guest/game_reset_leaves_reference.cpp', 'src/guest/game_loop_reference.hpp']
     report=dict(source_sha256=image.sha256,native_library_sha256=sha(a.native_library.read_bytes()),source_files={n:sha((pathlib.Path(__file__).resolve().parents[2]/n).read_bytes()) for n in names},original_range_sha256=sha(image.read(0x40cad0,0x21a)),
         cases=len(cases),case_sha256=sha(blob),source_outcomes=outcomes,mismatch_count=len(bad),mismatches=bad[:30],order_arguments_stores_boundaries_match=not bad,limits=__doc__)
     a.output.write_text(json.dumps(report,indent=1)+'\n');print(json.dumps(dict(cases=len(cases),mismatches=len(bad),outcomes=len(outcomes))));return int(bool(bad))
