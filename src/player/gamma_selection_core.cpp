@@ -77,13 +77,13 @@ void prepare_collision(Context &context, Primary task, const TaskWorkHandle &pri
 // NOTSA: named constructor step; each material lookup re-reads the shared table.
 void initialize_materials(Context &context) {
     auto &first = material(context, 1, 6);
-    first.words[4] = (first.words[4] & kMaterialRetainedFlags) | kMaterialGammaFlags;
+    first.attributes() = (first.attributes() & kMaterialRetainedFlags) | kMaterialGammaFlags;
     for (unsigned row : {5U, 4U, 3U, 2U}) {
         auto &entry = material(context, row, 2);
         if (row == 2)
             state(context).headlight_material = &entry;
-        entry.words[4] = (entry.words[4] & kMaterialRetainedFlags) | kMaterialGammaFlags;
-        entry.words[0] |= kOpaqueAlpha;
+        entry.attributes() = (entry.attributes() & kMaterialRetainedFlags) | kMaterialGammaFlags;
+        entry.diffuse() |= kOpaqueAlpha;
     }
 }
 

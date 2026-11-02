@@ -54,5 +54,6 @@ struct Context {
     regular_textures::State *texture_state;
     regular_textures::Services *texture_services;
     sprite_registry::State &sprites;
+    character_pack::SceneState &scene;
 };
 } // namespace sadx::gamma_selection

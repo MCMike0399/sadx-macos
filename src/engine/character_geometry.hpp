@@ -1,5 +1,6 @@
 #pragma once
 #include "engine/character_pack.hpp"
+#include "engine/character_material.hpp"
 
 namespace sadx::character_pack {
 // NOTSA: one typed array per imported resource identity, shared by all model users.
@@ -21,10 +22,25 @@ class GeometryState {
     std::vector<std::vector<std::uint32_t>> vectors_;
     std::vector<std::vector<std::int16_t>> shorts_;
 };
+// NOTSA: a single fixed-size material array for each imported ResourceId. No
+// array can be resized after publication, so headlight and model aliases stay valid.
+class MaterialState {
+  public:
+    explicit MaterialState(const CharacterPack &pack);
+    MaterialState(const MaterialState &) = delete;
+    MaterialState &operator=(const MaterialState &) = delete;
+    SceneMaterial &material(ResourceId resource, std::size_t index);
+    const SceneMaterial &material(ResourceId resource, std::size_t index) const;
+
+  private:
+    const CharacterPack &pack_;
+    std::vector<std::vector<SceneMaterial>> arrays_;
+};
 // NOTSA: mutable imported character resources share one scene lifetime across actor callbacks.
 struct SceneState {
-    explicit SceneState(const CharacterPack &pack) : objects(pack), geometry(pack) {}
+    explicit SceneState(const CharacterPack &pack) : objects(pack), geometry(pack), materials(pack) {}
     ObjectState objects;
     GeometryState geometry;
+    MaterialState materials;
 };
 } // namespace sadx::character_pack

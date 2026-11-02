@@ -126,7 +126,14 @@ std::int32_t floor_angle(Context &context, const TaskWorkHandle &primary_work, u
     if (!task) missing("native_gamma_collision_task_backlink");
     return player_initialization::bind_primary_view(task).rotation.at(axis);
 }
-SceneMaterial &material(Context &, unsigned, unsigned) {
+SceneMaterial &material(Context &context, unsigned table_row, unsigned material_row) {
+    // E102 reads its material-pointer table directly, independently of objects.
+    for (const auto &row : assets(context).materials) {
+        if (row.table_row != table_row || row.material_index != material_row)
+            continue;
+        if (!row.materials) missing("native_gamma_shared_material_binding");
+        return context.scene.materials.material(row.materials, row.record_index);
+    }
     missing("native_gamma_shared_material_binding");
 }
 ColorPointer line_colors(Context &context) { return assets(context).line_colors.data(); }

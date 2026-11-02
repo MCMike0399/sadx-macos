@@ -23,6 +23,32 @@ void require_kind(const CharacterPack &pack, ResourceId resource, ResourceKind k
 }
 } // namespace
 
+MaterialState::MaterialState(const CharacterPack &pack)
+    : pack_(pack), arrays_(pack.record_count() + 1) {
+    constexpr std::size_t kMaterialBytes = 20;
+    for (std::size_t index = 1; index <= pack.record_count(); ++index) {
+        const auto &record = pack.record(static_cast<ResourceId>(index));
+        if (record.kind != ResourceKind::Materials)
+            continue;
+        auto &array = arrays_[index];
+        const auto count = integer(record.payload, 0, kComponentBytes);
+        array.resize(count);
+        for (std::size_t item = 0; item < count; ++item)
+            for (std::size_t field = 0; field < array[item].words.size(); ++field)
+                array[item].words[field] = integer(record.payload,
+                    kArrayHeaderBytes + item * kMaterialBytes + field * kComponentBytes,
+                    kComponentBytes);
+    }
+}
+SceneMaterial &MaterialState::material(ResourceId resource, std::size_t index) {
+    require_kind(pack_, resource, ResourceKind::Materials);
+    return arrays_.at(resource).at(index);
+}
+const SceneMaterial &MaterialState::material(ResourceId resource, std::size_t index) const {
+    require_kind(pack_, resource, ResourceKind::Materials);
+    return arrays_.at(resource).at(index);
+}
+
 GeometryState::GeometryState(const CharacterPack &pack)
     : pack_(pack), vectors_(pack.record_count() + 1), shorts_(pack.record_count() + 1) {
     for (std::size_t index = 1; index <= pack.record_count(); ++index) {

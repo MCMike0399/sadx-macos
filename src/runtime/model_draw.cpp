@@ -124,6 +124,7 @@ void draw_buffered_mesh(Context &, const Meshset &) { throw Unavailable(Boundary
 namespace sadx::object_draw {
 void draw_model(Context &context, ModelId id) {
     basic_model::Context model{context.display, context.environment};
-    basic_model::draw_model(id, context.environment.pack, model.owners(), model);
+    basic_model::draw_model(id, context.environment.pack, context.environment.scene.materials,
+                            model.owners(), model);
 }
 } // namespace sadx::object_draw

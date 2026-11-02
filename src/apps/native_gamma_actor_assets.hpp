@@ -174,6 +174,34 @@ inline std::array<GammaCursorDeclaration, 2> gamma_cursors(
         throw std::runtime_error("Gamma cursor shared resource identity mismatch");
     return result;
 }
+// NOTSA: decode the five source material-pointer declarations into this pack's
+// namespace. The declarations identify initial aliases, never cloned materials.
+inline std::array<GammaMaterialDeclaration, 5> gamma_materials(
+    NSDictionary *metadata, const character_pack::CharacterPack &pack) {
+    std::array<GammaMaterialDeclaration, 5> result{};
+    const auto rows = array(metadata[@"materials"], result.size(), "Gamma materials");
+    constexpr std::array<unsigned, 5> kTableRows = {1, 5, 4, 3, 2};
+    for (std::size_t index = 0; index < result.size(); ++index) {
+        const auto declaration = dictionary(rows[index], "Gamma material declaration");
+        auto &row = result[index];
+        row.table_row = integer(declaration[@"table_row"], kTableRows[index], kTableRows[index],
+                                "Gamma material table row");
+        const auto material_index = index == 0 ? 6 : 2;
+        row.material_index = integer(declaration[@"material_index"], material_index, material_index,
+                                     "Gamma material index");
+        row.materials = integer(declaration[@"materials"], 1, pack.record_count(),
+                                "Gamma material array identity");
+        const auto &record = pack.record(row.materials);
+        if (record.kind != character_pack::ResourceKind::Materials)
+            throw std::runtime_error("Gamma material array kind mismatch");
+        constexpr std::size_t kHeaderBytes = 4, kMaterialBytes = 20;
+        const auto count = (record.payload.size() - kHeaderBytes) / kMaterialBytes;
+        if (!count) throw std::runtime_error("Gamma material array is empty");
+        row.record_index = integer(declaration[@"record_index"], 0, count - 1,
+                                    "Gamma material record index");
+    }
+    return result;
+}
 // NOTSA: complete source recipe metadata binds to the SAME validated CharacterPack.
 inline GammaActorAssets load_gamma_actor_assets(const std::filesystem::path &directory,
                                                 const character_pack::CharacterPack &pack) {
@@ -267,6 +295,7 @@ inline GammaActorAssets load_gamma_actor_assets(const std::filesystem::path &dir
     (void)integer(metadata[@"line_point_count"], 2, 2, "Gamma line point count");
     result.joins = gamma_joins(metadata, pack);
     result.cursors = gamma_cursors(metadata, pack);
+    result.materials = gamma_materials(metadata, pack);
     return result;
 }
 } // namespace sadx::native::app

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "cpu/fidelity_float.hpp"
-#include "engine/character_pack.hpp"
+#include "engine/character_geometry.hpp"
 #include "engine/graphics_frame.hpp"
 #include "math/d3dx_math.hpp"
 #include <stdexcept>
@@ -183,9 +183,9 @@ void reset_render_flags(State &, Context &);
 // FUNCTION: SONIC 0x784850 Direct3D_ParseMaterial
 void parse_material(const Material &, Owners, Context &);
 // STUB: SONIC 0x77eda0 njDirectDrawModel buffered draw path unrecovered
-void draw_direct_model(character_pack::ResourceId, const character_pack::CharacterPack &, Owners,
-                       Context &);
+void draw_direct_model(character_pack::ResourceId, const character_pack::CharacterPack &,
+                       const character_pack::MaterialState &, Owners, Context &);
 // FUNCTION: SONIC 0x77ef70 njDrawModel
-void draw_model(character_pack::ResourceId, const character_pack::CharacterPack &, Owners,
-                Context &);
+void draw_model(character_pack::ResourceId, const character_pack::CharacterPack &,
+                const character_pack::MaterialState &, Owners, Context &);
 } // namespace sadx::basic_model

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "math/ninja_math.hpp"
+#include "engine/character_material.hpp"
 #include "engine/scene_resource_reference.hpp"
 #include <optional>
 #include <unordered_map>
@@ -15,7 +16,6 @@ struct SceneMeshSet {
     std::optional<std::uint16_t> mesh_count;        // +2
     std::optional<SceneResourceReference> indices; // +4, preserves strip header words
 };
-struct SceneMaterial { std::array<std::uint32_t,5> words; }; // raw20-byte source material; flags=words[4]
 struct SceneBasicModel {
     std::optional<NinjaVector> center; // source basic model +0x18
     std::optional<float> radius;       // +0x24

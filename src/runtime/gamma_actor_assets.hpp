@@ -34,6 +34,13 @@ struct GammaCursorDeclaration {
     std::int16_t line_count = 0;
     std::uint16_t padding = 0;
 };
+// NOTSA: live rows of the original material-pointer table. Imported declarations
+// bind an array identity and offset; Gamma rereads each row at consumption.
+struct GammaMaterialDeclaration {
+    unsigned table_row = 0, material_index = 0;
+    character_pack::ResourceId materials = 0;
+    std::size_t record_index = 0;
+};
 // NOTSA: one imported table, shared by all native actors using its recipes.
 struct GammaActorAssets {
     player_initialization::ParameterTable parameters{};
@@ -41,6 +48,7 @@ struct GammaActorAssets {
     std::array<GammaAnimationRecipe, 91> recipes{};
     std::shared_ptr<const animation::Table> animation_table;
     ActionHandle stand;
+    std::array<GammaMaterialDeclaration, 5> materials{};
     std::vector<collision_component::Info> collision_info;
     std::array<std::uint32_t, 2> line_colors{};
     std::array<GammaJoinDeclaration, 5> joins{};

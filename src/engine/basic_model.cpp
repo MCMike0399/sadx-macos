@@ -17,18 +17,12 @@ std::uint32_t word(const character_pack::ResourceRecord &record, std::size_t off
     return std::uint32_t(bytes[offset]) | (std::uint32_t(bytes[offset + 1]) << 8) |
            (std::uint32_t(bytes[offset + 2]) << 16) | (std::uint32_t(bytes[offset + 3]) << 24);
 }
-// NOTSA: preserve all raw exponent bits, including signed zero and NaN payloads.
-Material material(const character_pack::CharacterPack &pack, character_pack::ResourceId resource,
-                  std::uint32_t index) {
-    const auto &record = pack.record(resource);
-    if (record.kind != character_pack::ResourceKind::Materials || index >= word(record, 0))
-        throw std::runtime_error("basic model: imported material unavailable");
-    const auto offset = 4 + std::size_t(index) * 20;
-    const auto power_bits = word(record, offset + 8);
-    float power;
-    std::memcpy(&power, &power_bits, sizeof(power));
-    return {word(record, offset), word(record, offset + 4), power, word(record, offset + 12),
-            word(record, offset + 16)};
+// NOTSA: borrow the canonical record at each source material transition. The
+// value handed to the parser retains its established arithmetic/callback order.
+Material material(const character_pack::MaterialState &materials,
+                  character_pack::ResourceId resource, std::uint32_t index) {
+    const auto &entry = materials.material(resource, index);
+    return {entry.diffuse(), entry.specular(), entry.power(), entry.texture(), entry.attributes()};
 }
 // NOTSA: the original table's layout ignores only the color bit in no-color mode.
 VertexLayout layout(bool normals, bool colors, bool uv, bool ignore_colors) {
@@ -258,7 +252,7 @@ void parse_material(const Material &material, Owners owners, Context &context) {
 }
 
 void draw_direct_model(character_pack::ResourceId id, const character_pack::CharacterPack &pack,
-                       Owners owners, Context &context) {
+                       const character_pack::MaterialState &materials, Owners owners, Context &context) {
     const auto entry_flags = owners.state.render_flags;
     if (has(entry_flags, RenderFlag::ConstantMaterial) ||
         has(entry_flags, RenderFlag::OffsetMaterial)) {
@@ -278,7 +272,7 @@ void draw_direct_model(character_pack::ResourceId id, const character_pack::Char
         const auto material_index = mesh_type & kMaterialIndexMask;
         if (material_index != previous_material) {
             previous_material = material_index;
-            parse_material(material(pack, model.materials, material_index), owners, context);
+            parse_material(material(materials, model.materials, material_index), owners, context);
             if (callback)
                 callback(context);
         }
@@ -302,9 +296,9 @@ void draw_direct_model(character_pack::ResourceId id, const character_pack::Char
 }
 
 void draw_model(character_pack::ResourceId id, const character_pack::CharacterPack &pack,
-                Owners owners, Context &context) {
+                const character_pack::MaterialState &materials, Owners owners, Context &context) {
     copy_constant_material(owners, context);
-    draw_direct_model(id, pack, owners, context);
+    draw_direct_model(id, pack, materials, owners, context);
     reset_render_flags(owners.state, context);
 }
 } // namespace sadx::basic_model
