@@ -1,0 +1,45 @@
+{
+  "recovery": {
+    "game_winmain": {
+      "recovered_after_source_edits": true,
+      "immutable_compiled_source": "6255cc6cabcf14adb32867ea011f7491dbbddd2d",
+      "compiled_model": "build/reset-old/build/native-game-winmain-probe.dylib",
+      "source_freeze": "BEFORE-SOURCE.json source_freeze; immutable build/reset-old snapshot",
+      "actual_wrapper_commit": "1004ab5",
+      "wrapper_sha256": "7b5846ab199ac91ac4b738791706246ea3ba669b4bd23937ca710dfddeac5850",
+      "artifacts": {
+        "build/reset-consumer-old-v7/game_winmain.abi.gz": "dc89c45f3d60cc13f5724ef612dd1ecddaa256f933de603554c26c6c461ee0b8",
+        "build/reset-consumer-old-v7/game_winmain.capture.json": "994f813295ed39ab2730584fccdb588e215f644342b1adb1cba07788e538ee88",
+        "build/reset-consumer-old-v7/game_winmain.json": "8c3432140915bcc12112ff13b22199b0220f0b0778d2c5c18683e24902848403",
+        "build/reset-consumer-old-v7/game_winmain.original.gz": "80f75ddde6700bf372e9b19dde77b74e077e1872f952844fabe293d9044408e6"
+      },
+      "initial_capture_limit": "Original stream initially empty. Initial native array observations remain valid in their bounded scope; original closure claim superseded. Report source_files maps are historical binding metadata, not proof of compiled old Source."
+    },
+    "stream_players": {
+      "recovered_after_source_edits": true,
+      "immutable_compiled_source": "6255cc6cabcf14adb32867ea011f7491dbbddd2d",
+      "compiled_model": "build/reset-old/build/native-stream-players-probe.dylib",
+      "source_freeze": "BEFORE-SOURCE.json source_freeze; immutable build/reset-old snapshot",
+      "actual_wrapper_commit": "0d0c243",
+      "wrapper_sha256": "eb124eb66716dbc4c4da5b9cb73d9fcacb8249d2439d81cc71aa663e65c666a0",
+      "artifacts": {
+        "build/reset-consumer-old-v4/stream_players.original.gz": "3eb1948702494611d8fc276f08d334f66c6df5b95287de657c5896fd3adc2be7",
+        "build/reset-consumer-old-v4/stream_players.capture.json": "a99f682339003593fd341db3616b58813b6a3bbe646542a6ededf785ad98d40d",
+        "build/reset-consumer-old-v4/stream_players.json": "954de40f4ae147babd9dad6dd2629b158cc1c8d37ed842578c929a13fa59eb4f",
+        "build/reset-consumer-old-v4/stream_players.abi.gz": "a54049bc54d049d82436f2dbd0442cc46a444b2e34df84038059f2b8b09f8f38"
+      },
+      "initial_capture_limit": "Original stream initially empty. Initial native array observations remain valid in their bounded scope; original closure claim superseded. Report source_files maps are historical binding metadata, not proof of compiled old Source."
+    }
+  },
+  "superseded": [
+    "build/reset-consumer-old original schema omitted scalars/bytes; two original streams empty",
+    "build/reset-consumer-old-v2 full scalar/byte streams; WinMain/stream original empty",
+    "build/reset-consumer-old-v3 WinMain slow trace interrupted",
+    "build/reset-consumer-old-v5 and v6 WinMain duplicate comprehension observations rejected by closure validation"
+  ],
+  "limits": [
+    "No original source stop or mismatch exclusion changed.",
+    "Sonic retained 2840 FP status differences; source observations include every case.",
+    "Task source FAIL207 untouched; no Task cohort executed."
+  ]
+}

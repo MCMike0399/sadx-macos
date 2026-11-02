@@ -1,0 +1,394 @@
+{
+  "no_judge_framework_changes": true,
+  "review": "Complete new and changed function/test bodies, including mac create_media_players and unforced NativeGame test binding; no new whole-module approval inferred.",
+  "members": [
+    {
+      "path": "Makefile",
+      "scope": "complete file, including every newly added helper and test body",
+      "sha256": "c036071f0e4a3f2c3ce1f98dccafb14108dc8cad322cce6cd86d77c43ba48adb",
+      "purpose": "Shared reset algorithm/native binding, reference routing/availability, or complete maintained consumer/binding migration; see CONTEXT and packet proof.",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required"
+    },
+    {
+      "path": "src/engine/reset_control.hpp",
+      "scope": "complete file, including every newly added helper and test body",
+      "sha256": "b230dfd60542d691b6d856acd7ee8baf2152e07893f042cc104a6f18e6f5d6a4",
+      "purpose": "Shared reset algorithm/native binding, reference routing/availability, or complete maintained consumer/binding migration; see CONTEXT and packet proof.",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required"
+    },
+    {
+      "path": "src/game/audio_playback.cpp",
+      "scope": "complete file, including every newly added helper and test body",
+      "sha256": "206b7156025fb333c2a731c4ac9e0b715c996e4acf0ce86bc0dbd6eb35d58c5b",
+      "purpose": "Shared reset algorithm/native binding, reference routing/availability, or complete maintained consumer/binding migration; see CONTEXT and packet proof.",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required"
+    },
+    {
+      "path": "src/game/game_cleanup.cpp",
+      "scope": "complete file, including every newly added helper and test body",
+      "sha256": "e928f5072b0787daea2f64f8c14bd4255b1ecd64767a4f626180345e415dce8c",
+      "purpose": "Shared reset algorithm/native binding, reference routing/availability, or complete maintained consumer/binding migration; see CONTEXT and packet proof.",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required"
+    },
+    {
+      "path": "src/game/game_cleanup.hpp",
+      "scope": "complete file, including every newly added helper and test body",
+      "sha256": "324cdbe6cb95e71d535c4f8da8041cb6269a16c424c79795d401796ca9a1b26c",
+      "purpose": "Shared reset algorithm/native binding, reference routing/availability, or complete maintained consumer/binding migration; see CONTEXT and packet proof.",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required"
+    },
+    {
+      "path": "src/game/game_cleanup_internal.hpp",
+      "scope": "complete file, including every newly added helper and test body",
+      "sha256": "a9be22c80e6048ac3ce7c665b6c9a311231ad567735e06e8d7006e6b79fd7f9f",
+      "purpose": "Shared reset algorithm/native binding, reference routing/availability, or complete maintained consumer/binding migration; see CONTEXT and packet proof.",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required"
+    },
+    {
+      "path": "src/game/game_loop.hpp",
+      "scope": "complete file, including every newly added helper and test body",
+      "sha256": "7e7c7c6a25ebdd396cb375227c9ad55fee9a9ea7472539260a593449ce42b35f",
+      "purpose": "Shared reset algorithm/native binding, reference routing/availability, or complete maintained consumer/binding migration; see CONTEXT and packet proof.",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required"
+    },
+    {
+      "path": "src/game/game_reset.hpp",
+      "scope": "complete file, including every newly added helper and test body",
+      "sha256": "31d4113de10a38e418e9204c762c570ff476df81dcdb5b159fd027100b7096ae",
+      "purpose": "Shared reset algorithm/native binding, reference routing/availability, or complete maintained consumer/binding migration; see CONTEXT and packet proof.",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required"
+    },
+    {
+      "path": "src/game/game_reset_leaves.hpp",
+      "scope": "complete file, including every newly added helper and test body",
+      "sha256": "8341c093a6044ae7333285c08bb3b65ec74af8293be9a62846a1d1b537841085",
+      "purpose": "Shared reset algorithm/native binding, reference routing/availability, or complete maintained consumer/binding migration; see CONTEXT and packet proof.",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required"
+    },
+    {
+      "path": "src/guest/game_loop.cpp",
+      "scope": "complete file, including every newly added helper and test body",
+      "sha256": "1f31431988ac01d6d5f67a96ee71faf646218000f1cbd4a2dbd9fd9081d4ebbe",
+      "purpose": "Shared reset algorithm/native binding, reference routing/availability, or complete maintained consumer/binding migration; see CONTEXT and packet proof.",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required"
+    },
+    {
+      "path": "src/guest/game_loop_reference.hpp",
+      "scope": "complete file, including every newly added helper and test body",
+      "sha256": "4d063089d11766ebc7e73ed664d614ec6641fdaf250c0e99ecc10f2207b17409",
+      "purpose": "Shared reset algorithm/native binding, reference routing/availability, or complete maintained consumer/binding migration; see CONTEXT and packet proof.",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required"
+    },
+    {
+      "path": "src/guest/game_mode_reference.hpp",
+      "scope": "complete file, including every newly added helper and test body",
+      "sha256": "1c26a543dc21762b8f9b89e3cc6810a253067da9b702ac5ba48f56ff673548e6",
+      "purpose": "Shared reset algorithm/native binding, reference routing/availability, or complete maintained consumer/binding migration; see CONTEXT and packet proof.",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required"
+    },
+    {
+      "path": "src/guest/game_reset_leaves_reference.cpp",
+      "scope": "complete file, including every newly added helper and test body",
+      "sha256": "f42f837a3a251a98063e38ef49c4b7a3894da588d98c46d3fd769da396bab8cb",
+      "purpose": "Shared reset algorithm/native binding, reference routing/availability, or complete maintained consumer/binding migration; see CONTEXT and packet proof.",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required"
+    },
+    {
+      "path": "src/guest/game_reset_leaves_reference.hpp",
+      "scope": "complete file, including every newly added helper and test body",
+      "sha256": "128a089f191e9dc3f32c61337dc6d86fe719bbaeac9384c2e9957056078b3888",
+      "purpose": "Shared reset algorithm/native binding, reference routing/availability, or complete maintained consumer/binding migration; see CONTEXT and packet proof.",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required"
+    },
+    {
+      "path": "src/guest/game_reset_reference.cpp",
+      "scope": "complete file, including every newly added helper and test body",
+      "sha256": "6df9a626bea315a1043ea1f10c89b443e1e15bb640be8b07d7dec247ed43d023",
+      "purpose": "Shared reset algorithm/native binding, reference routing/availability, or complete maintained consumer/binding migration; see CONTEXT and packet proof.",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required"
+    },
+    {
+      "path": "src/guest/game_reset_reference.hpp",
+      "scope": "complete file, including every newly added helper and test body",
+      "sha256": "1b6e0d7daa1166b3a7d110d294cb804d123284cda484b39c47821bd73521a149",
+      "purpose": "Shared reset algorithm/native binding, reference routing/availability, or complete maintained consumer/binding migration; see CONTEXT and packet proof.",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required"
+    },
+    {
+      "path": "src/guest/music_state_reference.hpp",
+      "scope": "complete file, including every newly added helper and test body",
+      "sha256": "aa3750574e9b21da6ff7e2194a10a0255d8be451ec3d0fcf5cea9e3278ec426c",
+      "purpose": "Shared reset algorithm/native binding, reference routing/availability, or complete maintained consumer/binding migration; see CONTEXT and packet proof.",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required"
+    },
+    {
+      "path": "src/guest/native_game_reference.cpp",
+      "scope": "complete file, including every newly added helper and test body",
+      "sha256": "5edeb74d63ac0e8270c5e9c10ff9db2a663370291c3acfd0ba0372b56d6af6b8",
+      "purpose": "Shared reset algorithm/native binding, reference routing/availability, or complete maintained consumer/binding migration; see CONTEXT and packet proof.",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required"
+    },
+    {
+      "path": "src/guest/native_game_reference.hpp",
+      "scope": "complete file, including every newly added helper and test body",
+      "sha256": "0edf0f20eade37f18b965f94edba023850d444ca74db4ffaa6b144752d05a863",
+      "purpose": "Shared reset algorithm/native binding, reference routing/availability, or complete maintained consumer/binding migration; see CONTEXT and packet proof.",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required"
+    },
+    {
+      "path": "src/guest/reset_buffer_tokens.hpp",
+      "scope": "complete file, including every newly added helper and test body",
+      "sha256": "010b586d5b3af46a79f0247a0782bd2f4288f602b1c3139728007795818760d8",
+      "purpose": "Shared reset algorithm/native binding, reference routing/availability, or complete maintained consumer/binding migration; see CONTEXT and packet proof.",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required"
+    },
+    {
+      "path": "src/guest/reset_control_reference.hpp",
+      "scope": "complete file, including every newly added helper and test body",
+      "sha256": "fd65bcd6dae58a057062af3f3f847246e265cf58ebbd689ebfe8bebab43f571a",
+      "purpose": "Shared reset algorithm/native binding, reference routing/availability, or complete maintained consumer/binding migration; see CONTEXT and packet proof.",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required"
+    },
+    {
+      "path": "src/platform/mac/mac_audio_playback.mm",
+      "scope": "complete file, including every newly added helper and test body",
+      "sha256": "64bb42b8c1af4c2502742f63daadcbe030a6b798921a2967e7c8bed11140ad16",
+      "purpose": "Shared reset algorithm/native binding, reference routing/availability, or complete maintained consumer/binding migration; see CONTEXT and packet proof.",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required"
+    },
+    {
+      "path": "src/player/sonic_player.cpp",
+      "scope": "complete file, including every newly added helper and test body",
+      "sha256": "f4315bb2f4641d7c337d9319f508dbeb4365d69955d8f12c210784144adc7c12",
+      "purpose": "Shared reset algorithm/native binding, reference routing/availability, or complete maintained consumer/binding migration; see CONTEXT and packet proof.",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required"
+    },
+    {
+      "path": "src/player/sonic_player.hpp",
+      "scope": "complete file, including every newly added helper and test body",
+      "sha256": "11d83de30ef183415b2a66a74291604567a280cd1edb24425e40a68af357b6f1",
+      "purpose": "Shared reset algorithm/native binding, reference routing/availability, or complete maintained consumer/binding migration; see CONTEXT and packet proof.",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required"
+    },
+    {
+      "path": "src/runtime/native_file_select_display.cpp",
+      "scope": "complete file, including every newly added helper and test body",
+      "sha256": "4606ea0d29eb68072fdf1bc00398bcc660d369d4dc9f3219a4070a6d87caa003",
+      "purpose": "Shared reset algorithm/native binding, reference routing/availability, or complete maintained consumer/binding migration; see CONTEXT and packet proof.",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required"
+    },
+    {
+      "path": "src/runtime/native_session.cpp",
+      "scope": "complete file, including every newly added helper and test body",
+      "sha256": "4b0711c1d9ffd8ab0e56a9ce16139e2cfbdd5bbfba86d0a8e590f848b3c56ff5",
+      "purpose": "Shared reset algorithm/native binding, reference routing/availability, or complete maintained consumer/binding migration; see CONTEXT and packet proof.",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required"
+    },
+    {
+      "path": "src/runtime/native_session.hpp",
+      "scope": "complete file, including every newly added helper and test body",
+      "sha256": "e26e273edee5f2eff6b8c21e150c54542065f7335c738b29f7476f7c7c66fbd2",
+      "purpose": "Shared reset algorithm/native binding, reference routing/availability, or complete maintained consumer/binding migration; see CONTEXT and packet proof.",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required"
+    },
+    {
+      "path": "tests/fixtures/reset_composition_fixture.hpp",
+      "scope": "complete file, including every newly added helper and test body",
+      "sha256": "400f656d8141e825912f8cc01a1b12462675a42bcf5207e86350b67ae8e489d1",
+      "purpose": "Shared reset algorithm/native binding, reference routing/availability, or complete maintained consumer/binding migration; see CONTEXT and packet proof.",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required"
+    },
+    {
+      "path": "tests/probes/native_frame_completion_probe.cpp",
+      "scope": "complete file, including every newly added helper and test body",
+      "sha256": "0e4dedf2c093022ffa11dfff2e049c926e5fa8e0e7c15a7b5650be107a522f8e",
+      "purpose": "Shared reset algorithm/native binding, reference routing/availability, or complete maintained consumer/binding migration; see CONTEXT and packet proof.",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required"
+    },
+    {
+      "path": "tests/probes/native_game_loop_probe.cpp",
+      "scope": "complete file, including every newly added helper and test body",
+      "sha256": "02e9d282a3cd675f4ce4923237fdccb0912c4739ea182d49102d7d30284912d4",
+      "purpose": "Shared reset algorithm/native binding, reference routing/availability, or complete maintained consumer/binding migration; see CONTEXT and packet proof.",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required"
+    },
+    {
+      "path": "tests/probes/native_game_reset_composed_probe.cpp",
+      "scope": "complete file, including every newly added helper and test body",
+      "sha256": "362fa18b512e91f174daf773d73ce71e68d03b216758786556e398d6263e84d6",
+      "purpose": "Shared reset algorithm/native binding, reference routing/availability, or complete maintained consumer/binding migration; see CONTEXT and packet proof.",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required"
+    },
+    {
+      "path": "tests/probes/native_game_reset_probe.cpp",
+      "scope": "complete file, including every newly added helper and test body",
+      "sha256": "c7e986338281a1b637de0f48ddd4f615409df5b2b66f78c99697acd1edce852e",
+      "purpose": "Shared reset algorithm/native binding, reference routing/availability, or complete maintained consumer/binding migration; see CONTEXT and packet proof.",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required"
+    },
+    {
+      "path": "tests/probes/native_sonic_player_probe.cpp",
+      "scope": "complete file, including every newly added helper and test body",
+      "sha256": "d663e0185ee28723a07a535f4ab833fd7526379ab704c0cfee5c5a30c103aec9",
+      "purpose": "Shared reset algorithm/native binding, reference routing/availability, or complete maintained consumer/binding migration; see CONTEXT and packet proof.",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required"
+    },
+    {
+      "path": "tests/probes/native_stream_players_probe.cpp",
+      "scope": "complete file, including every newly added helper and test body",
+      "sha256": "63871826ccaa172ee213b43d2e11988dd50b8ca1e7628aefc19d37f21e27e35d",
+      "purpose": "Shared reset algorithm/native binding, reference routing/availability, or complete maintained consumer/binding migration; see CONTEXT and packet proof.",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required"
+    },
+    {
+      "path": "tests/probes/reset_composition_fixture.cpp",
+      "scope": "complete file, including every newly added helper and test body",
+      "sha256": "75fb715f18caebb456df3876287886d7da53519996049c214d3fa571f7eebd0c",
+      "purpose": "Shared reset algorithm/native binding, reference routing/availability, or complete maintained consumer/binding migration; see CONTEXT and packet proof.",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required"
+    },
+    {
+      "path": "tests/unit/game_loop.cpp",
+      "scope": "complete file, including every newly added helper and test body",
+      "sha256": "a4f2976f5d480a3001e6fa58fbcf5b57662f1fba0da99ed4ac885bbbb1e98d32",
+      "purpose": "Shared reset algorithm/native binding, reference routing/availability, or complete maintained consumer/binding migration; see CONTEXT and packet proof.",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required"
+    },
+    {
+      "path": "tests/unit/game_reset.cpp",
+      "scope": "complete file, including every newly added helper and test body",
+      "sha256": "440f54e4e8e2dc3c6b68d7ed62d880d69b0f41d07bcfeba059b3d4610dc8467a",
+      "purpose": "Shared reset algorithm/native binding, reference routing/availability, or complete maintained consumer/binding migration; see CONTEXT and packet proof.",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required"
+    },
+    {
+      "path": "tests/unit/music_state_reference.cpp",
+      "scope": "complete file, including every newly added helper and test body",
+      "sha256": "250d71d4308e27c069ebe35f6322c6abae0fd8fd9b36301749413336719b9064",
+      "purpose": "Shared reset algorithm/native binding, reference routing/availability, or complete maintained consumer/binding migration; see CONTEXT and packet proof.",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required"
+    },
+    {
+      "path": "tests/unit/native_logo_scene.cpp",
+      "scope": "complete file, including every newly added helper and test body",
+      "sha256": "35eed329acc48a4835a8393230027e213bc7f0100cd608a776985457fe266546",
+      "purpose": "Shared reset algorithm/native binding, reference routing/availability, or complete maintained consumer/binding migration; see CONTEXT and packet proof.",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required"
+    },
+    {
+      "path": "tests/unit/reset_native_contract.cpp",
+      "scope": "complete file, including every newly added helper and test body",
+      "sha256": "108507bdfa16617a8e1c10d41db3d0682000f1e75714ae0a3b757fc61b57e939",
+      "purpose": "Shared reset algorithm/native binding, reference routing/availability, or complete maintained consumer/binding migration; see CONTEXT and packet proof.",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required"
+    },
+    {
+      "path": "tests/unit/reset_order_characterization.cpp",
+      "scope": "complete file, including every newly added helper and test body",
+      "sha256": "5ef27c87b103a2c3789e3c13783d977066fe61a46d05899e7da9067301d5a6c3",
+      "purpose": "Shared reset algorithm/native binding, reference routing/availability, or complete maintained consumer/binding migration; see CONTEXT and packet proof.",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required"
+    },
+    {
+      "path": "tests/unit/save_frame_characterization.cpp",
+      "scope": "complete file, including every newly added helper and test body",
+      "sha256": "f68e473cce6e2a663ffa8a3c7b8a9ead2804a1279b04fd8ca6e4756110dcce72",
+      "purpose": "Shared reset algorithm/native binding, reference routing/availability, or complete maintained consumer/binding migration; see CONTEXT and packet proof.",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required"
+    },
+    {
+      "path": "tests/unit/sonic_player.cpp",
+      "scope": "complete file, including every newly added helper and test body",
+      "sha256": "7ac14d9af682b500c0c0a2b7ec3fb1b6912fbce0c24812e26e022198fddd3fcf",
+      "purpose": "Shared reset algorithm/native binding, reference routing/availability, or complete maintained consumer/binding migration; see CONTEXT and packet proof.",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required"
+    },
+    {
+      "path": "tools/oracles/verify_original_game_cleanup.py",
+      "scope": "complete file, including every newly added helper and test body",
+      "sha256": "3711f4f36dd7a37b9272f9578504b6dd679c2aeab67b7c6a8798386d943e1820",
+      "purpose": "Shared reset algorithm/native binding, reference routing/availability, or complete maintained consumer/binding migration; see CONTEXT and packet proof.",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required"
+    },
+    {
+      "path": "tools/oracles/verify_original_game_loop.py",
+      "scope": "complete file, including every newly added helper and test body",
+      "sha256": "8f16020073e6dfe0a98d09bf6c75fadbf678aecb192b159c64c326b568379754",
+      "purpose": "Shared reset algorithm/native binding, reference routing/availability, or complete maintained consumer/binding migration; see CONTEXT and packet proof.",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required"
+    },
+    {
+      "path": "tools/oracles/verify_original_game_reset.py",
+      "scope": "complete file, including every newly added helper and test body",
+      "sha256": "18dfea4e6e1665dd5e789cd55d29fca44941135fbb152d01997eb27e1dcc85c0",
+      "purpose": "Shared reset algorithm/native binding, reference routing/availability, or complete maintained consumer/binding migration; see CONTEXT and packet proof.",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required"
+    },
+    {
+      "path": "tools/oracles/verify_original_game_reset_composed.py",
+      "scope": "complete file, including every newly added helper and test body",
+      "sha256": "b86a61e12fe020621ba933250f24031e80453cb93d7e21f9878c3d440f97e433",
+      "purpose": "Shared reset algorithm/native binding, reference routing/availability, or complete maintained consumer/binding migration; see CONTEXT and packet proof.",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required"
+    },
+    {
+      "path": "tools/oracles/verify_original_sonic_player.py",
+      "scope": "complete file, including every newly added helper and test body",
+      "sha256": "9e144bb1bd39d9c92ccf190363a33056b6b041e7bba0094c00bb61c35ac5f61e",
+      "purpose": "Shared reset algorithm/native binding, reference routing/availability, or complete maintained consumer/binding migration; see CONTEXT and packet proof.",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required"
+    },
+    {
+      "path": "tools/oracles/verify_original_stream_players.py",
+      "scope": "complete file, including every newly added helper and test body",
+      "sha256": "ac5bd2715799ff99cc06ac611b5ebf68567dc66d18ed57a4e60a686a19bb1d4b",
+      "purpose": "Shared reset algorithm/native binding, reference routing/availability, or complete maintained consumer/binding migration; see CONTEXT and packet proof.",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required"
+    },
+    {
+      "path": "reference/packets/reset-owner-source/test_capture_consumers.py",
+      "scope": "complete helper/test body",
+      "sha256": "9e6c235aa4f789ebfe6d8905ae490a955d037d282f83f93ef08a5a290c26b770",
+      "purpose": "Fake adequacy of every capture boundary, including actual Python trace events.",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required",
+      "predecessor_path": "docs/refactor-inventory/packets/reset-owner-source/test_capture_consumers.py"
+    },
+    {
+      "path": "reference/packets/reset-owner-source/run_reset_faults.py",
+      "scope": "complete helper/test body",
+      "sha256": "3c782047fc674cf58e6396b67f0e45ab266302cb0f372129bd4df2218f01b142",
+      "purpose": "Ten scoped semantic Source faults, registered compile recipes, explicit setup errors, finally restoration.",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required",
+      "predecessor_path": "docs/refactor-inventory/packets/reset-owner-source/run_reset_faults.py"
+    },
+    {
+      "path": "reference/packets/reset-owner-source/capture_consumers.py",
+      "scope": "complete helper/test body",
+      "sha256": "dc685d7fd0e4a3a9deefd58277a542192c1a88f2612b33c4a0170ebd2f7c4966",
+      "purpose": "Finite default export/schema/domain capture with exclusive artifacts; does not generate/change inputs or verdicts.",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required",
+      "predecessor_path": "docs/refactor-inventory/packets/reset-owner-source/capture_consumers.py"
+    },
+    {
+      "path": "tests/unit/reset_leaf_contract.cpp",
+      "scope": "complete file, every new helper/test body",
+      "purpose": "Complete reset consumer/pending/leaf support qualification",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required",
+      "sha256": "7410d465209f4bdcdb691e4c20c3532eafcf57430ebf0ac0d8df51412d1e98d0"
+    },
+    {
+      "path": "tests/unit/reset_pending_contract.cpp",
+      "scope": "complete file, every new helper/test body",
+      "purpose": "Complete reset consumer/pending/leaf support qualification",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required",
+      "sha256": "04f024fea49a82ef2dbec181b382e004101e4fc511182f3feed81ca6035a5f1a"
+    },
+    {
+      "path": "tests/probes/native_game_cleanup_probe.cpp",
+      "scope": "complete file, including every new helper/test body",
+      "purpose": "Explicit reset native/reference probe binding or consumer closure",
+      "disposition": "Author inspected; Root fresh Standards/Spec review required",
+      "sha256": "f7dae9022add568e24632e5e6612d344a57731bc7125e63ae92c8f52cbf413c2"
+    }
+  ]
+}

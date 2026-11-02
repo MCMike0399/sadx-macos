@@ -1,5 +1,60 @@
 {
   "status": "UNRUN",
   "owner": "Root",
-  "definition": "Small independent manual cohort: fail first media close and task init; unknown second buffer after first callback; equal buffer identities released twice; forced high-bit word plus editor unknown; nonzero frame blocks completion. Run original/reference/native observations before admission. No random seed assigned or consumed."
+  "definition_frozen_at_source": "744d313",
+  "development_independence": "Distinct literal payloads, fixed before Root admission; no random generator/seed or reserved execution performed here. Root supplies immutable-original/native/reference bindings.",
+  "cases": [
+    {
+      "id": "reserved-media-failure",
+      "frame": 2710631713,
+      "editor": 65025,
+      "fail_operation": "first media close",
+      "observe": "all preceding stores, complete pending payload, no later task/fog/seed"
+    },
+    {
+      "id": "reserved-task-failure",
+      "frame": 1480523139,
+      "editor": 33281,
+      "fail_operation": "task initializer",
+      "observe": "arena replacement prefix, pending payload, no level/fog/seed"
+    },
+    {
+      "id": "reserved-buffer-replacement",
+      "first_identity": 6656,
+      "second_identity": 6660,
+      "first_release_replaces_second_with": 6656,
+      "observe": "two calls despite aliases; first slot clears only after success"
+    },
+    {
+      "id": "reserved-later-buffer-unknown",
+      "first_identity": 6688,
+      "first_release_invalidates_second": true,
+      "observe": "unknown second read after successful first clear; no fog/seed"
+    },
+    {
+      "id": "reserved-level-substitution",
+      "mode": 0,
+      "set_alias_identity": 6720,
+      "camera_identity": 6724,
+      "observe": "SET/CAM release precedes callback read; callback substitution and failed return prefix"
+    },
+    {
+      "id": "reserved-editor-read",
+      "forced_word": 1,
+      "editor_initial": 65025,
+      "invalidate_after_borrow": true,
+      "observe": "forced read before editor validation, unavailable stops before action87 and upper guest bytes unchanged"
+    },
+    {
+      "id": "reserved-native-frame-alias",
+      "frame": 305443381,
+      "observe": "reached nonzero native_pending_text_window retained; reset makes same borrowed word zero"
+    },
+    {
+      "id": "reserved-media-reacquire",
+      "mode": 1,
+      "stop_replaces_player": true,
+      "observe": "reset replacement player, not cached player; replacement-null keeps earlier prefix"
+    }
+  ]
 }

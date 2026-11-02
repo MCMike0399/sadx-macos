@@ -1,0 +1,403 @@
+{
+  "source_commit": "744d313ed6a7f02c7c3c5b47ecb78078dca592aa",
+  "base": "6255cc6cabcf14adb32867ea011f7491dbbddd2d",
+  "units": [
+    {
+      "command": [
+        "build/sonic-player-test",
+        "build/assets/sonic-player-constants.bin",
+        "build/assets/sonic-action-dispatch.bin",
+        "build/assets/ninja-trig.f32",
+        "build/assets/ninja-unit.f32"
+      ],
+      "exit": 0,
+      "log": "build/corrected-sonic-player-test.log"
+    },
+    {
+      "command": [
+        "build/reset-native-contract-test"
+      ],
+      "exit": 0,
+      "log": "build/qualified-reset-native-contract-test.log"
+    },
+    {
+      "command": [
+        "build/reset-order-characterization-test"
+      ],
+      "exit": 0,
+      "log": "build/qualified-reset-order-characterization-test.log"
+    },
+    {
+      "command": [
+        "build/game-reset-test"
+      ],
+      "exit": 0,
+      "log": "build/qualified-game-reset-test.log"
+    },
+    {
+      "command": [
+        "build/game-cleanup-test"
+      ],
+      "exit": 0,
+      "log": "build/qualified-game-cleanup-test.log"
+    },
+    {
+      "command": [
+        "build/audio-playback-test"
+      ],
+      "exit": 0,
+      "log": "build/qualified-audio-playback-test.log"
+    },
+    {
+      "command": [
+        "build/game-loop-test"
+      ],
+      "exit": 0,
+      "log": "build/qualified-game-loop-test.log"
+    },
+    {
+      "command": [
+        "build/save-frame-characterization-test"
+      ],
+      "exit": 0,
+      "log": "build/qualified-save-frame-characterization-test.log"
+    },
+    {
+      "command": [
+        "build/music-state-reference-test"
+      ],
+      "exit": 0,
+      "log": "build/qualified-music-state-reference-test.log"
+    },
+    {
+      "command": [
+        "build/native-logo-scene-test"
+      ],
+      "exit": 0,
+      "log": "build/corrected-native-logo-scene-test.log"
+    },
+    {
+      "command": [
+        "build/mac-audio-playback-test",
+        "build/reset-private-audio.wav"
+      ],
+      "exit": 0,
+      "log": "build/qualified-mac-audio-playback-test.log"
+    },
+    {
+      "command": [
+        "build/reset-pending-contract-test"
+      ],
+      "exit": 0,
+      "old_current_complete_output_difference_count": 0,
+      "old_output": "build/old-pending.txt",
+      "current_output": "build/current-pending.txt"
+    },
+    {
+      "command": [
+        "build/reset-leaf-contract-test"
+      ],
+      "exit": 0,
+      "old_current_complete_output_difference_count": 0,
+      "old_output": "build/old-leaf.txt",
+      "current_output": "build/current-leaf.txt"
+    }
+  ],
+  "complete_consumer_comparison": {
+    "game_loop": {
+      "native_records": 688,
+      "original_records": 688,
+      "complete_native_differences": [],
+      "complete_original_differences": [],
+      "old_abi_sha256": "945b950eb75c55a67a1654c13dd20efdc3a4bfb7ae9deb2c5f52d967d18436f1",
+      "current_abi_sha256": "2283ba2b7b2aa3f501962a7e7d7f42c5d2882bd8b9733dc12720d4714e065ce1",
+      "metadata_normalization": "Old native record scalar/byte data preserved exactly; per-array element types are independently bound to immutable ctypes caller declarations. Missing old case labels are only monotonic observation ordinals."
+    },
+    "sonic_player": {
+      "native_records": 28800,
+      "original_records": 28800,
+      "complete_native_differences": [],
+      "complete_original_differences": [],
+      "old_abi_sha256": "7b12f6bde948622432c7d8a208a99ba9324701bd96d6dff1ce08ef33527fbb86",
+      "current_abi_sha256": "dda274ab433bc185a4806069f3294b0a63ec93bc16306b75ff2b42bf601e12f8",
+      "metadata_normalization": "Old native record scalar/byte data preserved exactly; per-array element types are independently bound to immutable ctypes caller declarations. Missing old case labels are only monotonic observation ordinals."
+    },
+    "game_winmain": {
+      "native_records": 3000,
+      "original_records": 3000,
+      "complete_native_differences": [],
+      "complete_original_differences": [],
+      "old_abi_sha256": "dc89c45f3d60cc13f5724ef612dd1ecddaa256f933de603554c26c6c461ee0b8",
+      "current_abi_sha256": "26562ea001e2f3aa223fc680badfa61c05f4e21596181fa7ce416cdda6b0e8b7",
+      "metadata_normalization": "Old native record scalar/byte data preserved exactly; per-array element types are independently bound to immutable ctypes caller declarations. Missing old case labels are only monotonic observation ordinals."
+    },
+    "stream_players": {
+      "native_records": 600,
+      "original_records": 600,
+      "complete_native_differences": [],
+      "complete_original_differences": [],
+      "old_abi_sha256": "a54049bc54d049d82436f2dbd0442cc46a444b2e34df84038059f2b8b09f8f38",
+      "current_abi_sha256": "a0db0adda6b4985e90b6c9f2057be591b048364fb10722c090358abe75104930",
+      "metadata_normalization": "Old native record scalar/byte data preserved exactly; per-array element types are independently bound to immutable ctypes caller declarations. Missing old case labels are only monotonic observation ordinals."
+    },
+    "sound_server": {
+      "native_records": 1956,
+      "original_records": 1956,
+      "complete_native_differences": [],
+      "complete_original_differences": [],
+      "old_abi_sha256": "fa093578950351c3e4e73c2cb306486f9ce0bc947ddadc4311195568d1633550",
+      "current_abi_sha256": "a29abfbe971370f615587746e28f848f510c70a2c9db3de2a70b2316d63107f1",
+      "metadata_normalization": "Old native record scalar/byte data preserved exactly; per-array element types are independently bound to immutable ctypes caller declarations. Missing old case labels are only monotonic observation ordinals.",
+      "undefined_void_register_disagreements": 1956,
+      "return_binding": "VOID-RETURN-BINDING.json; raw records retained, no C return result exists."
+    }
+  },
+  "oracles": {
+    "game_reset": {
+      "path": "build/oracles/game_reset.json",
+      "sha256": "5da9e4f43b8e3753d53df10ec029034a2fe176388f88be5e83b51bf1f621b352",
+      "cases": 300,
+      "verdict": "pass",
+      "value_mismatches": 0,
+      "status_mismatches": 0
+    },
+    "game_reset_composed": {
+      "path": "build/oracles/game_reset_composed.json",
+      "sha256": "a77974e1cfc0ddb65f16dade34643fec7b94fa2f7e379e37007df67f3c9ca356",
+      "cases": 300,
+      "verdict": "pass",
+      "value_mismatches": 0,
+      "status_mismatches": 0
+    },
+    "game_cleanup": {
+      "path": "build/oracles/game_cleanup.json",
+      "sha256": "28accd667e61d09689d82835c26d1253e00deff4b2b64e8e8a0074479f53ba2d",
+      "cases": 2604,
+      "verdict": "pass",
+      "value_mismatches": 0,
+      "status_mismatches": 0,
+      "corrected_probe_binding": "beaf1f2, actual registered oracle rerun exits 0 with 2604 cases and 0 mismatches"
+    },
+    "music": {
+      "path": "build/oracles/music.json",
+      "sha256": "d68af41b57a637c59737aec732157829cd5f678e8dbf059ef6f225968e3ff9e0",
+      "cases": 1301,
+      "verdict": "pass",
+      "value_mismatches": 0,
+      "status_mismatches": 0
+    },
+    "level_sounds": {
+      "path": "build/oracles/level_sounds.json",
+      "sha256": "87c504fecb98aa8f508847f200b6821d7f7709d0be3ee758edf53fed19e7c76e",
+      "cases": 2296,
+      "verdict": "pass",
+      "value_mismatches": 0,
+      "status_mismatches": 0
+    },
+    "game_mode": {
+      "path": "build/oracles/game_mode.json",
+      "sha256": "e214622ca6272d1907077d67e560ca1f59179f6afd83b0d5b396d1259b8165a7",
+      "cases": 24000,
+      "verdict": "pass",
+      "value_mismatches": 0,
+      "status_mismatches": 0
+    },
+    "sonic_actions": {
+      "path": "build/oracles/sonic_actions.json",
+      "sha256": "f4cb2a1070c610812c0a21283d3071f4b81a96f6006f2b9f7aa0fcc0d5d32333",
+      "cases": 30192,
+      "verdict": "partial",
+      "value_mismatches": 0,
+      "status_mismatches": 2172
+    },
+    "frame_completion": {
+      "path": "build/oracles/frame_completion.json",
+      "sha256": "f41bab77d7b108e2219a7680a370f29e2d4e2c115f50457fa7d0cdf66aa52267",
+      "cases": 2964,
+      "verdict": "pass",
+      "value_mismatches": 0,
+      "status_mismatches": 0
+    },
+    "title_menu": {
+      "path": "build/oracles/title_menu.json",
+      "sha256": "e28f3e70c0f38eb071e695aae67450f4e1f04b0445ac5909a69d189ce96ff526",
+      "cases": 20872,
+      "verdict": "partial",
+      "value_mismatches": 0,
+      "status_mismatches": 270
+    }
+  },
+  "faults": {
+    "source_sha256": "a9be22c80e6048ac3ce7c665b6c9a311231ad567735e06e8d7006e6b79fd7f9f",
+    "results": [
+      {
+        "name": "timer-before-flags",
+        "build_exit": 0,
+        "mutated_source_sha256": "07dabad3e883d8feedb95d4267979dcd11005201d3d3d83049da5889ec21c015",
+        "matrix_exit": 0,
+        "matrix_equal": false,
+        "native_exit": 0,
+        "oracle_exit": 0,
+        "original_cases": 300,
+        "original_mismatches": 0,
+        "status": "CAUGHT"
+      },
+      {
+        "name": "late-list-read",
+        "build_exit": 0,
+        "mutated_source_sha256": "68ffe8a4667f95d047cd96383a373a2e5a34196588205c66db485ba8067713a6",
+        "matrix_exit": 0,
+        "matrix_equal": false,
+        "native_exit": 0,
+        "oracle_exit": 0,
+        "original_cases": 300,
+        "original_mismatches": 0,
+        "status": "CAUGHT"
+      },
+      {
+        "name": "media-stop-instead-of-reset",
+        "build_exit": 0,
+        "mutated_source_sha256": "c55a268bbc3f63e6d6139f9f85cd64031aaaeb39ce095a7af781474c45b704a2",
+        "matrix_exit": 0,
+        "matrix_equal": false,
+        "native_exit": 0,
+        "oracle_exit": 1,
+        "original_cases": 300,
+        "original_mismatches": 122,
+        "status": "CAUGHT"
+      },
+      {
+        "name": "clear-before-callback",
+        "build_exit": 0,
+        "mutated_source_sha256": "c01f173a5138a319db3cb4d63d28596a4ddb6a1fa72a769512be3217ba9c093f",
+        "matrix_exit": 0,
+        "matrix_equal": false,
+        "native_exit": -6,
+        "oracle_exit": 1,
+        "original_cases": 300,
+        "original_mismatches": 149,
+        "status": "CAUGHT"
+      },
+      {
+        "name": "clear-before-free",
+        "build_exit": 0,
+        "mutated_source_sha256": "890c56aa8283991295f8ba93cd2f2c2f13977b45e263eb030cb9040a3e28395e",
+        "matrix_exit": 0,
+        "matrix_equal": false,
+        "native_exit": -6,
+        "oracle_exit": 1,
+        "original_cases": 300,
+        "original_mismatches": 1,
+        "status": "CAUGHT"
+      },
+      {
+        "name": "reread-wrong-buffer",
+        "build_exit": 0,
+        "mutated_source_sha256": "5d88d3bdb7122953f53060268d4aba22eed52f1db80c4be8eb4da2ad7105b577",
+        "matrix_exit": 0,
+        "matrix_equal": false,
+        "native_exit": -6,
+        "oracle_exit": 1,
+        "original_cases": 300,
+        "original_mismatches": 229,
+        "status": "CAUGHT"
+      },
+      {
+        "name": "omit-fog",
+        "build_exit": 0,
+        "mutated_source_sha256": "95b6c140fb94f625800ab08aad2b35e66602b988f22aa295a064fc4f00219930",
+        "matrix_exit": 0,
+        "matrix_equal": false,
+        "native_exit": -6,
+        "oracle_exit": 1,
+        "original_cases": 300,
+        "original_mismatches": 227,
+        "status": "CAUGHT"
+      },
+      {
+        "name": "wrong-seed",
+        "build_exit": 0,
+        "mutated_source_sha256": "ddfe6692626a665109aed2db77e842594f73a73467690f30d363a0693d0568d9",
+        "matrix_exit": 0,
+        "matrix_equal": false,
+        "native_exit": -6,
+        "oracle_exit": 1,
+        "original_cases": 300,
+        "original_mismatches": 227,
+        "status": "CAUGHT"
+      },
+      {
+        "name": "wrong-mission-guard",
+        "build_exit": 0,
+        "mutated_source_sha256": "c11233ff34009f507927ba9f1242d05aa768eb0bdcaca76df58fc5331de4303b",
+        "matrix_exit": 0,
+        "matrix_equal": false,
+        "native_exit": 0,
+        "oracle_exit": 0,
+        "original_cases": 300,
+        "original_mismatches": 0,
+        "status": "CAUGHT"
+      },
+      {
+        "name": "vibration-threshold",
+        "build_exit": 0,
+        "mutated_source_sha256": "a111bb4ee9f60bda5511f7e3c6b87d5a5d2967c101b439fe3bae85749d4db976",
+        "matrix_exit": 0,
+        "matrix_equal": true,
+        "native_exit": 0,
+        "oracle_exit": 1,
+        "original_cases": 300,
+        "original_mismatches": 72,
+        "status": "CAUGHT"
+      }
+    ],
+    "restored_build_exit": 0,
+    "limits": "Finite valid semantic faults only; no reserved cohort or new seed."
+  },
+  "native_force_load_closure_exit": 0,
+  "direct_registered_probe_recipes": 14,
+  "capture_adequacy_tests": 7,
+  "artifact_hashes": {
+    "build/reset-complete-consumer-comparison-typed.json": "4802b77cf6f2f43e56e78eb1ae7fda38a336b5bb8f9d2bab302f65f255e8bf66",
+    "build/reset-faults-744d313/results.json": "43b992a09e8f17d31d2cf6c2a08d0a5dbe52c179856e7ebcf00a19a72391605d",
+    "build/reset-oracle-verdicts.log": "0cac4bf91edf50c8d94402031cf0d519d16c14200bc2dc4888bb811797898517",
+    "build/reset-native-closure-final.log": "564871358df9042e6f3cd5751bbbea1eaeede18d873826f5b3a2124421b25bc1",
+    "build/reset-native-closure-command.json": "af5d222ad6c06983ed1b83f0734b10cdb387a57d274d126820f5101a0e46ce00",
+    "build/reset-units.json": "10dc7faaf8d9fbe8af974b3363745df38b2a2171d7880a1c0162d81df4882433",
+    "build/reset-corrected-units.json": "3f3d8e5d0417d569c2f814cace249e41c2d4ce51cd2cca204c0b61be4a052abb",
+    "build/affected-oracles.log": "aee1c9df3615e0e2701759b3eb7a51e897cb0691aea3c685fa71e8061a3bd7e3",
+    "build/old-build.log": "f45dbe4f576051e837835e7ce282877e624ec8048b0d0ecbb58eef1d344ae38b",
+    "build/final-source-build.log": "9e4bdb031ad8a8a1a6a7c7565502fc53e0d1a9890b922458ee49d2cd5a180e51",
+    "build/reset-final-force-load.log": "30d955acaab8be004383adf886f78ced6d419524ef8619f822358e30232b114c",
+    "build/sonic-unit-backtrace.log": "a985d5034521a6085f5d1b658e93f46d0e8fd6ec2241242ea247a959802524ad",
+    "build/qualified-sonic-player-test.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/qualified-native-logo-scene-test.log": "8ddacf19f9f420667da9c3dd22defe04eabae482503af055d5b88d864114cfb0",
+    "build/reset-final-capture-tests2.log": "74c03fc16fde9a2dfeff03db0ec8f472a5a8dfed04e9e982a912b4b7f64faee3",
+    "build/reset-final-layers.log": "5562fcfa762d63394b722a04826cf794222f4159fcc351b88a899e461deb0dfa",
+    "build/reset-final-owners.log": "1da29d1ee6b9992936f7129c1fb0922b1465a5a669bc327165728420ea20a811",
+    "build/reset-final-provenance.log": "d7ac35aeeeda8d71d072c7cbeeb092aa1ae3bf4bea72f88ed8f8f3e3ff14aad1",
+    "build/reset-final-readability.log": "b338e57f86a029645f530afd319d9b5d0c8e3d7b39629fb1e49a3953dc2db91c",
+    "build/reset-final-profile.log": "e066d5004346a11426b76c3eb85b1d45189250cd0d8154f0a2dae27a36263f2f",
+    "build/cleanup-token-binding-qualification.log": "8165dbe44bf6a50f17cc241c5e6f12e67eccf8621f804b509f85906ae94f5630"
+  },
+  "real_process_limits": [
+    "Nine-target Make invocation exits 2 because unchanged Title strict oracle returns 1 for 270 FP status mismatches. Sonic Actions remains partial with 2172 status differences and zero stored/boundary differences.",
+    "Initial capture omissions, scalar/void binding defects, duplicated Python 3.14 comprehension traces, stopped slow trace and initial failed unit attempts remain retained; they are not green evidence.",
+    "Current raw capture receipts compiled_old_base is a mislabeled comparison-old-base metadata field; actual compiled Source is source_git_base/SOURCE-FREEZE. Later helper spelling fixes metadata only, no repeated algorithm claim.",
+    "Profile checker declares 0 UNHANDLED across 75 declared ranges; five reports retain legacy unrecognized range formats and are explicitly listed in its log.",
+    "No full gate, Main write, manifest/inventory/STATUS refresh, reserved run, journey or push.",
+    "Task207 remains inherited source FAIL; no Task rerun or correction.",
+    "Native source-only export and independent system approval are Root-owned. This private force-load proves link closure only.",
+    "One early interrupted duplicate-build raw log was reused; ATTEMPTS.md labels the retained transcript excerpt and supersedes the inaccurate initial retention claim.",
+    "Session injected nonzero pending-text guard is preserved in Source; actual reached runtime admission remains Root reserved scope."
+  ],
+  "actual_process_statuses": {
+    "initial_focused_batch": 1,
+    "initial_untyped_comparison": 1,
+    "nine_target_oracle_make": 2,
+    "semantic_fault_runner": 0,
+    "corrected_cleanup_token_binding": 0,
+    "native_force_load_make": 0,
+    "native_closure_check": 0
+  }
+}

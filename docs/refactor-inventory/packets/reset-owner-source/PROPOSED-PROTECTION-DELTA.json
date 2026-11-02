@@ -1,0 +1,208 @@
+{
+  "parent_manifest_sha256": "1845002756ea9b07fb1d8822408023a87d31c7fb6f35fb5609b61a92b6498cc4",
+  "parent_paths": 1335,
+  "retained_parent_paths": 1335,
+  "removed_parent_paths": [],
+  "changes": [
+    {
+      "path": "Makefile",
+      "before": "d5c06fa100b152bad8efe7eca55c9dfa39d15f3cf5363ae12d4f31a1a4b08a4a",
+      "after": "c036071f0e4a3f2c3ce1f98dccafb14108dc8cad322cce6cd86d77c43ba48adb"
+    },
+    {
+      "path": "tests/probes/native_frame_completion_probe.cpp",
+      "before": "e27a9fdd4c8e2cbfd0d42a3ecfbf55a78d2adbf9308d0c92a8d7914674a756cf",
+      "after": "0e4dedf2c093022ffa11dfff2e049c926e5fa8e0e7c15a7b5650be107a522f8e"
+    },
+    {
+      "path": "tests/probes/native_game_cleanup_probe.cpp",
+      "before": "231926e3f042e41645b5e7e4cbeaadc278e70901b2c46a6b350c04000d020315",
+      "after": "f7dae9022add568e24632e5e6612d344a57731bc7125e63ae92c8f52cbf413c2"
+    },
+    {
+      "path": "tests/probes/native_game_loop_probe.cpp",
+      "before": "2ecf50dc4f72e6660023bf7b413e5c8b532348db2f32f2fc896059507e99ca1d",
+      "after": "02e9d282a3cd675f4ce4923237fdccb0912c4739ea182d49102d7d30284912d4"
+    },
+    {
+      "path": "tests/probes/native_game_reset_composed_probe.cpp",
+      "before": "b0180cc04fbc39b6191c7c6cfd7c111125a6e13cfdbeb06afcb29618e7967a1f",
+      "after": "362fa18b512e91f174daf773d73ce71e68d03b216758786556e398d6263e84d6"
+    },
+    {
+      "path": "tests/probes/native_game_reset_probe.cpp",
+      "before": "cb20c0754951e28fa02abb8edf701a61365f061059319751d8be87d17976008d",
+      "after": "c7e986338281a1b637de0f48ddd4f615409df5b2b66f78c99697acd1edce852e"
+    },
+    {
+      "path": "tests/probes/native_sonic_player_probe.cpp",
+      "before": "ea27199dca1c3f9ea726e9e1be159ed14b4ec35ab594d975fe80d2f9cd25ca60",
+      "after": "d663e0185ee28723a07a535f4ab833fd7526379ab704c0cfee5c5a30c103aec9"
+    },
+    {
+      "path": "tests/probes/native_stream_players_probe.cpp",
+      "before": "9ff03e8481020444dfd54b07acad8a679453d1ea11f3b36e2017a76b4792136d",
+      "after": "63871826ccaa172ee213b43d2e11988dd50b8ca1e7628aefc19d37f21e27e35d"
+    },
+    {
+      "path": "tests/unit/game_loop.cpp",
+      "before": "6555e4b182033af8889ff368197fdc28fcb503ff5a29659c58c13039444fa5eb",
+      "after": "a4f2976f5d480a3001e6fa58fbcf5b57662f1fba0da99ed4ac885bbbb1e98d32"
+    },
+    {
+      "path": "tests/unit/game_reset.cpp",
+      "before": "952fff15e4e32d0e806ad35c4c1bc4f56b36a82bf4160e2b4163fab8e7552a67",
+      "after": "440f54e4e8e2dc3c6b68d7ed62d880d69b0f41d07bcfeba059b3d4610dc8467a"
+    },
+    {
+      "path": "tests/unit/manifest.tsv",
+      "before": "362b5fbdc10532f8954b786365734ffb0c5980691802a49bb2761d7aca43571d",
+      "after": "c7e39b4307ac5756d305ef5932d01e375ec8df6429cab5758ba8ee8d487c4f5e"
+    },
+    {
+      "path": "tests/unit/music_state_reference.cpp",
+      "before": "e106bb9649ac16af5a3333fc095375b3e966cd73fa986a86508f2b95505e9357",
+      "after": "250d71d4308e27c069ebe35f6322c6abae0fd8fd9b36301749413336719b9064"
+    },
+    {
+      "path": "tests/unit/native_logo_scene.cpp",
+      "before": "89a899c81a773dd96aad9cb872cb848323e4201040b5029398deecdae53d692c",
+      "after": "35eed329acc48a4835a8393230027e213bc7f0100cd608a776985457fe266546"
+    },
+    {
+      "path": "tests/unit/save_frame_characterization.cpp",
+      "before": "00440cee80d17963fc2cb95837ce21a1db061ee9580071cfc42b33c7362b6ae6",
+      "after": "f68e473cce6e2a663ffa8a3c7b8a9ead2804a1279b04fd8ca6e4756110dcce72"
+    },
+    {
+      "path": "tests/unit/sonic_player.cpp",
+      "before": "c8696302d5c10c310aaf98058625bdb903841cec436661d9114a96961a817457",
+      "after": "7ac14d9af682b500c0c0a2b7ec3fb1b6912fbce0c24812e26e022198fddd3fcf"
+    },
+    {
+      "path": "tools/oracles/verify_original_game_cleanup.py",
+      "before": "b748039dbd7771b9b67604f9fba65321ea42bc27739222f5eb544eefd212d3e0",
+      "after": "3711f4f36dd7a37b9272f9578504b6dd679c2aeab67b7c6a8798386d943e1820"
+    },
+    {
+      "path": "tools/oracles/verify_original_game_loop.py",
+      "before": "50dbb4081cc1ce1adf15c5e1f20166447c6bc93a1a840793d7ea3275c15899e6",
+      "after": "8f16020073e6dfe0a98d09bf6c75fadbf678aecb192b159c64c326b568379754"
+    },
+    {
+      "path": "tools/oracles/verify_original_game_reset.py",
+      "before": "a6f0868a6f23274feb404bbbc2f463e2a2e1e6d24b253363a713373e629c2c7e",
+      "after": "18dfea4e6e1665dd5e789cd55d29fca44941135fbb152d01997eb27e1dcc85c0"
+    },
+    {
+      "path": "tools/oracles/verify_original_game_reset_composed.py",
+      "before": "65b2f8676ed56673896446fec9358528b3d68fd6888d5b47726e963584231939",
+      "after": "b86a61e12fe020621ba933250f24031e80453cb93d7e21f9878c3d440f97e433"
+    },
+    {
+      "path": "tools/oracles/verify_original_sonic_player.py",
+      "before": "d5b661520a090a7a4f4e4e6db71221c0e6bee1a24c9c8a01363f67af22f44c0a",
+      "after": "9e144bb1bd39d9c92ccf190363a33056b6b041e7bba0094c00bb61c35ac5f61e"
+    },
+    {
+      "path": "tools/oracles/verify_original_stream_players.py",
+      "before": "f055a1b6c310fc04624ee79fad177c98c9416c07f721a309a6b5f2ee1e34341a",
+      "after": "ac5bd2715799ff99cc06ac611b5ebf68567dc66d18ed57a4e60a686a19bb1d4b"
+    }
+  ],
+  "additions": [
+    {
+      "path": "tests/unit/reset_order_characterization.cpp",
+      "sha256": "5ef27c87b103a2c3789e3c13783d977066fe61a46d05899e7da9067301d5a6c3"
+    },
+    {
+      "path": "tests/unit/reset_native_contract.cpp",
+      "sha256": "108507bdfa16617a8e1c10d41db3d0682000f1e75714ae0a3b757fc61b57e939"
+    },
+    {
+      "path": "tests/unit/reset_pending_contract.cpp",
+      "sha256": "04f024fea49a82ef2dbec181b382e004101e4fc511182f3feed81ca6035a5f1a"
+    },
+    {
+      "path": "tests/unit/reset_leaf_contract.cpp",
+      "sha256": "7410d465209f4bdcdb691e4c20c3532eafcf57430ebf0ac0d8df51412d1e98d0"
+    },
+    {
+      "path": "tests/fixtures/reset_composition_fixture.hpp",
+      "sha256": "400f656d8141e825912f8cc01a1b12462675a42bcf5207e86350b67ae8e489d1"
+    },
+    {
+      "path": "tests/probes/reset_composition_fixture.cpp",
+      "sha256": "75fb715f18caebb456df3876287886d7da53519996049c214d3fa571f7eebd0c"
+    },
+    {
+      "path": "reference/packets/reset-owner-source/test_capture_consumers.py",
+      "sha256": "9e6c235aa4f789ebfe6d8905ae490a955d037d282f83f93ef08a5a290c26b770"
+    },
+    {
+      "path": "reference/packets/reset-owner-source/run_reset_faults.py",
+      "sha256": "3c782047fc674cf58e6396b67f0e45ab266302cb0f372129bd4df2218f01b142"
+    },
+    {
+      "path": "reference/packets/reset-owner-source/capture_consumers.py",
+      "sha256": "dc685d7fd0e4a3a9deefd58277a542192c1a88f2612b33c4a0170ebd2f7c4966"
+    }
+  ],
+  "unavailable_inherited_paths": [
+    "reference/oracle-reports/air_acceleration.cases.bin",
+    "reference/oracle-reports/axis_projection.cases.bin",
+    "reference/oracle-reports/collision_shapes.cases.bin",
+    "reference/oracle-reports/floor_angles.cases.bin",
+    "reference/oracle-reports/frame_completion.cases.bin",
+    "reference/oracle-reports/game_frame_control.cases.bin",
+    "reference/oracle-reports/game_logic.cases.bin",
+    "reference/oracle-reports/game_loop.cases.bin",
+    "reference/oracle-reports/game_mode.cases.bin",
+    "reference/oracle-reports/game_scene_logic.cases.bin",
+    "reference/oracle-reports/ground_acceleration.cases.bin",
+    "reference/oracle-reports/ninja_queue_consumer.cases.bin",
+    "reference/oracle-reports/ninja_queue_lifecycle.cases.bin",
+    "reference/oracle-reports/ninja_render.cases.bin",
+    "reference/oracle-reports/ninja_sprite.cases.bin",
+    "reference/oracle-reports/ninja_sprite_display.cases.bin",
+    "reference/oracle-reports/ninja_sprite_queue.cases.bin",
+    "reference/oracle-reports/ninja_texture_selection.cases.bin",
+    "reference/oracle-reports/player_animation.constants.bin",
+    "reference/oracle-reports/player_auxiliary_effect.cases.bin",
+    "reference/oracle-reports/player_contact_attributes.cases.bin",
+    "reference/oracle-reports/player_contact_initializer.cases.bin",
+    "reference/oracle-reports/player_contact_response.constants.bin",
+    "reference/oracle-reports/player_coordinates.cases.bin",
+    "reference/oracle-reports/player_direction_reset.cases.bin",
+    "reference/oracle-reports/player_heading.angle-cases.bin",
+    "reference/oracle-reports/player_heading.cases.bin",
+    "reference/oracle-reports/player_input.cases.bin",
+    "reference/oracle-reports/player_input_producer.cases.bin",
+    "reference/oracle-reports/player_mesh_math.cases.bin",
+    "reference/oracle-reports/player_mesh_query.cases.bin",
+    "reference/oracle-reports/player_mesh_registry.cases.bin",
+    "reference/oracle-reports/player_movement.cases.bin",
+    "reference/oracle-reports/player_path.cases.bin",
+    "reference/oracle-reports/player_plane.cases.bin",
+    "reference/oracle-reports/player_position.cases.bin",
+    "reference/oracle-reports/player_reaction.cases.bin",
+    "reference/oracle-reports/player_rotation.cases.bin",
+    "reference/oracle-reports/player_scene.cases.bin",
+    "reference/oracle-reports/player_scene_helpers.cases.bin",
+    "reference/oracle-reports/player_scene_position.cases.bin",
+    "reference/oracle-reports/player_speed.cases.bin",
+    "reference/oracle-reports/player_startup.cases.bin",
+    "reference/oracle-reports/projection_angle.cases.bin",
+    "reference/oracle-reports/scene_input_producer.cases.bin",
+    "reference/oracle-reports/scene_mesh_bounds.cases.bin",
+    "reference/oracle-reports/sonic_actions.constants.bin",
+    "reference/oracle-reports/sonic_player.constants.bin",
+    "reference/oracle-reports/sonic_player.dispatch.bin",
+    "reference/oracle-reports/speedrun_limiter.cases.bin",
+    "reference/oracle-reports/task_lifecycle.cases.bin",
+    "reference/oracle-reports/task_work.cases.bin",
+    "reference/oracle-reports/x87_memory.cases.bin"
+  ],
+  "scope": "Finite proposal only. No manifest refresh, path deletion, binary copy or exemption. Root reviews and unions every inherited path with final actual integration inputs.",
+  "note": "Helpers use the existing protected reference/packets Python convention. Their fixed SHA anchors also bind the external contract JSON and old matrix; no checker/framework expansion."
+}
