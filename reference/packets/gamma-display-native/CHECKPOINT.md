@@ -36,3 +36,20 @@ manifest refresh, inventory retirement or old test change is included here.
 Remaining: compile/fix this draft; validate original source/store/failure order and
 leaf state with faults/holdout; unchanged affected regressions; actual caller/app
 and private normal-input capture. Retain every inherited partial/failure identity.
+
+Source review during the hold found three ordering corrections before qualification:
+entry captures the primary owner without eagerly reading unrelated fields; each
+animation query validates only its consumed field; object-table identities reload
+only at the three source loads, retaining the first table across equipment/extra
+reads and each table across its corresponding row accesses and sibling store.
+No heavy command was started to make these corrections.
+
+The deferred qualification sources are now authored: the original-instruction
+18-access topology prefix comparison, seven render-state integer leaves, and a
+real constructor/display binding program. These files have not been compiled or
+run. The topology judge includes the different equipped/ordinary read order,
+three table loads, aliasing, explicit access failures and table mutation. It
+stops before palette 4 and makes no placement/arithmetic/draw claim. Placement,
+SetMaterial's scratch store and actual app/scheduler evidence still need their
+own complete comparisons after release. verify_packet.py records finite argv
+and uses an exact private callback-source override at maximum -j2.
