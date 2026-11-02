@@ -94,6 +94,8 @@ struct Player {
     Stage stage = Stage::Entry;
 };
 using PlayerHandle = std::shared_ptr<Player>;
+// NOTSA: borrow the existing join word; generic uninitialized state stays unknown.
+std::int16_t &bind_join_vertex_mode(const PlayerHandle &);
 // NOTSA: native consumers borrow the initialized legacy fields through semantic names.
 // Missing initialization is rejected here, before a game callback consumes the value.
 struct InitializedPlayerView {

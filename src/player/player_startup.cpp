@@ -34,11 +34,16 @@ PlayerContactWork zero_contact() {
     result.vector_at_78 = zero;
     return result;
 }
+// NOTSA: one semantic borrow of the legacy join word, shared by its source
+// producer and weld consumer. This accessor does not create another owner.
+std::optional<std::int16_t> &join_mode_field(PlayerPhysicsState &player) {
+    return player.join_vertex_mode_at_122;
+}
 // NOTSA: the source calloc and explicit shadow stores share these live fields.
 void store_animation_shadow(PlayerPhysicsState &player, float shadow) {
     player.animation_mode_at_120 = 0;
     player.shadow_scale_at_1fc = shadow;
-    player.join_vertex_mode_at_122 = 0;
+    join_mode_field(player) = 0;
 }
 // NOTSA: legacy availability remains at this existing native initialization boundary.
 struct PlayerFields {
@@ -426,6 +431,11 @@ std::shared_ptr<PlayerMotionState> bind_existing_motion(const TaskHandle &task) 
     if (!task->motion_work || !task->motion_state)
         throw Error(Boundary::MotionState);
     return task->motion_state;
+}
+std::int16_t &bind_join_vertex_mode(const PlayerHandle &record) {
+    if (!record || !record->physics)
+        throw Error(Boundary::PlayerAllocation);
+    return required(join_mode_field(*record->physics), Boundary::Parameters);
 }
 InitializedPlayerView bind_initialized_player(const PlayerHandle &record) {
     if (!record || !record->physics)

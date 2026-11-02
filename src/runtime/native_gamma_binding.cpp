@@ -1,6 +1,7 @@
 #include "runtime/native_player_system.hpp"
 #include "runtime/native_display.hpp"
 #include "player/selection_player_queries.hpp"
+#include "player/player_vertex_weld.hpp"
 #include "game/game_mode.hpp"
 
 namespace sadx::gamma_selection {
@@ -279,8 +280,25 @@ void set_motion(Context &context, const Player &player) {
     }
 }
 // NOTSA: native boundary for PJoinVertexes; source seam declared in the Gamma core.
-void join_vertices(Context &, Primary, const TaskWorkHandle &, const Player &) {
-    missing("native_gamma_join_vertices");
+void join_vertices(Context &context, Primary, const TaskWorkHandle &, const Player &player) {
+    auto &join_mode = player_initialization::bind_join_vertex_mode(player);
+    const auto mode = join_mode;
+    if (mode == 1) {
+        // Active processing reaches the real motion-matrix producer before it
+        // consumes the join table, including when the table is empty.
+        missing("native_gamma_join_vertices_CalcMMMatrix");
+    }
+    auto &table = physics(player).animation_tail.join_table;
+    if (!table)
+        missing("native_gamma_weld_table_field");
+    if (!*table)
+        missing("native_gamma_weld_null_table");
+    if (mode == 0) {
+        vertex_weld::initialize(**table, arena(context), context.scene);
+        join_mode = 1;
+    } else {
+        vertex_weld::restore(**table, arena(context), context.scene);
+    }
 }
 // NOTSA: native boundary for GammaUpdateLaserTargets; source seam declared in the Gamma core.
 void update_laser_targets(Context &, const TaskWorkHandle &, std::uint8_t) {

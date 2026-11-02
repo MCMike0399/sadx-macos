@@ -16,6 +16,8 @@ class GeometryState {
     const std::vector<std::uint32_t> &color_words(ResourceId resource) const;
     const std::vector<std::int16_t> &indices(ResourceId resource) const;
     const std::vector<std::int16_t> &texture_coordinates(ResourceId resource) const;
+    // NOTSA: immutable model metadata selects this owner's mutable vector arrays.
+    ModelResource model(ResourceId resource) const { return pack_.model(resource); }
 
   private:
     const CharacterPack &pack_;
