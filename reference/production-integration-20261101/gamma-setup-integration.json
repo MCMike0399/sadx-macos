@@ -1,0 +1,249 @@
+{
+  "packet_candidate": "a750d4b",
+  "source_reviews": [
+    "1938ef3 (constructor)",
+    "09bc8666 (setup source)",
+    "d53eb7f9 (observer correction)"
+  ],
+  "commit_mapping": [
+    {
+      "packet": "db3aa61",
+      "main": "122754cc615156b13283b0afd434aa58548f4cc6"
+    },
+    {
+      "packet": "9e3bd1b",
+      "main": "d3296658bc3f0a877d4a372b0f6319bb9d6d4d4d"
+    },
+    {
+      "packet": "1671539",
+      "main": "bfb7e4f48bba54529f1473686ddb968eca4e50e4"
+    },
+    {
+      "packet": "32074d1",
+      "main": "b93615118bed4ce384029590eac18eed96ba72f2"
+    },
+    {
+      "packet": "a750d4b",
+      "main": "735a57887d9ef0110c93ca95f3bb7387604b3e92"
+    }
+  ],
+  "scope": "Reviewed Gamma setup subsystem plus canonical Session/PlayerSystem/asset/caller integration; materials/effects remain uncomposed.",
+  "frontier": "reference/production-integration-20261101/gamma-setup-native-frontier.json",
+  "imported_pack_sha256": "e1814676525022ba2458bfa9f85059490253fbe5c1d72967243ba96b53bd8dc0",
+  "native_build_exit_status": 0,
+  "native_force_load_closure": "PASS",
+  "binding_tests": {
+    "native_gamma_binding": {
+      "exit_status": 0,
+      "old_missing_setup_case_preserved": true,
+      "new_actual_setup_case": "reaches material, checks canonical pointer/list/arena/count, rejects wrong descriptor/duplicate binding, preserves later source-null pointer"
+    },
+    "native_gamma_weld_cursors": {
+      "exit_status": 0,
+      "change": "borrow a separate world registry; existing setup stop and assertions unchanged"
+    },
+    "animation_gamma_shared_binding": {
+      "exit_status": 0,
+      "change": "borrow a separate world registry; existing assertions unchanged"
+    }
+  },
+  "new_units_and_python": [
+    {
+      "command": [
+        "build/sprite-registry-test"
+      ],
+      "exit_status": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "build/gamma-setup-resource-test"
+      ],
+      "exit_status": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "build/gamma-setup-resource-test",
+        "game/imported/gamma-setup.bin"
+      ],
+      "exit_status": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "build/gamma-setup-allocation-test"
+      ],
+      "exit_status": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "build/gamma-setup-caller-test",
+        "game/imported/gamma-setup.bin"
+      ],
+      "exit_status": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/python",
+        "-p",
+        "test_gamma_setup_resource.py"
+      ],
+      "exit_status": 0,
+      "stdout": "",
+      "stderr": ".....\n----------------------------------------------------------------------\nRan 5 tests in 0.000s\n\nOK\n"
+    }
+  ],
+  "oracles": {
+    "gamma_setup_resource": {
+      "oracle": "gamma_setup_resource",
+      "passed": true,
+      "cases": 848,
+      "seed": 5420,
+      "holdout": false,
+      "definition_identities": [
+        9969912,
+        587202560
+      ],
+      "native_probe_sha256": "68b2eb90f95edae7a905f4f6ea512f9285936c7a3382069701161370c814c4d5",
+      "mismatches": [],
+      "stream_sha256": "d0e5082670712a624a0270b65804a5cefbe363e33b05c76ec3ae0c8c12d6592b",
+      "source_ranges": {
+        "0x4c5420-0x4c5436": "b6fbb51beab3d38800a84fe3b140c42419ba33755fdc6a4810ade1c4257caf22",
+        "0x456c50-0x456ca1": "0fa30c3ff99ef4a7d0f07319edd21692228239ed62574cfb08cee6a3c936526f"
+      },
+      "limits": [
+        "CAlloc intercepted; lower allocator behavior not independently qualified.",
+        "Host bad_alloc and arbitrary memory faults not qualified.",
+        "Definition payload qualified by separate inverse-byte import test.",
+        "No native app or actor display claim."
+      ]
+    },
+    "sprite_registry": {
+      "slug": "sprite_registry",
+      "cases": 1136,
+      "holdout": false,
+      "seed": 45650,
+      "prefixes_match": true,
+      "passed": true,
+      "values_match": true,
+      "mismatches": [],
+      "mismatch_count": 0,
+      "source_ranges": {
+        "0x456c50-0x456ca1": {
+          "size": 81
+        }
+      },
+      "range_sha256": "0fa30c3ff99ef4a7d0f07319edd21692228239ed62574cfb08cee6a3c936526f",
+      "limits": [
+        "CAlloc intercepted with actual-arena size/failure contract; lower allocator not judged.",
+        "Source instruction read/store order asserted; five native prefixes use a test-only instrumented copy when requested. Before-store uninitialized fields are excluded from prefix snapshots; final bytes remain compared.",
+        "Opaque unmapped definition identity only; no payload, import, Gamma binding or rendering claim.",
+        "Wrapped undersized allocations retain interior identity; consumers/access not qualified.",
+        "No floating-point instructions in constructor; strict constructor values match only."
+      ]
+    }
+  },
+  "integration_fault": {
+    "fault": "register setup in an unshared registry",
+    "caught": true,
+    "original_sha256": "bf74316c9d4b3594684e76b7aac2703114ba430944cbc174527eb6626af6e433",
+    "mutated_sha256": "8e32cef737c3fbbb8faee335a32dff7b6f40c8dff1dc9e8ec5b8e04956df788c",
+    "records": [
+      {
+        "command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-Isrc",
+          "-c",
+          "build/gamma-setup-owner-mutation/native_gamma_binding.cpp",
+          "-o",
+          "build/gamma-setup-owner-mutation/binding.o"
+        ],
+        "exit_status": 0,
+        "stderr": ""
+      },
+      {
+        "command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-fobjc-arc",
+          "-Isrc",
+          "-Itests/fixtures",
+          "tests/unit/native_gamma_binding.mm",
+          "build/gamma-setup-owner-mutation/binding.o",
+          "build/libsadx-native.a",
+          "-framework",
+          "Foundation",
+          "-o",
+          "build/gamma-setup-owner-mutation/test"
+        ],
+        "exit_status": 0,
+        "stderr": ""
+      },
+      {
+        "command": [
+          "build/gamma-setup-owner-mutation/test",
+          "game/imported"
+        ],
+        "exit_status": 1,
+        "stdout": "PASS: imported Gamma -> canonical collision/ordinary textures/cursors -> setup boundary\n",
+        "stderr": "actual Gamma caller registers the imported definition in the shared arena\n"
+      }
+    ]
+  },
+  "registration": "Explicit compiler/dependency rules for allocator-isolated witnesses and prefix probe; four unit rows; custom oracle invocations; canonical symbol proposals.",
+  "root_packet_preserved": true,
+  "limits": [
+    "Full gate pending. No N3b/actor display/gameplay/63FPS claim.",
+    "Source-only force-load link is not a fresh clean source export.",
+    "No new allocator internals, host bad_alloc, particle update/destruction or physical hardware qualification.",
+    "All inherited Gamma numeric partials remain partial; actual original/native preservation retained by packet."
+  ],
+  "source_integration_commit": "024715a9d3b5c8c4909f06cabbdbaa7ff7a720d1",
+  "inherited_gamma_recheck": {
+    "make_exit_status": 2,
+    "cases": 1422,
+    "value_failures": 0,
+    "FP_partials": 498,
+    "verdict": "partial",
+    "log": "build/gamma-setup-existing-gamma-oracle.log"
+  },
+  "new_table_review": {
+    "entry": "src/player/gamma_setup_resource.cpp::kMagic",
+    "classification": "named_structure",
+    "initial_check": "failed on unreviewed custom pack magic; added its bounded semantic review, leaving all prior classifications unchanged"
+  }
+}

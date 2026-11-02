@@ -1,0 +1,21 @@
+{
+  "source_integration": "024715a",
+  "changed_file": "src/runtime/native_session.hpp",
+  "old_sha256": "1c5a4dba5a5bffe1c476ed60feadb3802f838a9c1af73a512cae922b4fb91071",
+  "current_sha256": "01319b25f04d5fa11093af5bdb599884c9c96aa1b12c869865669bf8ee0e4a1d",
+  "retained_declaration": "    // GLOBAL: SONIC 0x3c5e8a8 SaveWarningTask size=4\n    TaskHandle save_warning_message_;",
+  "unchanged_consumers": {
+    "src/game/save_completion.hpp": "f7ccc8fc53231278f826acdf287d7693cc649e5390df3836b4ab9b635be18d16",
+    "src/game/save_completion.cpp": "3ddcb611f9970fde40cd8d731b6c0c9484033ef043b1b73055ffbac7ca319095",
+    "src/runtime/native_title_scene.hpp": "6bbeb90ebb857292266180d33d2519eadcb8a8ac076cc6b667a9573951382d07",
+    "src/runtime/native_title_tasks.cpp": "851c57d3644c27e659c64561bed508d76a0e47a6c059719a62aa64335e28e81c",
+    "tests/unit/save_completion_callbacks.cpp": "e7a01dd7379146d0e20d873d76b515c5674bacdbe826e370ffbdec12e7ce276f",
+    "tools/oracles/verify_original_save_completion.py": "ec92ebfbbd9a67c108ea35200bccb0070756f61bc425cf8f70ecef3e696d00ba",
+    "tests/probes/native_save_creation_probe.cpp": "aaf870cf694ca974632370ea3ca96fd25a06c8cb95939543b6cd318d50f1e122"
+  },
+  "scope": "Only two current save-warning evidence references to the changed Session header are rebound. Warning owner declaration and complete save/borrower/witness files are byte-identical; no warning behavior or coverage is promoted.",
+  "limits": [
+    "Static preservation evidence; fresh complete gate pending.",
+    "Existing warning STUB behavior remains unrecovered_open_debt."
+  ]
+}

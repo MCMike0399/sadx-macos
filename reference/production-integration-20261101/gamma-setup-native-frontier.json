@@ -1,0 +1,49 @@
+{
+  "source_base": "735a57887d9ef0110c93ca95f3bb7387604b3e92",
+  "source_state": "uncommitted Gamma owner/caller integration over source_base",
+  "source_diff_sha256": "3e78c7cdf35be6170e62bb78f24f9f84bbf6cc977eda26a4764c4e026808a415",
+  "command": [
+    "/Users/burbujamc/Developer/sadx-macos/build/sadx-native",
+    "--assets",
+    "/Users/burbujamc/Developer/sadx-macos/game/imported",
+    "--offscreen",
+    "--paced",
+    "--exit-after",
+    "1550",
+    "--save-directory",
+    "/Users/burbujamc/Developer/sadx-macos/build/native-gamma-setup-9jws6f77/savedata",
+    "--key-events",
+    "500:13:down,501:13:up,750:13:down,751:13:up,950:13:down,951:13:up,1050:13:down,1051:13:up,1300:13:down,1301:13:up",
+    "--capture-directory",
+    "/Users/burbujamc/Developer/sadx-macos/build/native-gamma-setup-9jws6f77/captures",
+    "--capture-at",
+    "1300,1380,1381,1382",
+    "--screenshot",
+    "/Users/burbujamc/Developer/sadx-macos/build/native-gamma-setup-9jws6f77/frontier.ppm"
+  ],
+  "app_sha256": "7658108a850b6f8b4c0f9257c72fb990c2756fe3bb212384f9770775092be58e",
+  "prior_receipt": "reference/production-integration-20261101/native-route-review.json",
+  "limits": [
+    "Diagnostic route only, not N3b or full gate."
+  ],
+  "exit_status": 1,
+  "state": {
+    "execution": "native",
+    "frames": 1332,
+    "game_mode": 12,
+    "game_state": 21,
+    "main_menu_phase": 3,
+    "sequence_mode": 1,
+    "character_select_next": 8,
+    "sprite_registry_count": 1,
+    "gamma_setup_assets_loaded": true,
+    "gamma_setup_registered": true
+  },
+  "stop": "native session stopped: native_gamma_shared_material_binding",
+  "screenshot_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427",
+  "matches_prior_image": true,
+  "raw_output_directory": "build/native-gamma-setup-9jws6f77",
+  "observation": "Inspected outgoing-title image is byte-identical to prior capture; one real setup sprite is registered before the material boundary.",
+  "source_integration_commit": "024715a9d3b5c8c4909f06cabbdbaa7ff7a720d1",
+  "source_diff_matches_commit": true
+}

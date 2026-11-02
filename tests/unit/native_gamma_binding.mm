@@ -44,7 +44,7 @@ void check_collision_decode() {
             "all three signed collision angle words retain source bits");
     }
 }
-void check_binding(const std::filesystem::path &directory) {
+void check_binding(const std::filesystem::path &directory, bool with_setup = false) {
     using namespace sadx;
     namespace gamma = gamma_selection;
     const auto pack = character_pack::CharacterPack::load(directory / "characters/sonic-selection.actions");
@@ -117,8 +117,29 @@ void check_binding(const std::filesystem::path &directory) {
         [&](regular_textures::List &list) { return display.output().load_individual_textures(list); },
         [](std::string_view message) { throw std::runtime_error(std::string(message)); }};
     const std::int16_t stage = 0, act = 0;
+    sprite_registry::State sprites;
     gamma::Context context{players, scheduler, bootstrap, display, task, stage, act,
-        lower_callback, lower_callback, lower_callback, catalog, &texture_state, &texture_services};
+        lower_callback, lower_callback, lower_callback, catalog, &texture_state, &texture_services,
+        sprites};
+    if (with_setup) {
+        const auto definition = native::app::load_gamma_setup_definition(directory);
+        require(bool(definition), "real imported setup definition is required");
+        auto wrong = texture_assets;
+        wrong[6][2].resource_name = "wrong_effect_list";
+        bool rejected = false;
+        try { native::bind_gamma_setup_resources(players, wrong, character_lists, *definition); }
+        catch (const std::runtime_error &) { rejected = true; }
+        require(rejected && !players.gamma_setup_asset && !players.gamma_setup.definition,
+                "wrong texture identity fails before setup publication");
+        native::bind_gamma_setup_resources(players, texture_assets, character_lists, *definition);
+        require(players.gamma_setup.definition == &players.gamma_setup_asset->definition &&
+                players.gamma_setup.definition->textures == &character_lists[6][2],
+                "setup borrows the same E102EFFECT list as the ordinary texture loader");
+        rejected = false;
+        try { native::bind_gamma_setup_resources(players, texture_assets, character_lists, *definition); }
+        catch (const std::runtime_error &) { rejected = true; }
+        require(rejected, "setup cannot replace its stable asset storage after publication");
+    }
     // Consumer bindings must read bootstrap timer bytes and the actual task handle,
     // independent of similarly named cutscene control/work or game timer fields.
     bootstrap.cutscene_active = 1;
@@ -145,10 +166,26 @@ void check_binding(const std::filesystem::path &directory) {
     bool stopped = false;
     try { gamma::run(context, task); }
     catch (const flow::UnrecoveredGameFlowCall &error) {
-        require(std::string(error.what()) == "native_gamma_load_setup_resource", "first real lower boundary");
+        require(std::string(error.what()) == (with_setup ? "native_gamma_shared_material_binding" :
+                "native_gamma_load_setup_resource"), "first real lower boundary");
         stopped = true;
     }
-    require(stopped, "unrecovered setup resource must throw");
+    require(stopped, "missing setup or subsequent material must stop explicitly");
+    if (with_setup) {
+        const auto node = players.gamma_setup.sprite;
+        require(node && sprites.head == node && sprites.count == 1 &&
+                node->definition == players.gamma_setup.definition &&
+                node->allocation && node->allocation->requested_size() == 28 &&
+                !node->extra_data.allocation,
+                "actual Gamma caller registers the imported definition in the shared arena");
+        players.gamma_setup.definition = nullptr;
+        gamma::load_setup_resource(context);
+        require(!players.gamma_setup.sprite && sprites.head == node && sprites.count == 1,
+                "later source-null definition survives and publishes null without clearing the registry");
+    } else {
+        require(!players.gamma_setup.sprite && sprites.count == 0,
+                "missing assets cannot manufacture successful source-null setup");
+    }
     require(players.gamma.time_zero == 0 && players.gamma.event_enabled == 1,
         "core consumes the actual bootstrap-bound predicates before initialization");
     const auto player = players.registry.players[5];
@@ -274,6 +311,7 @@ int main(int argc, char **argv) {
             if (argc != 2) throw std::runtime_error("expected imported asset directory");
             check_collision_decode();
             check_binding(argv[1]);
+            check_binding(argv[1], true);
             return 0;
         } catch (const std::exception &error) {
             std::cerr << error.what() << '\n';

@@ -49,9 +49,10 @@ int main(int argc, char **argv) {
     bootstrap::State bootstrap({card, timer, rings, movie, mode});
     frame::ModeState timing;
     native::Display display(directory / "system", timing);
+    sprite_registry::State sprites;
     gamma::Context context{players, scheduler, bootstrap, display, tasks[0], stage, act,
         unavailable_callback, unavailable_callback, unavailable_callback,
-        {nullptr, nullptr, 0}, nullptr, nullptr};
+        {nullptr, nullptr, 0}, nullptr, nullptr, sprites};
     for (unsigned index = 0; index < tasks.size(); ++index)
         gamma::initialize_player(context, static_cast<std::int32_t>(index), tasks[index]);
     const auto first = players.registry.players[0], second = players.registry.players[1];

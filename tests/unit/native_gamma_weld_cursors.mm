@@ -85,8 +85,10 @@ void check_binding(const std::filesystem::path &directory) {
         [&](regular_textures::List &list) { return display.output().load_individual_textures(list); },
         [](std::string_view message) { throw std::runtime_error(std::string(message)); }};
     const std::int16_t stage = 0, act = 0;
+    sprite_registry::State sprites;
     gamma::Context context{players, scheduler, bootstrap, display, task, stage, act,
-        lower_callback, lower_callback, lower_callback, catalog, &texture_state, &texture_services};
+        lower_callback, lower_callback, lower_callback, catalog, &texture_state, &texture_services,
+        sprites};
     bool stopped = false;
     try { gamma::run(context, task); }
     catch (const flow::UnrecoveredGameFlowCall &error) {

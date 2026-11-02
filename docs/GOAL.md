@@ -187,7 +187,7 @@ EXE/DLL, no prebuilt game objects) runs it from imported assets.
 | N1 | SEGA/Sonic Team logos | done (16 states + images vs reference) |
 | N2 | Intro movie (play and Skipma), title, audible Start | done |
 | N3a | FileSelect, dialog, MainMenu, fresh save/load/restart, empty profile | done (`native-file-select`, `native-main-menu`, `native-fresh-save`) |
-| N3b | **CharacterSelect**: all preview actors initialised, updated and drawn; cursor/cancel/reentry; music/voice; Sonic confirmed → story entry | **in progress**: current-source diagnostic run stops at `native_gamma_load_setup_resource`, frame 1332, exit 1; image remains outgoing title. Prior source-only receipt reached the same stop at frame 1382 with its input schedule. |
+| N3b | **CharacterSelect**: all preview actors initialised, updated and drawn; cursor/cancel/reentry; music/voice; Sonic confirmed → story entry | **in progress**: source `024715a` registers the real Gamma setup sprite and stops at `native_gamma_shared_material_binding`, frame 1332, exit 1. Image remains outgoing title; integration gate pending. |
 | N4 | Story entry: the opening event (played or skipped as the profile does) → Station Square drawn from the imported pack with the real camera | open |
 | N5 | Sonic controllable at Chaos 0: run, jump, spin/homing attack, hurt, rings, with the boss active; first frames match the reference trace | open |
 | N6 | Chaos 0 defeated → natural story return → save progression | open |
@@ -406,13 +406,21 @@ image remains outgoing title. `make -j2 build/sadx-native` reported up to date;
 this was not a clean rebuild or a new full gate. Preserve the differing input
 schedules and frame numbers rather than claiming aligned frame parity.
 
+Update: source `024715a` passes the setup call with one actual registry node and
+reaches `native_gamma_shared_material_binding` at the same frame 1332 and input
+schedule. The inspected image remains outgoing title. The run and source diff are
+bound by `reference/production-integration-20261101/gamma-setup-native-frontier.json`;
+`gamma-setup-integration.json` records focused checks. Full gate is pending. Preview
+action dispatch is integrated but still needs the separate native event-action
+candidate. Sonic controller and event-action candidates await independent review.
+
 First delivery target: a complete native CharacterSelect frame with real scheduled
 actors, then repeated updates, cursor/motion, cancel/reentry and Sonic confirmation.
 Advancing one missing call is dependency progress only.
 
 | Caller | Canonical owner | Packet assignment | Integration check |
 |---|---|---|---|
-| Gamma mode zero → setup resource | sprite registry and Gamma result; imported definition | A: complete setup subsystem; bounded constructor `packet/gamma-setup-sprite@da73181` is only a starting component | Real Gamma caller passes setup; original ordered comparison and imported-byte checks; no dummy definition |
+| Gamma mode zero → setup resource | sprite registry and Gamma result; imported definition | Source integrated at `024715a`; owner binding/integration gate pending | Actual normal input passes setup with one registry node; original comparisons and imported-byte checks pass |
 | Scheduler → Sonic controller | existing PlayerSystem/current-player, task arena and animation owners | B: readable recovered Sonic controller and reference adapter, preserving all existing behavior | Complete unchanged oracle observations, failure identities and mutants; native closure with explicit missing callees |
 | Preview update/selection → actions and motion | preview work, actor tasks and existing animation state | C: source-backed preview action/motion operations and lifecycle coverage; actor algorithms remain separately owned | Callback/order comparison, cancellation/reentry checks and native binding contract |
 | Gamma setup → materials/effects/common tail/display | mutable scene and shared player/animation/geometry state | Integrator sequences returned packets and assigns reached leaves | Real repeated actor frame; live material aliasing and full reached common tail |
