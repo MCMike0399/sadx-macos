@@ -81,7 +81,8 @@ class Function:
         result = self.function(*args)
         outputs = [argument(a) for a in args]
         data = json.dumps({'ordinal': ordinal, 'function': self.function.__name__,
-                           'argument_count': len(args), 'result': result,
+                           'argument_count': len(args),
+                           'result': None if self.capture.get('contract', {}).get('return_kind') == 'void' else result,
                            'inputs': inputs, 'outputs': outputs}, separators=(',', ':')).encode()
         self.capture['stream'].write(struct.pack('<I', len(data)) + data)
         self.capture['count'] += 1

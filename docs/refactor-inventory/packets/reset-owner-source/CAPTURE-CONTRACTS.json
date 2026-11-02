@@ -36,7 +36,8 @@
     "immutable_old_base": "6255cc6cabcf14adb32867ea011f7491dbbddd2d",
     "old_judge_sha256": "50dbb4081cc1ce1adf15c5e1f20166447c6bc93a1a840793d7ea3275c15899e6",
     "structure": "Exactly one original observation and one native call per committed default case; Sonic has two ordered export cohorts. This is not a general original/native count equivalence.",
-    "recovered_after_source_edits": false
+    "recovered_after_source_edits": false,
+    "return_kind": "int"
   },
   "sonic_player": {
     "native_calls": 28800,
@@ -98,7 +99,8 @@
     "immutable_old_base": "6255cc6cabcf14adb32867ea011f7491dbbddd2d",
     "old_judge_sha256": "d5b661520a090a7a4f4e4e6db71221c0e6bee1a24c9c8a01363f67af22f44c0a",
     "structure": "Exactly one original observation and one native call per committed default case; Sonic has two ordered export cohorts. This is not a general original/native count equivalence.",
-    "recovered_after_source_edits": false
+    "recovered_after_source_edits": false,
+    "return_kind": "int"
   },
   "game_winmain": {
     "native_calls": 3000,
@@ -141,7 +143,8 @@
     "immutable_old_base": "6255cc6cabcf14adb32867ea011f7491dbbddd2d",
     "old_judge_sha256": "0f219e36bd3896d51931e3faa295e8b070fb12e489c0549509d54750e67c1f95",
     "structure": "Exactly one original observation and one native call per committed default case; Sonic has two ordered export cohorts. This is not a general original/native count equivalence.",
-    "recovered_after_source_edits": true
+    "recovered_after_source_edits": true,
+    "return_kind": "int"
   },
   "stream_players": {
     "native_calls": 600,
@@ -180,7 +183,8 @@
     "immutable_old_base": "6255cc6cabcf14adb32867ea011f7491dbbddd2d",
     "old_judge_sha256": "f055a1b6c310fc04624ee79fad177c98c9416c07f721a309a6b5f2ee1e34341a",
     "structure": "Exactly one original observation and one native call per committed default case; Sonic has two ordered export cohorts. This is not a general original/native count equivalence.",
-    "recovered_after_source_edits": true
+    "recovered_after_source_edits": true,
+    "return_kind": "int"
   },
   "sound_server": {
     "native_calls": 1956,
@@ -211,6 +215,8 @@
     "immutable_old_base": "6255cc6cabcf14adb32867ea011f7491dbbddd2d",
     "old_judge_sha256": "9d56c2fbb52635fcb67e64c51467bcf6c8141817f5abcbbd248fe4abf465070a",
     "structure": "Exactly one original observation and one native call per committed default case; Sonic has two ordered export cohorts. This is not a general original/native count equivalence.",
-    "recovered_after_source_edits": false
+    "recovered_after_source_edits": false,
+    "return_kind": "void",
+    "return_evidence": "tests/probes/native_sound_server_probe.cpp declares extern C void. Unchanged Python judge ignores its ctypes default int. Recorded return-register garbage is not a source ABI result; all input/output bytes remain compared."
   }
 }

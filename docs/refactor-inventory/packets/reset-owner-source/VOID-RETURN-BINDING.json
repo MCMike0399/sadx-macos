@@ -1,0 +1,7 @@
+{
+  "symbol": "sadx_native_sound_server_probe",
+  "defined_return": "void",
+  "evidence": "tests/probes/native_sound_server_probe.cpp extern C declaration; unchanged verifier never uses the returned object",
+  "initial_observation": "Default ctypes restype int captured unspecified register bits; all 1956 old/current records differ in this field. These are retained raw.",
+  "qualification": "Compare every scalar argument/input/output byte and all original observations; normalize only the undefined void return register to null. Report its raw disagreement count separately. No return value in the C ABI, fixture input, expectation, tolerance or algorithm is changed."
+}
