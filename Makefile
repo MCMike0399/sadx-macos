@@ -598,3 +598,12 @@ build/gamma-effects-test: tests/unit/gamma_effects.cpp src/player/gamma_effects.
 	$(CXX) $(CXXFLAGS) $(INCLUDES) $< build/libsadx-native.a -o $@
 build/native-gamma-effects-test: tests/unit/native_gamma_effects.mm src/apps/native_gamma_actor_assets.hpp src/runtime/native_player_system.hpp src/player/gamma_effects.hpp src/engine/particle_pool.hpp build/libsadx-native.a
 	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) $< build/libsadx-native.a -framework Foundation -o $@
+
+build/sonic-animation-assets-test: tests/unit/sonic_animation_assets.mm src/apps/native_sonic_animation_assets.hpp src/apps/native_gamma_actor_assets.hpp src/runtime/native_player_system.hpp src/runtime/sonic_animation_assets.hpp build/libsadx-native.a
+	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) $< build/libsadx-native.a -framework Foundation -o $@
+build/sonic-animation-integration-test: tests/unit/sonic_animation_integration.mm src/apps/native_sonic_animation_assets.hpp src/apps/native_gamma_actor_assets.hpp src/runtime/native_session.hpp src/runtime/native_player_system.hpp src/runtime/native_title_scene.hpp src/runtime/native_sonic_context.hpp build/libsadx-native.a $(NATIVE_PLATFORM_OBJECTS)
+	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) $< $(NATIVE_PLATFORM_OBJECTS) build/libsadx-native.a $(MAC_FRAMEWORKS) -o $@
+# App metadata loaders are header implementations, outside per-object dependency generation.
+build/sadx-native build/sadx-native-closure: src/apps/native_sonic_animation_assets.hpp src/runtime/sonic_animation_assets.hpp src/runtime/native_session.hpp src/runtime/native_player_system.hpp
+# These existing Objective-C++ test recipes also include shared owners directly.
+build/native-sonic-callback-test build/native-preview-events-test build/native-gamma-binding-test build/native-gamma-weld-cursors-test build/native-gamma-effects-test build/animation-gamma-shared-binding-test: src/runtime/native_session.hpp src/runtime/native_player_system.hpp src/runtime/sonic_animation_assets.hpp

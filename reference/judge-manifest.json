@@ -1,12 +1,12 @@
 {
   "change": {
-    "base_commit": "b464aaadba978022fcabe4c2f6c1c623e3b532ea",
-    "evidence": "reference/production-integration-20261102/gamma-effects-integration.json",
-    "evidence_sha256": "9b4e90eaad61a403c0c7533cdd5feeb3c133f5403607fe57770ecf6a5a33b26d",
-    "reason": "Register reviewed Gamma effects initialization and actual native caller checks; preserve all inherited protected evidence"
+    "base_commit": "ac7e2ad33b76357e194b78ed13d4a5ddba0710d3",
+    "evidence": "reference/packets/sonic-animation-integration/judge-reconciliation.json",
+    "evidence_sha256": "c6a898f76eee21b95e5e6154a0172777773c28d8b45b466e1600830b992c5540",
+    "reason": "Finite Sonic animation integration registration; preserve all inherited protected paths"
   },
   "files": {
-    "Makefile": "8a0f38ce8dbd0a3d65cecd1d98e10a88b59dae018d8f3d797317e89c3bfc5151",
+    "Makefile": "0b7342072cfd473f11dc9749c0652ed5cb9bb25947f26c79242d66d129200c35",
     "reference/address-dispatch-baseline-v1.json": "a55df9d554f6fc3e37a8916a3795c590f3b0daa5a7e4daed81156f7ae8fc7a64",
     "reference/constexpr-table-review.json": "128c53834a7d298dd3df6a569e962fe1899dc6c26534466c509fb22f0577f7bd",
     "reference/fp-control-census.json": "6e3c48227461edbcdc6a9c807a1596b8870178df7511981ee779c71dee09a505",
@@ -319,6 +319,9 @@
     "reference/packets/save-list-frame-source/qualify_consumers.py": "8ada3d6790e8c6be3ae9910605af81d6404b1f6f1112c2971cbe03a19483dd61",
     "reference/packets/save-list-frame-source/rebind_mutants.py": "2186413c6d8a82a5015270efc2b72338d41d16ef6201d2ef1c78069741133234",
     "reference/packets/save-list-frame-source/reserved.py": "ab00f9028e5170bb120126b6e2d35ac3869969ddc853d1b65333e231604cae76",
+    "reference/packets/sonic-animation-native/verify_faults.py": "5ea96d40e3c8a8a785d6a84ec7c6a717b1de29110a74b455e1f667a0af7bfc7d",
+    "reference/packets/sonic-animation-native/verify_imported.py": "8782a8c04ae161309487993ce97100f1c0c51bdb4ca22905f60efb3494769b06",
+    "reference/packets/sonic-animation-native/verify_importer.py": "5730a3bca4967d0a4bb4f40afa0e10a8079fbdc82a64f5d581742f93f9e66520",
     "reference/packets/sse-readability/build.py": "6a90fe3025e34815bce12b8ffbfe58ff6fdb5069a70365fdeaa453e706e0a160",
     "reference/packets/sse-readability/capture_pad.py": "813d2b949e56ed041aaaea08c588c2b59e76c8590c33a943bb44668081ebf3dd",
     "reference/packets/sse-readability/capture_sse.py": "dc529367211d2e2e25da9c8f346124b2fa3f12e35711c4cee07b4c0c98908740",
@@ -843,7 +846,7 @@
     "tests/unit/main_menu_content.cpp": "9ae62d33ab3981c4050da8fd8ede955a08c2ecbcfd91d865de895e5d39c49145",
     "tests/unit/main_menu_eligibility.cpp": "0769bb1cd5d58da859399c2dc7082ca05d3ed8bd3704838e1c528b49ef9896cc",
     "tests/unit/main_menu_profile.cpp": "5c9e473de4a1fecaf1e1cbd9e14072919973cb8719c724de52cc95900ba9dace",
-    "tests/unit/manifest.tsv": "1303e7ce1862aa56a1a4ec8e6ee0d019c5b0dcdbe7ddefd4da41ff47a865a6f0",
+    "tests/unit/manifest.tsv": "4d3a5df762a3c5575ea09280ccbfe04e86fe39fa2698ab94dce798c7506afe64",
     "tests/unit/material_correction.cpp": "e866358fc8165d70c48a71b77ee5479198900842c3cfcd4de4ce65701d1f1a3a",
     "tests/unit/menu_dialog_control.cpp": "dcf53f00372f20ade1fcb0714f1fd184052077a5ac9709afd91840a0ffe6cb1a",
     "tests/unit/menu_draw_primitives.cpp": "e11ef8ad54979d33773aaecb47e1d1bbf115bd8e2b7f5115582a8718ed85543f",
@@ -996,6 +999,8 @@
     "tests/unit/selection_question.cpp": "24408421691f250137fa8166e1d09cd8bcbbd27927e77ab9b4520830f7b2e303",
     "tests/unit/session_control_defaults.cpp": "dfa1d59b06e60b9fc48e2292baab0bbb4362f10c95bbff3d40d5a07d2eb32993",
     "tests/unit/sonic_actions.cpp": "525098c7af81f9fea16c67f227b8352c702238a82894d1276e28659ab35f40fc",
+    "tests/unit/sonic_animation_assets.mm": "12f1449f9ab2bc956128fe9efb4386f78f2ef1f28f3b7b96d9fda2002d778a94",
+    "tests/unit/sonic_animation_integration.mm": "6ec71f4ab89291d664bf951eb5dbd33c65f85b69241aa33846c3f3994602d85d",
     "tests/unit/sonic_animation_table.cpp": "eb232f14205aa862b3e831ff338204f3d64acef62bf6a92be6c7a90268db1ee0",
     "tests/unit/sonic_controller_native.cpp": "871d4edcfd17d038ae5c1bc640892ca84dc453c3453a33912b4d30d7fb34b888",
     "tests/unit/sonic_controller_reference.cpp": "0c000a8a069498f5e92ef00f22083b7faba48b62633cf085b34e020a78bdfec2",

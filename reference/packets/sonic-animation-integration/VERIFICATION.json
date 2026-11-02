@@ -1,0 +1,858 @@
+{
+  "base_main": "76b44198",
+  "accepted_source": [
+    "a77d7110",
+    "02a6d9a4"
+  ],
+  "accepted_judge": "c4616102",
+  "reviews": {
+    "standards": "d410b20a",
+    "fidelity": "9663fd1c"
+  },
+  "integration_source_commit": "ac7e2ad3",
+  "accepted_hashes_unchanged": {
+    "src/apps/native_sonic_animation_assets.hpp": "dace0c61e03134a8628e75819b9541779737b34c186fff28b85b0675fc8ca6c8",
+    "src/runtime/sonic_animation_assets.cpp": "f3667068e2b6f3018bd1362746a9e5bbc3224f1ad1eace29994a87cb1364b175",
+    "src/runtime/sonic_animation_assets.hpp": "45aef415e83f6ee6c5f4af8b8794ff65b16ab8f356aac525ad2013ea489ffe56",
+    "tests/unit/sonic_animation_assets.mm": "12f1449f9ab2bc956128fe9efb4386f78f2ef1f28f3b7b96d9fda2002d778a94",
+    "tools/import/sonic_animation_resources.py": "72c7f23e936a09162b58eedbe0cb7add40b1ab0fb3a5052b3e32933d5e21fcde",
+    "reference/packets/sonic-animation-native/verify_faults.py": "5ea96d40e3c8a8a785d6a84ec7c6a717b1de29110a74b455e1f667a0af7bfc7d",
+    "reference/packets/sonic-animation-native/verify_imported.py": "8782a8c04ae161309487993ce97100f1c0c51bdb4ca22905f60efb3494769b06",
+    "reference/packets/sonic-animation-native/verify_importer.py": "5730a3bca4967d0a4bb4f40afa0e10a8079fbdc82a64f5d581742f93f9e66520"
+  },
+  "build": {
+    "command": [
+      "make",
+      "-j2",
+      "-o",
+      "build/native-controller-deps/include/SDL3/SDL.h",
+      "build/sadx-native",
+      "native-closure",
+      "build/sonic-animation-assets-test",
+      "build/sonic-animation-integration-test",
+      "build/native-sonic-callback-test",
+      "build/native-gamma-effects-test"
+    ],
+    "exit_status": 0,
+    "log_sha256": "a73cdd9421ca06b7f45cba333b077895a99c24bd32581d9c4367c30516d6fdd2",
+    "native_app_sha256": "2b91f71658630acaf20df542e5e27149b09bb6eecf3474ee0b5e1224af2f62db",
+    "dependencies": "Public SDL3/libusb copied locally with symlinks dereferenced; fresh game objects built in this checkout."
+  },
+  "closure": {
+    "passed": true,
+    "problems": [],
+    "inputs": [
+      "build/libsadx-native.a",
+      "build/obj/platform/mac/mac_clock.o",
+      "build/obj/platform/mac/mac_audio.o",
+      "build/obj/platform/mac/hid_switch_controller.o",
+      "build/obj/platform/mac/mac_movie.o",
+      "build/obj/platform/mac/metal_device_frame.o",
+      "build/obj/platform/mac/mac_audio_playback.o",
+      "build/obj/platform/mac/mac_sound_bank.o",
+      "build/obj/platform/mac/mac_sound_effects.o",
+      "build/obj/platform/mac/mac_save_files.o",
+      "build/obj/platform/mac/mac_save_writer.o"
+    ],
+    "sources": [
+      "src/cpu/crt_acos.cpp",
+      "src/cpu/crt_argument.cpp",
+      "src/cpu/crt_asin.cpp",
+      "src/cpu/crt_integer.cpp",
+      "src/cpu/sse_math.cpp",
+      "src/cpu/x87_math.cpp",
+      "src/cpu/x87_transcendental.cpp",
+      "src/engine/basic_model.cpp",
+      "src/engine/character_geometry.cpp",
+      "src/engine/character_pack.cpp",
+      "src/engine/collision_component.cpp",
+      "src/engine/cooperative_thread_native.cpp",
+      "src/engine/device_lights.cpp",
+      "src/engine/font_native.cpp",
+      "src/engine/frame_loop_native.cpp",
+      "src/engine/game_controller.cpp",
+      "src/engine/game_frame_control.cpp",
+      "src/engine/game_frame_control_native.cpp",
+      "src/engine/gamma_setup_allocation_native.cpp",
+      "src/engine/graphics_frame.cpp",
+      "src/engine/graphics_frame_fog.cpp",
+      "src/engine/graphics_frame_lighting.cpp",
+      "src/engine/material_correction.cpp",
+      "src/engine/menu_draw_primitives.cpp",
+      "src/engine/menu_square.cpp",
+      "src/engine/message_sprite_profile.cpp",
+      "src/engine/message_sprite_queue.cpp",
+      "src/engine/native_message_texture.cpp",
+      "src/engine/native_texture_lifetime.cpp",
+      "src/engine/native_texture_palette.cpp",
+      "src/engine/ninja_fog.cpp",
+      "src/engine/ninja_fog_native.cpp",
+      "src/engine/ninja_matrix.cpp",
+      "src/engine/ninja_projected_depth.cpp",
+      "src/engine/ninja_queue_native.cpp",
+      "src/engine/ninja_render.cpp",
+      "src/engine/ninja_sprite_queue.cpp",
+      "src/engine/ninja_texture.cpp",
+      "src/engine/ninja_view_native.cpp",
+      "src/engine/normal_uv_strip.cpp",
+      "src/engine/object_draw.cpp",
+      "src/engine/particle_pool.cpp",
+      "src/engine/particle_pool_native.cpp",
+      "src/engine/polybuff_initialization.cpp",
+      "src/engine/polybuff_initialization_binding.cpp",
+      "src/engine/pvr_device.cpp",
+      "src/engine/pvr_draw.cpp",
+      "src/engine/queue_blank_frame.cpp",
+      "src/engine/queue_consumer_native.cpp",
+      "src/engine/screen_sprite.cpp",
+      "src/engine/speedrun.cpp",
+      "src/engine/sprite_immediate.cpp",
+      "src/engine/sprite_registry.cpp",
+      "src/engine/task.cpp",
+      "src/engine/task_work.cpp",
+      "src/engine/texture_list_gate.cpp",
+      "src/engine/texture_selection_native.cpp",
+      "src/engine/ui_scale_profile.cpp",
+      "src/game/audio_playback.cpp",
+      "src/game/character_completion.cpp",
+      "src/game/character_select_labels.cpp",
+      "src/game/character_select_menu.cpp",
+      "src/game/character_textures.cpp",
+      "src/game/file_select.cpp",
+      "src/game/file_select_controls.cpp",
+      "src/game/file_select_display.cpp",
+      "src/game/game_bootstrap.cpp",
+      "src/game/game_cleanup.cpp",
+      "src/game/game_mode.cpp",
+      "src/game/game_mode_native.cpp",
+      "src/game/game_view_native.cpp",
+      "src/game/level_sounds.cpp",
+      "src/game/library_initial_state.cpp",
+      "src/game/lighting_palette.cpp",
+      "src/game/logo.cpp",
+      "src/game/logo_display.cpp",
+      "src/game/logo_startup.cpp",
+      "src/game/main_menu.cpp",
+      "src/game/main_menu_content.cpp",
+      "src/game/main_menu_eligibility.cpp",
+      "src/game/menu_caption.cpp",
+      "src/game/menu_dialog.cpp",
+      "src/game/menu_dialog_control.cpp",
+      "src/game/menu_dialog_draw.cpp",
+      "src/game/menu_dialog_file_select.cpp",
+      "src/game/menu_eligibility.cpp",
+      "src/game/menu_navigation.cpp",
+      "src/game/menu_resource_lifetime.cpp",
+      "src/game/menu_voice.cpp",
+      "src/game/message_frame.cpp",
+      "src/game/message_text.cpp",
+      "src/game/message_texture.cpp",
+      "src/game/movie.cpp",
+      "src/game/music.cpp",
+      "src/game/regular_textures.cpp",
+      "src/game/save_completion.cpp",
+      "src/game/save_creation.cpp",
+      "src/game/save_data.cpp",
+      "src/game/save_file_list.cpp",
+      "src/game/save_frame.cpp",
+      "src/game/save_write.cpp",
+      "src/game/saving_message.cpp",
+      "src/game/selection_camera.cpp",
+      "src/game/selection_preview.cpp",
+      "src/game/selection_preview_actions.cpp",
+      "src/game/selection_preview_textures.cpp",
+      "src/game/selection_question.cpp",
+      "src/game/sound_bank.cpp",
+      "src/game/sound_effects.cpp",
+      "src/game/sound_initial_state.cpp",
+      "src/game/stage_lighting.cpp",
+      "src/game/title_menu.cpp",
+      "src/game/voice_playback.cpp",
+      "src/input/input_initial_state.cpp",
+      "src/input/input_mod_axes.cpp",
+      "src/input/input_mod_constants.cpp",
+      "src/input/input_mod_pad.cpp",
+      "src/math/d3dx_math.cpp",
+      "src/math/ninja_length.cpp",
+      "src/math/ninja_math.cpp",
+      "src/math/ninja_sine_table.cpp",
+      "src/player/actor_current.cpp",
+      "src/player/event_actions.cpp",
+      "src/player/floor_angles.cpp",
+      "src/player/gamma_cursors.cpp",
+      "src/player/gamma_effects.cpp",
+      "src/player/gamma_selection_core.cpp",
+      "src/player/gamma_setup_resource.cpp",
+      "src/player/ground_acceleration.cpp",
+      "src/player/ground_acceleration_native.cpp",
+      "src/player/ground_friction.cpp",
+      "src/player/player_acceleration_air.cpp",
+      "src/player/player_animation.cpp",
+      "src/player/player_animation_blend.cpp",
+      "src/player/player_coordinates.cpp",
+      "src/player/player_heading.cpp",
+      "src/player/player_input.cpp",
+      "src/player/player_input_producer.cpp",
+      "src/player/player_motion.cpp",
+      "src/player/player_movement.cpp",
+      "src/player/player_projection.cpp",
+      "src/player/player_rotation.cpp",
+      "src/player/player_speed.cpp",
+      "src/player/player_startup.cpp",
+      "src/player/player_state.cpp",
+      "src/player/scene_input_producer.cpp",
+      "src/player/selection_player_queries.cpp",
+      "src/player/sonic_animation_table.cpp",
+      "src/player/sonic_player.cpp",
+      "src/runtime/engine_code_tables.cpp",
+      "src/runtime/logo_renderer.cpp",
+      "src/runtime/logo_scene.cpp",
+      "src/runtime/model_buffer_seam.cpp",
+      "src/runtime/model_device.cpp",
+      "src/runtime/model_draw.cpp",
+      "src/runtime/movie_scene.cpp",
+      "src/runtime/native_character_resources.cpp",
+      "src/runtime/native_character_select.cpp",
+      "src/runtime/native_display.cpp",
+      "src/runtime/native_event_actions_context.cpp",
+      "src/runtime/native_file_select_display.cpp",
+      "src/runtime/native_gamma_assets_native.cpp",
+      "src/runtime/native_gamma_binding.cpp",
+      "src/runtime/native_gamma_resources_native.cpp",
+      "src/runtime/native_input.cpp",
+      "src/runtime/native_lighting_palette.cpp",
+      "src/runtime/native_main_menu.cpp",
+      "src/runtime/native_menu_texture_bindings.cpp",
+      "src/runtime/native_message_display.cpp",
+      "src/runtime/native_message_frame.cpp",
+      "src/runtime/native_object_draw.cpp",
+      "src/runtime/native_object_render_seams.cpp",
+      "src/runtime/native_regular_resources.cpp",
+      "src/runtime/native_save.cpp",
+      "src/runtime/native_selection_camera.cpp",
+      "src/runtime/native_selection_preview.cpp",
+      "src/runtime/native_selection_question.cpp",
+      "src/runtime/native_session.cpp",
+      "src/runtime/native_sonic_assets_native.cpp",
+      "src/runtime/native_sonic_binding.cpp",
+      "src/runtime/native_sonic_events.cpp",
+      "src/runtime/native_title_scene.cpp",
+      "src/runtime/native_title_tasks.cpp",
+      "src/runtime/sonic_animation_assets.cpp"
+    ],
+    "force_load_executable": "build/sadx-native-closure",
+    "limits": [
+      "Link closure proves dependencies, not recovered behavior."
+    ]
+  },
+  "focused_results": [
+    {
+      "command": [
+        "build/sonic-animation-assets-test",
+        "game/imported",
+        "build/sonic-animation-table.tsv"
+      ],
+      "exit_status": 0,
+      "stdout": "",
+      "stderr": "149 declarations, 147 rows, imported preview closure, seven invalid declarations, two real Sonic binds and Stand playback pass\n"
+    },
+    {
+      "command": [
+        "build/sonic-animation-integration-test",
+        "game/imported"
+      ],
+      "exit_status": 0,
+      "stdout": "Session rejects null/replacement; stable Sonic owner/table/resources; actual callback preserves editor stop with absent/present metadata\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "build/native-sonic-callback-test",
+        "game/imported"
+      ],
+      "exit_status": 0,
+      "stdout": "Real Sonic callback publishes canonical current owners before the editor stop; captured event mode/path bindings survive primary replacement and reject release\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "build/native-gamma-effects-test",
+        "game/imported"
+      ],
+      "exit_status": 0,
+      "stdout": "Real Gamma/PInitialize/setup/material caller reaches PSetMotion with shared hit list and pool\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+        "reference/packets/sonic-animation-native/verify_imported.py",
+        "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe",
+        "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/system/CHRMODELS_orig.dll",
+        "game/imported/characters",
+        "build/sonic-animation-table.tsv",
+        "build/sonic-animation-integration/imported.json"
+      ],
+      "exit_status": 0,
+      "stdout": "{\n  \"source_game_sha256\": \"6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74\",\n  \"source_dll_sha256\": \"76bbaa1b6aa23872648e6f1f39642e4262403e372b4c4b32f20f0ec89780c2a5\",\n  \"pack_sha256\": \"c414e173bf4bf9f803f24d61642e233ff9650fe9276d70da2ac3939fee2b5d7f\",\n  \"export_sha256\": \"cca605d27263951f0649d79b26c6602e3731b735c8098c1cbc3c9f1162e12ce9\",\n  \"producer_sha256\": \"4fb64e48d45e6008328627f24c9065e89240ec2b5458cedfb73a6ce26d183944\",\n  \"output_sha256\": \"9ec5d1a6049136911067fa3347351462023986acefdcbd0a32f8644eea345ca9\",\n  \"source_ranges\": {\n    \"0x7cec90\": {\n      \"size\": 7674,\n      \"sha256\": \"4fb64e48d45e6008328627f24c9065e89240ec2b5458cedfb73a6ce26d183944\"\n    }\n  },\n  \"declaration_slots\": 149,\n  \"table_rows\": 147,\n  \"compared_bytes\": 2352,\n  \"byte_mismatches\": 0,\n  \"counts\": {\n    \"loaded\": 4,\n    \"known_null\": 3,\n    \"unavailable\": 142\n  },\n  \"loaded_exports\": [\n    1,\n    5,\n    100,\n    101\n  ],\n  \"null_exports\": [\n    24,\n    25,\n    26\n  ],\n  \"source_alias_groups\": [],\n  \"appended_records\": 0,\n  \"pack_reconstruction_exact\": true,\n  \"limits\": [\n    \"Original producer comparison is table initialization, not an actor frame or animation pose sampler.\",\n    \"Payload decoder uses the already inverse-proved MDATA2 pack closure; MDATA3 remains unavailable.\"\n  ]\n}\n",
+      "stderr": ""
+    }
+  ],
+  "original_imported": {
+    "source_game_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+    "source_dll_sha256": "76bbaa1b6aa23872648e6f1f39642e4262403e372b4c4b32f20f0ec89780c2a5",
+    "pack_sha256": "c414e173bf4bf9f803f24d61642e233ff9650fe9276d70da2ac3939fee2b5d7f",
+    "export_sha256": "cca605d27263951f0649d79b26c6602e3731b735c8098c1cbc3c9f1162e12ce9",
+    "producer_sha256": "4fb64e48d45e6008328627f24c9065e89240ec2b5458cedfb73a6ce26d183944",
+    "output_sha256": "9ec5d1a6049136911067fa3347351462023986acefdcbd0a32f8644eea345ca9",
+    "source_ranges": {
+      "0x7cec90": {
+        "size": 7674,
+        "sha256": "4fb64e48d45e6008328627f24c9065e89240ec2b5458cedfb73a6ce26d183944"
+      }
+    },
+    "declaration_slots": 149,
+    "table_rows": 147,
+    "compared_bytes": 2352,
+    "byte_mismatches": 0,
+    "counts": {
+      "loaded": 4,
+      "known_null": 3,
+      "unavailable": 142
+    },
+    "loaded_exports": [
+      1,
+      5,
+      100,
+      101
+    ],
+    "null_exports": [
+      24,
+      25,
+      26
+    ],
+    "source_alias_groups": [],
+    "appended_records": 0,
+    "pack_reconstruction_exact": true,
+    "limits": [
+      "Original producer comparison is table initialization, not an actor frame or animation pose sampler.",
+      "Payload decoder uses the already inverse-proved MDATA2 pack closure; MDATA3 remains unavailable."
+    ]
+  },
+  "normal_input": {
+    "command": [
+      "build/sadx-native",
+      "--assets",
+      "game/imported",
+      "--offscreen",
+      "--paced",
+      "--exit-after",
+      "1550",
+      "--save-directory",
+      "build/sonic-animation-integration/savedata",
+      "--key-events",
+      "500:13:down,501:13:up,750:13:down,751:13:up,950:13:down,951:13:up,1050:13:down,1051:13:up,1300:13:down,1301:13:up",
+      "--screenshot",
+      "build/sonic-animation-integration/frontier.ppm"
+    ],
+    "exit_status": 1,
+    "stop": "native session stopped: native_gamma_set_motion",
+    "state": {
+      "execution": "native",
+      "frames": 1332,
+      "sprite_registry_count": 1,
+      "gamma_setup_assets_loaded": true,
+      "gamma_setup_registered": true,
+      "game_mode": 12,
+      "game_state": 21,
+      "stage": 0,
+      "act": 1,
+      "rings": 0,
+      "global_timer": 146167,
+      "save_file_count": 2,
+      "selected_save": 1,
+      "menu_selected_save": 1,
+      "save_checksum": 44416,
+      "selected_save_name": null,
+      "save_phase": 0,
+      "save_ready": 0,
+      "save_write_count": 0,
+      "save_exec": 0,
+      "save_ok": 0,
+      "saving_message_pending": 0,
+      "player": null,
+      "player_error": "unrecovered native gameplay player owner",
+      "camera": null,
+      "camera_error": "unrecovered native gameplay camera owner",
+      "tasks": [
+        {
+          "path": "0/0",
+          "exec": true,
+          "display": false,
+          "destructor": false
+        },
+        {
+          "path": "1/0",
+          "exec": true,
+          "display": false,
+          "destructor": true
+        },
+        {
+          "path": "1/1",
+          "exec": true,
+          "display": false,
+          "destructor": false
+        },
+        {
+          "path": "1/2",
+          "exec": true,
+          "display": true,
+          "destructor": true
+        },
+        {
+          "path": "1/3",
+          "exec": true,
+          "display": false,
+          "destructor": false
+        },
+        {
+          "path": "1/4",
+          "exec": true,
+          "display": false,
+          "destructor": false
+        },
+        {
+          "path": "1/5",
+          "exec": true,
+          "display": false,
+          "destructor": false
+        },
+        {
+          "path": "1/6",
+          "exec": true,
+          "display": false,
+          "destructor": false
+        },
+        {
+          "path": "1/7",
+          "exec": true,
+          "display": false,
+          "destructor": false
+        },
+        {
+          "path": "2/0",
+          "exec": true,
+          "display": false,
+          "destructor": false
+        },
+        {
+          "path": "3/0",
+          "exec": true,
+          "display": true,
+          "destructor": true
+        },
+        {
+          "path": "3/1",
+          "exec": true,
+          "display": true,
+          "destructor": false
+        },
+        {
+          "path": "3/2",
+          "exec": true,
+          "display": true,
+          "destructor": false
+        },
+        {
+          "path": "3/3",
+          "exec": true,
+          "display": true,
+          "destructor": false
+        },
+        {
+          "path": "3/4",
+          "exec": true,
+          "display": true,
+          "destructor": false
+        },
+        {
+          "path": "3/5",
+          "exec": true,
+          "display": true,
+          "destructor": false
+        },
+        {
+          "path": "3/6",
+          "exec": true,
+          "display": true,
+          "destructor": false
+        },
+        {
+          "path": "3/7",
+          "exec": true,
+          "display": true,
+          "destructor": false
+        },
+        {
+          "path": "3/8",
+          "exec": true,
+          "display": false,
+          "destructor": true
+        },
+        {
+          "path": "4/0",
+          "exec": true,
+          "display": true,
+          "destructor": true
+        },
+        {
+          "path": "4/1",
+          "exec": true,
+          "display": false,
+          "destructor": false
+        },
+        {
+          "path": "4/2",
+          "exec": true,
+          "display": false,
+          "destructor": false
+        },
+        {
+          "path": "4/3",
+          "exec": true,
+          "display": true,
+          "destructor": true
+        },
+        {
+          "path": "4/4",
+          "exec": true,
+          "display": true,
+          "destructor": false
+        },
+        {
+          "path": "4/5",
+          "exec": true,
+          "display": true,
+          "destructor": false
+        },
+        {
+          "path": "4/6",
+          "exec": true,
+          "display": true,
+          "destructor": false
+        },
+        {
+          "path": "4/7",
+          "exec": true,
+          "display": true,
+          "destructor": false
+        },
+        {
+          "path": "4/8",
+          "exec": true,
+          "display": true,
+          "destructor": false
+        },
+        {
+          "path": "5/0",
+          "exec": true,
+          "display": true,
+          "destructor": false
+        }
+      ],
+      "logic_loop_count": 1,
+      "music_song": -1,
+      "native_music_gain": 1,
+      "native_effects_gain": 1,
+      "native_voice_gain": 1,
+      "active_save_name": "SonicDX02.snc",
+      "fallback_save_name": null,
+      "menu_voice_cursor": 1,
+      "caption_buffer_live": false,
+      "caption_timer": 0,
+      "message_texture_release_count": 0,
+      "caption_buffers_allocated": 118,
+      "caption_buffers_freed": 118,
+      "caption_thread_waits": 118,
+      "preview_task_retired": false,
+      "preview_camera_live": true,
+      "preview_warmup_frames": 0,
+      "preview_actors": [
+        {
+          "retired": false,
+          "mode": 0,
+          "id": 0,
+          "player_index": 0,
+          "character": 0,
+          "status": 0,
+          "position": [
+            400,
+            0,
+            -20
+          ],
+          "rotation": [
+            0,
+            16384,
+            0
+          ],
+          "aim_y": 16384
+        },
+        {
+          "retired": false,
+          "mode": 0,
+          "id": 0,
+          "player_index": 1,
+          "character": 2,
+          "status": 0,
+          "position": [
+            400,
+            0,
+            -20
+          ],
+          "rotation": [
+            0,
+            16384,
+            0
+          ],
+          "aim_y": 0
+        },
+        {
+          "retired": false,
+          "mode": 0,
+          "id": 0,
+          "player_index": 2,
+          "character": 3,
+          "status": 0,
+          "position": [
+            400,
+            0,
+            -20
+          ],
+          "rotation": [
+            0,
+            16384,
+            0
+          ],
+          "aim_y": 0
+        },
+        {
+          "retired": false,
+          "mode": 0,
+          "id": 0,
+          "player_index": 3,
+          "character": 5,
+          "status": 0,
+          "position": [
+            400,
+            0,
+            -20
+          ],
+          "rotation": [
+            0,
+            16384,
+            0
+          ],
+          "aim_y": 0
+        },
+        {
+          "retired": false,
+          "mode": 0,
+          "id": 0,
+          "player_index": 4,
+          "character": 7,
+          "status": 0,
+          "position": [
+            400,
+            0,
+            -20
+          ],
+          "rotation": [
+            0,
+            16384,
+            0
+          ],
+          "aim_y": 0
+        },
+        {
+          "retired": false,
+          "mode": 1,
+          "id": 2,
+          "player_index": 5,
+          "character": 6,
+          "status": 1,
+          "position": [
+            400,
+            0,
+            -20
+          ],
+          "rotation": [
+            0,
+            16384,
+            0
+          ],
+          "aim_y": 0
+        },
+        {
+          "retired": false,
+          "mode": 0,
+          "id": 0,
+          "player_index": 6,
+          "character": 0,
+          "status": 0,
+          "position": [
+            400,
+            0,
+            -20
+          ],
+          "rotation": [
+            0,
+            17112,
+            0
+          ],
+          "aim_y": 0
+        }
+      ],
+      "main_menu_phase": 3,
+      "main_menu_submode": 6,
+      "main_menu_selected": 0,
+      "sequence_mode": 1,
+      "sequence_fixed_mode": 6,
+      "sequence_waiting": 0,
+      "character_select_next": 8,
+      "dialog_phase": 5,
+      "dialog_cursor": 0,
+      "dialog_opening_frames": 0,
+      "file_select_phase": 0,
+      "file_select_submode": 10,
+      "file_select_color": 0,
+      "file_select_fade": 1,
+      "character_texture_loaded": [
+        1,
+        0,
+        1,
+        1,
+        0,
+        1,
+        2,
+        1,
+        0
+      ],
+      "logo_frames": 0,
+      "logo_mode": 0,
+      "textures": 0,
+      "texture_slots_in_use": 762,
+      "completed_frames": 1330,
+      "pending_logic_ticks": 0,
+      "elapsed_logic_ticks": 0,
+      "frame_resync": 0,
+      "input_held": 0,
+      "movie_decoded_frames": 53,
+      "movie_textures": 0,
+      "movie_media_open": false,
+      "movie_phase": 5,
+      "movie_source_padding_defined": false,
+      "movie_audio_frames": 80896,
+      "movie_audio_nonzero_samples": 98362,
+      "movie_audio_completed_buffers": 76,
+      "movie_audio_device_error": 0,
+      "sound_banks_loaded": 7,
+      "sound_bank_samples": 157,
+      "sound_bank_open_attempts": 19,
+      "music_open_events": 3,
+      "music_start_events": 3,
+      "music_audio_frames": 173056,
+      "music_audio_nonzero_samples": 310656,
+      "music_audio_completed_buffers": 166,
+      "music_audio_device_error": 0,
+      "voice_open_events": 1,
+      "voice_start_events": 1,
+      "voice_audio_frames": 216064,
+      "voice_audio_nonzero_samples": 92288,
+      "voice_audio_completed_buffers": 208,
+      "voice_audio_device_error": 0,
+      "sound_load_events": 6,
+      "sound_play_events": 6,
+      "sound_audio_frames": 2163200,
+      "sound_audio_nonzero_samples": 289040,
+      "sound_audio_completed_buffers": 8447,
+      "sound_audio_device_error": 0
+    },
+    "image_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427",
+    "inspected_image": "Outgoing Sonic Adventure DX title; no completed actor frame.",
+    "same_as_main_image": true
+  },
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "tools/gate/check_readability.py"
+      ],
+      "exit_status": 0,
+      "stdout": "Readability: 539 files, {'hex_literals': 2368, 'address_identifiers': 1188, 'address_calls': 61, 'goto': 0, 'address_labels': 0, 'long_lines': 932, 'multi_statement_lines': 1536, 'large_decimal_literals': 231, 'emulator_arithmetic': 3103, 'address_comments': 1029}, 0 regressions\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "tools/gate/check_layers.py"
+      ],
+      "exit_status": 0,
+      "stdout": "12 layers, 0 known exceptions, 0 violations\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "tools/gate/check_global_owners.py"
+      ],
+      "exit_status": 0,
+      "stdout": "159059 owned bytes, 0 with more than one owner struct\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "tools/gate/check_provenance.py",
+        "--database",
+        "/Users/burbujamc/Developer/sadx-macos/build/symbols/symbols.json"
+      ],
+      "exit_status": 0,
+      "stdout": "Provenance: {'FUNCTION': 535, 'GLOBAL': 103, 'STUB': 106, 'PATCH': 2, 'DATA': 7}, 167492 legacy/annotated byte identities, 0 errors\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "tools/gate/check_judge.py"
+      ],
+      "exit_status": 1,
+      "stdout": "JUDGE: missing judge input: reference/oracle-reports/air_acceleration.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/axis_projection.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/collision_shapes.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/floor_angles.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/frame_completion.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/game_frame_control.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/game_logic.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/game_loop.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/game_mode.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/game_scene_logic.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/ground_acceleration.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/ninja_queue_consumer.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/ninja_queue_lifecycle.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/ninja_render.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/ninja_sprite.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/ninja_sprite_display.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/ninja_sprite_queue.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/ninja_texture_selection.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/player_animation.constants.bin\nJUDGE: missing judge input: reference/oracle-reports/player_auxiliary_effect.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/player_contact_attributes.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/player_contact_initializer.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/player_contact_response.constants.bin\nJUDGE: missing judge input: reference/oracle-reports/player_coordinates.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/player_direction_reset.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/player_heading.angle-cases.bin\nJUDGE: missing judge input: reference/oracle-reports/player_heading.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/player_input.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/player_input_producer.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/player_mesh_math.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/player_mesh_query.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/player_mesh_registry.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/player_movement.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/player_path.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/player_plane.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/player_position.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/player_reaction.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/player_rotation.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/player_scene.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/player_scene_helpers.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/player_scene_position.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/player_speed.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/player_startup.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/projection_angle.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/scene_input_producer.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/scene_mesh_bounds.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/sonic_actions.constants.bin\nJUDGE: missing judge input: reference/oracle-reports/sonic_player.constants.bin\nJUDGE: missing judge input: reference/oracle-reports/sonic_player.dispatch.bin\nJUDGE: missing judge input: reference/oracle-reports/speedrun_limiter.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/task_lifecycle.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/task_work.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/x87_memory.cases.bin\nJudge manifest: 1336 files, 53 violations\n",
+      "stderr": ""
+    }
+  ],
+  "inventory": {
+    "command": [
+      "python3",
+      "tools/inventory/refactor_inventory.py",
+      "--check"
+    ],
+    "exit_status": 1,
+    "stdout": "",
+    "stderr": "Inventory drift: modules.jsonl, modules-002.jsonl, boundaries.jsonl, stubs.jsonl, summary.json, files/reference-scripts.jsonl, files/src-apps.jsonl, files/src-cpu.jsonl, files/src-engine.jsonl, files/src-game.jsonl, files/src-input.jsonl, files/src-math.jsonl, files/src-player.jsonl, files/src-runtime.jsonl, files/tests-unit.jsonl, files/tools-import.jsonl\n"
+  },
+  "reused_exact_evidence": {
+    "verification": "reference/packets/sonic-animation-native/VERIFICATION.json",
+    "original_table": "reference/packets/sonic-animation-native/original-table.json",
+    "faults": "reference/packets/sonic-animation-native/faults.json",
+    "faults_sha256": "5c17a25c3b789f7db0b91787ef92a2d36836a4aad211863985cadeb52f7ec44e",
+    "scope": "Accepted immutable owner/loader/importer, canonical initializer, native Sonic binding and existing fault inputs unchanged. Existing 103-case table oracle, 882 publications and compiled fault receipts reused; affected real composition and table inverse rerun here."
+  },
+  "limits": [
+    "Actual TitleScene callback dynamically stops at sonic_check_edit_mode_editor before animation consumption with both absent and present metadata. Controlled accepted witness separately executes real Sonic initialization and Stand; no production editor inputs invented.",
+    "Normal-input app stops at Gamma motion before Sonic callback; same schedule/frame/image as Main, not an actor-frame success.",
+    "resources.objects remains absent; editor/model/common tail/PSetMotion and other actors remain open.",
+    "Judge checker exit 1 consists exactly of the 53 inherited absent local evidence files; all original paths/hashes retained except the two evidenced registration files. No reserved Task/reset inputs read or run.",
+    "Inventory checker exit 1 retains existing isolated-tree/content drift; only two save-warning fingerprints and their generated mirror were rebound. Warning debt remains unrecovered_open_debt.",
+    "No full gate, unrelated oracle suites, push, Main admission or N3b qualification."
+  ]
+}
