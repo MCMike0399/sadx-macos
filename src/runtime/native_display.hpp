@@ -42,6 +42,10 @@ class Display {
     void rotate_matrix_z(NinjaMatrix &matrix, std::int32_t angle) {
         coordinates_->rotate_z(matrix, angle, arithmetic_);
     }
+    // NOTSA: the fan borrows the existing display sine coefficients and arithmetic.
+    X87Value sine(std::int32_t angle) {
+        return NinjaMath(sine_, arithmetic_).sin_extended(angle);
+    }
     X87Context &arithmetic() { return arithmetic_; }
     SseContext &sse() { return sse_; }
     void set_camera();
