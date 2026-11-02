@@ -1,0 +1,55 @@
+{
+  "revision": "7bcfd7826ea9318e0c31dac072281066ec8a56cd",
+  "source_directory": "/Users/burbujamc/Developer/sadx-macos/build/gamma-setup-source-only-6kjcczhd/source",
+  "archive_sha256": "cca34e2da9afaed94c57ade1100589126b140900e34694c1521c079b8d6436b4",
+  "initial_original_binaries": 0,
+  "initial_prebuilt_game_objects": 0,
+  "reused_dependency": "Pinned public SDL3/libusb headers/libraries only; its header target marked old to prevent writes through the dependency link. All maintained game/CPU source is rebuilt.",
+  "dependency_builder_sha256": "a1709c569d4b4cc255f56e19a0d5717e87cfcb9fab89361f6c871478de65db50",
+  "command": [
+    "make",
+    "-C",
+    "/Users/burbujamc/Developer/sadx-macos/build/gamma-setup-source-only-6kjcczhd/source",
+    "-j2",
+    "-o",
+    "build/native-controller-deps/include/SDL3/SDL.h",
+    "build/sadx-native",
+    "native-closure"
+  ],
+  "build_exit_status": 0,
+  "build_log_sha256": "15ca2db74b6315590281f38fd7cdd97a608b503f6b0fec60937749a53e7a305a",
+  "app_command": [
+    "/Users/burbujamc/Developer/sadx-macos/build/gamma-setup-source-only-6kjcczhd/source/build/sadx-native",
+    "--assets",
+    "/Users/burbujamc/Developer/sadx-macos/game/imported",
+    "--offscreen",
+    "--paced",
+    "--exit-after",
+    "1550",
+    "--save-directory",
+    "/Users/burbujamc/Developer/sadx-macos/build/gamma-setup-source-only-6kjcczhd/qualification/savedata",
+    "--key-events",
+    "500:13:down,501:13:up,750:13:down,751:13:up,950:13:down,951:13:up,1050:13:down,1051:13:up,1300:13:down,1301:13:up",
+    "--capture-directory",
+    "/Users/burbujamc/Developer/sadx-macos/build/gamma-setup-source-only-6kjcczhd/qualification/captures",
+    "--capture-at",
+    "1300,1380,1381,1382",
+    "--screenshot",
+    "/Users/burbujamc/Developer/sadx-macos/build/gamma-setup-source-only-6kjcczhd/qualification/frontier.ppm"
+  ],
+  "app_exit_status": 1,
+  "state": {
+    "frames": 1332,
+    "sprite_registry_count": 1,
+    "gamma_setup_assets_loaded": true,
+    "gamma_setup_registered": true
+  },
+  "stop": "native session stopped: native_gamma_shared_material_binding",
+  "app_sha256": "7658108a850b6f8b4c0f9257c72fb990c2756fe3bb212384f9770775092be58e",
+  "screenshot_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427",
+  "matches_integrated_image": true,
+  "limits": [
+    "Source archive has no original binaries or prebuilt game objects. Assets are external imported data.",
+    "This proves the same explicit material stop, not CharacterSelect/actor output or complete gameplay."
+  ]
+}

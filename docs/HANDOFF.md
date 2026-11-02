@@ -861,3 +861,11 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Native app and force-load closure pass. Existing missing-setup Gamma/weld/animation tests pass, and a new real setup path checks canonical texture/definition/arena/count, duplicate loading and source-null mutation. A compiled wrong-registry integration fault is caught.
 * Four new native programs (resource test also run with synthetic input) and five Python tests pass. Integrated setup 848 and constructor 1,136 original cases pass; Gamma 1,422 cases retain zero value failures and all 498 FP partials, strict make exit 2. Source/schema/static checks have zero violations.
 * Full gate, clean source export, native actor animation/rendering, shared sprite cleanup and N3b acceptance remain open. Source and tests remain separate commits; no tolerance or old missing-resource expectation changed. Next: integration review and gate, then shared mutable materials.
+
+### 2026-11-02 — Preview and Gamma setup qualified (N3b dependency, full gate)
+
+* Independent integration review 06ab54ba accepts canonical Gamma ownership/bindings. Full make -j10 gate at 7bcfd78 exits 0: 311 native programs, 612 Python tests, reference R1–R4, three native menu/save journeys and sixteen startup comparisons.
+* The gate's seven Python skips remain recorded. A same-source six-test qualified-raster supplement passes with zero skips; the inherited volume case-alias capability remains skipped. No repeated full Python suite is claimed.
+* A clean source archive contains no original EXE/DLL or prebuilt game objects; all maintained and numerical code rebuilds. Only pinned SDL3/libusb is reused. Native app and force-load closure pass, and normal input reaches the same material boundary at frame 1332 with one setup sprite and identical inspected title image.
+* Gate, raster and cold-build receipts are under reference/production-integration-20261102. Gamma retains all 498 FP partials and strict exit 2; other inherited failures remain open. No complete actor frame, N3b, gameplay cadence or new hardware claim.
+* Next is shared mutable material ownership and real Gamma material binding. Event-action candidate b05ab74 and Sonic controller candidate 0aefb44 remain under independent review; neither is integrated. Reset reservations and stopped schedules/storage remain unchanged.

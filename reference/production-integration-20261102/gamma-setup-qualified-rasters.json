@@ -1,0 +1,10 @@
+{
+  "source_commit": "7bcfd7826ea9318e0c31dac072281066ec8a56cd",
+  "command": "SADX_CONTENT_CORPUS=\"$PWD\" PYTHONPATH=tools/lib:tools/oracles reference/python/bin/python -m unittest discover -s tests/python -p test_capture_content_offline.py",
+  "exit_status": 0,
+  "tests": 6,
+  "skipped": 0,
+  "log": "build/gamma-setup-qualified-raster-tests.log",
+  "log_sha256": "ea38368e8e123b948803698b606fb3a003e99f2c970b3fa0c2862893b0fe0c98",
+  "relationship": "Supplement executes all six qualified offline raster checks omitted by the default612-test gate. The actual gate remains612 tests with7 skips; inherited volume case-alias skip remains. This is not a repeated full Python suite."
+}
