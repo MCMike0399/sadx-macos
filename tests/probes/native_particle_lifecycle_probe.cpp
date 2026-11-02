@@ -16,6 +16,13 @@ float scalar(std::uint32_t v) { float f; std::memcpy(&f, &v, 4); return f; }
 std::uint32_t particle_base() {
     return input[6] ? 0x23003000U - (input[6] - 1) : 0x23002000U;
 }
+std::uint32_t buffer_tag(const TaskWorkHandle &buffer) {
+    if (!buffer) return 0;
+    if (buffer == buffers[0]) return 0x23000000;
+    if (buffer == buffers[1]) return 0x23001000;
+    if (buffer == buffers[2]) return particle_base();
+    throw std::runtime_error("unexpected particle buffer identity");
+}
 std::uint32_t frame_tag(Frame *f) {
     return f ? 0x24000000 + std::uint32_t(f - initial->frames) * 44 : 0;
 }
@@ -111,13 +118,21 @@ extern "C" int particle_lifecycle_case(const std::uint32_t *values, std::uint32_
         boundary = std::uint32_t(f.operation) + 1; field = std::uint32_t(f.field);
     }
     std::vector<std::uint32_t> data{boundary, field, result, initial->active_count,
-        replacement->active_count, task->auxiliary_native_work == replacement ? 1U : 0U};
+        replacement->active_count, task->auxiliary_native_work == replacement ? 0x22000100U :
+        task->auxiliary_native_work == initial ? 0x22000000U : 0U};
     std::array<std::uint32_t, 64> payload;
     if (!arena->read(free, 0, payload.data(), 32) || !arena->read(active, 0, payload.data() + 8, 32) ||
         !arena->read(particles, 0, payload.data() + 16, 192)) return -4;
     data.insert(data.end(), payload.begin(), payload.end());
-    const auto *frame_words = reinterpret_cast<const std::uint32_t *>(frames.data());
-    data.insert(data.end(), frame_words, frame_words + 44);
+    std::array<std::uint32_t, 44> frame_words;
+    std::memcpy(frame_words.data(), frames.data(), sizeof(frames));
+    data.insert(data.end(), frame_words.begin(), frame_words.end());
+    for (const auto &work : {initial, replacement}) {
+        data.insert(data.end(), {std::uint32_t(work->active_count) | (std::uint32_t(work->capacity) << 16),
+            buffer_tag(work->free_indices), buffer_tag(work->active_indices), buffer_tag(work->particles),
+            work->update ? 0x25000000U : 0U, bits(work->parameters.drag),
+            bits(work->parameters.vertical_acceleration), frame_tag(work->frames)});
+    }
     data.push_back(events.size()); data.insert(data.end(), events.begin(), events.end());
     data.push_back(fp.exception_flags() & 63);
     std::memcpy(output, data.data(), data.size() * 4);

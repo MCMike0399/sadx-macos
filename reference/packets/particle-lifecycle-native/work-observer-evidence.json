@@ -1,0 +1,25 @@
+{
+  "reason": "Current new lifecycle oracle observes all buffer/frame bytes but only work counts, not full Work. Extend its serialization to both complete live work records and exact Task.awp identity; prove adequacy with a capacity-corruption fault that the prior observer cannot see. Product source, test domains, arithmetic tolerances and all pre-task judges remain unchanged.",
+  "base": "897f2f02",
+  "status": "Prior observer has zero value failures for capacity corruption; stronger observer detects it. No product source change.",
+  "old": {
+    "cases": 149,
+    "value_failures": 0,
+    "partial_count": 28,
+    "report_sha256": "8458b71b9994e8c391aa73d6212e9c025ae2f353fc7b568e7b239ad077e00fd1",
+    "exit_status": 2
+  },
+  "new": {
+    "cases": 149,
+    "value_failures": 9,
+    "partial_count": 26,
+    "report_sha256": "6433109a2d3528a3edb10a8f914cff69a11ce6e45d2904e8061034589987e538",
+    "exit_status": 1
+  },
+  "unchanged_candidate": {
+    "cases": 1109,
+    "value_failures": 0,
+    "fp_partial_count": 237,
+    "same_individual_partial_records_as_prior_observer": true
+  }
+}

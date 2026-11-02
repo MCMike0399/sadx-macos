@@ -8,6 +8,8 @@ import sys
 ROOT=Path(__file__).resolve().parents[2]
 DIRECTORY=ROOT/'build/particle-mutants'
 FAULTS=[
+ ('corrupt-capacity','work->active_count = last_index;',
+  'work->active_count = last_index; work->capacity ^= 1;',1),
  ('unsigned-count','return value < 32768 ? value : std::int32_t(value) - kIndexModulus;',
   'return std::int32_t(value) - (value < 32768 ? 0 : kIndexModulus - kIndexModulus);',1),
  ('skip-update-display','    display_task(scheduler, task);','    /* fault: omitted display */',2),

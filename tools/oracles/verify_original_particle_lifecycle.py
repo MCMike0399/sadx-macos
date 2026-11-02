@@ -105,8 +105,8 @@ class Source:
             elif case[3]&16 and pc==0:boundary=8
             elif case[3]&1 and pc in (0x4cc11d,0x4cc1a5):boundary=6
             else: raise RuntimeError(f'unclassified source fault {pc:#x}, case {case[:10]}')
-        data=[boundary,field,result,self.count(WORK),self.count(REPLACEMENT),int(self.word(TASK+44)==REPLACEMENT)]
-        for a,n in ((FREE,32),(ACTIVE,32),(self.particle_base,192),(FRAMES,176)):
+        data=[boundary,field,result,self.count(WORK),self.count(REPLACEMENT),self.word(TASK+44)]
+        for a,n in ((FREE,32),(ACTIVE,32),(self.particle_base,192),(FRAMES,176),(WORK,32),(REPLACEMENT,32)):
             data.extend(words(bytes(m.mem_read(a,n))))
         data.extend([len(self.events),*self.events,m.reg_read(UC_X86_REG_FPSW)&63])
         return data
