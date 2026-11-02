@@ -1,0 +1,89 @@
+{
+  "base": "a906e198",
+  "unchanged_files": {
+    "src/runtime/native_session.hpp": "0571a037baee4fa54e817babc265e4cc5c12423be1c6874535e047ca84b0e876",
+    "src/runtime/native_player_system.hpp": "02c219d3f9d72e130b1d5297e52aaf2886ab5752fc24d8fe2ab9cde6ac9caca0",
+    "src/runtime/native_display.hpp": "89cfa670a597de4388cabbfd41412008006031c096b2b63e7772e86ea9122954",
+    "src/runtime/native_selection_preview.cpp": "3f005cca3e09c58b32ee2829c80e8764461aad41e740dd884700d79b10a97329",
+    "src/runtime/native_gamma_binding.cpp": "ed940ee9e75f6f5d3f7dd9b01720bad9f52da42c3d8a9bdf2bed2099dc2c9499",
+    "src/player/gamma_selection_core.cpp": "489d333f086900b3827f4fba2448549331b5756ffe79e617853e1481d1731dde",
+    "src/player/player_startup.cpp": "7e8ef54f8546227cafb7b70bc19f87a813771c9a4da2c78d35c1bb226c2d5ea4",
+    "src/engine/character_pack.cpp": "b2c5e28e05279a2bd20608aec766d3bfcb471bd11e659f9113dd77e677214a8d",
+    "src/engine/character_geometry.cpp": "3ecc07ddcdb92406946190f6a9f863667741610e5d9ce3d524f41b603bec063a",
+    "src/engine/collision_component.cpp": "dcc98cffb8e52f289f9bbe14a6340ffb972516eb55223b5256ee5a12d98d7b18",
+    "src/runtime/native_object_draw.cpp": "0c63670b1b0dabeddf22944b076a93f4d12b0262c4c7410873cdd6e30092bfcd",
+    "src/player/player_animation.cpp": "48eefd19e6d65f20c0c41729a9484d938c84df419d7156eed1b33e1e255a5497",
+    "src/player/player_animation_blend.cpp": "a1f6733277da77371fd705af198f5aad3480b62e26a5733a71a220361aa3e94a",
+    "src/player/event_actions.cpp": "aca4ea9118d987c266970373a28e23935d58a4307e5ca6b2e907edb15a657bba",
+    "tests/unit/sonic_controller_native.cpp": "871d4edcfd17d038ae5c1bc640892ca84dc453c3453a33912b4d30d7fb34b888",
+    "tests/unit/sonic_physics_capture_native.cpp": "d66f87dc8283db63c22b227b1a6da8eaaa9edce7d680da5927c838cd5a635393",
+    "tests/unit/sonic_physics_capture_reference.cpp": "68cf014efd76a68bbc5ac14251515721ce48495dc84e0735b61a3a753129a4fd",
+    "tests/unit/sonic_controller_reference.cpp": "0c000a8a069498f5e92ef00f22083b7faba48b62633cf085b34e020a78bdfec2",
+    "reference/symbols/native-counterparts.json": "b14628b1d4a00f13f84d72d9a8bfbbb053095d8be52f15f10b1d45b590ab656b",
+    "tools/gate/check_provenance.py": "4f7abf819923965592b868112cdd38feb503b2cb471840816c4b5ae96aa7243f"
+  },
+  "exact_name_only_changes": {
+    "src/player/sonic_player_internal.hpp": {
+      "only_change": "missing_model -> initialize_model; reference boundary and game template semantics unchanged",
+      "base_sha256": "35c11bd7ddf67aa84f9ec22b8cf11dbea38889c801cfbdf436b8c0c7451fa006",
+      "current_sha256": "4960d3c64eb6d5e11ae5ed74f93ff1302709ca21a10d96d780a869e28bdfa827"
+    },
+    "src/guest/sonic_player_reference.cpp": {
+      "only_change": "missing_model -> initialize_model; reference boundary and game template semantics unchanged",
+      "base_sha256": "a7311aa1ebbff20a598becbd3ceb98bd4659b5c28307733795933655b8ead7e8",
+      "current_sha256": "0847b4cbe5238333fd8259358e566c7a67171274ef737ef055a9ce11aef5e6f7"
+    }
+  },
+  "default_player": {
+    "slug": "sonic_player",
+    "records": 28800,
+    "complete_capture_sha256": "2833d480dec1c99bef187812d6718dcd7acb9f4c51db43cbe29be2fe794382d9",
+    "library_sha256": "6ac6b6f5575b4b1ce110396b75627bcb14cea0ddeb2b4638fc285143996cb52b",
+    "complete_output_sha256": "5ab822555235d1ee7f7da5905d6220c255d935b8bd623d077f5225f52db7f643",
+    "differences": [],
+    "exact": true,
+    "supplement": {
+      "records": 2,
+      "fixture_sha256": "d81539e8aff755d111e34cee45d8a96501f9571575b1149c98e8bc157ba61331",
+      "differences": [],
+      "exact": true
+    }
+  },
+  "default_actions": {
+    "records": 30192,
+    "input_sha256": "011512a72d2c21b1ea2362ba8cf86393b52f13601b89055fa8137cd3d505053b",
+    "native_differences": [],
+    "complete_observation_sha256": "48eb7e3b60f9fb08719b93a3209c2e3865d4caa7629dabcc540ffd7509a69794",
+    "inherited_partials": 2172,
+    "individual_partials_exact": true,
+    "individual_partial_sha256": "f6e89ccd071ac44ead1c4464e0b64528298cbd41d5f0ab395e2adfced8dc0721",
+    "input_exact": true,
+    "limits": [
+      "Unchanged original fixtures and run method; compares every old/current output word.",
+      "Source partials remain partial; exact means old/current observation preservation."
+    ]
+  },
+  "extra": {
+    "sonic_player": {
+      "records": 1536,
+      "input_sha256": "8635b3c2e3a695df97274d6fdba0295f5f044b8da540fb765108a98427da2283",
+      "complete_observation_sha256": "ab9e942a24361d3fac24a2779d533c07131782bd8aac27a4bfff196f2fcce5bf",
+      "exact_old_new": true,
+      "partial_count": 204,
+      "individual_partials_equal_to_accepted": true
+    },
+    "sonic_actions": {
+      "records": 1536,
+      "input_sha256": "61e8290fbc61b1353178b966ead4540aae4eb52316d810c60e1ab687c94afe84",
+      "complete_observation_sha256": "91327b14847f021d5a8e5a094497085759ed972effd13dc6f6d0bb89a17abe75",
+      "exact_old_new": true,
+      "partial_count": 219,
+      "individual_partials_equal_to_accepted": true
+    }
+  },
+  "limits": [
+    "Original action verifier was also rerun unchanged:30192 cases, zero value/boundary failures and2172 status partials.",
+    "Player replay validates the entire frozen source/native stream against its committed anchor;2840 inherited partial identities remain unchanged.",
+    "No reserved reset/Task cohort or collector was run."
+  ]
+}

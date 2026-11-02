@@ -636,3 +636,17 @@ build/native-gamma-input-buffer-test: tests/unit/native_gamma_input_buffer.mm sr
 
 build/native-gamma-input-buffer-probe.dylib: tests/probes/native_gamma_input_buffer_probe.cpp src/player/gamma_input_buffer.cpp src/player/gamma_input_buffer.hpp
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -shared -fPIC $< src/player/gamma_input_buffer.cpp -o $@
+
+# Sonic inline model prefix; independent new original judge.
+build/native-sonic-model-probe.dylib: tests/probes/native_sonic_model_probe.mm src/apps/native_sonic_model_assets.hpp build/libsadx-native.a
+	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) -dynamiclib $< build/libsadx-native.a -framework Foundation -o $@
+build/sonic-model-selection-preview.cpp: src/runtime/native_selection_preview.cpp reference/packets/sonic-model-native/prepare_wiring.py
+	python3 reference/packets/sonic-model-native/prepare_wiring.py
+build/sonic-model-callback.o: build/sonic-model-selection-preview.cpp Makefile
+	$(CXX) $(CXXFLAGS) -MMD -MP $(INCLUDES) -c $< -o $@
+-include build/sonic-model-callback.d
+build/sonic-model-native-test: tests/unit/sonic_model_native.mm src/apps/native_sonic_model_assets.hpp build/sonic-model-callback.o build/libsadx-native.a $(NATIVE_PLATFORM_OBJECTS)
+	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) $< build/sonic-model-callback.o $(NATIVE_PLATFORM_OBJECTS) build/libsadx-native.a $(MAC_FRAMEWORKS) -o $@
+
+# Shared inline loader consumed by the app and existing Sonic integration witnesses.
+build/sadx-native build/sadx-native-closure build/sonic-animation-assets-test build/sonic-animation-integration-test build/native-editor-binding-test: src/apps/native_sonic_model_assets.hpp

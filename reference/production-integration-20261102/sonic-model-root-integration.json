@@ -1,0 +1,145 @@
+{
+  "schema": 1,
+  "source_commit": "d8dc82d2e89280ef838ee18750349ac3507ef2bb",
+  "accepted_candidate": "f638e755",
+  "reviews": {
+    "runtime_fidelity": "66472125",
+    "correction": "6444da27"
+  },
+  "root_wiring": "Exact reviewed callback hunk supplies the existing model owner and canonical SceneState object borrow.",
+  "native_build_exit": 0,
+  "native_closure_exit": 0,
+  "first_programs": [
+    {
+      "name": "new-callback",
+      "command": [
+        "build/sonic-model-native-test",
+        "game/imported"
+      ],
+      "exit_status": 0,
+      "stdout": "Real callback plus exact Root hunk: first normal collision/texture boundary; live Metal skip; changed-sibling splice/PJoin boundary; absent-model boundary; canonical aliases and animation scene consumer\n",
+      "stderr": "scenario 0 boundary sonic_LoadCharTextures\nscenario 1 boundary sonic_LoadCharTextures\nscenario 2 boundary sonic_model_graph\nscenario 3 boundary sonic_PJoinVertexes\n"
+    },
+    {
+      "name": "editor-callback",
+      "command": [
+        "build/native-editor-binding-test",
+        "game/imported",
+        "build/sonic-model-root/editor.tsv"
+      ],
+      "exit_status": -6,
+      "stdout": "",
+      "stderr": "Assertion failed: (boundary == expected), function operator(), file native_editor_binding.mm, line 30.\n"
+    },
+    {
+      "name": "animation-assets",
+      "command": [
+        "build/sonic-animation-assets-test",
+        "game/imported",
+        "build/sonic-model-root/table.tsv"
+      ],
+      "exit_status": 0,
+      "stdout": "",
+      "stderr": "149 declarations, 147 rows, imported preview closure, seven invalid declarations, two real Sonic binds and Stand playback pass\n"
+    }
+  ],
+  "old_caller_boundaries": [
+    {
+      "command": [
+        "build/native-editor-binding-test",
+        "game/imported",
+        "build/sonic-model-root/editor.tsv"
+      ],
+      "exit_status": 0,
+      "stdout": "81 production callback editor pairs; shared Gamma signed results; missing read order; initialized player/table; actual cleanup uses canonical word\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "build/sonic-animation-integration-test",
+        "game/imported"
+      ],
+      "exit_status": -6,
+      "stdout": "",
+      "stderr": "Actual Sonic boundary: sonic_controls; expected sonic_model_graph\nAssertion failed: (stopped && display.arithmetic().control_word() == cw), function operator(), file sonic_animation_integration.mm, line 38.\n"
+    }
+  ],
+  "corrected_callers": [
+    {
+      "command": [
+        "build/native-editor-binding-test",
+        "game/imported",
+        "build/sonic-model-root/editor.tsv"
+      ],
+      "exit_status": 0,
+      "stdout": "81 production callback editor pairs; shared Gamma signed results; missing read order; initialized player/table; actual cleanup uses canonical word\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "build/sonic-animation-integration-test",
+        "game/imported"
+      ],
+      "exit_status": 0,
+      "stdout": "Session rejects null/replacement; stable Sonic owner/table/resources; actual callback initializes player/table/model prefix then reaches texture/control stops\n",
+      "stderr": ""
+    }
+  ],
+  "judge_adaptation": "Old witnesses advance from model-graph to texture-load boundary. The repeated animation callback retains the same task/owners and now reaches sonic_controls because source49abe3 sets Stand before the texture call. Added Stand assertion; no input reset or assertion removal.",
+  "consumer_rebinding": {
+    "path": "src/player/sonic_player_internal.hpp",
+    "before_sha256": "35c11bd7ddf67aa84f9ec22b8cf11dbea38889c801cfbdf436b8c0c7451fa006",
+    "after_sha256": "4960d3c64eb6d5e11ae5ed74f93ff1302709ca21a10d96d780a869e28bdfa827",
+    "entry": "kStageCharacterSounds",
+    "proof": "Only the model seam name changes; declaration and classification remain unchanged."
+  },
+  "cohorts": {
+    "development": {
+      "cases": 80,
+      "value_failures": 0,
+      "individual_fp_partials": 34,
+      "strict_exit": 2,
+      "observations_equal_reviewed_correction": true,
+      "report_sha256": "fea1acdde01f545d74e68fb729bea693ad24ee9313e5f459466a75ca1b1aaa52"
+    },
+    "holdout": {
+      "cases": 80,
+      "value_failures": 0,
+      "individual_fp_partials": 34,
+      "strict_exit": 2,
+      "observations_equal_reviewed_correction": true,
+      "report_sha256": "1d342d439a799846c1bdcc20baab8238c6d3d09eb6f617174aae2d69e2117433"
+    }
+  },
+  "normal_input": {
+    "command": [
+      "build/sadx-native",
+      "--assets",
+      "game/imported",
+      "--offscreen",
+      "--paced",
+      "--exit-after",
+      "1550",
+      "--save-directory",
+      "build/sonic-model-root/savedata",
+      "--key-events",
+      "500:13:down,501:13:up,750:13:down,751:13:up,950:13:down,951:13:up,1050:13:down,1051:13:up,1300:13:down,1301:13:up",
+      "--screenshot",
+      "build/sonic-model-root/frontier.ppm"
+    ],
+    "exit_status": 1,
+    "frames": 1332,
+    "stop": "native session stopped: native_gamma_get_model_matrix",
+    "app_sha256": "0ab6a60c9bed36c4e37961cdd3ee271b409a20fe614138f9b0396a636e504f6d",
+    "screenshot_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427"
+  },
+  "limits": [
+    "Focused Main qualification; last full gate/cold source remains e1946df8.",
+    "Texture helpers, later model/common tail, active welding/matrices and N3b remain open.",
+    "Post-PJoin export rebinding and broader callback replacement remain outside accepted model prefix.",
+    "Original two80case cohorts retain34FPpartials each, not strict passes."
+  ],
+  "static_check_exit": 0,
+  "callback_generated_source_equals_shipping": true,
+  "report_tracking": "Exact copy of the recorded development report into build/oracles/sonic_model.json; no extra execution claimed."
+}

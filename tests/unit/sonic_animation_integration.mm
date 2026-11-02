@@ -32,6 +32,8 @@ struct SonicCallbackProbe {
             try { task->exec(scheduler, task); }
             catch (const sonic::Unavailable &error) {
                 stopped = std::string(error.what()) == boundary;
+                if (!stopped)
+                    std::cerr << "Actual Sonic boundary: " << error.what() << "; expected " << boundary << '\n';
             }
             assert(stopped && display.arithmetic().control_word() == cw);
             assert(session.players_.current.primary == task->primary_work);
@@ -54,7 +56,8 @@ struct SonicCallbackProbe {
         assert(&owner->table() == table_member && owner->table() == table);
         assert(&owner->resources() == resources);
         const auto entry_player = session.players_.registry.players[0]->allocation;
-        initialization_stop("sonic_model_graph");
+        initialization_stop("sonic_LoadCharTextures");
+        assert(task->primary_state->action_at_0 == 1); // Source stores Stand before textures.
         assert(session.players_.current.player == entry_player);
         assert(session.players_.registry.players[0]->physics->animation_tail.table_at_140 == table);
         rejected = false;
@@ -65,7 +68,7 @@ struct SonicCallbackProbe {
         try { session.load_sonic_animation_assets(nullptr); }
         catch (const std::runtime_error &) { rejected = true; }
         assert(rejected && session.players_.sonic_animation_assets.get() == owner);
-        initialization_stop("sonic_model_graph");
+        initialization_stop("sonic_controls");
         assert(&owner->resources() == resources && &owner->table() == table_member);
         // The invocation runtime only borrows: repeated callback destruction keeps backing alive.
         for (const auto &entry : resources->key_arrays)
@@ -90,6 +93,6 @@ int main(int argc, char **argv) {
         native::TitleScene scene(session, display, titles);
         native::SonicCallbackProbe::run(session, scene, display, directory, *pack);
         std::cout << "Session rejects null/replacement; stable Sonic owner/table/resources; actual "
-                     "callback initializes real player/table and reaches explicit model stop\n";
+                     "callback initializes player/table/model prefix then reaches texture/control stops\n";
     }
 }

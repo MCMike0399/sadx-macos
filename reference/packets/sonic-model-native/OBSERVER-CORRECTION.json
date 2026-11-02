@@ -1,0 +1,748 @@
+{
+  "schema": 1,
+  "base": "4ec83dab",
+  "finding": "b0a1211e: metadata-derived pair identity hid native binding errors; callback object lacked header dependencies",
+  "friend_commit": "9e800117e3d71571bf7965d6ee6493aa26728565",
+  "product_change": "One probe-only friend declaration; removing it exactly restores the accepted header. Runtime algorithms and reference behavior are unchanged.",
+  "observation": "Actual row.vertex_pairs is identified against private canonical storage; unknown pointers fail. Every referenced pair length and uint16 value is appended after the unchanged320word prefix. Original observation reads pinned pair bytes from original memory.",
+  "input_generator_unchanged": true,
+  "cohorts": {
+    "development": {
+      "cases": 80,
+      "value_failures": 0,
+      "partials": [
+        {
+          "case": 4,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 7,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 16,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 19,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 20,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 23,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 24,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 27,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 28,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 31,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 32,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 35,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 36,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 39,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 40,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 43,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 44,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 47,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 48,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 51,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 52,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 55,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 56,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 59,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 60,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 63,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 64,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 67,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 68,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 71,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 72,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 75,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 76,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 79,
+          "source_flags": 0,
+          "native_flags": 32
+        }
+      ],
+      "strict_exit": 2,
+      "original_320_word_observations_unchanged": true,
+      "report_sha256": "fea1acdde01f545d74e68fb729bea693ad24ee9313e5f459466a75ca1b1aaa52"
+    },
+    "holdout": {
+      "cases": 80,
+      "value_failures": 0,
+      "partials": [
+        {
+          "case": 4,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 5,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 6,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 8,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 11,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 14,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 16,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 17,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 18,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 20,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 21,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 23,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 25,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 31,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 32,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 33,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 35,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 36,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 39,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 43,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 44,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 47,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 49,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 50,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 51,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 53,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 55,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 56,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 57,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 58,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 60,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 69,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 72,
+          "source_flags": 0,
+          "native_flags": 32
+        },
+        {
+          "case": 74,
+          "source_flags": 0,
+          "native_flags": 32
+        }
+      ],
+      "strict_exit": 2,
+      "original_320_word_observations_unchanged": true,
+      "report_sha256": "1d342d439a799846c1bdcc20baab8238c6d3d09eb6f617174aae2d69e2117433"
+    }
+  },
+  "pair_faults": [
+    {
+      "name": "same-length-wrong-pair",
+      "source_sha256": "9dd3d0215e79b66868ac068e239de572495d5c2db408b8d4b216a77688d1e878",
+      "checks": [
+        {
+          "schema": "before",
+          "command": [
+            "xcrun",
+            "clang++",
+            "-std=c++17",
+            "-O2",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-ffp-contract=off",
+            "-fno-fast-math",
+            "-arch",
+            "arm64",
+            "-mmacosx-version-min=14.0",
+            "-fobjc-arc",
+            "-Isrc",
+            "-dynamiclib",
+            "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-ae8db0ad/build/sonic-model/observer-correction/probe-before.mm",
+            "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-ae8db0ad/build/sonic-model/observer-correction/same-length-wrong-pair.cpp",
+            "build/libsadx-native.a",
+            "-framework",
+            "Foundation",
+            "-o",
+            "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-ae8db0ad/build/sonic-model/observer-correction/same-length-wrong-pair-before.dylib"
+          ],
+          "exit_status": 2,
+          "failures": 0,
+          "partials": 34,
+          "first_failure": [],
+          "library_sha256": "4a293e95d6fc7976897fb8717f90f74b13fae8a0be894bb832cede1531e2651d",
+          "report_sha256": "5b5f86902e8fd0db511b6a26b3182b99c37e1d33eab373e508967c46cd8261a4"
+        },
+        {
+          "schema": "after",
+          "command": [
+            "xcrun",
+            "clang++",
+            "-std=c++17",
+            "-O2",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-ffp-contract=off",
+            "-fno-fast-math",
+            "-arch",
+            "arm64",
+            "-mmacosx-version-min=14.0",
+            "-fobjc-arc",
+            "-Isrc",
+            "-dynamiclib",
+            "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-ae8db0ad/tests/probes/native_sonic_model_probe.mm",
+            "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-ae8db0ad/build/sonic-model/observer-correction/same-length-wrong-pair.cpp",
+            "build/libsadx-native.a",
+            "-framework",
+            "Foundation",
+            "-o",
+            "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-ae8db0ad/build/sonic-model/observer-correction/same-length-wrong-pair-after.dylib"
+          ],
+          "exit_status": 1,
+          "failures": 80,
+          "partials": 0,
+          "first_failure": [
+            {
+              "case": 0,
+              "input": [
+                0,
+                0,
+                102,
+                0,
+                29136,
+                34408,
+                192,
+                42095,
+                4294967295,
+                1282325866,
+                17,
+                206,
+                924566631
+              ],
+              "differences": [
+                [
+                  34,
+                  1,
+                  2
+                ],
+                [
+                  46,
+                  1,
+                  2
+                ],
+                [
+                  118,
+                  1,
+                  2
+                ],
+                [
+                  166,
+                  1,
+                  2
+                ],
+                [
+                  178,
+                  1,
+                  2
+                ],
+                [
+                  322,
+                  2,
+                  10
+                ],
+                [
+                  324,
+                  3,
+                  11
+                ],
+                [
+                  326,
+                  6,
+                  14
+                ],
+                [
+                  328,
+                  7,
+                  15
+                ],
+                [
+                  340,
+                  2,
+                  10
+                ],
+                [
+                  342,
+                  3,
+                  11
+                ],
+                [
+                  344,
+                  6,
+                  14
+                ],
+                [
+                  346,
+                  7,
+                  15
+                ],
+                [
+                  508,
+                  2,
+                  10
+                ],
+                [
+                  510,
+                  3,
+                  11
+                ],
+                [
+                  512,
+                  6,
+                  14
+                ],
+                [
+                  514,
+                  7,
+                  15
+                ],
+                [
+                  524,
+                  2,
+                  10
+                ],
+                [
+                  526,
+                  3,
+                  11
+                ],
+                [
+                  528,
+                  6,
+                  14
+                ],
+                [
+                  530,
+                  7,
+                  15
+                ],
+                [
+                  542,
+                  2,
+                  10
+                ],
+                [
+                  544,
+                  3,
+                  11
+                ],
+                [
+                  546,
+                  6,
+                  14
+                ],
+                [
+                  548,
+                  7,
+                  15
+                ]
+              ]
+            }
+          ],
+          "library_sha256": "d199ef5edf678e9f064d48f9e28ef54a458cb1c319b75c2fa42a126c57e079e5",
+          "report_sha256": "ed714bc5ac1e07d6ad2d1e6d445eeb30f514d2da54fd2784871b2153340ea6ff"
+        }
+      ]
+    },
+    {
+      "name": "changed-pair-content",
+      "source_sha256": "afd3842c833d9b9fdcc7fa1f451a722016e522b962f0ad21653d06e8715b7573",
+      "checks": [
+        {
+          "schema": "before",
+          "command": [
+            "xcrun",
+            "clang++",
+            "-std=c++17",
+            "-O2",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-ffp-contract=off",
+            "-fno-fast-math",
+            "-arch",
+            "arm64",
+            "-mmacosx-version-min=14.0",
+            "-fobjc-arc",
+            "-Isrc",
+            "-dynamiclib",
+            "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-ae8db0ad/build/sonic-model/observer-correction/probe-before.mm",
+            "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-ae8db0ad/build/sonic-model/observer-correction/changed-pair-content.cpp",
+            "build/libsadx-native.a",
+            "-framework",
+            "Foundation",
+            "-o",
+            "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-ae8db0ad/build/sonic-model/observer-correction/changed-pair-content-before.dylib"
+          ],
+          "exit_status": 2,
+          "failures": 0,
+          "partials": 34,
+          "first_failure": [],
+          "library_sha256": "8db7a477faebf7aa07b2a69564ef3c8822886449d38e6d61b8a3b7811b1bdd65",
+          "report_sha256": "5b5f86902e8fd0db511b6a26b3182b99c37e1d33eab373e508967c46cd8261a4"
+        },
+        {
+          "schema": "after",
+          "command": [
+            "xcrun",
+            "clang++",
+            "-std=c++17",
+            "-O2",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-ffp-contract=off",
+            "-fno-fast-math",
+            "-arch",
+            "arm64",
+            "-mmacosx-version-min=14.0",
+            "-fobjc-arc",
+            "-Isrc",
+            "-dynamiclib",
+            "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-ae8db0ad/tests/probes/native_sonic_model_probe.mm",
+            "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-ae8db0ad/build/sonic-model/observer-correction/changed-pair-content.cpp",
+            "build/libsadx-native.a",
+            "-framework",
+            "Foundation",
+            "-o",
+            "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-ae8db0ad/build/sonic-model/observer-correction/changed-pair-content-after.dylib"
+          ],
+          "exit_status": 1,
+          "failures": 80,
+          "partials": 0,
+          "first_failure": [
+            {
+              "case": 0,
+              "input": [
+                0,
+                0,
+                102,
+                0,
+                29136,
+                34408,
+                192,
+                42095,
+                4294967295,
+                1282325866,
+                17,
+                206,
+                924566631
+              ],
+              "differences": [
+                [
+                  321,
+                  0,
+                  1
+                ],
+                [
+                  339,
+                  0,
+                  1
+                ],
+                [
+                  507,
+                  0,
+                  1
+                ],
+                [
+                  523,
+                  0,
+                  1
+                ],
+                [
+                  541,
+                  0,
+                  1
+                ]
+              ]
+            }
+          ],
+          "library_sha256": "8cfe80fafe3b2ce122d2fb8b84bd718253b4d5c273d37261855bee0160511fdd",
+          "report_sha256": "7ad51974a9a64ba5d8da7c06e6ee8a408bc2d762ee388e8eced1ce332eea8721"
+        }
+      ]
+    }
+  ],
+  "prior_faults_caught": 7,
+  "probe_abi": {
+    "legacy_320_word_canary_preserved": true,
+    "insufficient_capacity_rejected_before_access": true
+  },
+  "dependency_checks": [
+    {
+      "header": "src/runtime/native_session.hpp",
+      "before_rebuild": false,
+      "after_rebuild": true,
+      "before": "make: `build/sonic-model-callback.o' is up to date.\n",
+      "after": "xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -MMD -MP -Isrc -Itests/fixtures -c build/sonic-model-selection-preview.cpp -o build/sonic-model-callback.o\n"
+    },
+    {
+      "header": "src/runtime/native_player_system.hpp",
+      "before_rebuild": false,
+      "after_rebuild": true,
+      "before": "make: `build/sonic-model-callback.o' is up to date.\n",
+      "after": "xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -MMD -MP -Isrc -Itests/fixtures -c build/sonic-model-selection-preview.cpp -o build/sonic-model-callback.o\n"
+    },
+    {
+      "header": "src/runtime/native_sonic_context.hpp",
+      "before_rebuild": false,
+      "after_rebuild": true,
+      "before": "make: `build/sonic-model-callback.o' is up to date.\n",
+      "after": "xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -MMD -MP -Isrc -Itests/fixtures -c build/sonic-model-selection-preview.cpp -o build/sonic-model-callback.o\n"
+    }
+  ],
+  "dependency_bootstrap": "First dry-run exposed the existing object had no .d file. Adding Makefile as a prerequisite forces first rebuild; -MMD -MP plus included .d then tracks headers.",
+  "native_callback_test_exit": 0,
+  "protected_changes": {
+    "Makefile": "84fb30f5e95947cc823cf662a2c5d54f011014bbb33142148ec3d9cc427cca4b",
+    "tests/probes/native_sonic_model_probe.mm": "7a8405793ae26f9225643f67484c5879ff27909ae263b20d0eb1cb100a20c6a8",
+    "reference/packets/sonic-model-native/verify_source.py": "ef6d1191486b1bb25d38d8ed21eecddf0fd38d5354a5bbad140475a3aa66facd",
+    "reference/packets/sonic-model-native/verify_pair_observer.py": "782ae5f5fa70f13bcb686734d42934e77b4f50e1ecb2d6d78e0bce0e115a38f8"
+  },
+  "limits": [
+    "Verification correction only; no new runtime recovery, Root callback admission, full gate or N3b.",
+    "All original cases, comparisons, partial identities and prior mutation definitions retained.",
+    "Existing53missing inherited binary protections remain in this isolated manifest."
+  ]
+}

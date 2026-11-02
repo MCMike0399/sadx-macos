@@ -42,3 +42,5 @@ sprite_registry	build/native-sprite-registry-probe.dylib build/native-sprite-reg
 gamma_effects	build/native-gamma-effects-probe.dylib	tools/oracles/verify_original_gamma_effects.py --exe "$(GAME_EXE)" --probe build/native-gamma-effects-probe.dylib --output build/oracles/gamma_effects.json
 
 particle_lifecycle	build/native-particle-lifecycle-probe.dylib	tools/oracles/verify_original_particle_lifecycle.py --exe "$(GAME_EXE)" --probe build/native-particle-lifecycle-probe.dylib --output build/oracles/particle_lifecycle.json
+
+sonic_model	build/native-sonic-model-probe.dylib game/imported/characters/sonic-selection.actions game/imported/characters/sonic-actor.json	tools/oracles/verify_original_sonic_model.py "$(GAME_EXE)" build/native-sonic-model-probe.dylib --output build/oracles/sonic_model.json

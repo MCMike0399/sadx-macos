@@ -1,0 +1,140 @@
+{
+  "base": "a906e198",
+  "source_commit": "18f3e8442fedcd01cb3ba66d9ac11334e1fc1739",
+  "source_files": {
+    "native-sources.txt": "4155220570ec5585d95296fb6bdd5d79f03014bbfccd6c502ee3634463da6be0",
+    "reference/symbols/overrides.tsv": "66da3d081afa06fab84ca55a60c41a2f65707edd67f84182037b80094b98c677",
+    "src/apps/native_sonic_animation_assets.hpp": "1a448c36db2105418b1343878936f507b2453e592657794784f39c5cdac9b562",
+    "src/apps/native_sonic_model_assets.hpp": "3d8d76f02a02b5f2e0d4425946a71c99bc1410a4e232317cc212f9f235ac0ab9",
+    "src/guest/sonic_player_reference.cpp": "0847b4cbe5238333fd8259358e566c7a67171274ef737ef055a9ce11aef5e6f7",
+    "src/player/sonic_model.cpp": "87e2da9fc11e711b170004c8c4706fbb6edf337598c8c62250e48d4cd699608d",
+    "src/player/sonic_model.hpp": "5fa6341efabf08531355c4e782b576e87de541523263212240a42498fccb9aef",
+    "src/player/sonic_player_internal.hpp": "4960d3c64eb6d5e11ae5ed74f93ff1302709ca21a10d96d780a869e28bdfa827",
+    "src/runtime/native_sonic_assets_native.cpp": "7744db85bdc2793ebc8c4ccd69cb82629925b5f9c1a6ae96fca4d011152245ab",
+    "src/runtime/native_sonic_binding.cpp": "d0074a6ad39152490c3efcf9c1a6a6ea6098ab83cd678e3c4672694dd2971a8d",
+    "src/runtime/native_sonic_context.hpp": "1e8692f3083dfedc2988457396228e06ace05f8f0943c9fa401c514ebc72216c",
+    "src/runtime/native_sonic_fields.hpp": "e17fde213d8bfa35a56df1d76a6234233215b48e56adb07b7e2de0cb9d913a22",
+    "src/runtime/sonic_animation_assets.cpp": "48fb14ddee959de06cacaa3e225530be8a43f6be9f62bbdad5c99795b9faa638",
+    "src/runtime/sonic_animation_assets.hpp": "ca12f5f96b260f79bd92cddad9db486d8c06940ddea2008d94c6ba855284e977",
+    "src/runtime/sonic_model_assets.cpp": "a5886f7a77373b718210e2891dfb8f9cfe9c6e1b5b3225eb1382933f53f211ee",
+    "src/runtime/sonic_model_assets.hpp": "5dfd611ac44d7cdc8199352dbe01153e4259ee05de11610b54be79df3e6bfb07"
+  },
+  "new_source": {
+    "development": {
+      "cases": 80,
+      "value_failures": 0,
+      "fp_partials": 34,
+      "strict_exit": 2
+    },
+    "holdout": {
+      "cases": 80,
+      "value_failures": 0,
+      "fp_partials": 34,
+      "strict_exit": 2
+    }
+  },
+  "compiled_faults": {
+    "core": 7,
+    "actual_callback_height": 1,
+    "all_caught": true
+  },
+  "focused_tests": {
+    "programs": 16,
+    "all_exit_zero": true,
+    "commands": "focused-tests.json"
+  },
+  "native_closure": {
+    "build_exit": 0,
+    "force_load_exit": 0,
+    "checker": "Native closure: PASS",
+    "source_members_added": [
+      "src/player/sonic_model.cpp",
+      "src/runtime/sonic_model_assets.cpp"
+    ],
+    "dependencies": "local copied/dereferenced SDL/libusb; make -j2 -o build/native-controller-deps/include/SDL3/SDL.h"
+  },
+  "source_checks": {
+    "provenance_errors": 0,
+    "readability_regressions": 0,
+    "layer_violations": 0,
+    "duplicate_global_owner_bytes": 0
+  },
+  "normal_app": {
+    "exit": 1,
+    "frames": 1332,
+    "boundary": "native_gamma_join_vertices",
+    "screenshot_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427",
+    "visually_inspected": true,
+    "image": "outgoing Sonic Adventure DX title; no visible progress claimed"
+  },
+  "root_integration": {
+    "shared_declarations_edited": false,
+    "actual_callback": "compiled from current source using build-only exact ROOT-WIRING.patch; shared callback file stays byte-identical to base",
+    "automatic_registration": "new unit TSV row has all arguments in field2; generated command executed; new oracle target executed and returns2 partial"
+  },
+  "limits": [
+    "Root reviews/integrates shared callback and inventories.",
+    "First real Sonic initialization reaches LoadCharTextures at source call49abeb. The source-required changed-sibling normal path stops at PJoinVertexes call49ab9e.",
+    "Texture loading, remaining mode0 block, PSetMotion and final weld/common tail remain explicit outside this prefix. No complete actor frame, N3b, full gate, cold build or push.",
+    "First cached Ghidra/symbol evidence was sufficient; no fresh Ghidra, agents, new checkout, Gamma weld edits, schedules, storage/provider changes or Main writes.",
+    "Historical source-build setup misses and corrected fresh tests are documented in ATTEMPTS.md."
+  ],
+  "logs": {
+    "build/sonic-model/final-build.log": "a98b04fbb42c5284fd0e4a99863f7865f83f75ad7765207efc70c3baabe128af",
+    "build/sonic-model/registered-oracle.log": "b1a1874f2aba77dc85a55f5893d082562f419f817760647071f81c3db2aaf9b7",
+    "build/sonic-model/reference-build2.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/sonic-model/app/run.json": "336dafedeed9daea9de06159f129ab0d47fff8c54427b715b0159405c4013eee",
+    "build/sonic-model/app/stderr.log": "84f7ece7255308b7c7bc16da1af27a8d9f46716cb76a2809dea51617a64a50f3",
+    "build/sonic-model/provenance2.log": "2d148e3593b80c8edf2d4d0373b59c41ab812c577048048f254d98d11a563b37",
+    "build/sonic-model/readability.log": "63b32897b66ae07b334846299b81ba2551193e30b96754483a2af165ebccc9ac",
+    "build/sonic-model/layers.log": "5562fcfa762d63394b722a04826cf794222f4159fcc351b88a899e461deb0dfa"
+  },
+  "unchanged_animation_table": {
+    "source_game_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+    "source_dll_sha256": "76bbaa1b6aa23872648e6f1f39642e4262403e372b4c4b32f20f0ec89780c2a5",
+    "pack_sha256": "c414e173bf4bf9f803f24d61642e233ff9650fe9276d70da2ac3939fee2b5d7f",
+    "export_sha256": "cca605d27263951f0649d79b26c6602e3731b735c8098c1cbc3c9f1162e12ce9",
+    "producer_sha256": "4fb64e48d45e6008328627f24c9065e89240ec2b5458cedfb73a6ce26d183944",
+    "output_sha256": "9ec5d1a6049136911067fa3347351462023986acefdcbd0a32f8644eea345ca9",
+    "source_ranges": {
+      "0x7cec90": {
+        "size": 7674,
+        "sha256": "4fb64e48d45e6008328627f24c9065e89240ec2b5458cedfb73a6ce26d183944"
+      }
+    },
+    "declaration_slots": 149,
+    "table_rows": 147,
+    "compared_bytes": 2352,
+    "byte_mismatches": 0,
+    "counts": {
+      "loaded": 4,
+      "known_null": 3,
+      "unavailable": 142
+    },
+    "loaded_exports": [
+      1,
+      5,
+      100,
+      101
+    ],
+    "null_exports": [
+      24,
+      25,
+      26
+    ],
+    "source_alias_groups": [],
+    "appended_records": 0,
+    "pack_reconstruction_exact": true,
+    "limits": [
+      "Original producer comparison is table initialization, not an actor frame or animation pose sampler.",
+      "Payload decoder uses the already inverse-proved MDATA2 pack closure; MDATA3 remains unavailable."
+    ]
+  },
+  "judge": {
+    "protected_keys": 1412,
+    "present_local": 1359,
+    "expected_missing_local": 53,
+    "other_drift": 0,
+    "full_gate": false
+  }
+}

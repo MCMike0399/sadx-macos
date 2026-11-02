@@ -1,0 +1,59 @@
+{
+  "base": "a906e198",
+  "source_dossier": {
+    "path": "/Users/burbujamc/Developer/sadx-macos/reference/ghidra-gameplay-live-recovery/sonic-main.json",
+    "sha256": "1d0efdf6304ebc671bbc101955ac70cc7c5f72bbb9e13e4a2dcb61234fe9b1fb",
+    "evidence_id": "ev_ba234573e6c1cb6b8bfca460cf97a528b7eeb9d3603e124fb4fcfaca6f8082a6",
+    "subject": {
+      "name": "sonic.exe",
+      "digest": {
+        "sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74"
+      },
+      "format": "pe",
+      "architecture": "x86",
+      "local_path": "/Users/burbujamc/Developer/rea/Sonic Adventure DX/sonic.exe"
+    },
+    "body": {
+      "available": true,
+      "provenance": "ghidra-function-body-address-set",
+      "ranges": [
+        {
+          "start": "0x49a9b0",
+          "end": "0x49bfbb"
+        }
+      ],
+      "total_bytes": 5644,
+      "span_bytes": 5644,
+      "non_contiguous": false,
+      "contains_entry": true
+    }
+  },
+  "inline_range": {
+    "start": "0x49ab58",
+    "end_exclusive": "0x49abf0",
+    "not_a_function_entry": true
+  },
+  "prefix_end": "before LoadCharTextures at call49abeb",
+  "normal_next": "PJoinVertexes at call49ab9e; no helper execution claimed",
+  "alternate_next": "LoadCharTextures at call49abeb, after real CCL_Init",
+  "ownership": {
+    "0x3c55e28": "37 PL_JOIN_VERTEX records, 888 source bytes, one live native table",
+    "0x3c55f38": "row11.destination_object in the preceding table; not a distinct GLOBAL",
+    "0x3c55d40": "one source-zero sibling cache, native imported object identity"
+  },
+  "content": "existing SDXACT03 3328 records; slots5/6 and Sonic joins/pairs and collision only; no new import",
+  "not_consumed": "slot22, Metal joins, direct-ahead, parameters metadata and selected actions are not decoded again",
+  "consumer": "ObjectState is borrowed by animation Runtime.scene_objects and native_object_draw; join table pointer is published in canonical player animation tail",
+  "limits": [
+    "normal first helper is unimplemented",
+    "prefix does not implement textures, subsequent initialization, active matrices or actor frame",
+    "current callback source/Root shared declarations remain unchanged; exact wiring hunk is exercised separately"
+  ],
+  "real_imported_initial_sibling": "slot6.sibling already equals slot5, verified from actual first callback and source DLL object; first normal call skips initial PJoin",
+  "alternate_scope": "nonzero Metal flag skips splice and uses the same slot6, not proof of later Metal content/appearance",
+  "cache_source_initialization": {
+    "section": ".data",
+    "raw_end": "0x38f7000",
+    "virtual_end": "0x3d12e40"
+  }
+}

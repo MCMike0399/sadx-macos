@@ -974,3 +974,12 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Only unchanged input-declaration consumer hashes and existing warning-header evidence were rebound. The original-caller proof script is explicitly protected; all 1,418 protections are retained with zero drift.
 * gamma-input-root-integration.json preserves commands, identities and limits. The later history producer, matrices and actor work remain explicit; last full gate/cold source is e1946df8.
 * Sonic model-prefix observer and callback-dependency corrections are committed separately in its candidate branch and awaiting fresh recheck.
+
+### 2026-11-02 — Sonic model initialization prefix connected
+
+* Source 0203bf72 and Root wiring d8dc82d2 consume the reviewed model prefix. Recheck 6444da27 closes actual-pair observation and callback-dependency findings; the corrected probe preserves its old ABI and all prior case observations.
+* The shipping callback now reaches LoadCharTextures on the real normal/Metal initialization path. Changed normal siblings stop at PJoinVertexes. This is not model rendering or later Metal appearance.
+* Main app/force-load, new callback/owner checks, adapted existing callers and make check pass. Each original 80-case cohort retains zero value failures and the same 34 individual FP partials, strict exit 2.
+* Existing caller assertions remain: initialization sets Stand before the texture stop, and a repeated callback now reaches unbound controls. No fixture mode reset hides that transition. Failed former-boundary expectations remain recorded.
+* The generated callback equals the shipping source; header dependencies and inline-loader prerequisites are complete. Only the unchanged sound-table consumer fingerprint was rebound. No inherited protection was removed.
+* Normal input remains at Gamma GetMMMatrix, frame 1332, exit 1, with unchanged title image. sonic-model-root-integration.json records focused scope. Full gate/cold qualification remains e1946df8 until the next combined run succeeds.

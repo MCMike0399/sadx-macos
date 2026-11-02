@@ -1,0 +1,657 @@
+[
+  {
+    "name": "metal_guard",
+    "command": [
+      "xcrun",
+      "clang++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-arch",
+      "arm64",
+      "-mmacosx-version-min=14.0",
+      "-fobjc-arc",
+      "-Isrc",
+      "-dynamiclib",
+      "tests/probes/native_sonic_model_probe.mm",
+      "build/sonic-model/faults/metal_guard.cpp",
+      "build/libsadx-native.a",
+      "-framework",
+      "Foundation",
+      "-o",
+      "build/sonic-model/faults/metal_guard.dylib"
+    ],
+    "compile_exit": 0,
+    "judge_exit": 1,
+    "failures": 60,
+    "first_failure": {
+      "case": 0,
+      "input": [
+        0,
+        0,
+        102,
+        0,
+        29136,
+        34408,
+        192,
+        42095,
+        4294967295,
+        1282325866,
+        17,
+        206,
+        924566631
+      ],
+      "differences": [
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          1,
+          102,
+          0
+        ],
+        [
+          2,
+          102,
+          0
+        ],
+        [
+          3,
+          1,
+          0
+        ],
+        [
+          4,
+          0,
+          29136
+        ],
+        [
+          5,
+          34408,
+          0
+        ],
+        [
+          6,
+          192,
+          1
+        ],
+        [
+          7,
+          42095,
+          42051
+        ],
+        [
+          8,
+          0,
+          213152
+        ],
+        [
+          9,
+          0,
+          213376
+        ],
+        [
+          10,
+          213120,
+          213472
+        ],
+        [
+          11,
+          0,
+          1098087258
+        ],
+        [
+          12,
+          0,
+          2
+        ],
+        [
+          13,
+          0,
+          32768
+        ],
+        [
+          28,
+          102,
+          0
+        ],
+        [
+          97,
+          102,
+          0
+        ],
+        [
+          251,
+          0,
+          3758491392
+        ],
+        [
+          252,
+          0,
+          1056
+        ],
+        [
+          254,
+          0,
+          1065353216
+        ],
+        [
+          256,
+          0,
+          924566631
+        ],
+        [
+          257,
+          0,
+          1082130432
+        ],
+        [
+          258,
+          0,
+          1059481190
+        ],
+        [
+          263,
+          0,
+          7340290
+        ],
+        [
+          264,
+          0,
+          3678216
+        ],
+        [
+          266,
+          0,
+          1073741824
+        ],
+        [
+          267,
+          0,
+          1082130432
+        ],
+        [
+          268,
+          0,
+          1080033280
+        ],
+        [
+          269,
+          0,
+          1092616192
+        ]
+      ]
+    }
+  },
+  {
+    "name": "equal_sibling_guard",
+    "command": [
+      "xcrun",
+      "clang++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-arch",
+      "arm64",
+      "-mmacosx-version-min=14.0",
+      "-fobjc-arc",
+      "-Isrc",
+      "-dynamiclib",
+      "tests/probes/native_sonic_model_probe.mm",
+      "build/sonic-model/faults/equal_sibling_guard.cpp",
+      "build/libsadx-native.a",
+      "-framework",
+      "Foundation",
+      "-o",
+      "build/sonic-model/faults/equal_sibling_guard.dylib"
+    ],
+    "compile_exit": 0,
+    "judge_exit": 1,
+    "failures": 4,
+    "first_failure": {
+      "case": 4,
+      "input": [
+        0,
+        102,
+        102,
+        94,
+        31773,
+        16709,
+        248,
+        23446,
+        4294967295,
+        1211352721,
+        240,
+        131,
+        4076075461
+      ],
+      "differences": [
+        [
+          0,
+          2,
+          1
+        ],
+        [
+          3,
+          0,
+          1
+        ],
+        [
+          4,
+          31773,
+          0
+        ],
+        [
+          5,
+          0,
+          16709
+        ],
+        [
+          6,
+          1,
+          248
+        ],
+        [
+          7,
+          23426,
+          23446
+        ],
+        [
+          8,
+          213152,
+          0
+        ],
+        [
+          9,
+          213376,
+          0
+        ],
+        [
+          10,
+          213472,
+          213120
+        ],
+        [
+          11,
+          1098087258,
+          0
+        ],
+        [
+          12,
+          2,
+          0
+        ],
+        [
+          13,
+          32768,
+          0
+        ],
+        [
+          97,
+          94,
+          102
+        ],
+        [
+          251,
+          3758491392,
+          0
+        ],
+        [
+          252,
+          1056,
+          0
+        ],
+        [
+          254,
+          1065353216,
+          0
+        ],
+        [
+          256,
+          4076075461,
+          0
+        ],
+        [
+          257,
+          1082130432,
+          0
+        ],
+        [
+          258,
+          1059481190,
+          0
+        ],
+        [
+          263,
+          7340290,
+          0
+        ],
+        [
+          264,
+          3678216,
+          0
+        ],
+        [
+          266,
+          1073741824,
+          0
+        ],
+        [
+          267,
+          1082130432,
+          0
+        ],
+        [
+          268,
+          1080033280,
+          0
+        ],
+        [
+          269,
+          1092616192,
+          0
+        ]
+      ]
+    }
+  },
+  {
+    "name": "splice_identity",
+    "command": [
+      "xcrun",
+      "clang++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-arch",
+      "arm64",
+      "-mmacosx-version-min=14.0",
+      "-fobjc-arc",
+      "-Isrc",
+      "-dynamiclib",
+      "tests/probes/native_sonic_model_probe.mm",
+      "build/sonic-model/faults/splice_identity.cpp",
+      "build/libsadx-native.a",
+      "-framework",
+      "Foundation",
+      "-o",
+      "build/sonic-model/faults/splice_identity.dylib"
+    ],
+    "compile_exit": 0,
+    "judge_exit": 1,
+    "failures": 12,
+    "first_failure": {
+      "case": 0,
+      "input": [
+        0,
+        0,
+        102,
+        0,
+        29136,
+        34408,
+        192,
+        42095,
+        4294967295,
+        1282325866,
+        17,
+        206,
+        924566631
+      ],
+      "differences": [
+        [
+          1,
+          102,
+          94
+        ],
+        [
+          28,
+          102,
+          94
+        ],
+        [
+          97,
+          102,
+          94
+        ]
+      ]
+    }
+  },
+  {
+    "name": "join_destination_neighbor",
+    "command": [
+      "xcrun",
+      "clang++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-arch",
+      "arm64",
+      "-mmacosx-version-min=14.0",
+      "-fobjc-arc",
+      "-Isrc",
+      "-dynamiclib",
+      "tests/probes/native_sonic_model_probe.mm",
+      "build/sonic-model/faults/join_destination_neighbor.cpp",
+      "build/libsadx-native.a",
+      "-framework",
+      "Foundation",
+      "-o",
+      "build/sonic-model/faults/join_destination_neighbor.dylib"
+    ],
+    "compile_exit": 0,
+    "judge_exit": 1,
+    "failures": 12,
+    "first_failure": {
+      "case": 0,
+      "input": [
+        0,
+        0,
+        102,
+        0,
+        29136,
+        34408,
+        192,
+        42095,
+        4294967295,
+        1282325866,
+        17,
+        206,
+        924566631
+      ],
+      "differences": [
+        [
+          97,
+          102,
+          0
+        ],
+        [
+          103,
+          3269,
+          102
+        ]
+      ]
+    }
+  },
+  {
+    "name": "join_mode",
+    "command": [
+      "xcrun",
+      "clang++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-arch",
+      "arm64",
+      "-mmacosx-version-min=14.0",
+      "-fobjc-arc",
+      "-Isrc",
+      "-dynamiclib",
+      "tests/probes/native_sonic_model_probe.mm",
+      "build/sonic-model/faults/join_mode.cpp",
+      "build/libsadx-native.a",
+      "-framework",
+      "Foundation",
+      "-o",
+      "build/sonic-model/faults/join_mode.dylib"
+    ],
+    "compile_exit": 0,
+    "judge_exit": 1,
+    "failures": 12,
+    "first_failure": {
+      "case": 0,
+      "input": [
+        0,
+        0,
+        102,
+        0,
+        29136,
+        34408,
+        192,
+        42095,
+        4294967295,
+        1282325866,
+        17,
+        206,
+        924566631
+      ],
+      "differences": [
+        [
+          4,
+          0,
+          2
+        ]
+      ]
+    }
+  },
+  {
+    "name": "cache_prefix",
+    "command": [
+      "xcrun",
+      "clang++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-arch",
+      "arm64",
+      "-mmacosx-version-min=14.0",
+      "-fobjc-arc",
+      "-Isrc",
+      "-dynamiclib",
+      "tests/probes/native_sonic_model_probe.mm",
+      "build/sonic-model/faults/cache_prefix.cpp",
+      "build/libsadx-native.a",
+      "-framework",
+      "Foundation",
+      "-o",
+      "build/sonic-model/faults/cache_prefix.dylib"
+    ],
+    "compile_exit": 0,
+    "judge_exit": 1,
+    "failures": 12,
+    "first_failure": {
+      "case": 0,
+      "input": [
+        0,
+        0,
+        102,
+        0,
+        29136,
+        34408,
+        192,
+        42095,
+        4294967295,
+        1282325866,
+        17,
+        206,
+        924566631
+      ],
+      "differences": [
+        [
+          2,
+          102,
+          94
+        ]
+      ]
+    }
+  },
+  {
+    "name": "primary_mode",
+    "command": [
+      "xcrun",
+      "clang++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-arch",
+      "arm64",
+      "-mmacosx-version-min=14.0",
+      "-fobjc-arc",
+      "-Isrc",
+      "-dynamiclib",
+      "tests/probes/native_sonic_model_probe.mm",
+      "build/sonic-model/faults/primary_mode.cpp",
+      "build/libsadx-native.a",
+      "-framework",
+      "Foundation",
+      "-o",
+      "build/sonic-model/faults/primary_mode.dylib"
+    ],
+    "compile_exit": 0,
+    "judge_exit": 1,
+    "failures": 34,
+    "first_failure": {
+      "case": 4,
+      "input": [
+        0,
+        102,
+        102,
+        94,
+        31773,
+        16709,
+        248,
+        23446,
+        4294967295,
+        1211352721,
+        240,
+        131,
+        4076075461
+      ],
+      "differences": [
+        [
+          6,
+          1,
+          2
+        ]
+      ]
+    }
+  }
+]

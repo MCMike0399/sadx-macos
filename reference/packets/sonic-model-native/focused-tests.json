@@ -1,0 +1,114 @@
+[
+  {
+    "name": "character-object-state",
+    "generated_command": "/usr/bin/time -p ./build/character-object-state-test game/imported/characters/sonic-selection.actions",
+    "exit": 0,
+    "stdout": "Character objects: shared mutable identity, stable borrows, immutable import and missing-resource boundaries pass\n",
+    "stderr": "real 0.23\nuser 0.00\nsys 0.00\n"
+  },
+  {
+    "name": "object-draw-native",
+    "generated_command": "/usr/bin/time -p ./build/object-draw-native-test",
+    "exit": 0,
+    "stdout": "",
+    "stderr": "real 0.13\nuser 0.00\nsys 0.00\n"
+  },
+  {
+    "name": "normal-uv-strip",
+    "generated_command": "/usr/bin/time -p ./build/normal-uv-strip-test",
+    "exit": 0,
+    "stdout": "normal_uv_strip: 12 checks passed\n",
+    "stderr": "real 0.13\nuser 0.00\nsys 0.00\n"
+  },
+  {
+    "name": "character-geometry",
+    "generated_command": "/usr/bin/time -p ./build/character-geometry-test game/imported/characters/sonic-selection.actions",
+    "exit": 0,
+    "stdout": "",
+    "stderr": "real 0.13\nuser 0.00\nsys 0.00\n"
+  },
+  {
+    "name": "collision-component",
+    "generated_command": "/usr/bin/time -p ./build/collision-component-test",
+    "exit": 0,
+    "stdout": "Canonical primary/motion, real scheduler cleanup/reentry, store prefix and allocation failures pass\n",
+    "stderr": "real 0.16\nuser 0.00\nsys 0.00\n"
+  },
+  {
+    "name": "animation-gamma-shared-binding",
+    "generated_command": "/usr/bin/time -p ./build/animation-gamma-shared-binding-test game/imported",
+    "exit": 0,
+    "stdout": "Two real Gamma players share one imported table; isolated state and failed-binding prefixes pass\n",
+    "stderr": "real 0.17\nuser 0.00\nsys 0.00\n"
+  },
+  {
+    "name": "sonic-controller-native",
+    "generated_command": "/usr/bin/time -p ./build/sonic-controller-native-test",
+    "exit": 0,
+    "stdout": "Controlled native Sonic ownership/order harness passed\n",
+    "stderr": "real 0.15\nuser 0.00\nsys 0.00\n"
+  },
+  {
+    "name": "sonic-controller-reference",
+    "generated_command": "/usr/bin/time -p ./build/sonic-controller-reference-test",
+    "exit": 0,
+    "stdout": "Reference Sonic callback reload contracts passed\n",
+    "stderr": "real 0.14\nuser 0.00\nsys 0.00\n"
+  },
+  {
+    "name": "sonic-physics-capture-native",
+    "generated_command": "/usr/bin/time -p ./build/sonic-physics-capture-native-test",
+    "exit": 0,
+    "stdout": "{\"null\":0,\"same_player\":1,\"acceleration_x\":0,\"speed\":3,\"new_speed\":103,\"target_yaw\":0}\n{\"null\":1,\"same_player\":1,\"acceleration_x\":0,\"speed\":3,\"new_speed\":103,\"target_yaw\":0}\n{\"null\":0,\"same_player\":1,\"acceleration_x\":4.225,\"speed\":3,\"new_speed\":103,\"target_yaw\":0}\n{\"case\":\"native_copy_finalize\",\"null\":0,\"callbacks\":1,\"original_speed\":7,\"replacement_speed\":3,\"good\":1}\n{\"case\":\"native_copy_finalize\",\"null\":1,\"callbacks\":1,\"original_speed\":7,\"replacement_speed\":103,\"good\":1}\n{\"case\":\"native_movement_capture\",\"null\":0,\"original_speed\":8,\"replacement_speed\":103,\"good\":1}\n{\"case\":\"native_movement_capture\",\"null\":1,\"original_speed\":8,\"replacement_speed\":103,\"good\":1}\n",
+    "stderr": "real 0.15\nuser 0.00\nsys 0.00\n"
+  },
+  {
+    "name": "sonic-physics-capture-reference",
+    "generated_command": "/usr/bin/time -p ./build/sonic-physics-capture-reference-test",
+    "exit": 0,
+    "stdout": "{\"case\":\"ground\",\"null\":0,\"nested\":0,\"original_identity\":1,\"nested_identity\":0,\"original_speed\":10,\"replacement_speed\":103,\"live_parameter\":19,\"good\":1}\n{\"case\":\"ground\",\"null\":1,\"nested\":0,\"original_identity\":1,\"nested_identity\":0,\"original_speed\":10,\"replacement_speed\":103,\"live_parameter\":19,\"good\":1}\n{\"case\":\"ground\",\"null\":0,\"nested\":1,\"original_identity\":1,\"nested_identity\":1,\"original_speed\":10,\"replacement_speed\":114,\"live_parameter\":19,\"good\":1}\n{\"case\":\"ground\",\"null\":1,\"nested\":1,\"original_identity\":1,\"nested_identity\":0,\"original_speed\":10,\"replacement_speed\":103,\"live_parameter\":19,\"good\":1}\n{\"case\":\"movement_capture\",\"null\":0,\"original_speed\":8,\"replacement_speed\":103,\"good\":1}\n{\"case\":\"movement_capture\",\"null\":1,\"original_speed\":8,\"replacement_speed\":103,\"good\":1}\n{\"case\":\"copy_finalize\",\"null\":0,\"callbacks\":1,\"original_speed\":7,\"replacement_speed\":3,\"good\":1}\n{\"case\":\"copy_finalize\",\"null\":1,\"callbacks\":1,\"original_speed\":7,\"replacement_speed\":103,\"good\":1}\n",
+    "stderr": "real 0.13\nuser 0.00\nsys 0.00\n"
+  },
+  {
+    "name": "native-sonic-callback",
+    "generated_command": "/usr/bin/time -p ./build/native-sonic-callback-test game/imported",
+    "exit": 0,
+    "stdout": "Real Sonic callback publishes canonical current owners before real initialization reaches the animation-table stop; captured event mode/path bindings survive primary replacement and reject release\n",
+    "stderr": "real 0.18\nuser 0.00\nsys 0.00\n"
+  },
+  {
+    "name": "sonic-animation-assets",
+    "generated_command": "/usr/bin/time -p ./build/sonic-animation-assets-test game/imported build/sonic-animation-table.tsv",
+    "exit": 0,
+    "stdout": "",
+    "stderr": "149 declarations, 147 rows, imported preview closure, seven invalid declarations, two real Sonic binds and Stand playback pass\nreal 0.29\nuser 0.00\nsys 0.00\n"
+  },
+  {
+    "name": "sonic-animation-integration",
+    "generated_command": "/usr/bin/time -p ./build/sonic-animation-integration-test game/imported",
+    "exit": 0,
+    "stdout": "Session rejects null/replacement; stable Sonic owner/table/resources; actual callback initializes real player/table and reaches explicit model stop\n",
+    "stderr": "real 0.19\nuser 0.00\nsys 0.00\n"
+  },
+  {
+    "name": "native-gamma-motion",
+    "generated_command": "/usr/bin/time -p ./build/native-gamma-motion-test game/imported build/gamma-motion-observations.tsv",
+    "exit": 0,
+    "stdout": "Real Gamma initialization reaches PJoinVertexes; canonical motion, live scene, keys and aliases pass\n",
+    "stderr": "real 0.17\nuser 0.00\nsys 0.00\n"
+  },
+  {
+    "name": "native-editor-binding",
+    "generated_command": "/usr/bin/time -p ./build/native-editor-binding-test game/imported build/editor-native.tsv",
+    "exit": 0,
+    "stdout": "81 production callback editor pairs; shared Gamma signed results; missing read order; initialized player/table; actual cleanup uses canonical word\n",
+    "stderr": "real 0.19\nuser 0.00\nsys 0.00\n"
+  },
+  {
+    "name": "sonic-model-native",
+    "generated_command": "/usr/bin/time -p ./build/sonic-model-native-test game/imported",
+    "exit": 0,
+    "stdout": "Real callback plus exact Root hunk: first normal collision/texture boundary; live Metal skip; changed-sibling splice/PJoin boundary; absent-model boundary; canonical aliases and animation scene consumer\n",
+    "stderr": "scenario 0 boundary sonic_LoadCharTextures\nscenario 1 boundary sonic_LoadCharTextures\nscenario 2 boundary sonic_model_graph\nscenario 3 boundary sonic_PJoinVertexes\nreal 0.19\nuser 0.01\nsys 0.00\n"
+  }
+]

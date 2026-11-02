@@ -32,7 +32,7 @@ struct SonicCallbackProbe {
             assert(session.players_.current.primary == primary);
             assert(task->primary_work == primary && task->motion_work == motion);
         };
-        invoke("sonic_model_graph");
+        invoke("sonic_LoadCharTextures");
         const auto player = session.players_.registry.players[0];
         assert(player && player->stage == player_initialization::Stage::Complete);
         assert(!session.players_.current.player); // captured before PInitialize
