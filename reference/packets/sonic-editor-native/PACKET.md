@@ -67,3 +67,9 @@ paths, are retained; finite registrations and exact local judge limits are in
 registration.json. Only two unrelated save-warning header fingerprints and their
 mirror are narrowly rebound; their open debt is unchanged. Broad inventory
 regeneration is left to Root after shared-field reconciliation.
+
+Root standards correction: source annotation 0bf4f86e adds checked provenance
+for the mission word without changing C++ tokens. counterpart-provenance.json
+records explicit native/reference pairing, preserved old test bodies, 19 provenance
+and 17 judge tests, and the actual duplicate-native rejection. Runtime behavior
+remains the accepted 29acd317 scope; fresh correction review is pending.

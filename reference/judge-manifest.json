@@ -1,9 +1,9 @@
 {
   "change": {
-    "base_commit": "9f6ec53b9671c25b9ae10273f44928698687bebd",
-    "evidence": "reference/packets/sonic-editor-native/registration.json",
-    "evidence_sha256": "090935e84c200e09e4d00c01156e3d5ff06b4a8a1edb3207b6130c3e76cc9e1e",
-    "reason": "Qualify recovered editor reads and actual callback progress; existing callback tests now require real initialization/table/model boundaries and retain their publication/event/lifetime assertions. Numeric expected values, tolerances, existing numeric inputs and mutants remain unchanged; the two obsolete missing-editor boundary assertions advance to independently verified initialization boundaries."
+    "base_commit": "0bf4f86ef99c4162728f9454f192e69690435c3d",
+    "evidence": "reference/packets/sonic-editor-native/counterpart-provenance.json",
+    "evidence_sha256": "787b9e9ebab5b93d75546eec7c8ea732f61edabd626b192d6dd59409d0649cb8",
+    "reason": "Check the mission-editor native/reference scalar counterpart explicitly without exempting additional owners or changing fixture behavior"
   },
   "files": {
     "Makefile": "1e9290ddf3fea61568f74cbe854b97976d1f326c977b3080ca2c6ff5636aaee0",
@@ -390,6 +390,7 @@
     "reference/production-integration-20261101/session-character-resources-mutants.json": "bdb70359726436c7cfefe5729e02e75f35aa1a4b98dc1934c3df0293fb8c8693",
     "reference/production-integration-20261101/session-regular-resources-mutants.json": "c56fe89a628d98ed2e1fe439c2fc99e8d7c5070978d30c2b2d344aa0a428f4ea",
     "reference/production-integration-20261101/session-save-owner-mutants.json": "b95ec90bb88e7a03c6d3b95e47dbda27880253048f28df6101810123df741fd6",
+    "reference/symbols/native-counterparts.json": "b14628b1d4a00f13f84d72d9a8bfbbb053095d8be52f15f10b1d45b590ab656b",
     "tests/fixtures/animation_table_publications.hpp": "072315e8f29640e0da452332f9da5f7c8d81813dd57c377f2d1641e0c11c18e1",
     "tests/fixtures/character_material_consumer.hpp": "c6848852924404622e38964b21449c793e2cdb2b618f29ef3f5b6aa506b8916b",
     "tests/fixtures/character_resource_baseline.hpp": "ebf3af3eaa54ab6ad1255f0c71dff69f28bb8b6fa4789e7684d20cb107f7a77f",
@@ -695,7 +696,7 @@
     "tests/python/test_native_closure.py": "b41630f057e2f69982e8257d03de98ca07c7952de193d34b8d3b21388cad1f85",
     "tests/python/test_native_main_menu_journey.py": "85ac3d1f9be696152dbd1600d6d393812fcf939dcc525cc9d310e5174908a714",
     "tests/python/test_native_settings.py": "6496b84d39012c5ea69aacd06ad1d41475f580016da9c22ab4a5f2b44dea58d6",
-    "tests/python/test_provenance.py": "ce62fc0efc2ef9a92b2493adaf994fcbc38af4427c16c28eabe6aea72287fcc2",
+    "tests/python/test_provenance.py": "05cd844bfcfa1737ebb808158d5db1a174237a24cf3a49159dfc675bb3ed6747",
     "tests/python/test_readability.py": "5593d449e6b7f507e233903a14aaae0a6c3621db888b31ae2169a3ca5229db94",
     "tests/python/test_refactor_inventory_lineage.py": "0f990c507ca3f786a4cccd7db0db487cdc4134ebbff4f7b7e35c4d3e68469738",
     "tests/python/test_refactor_inventory_lineage_regressions.py": "e29e69074d2992c1c0671fe21706389c58c7d921e9b41c76028f23456540c5a0",
@@ -1062,7 +1063,7 @@
     "tools/gate/check_global_owners.py": "764714cd1fbdeab7b77f3b50d9efb64f12992f791758e3f07602a938b32ef504",
     "tools/gate/check_input_initial_state.py": "2a9de3ce38d6a1c8bef12e6c87fd8181a0888c15e5033b5c8b8b6a873f2352e1",
     "tools/gate/check_input_mod_constants.py": "be8443495170b4ecbc7388c3e60f387242847ae7318e3e310b6a53c74300614b",
-    "tools/gate/check_judge.py": "6dd85f4933371d319633df5ada46e04f19439987bfecc141a226abd3296cea24",
+    "tools/gate/check_judge.py": "a19124f2589d4ded0ca08eca83f92e59cc11fe052612c1f465109d65e8b7b04f",
     "tools/gate/check_layers.py": "2b72408ccd936baa5da22b36eefbf90ce2af4ebf1ab01dc63a5f45f5fa9615c1",
     "tools/gate/check_library_initial_state.py": "6d5d21de9176f715328496408b5e87e5d80f72793cdfe13a4e7dc09931201080",
     "tools/gate/check_native_closure.py": "405656d6154dc89aec53cdc49c854ae6ec9287b7bb58dc894daa6ee07d8bc2d2",
@@ -1072,7 +1073,7 @@
     "tools/gate/check_ninja_screen_initial_state.py": "5d24a2942d0efea31ddeeb5b209ee09623e515e7d0cd00c8259db25cc7922b92",
     "tools/gate/check_ninja_sine_table.py": "3476a71e07de4b1f98db2cc9924052995517ef16da5a61be1d1ff7ea82e16fb5",
     "tools/gate/check_profile_patches.py": "1c9a845b3d07312b3e76233adeb56478a1d7edbdfed1873db6a50fe6e1407fda",
-    "tools/gate/check_provenance.py": "67b03f53ae1843e5fb4febf9322344955598f152c85e1e6f4332b05c55f6ed35",
+    "tools/gate/check_provenance.py": "4f7abf819923965592b868112cdd38feb503b2cb471840816c4b5ae96aa7243f",
     "tools/gate/check_readability.py": "4be4b86842b84692df425fbd8456c2964c69e79bf8c3222b701e0ec1c7fd7d51",
     "tools/gate/check_repo_hygiene.py": "68839116ffd89250e666116fa254e538c7dc847af5c365016c868a135d9efdd0",
     "tools/gate/check_session_control_defaults.py": "0b610a128768e26ce7082c7f609f5f544b6c3931dea7a27ef593dd58a492c89d",

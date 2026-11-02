@@ -15,6 +15,7 @@ DIRECTORIES = ('tools/oracles', 'tools/gate', 'tools/lib', 'tests/probes', 'test
                'tests/python', 'tests/unit', 'reference/oracle-reports')
 REFERENCE_PACKET_DIRECTORY = 'reference/packets'
 FILES = ('tools/inventory/refactor_inventory.py',
+         'reference/symbols/native-counterparts.json',
          'reference/constexpr-table-review.json', 'reference/address-dispatch-baseline-v1.json', 'tools/journey/content_corpus.py', 'tools/journey/capture_content.py', 'tools/journey/compare_native_startup.py', 'tools/journey/check_native_file_select.py', 'tools/journey/check_native_main_menu.py', 'tools/journey/check_native_fresh_save.py', 'Makefile', 'tests/unit/manifest.tsv', 'reference/frame-control-corpus.tsv',
          'reference/frame-control-corpus.json', 'reference/keyboard-sampling-goldens.json',
          'reference/judge-hook-settings.proposed.json',

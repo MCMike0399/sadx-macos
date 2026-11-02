@@ -1,5 +1,7 @@
 """Adversarial source fixtures for ownership/provenance migration."""
 import pathlib
+import hashlib
+import json
 import sys
 import tempfile
 import unittest
@@ -171,6 +173,88 @@ std::uint32_t pad;
 // GLOBAL: SONIC 0x10000000 Separate size=4
 std::uint32_t separate;
 '''), [])
+
+    def counterpart_fixture(self):
+        reference = self.root / 'src/guest/facts.hpp'
+        reference.parent.mkdir(parents=True)
+        reference.write_text('struct Facts {\nstd::optional<std::int16_t> word_at_900002;\n};\n')
+        native = ('struct Native {\n// GLOBAL: SONIC 0x900002 HighWord size=2\n'
+                  'std::uint16_t high;\n};\n')
+        self.path.write_text(native)
+        evidence = self.root / 'reference/word-evidence.txt'
+        evidence.parent.mkdir(parents=True)
+        evidence.write_text('The native word and the separately executed reference fixture share source bits.')
+        record = dict(module='SONIC', address='0x900002', size=2,
+                      native_path='src/engine/frame.hpp', native_member='high',
+                      reference='src/guest/facts.hpp:Facts.word_at_900002',
+                      reason='One native word; one reference fixture fact.',
+                      evidence='reference/word-evidence.txt',
+                      evidence_sha256=hashlib.sha256(evidence.read_bytes()).hexdigest())
+        return native, legacy_snapshot(self.root), record
+
+    def write_counterparts(self, records):
+        path = self.root / 'reference/symbols/native-counterparts.json'
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps(dict(schema=1, counterparts=records)))
+        return path
+
+    def test_counterpart_requires_explicit_pair(self):
+        native, baseline, record = self.counterpart_fixture()
+        self.assertEqual(sum('overlapping GLOBAL' in e for e in self.run_check(native, baseline)), 2)
+        self.write_counterparts([record])
+        self.assertEqual(self.run_check(native, baseline), [])
+        self.assertTrue(any('matching native GLOBAL' in e for e in self.run_check(
+            native.replace('// GLOBAL: SONIC 0x900002 HighWord size=2\n', ''), baseline)))
+
+    def test_counterpart_rejects_other_owners_and_duplicate_records(self):
+        native, baseline, record = self.counterpart_fixture()
+        self.write_counterparts([record])
+        duplicate = native.replace('Native', 'Other').replace('high;', 'shadow;')
+        self.assertEqual(sum('overlapping GLOBAL' in e for e in self.run_check(native + duplicate, baseline)), 2)
+        reference = self.root / 'src/guest/facts.hpp'
+        old = reference.read_text()
+        reference.write_text(old + old.replace('Facts', 'OtherFacts').replace('word_at_', 'other_at_'))
+        self.assertTrue(any('overlapping GLOBAL' in e for e in self.run_check(native, legacy_snapshot(self.root))))
+        reference.write_text(old)
+        self.write_counterparts([record, record])
+        self.assertTrue(any('overlapping counterpart' in e for e in self.run_check(native, baseline)))
+
+    def test_counterpart_rejects_stale_identity_extent_and_role(self):
+        native, baseline, record = self.counterpart_fixture()
+        changes = [('native_member', 'missing'), ('size', 1), ('size', 4),
+                   ('native_path', 'src/guest/facts.hpp'), ('module', 'INPUT'),
+                   ('reference', 'src/guest/missing.hpp:Facts.word_at_900002')]
+        for field, value in changes:
+            with self.subTest(field=field, value=value):
+                self.write_counterparts([{**record, field: value}])
+                self.assertTrue(self.run_check(native, baseline))
+        self.write_counterparts([record])
+        reference = self.root / 'src/guest/facts.hpp'
+        reference.write_text(reference.read_text().replace('int16_t', 'int32_t'))
+        self.assertTrue(any('exact extent changed' in e for e in self.run_check(native, baseline)))
+        moved = self.root / 'src/engine/facts.hpp'
+        reference.rename(moved)
+        self.write_counterparts([{**record, 'reference': 'src/engine/facts.hpp:Facts.word_at_900002'}])
+        self.assertTrue(any('reference layer' in e for e in self.run_check(native, legacy_snapshot(self.root))))
+
+    def test_counterpart_rejects_stale_or_escaping_evidence(self):
+        native, baseline, record = self.counterpart_fixture()
+        for evidence in ['../outside.txt', '/outside.txt', 'reference/missing.txt']:
+            with self.subTest(evidence=evidence):
+                self.write_counterparts([{**record, 'evidence': evidence}])
+                self.assertTrue(self.run_check(native, baseline))
+        self.write_counterparts([record])
+        (self.root / record['evidence']).write_text('changed')
+        self.assertTrue(any('evidence hash changed' in e for e in self.run_check(native, baseline)))
+
+    def test_counterpart_rejects_malformed_catalog(self):
+        native, baseline, record = self.counterpart_fixture()
+        path = self.write_counterparts([record])
+        for document in ['{', 'null', '{}', '{"schema":1,"counterparts":{}}',
+                         '{"schema":1,"counterparts":[{}]}']:
+            with self.subTest(document=document):
+                path.write_text(document)
+                self.assertTrue(self.run_check(native, baseline))
 
 
 if __name__ == '__main__':

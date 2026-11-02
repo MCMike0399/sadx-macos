@@ -12,6 +12,7 @@ annotated declarations fail instead of being assigned a guessed width/owner.
 """
 import argparse
 import collections
+import hashlib
 import json
 import pathlib
 import re
@@ -23,6 +24,7 @@ LEGACY = re.compile(r'\b\w+_at_[0-9a-f]{6,8}_?\b')
 WIDTHS = {'uint8_t': 1, 'int8_t': 1, 'bool': 1, 'uint16_t': 2,
           'int16_t': 2, 'uint32_t': 4, 'int32_t': 4, 'float': 4,
           'uint64_t': 8, 'int64_t': 8, 'double': 8}
+COUNTERPARTS = 'reference/symbols/native-counterparts.json'
 
 
 def source_files(root):
@@ -131,6 +133,66 @@ def legacy_owners(root):
     return owners
 
 
+def counterpart_owners(root, legacy, annotated, errors):
+    """Bind one native scalar declaration to one separately executed fixture owner."""
+    path = root / COUNTERPARTS
+    if not path.exists():
+        return {}
+    allowed = {}
+    try:
+        document = json.loads(path.read_text())
+        if (set(document) != {'schema', 'counterparts'} or
+                type(document['schema']) is not int or document['schema'] != 1 or
+                not isinstance(document['counterparts'], list)):
+            raise ValueError('invalid counterpart catalog')
+    except (OSError, ValueError, TypeError) as error:
+        errors.append(f'{COUNTERPARTS}: {error}')
+        return allowed
+    for number, record in enumerate(document['counterparts'], 1):
+        try:
+            if set(record) != {'module', 'address', 'size', 'native_path', 'native_member',
+                               'reference', 'reason', 'evidence', 'evidence_sha256'}:
+                raise ValueError('invalid counterpart fields')
+            # Legacy fixture identifiers do not carry a DLL module identity.
+            if record['module'] != 'SONIC' or not re.fullmatch(r'0x[0-9a-f]+', record['address']):
+                raise ValueError('counterpart requires an explicit SONIC address')
+            start, size = int(record['address'], 16), record['size']
+            if type(size) is not int or size not in {1, 2, 4, 8} or start + size > 1 << 32:
+                raise ValueError('counterpart requires a scalar source extent')
+            native_path = pathlib.PurePosixPath(record['native_path'])
+            if (native_path.is_absolute() or '..' in native_path.parts or
+                    not str(native_path).startswith('src/') or
+                    str(native_path).startswith(('src/guest/', 'src/hle/'))):
+                raise ValueError('native counterpart must be outside the reference layer')
+            reference = record['reference']
+            if not reference.startswith(('src/guest/', 'src/hle/')):
+                raise ValueError('counterpart facts must belong to the reference layer')
+            keys = {('SONIC', byte) for byte in range(start, start + size)}
+            reference_keys = {key for key, names in legacy.items() if reference in names}
+            if reference_keys != keys:
+                raise ValueError('reference counterpart is missing or its exact extent changed')
+            native = annotated.get(('SONIC', start, size, str(native_path), record['native_member']), [])
+            if len(native) != 1:
+                raise ValueError('counterpart needs exactly one matching native GLOBAL declaration')
+            if not isinstance(record['reason'], str) or not record['reason'].strip():
+                raise ValueError('counterpart needs an ownership reason')
+            evidence = pathlib.PurePosixPath(record['evidence'])
+            if evidence.is_absolute() or '..' in evidence.parts:
+                raise ValueError('counterpart evidence must be repository-relative')
+            evidence_path = (root / evidence).resolve()
+            if not evidence_path.is_relative_to(root.resolve()):
+                raise ValueError('counterpart evidence escapes the repository')
+            if hashlib.sha256(evidence_path.read_bytes()).hexdigest() != record['evidence_sha256']:
+                raise ValueError('counterpart evidence hash changed')
+            if keys.intersection(allowed):
+                raise ValueError('overlapping counterpart declarations')
+            for key in keys:
+                allowed[key] = {reference, native[0]}
+        except (OSError, ValueError, TypeError, KeyError, AttributeError) as error:
+            errors.append(f'{COUNTERPARTS}:{number}: {error}')
+    return allowed
+
+
 def check(root, database, baseline):
     errors = []
     current = legacy_identifiers(root)
@@ -142,6 +204,7 @@ def check(root, database, baseline):
     owners = collections.defaultdict(set, {key: set(value) for key, value in legacy.items()})
     entries, patches = {}, {}
     annotated_bytes = set()
+    annotated_owners = collections.defaultdict(list)
     counts = collections.Counter()
     for path in source_files(root):
         relative = str(path.relative_to(root))
@@ -209,9 +272,11 @@ def check(root, database, baseline):
                 if LEGACY.search(variable):
                     errors.append(f'{location}: migrate identifier and annotation together')
                     continue
+                claim = f'{location}:{variable}'
+                annotated_owners[(module, key[1], size, relative, variable)].append(claim)
                 for byte in range(key[1], key[1] + size):
                     byte_key = (module, byte)
-                    owners[byte_key].add(f'{location}:{variable}')
+                    owners[byte_key].add(claim)
                     annotated_bytes.add(byte_key)
             elif kind in {'FUNCTION', 'LIBRARY', 'STUB'}:
                 if not function_declaration(declaration):
@@ -226,8 +291,9 @@ def check(root, database, baseline):
             if missing:
                 errors.append(f'{record["identity"]}: lost source ownership at {missing[0]:#x}; '
                               'a semantic rename requires GLOBAL coverage of the retained source extent')
-    # Legacy-vs-legacy behavior stays under the old checker, including its struct
-    # alias allowances. Any byte touched by an annotation has exactly one owner.
+    counterparts = counterpart_owners(root, legacy, annotated_owners, errors)
+    # Legacy-vs-legacy behavior stays under the old checker. A registered fixture
+    # counterpart permits exactly that pair, never another native or fixture owner.
     for key in sorted(annotated_bytes):
         claims = set(owners[key])
         # Legacy identifiers do not encode a source module. Until a DLL owner is
@@ -235,7 +301,7 @@ def check(root, database, baseline):
         # Do not silently assume it belongs to a different DLL at the same base.
         if key[0] != 'SONIC':
             claims.update(legacy.get(('SONIC', key[1]), set()))
-        if len(claims) > 1:
+        if len(claims) > 1 and claims != counterparts.get(key):
             errors.append(f'{key[0]} {key[1]:#x}: overlapping GLOBAL owners: ' + ', '.join(sorted(claims)))
     return errors, dict(counts), len(owners)
 

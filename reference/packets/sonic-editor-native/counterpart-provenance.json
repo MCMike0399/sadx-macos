@@ -1,0 +1,57 @@
+{
+  "schema": 1,
+  "review_finding": "f46d1387 P2: newly owned mission-editor word lacked checked source provenance",
+  "source_annotation_commit": "0bf4f86ef99c4162728f9454f192e69690435c3d",
+  "runtime_header": {
+    "old_sha256": "b7989a735c8e996bbe880fd55def8461d7bb8e91be6e66b6bd7acffc69d59dcb",
+    "new_sha256": "0571a037baee4fa54e817babc265e4cc5c12423be1c6874535e047ca84b0e876",
+    "noncomment_tokens_identical": true,
+    "reference_fixture_unchanged": true
+  },
+  "checks": {
+    "before": {
+      "errors": [
+        "SONIC 0x3b29d0c: overlapping GLOBAL owners: src/guest/sonic_player_reference.hpp:SonicPlayerGlobals.forced_at_3b29d0c, src/runtime/native_session.hpp:343:mission_editor_status_",
+        "SONIC 0x3b29d0d: overlapping GLOBAL owners: src/guest/sonic_player_reference.hpp:SonicPlayerGlobals.forced_at_3b29d0c, src/runtime/native_session.hpp:343:mission_editor_status_"
+      ],
+      "counts": {
+        "FUNCTION": 542,
+        "GLOBAL": 104,
+        "STUB": 101,
+        "PATCH": 2,
+        "DATA": 7
+      },
+      "owned": 167492,
+      "noncomment_source_unchanged": true
+    },
+    "after_errors": [],
+    "duplicate_native_errors": [
+      "SONIC 0x3b29d0c: overlapping GLOBAL owners: src/guest/sonic_player_reference.hpp:SonicPlayerGlobals.forced_at_3b29d0c, src/runtime/native_session.hpp:343:mission_editor_status_, src/runtime/native_session.hpp:345:duplicate_mission_editor_status_",
+      "SONIC 0x3b29d0d: overlapping GLOBAL owners: src/guest/sonic_player_reference.hpp:SonicPlayerGlobals.forced_at_3b29d0c, src/runtime/native_session.hpp:343:mission_editor_status_, src/runtime/native_session.hpp:345:duplicate_mission_editor_status_"
+    ]
+  },
+  "python_tests": {
+    "provenance": {
+      "tests": 19,
+      "exit_status": 0,
+      "all_preexisting_method_asts_unchanged": true
+    },
+    "judge": {
+      "tests": 17,
+      "exit_status": 0
+    }
+  },
+  "scope": "One exact SONIC scalar extent: one native GLOBAL plus one existing reference-layer legacy fixture owner. Missing/stale/wrong-role/wrong-extent/duplicate mappings fail; additional owners are never exempted. Catalog itself is judge-protected.",
+  "protected_updates": {
+    "tools/gate/check_provenance.py": "4f7abf819923965592b868112cdd38feb503b2cb471840816c4b5ae96aa7243f",
+    "tools/gate/check_judge.py": "a19124f2589d4ded0ca08eca83f92e59cc11fe052612c1f465109d65e8b7b04f",
+    "tests/python/test_provenance.py": "05cd844bfcfa1737ebb808158d5db1a174237a24cf3a49159dfc675bb3ed6747",
+    "reference/symbols/native-counterparts.json": "b14628b1d4a00f13f84d72d9a8bfbbb053095d8be52f15f10b1d45b590ab656b"
+  },
+  "warning_evidence": "Only the two header hashes and their two generated mirrors change; owner declaration and debt remain unchanged.",
+  "limits": [
+    "No gameplay algorithm, reference fixture or existing oracle changed. Runtime qualification remains the previously accepted bounded state binding.",
+    "This does not certify indirect writer absence, alternate-model behavior, model graphs, N3b or a new full gate.",
+    "The isolated checkout still lacks 53 inherited protected binary inputs; their manifest entries remain intact."
+  ]
+}

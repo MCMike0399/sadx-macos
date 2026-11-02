@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "counterparts": [
+    {
+      "module": "SONIC",
+      "address": "0x3b29d0c",
+      "size": 2,
+      "native_path": "src/runtime/native_session.hpp",
+      "native_member": "mission_editor_status_",
+      "reference": "src/guest/sonic_player_reference.hpp:SonicPlayerGlobals.forced_at_3b29d0c",
+      "reason": "The product Session owns the source low word. The reference-only Sonic adapter retains its independent optional fixture fact; it is not another product owner. Both preserve the two-byte source extent.",
+      "evidence": "reference/packets/sonic-editor-native/check-edit-mode-evidence.json",
+      "evidence_sha256": "f63d5e27a227cc3d3f1972b5c98868b79ff25dbb62d328c97948ffd748a1c7ba"
+    }
+  ]
+}

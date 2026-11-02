@@ -18,3 +18,13 @@ imported animation table and canonical arena/player. The first current-player
 publication stays genuinely null. Model graph, common tail and the normal app's
 earlier PJoinVertexes boundary remain open. No reset collector, reserved vector,
 Task owner migration or full reset qualification follows from this binding.
+
+## Checked native/reference counterpart
+
+Session's mission-editor low word has a GLOBAL annotation covering exactly two
+source bytes. reference/symbols/native-counterparts.json pairs that declaration
+with the existing reference-only SonicPlayerGlobals fixture fact. The catalog
+is judge-protected and pins the source evidence. check_provenance requires both
+identities and exactly equal scalar extents; a missing annotation, changed extent,
+stale evidence, second native owner, extra fixture owner or duplicate registration
+fails. This permits no second product owner and changes no fixture behavior.
