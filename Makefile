@@ -118,8 +118,8 @@ build/reset-sonic-final: tests/fixtures/reset_sonic_final.cpp tests/reference/ac
 build/reset-reference-final: tests/fixtures/reset_reference_final.cpp build/libsadx-guest.a build/libsadx-core.a
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -MMD -MP $< build/libsadx-guest.a build/libsadx-core.a -o $@
 # Explicit reserved binding build only. This program is never run by the gate.
-build/reset-native-session-final: tests/fixtures/reset_native_session_final.cpp build/libsadx-native.a $(NATIVE_PLATFORM_OBJECTS)
-	$(CXX) $(CXXFLAGS) $(INCLUDES) -MMD -MP $< $(NATIVE_PLATFORM_OBJECTS) build/libsadx-native.a $(MAC_FRAMEWORKS) -o $@
+build/reset-native-session-final: tests/fixtures/reset_native_session_final.mm build/libsadx-native.a $(NATIVE_PLATFORM_OBJECTS)
+	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) -MMD -MP $< $(NATIVE_PLATFORM_OBJECTS) build/libsadx-native.a $(MAC_FRAMEWORKS) -o $@
 # Force-load every member: ordinary app linkage can hide a guest-only dependency
 # in an archive member the current frontier has not reached yet.
 build/sadx-native-closure: src/apps/sadx_native.mm build/libsadx-native.a $(NATIVE_PLATFORM_OBJECTS)
