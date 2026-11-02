@@ -83,8 +83,8 @@ struct TitleScene::CharacterMenuServices final : character_select_menu::Calls {
         menu_voice::request_voice(assets().selected_voice_cues[character], scene.sound_.volume_task,
                                   services);
     }
-    void select_preview(std::int32_t) override {
-        throw flow::UnrecoveredGameFlowCall("native_character_preview_motion_selection");
+    void select_preview(std::int32_t motion) override {
+        selection_preview::select_motion(scene.preview_, motion);
     }
     std::int32_t character_count() override { return character_select_menu::character_count(progress()); }
     void set_stage(std::int16_t stage, std::int16_t act) override {

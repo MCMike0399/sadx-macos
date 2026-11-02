@@ -2,6 +2,7 @@
 #include "runtime/native_session.hpp"
 #include "runtime/native_display.hpp"
 #include "player/player_initialization.hpp"
+#include "runtime/native_event_actions_context.hpp"
 
 namespace sadx::native {
 // NOTSA: adapts the source preview to the actual scheduler, primary/motion owners
@@ -136,8 +137,17 @@ struct TitleScene::PreviewServices final : selection_preview::Calls {
     void set_perspective(std::int32_t angle) override {
         scene.display_.set_perspective(angle, scene.session_.flow_.pause_state);
     }
-    void update_actor_actions(selection_preview::Work &) override {
-        throw flow::UnrecoveredGameFlowCall("native_character_preview_event_actions");
+    void update_actor_actions(selection_preview::Work &work) override {
+        const auto arena = scheduler().work_arena();
+        if (!arena)
+            throw event_actions::Error(event_actions::Boundary::Primary);
+        const auto fields = event_primary_fields();
+        const auto bindings = preview_texture_bindings(assets(), scene.session_.character_resources_);
+        EventActionsContext context{*arena, scene.session_.event_actions_,
+            scene.session_.players_.registry, *scene.session_.character_pack_, fields};
+        PreviewActionCalls actions(context, assets(), bindings);
+        selection_preview::update_actions(work, scene.session_.preview_actions_,
+                                          scene.session_.bootstrap_.menu.player_character, actions);
     }
 };
 void TitleScene::create_character_preview() {

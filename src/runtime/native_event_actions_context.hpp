@@ -5,12 +5,18 @@
 #include "runtime/character_selection_assets.hpp"
 
 namespace sadx::native {
+class CharacterResources;
 // NOTSA: semantic field bindings borrow the shared primary owner. Root supplies
 // its canonical secondary-mode store and counter reference, with adapter diagnostics.
 struct EventPrimaryFields {
     event_actions::InputModeStore store_secondary_mode;
     std::function<std::int32_t &(PlayerTaskState &)> counter;
 };
+// NOTSA: per-consumption borrows from the existing primary schema, without eager reads.
+EventPrimaryFields event_primary_fields();
+// NOTSA: source preview descriptors borrow the actual character texture-list owners.
+std::array<regular_textures::List *, 6>
+preview_texture_bindings(const CharacterSelectionAssets &, CharacterResources &);
 // NOTSA: borrowed owners for one invocation; no actor, pose, motion or list copy.
 struct EventActionsContext final : event_actions::ActionSource {
     EventActionsContext(TaskWorkArena &arena, event_actions::State &state,

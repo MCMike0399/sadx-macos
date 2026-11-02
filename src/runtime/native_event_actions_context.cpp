@@ -1,6 +1,44 @@
 #include "runtime/native_event_actions_context.hpp"
+#include "runtime/native_character_resources.hpp"
 
 namespace sadx::native {
+EventPrimaryFields event_primary_fields() {
+    return {
+        [](PlayerTaskState &primary, std::uint8_t value) {
+            auto &[orientation, index, character, event, position, path, id, scale, mode,
+                   secondary_mode, timer, counter] = primary;
+            secondary_mode = value;
+        },
+        [](PlayerTaskState &primary) -> std::int32_t & {
+            auto &[orientation, index, character, event, position, path, id, scale, mode,
+                   secondary_mode, timer, counter] = primary;
+            if (!counter)
+                throw event_actions::Error(event_actions::Boundary::RegisteredCounter);
+            return *counter;
+        }};
+}
+
+std::array<regular_textures::List *, 6>
+preview_texture_bindings(const CharacterSelectionAssets &assets, CharacterResources &characters) {
+    std::array<regular_textures::List *, 6> result{};
+    for (std::size_t slot = 0; slot < result.size(); ++slot) {
+        const auto character = assets.characters[slot];
+        if (assets.sequences[slot].character != character)
+            throw selection_preview::Error(selection_preview::Boundary::TextureCharacter, slot,
+                                           "preview sequence and character declarations differ");
+        const auto kind = static_cast<selection_preview::ActorKind>(slot);
+        const std::size_t binding = kind == selection_preview::ActorKind::Knuckles ||
+                                           kind == selection_preview::ActorKind::Big
+                                       ? 1 : 0;
+        if (character >= characters.lists().size() ||
+            binding >= characters.lists()[character].size())
+            throw selection_preview::Error(selection_preview::Boundary::TextureBinding, slot,
+                                           "source preview texture declaration is unavailable");
+        result[slot] = &characters.lists()[character][binding];
+    }
+    return result;
+}
+
 character_pack::ResourceId EventActionsContext::object(ActionHandle handle) {
     if (!handle.identity)
         throw event_actions::Error(event_actions::Boundary::ActionObject);

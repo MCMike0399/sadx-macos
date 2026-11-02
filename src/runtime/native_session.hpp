@@ -37,6 +37,8 @@
 #include "game/save_write.hpp"
 #include "game/save_frame.hpp"
 #include "game/sound_effects.hpp"
+#include "player/event_actions.hpp"
+#include "game/selection_preview.hpp"
 
 namespace sadx::native {
 class MovieScene;
@@ -250,6 +252,8 @@ class Session final : private flow::NativeServices {
     // Registry users are destroyed before their imported definitions, texlists and arena.
     PlayerSystem players_;
     sprite_registry::State sprites_;
+    event_actions::State event_actions_;
+    selection_preview::ActionState preview_actions_;
     RegularResources regular_resources_;
     regular_textures::Services regular_texture_services();
     void load_regular_object_textures(std::uint32_t);
