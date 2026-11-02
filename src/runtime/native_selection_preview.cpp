@@ -202,7 +202,9 @@ void TitleScene::exec_selection_sonic(TaskScheduler &scheduler, const TaskHandle
         return;
     }
     context.animation_table = &assets->table();
-    animation::Runtime animation{scheduler.work_arena().get(), assets->resources()};
+    context.model = assets->model();
+    animation::Runtime animation{scheduler.work_arena().get(), assets->resources(),
+                                 &scene.session_.character_scene_.objects};
     context.animation = &animation;
     sonic::run(context);
 }
