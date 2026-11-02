@@ -1,0 +1,66 @@
+{
+  "schema": 1,
+  "status": "DEVELOPMENT_COMPLETE_RESERVED_UNRUN",
+  "source_commit": "1e448c47c14811ac7090ec48411ba2deab32bdb3",
+  "models": {
+    "reset-reference-final-old": {
+      "path": "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6a2279e4/build/reset-final-binding-models-v1/reset-reference-final-old",
+      "sha256": "6df20ef3b6cceeb6472ae281b8818c2e0fdb81f03b6400cea65dc65ecf65dc90"
+    },
+    "reset-reference-final": {
+      "path": "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6a2279e4/build/reset-final-binding-models-v1/reset-reference-final",
+      "sha256": "5326088f1a0e5d20843a2ee27a907056c3ba36c6cc4aa5fe1786b8cf8c87a975"
+    },
+    "reset-sonic-final-old": {
+      "path": "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6a2279e4/build/reset-final-binding-models-v1/reset-sonic-final-old",
+      "sha256": "38b0417a1c467fefb65318344cc1b364554c9d955bd87a725ecb27a89aa27800"
+    },
+    "reset-sonic-final": {
+      "path": "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6a2279e4/build/reset-final-binding-models-v1/reset-sonic-final",
+      "sha256": "b52be1ad72f335b1a24c0a51018e0cb61d9951a7f0ef14731596dcc2d3ad57c3"
+    },
+    "reset-native-session-final": {
+      "path": "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6a2279e4/build/reset-final-binding-models-v1/reset-native-session-final",
+      "sha256": "659e25256da42a16272023115e8fd00da5cba5dc82c97b41d4e210e6fe3c7688"
+    }
+  },
+  "binding_sources": {
+    "tests/fixtures/reset_reference_final.cpp": "c5f0b4e3dbd6847e308208e5bf1f4cd2e3a4c8797cae3ae63511d3abfdfea0dc",
+    "tests/fixtures/reset_sonic_final.cpp": "45c636dd8888fd66c3a38932cc53658986f2b6999f57ddd873b0a69ae38676c3",
+    "tests/fixtures/reset_native_session_final.mm": "138931076918d00539614e912f48f5ac5056b700d976508a0367de709c046587",
+    "tests/fixtures/reset_final_parent.hpp": "8b3f1033b5976f8d476ce6185420b33cd4c12e4c0d397539fe09dbe2ca4aac31",
+    "reference/packets/reset-owner-final/development.py": "2218bdd32dd234508e7264899ec8789647d9d0cdb5877973fb3111d7ae007577",
+    "Makefile": "34f5e40b40e360dd916b91d5cd0fc855d29db246a1b805d9b6097aef203470e2",
+    "src/runtime/native_session.hpp": "e8d4c538ddd514572749c13a0d054720e416d5e2d0eec38d757ad137e58b5f1f"
+  },
+  "development": {
+    "old_current_interface_families": 7,
+    "matching_native_program_calls": 14,
+    "actual_native_session_successful_calls": 1,
+    "failed_native_session_construction_attempts": 1,
+    "original_executions": 0,
+    "reserved_inputs_consumed": false,
+    "initial_process_exit": 1,
+    "session_only_recovery_exit": 0,
+    "domain_fix": "Initial empty character texture declarations were rejected by the actual constructor before frame injection. Corrected binding uses the normal native app imported-assets loader and real declarations/title/audio/profile settings; no guessed content or game behavior change. Seven completed interface families were not rerun.",
+    "compile_setup_failure": "Initial reference binding omitted one aggregate initializer and failed -Wmissing-field-initializers; corrected build passes. This is not a semantic fault kill."
+  },
+  "artifacts": {
+    "build/reset-binding-development-v1/RESULT.json": "950e5efafc3f51d3700e3b713d2348710ae1274e0f624961e349b7b02ca8ebd4",
+    "build/reset-binding-development-session-v2/RESULT.json": "84c97cd878b80ea1cdeab49aaf2ea9a7f998740fc95500cc6b1caa13d349e1c3",
+    "build/root-reset-binding-development.log": "b9a752796b963db4df3a5c56639e7cafc67b7cd762116f91e25808cc80870ae8",
+    "build/root-reset-binding-development.exit": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+    "build/root-reset-reference-final-build.log": "ad8b193ad41f5b940cb762e3174d082fad19500a2ca60c98b2e6612d22e53449",
+    "build/root-reset-reference-final-build.exit": "53c234e5e8472b6ac51c1ae1cab3fe06fad053beb8ebfd8977b010655bfdd3c3",
+    "build/root-reset-reference-final-build2.log": "0e8ebd501f6f96fcdeb68376761d0b666b90b583e52a2b0d2cf0550a826ea5be",
+    "build/root-reset-final-bindings-build.log": "b784cc0a5dfccfc87b849f38deda47f39f3103686fcdb7bd97da5da4a2ad451d",
+    "build/root-reset-final-bindings-build2.log": "9def11e4910c6de591d75066be361e52073662cba479b49d22f17447474912f2",
+    "build/root-reset-final-reference-build3.log": "0e8ebd501f6f96fcdeb68376761d0b666b90b583e52a2b0d2cf0550a826ea5be",
+    "build/root-reset-reference-final-old-build3.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/root-reset-sonic-final-old-build2.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/root-reset-session-imported-build.log": "f19c7bb4019a16349ff34dbc7d604ab787dc69e81fa838b848f8dda12f27d40c",
+    "build/root-reset-session-imported-build2.log": "f19c7bb4019a16349ff34dbc7d604ab787dc69e81fa838b848f8dda12f27d40c"
+  },
+  "historical_build_limit": "Initial build-only Session executable/dependency file named in SESSION-BINDING.json were superseded while adding parent guards and imported assets; not retained as immutable binaries. That receipt remains historical and is not claimed to revalidate. No behavior or reserved input had run against the initial build. Exact Source remains in commits6ea4051/dcab7a4. Current final models are copied exclusively to this new versioned folder and must not be overwritten. All original worker qualification models/captures remain untouched.",
+  "remaining": "Implement finite execution collector and fake adequacy; fresh independent review of bindings/collector including test-only friend and parent guard; immutable closure + distinct affirmative Root admission before any frozen reserved vector is passed. No Main integration or gate."
+}
