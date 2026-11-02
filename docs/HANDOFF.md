@@ -947,3 +947,12 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Fresh git-export native build and force-load closure pass without original executable/DLL or prebuilt game objects; only copied public SDL3/libusb is reused. The app reaches PJoinVertexes at frame 1332, exit 1, with identical outgoing-title image.
 * motion-particle-gate.json, motion-particle-qualified-rasters.json and motion-particle-source-only.json retain exact scope. STATUS is regenerated from this real gate; no completed actor frame, N3b or gameplay claim follows.
 * Weld worker 75ca9e77 was explicitly released for heavy execution after the gate, continuation 8db8effd. Next: actual welding and source-backed Sonic editor-state binding; preserve renderer/release and all inherited numeric limits.
+
+### 2026-11-02 — Source-backed Sonic state binding admitted (focused qualification)
+
+* Runtime fidelity cfa8fef1 accepts the signed editor-word and existing Metal-owner bindings. Root fixed the missing mission-owner provenance; recheck e1486737 accepts the exact native/reference counterpart guard and unchanged runtime tokens.
+* Main source a06b2e40 and annotation da18a495 now let the real Sonic callback initialize its player, own animation table and request zero, then stop at sonic_model_graph. Its entry-time current-player alias remains captured null.
+* Main app/force-load, five generated native test commands, 19 provenance tests, 17 judge tests and make check pass. The 5,201-case source comparison and all 81 caller pairs exactly match the reviewed observation hashes.
+* Main has 1,404 protected paths with zero drift; no inherited protection was removed. The counterpart catalog preserves the reference fixture and rejects additional owners; warning debt remains open.
+* Normal input still stops at Gamma welding at frame 1332, exit 1, with identical title image. Dynamic alternate-model behavior, models/common tails and N3b remain open; last full gate/cold source is e1946df8.
+* sonic-editor-root-integration.json records this admission. Gamma's qualified weld initialization/restoration prefix is now awaiting independent review; active matrix-based welding remains explicit.

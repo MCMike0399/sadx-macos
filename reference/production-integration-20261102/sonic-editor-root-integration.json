@@ -1,0 +1,118 @@
+{
+  "schema": 1,
+  "source_commit": "4e1540f3d463d2ae9a3e3a753305f358fc2a820a",
+  "accepted_candidate": "f48bba6a",
+  "reviews": {
+    "runtime_fidelity": "cfa8fef1",
+    "standards_correction": "e1486737"
+  },
+  "native_build_exit": 0,
+  "native_closure_exit": 0,
+  "static_check_exit": 0,
+  "python_tests": {
+    "provenance": 19,
+    "judge": 17,
+    "exit_status": 0
+  },
+  "judge": {
+    "protected_paths": 1404,
+    "violations": 0,
+    "inherited_paths_removed": 0
+  },
+  "generated_program_checks": [
+    {
+      "command": [
+        "/usr/bin/time",
+        "-p",
+        "./build/editor-state-test"
+      ],
+      "exit_status": 0,
+      "stdout": "81 signed non-normalized editor combinations; live distinct words and canaries\n",
+      "stderr": "real 0.26\nuser 0.00\nsys 0.00\n"
+    },
+    {
+      "command": [
+        "/usr/bin/time",
+        "-p",
+        "./build/native-editor-binding-test",
+        "game/imported",
+        "build/editor-native.tsv"
+      ],
+      "exit_status": 0,
+      "stdout": "81 production callback editor pairs; shared Gamma signed results; missing read order; initialized player/table; actual cleanup uses canonical word\n",
+      "stderr": "real 0.21\nuser 0.01\nsys 0.01\n"
+    },
+    {
+      "command": [
+        "/usr/bin/time",
+        "-p",
+        "./build/native-sonic-callback-test",
+        "game/imported"
+      ],
+      "exit_status": 0,
+      "stdout": "Real Sonic callback publishes canonical current owners before real initialization reaches the animation-table stop; captured event mode/path bindings survive primary replacement and reject release\n",
+      "stderr": "real 0.20\nuser 0.00\nsys 0.01\n"
+    },
+    {
+      "command": [
+        "/usr/bin/time",
+        "-p",
+        "./build/sonic-animation-integration-test",
+        "game/imported"
+      ],
+      "exit_status": 0,
+      "stdout": "Session rejects null/replacement; stable Sonic owner/table/resources; actual callback initializes real player/table and reaches explicit model stop\n",
+      "stderr": "real 0.19\nuser 0.00\nsys 0.00\n"
+    },
+    {
+      "command": [
+        "/usr/bin/time",
+        "-p",
+        "./build/native-gamma-motion-test",
+        "game/imported",
+        "build/gamma-motion-observations.tsv"
+      ],
+      "exit_status": 0,
+      "stdout": "Real Gamma initialization reaches PJoinVertexes; canonical motion, live scene, keys and aliases pass\n",
+      "stderr": "real 0.18\nuser 0.01\nsys 0.00\n"
+    }
+  ],
+  "source_comparison": {
+    "cases": 5201,
+    "composition_rows": 81,
+    "mismatch_count": 0,
+    "exit_status": 0,
+    "observations_equal_reviewed_candidate": true,
+    "observation_sha256": "05e41ceaf89fefdadda1a29ebcea37d28051025e2bb08f64e00243fd90c1ee63",
+    "composition_sha256": "e33d1921f5346665c73e99f83e645f20b3db44385052aeb09948b6b2c2abe5fa"
+  },
+  "normal_input": {
+    "command": [
+      "build/sadx-native",
+      "--assets",
+      "game/imported",
+      "--offscreen",
+      "--paced",
+      "--exit-after",
+      "1550",
+      "--save-directory",
+      "build/sonic-editor-root/savedata",
+      "--key-events",
+      "500:13:down,501:13:up,750:13:down,751:13:up,950:13:down,951:13:up,1050:13:down,1051:13:up,1300:13:down,1301:13:up",
+      "--screenshot",
+      "build/sonic-editor-root/frontier.ppm"
+    ],
+    "exit_status": 1,
+    "frames": 1332,
+    "stop": "native session stopped: native_gamma_join_vertices",
+    "app_sha256": "d49650ac3337c723dd99f2c843b1abb6fbe5d7e41961db6cc5657165480d23fa",
+    "screenshot_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427"
+  },
+  "limits": [
+    "Focused Main qualification; last full gate/cold source remains e1946df8.",
+    "Actual Sonic callback reaches real player/table initialization then sonic_model_graph; model/editor gameplay remains open.",
+    "Metal owner is statically borrowed; alternative model behavior is not dynamically distinguished at the shared missing graph boundary.",
+    "Inherited Sonic numeric streams/partials reused under accepted unchanged-body evidence, not rerun here.",
+    "Normal app still stops earlier in Gamma welding; no completed actor frame or N3b."
+  ]
+}
