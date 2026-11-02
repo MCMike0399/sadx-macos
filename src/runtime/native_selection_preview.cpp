@@ -187,6 +187,9 @@ void TitleScene::exec_selection_sonic(TaskScheduler &scheduler, const TaskHandle
     scene.register_callback(initialize_player_auxiliary);
     sonic::Context context{scene.session_.players_, scheduler, task, scene.display_.arithmetic()};
     context.stage = &scene.session_.stage_;
+    sonic::bind_editor_state(context,
+        {scene.session_.editor_status_, scene.session_.mission_editor_status_});
+    context.alternate_model = &scene.session_.soft_reset_.metal_sonic;
     context.events = &scene.session_.bootstrap_.event_work;
     context.auxiliary = initialize_player_auxiliary;
     // The imported parameter table contains all player rows.
@@ -230,6 +233,9 @@ void TitleScene::exec_selection_gamma(TaskScheduler &scheduler, const TaskHandle
         texture_views.catalog(scene.session_.character_resources_.loaded()),
         scene.session_.regular_resources_.state(), &texture_services, scene.session_.sprites_,
         scene.session_.character_scene_};
+    const editor::View editor_state{scene.session_.editor_status_,
+                                    scene.session_.mission_editor_status_};
+    context.editor_state = &editor_state;
     gamma_selection::run(context, task);
 }
 // NOTSA: native boundary for E102Display; source seam declared in the Gamma core.

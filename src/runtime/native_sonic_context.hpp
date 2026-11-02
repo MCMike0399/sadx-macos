@@ -8,6 +8,7 @@
 #include "player/player_position.hpp"
 #include "player/sonic_player.hpp"
 #include "runtime/native_player_system.hpp"
+#include "game/editor_state.hpp"
 #include <functional>
 
 namespace sadx::sonic {
@@ -57,6 +58,8 @@ struct Context {
 // NOTSA: native-facing entry points execute the same template body as the reference adapter.
 // NOTSA: bind event reads/stores to the callback's captured primary allocation.
 void bind_event_work(Context &);
+// NOTSA: bind live signed-word reads without copying either source owner.
+void bind_editor_state(Context &, editor::View);
 void run(Context &);
 Reply action_checks(Context &);
 Reply action_predicate(Context &, Predicate, std::optional<std::uint32_t> argument = {});

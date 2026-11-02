@@ -9,6 +9,7 @@
 #include "player/gamma_setup_resource.hpp"
 #include "player/gamma_effects.hpp"
 #include "game/game_bootstrap.hpp"
+#include "game/editor_state.hpp"
 #include "game/character_textures.hpp"
 
 namespace sadx::native {
@@ -65,5 +66,6 @@ struct Context {
     regular_textures::Services *texture_services;
     sprite_registry::State &sprites;
     character_pack::SceneState &scene;
+    const editor::View *editor_state = nullptr;
 };
 } // namespace sadx::gamma_selection

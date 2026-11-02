@@ -5,6 +5,15 @@
 #include "runtime/native_sonic_fields.hpp"
 
 namespace sadx::sonic {
+void bind_editor_state(Context &context, editor::View state) {
+    context.read_editor = [state] {
+        return static_cast<std::int16_t>(state.mission_status);
+    };
+    context.read_forced = [state] {
+        return static_cast<std::int16_t>(state.status);
+    };
+}
+
 namespace {
 [[noreturn]] void missing(const char *name) { throw Unavailable(name); }
 template <class T> T &require(std::optional<T> &value, const char *name) {

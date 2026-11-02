@@ -108,7 +108,7 @@ std::int32_t event_cancel(Context &);
 std::uint8_t is_time_zero(Context &);
 // STUB: SONIC 0x4c3780 GammaUpdateLaserMode
 void update_laser_mode(Context &, const TaskWorkHandle &, std::uint8_t index, bool mode_three);
-// STUB: SONIC 0x4258f0 CheckEditMode
+// NOTSA: CheckEditMode binding borrows the native owners or calls the reference.
 std::int32_t check_edit_mode(Context &);
 // STUB: SONIC 0x481460 GammaProcessAction
 void process_action(Context &, const TaskHandle &, const TaskWorkHandle &, const Player &);

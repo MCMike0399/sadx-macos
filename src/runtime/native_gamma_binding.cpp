@@ -203,8 +203,10 @@ void update_laser_mode(Context &, const TaskWorkHandle &, std::uint8_t, bool) {
     missing("native_gamma_update_laser_mode");
 }
 // NOTSA: native boundary for CheckEditMode; source seam declared in the Gamma core.
-std::int32_t check_edit_mode(Context &) {
-    missing("native_gamma_check_edit_mode");
+std::int32_t check_edit_mode(Context &context) {
+    if (!context.editor_state)
+        missing("native_gamma_check_edit_mode");
+    return editor::check_mode(*context.editor_state);
 }
 // NOTSA: native boundary for GammaProcessAction; source seam declared in the Gamma core.
 void process_action(Context &, const TaskHandle &, const TaskWorkHandle &, const Player &) {

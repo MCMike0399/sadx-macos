@@ -336,7 +336,11 @@ class Session final : private flow::NativeServices {
     std::uint8_t hide_hud_ = 0;
     // File-backed default; LoadSave subsequently writes the saved vibration byte.
     std::uint8_t rumble_enabled_ = 1;
+    // Native ssEditorStatus low word.
+    // PE virtual zero; ResetGame clears this same word through cleanup::State.
     std::uint16_t editor_status_ = 0;
+    // Native ssMiEditorStatus low word; the reference fixture remains separate.
+    std::uint16_t mission_editor_status_ = 0; // PE virtual zero; no source writer.
     std::uint32_t reset_status_ = 0, reset_work_ = 0, saved_stage_ = 0, market_rings_ = 0;
     std::int16_t act_ = 0, previous_stage_ = 0;
     std::uint32_t previous_act_ = 0;
