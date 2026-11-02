@@ -3,8 +3,8 @@
 #include "engine/task_work.hpp"
 
 namespace sadx::sprite_registry {
-// The constructor borrows this identity without dereferencing it. Its content layout
-// and consumers remain unrecovered; this declaration does not define a payload.
+// The constructor borrows this identity without dereferencing it. Consumers use
+// the imported declaration layout in sprite_definition.hpp.
 struct Definition;
 struct Node;
 using NodeHandle = std::shared_ptr<Node>;

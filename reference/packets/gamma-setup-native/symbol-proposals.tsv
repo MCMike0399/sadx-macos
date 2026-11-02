@@ -1,0 +1,5 @@
+module	address	kind	name	type	signature	size	evidence_id	reason
+SONIC	0x9820f8	data	GammaSetupDefinition	imported sprite definition		20	ev_a8cc3aa1a5daa91981caf688ce65ca4371f0a7cbd958ff3def7739214b084a9e	Header consumed by SpLoopOnlyDisplay; retained animation count low/high halves
+SONIC	0x98210c	data	GammaSetupParticleParameters	imported particle parameters		60	ev_16a829531fcc5f2e5cf5390f37eda98b66445273e2bd9f256f5879deabd81d7c	Trailing setup declaration parameter block; callback qualification recorded separately
+SONIC	0x982148	global	GammaSetupDefinitionPointer	native Definition pointer		4	ev_16a829531fcc5f2e5cf5390f37eda98b66445273e2bd9f256f5879deabd81d7c	Captured before constructor; imported data initializer points to definition
+SONIC	0x982154	global	GammaSetupSprite	native NodeHandle		4	ev_16a829531fcc5f2e5cf5390f37eda98b66445273e2bd9f256f5879deabd81d7c	Nullable constructor result publication; later Gamma particle spawn consumes it
