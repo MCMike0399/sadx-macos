@@ -1,9 +1,9 @@
 {
   "change": {
-    "base_commit": "a2bcdd9f2c324f0885016620ec49c3781a3ccd62",
-    "evidence": "reference/production-integration-20261102/motion-particle-integration.json",
-    "evidence_sha256": "3ba086645ddc9dceb52a8abb81b05fde4e5a6025a98358240caa8f7a384697f9",
-    "reason": "Integrate reviewed Gamma motion and particle lifecycle, observe the actual live arithmetic binding, and retain all inherited protections"
+    "base_commit": "acdb5a04b06c642ebb0f9f7ac836da5fcd50d5ec",
+    "evidence": "reference/production-integration-20261102/motion-particle-registration-correction.json",
+    "evidence_sha256": "82f62656ae4670b9f07a312fa71898c2319873fd0cfd537c0fec3d7fa62c79c7",
+    "reason": "Correct two test argument rows to the generator existing two-column format; preserve test inputs and bodies"
   },
   "files": {
     "Makefile": "3134d52d4474ddd56f93e8dd1e855badc09012a0c8476851a2cf2cf09df04e12",
@@ -851,7 +851,7 @@
     "tests/unit/main_menu_content.cpp": "9ae62d33ab3981c4050da8fd8ede955a08c2ecbcfd91d865de895e5d39c49145",
     "tests/unit/main_menu_eligibility.cpp": "0769bb1cd5d58da859399c2dc7082ca05d3ed8bd3704838e1c528b49ef9896cc",
     "tests/unit/main_menu_profile.cpp": "5c9e473de4a1fecaf1e1cbd9e14072919973cb8719c724de52cc95900ba9dace",
-    "tests/unit/manifest.tsv": "ebd227c6a443c70dd6258b12bf92a7a0ee2ee7244a0da2c014d803101e692c7d",
+    "tests/unit/manifest.tsv": "d060e736e50b580cba40807cb374cda24a59b2350fe5514cd850031cfd942d2d",
     "tests/unit/material_correction.cpp": "e866358fc8165d70c48a71b77ee5479198900842c3cfcd4de4ce65701d1f1a3a",
     "tests/unit/menu_dialog_control.cpp": "dcf53f00372f20ade1fcb0714f1fd184052077a5ac9709afd91840a0ffe6cb1a",
     "tests/unit/menu_draw_primitives.cpp": "e11ef8ad54979d33773aaecb47e1d1bbf115bd8e2b7f5115582a8718ed85543f",

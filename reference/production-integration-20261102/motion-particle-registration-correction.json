@@ -1,0 +1,54 @@
+{
+  "source_commit": "acdb5a04b06c642ebb0f9f7ac836da5fcd50d5ec",
+  "failure": {
+    "command": "make -j10 gate",
+    "exit_status": 2,
+    "log": "build/motion-particle-gate-failed-arguments.log",
+    "log_sha256": "e68c49faaa5a2e7479576fc019b257034da7be4a2b2f9b1d401e69544341d37d",
+    "diagnostic": "sonic-animation-assets-test: requires imported directory and observation output",
+    "cause": "Unit manifest arguments occupy one second column; third column was ignored. Two new rows used a separate third column for their output path."
+  },
+  "correction": [
+    {
+      "name": "sonic-animation-assets",
+      "before": "sonic-animation-assets\tgame/imported\tbuild/sonic-animation-table.tsv",
+      "after": "sonic-animation-assets\tgame/imported build/sonic-animation-table.tsv"
+    },
+    {
+      "name": "native-gamma-motion",
+      "before": "native-gamma-motion\tgame/imported\tbuild/gamma-motion-observations.tsv",
+      "after": "native-gamma-motion\tgame/imported build/gamma-motion-observations.tsv"
+    }
+  ],
+  "generated_command_checks": [
+    {
+      "command": [
+        "/usr/bin/time",
+        "-p",
+        "./build/sonic-animation-assets-test",
+        "game/imported",
+        "build/sonic-animation-table.tsv"
+      ],
+      "exit_status": 0,
+      "stdout": "",
+      "stderr": "149 declarations, 147 rows, imported preview closure, seven invalid declarations, two real Sonic binds and Stand playback pass\nreal 0.08\nuser 0.01\nsys 0.01\n"
+    },
+    {
+      "command": [
+        "/usr/bin/time",
+        "-p",
+        "./build/native-gamma-motion-test",
+        "game/imported",
+        "build/gamma-motion-observations.tsv"
+      ],
+      "exit_status": 0,
+      "stdout": "Real Gamma initialization reaches PJoinVertexes; canonical motion, live scene, keys and aliases pass\n",
+      "stderr": "real 0.04\nuser 0.00\nsys 0.00\n"
+    }
+  ],
+  "preflight_setup": "An initial local token-count assertion expected six argv entries; corrected to five before these executions.",
+  "limits": [
+    "No game source, test body, generator, input value, tolerance or comparison changed.",
+    "Failed gate remains failed and is not a qualification receipt; new full gate required."
+  ]
+}
