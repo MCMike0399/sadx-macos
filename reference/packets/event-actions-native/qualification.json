@@ -1,0 +1,284 @@
+{
+  "base": "0e56c5d037b66f730b263400fc4a29afecc76483",
+  "branch": "packet/event-actions-native",
+  "scope": "Candidate SetInputP, native event-action allocation/admission/clear and preview bindings; no app/N3b/gate acceptance.",
+  "final_sources": {
+    "src/engine/task_work.hpp": "a8dea63eb5176a0955b085dcc0248b9aba78665663912eba44e759052d682687",
+    "src/game/selection_preview.hpp": "a38087d4e49f3ca39bb44258a6d1f218532e941af5efeadae5b69990328e2847",
+    "src/player/event_actions.hpp": "67b9beed86b5a7dab204a43095725ba73866bc59040218612266cd09897a1dd1",
+    "src/player/event_actions.cpp": "c66d92f5008847667e0823b8b3072644768da39655b9e769a6fb90dc2f5820d9",
+    "src/runtime/native_event_actions_context.hpp": "c6f29fee5b02d9bcf6fcecb25c2110d68ce651132e67cb2eaff2b70bbc240f20",
+    "src/runtime/native_event_actions_context.cpp": "cdabbd1c9a09ce2832ff7b1d94911a763fab0274788f06f7dc9c3af6c5a35f02",
+    "tests/unit/event_actions.cpp": "c64d46031303a2d945dcc5517a07903dae260f2e5b09081c7f8b94c7bbed9a2c",
+    "tests/probes/native_event_actions_probe.cpp": "d137091f0ad4b9624be5423ecbf311e2e9db065efb28f64a9b269b4feab26e18",
+    "tools/oracles/verify_original_event_actions.py": "5bb434381af55f03a54adcbec69ff7d6e3f4992875897ebf232de6a23c24e81a",
+    "reference/packets/event-actions-native/verify_mutants.py": "327d0b269aaada743f61a3a05a8538bbf7322b3900f95cd0e7ebef9b935876c2"
+  },
+  "source_ranges": {
+    "0x417e80-0x417ea0": "26fabc5d2513033969f64f29086c4de90fdebae7ae14f4724e4f6b82003887fd",
+    "0x417ea0-0x417ee2": "43987ffc448288dc06345a7bb10df78071b1151333a661d3b4801f616a6b1d77",
+    "0x417ef0-0x417f48": "9360136315574feae94583d069596305ea2ef4cc74aa1494854aab19bfb47bb8",
+    "0x42fe00-0x42fe15": "ebcdff387a97f0a3c12714d8a7f08315f173f3299312f68e8b294a9534ecdbfd",
+    "0x42fe40-0x42fe55": "b261f363af7b42800458baecd1fa672d6142439dc17b2aa829b09b9360980500",
+    "0x441260-0x44127c": "f3d9f1d72c0cc8d08044dacaf90faf6c948acaace8d162ea1b96760e62b0e5c8",
+    "0x40b2d0-0x40b304": "b1910d7f567983b9d942b334f0d918441ffeccf600eda82d45745d838918205f"
+  },
+  "development": {
+    "passed": true,
+    "cases": 2630,
+    "executed": 2630,
+    "seed": 417239,
+    "outcomes": {
+      "0": 1870,
+      "1": 214,
+      "2": 151,
+      "4": 63,
+      "5": 80,
+      "6": 21,
+      "3": 80,
+      "7": 151
+    },
+    "input_stream_sha256": "5229b3ee0449c77622b9b6ad3411ea61a98ac13ea9042e8390f83f62ed6e821a",
+    "complete_observation_sha256": "15bf5a2ce8e13060c2ca0bcf1fd32c515e1f803119e6642aa8264abffe0b035f",
+    "native_library_sha256": "891b5bae5383561eb6e1e3a6f7a67ce0c2e5022bce5b364751a30d4a27717398"
+  },
+  "final_holdout": {
+    "passed": true,
+    "cases": 4630,
+    "executed": 4630,
+    "seed": 2026110223,
+    "outcomes": {
+      "0": 3196,
+      "1": 390,
+      "2": 316,
+      "4": 121,
+      "5": 142,
+      "6": 26,
+      "3": 147,
+      "7": 292
+    },
+    "input_stream_sha256": "0cdcfcf54cd02843930d74724d676cdb29b9440c487516e000773222b6fb8f6e",
+    "complete_observation_sha256": "36c7c454cf0518b70760f87825621233d8aee736b90cc7b5aa3a949083cba239",
+    "native_library_sha256": "891b5bae5383561eb6e1e3a6f7a67ce0c2e5022bce5b364751a30d4a27717398"
+  },
+  "holdout_policy": "Final source frozen before seed 2026110223: 4000 new seeded cases plus the retained 630 fixed cases; no reset reserved input.",
+  "observations": "512 exact words: returned/stop, exact failure PC, input registry/state, allocation/release trace, all modeled node fields/padding, full 64-byte original/replacement primary and 124-byte original/replacement/new event snapshots. Pointer words normalize allocation identity; neighboring scalar sentinels remain exact.",
+  "mutants": [
+    {
+      "name": "input-pending-flag",
+      "compiled": true,
+      "caught": true,
+      "exit_status": 1,
+      "failed_cases": 8,
+      "compiled_source_sha256": "c7f431e4ca9c4d58a5f3be43c58d2f030bff76c8f8d49654f5dafbf2aee6e766",
+      "library_sha256": "0c3fbd548078a89b29b0638cd3d98dc3d66e047a1cfb322493522fdc9bbff4fc"
+    },
+    {
+      "name": "tail-traversal",
+      "compiled": true,
+      "caught": true,
+      "exit_status": 1,
+      "failed_cases": 8,
+      "compiled_source_sha256": "a7043ff7fcb28407fbd66f5d26595c1dba06b29be4ec2abaca6d1b35b9315d69",
+      "library_sha256": "3b4d997e79293f8962cb48a7a56280a05dda6ee1ad62dee69a81d1257c06089e"
+    },
+    {
+      "name": "link-byte",
+      "compiled": true,
+      "caught": true,
+      "exit_status": 1,
+      "failed_cases": 8,
+      "compiled_source_sha256": "afc23e3f401cb40909722724ee7ec69e47c1027afbc94f7d92f240f7b1129090",
+      "library_sha256": "54da64429efb8bb37cc140da66d8b1b228c4379b12a33593e079040343d40339"
+    },
+    {
+      "name": "action-copy-order",
+      "compiled": true,
+      "caught": true,
+      "exit_status": 1,
+      "failed_cases": 8,
+      "compiled_source_sha256": "749d82802fb8910895e5f2d6a236c77edcd075bfc3288d35480f8aa0d6975acd",
+      "library_sha256": "a9eea47be57ffacd5902104a28fa8ca93aaab3efd6fe8d30d6300a0f4a3d4ce7"
+    },
+    {
+      "name": "initialize-primary-recapture",
+      "compiled": true,
+      "caught": true,
+      "exit_status": 1,
+      "failed_cases": 6,
+      "compiled_source_sha256": "ccbfb11bf59336352aceed9999100f6ee176d977ffc0998ad9eff901b0504c96",
+      "library_sha256": "95a18bfe9f6e36e22d0559e9e33acd96d79c5d8cb92443456a1e5366c3a6ac18"
+    },
+    {
+      "name": "allocation-failure-publication",
+      "compiled": true,
+      "caught": true,
+      "exit_status": 1,
+      "failed_cases": 4,
+      "compiled_source_sha256": "7947a9efef221be87fad535387a745d0bcbb7f65a4037c48faf35455ade3d24e",
+      "library_sha256": "8854f798315f8767e1da52baae3852dcef755c8b5650796c747e2261356ab197"
+    },
+    {
+      "name": "cleanup-head-order",
+      "compiled": true,
+      "caught": true,
+      "exit_status": 1,
+      "failed_cases": 8,
+      "compiled_source_sha256": "e8a1679b966f0f8084ffc08d69fce821011704f99fa9ef5f998a024938d57d69",
+      "library_sha256": "51100eb370be56e7d0c6d634183a67a187da482f05d6635af2a107cd24292bcc"
+    }
+  ],
+  "native_closure": {
+    "exit_status": 0,
+    "binary_sha256": "2ef25971cb19c86311e20d02e94d6035a60d3d76addb40f7f94e6bc471091b9c",
+    "compiler_dependency_sha256": "671c055cc500ddf0d0faae3acf0cf012243a403af577a71cfb4d451f3de4a408",
+    "undefined_symbols_sha256": "71d9069b9781110c885f648640da39a3d25e1cf1f0885d367b7bee9af0addc99",
+    "libraries_sha256": "6dd6aca91a5b304e7cd1685d3731e5d677437a6782466edba2cac54e547dee93",
+    "linked_libraries": [
+      "/usr/lib/libc++.1.dylib",
+      "/usr/lib/libSystem.B.dylib"
+    ],
+    "inputs": "Only the seven source files named in the native build command. CharacterPack is decoded from a valid in-memory pack; no original binary, assets, prebuilt game objects or guest runtime."
+  },
+  "focused_checks": [
+    {
+      "command": [
+        "build/event-actions/native-test"
+      ],
+      "exit_status": 0,
+      "output": "build/event-actions/final-check-0.log"
+    },
+    {
+      "command": [
+        "build/event-actions/task-native-test"
+      ],
+      "exit_status": 0,
+      "output": "build/event-actions/final-check-1.log"
+    },
+    {
+      "command": [
+        "build/event-actions/preview-test"
+      ],
+      "exit_status": 0,
+      "output": "build/event-actions/final-check-2.log"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/gate/check_readability.py"
+      ],
+      "exit_status": 0,
+      "output": "build/event-actions/final-check-3.log"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/gate/check_layers.py"
+      ],
+      "exit_status": 0,
+      "output": "build/event-actions/final-check-4.log"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/gate/check_global_owners.py"
+      ],
+      "exit_status": 0,
+      "output": "build/event-actions/final-check-5.log"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/gate/check_provenance.py",
+        "--database",
+        "/Users/burbujamc/Developer/sadx-macos/build/symbols/symbols.json"
+      ],
+      "exit_status": 0,
+      "output": "build/event-actions/final-check-6.log"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/gate/check_profile_patches.py",
+        "--build-dir",
+        "build/event-actions/profile",
+        "--json"
+      ],
+      "exit_status": 0,
+      "output": "build/event-actions/final-check-7.log"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_status": 0,
+      "output": "build/event-actions/final-check-8.log"
+    }
+  ],
+  "profile": {
+    "patches": 618,
+    "active_patches": 121,
+    "active_unhandled_patches": 79,
+    "reports": 1,
+    "declared_exe_ranges": 7,
+    "unhandled_overlaps": 0,
+    "handled_overlaps": 0,
+    "undetermined_overlaps": 0,
+    "reports_without_addressed_ranges": []
+  },
+  "preview_preservation": {
+    "passed": true,
+    "cases": 4013,
+    "input_stream_sha256": "5889e2774b4d9c6464a9c12c39fb56414498137c366d2ae1ff3055bcc3859fb8",
+    "complete_observation_sha256": "8fdd518e1deca2bc76fbe09db27c18effea005dce558626abfb495e307c3eefc"
+  },
+  "retained_preview_evidence": {
+    "holdout_cases": 7013,
+    "mutants": 13,
+    "rerun": false,
+    "reason": "Existing preview core and existing test/probe/oracle bodies are unchanged; only declaration comments changed."
+  },
+  "protected_inputs": {
+    "present_unchanged": 1287,
+    "inherited_absent_ignored_inputs": 53,
+    "modified": [],
+    "manifest_updated": false,
+    "note": "53 ignored binary records are absent in the supplied worktree. No restoration, reserved consumption or full judge/gate claim."
+  },
+  "commands": [
+    "clang++ -std=c++17 -O2 -Wall -Wextra -Werror -Isrc -dynamiclib tests/probes/native_event_actions_probe.cpp src/player/event_actions.cpp src/engine/task.cpp src/engine/task_work.cpp -o build/event-actions/probe.dylib",
+    "clang++ -std=c++17 -O2 -Wall -Wextra -Werror -Isrc tests/unit/event_actions.cpp src/player/event_actions.cpp src/runtime/native_event_actions_context.cpp src/game/selection_preview_actions.cpp src/engine/task.cpp src/engine/task_work.cpp src/engine/character_pack.cpp -o build/event-actions/native-test",
+    "build/event-actions/native-test",
+    "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python tools/oracles/verify_original_event_actions.py '/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe' build/event-actions/probe.dylib --cases 2000 --output build/event-actions/final-development.json",
+    "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python tools/oracles/verify_original_event_actions.py '/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe' build/event-actions/probe.dylib --cases 4000 --seed 2026110223 --output build/event-actions/final-holdout.json",
+    "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python reference/packets/event-actions-native/verify_mutants.py '/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe' --output-dir build/event-actions/qualified-mutants"
+  ],
+  "raw_reports": {
+    "build/event-actions/final-development.json": "804cc3dc8b6eec178bd14f0c7739754a210204e7db37fa65730d07357fc7b3b5",
+    "build/event-actions/final-holdout.json": "65eb6b6b0dc01a68a715c1b35f7354efaefbc95308225c8d2b551636a91547b3",
+    "build/event-actions/qualified-mutants/summary.json": "672de3ad2a8a3235aa71d7e66c2d8df075539e0ff8b0aa2421a53e7a0e0dfbb0",
+    "build/event-actions/preview-development.json": "da4092a1adc20b960552ab90519ea9aa73676a913bf0388fabc8f160cc5a60ff",
+    "build/event-actions/protected-preservation.json": "9270a49b17685d4028bc3e1281acc7d64647a3cb978aea800a99ebcf52417fd2"
+  },
+  "setup_history": [
+    "First runner config had an invalid environment path; corrected locally. Copied old snapshot was rejected for profile mismatch, so one fresh 2 GiB import ran and saved only the local snapshot. The runner closed normally.",
+    "Initial comparison exposed initialization primary recapture across allocator reentry and too-early native rejection of a released old pointer. Both source ordering defects were corrected before qualification.",
+    "New fixture corrections retained all input vectors: callback mutations must target the actually selected action container; callback spare-node references require a real spare allocation; duplicate-free contract stops precede simulated reentry. Earlier diagnostic reports are superseded.",
+    "The first native failure fixture exhausted only the largest free block, leaving small reusable blocks; a second attempt tried to allocate a zero-size sentinel. Final test exhausts every allocatable free block and asserts actual 24-byte failure.",
+    "Packaging found PInitialize already owns event allocation. Duplicate typed mode/timer fields were removed; complete event snapshots and a raw-startup-allocation composed case qualify the actual owner.",
+    "Final identity retention stores allocation records outside their payloads, preserving released old/head identities without fixture-held handles or ownership cycles. Final source, all seven mutants and a fresh holdout were rerun."
+  ],
+  "limits": [
+    "Queue/admission and cleanup only; no animation stepping, controller or render qualification.",
+    "Void ABI: return/stop and all modeled state/call/allocation/failure observations; incidental caller-saved registers are not API results.",
+    "Source CAlloc executes; MAlloc/FreeMemory are recorded allocation boundaries. Native adapter delegates to the real TaskWorkArena.",
+    "Duplicate free is a stopped allocator contract violation on both adapters, not a claim about original heap-corruption behavior.",
+    "SetInputP registry slots 0..7, including byte-truncated input words; arbitrary beyond-registry memory is unavailable natively.",
+    "No live guest override registration; the new reference-only ABI adapter exercises the same core with real native allocation. Root owns runtime integration/review and global registrations.",
+    "No actor controller, animation stepping/PSetMotion, stage/script or rendering implementation. Gamma setup remains the retained app frontier.",
+    "Stable typed tombstones/retired allocation records remain until event State destruction to preserve raw tail identities. Arena memory is released and may be reused; this bookkeeping pool grows with admitted nodes.",
+    "No full gate, new app build/journey or hardware test. No existing protected judge, global manifest, native source list, symbol registry, inventory or reserved vector changed."
+  ]
+}

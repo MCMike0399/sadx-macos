@@ -1,0 +1,255 @@
+{
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "layout": {
+    "task_primary": 32,
+    "primary_event": 60,
+    "event_bytes": 124,
+    "event_mode": 0,
+    "event_move_mode": 36,
+    "action_timer": 60,
+    "action_list": 64,
+    "action_old": 68,
+    "path_list": 76,
+    "node_bytes": 24,
+    "node_mode": 0,
+    "node_link_frames": 1,
+    "node_action_object": 4,
+    "node_action_motion": 8,
+    "node_textures": 12,
+    "node_next": 16,
+    "node_speed": 20
+  },
+  "layout_source": "reference/sadx-mod-loader/SADXModLoader/include/SADXStructsNew.h eventwk, eventwk_action, EVENT_ACTION_LIST; confirmed reached operand offsets in fresh dossiers.",
+  "profile": "Seven complete bounded ranges, zero active or undetermined overlaps; qualification.json records the checker receipt.",
+  "callers_and_existing_owners": "417e80 callers include PInitialize442750. Existing player_startup.cpp::bind_work already inlines that event allocation on the canonical primary. No second event/registry/pose/motion owner; node links share scheduler cleanup references.",
+  "style_model": "engine/collision_component: arena allocation identity plus typed payload, weak back-references and explicit failure boundaries.",
+  "rea": {
+    "event-clear-wrapper": {
+      "evidence_id": "ev_96183febfe0bdb8f5fe43676efae797e260d07cb33a037cff30d2cd56cd983ed",
+      "artifact_sha256": "6f1038455de07a2766ce515575d45e2df6711ff6dd4e95ce21e89accb78faa90",
+      "procedure": {
+        "address": "0x42fe40",
+        "name": "FUN_0042fe40",
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x42fe40",
+              "end": "0x42fe54"
+            }
+          ],
+          "total_bytes": 21,
+          "span_bytes": 21,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "signature": "undefined FUN_0042fe40()",
+        "locals": []
+      }
+    },
+    "event-init": {
+      "evidence_id": "ev_389ba91bbf77397d8e5897486bd9b221fac05f08096ea6226a171664be407818",
+      "artifact_sha256": "c80322265a687003f1a8aec46d12c66343f776790d889625f06001e3d22de674",
+      "procedure": {
+        "address": "0x417e80",
+        "name": "FUN_00417e80",
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x417e80",
+              "end": "0x417e9f"
+            }
+          ],
+          "total_bytes": 32,
+          "span_bytes": 32,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "signature": "undefined FUN_00417e80()",
+        "locals": []
+      }
+    },
+    "event-clear": {
+      "evidence_id": "ev_fe9b5e34c9084f9a91e4b3f1d2784db5c95e133dbaed376db878f082b10e0471",
+      "artifact_sha256": "cdf55b8bb3f8f98786cbfe849ca38f440d2bf87ed369343f6629528fae8f9829",
+      "procedure": {
+        "address": "0x417ea0",
+        "name": "FUN_00417ea0",
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x417ea0",
+              "end": "0x417ee1"
+            }
+          ],
+          "total_bytes": 66,
+          "span_bytes": 66,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "signature": "undefined FUN_00417ea0()",
+        "locals": []
+      }
+    },
+    "event-set-action": {
+      "evidence_id": "ev_129bd3b317115184f61ea7bbee4aca4bc82f0482291681c8d629a745972cf5c9",
+      "artifact_sha256": "ae0a7008d38e275074dd58905e9958248d910372d764325e1f3078e643a27b15",
+      "procedure": {
+        "address": "0x42fe00",
+        "name": "FUN_0042fe00",
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x42fe00",
+              "end": "0x42fe14"
+            }
+          ],
+          "total_bytes": 21,
+          "span_bytes": 21,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "signature": "undefined FUN_0042fe00()",
+        "locals": []
+      }
+    },
+    "event-admission": {
+      "evidence_id": "ev_40efc947609e5f03ffca767fc49ad18803b4db6dccae545e6a52fab71eb2956b",
+      "artifact_sha256": "f65d4a7522c7382c6668d8a8aa5eaf3c31015ca03abc2722c6064cd08044555c",
+      "procedure": {
+        "address": "0x417ef0",
+        "name": "FUN_00417ef0",
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x417ef0",
+              "end": "0x417f47"
+            }
+          ],
+          "total_bytes": 88,
+          "span_bytes": 88,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "signature": "undefined FUN_00417ef0()",
+        "locals": []
+      }
+    },
+    "event-calloc": {
+      "evidence_id": "ev_6a782758f909f41f5f6396491f60addc8541bb91e1d46556b7bcf09e6374b139",
+      "artifact_sha256": "1f24f0ae0049188a34b75affc38b9dd4ce52de0d6dfc6daced144126135a54a9",
+      "procedure": {
+        "address": "0x40b2d0",
+        "name": "FUN_0040b2d0",
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x40b2d0",
+              "end": "0x40b303"
+            }
+          ],
+          "total_bytes": 52,
+          "span_bytes": 52,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "signature": "undefined FUN_0040b2d0()",
+        "locals": []
+      }
+    },
+    "event-init-callers": {
+      "evidence_id": "ev_2ffca4329a4b1683b7431edf0a74da15ef3ae871e872c5da7d0c85335faef45d",
+      "artifact_sha256": "1ca375e87d7a4eb51cd699b1bfd3721b8387f0c7cbbad6e88808c050a98da78b",
+      "procedure": [
+        "0x442750",
+        "0x4d3e00",
+        "0x6ece70",
+        "0x6ecf20",
+        "0x6ed090",
+        "0x6f0070",
+        "0x6f00a0",
+        "0x6f00d0",
+        "0x6f08b0",
+        "0x6f22d0",
+        "0x6f6ae0"
+      ]
+    },
+    "event-set-input": {
+      "evidence_id": "ev_472fdeba0bcb3baf04bac2f2e7b38cf027f57a00bba7fccaec275ca035fd516b",
+      "artifact_sha256": "b1108172a410dc2270158d4b577649595b6733318c9ab465bed8bd7900dba68e",
+      "procedure": {
+        "address": "0x441260",
+        "name": "FUN_00441260",
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x441260",
+              "end": "0x44127b"
+            }
+          ],
+          "total_bytes": 28,
+          "span_bytes": 28,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "signature": "undefined FUN_00441260()",
+        "locals": []
+      }
+    }
+  }
+}

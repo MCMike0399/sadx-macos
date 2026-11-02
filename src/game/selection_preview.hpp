@@ -117,8 +117,8 @@ void remove(State &, Calls &);
 } // namespace sadx::selection_preview
 
 namespace sadx {
-// NOTSA: opaque borrow of the canonical EVENT_ACTION_LIST node. Root supplies
-// its definition with the event-action owner; preview never owns or copies it.
+// NOTSA: opaque borrow of the canonical EVENT_ACTION_LIST node defined by
+// player/event_actions.hpp; preview never owns or copies it.
 struct PlayerEventActionNode;
 }
 
@@ -133,7 +133,7 @@ struct ActionState {
 struct ActionCalls {
     virtual ~ActionCalls() = default;
     virtual std::shared_ptr<PlayerTaskState> primary(const TaskHandle &task) = 0;
-    // STUB: SONIC 0x441260 SetInputP
+    // NOTSA: delegates to the recovered event_actions::set_input core.
     virtual void set_input(std::uint8_t player, std::int8_t mode) = 0;
     virtual std::int32_t &miles_counter() = 0;
     // The imported sequence includes a null terminator. Signed indices retain
@@ -141,7 +141,7 @@ struct ActionCalls {
     virtual ActionHandle action(std::size_t actor, std::int32_t index) = 0;
     virtual regular_textures::List &textures(std::size_t actor) = 0;
     virtual std::int32_t link_frames(std::size_t actor, std::int32_t index) = 0;
-    // STUB: SONIC 0x42fe00 EV_SetAction
+    // NOTSA: delegates to the recovered event_actions::set_action core.
     virtual void set_action(const TaskHandle &task, ActionHandle action,
                             regular_textures::List &textures, float speed,
                             bool loop, std::int32_t link_frames) = 0;

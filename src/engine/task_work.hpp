@@ -14,6 +14,10 @@ namespace collision_component {
 struct Work;
 }
 
+namespace event_actions {
+struct Work;
+}
+
 class TaskWorkArena;
 class TaskWork;
 using TaskWorkHandle = std::shared_ptr<TaskWork>;
@@ -42,6 +46,8 @@ class TaskWork {
   public:
     // NOTSA: typed collision payload; arena bytes retain only scheduler cleanup metadata.
     std::shared_ptr<collision_component::Work> collision_state;
+    // NOTSA: event allocation/node payload; links remain canonical arena references.
+    std::shared_ptr<event_actions::Work> event_state;
     std::uint32_t data_offset() const noexcept { return header_ + 32; }
     std::uint32_t requested_size() const noexcept { return requested_; }
     bool released() const noexcept { return released_; }
