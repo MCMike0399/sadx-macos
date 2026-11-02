@@ -111,6 +111,12 @@ build/sadx-controller-qualify: src/apps/controller_qualify.mm build/libsadx-maco
 	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) $< build/libsadx-macos.a build/libsadx-core.a $(MAC_FRAMEWORKS) -o $@
 build/sadx-native: src/apps/sadx_native.mm build/libsadx-native.a $(NATIVE_PLATFORM_OBJECTS)
 	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) $< $(NATIVE_PLATFORM_OBJECTS) build/libsadx-native.a $(MAC_FRAMEWORKS) -o $@
+# Registered Sonic fixture include applies to this separately built reader binding.
+build/reset-sonic-final: tests/fixtures/reset_sonic_final.cpp tests/reference/actor_current_fixture.hpp build/libsadx-guest.a build/libsadx-core.a
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -include tests/reference/actor_current_fixture.hpp -MMD -MP $< build/libsadx-guest.a build/libsadx-core.a -o $@
+# Finite reserved reference binding; explicit build, never automatic execution.
+build/reset-reference-final: tests/fixtures/reset_reference_final.cpp build/libsadx-guest.a build/libsadx-core.a
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -MMD -MP $< build/libsadx-guest.a build/libsadx-core.a -o $@
 # Explicit reserved binding build only. This program is never run by the gate.
 build/reset-native-session-final: tests/fixtures/reset_native_session_final.cpp build/libsadx-native.a $(NATIVE_PLATFORM_OBJECTS)
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -MMD -MP $< $(NATIVE_PLATFORM_OBJECTS) build/libsadx-native.a $(MAC_FRAMEWORKS) -o $@

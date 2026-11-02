@@ -1,3 +1,4 @@
+#include "reset_final_parent.hpp"
 #include "runtime/native_session.hpp"
 #include "runtime/native_display.hpp"
 #include "runtime/native_title_scene.hpp"
@@ -63,17 +64,21 @@ void observe_session(const std::filesystem::path &assets, std::uint32_t input) {
     const bool same_owner = identity == &native::ResetSessionFixture::frame_message(session);
     if (!same_owner || frame.work != 0 || vibration_calls != 1)
         throw std::runtime_error("real reset did not clear the live native message owner");
-    std::cout << "reserved-native-frame-alias " << input << ' ' << boundary << ' '
-              << same_owner << ' ' << frame.work << ' ' << vibration_calls << '\n';
+    std::cout << "{\"case\":\"reserved-native-frame-alias\",\"input\":[" << input
+              << "],\"boundary\":\"" << boundary << "\",\"same_owner\":" << same_owner
+              << ",\"frame\":" << frame.work << ",\"vibration_calls\":"
+              << vibration_calls << "}\n";
 }
 } // namespace
 
 int main(int argc, char **argv) {
     // Root's separately reviewed runner supplies the frozen input only after admission.
     // Building this executable does not execute or consume a reserved case.
-    if (argc != 3)
+    if (argc != 5)
         return 64;
     try {
+        sadx::test::retain_reset_parent(input_word(argv[3]),
+                                         input_word(argv[4]));
         observe_session(argv[1], input_word(argv[2]));
     } catch (const std::exception &failure) {
         std::cerr << failure.what() << '\n';
