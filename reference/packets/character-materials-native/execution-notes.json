@@ -1,0 +1,19 @@
+{
+  "initial_build": "Initial make followed a dependency symlink and rebuilt/installed libusb into Root cache before it was noticed. Dependency builder was terminated during SDL configure, link removed, dependency files copied locally; all later builds used -o header and worktree-only outputs. No game source or assets were changed in Root.",
+  "affected_root_cache": "/Users/burbujamc/Developer/sadx-macos/build/native-controller-deps",
+  "installed_files": [
+    "include/libusb-1.0/libusb.h",
+    "lib/libusb-1.0.a",
+    "lib/libusb-1.0.la",
+    "lib/pkgconfig/libusb-1.0.pc"
+  ],
+  "initial_log": "build/baseline-build.log",
+  "initial_log_sha256": "d9727af0bbf72114a2d410d1f57dc0d7fc76fbb1a0d1ef86dbc3036b72af345f",
+  "Root_action": "Cache may be rebuilt/restored by its owner; metadata installation prefixes may mention this worktree. Do not treat the cache as unchanged.",
+  "other_rejected_attempts": [
+    "Source inverse script initially used the installed/proxy DLL and rejected its hash; CHRMODELS_orig.dll matches the pinned imported archive.",
+    "Consumer first lacked a selected texture list; corrected fixture selects the actual loaded E102 list.",
+    "Verification first omitted gamma-setup-caller argument; corrected from existing manifest. Detached mutant initially failed at an earlier stronger identity assertion; receipt expectation corrected.",
+    "Pillow unavailable in reference venv; screenshot converted using sips and inspected."
+  ]
+}

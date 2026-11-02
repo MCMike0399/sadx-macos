@@ -138,7 +138,7 @@ int main(int argc, char **argv) {
     const auto model_resource = pack.model(kQuestionModel);
     const auto &before = scene.geometry.vector_words(model_resource.points);
     const auto first_coordinate = before.front();
-    basic_model::draw_model(kQuestionModel, pack, model.owners(), model);
+    basic_model::draw_model(kQuestionModel, pack, scene.materials, model.owners(), model);
     assert(device.frame().commands.size() == 1);
     const auto &draw = std::get<graphics::Draw>(device.frame().commands.back());
     assert(draw.has_normals && draw.has_diffuse && draw.texture_coordinates == 1);
@@ -158,7 +158,7 @@ int main(int argc, char **argv) {
     auto &live_points = scene.geometry.vector_words(model_resource.points);
     for (std::size_t component = 0; component < live_points.size(); component += 3)
         live_points[component] = changed_bits;
-    basic_model::draw_model(kQuestionModel, pack, model.owners(), model);
+    basic_model::draw_model(kQuestionModel, pack, scene.materials, model.owners(), model);
     assert(device.frame().commands.size() == 2);
     assert(std::get<graphics::Draw>(device.frame().commands[0]).vertices.front().position[0] ==
            original_x);

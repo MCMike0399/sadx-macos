@@ -1,0 +1,207 @@
+{
+  "native_programs": {
+    "native-gamma-binding": 0,
+    "native-gamma-weld-cursors": 0,
+    "animation-gamma-shared-binding": 0,
+    "animation-gamma-assets": 0,
+    "gamma-setup-caller": 0,
+    "basic-model": 0,
+    "model-binding": 0
+  },
+  "mutants": [
+    {
+      "name": "immutable-renderer",
+      "compiled": true,
+      "exit_status": 1,
+      "observed": "PASS: imported Gamma -> canonical collision/ordinary textures/cursors -> setup boundary\nactual recorded draw must observe the Gamma-mutated canonical material"
+    },
+    {
+      "name": "detached-gamma",
+      "compiled": true,
+      "exit_status": 1,
+      "observed": "PASS: imported Gamma -> canonical collision/ordinary textures/cursors -> setup boundary\nGamma resolves the shared material identity on every call"
+    },
+    {
+      "name": "basic_model-normalized-material",
+      "compiled": true,
+      "exit_status": 1,
+      "value_failures": 1263
+    },
+    {
+      "name": "basic_model-destination-blend-field",
+      "compiled": true,
+      "exit_status": 1,
+      "value_failures": 1080
+    },
+    {
+      "name": "basic_model-environment-off-skipped",
+      "compiled": true,
+      "exit_status": 1,
+      "value_failures": 42
+    },
+    {
+      "name": "basic_model-callback-reloaded",
+      "compiled": true,
+      "exit_status": 1,
+      "value_failures": 38
+    },
+    {
+      "name": "basic_model-reset-world-alias",
+      "compiled": true,
+      "exit_status": 1,
+      "value_failures": 180
+    },
+    {
+      "name": "basic_model-constant-channel-order",
+      "compiled": true,
+      "exit_status": 1,
+      "value_failures": 73
+    },
+    {
+      "name": "basic_model-environment-generator",
+      "compiled": true,
+      "exit_status": 1,
+      "value_failures": 31
+    },
+    {
+      "name": "gamma_selection_core-skip_id2",
+      "compiled": true,
+      "exit_status": 1,
+      "value_failures": 1044
+    },
+    {
+      "name": "gamma_selection_core-republish_player",
+      "compiled": true,
+      "exit_status": 1,
+      "value_failures": 1140
+    },
+    {
+      "name": "gamma_selection_core-wrong_texture_character",
+      "compiled": true,
+      "exit_status": 1,
+      "value_failures": 1134
+    },
+    {
+      "name": "gamma_selection_core-wrong_material_mask",
+      "compiled": true,
+      "exit_status": 1,
+      "value_failures": 858
+    },
+    {
+      "name": "gamma_selection_core-stale_extra_after_display",
+      "compiled": true,
+      "exit_status": 1,
+      "value_failures": 114
+    },
+    {
+      "name": "gamma_selection_core-omit_join",
+      "compiled": true,
+      "exit_status": 1,
+      "value_failures": 1062
+    },
+    {
+      "name": "gamma_selection_core-spill_shadow_return",
+      "compiled": true,
+      "exit_status": 1,
+      "value_failures": 71
+    }
+  ],
+  "basic_model_holdout": {
+    "cases": 3427,
+    "mismatch_count": 0,
+    "fp_status_mismatches": 274,
+    "case_sha256": "673e0a725b7ed05ff36cbe7264fb8abcc8b42ed3607650c6789de4bc17d52d63"
+  },
+  "gamma_selection_core_holdout": {
+    "case_count": 1080,
+    "value_failures": 0,
+    "fp_flag_partials": 690
+  },
+  "Gamma_complete_native_baseline_equality": {
+    "cases": 2502,
+    "sha256": "3ad844bafe6541ca238da51676bb0246b5537c44e84f6decc1a8e1077dbd60cc",
+    "includes_each_FP_status": true
+  },
+  "basic_complete_receipts_equal": true,
+  "basic_holdout_complete_receipts_equal": true,
+  "source_commit": "4a33d28",
+  "base_commit": "eb49adc75d5398780664b43d77d5061be6260a7d",
+  "basic_baseline": {
+    "cases": 2427,
+    "mismatch_count": 0,
+    "fp_status_mismatches": 172,
+    "case_sha256": "3792e2c9a7d9e7a357b68795dd57dc65d599111ce3a7b00f2c4ac00d6e1fa3b7",
+    "original_ranges_sha256": {
+      "0x77ef70-0x77ef87": "4f5977cb691edaa04c982a4dc417eaeea893aa03592b5a6e87c5764cc71491a9",
+      "0x77eda0-0x77ef4e": "8263cd042dc3ffa7a2a13f14b159c47e113da1dab46513cd256e6a695516f68e",
+      "0x781cc0-0x781dea": "10ec7f111b297f36c00b1af5edd3605d1d7ce335f0fd5f42e3fe7eacac1e2be1",
+      "0x781df0-0x781e14": "43e7eaecdd25401cb4832afab1600affa25c9c5116e61a176c243bbb309053c2",
+      "0x781ec0-0x78202c": "37d0ef25b1a6dbf1096b4c21b3b2a0a02cc1529431ab2c6851f9aa5c9930d41d",
+      "0x7944b0-0x7944f1": "b89491d221eb7dab3b8a00626b0c7ab67a5980bb67cdf8a58576a43e5c160126",
+      "0x794500-0x79453e": "e7d26eb669767c67201c4eecdf445fafa3576ac4cf9f4bd0e3231119a7765a13",
+      "0x784850-0x784adf": "48c720d61746b56396a4b357fe21e61e8c2eeebf1ab9d74559d33c460875da88",
+      "0x791a50-0x791a7c": "2d5e4aeaacf1c2c257fb257aea0bf82a7ae9bd55d0e180a6138d7e2361e078d0",
+      "0x791a80-0x791aa4": "6947bc74529b5d2b87af4c603080cb74992edccaa9e44f49bf5e737522b1aeb0",
+      "0x791990-0x791a4a": "0e7f45547011c434e1883a4ee2c1b03f401ccfb9d2d6ec78e2f4c0a10f62c1b3",
+      "0x791ab0-0x791ac9": "a3e41ac30905827503386d50372ff6cdba6a5e302521a42f2d0e4e51adb0ae41",
+      "0x791ad0-0x791ae9": "22073fc5b9ec4e9890d76725175c11afdaf4b86b7025dac0ab4a27a0056397ab"
+    },
+    "strict_exit_status": 2
+  },
+  "basic_candidate": {
+    "cases": 2427,
+    "mismatch_count": 0,
+    "fp_status_mismatches": 172,
+    "case_sha256": "3792e2c9a7d9e7a357b68795dd57dc65d599111ce3a7b00f2c4ac00d6e1fa3b7",
+    "original_ranges_sha256": {
+      "0x77ef70-0x77ef87": "4f5977cb691edaa04c982a4dc417eaeea893aa03592b5a6e87c5764cc71491a9",
+      "0x77eda0-0x77ef4e": "8263cd042dc3ffa7a2a13f14b159c47e113da1dab46513cd256e6a695516f68e",
+      "0x781cc0-0x781dea": "10ec7f111b297f36c00b1af5edd3605d1d7ce335f0fd5f42e3fe7eacac1e2be1",
+      "0x781df0-0x781e14": "43e7eaecdd25401cb4832afab1600affa25c9c5116e61a176c243bbb309053c2",
+      "0x781ec0-0x78202c": "37d0ef25b1a6dbf1096b4c21b3b2a0a02cc1529431ab2c6851f9aa5c9930d41d",
+      "0x7944b0-0x7944f1": "b89491d221eb7dab3b8a00626b0c7ab67a5980bb67cdf8a58576a43e5c160126",
+      "0x794500-0x79453e": "e7d26eb669767c67201c4eecdf445fafa3576ac4cf9f4bd0e3231119a7765a13",
+      "0x784850-0x784adf": "48c720d61746b56396a4b357fe21e61e8c2eeebf1ab9d74559d33c460875da88",
+      "0x791a50-0x791a7c": "2d5e4aeaacf1c2c257fb257aea0bf82a7ae9bd55d0e180a6138d7e2361e078d0",
+      "0x791a80-0x791aa4": "6947bc74529b5d2b87af4c603080cb74992edccaa9e44f49bf5e737522b1aeb0",
+      "0x791990-0x791a4a": "0e7f45547011c434e1883a4ee2c1b03f401ccfb9d2d6ec78e2f4c0a10f62c1b3",
+      "0x791ab0-0x791ac9": "a3e41ac30905827503386d50372ff6cdba6a5e302521a42f2d0e4e51adb0ae41",
+      "0x791ad0-0x791ae9": "22073fc5b9ec4e9890d76725175c11afdaf4b86b7025dac0ab4a27a0056397ab"
+    },
+    "strict_exit_status": 2
+  },
+  "gamma_baseline": {
+    "original_ranges_sha256": {
+      "0x483430-0x4841cf": "75e0a0b41f8c60e9b27ae1befd885782f698964bdaa8fd9cd77407a530c7875c"
+    },
+    "case_count": 1422,
+    "value_failures": 0,
+    "fp_flag_partials": 498,
+    "strict_exit_status": 2
+  },
+  "gamma_candidate": {
+    "original_ranges_sha256": {
+      "0x483430-0x4841cf": "75e0a0b41f8c60e9b27ae1befd885782f698964bdaa8fd9cd77407a530c7875c"
+    },
+    "case_count": 1422,
+    "value_failures": 0,
+    "fp_flag_partials": 498,
+    "strict_exit_status": 2
+  },
+  "baselines": {
+    "build/character-materials/baseline/native-basic-model-probe.dylib": "fbe3aefde0acef7578884a455d74e3902444b9573b42189d73601a16da65099e",
+    "build/character-materials/baseline/native-gamma-selection-core-probe.dylib": "ec710473762a94033d378eafe21fadd707c51ca8cc43152bba26c4815179d52b"
+  },
+  "checks": {
+    "layers": "12 layers, 0 known exceptions, 0 violations",
+    "readability": "Readability: 520 files, {'hex_literals': 2934, 'address_identifiers': 1365, 'address_calls': 61, 'goto': 0, 'address_labels': 0, 'long_lines': 1000, 'multi_statement_lines': 1538, 'large_decimal_literals': 231, 'emulator_arithmetic': 3198, 'address_comments': 1029}, 0 regressions",
+    "owners": "159059 owned bytes, 0 with more than one owner struct",
+    "provenance": "Provenance: {'FUNCTION': 503, 'GLOBAL': 102, 'STUB': 82, 'PATCH': 2, 'DATA': 5}, 167488 legacy/annotated byte identities, 0 errors",
+    "profile": "14 source ranges, 0 UNHANDLED/undetermined overlaps; profile.json"
+  },
+  "limits": [
+    "No full gate, N3b, Gamma actor pixels, gameplay or new hardware qualification.",
+    "New Draw proof rewires two model descriptors onto the existing supported Question strip, with the real canonical Gamma-mutated material array.",
+    "Root owns manifest/build dependency registration and independent review. Existing original comparison scripts/cases/tolerances are unchanged."
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "source_commit": "4a33d28",
+  "exit_status": 1,
+  "stop": "native session stopped: native_gamma_initialize_effects",
+  "state": {
+    "frames": 1332,
+    "sprite_registry_count": 1,
+    "gamma_setup_assets_loaded": true,
+    "gamma_setup_registered": true,
+    "game_mode": 12,
+    "game_state": 21,
+    "main_menu_phase": 3,
+    "character_select_next": 8
+  },
+  "input_schedule": "500:13:down,501:13:up,750:13:down,751:13:up,950:13:down,951:13:up,1050:13:down,1051:13:up,1300:13:down,1301:13:up",
+  "screenshot_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427",
+  "same_baseline_image": true,
+  "raw_output_directory": "build/character-materials/source-only/run",
+  "output_log_sha256": "8a4846614bc7060a5ac7c01c4a39c6eb5661dbab1fe55ab69e195a9d96000363",
+  "observation": "Inspected outgoing-title image; later explicit dependency boundary, no actor frame.",
+  "build_exit_status": 0,
+  "archive_sha256": "788a1e21eb1eebe28bc8328ba1ae38009048ee38729b9519f3307ea5b2599d9d",
+  "initial_original_binaries": 0,
+  "initial_prebuilt_objects": 0,
+  "build_log_sha256": "c623bce9fb1ae21dcd05ceb1c7617bc5b9794c1c211388aab7b3ca1f04022438",
+  "command": "make -j2 -o build/native-controller-deps/include/SDL3/SDL.h build/sadx-native native-closure",
+  "reused_dependencies": "Pinned public SDL3/libusb copied into archive build directory only; all maintained and numerical source rebuilt.",
+  "app_sha256": "03baa77cb8bb9751152d26821d66806fc94f27ec140a0df7106bf37ec50c5d22"
+}

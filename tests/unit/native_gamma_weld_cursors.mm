@@ -88,7 +88,7 @@ void check_binding(const std::filesystem::path &directory) {
     sprite_registry::State sprites;
     gamma::Context context{players, scheduler, bootstrap, display, task, stage, act,
         lower_callback, lower_callback, lower_callback, catalog, &texture_state, &texture_services,
-        sprites};
+        sprites, scene};
     bool stopped = false;
     try { gamma::run(context, task); }
     catch (const flow::UnrecoveredGameFlowCall &error) {

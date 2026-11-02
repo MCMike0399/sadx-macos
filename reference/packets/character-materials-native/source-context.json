@@ -1,0 +1,90 @@
+{
+  "exe_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "dll_sha256": "76bbaa1b6aa23872648e6f1f39642e4262403e372b4c4b32f20f0ec89780c2a5",
+  "pack_sha256": "c414e173bf4bf9f803f24d61642e233ff9650fe9276d70da2ac3939fee2b5d7f",
+  "metadata_sha256": "26f0643c7b8572d1601b23ef071b4346c46bdf1d8eaa3c654f3152582c90357e",
+  "material_arrays": 249,
+  "material_words": 1990,
+  "all_material_payloads_inverse_exact": true,
+  "table_export": "0x100074f8",
+  "declarations": [
+    {
+      "table_row": 1,
+      "material_index": 6,
+      "materials": 2742,
+      "record_index": 6,
+      "source_record": "0x10200dc0",
+      "model_users": [
+        2717
+      ],
+      "record_sha256": "b0854ef0e519117c4fa98bd23eb53bc6050f49c1a61307f75eca2c4e24d22794"
+    },
+    {
+      "table_row": 5,
+      "material_index": 2,
+      "materials": 2752,
+      "record_index": 2,
+      "source_record": "0x102009e8",
+      "model_users": [
+        2744
+      ],
+      "record_sha256": "7116401dbaacc5193de144aebd82de1c58a9e524517ee917942beab70a2e40b0"
+    },
+    {
+      "table_row": 4,
+      "material_index": 2,
+      "materials": 2764,
+      "record_index": 2,
+      "source_record": "0x10200554",
+      "model_users": [
+        2754
+      ],
+      "record_sha256": "5ec9c3e8148f7959805c200d0f3ea26905eac556946f5f39c76ae998e7e20cb4"
+    },
+    {
+      "table_row": 3,
+      "material_index": 2,
+      "materials": 2555,
+      "record_index": 2,
+      "source_record": "0x10204ef0",
+      "model_users": [
+        2543
+      ],
+      "record_sha256": "8021d2eeef9a581f06240324d2ae8404a77e3d28df9b1bd465072c780bf4ba58"
+    },
+    {
+      "table_row": 2,
+      "material_index": 2,
+      "materials": 2474,
+      "record_index": 2,
+      "source_record": "0x10206300",
+      "model_users": [
+        2462
+      ],
+      "record_sha256": "8c0f11a5b05ddae5c9ae50fcefe744aa7fef6f17d646080c654e265eda8d0049"
+    }
+  ],
+  "source_semantics": {
+    "Gamma": "483430 reads the direct E102_MATERIALS table in order 1/6,5/2,4/2,3/2,2/2. No object/model traversal. Row2 publishes its retained material pointer.",
+    "renderer": "4034b0 rereads node.model for each draw. 77eda0 captures model.points/normals/meshsets/materials/count before its mesh loop. 77ee24 reloads the retained material-array base from stack, not model+16; 784850 reads each selected record at the transition.",
+    "limits": "Only the five declared Gamma table accesses are bound. Other indices remain unavailable. No new mutable model-descriptor behavior is claimed."
+  },
+  "renderer_dossier": {
+    "path": "/Users/burbujamc/Developer/sadx-macos/reference/inventory-raw/native-basic-model-render-recovery-20261021/native-basic-model-dispatch.json",
+    "sha256": "25e1a15d28d7610adff5e75026dc78b6dfe41aaa1b6d6ca90c888db5ee2aac0b",
+    "evidence_id": "ev_8156aa71a36fb1ef6e6a9e079e00d4f81d2eae5b67852d2cf259ab0211d99b57"
+  },
+  "Gamma_dossier": {
+    "evidence_id": "ev_2f86a86b5e458c4a46ed9ceba4c3356e895691686cb9a4cd3c3e96ec964bf27f",
+    "dossier_sha256": "f5b3fb01a7d4b50e5f8912a4a674d4af37bc0542fe158002ea1b6a31c0c431a6",
+    "dossier_path": "/Users/burbujamc/Developer/sadx-wt-normal-uv-strip/reference/inventory-raw/gamma-selection-recovery-20261026/gamma-483430.json",
+    "source_ranges": {
+      "0x483430-0x4841cf": "75e0a0b41f8c60e9b27ae1befd885782f698964bdaa8fd9cd77407a530c7875c"
+    }
+  },
+  "profile_original_model_archive": {
+    "path": "reference/updated-pc-reference/game/system/CHRMODELS_orig.dll",
+    "sha256": "76bbaa1b6aa23872648e6f1f39642e4262403e372b4c4b32f20f0ec89780c2a5",
+    "loader_source": "reference/sadx-mod-loader/SADXModLoader/dllmain.cpp:1654-1665 loads CHRMODELS_orig.dll; CHRMODELS.dll is the proxy, not the asset archive."
+  }
+}

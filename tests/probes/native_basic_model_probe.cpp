@@ -62,10 +62,11 @@ extern "C" int sadx_native_basic_model(const std::uint32_t *input, std::uint32_t
                 return -2;
             const auto pack = sadx::character_pack::CharacterPack::decode(
                 std::vector<std::uint8_t>(pack_bytes, pack_bytes + pack_size));
+            const sadx::character_pack::MaterialState materials(pack);
             if (input[0] == 7)
-                bm::draw_model(3, pack, owners, context);
+                bm::draw_model(3, pack, materials, owners, context);
             else
-                bm::draw_direct_model(3, pack, owners, context);
+                bm::draw_direct_model(3, pack, materials, owners, context);
             break;
         }
         case 9:

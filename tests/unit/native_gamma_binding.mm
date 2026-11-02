@@ -3,6 +3,7 @@
 #include "runtime/native_display.hpp"
 #include "runtime/character_texture_assets.hpp"
 #include "game/game_mode.hpp"
+#include "character_material_consumer.hpp"
 #include <iostream>
 #include <algorithm>
 
@@ -48,6 +49,8 @@ void check_binding(const std::filesystem::path &directory, bool with_setup = fal
     using namespace sadx;
     namespace gamma = gamma_selection;
     const auto pack = character_pack::CharacterPack::load(directory / "characters/sonic-selection.actions");
+    character_material_test::declarations(directory, pack);
+    character_material_test::unusual_bits(directory);
     native::PlayerSystem players;
     players.gamma_assets = std::make_unique<native::GammaActorAssets>(
         native::app::load_gamma_actor_assets(directory, pack));
@@ -120,7 +123,7 @@ void check_binding(const std::filesystem::path &directory, bool with_setup = fal
     sprite_registry::State sprites;
     gamma::Context context{players, scheduler, bootstrap, display, task, stage, act,
         lower_callback, lower_callback, lower_callback, catalog, &texture_state, &texture_services,
-        sprites};
+        sprites, scene};
     if (with_setup) {
         const auto definition = native::app::load_gamma_setup_definition(directory);
         require(bool(definition), "real imported setup definition is required");
@@ -161,17 +164,64 @@ void check_binding(const std::filesystem::path &directory, bool with_setup = fal
     require(gamma::is_time_zero(context) == 0, "actual minute byte consumed");
     bootstrap.minutes = 0;
     bootstrap.frames = 17;
+    // Inverse every imported material word before any native mutation.
+    std::size_t material_words = 0;
+    for (std::size_t id = 1; id <= pack.record_count(); ++id) {
+        const auto &record = pack.record(id);
+        if (record.kind != character_pack::ResourceKind::Materials) continue;
+        const auto count = character_material_test::word(record.payload, 0);
+        for (std::size_t item = 0; item < count; ++item) {
+            const auto &material = scene.materials.material(static_cast<character_pack::ResourceId>(id), item);
+            for (std::size_t field = 0; field < material.words.size(); ++field) {
+                require(material.words[field] == character_material_test::word(
+                    record.payload, 4 + item * 20 + field * 4), "all imported material bits inverse exactly");
+                ++material_words;
+            }
+        }
+    }
+    require(material_words > 0, "real material import coverage");
+    if (with_setup) {
+        for (std::size_t index = 0; index < assets.materials.size(); ++index) {
+            const auto &row = assets.materials[index];
+            auto &material = scene.materials.material(row.materials, row.record_index);
+            material.words = {0x12234567U + static_cast<std::uint32_t>(index),
+                              0x44112233, float_bits(13), 0, 0x12345678};
+        }
+    }
     const auto stale = arena->allocate(512).work;
     players.current.player = stale;
     bool stopped = false;
     try { gamma::run(context, task); }
     catch (const flow::UnrecoveredGameFlowCall &error) {
-        require(std::string(error.what()) == (with_setup ? "native_gamma_shared_material_binding" :
+        require(std::string(error.what()) == (with_setup ? "native_gamma_initialize_effects" :
                 "native_gamma_load_setup_resource"), "first real lower boundary");
         stopped = true;
     }
-    require(stopped, "missing setup or subsequent material must stop explicitly");
+    require(stopped, "missing setup or subsequent effects must stop explicitly");
     if (with_setup) {
+        for (std::size_t index = 0; index < assets.materials.size(); ++index) {
+            const auto &row = assets.materials[index];
+            auto &material = scene.materials.material(row.materials, row.record_index);
+            require(&gamma::material(context, row.table_row, row.material_index) == &material,
+                    "Gamma resolves the shared material identity on every call");
+            const auto initial_color = 0x12234567U + static_cast<std::uint32_t>(index);
+            require(material.diffuse() == (index == 0 ? initial_color : initial_color | 0xff000000) &&
+                    material.attributes() == ((0x12345678U & 0x03efffffU) | 0x80100000U) &&
+                    material.words[1] == 0x44112233 && material.words[2] == float_bits(13) &&
+                    material.words[3] == 0, "all five exact Gamma stores preserve every other bit");
+        }
+        character_material_test::render(context, directory, pack);
+        // Material table rows are live direct pointers, independent of object/model links.
+        const auto original_binding = assets.materials.back();
+        assets.materials.back().materials = assets.materials[1].materials;
+        assets.materials.back().record_index = assets.materials[1].record_index;
+        require(&gamma::material(context, 2, 2) == &scene.materials.material(
+                    assets.materials[1].materials, assets.materials[1].record_index),
+                "Gamma rereads a changed material-table reference");
+        require(players.gamma.headlight_material == &scene.materials.material(
+                    original_binding.materials, original_binding.record_index),
+                "published headlight pointer retains its original stable array address");
+        assets.materials.back() = original_binding;
         const auto node = players.gamma_setup.sprite;
         require(node && sprites.head == node && sprites.count == 1 &&
                 node->definition == players.gamma_setup.definition &&
