@@ -1011,3 +1011,11 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * App/force-load, new real caller, eight inherited caller programs and static checks pass at -j2. Eleven unchanged judges retain numeric results and all emitted partial identities; imported matrices retain 774 rows and three partials.
 * Root owns the minimal Display/source-list hunks, test registration, inventory and admission. All 1,441 protections remain, including 53 local absences; the finite proposal adds nine paths. No manifest refresh or full gate was run.
 * PACKET.md and VERIFICATION.json retain source, owner, caller, commands and limits. Active PJoin arguments/deformation/attachments and display/controller bodies remain explicit boundaries; shared Session/PlayerSystem fields and later Gamma code are unchanged.
+
+### 2026-11-02 — Gamma fan integration packet ready for Root
+
+* In packet/gamma-fan-integration, source fadef4b7 and exact wiring eb8ae446 integrate accepted c8967938; candidate judges bdfb4359 are retained separately as 07028705. Reviews 9cd78257/e3b89d79 found no bounded-scope defects.
+* Shipping app/force-load and nine native programs pass at -j2. Normal input with a private retained save copy reaches native_gamma_display at frame 1332, exit 1, completed 1330. The inspected outgoing-title hash remains c7d02f64. No actor frame or N3b claim.
+* All 909 development cases and both streams match, including 733 complete FP partial identities, strict exit 2. Accepted 4,493-case holdout with 3,434 partial identities and eleven compiled faults are reused under unchanged contracts.
+* Finite judge union retains all 1,441 protections and adds nine. Two registration hashes change; 53 absent ignored inputs remain protected. Local judge exit 1 reports only those absences. Generated inventory passes; authored dispositions and open debt stay unchanged.
+* gamma-fan-integration.json and packet/gamma-fan-integration record commands, app state/image, source/judge hashes and limits. Main remains untouched; Root owns adoption and coherent gate. No full gate, cold proof, original runtime witness rerun or Sonic continuation is included.

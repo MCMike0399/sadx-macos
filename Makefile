@@ -656,3 +656,9 @@ build/native-model-matrices-probe.dylib: tests/probes/native_model_matrices_prob
 
 build/model-motion-matrices-test: tests/unit/model_motion_matrices.mm src/engine/model_matrices.cpp src/engine/ninja_matrix_composition.cpp src/player/model_motion_matrices.cpp src/player/model_motion_source.cpp build/libsadx-native.a
 	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) $^ -framework Foundation -o $@
+
+# Gamma fan source body and real common-tail binding.
+build/native-gamma-fan-probe.dylib: tests/probes/native_gamma_fan_probe.cpp src/player/gamma_fan.cpp src/player/gamma_fan.hpp build/libsadx-native.a
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -dynamiclib $< src/player/gamma_fan.cpp build/libsadx-native.a -o $@
+build/native-gamma-fan-test: tests/unit/native_gamma_fan.mm src/apps/native_gamma_actor_assets.hpp src/runtime/native_player_system.hpp src/runtime/native_display.hpp build/libsadx-native.a $(NATIVE_PLATFORM_OBJECTS)
+	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) $< $(NATIVE_PLATFORM_OBJECTS) build/libsadx-native.a $(MAC_FRAMEWORKS) -o $@

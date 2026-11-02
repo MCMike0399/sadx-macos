@@ -1,0 +1,515 @@
+{
+  "base": "bdb61450f4987355c7e9c3eb467b0971ffb02c72",
+  "branch": "packet/gamma-fan-integration",
+  "candidate": {
+    "source": "c89679381a9c541c8849450b4a862bf3ecbc1e70",
+    "judge": "bdfb4359e1df2a49977cfe1e60dc28b0980f80d1"
+  },
+  "integrated_commits": {
+    "source": "fadef4b7",
+    "wiring": "eb8ae446",
+    "candidate_judges": "07028705"
+  },
+  "reviews": {
+    "standards": "9cd78257-f4e2-45b3-be3d-49713cb8de62",
+    "fidelity": "e3b89d79-70a5-467f-ad81-e0584c0daeed",
+    "verdict": "accepted bounded source plus exact ROOT-WIRING.patch, no findings"
+  },
+  "source_contract": {
+    "candidate_owned_files_byte_identical": true,
+    "display_patch_exact": true,
+    "native_sources_delta": [
+      "src/player/gamma_fan.cpp"
+    ],
+    "shared_owners_unchanged": true,
+    "header_hash_rebindings": []
+  },
+  "manifest_delta": {
+    "inherited_count": 1441,
+    "added": {
+      "reference/packets/gamma-fan-native/verify_binding_faults.py": "44ab3a981273e15e57321d7665df128ae24a958dd5b177120151b9166e400622",
+      "reference/packets/gamma-fan-native/verify_initialization.py": "6aa07dd953057777161476b02a5e3f79b37663629c3e751b06786a2a58fbf0df",
+      "reference/packets/gamma-fan-native/verify_packet.py": "ef2b4b5f18c6c4d0c3ab9562649d2bf0b6763fda0ea229113a77e5591f32142f",
+      "reference/packets/gamma-fan-native/verify_regressions.py": "382d2e8a95272ef6e6ea3de3c8b7faf49a408e266454472d873d591314f2633d",
+      "reference/packets/gamma-fan-native/verify_root_fixture.py": "73f221d09bb357f6c8e9a77b7f7b8bc1f41726d9dfaf21f3443972de73abf11a",
+      "tests/probes/gamma_fan_initialization.cpp": "befda49bf75a903d8044eef45324d2871fb990d9790608abcc8819cce73ff7c3",
+      "tests/probes/native_gamma_fan_probe.cpp": "d0c1363df91a0bff2d5109d2ea8b0b91c73730fb105b1e0bc973a7713665e424",
+      "tests/unit/native_gamma_fan.mm": "2dbf5ceecba809ee6b60846614a640f85ad5f83bb864c4e36df966ba45a5fbb4",
+      "tools/oracles/verify_original_gamma_fan.py": "de3984497e6f76818606e71ecc92c06231e823aec966053db0590f9409484ba5"
+    },
+    "changed": {
+      "Makefile": {
+        "before": "72728bad45f14930134e4fa64b4e1dd6b4d1bd2e204d61ec94a7186d0ea4f92a",
+        "after": "067198327630fcebc2d83ea0f67af96c506037f4497f744a95d273a781a28663"
+      },
+      "tests/unit/manifest.tsv": {
+        "before": "d02c284e3e2ed21b115501620d1178a5722ec05301342cd4d7b4f052efb80c92",
+        "after": "0e97044abb24f5ba35000296d7bdf4c30415ac685f0c94c03d06a3cf90366075"
+      }
+    },
+    "removed": [],
+    "protected_count": 1450,
+    "protected_absences": [
+      "reference/oracle-reports/air_acceleration.cases.bin",
+      "reference/oracle-reports/axis_projection.cases.bin",
+      "reference/oracle-reports/collision_shapes.cases.bin",
+      "reference/oracle-reports/floor_angles.cases.bin",
+      "reference/oracle-reports/frame_completion.cases.bin",
+      "reference/oracle-reports/game_frame_control.cases.bin",
+      "reference/oracle-reports/game_logic.cases.bin",
+      "reference/oracle-reports/game_loop.cases.bin",
+      "reference/oracle-reports/game_mode.cases.bin",
+      "reference/oracle-reports/game_scene_logic.cases.bin",
+      "reference/oracle-reports/ground_acceleration.cases.bin",
+      "reference/oracle-reports/ninja_queue_consumer.cases.bin",
+      "reference/oracle-reports/ninja_queue_lifecycle.cases.bin",
+      "reference/oracle-reports/ninja_render.cases.bin",
+      "reference/oracle-reports/ninja_sprite.cases.bin",
+      "reference/oracle-reports/ninja_sprite_display.cases.bin",
+      "reference/oracle-reports/ninja_sprite_queue.cases.bin",
+      "reference/oracle-reports/ninja_texture_selection.cases.bin",
+      "reference/oracle-reports/player_animation.constants.bin",
+      "reference/oracle-reports/player_auxiliary_effect.cases.bin",
+      "reference/oracle-reports/player_contact_attributes.cases.bin",
+      "reference/oracle-reports/player_contact_initializer.cases.bin",
+      "reference/oracle-reports/player_contact_response.constants.bin",
+      "reference/oracle-reports/player_coordinates.cases.bin",
+      "reference/oracle-reports/player_direction_reset.cases.bin",
+      "reference/oracle-reports/player_heading.angle-cases.bin",
+      "reference/oracle-reports/player_heading.cases.bin",
+      "reference/oracle-reports/player_input.cases.bin",
+      "reference/oracle-reports/player_input_producer.cases.bin",
+      "reference/oracle-reports/player_mesh_math.cases.bin",
+      "reference/oracle-reports/player_mesh_query.cases.bin",
+      "reference/oracle-reports/player_mesh_registry.cases.bin",
+      "reference/oracle-reports/player_movement.cases.bin",
+      "reference/oracle-reports/player_path.cases.bin",
+      "reference/oracle-reports/player_plane.cases.bin",
+      "reference/oracle-reports/player_position.cases.bin",
+      "reference/oracle-reports/player_reaction.cases.bin",
+      "reference/oracle-reports/player_rotation.cases.bin",
+      "reference/oracle-reports/player_scene.cases.bin",
+      "reference/oracle-reports/player_scene_helpers.cases.bin",
+      "reference/oracle-reports/player_scene_position.cases.bin",
+      "reference/oracle-reports/player_speed.cases.bin",
+      "reference/oracle-reports/player_startup.cases.bin",
+      "reference/oracle-reports/projection_angle.cases.bin",
+      "reference/oracle-reports/scene_input_producer.cases.bin",
+      "reference/oracle-reports/scene_mesh_bounds.cases.bin",
+      "reference/oracle-reports/sonic_actions.constants.bin",
+      "reference/oracle-reports/sonic_player.constants.bin",
+      "reference/oracle-reports/sonic_player.dispatch.bin",
+      "reference/oracle-reports/speedrun_limiter.cases.bin",
+      "reference/oracle-reports/task_lifecycle.cases.bin",
+      "reference/oracle-reports/task_work.cases.bin",
+      "reference/oracle-reports/x87_memory.cases.bin"
+    ],
+    "protected_absence_count": 53,
+    "method": "Finite union only; no full manifest regeneration. Existing hashes remain except two appended registration files."
+  },
+  "development": {
+    "cases": 909,
+    "failure_prefixes": 609,
+    "value_mismatches": 0,
+    "individual_fp_partials": 733,
+    "strict_exit_status": 2,
+    "seed": 4992656,
+    "report_path": "build/oracles/gamma_fan.json",
+    "report_sha256": "19325d294593c71e33d544b84e29f918f7ce95a00cb2cb58766f89160d4e1484",
+    "partial_identity_sha256": "d294e1ac7d6e86ab84f6fb81a03cebab3e5dc47da9e9b41089dadfcc8f33e0a0",
+    "original_stream_sha256": "a3da08035a4531c8c939c27a76d27fc9697f961af579727b8105a24d2d8e8a13",
+    "native_stream_sha256": "55012a1c1f35fa4e505a2bbfe860f6f99fe6d0366200addcade01e259a908b43",
+    "rerun": true,
+    "complete_report_and_both_streams_equal_candidate": true,
+    "partial_identity_comparison": "All 733 complete case/flags tuples equal, not counts only"
+  },
+  "holdout": {
+    "cases": 4493,
+    "failure_prefixes": 3781,
+    "value_mismatches": 0,
+    "individual_fp_partials": 3434,
+    "strict_exit_status": 2,
+    "seed": 2655595536,
+    "report_path": "build/oracles/gamma_fan_holdout.json",
+    "report_sha256": "7c87e5305eae544489651e6fbed940f421d608e1571f354abc36a5e8fdffea2c",
+    "partial_identity_sha256": "ed49fa83543e89454303bea819ea8b09e34e29ccb2b9f7e2b231e96faf10589e",
+    "original_stream_sha256": "e546135c5efc531e03be688400cd7a3583df7b413826825cd84226028f118adf",
+    "native_stream_sha256": "80bddc9d2ba7e8317ff1a9377b2ee874c55e79cb21689e6b53809cce81ff5ce4",
+    "rerun": false,
+    "reuse": "Unchanged maintained source, oracle, probe and lower numeric contracts; all 3434 complete partial tuples and both stream hashes checked against accepted receipt."
+  },
+  "reused_faults": {
+    "core": 7,
+    "binding": 4,
+    "receipts": [
+      "reference/packets/gamma-fan-native/FAULTS.json",
+      "reference/packets/gamma-fan-native/BINDING-FAULTS.json"
+    ],
+    "rerun": false
+  },
+  "normal_input": {
+    "exit_status": 1,
+    "frames": 1332,
+    "completed_frames": 1330,
+    "boundary": "native_gamma_display",
+    "reference_first_fan_frame": 1334,
+    "capture_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427",
+    "capture_inspected": true,
+    "inspection": "Outgoing Sonic Adventure DX title; no actor frame.",
+    "app_sha256": "a1e2d924026bfc023dbcd61a1f7798c51246947ed3c37dba9e0f23551c2829bf",
+    "state_sha256": "b18e4e9f6c2b5692f757058e2faf9705f6d59d4e071e3aefba7757996ce6a91f",
+    "state_path": "build/gamma-fan-integration/state.json",
+    "capture_path": "build/gamma-fan-integration/frontier.ppm",
+    "save_input": {
+      "SONICADVENTURE_DX_CHAOGARDEN.snc": "53b585755ada51c7ed07d2f69ad3ddb195b5a6e48a838fc98533910205dae3e3",
+      "SonicDX02.snc": "3249b31891872b96be539348c005abf812c76af5e3e7c5f198ee65de008943e4",
+      "SonicDX01.snc": "15ac61323e0508d72a279f0f648f4b5007793cc0c8fb42bce9d893f00c265cf6"
+    },
+    "save_source": "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-95c06094/build/gamma-fan-native/baseline-save",
+    "private_save_directory": "build/gamma-fan-integration/savedata",
+    "schedule": "500/750/950/1050/1300 Enter down, +1 up; paced; exit-after 1550",
+    "fresh_save_1082_used": false
+  },
+  "consumer_observations": {
+    "build/gamma-motion-observations.tsv": {
+      "sha256": "3bcab50e1e0d58096e2b1c174c20c0ad4fed6cb4ce9bc6800fed66ed008fca34",
+      "candidate_bytes_equal": true
+    },
+    "build/gamma-weld/imported-topology.tsv": {
+      "sha256": "87eb6646c42d99987fea1f207a6b40fde8f2b73443faa01ebcb50c6797d52c7c",
+      "candidate_bytes_equal": true
+    },
+    "build/model-matrices-native/imported.tsv": {
+      "sha256": "5ba87d6d33f7613d561ddf913fd77e48dd45ec63b334ed2465b3df56c560e272",
+      "candidate_bytes_equal": true
+    },
+    "build/sonic-animation-table.tsv": {
+      "sha256": "5e1a5c7031f71b87fee5b89ac18cf54db04c277c31455560bfd5659227414676",
+      "candidate_bytes_equal": true
+    }
+  },
+  "imported_matrix_judge_reuse": {
+    "scenarios": 3,
+    "compared_rows": 774,
+    "failures": [],
+    "fp_partials": [
+      {
+        "scenario": "stand",
+        "row": 0,
+        "field": 4,
+        "source": 0,
+        "native": 32
+      },
+      {
+        "scenario": "idle_pose_a",
+        "row": 0,
+        "field": 4,
+        "source": 0,
+        "native": 32
+      },
+      {
+        "scenario": "idle_pose_b",
+        "row": 0,
+        "field": 4,
+        "source": 0,
+        "native": 32
+      }
+    ],
+    "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+    "values_match": true,
+    "flag_mismatches": 3,
+    "passed": false,
+    "dll_sha256": "76bbaa1b6aa23872648e6f1f39642e4262403e372b4c4b32f20f0ec89780c2a5",
+    "observation_sha256": "5ba87d6d33f7613d561ddf913fd77e48dd45ec63b334ed2465b3df56c560e272",
+    "limits": [
+      "Original allocator policy supplied by deterministic fixture.",
+      "Actual actions, generated keys and live pose edits; controlled post-initialization callers.",
+      "No first full-route GetMMMatrix state, active welding, attachments, actor frame or N3b claim."
+    ]
+  },
+  "commands": [
+    {
+      "label": "shipping-build",
+      "argv": [
+        "make",
+        "-j2",
+        "-o",
+        "build/native-controller-deps/include/SDL3/SDL.h",
+        "build/sadx-native",
+        "native-closure",
+        "build/native-gamma-fan-test",
+        "build/native-gamma-fan-probe.dylib",
+        "build/native-gamma-binding-test",
+        "build/native-gamma-effects-test",
+        "build/native-gamma-motion-test",
+        "build/native-gamma-vertex-weld-test",
+        "build/native-gamma-input-buffer-test",
+        "build/sonic-animation-assets-test",
+        "build/sonic-model-native-test",
+        "build/model-motion-matrices-test"
+      ],
+      "exit_status": 0,
+      "log_sha256": "772d1f71e2e6c18524f875bb2d4e3c8f4b68302243520ae0a3162cafd0da1806"
+    },
+    {
+      "label": "inventory-before",
+      "argv": [
+        "python3",
+        "tools/inventory/refactor_inventory.py",
+        "--check"
+      ],
+      "exit_status": 1,
+      "log_sha256": "ff3f5dd9df60d323003abf083bddcd685b572edbc83e613a341206b6ca729e3f"
+    },
+    {
+      "label": "development",
+      "argv": [
+        "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+        "tools/oracles/verify_original_gamma_fan.py",
+        "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe",
+        "build/native-gamma-fan-probe.dylib"
+      ],
+      "exit_status": 2,
+      "log_sha256": "290136734be17df997cabddecea6436b4f612065c38dc838db309afaf9b09683"
+    },
+    {
+      "label": "normal-input",
+      "argv": [
+        "build/sadx-native",
+        "--assets",
+        "game/imported",
+        "--controller-library",
+        "build/native-controller-deps/lib/libSDL3.0.dylib",
+        "--offscreen",
+        "--paced",
+        "--exit-after",
+        "1550",
+        "--save-directory",
+        "build/gamma-fan-integration/savedata",
+        "--key-events",
+        "500:13:down,501:13:up,750:13:down,751:13:up,950:13:down,951:13:up,1050:13:down,1051:13:up,1300:13:down,1301:13:up",
+        "--screenshot",
+        "build/gamma-fan-integration/frontier.ppm"
+      ],
+      "exit_status": 1,
+      "log_sha256": "052034eaa68701caf9884b6a3eee75326898dca1d0bf7033d9a8f1620b6a848b"
+    },
+    {
+      "label": "native-gamma-fan",
+      "argv": [
+        "build/native-gamma-fan-test",
+        "game/imported"
+      ],
+      "exit_status": 0,
+      "log_sha256": "a0bfcd4f6e6506e9471bec86da377aae2c6675bd1716c79a035f7b83545140d7"
+    },
+    {
+      "label": "native-gamma-binding",
+      "argv": [
+        "build/native-gamma-binding-test",
+        "game/imported"
+      ],
+      "exit_status": 0,
+      "log_sha256": "aedca991586ba1d9b5f0e600d15a9ff2eed498e77e3c4dd37014f27c7540f80e"
+    },
+    {
+      "label": "native-gamma-effects",
+      "argv": [
+        "build/native-gamma-effects-test",
+        "game/imported"
+      ],
+      "exit_status": 0,
+      "log_sha256": "9cf6a7b1d808f8d9162f0d69650ab860796fdda5d9d9e9edf5da4fa7951d8604"
+    },
+    {
+      "label": "native-gamma-motion",
+      "argv": [
+        "build/native-gamma-motion-test",
+        "game/imported",
+        "build/gamma-motion-observations.tsv"
+      ],
+      "exit_status": 0,
+      "log_sha256": "f1eb33883d3d06c4d97f4d976a2cd222f89c9299871d201731f5a8b11ab6d37f"
+    },
+    {
+      "label": "native-gamma-vertex-weld",
+      "argv": [
+        "build/native-gamma-vertex-weld-test",
+        "game/imported",
+        "build/gamma-weld/imported-topology.tsv"
+      ],
+      "exit_status": 0,
+      "log_sha256": "bb22dab3b2fbf7391c4c08bc1aa75ee723d367eafe5cb28587f0f353fd0d56d7"
+    },
+    {
+      "label": "native-gamma-input-buffer",
+      "argv": [
+        "build/native-gamma-input-buffer-test",
+        "game/imported"
+      ],
+      "exit_status": 0,
+      "log_sha256": "f61b34d4063fd6ba0fac2e7895f474e550a5b2e1ff21a62fddf948229a54ed4e"
+    },
+    {
+      "label": "sonic-animation-assets",
+      "argv": [
+        "build/sonic-animation-assets-test",
+        "game/imported",
+        "build/sonic-animation-table.tsv"
+      ],
+      "exit_status": 0,
+      "log_sha256": "1fcfab172a2bba562d9b5a1622b7a16afd2717065c31d0114943444bb1a822cf"
+    },
+    {
+      "label": "sonic-model-native",
+      "argv": [
+        "build/sonic-model-native-test",
+        "game/imported"
+      ],
+      "exit_status": 0,
+      "log_sha256": "633a50f9b562e04603b40ac46f07a783ffbeb40343e1efa71a9e56f0e0ea89f2"
+    },
+    {
+      "label": "model-motion-matrices",
+      "argv": [
+        "build/model-motion-matrices-test",
+        "game/imported",
+        "build/model-matrices-native/imported.tsv"
+      ],
+      "exit_status": 0,
+      "log_sha256": "c10594f89ad9bbe37a1326d76e923bfff3caca1c410b80c4d58637fa5eb9d946"
+    },
+    {
+      "label": "layers",
+      "argv": [
+        "python3",
+        "tools/gate/check_layers.py"
+      ],
+      "exit_status": 0,
+      "log_sha256": "5562fcfa762d63394b722a04826cf794222f4159fcc351b88a899e461deb0dfa"
+    },
+    {
+      "label": "global_owners",
+      "argv": [
+        "python3",
+        "tools/gate/check_global_owners.py"
+      ],
+      "exit_status": 0,
+      "log_sha256": "5d8703c5613218fb62e6a1f258cd6b2ac704a0a283b69fdc687d54fe56e12de0"
+    },
+    {
+      "label": "provenance",
+      "argv": [
+        "python3",
+        "tools/gate/check_provenance.py"
+      ],
+      "exit_status": 0,
+      "log_sha256": "ed30958d7fe343abde341ea78ceeb749415d9818548ab45c28313961437e02e9"
+    },
+    {
+      "label": "provenance",
+      "argv": [
+        "python3",
+        "tools/gate/check_provenance.py"
+      ],
+      "exit_status": 0,
+      "log_sha256": "ed30958d7fe343abde341ea78ceeb749415d9818548ab45c28313961437e02e9"
+    },
+    {
+      "label": "readability",
+      "argv": [
+        "python3",
+        "tools/gate/check_readability.py"
+      ],
+      "exit_status": 0,
+      "log_sha256": "b8fc78de2e9a94040073cbaa78eaacdb4f701e40d3a5722ebb88c266f3bab875"
+    },
+    {
+      "label": "constexpr_tables",
+      "argv": [
+        "python3",
+        "tools/gate/check_constexpr_tables.py"
+      ],
+      "exit_status": 0,
+      "log_sha256": "74535fa5f0f579d6f65bd06ea6fe34bbd56fb3bbd46785303d8562f1bda64adc"
+    },
+    {
+      "label": "address_dispatch",
+      "argv": [
+        "python3",
+        "tools/gate/check_address_dispatch.py"
+      ],
+      "exit_status": 0,
+      "log_sha256": "967e86f9333cb61698a4d9ed919b61454dddce4258688334ba6c6b1f65832f6a"
+    },
+    {
+      "label": "profile_patches",
+      "argv": [
+        "python3",
+        "tools/gate/check_profile_patches.py"
+      ],
+      "exit_status": 0,
+      "log_sha256": "a55eff2efc729a57b7335198b61f4f416e2504ad524b43d9cfb551554669f341"
+    },
+    {
+      "label": "repo_hygiene",
+      "argv": [
+        "python3",
+        "tools/gate/check_repo_hygiene.py"
+      ],
+      "exit_status": 0,
+      "log_sha256": "940fac1ef1dba8da79365d688acce3e525ccfc65507b4b9ba6d3f38298dfb7a2"
+    }
+  ],
+  "environment": {
+    "memory_pressure_free_percent_before_build": 29,
+    "max_make_jobs": 2,
+    "dependencies": "Public SDL3/libusb copied with symlinks dereferenced into this build/native-controller-deps; no writable Root dependency symlink.",
+    "assets": "Root game/imported read-only use; all app/save/build outputs private.",
+    "generated_symbols": "Copied existing Root build/symbols/symbols.json; no Ghidra or symbol recovery."
+  },
+  "corrections": [
+    "First provenance attempt lacked generated symbol database; copied the existing database and reran successfully. No judge/source correction required.",
+    "Inventory-before correctly reports stale generated accounting after source/packet additions; regenerated accounting retains authored dispositions and open debt."
+  ],
+  "limits": [
+    "Strict fan FP fidelity remains partial, exit 2, not pass.",
+    "Original first-call runtime witness is reused, not rerun. Reference1334 and native1332 remain distinct.",
+    "No actor frame, N3b, full gate, cold-source export/proof, new recovery or policy change.",
+    "Active PJoin arguments/deformation/attachments and later Display/controller behavior remain explicit open boundaries.",
+    "Existing OpenDebt and authored inventory review dispositions remain unchanged.",
+    "53 ignored inherited judge inputs are absent locally but all remain protected. Root owns coherent full gate after adoption.",
+    "Sonic continuation/correction on t3-993b122e is excluded."
+  ],
+  "judge_final": {
+    "command": [
+      "python3",
+      "tools/gate/check_judge.py"
+    ],
+    "exit_status": 1,
+    "violations": 53,
+    "only_inherited_protected_absences": true,
+    "present_drift": 0,
+    "new_unregistered_inputs": 0
+  },
+  "inventory_final": {
+    "command": [
+      "python3",
+      "tools/inventory/refactor_inventory.py",
+      "--check"
+    ],
+    "exit_status": 0,
+    "authored_review_and_dispositions_byte_unchanged": true,
+    "existing_historical_open_debt": 2,
+    "note": "Generated accounting only; no semantic classification upgraded and no lineage/debt retired."
+  },
+  "command_ledger": "reference/packets/gamma-fan-integration/COMMANDS.tsv",
+  "source_and_judge_diff_scope": [
+    "native-sources.txt",
+    "src/player/gamma_fan.cpp",
+    "src/player/gamma_fan.hpp",
+    "src/player/gamma_selection_core.hpp",
+    "src/runtime/native_display.hpp",
+    "src/runtime/native_gamma_binding.cpp"
+  ]
+}
