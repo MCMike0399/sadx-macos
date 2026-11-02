@@ -4,8 +4,43 @@
 #include <iostream>
 #include <set>
 
+namespace {
+void check_dispatch() {
+    for (int raw = -32768; raw <= 32767; ++raw) {
+        auto mode = static_cast<std::int16_t>(raw);
+        unsigned active = 0;
+        unsigned initialized = 0;
+        unsigned restored = 0;
+        sadx::vertex_weld::update_prefix(
+            mode, [&] { ++active; },
+            [&] {
+                assert(mode == 0);
+                ++initialized;
+            },
+            [&] { ++restored; });
+        assert(active == (raw == 1));
+        assert(initialized == (raw == 0));
+        assert(restored == (raw != 0 && raw != 1));
+        assert(mode == (raw == 0 ? 1 : raw));
+    }
+    for (const std::int16_t initial : {0, 1, -1}) {
+        auto mode = initial;
+        unsigned reached = 0;
+        try {
+            sadx::vertex_weld::update_prefix(
+                mode, [&] { throw 1; }, [&] { throw 2; }, [&] { throw 3; });
+        } catch (int boundary) {
+            reached = boundary;
+        }
+        assert(reached == (initial == 1 ? 1U : initial == 0 ? 2U : 3U));
+        assert(mode == initial);
+    }
+}
+} // namespace
+
 int main(int argc, char **argv) {
     assert(argc == 2);
+    check_dispatch();
     using namespace sadx;
     using namespace sadx::character_pack;
     const auto pack = CharacterPack::load(argv[1]);

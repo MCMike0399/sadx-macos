@@ -1,4 +1,5 @@
 #include "apps/native_gamma_actor_assets.hpp"
+#include "apps/native_regular_texture_assets.hpp"
 #include "apps/native_sonic_animation_assets.hpp"
 #include "runtime/native_display.hpp"
 #include "runtime/native_session.hpp"
@@ -32,7 +33,7 @@ struct SonicCallbackProbe {
             assert(session.players_.current.primary == primary);
             assert(task->primary_work == primary && task->motion_work == motion);
         };
-        invoke("sonic_LoadCharTextures");
+        invoke("sonic_common_model_slot_20");
         const auto player = session.players_.registry.players[0];
         assert(player && player->stage == player_initialization::Stage::Complete);
         assert(!session.players_.current.player); // captured before PInitialize
@@ -123,13 +124,15 @@ int main(int argc, char **argv) {
         const std::filesystem::path directory(argv[1]);
         std::ofstream output(argv[2]);
         assert(output);
-        const auto assets = native::app::load_assets(directory);
+        auto assets = native::app::load_assets(directory);
         auto pack = std::make_shared<const character_pack::CharacterPack>(
             character_pack::CharacterPack::load(directory / "characters/sonic-selection.actions"));
         frame::ModeState mode;
         native::Display display(directory / "system", mode);
         native::Session session(display.output(), pack, display.frame_state(), display.arithmetic(),
                                 mode, assets.character_textures, 1, [](std::uint32_t) {});
+        session.attach_cleanup(display, assets.audio);
+        session.attach_regular_textures(native::app::load_regular_texture_assets(directory));
         session.load_player_assets(native::app::load_gamma_actor_assets(directory, *pack));
         session.load_sonic_animation_assets(native::app::load_sonic_animation_assets(directory, *pack));
         const native::TitleAssets titles{};

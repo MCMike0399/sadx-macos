@@ -1,4 +1,5 @@
 #include "apps/native_gamma_actor_assets.hpp"
+#include "apps/native_regular_texture_assets.hpp"
 #include "apps/native_sonic_animation_assets.hpp"
 #include "player/animation/animation_native_access.hpp"
 #include "runtime/native_display.hpp"
@@ -53,8 +54,10 @@ struct SonicCallbackProbe {
         try { task->exec(scheduler, task); }
         catch (const sonic::Unavailable &error) { boundary = error.what(); }
         std::cerr << "scenario " << scenario << " boundary " << boundary << "\n";
-        assert(boundary == (scenario == 3 ? "sonic_PJoinVertexes" :
-                            scenario == 2 ? "sonic_model_graph" : "sonic_LoadCharTextures"));
+        assert(boundary == (scenario == 2 ? "sonic_model_graph" :
+                            scenario == 0 ? "sonic_common_model_slot_20" :
+                            scenario == 1 ? "sonic_motion_phase_27_failure_10:" :
+                                            "sonic_join_vertices_CalcMMMatrix"));
         assert(display.arithmetic().control_word() == control);
         const auto player = session.players_.registry.players[0];
         assert(player && player->stage == player_initialization::Stage::Complete);
@@ -76,19 +79,27 @@ struct SonicCallbackProbe {
         assert(consumer.sibling(borrowed, animation::Phase::SelectNewObject).id.value_or(0) == root.sibling);
         if (scenario == 3) {
             assert(root.sibling == model->attach());
-            assert(!model->state().model_sibling); // cache store is after first join call
+            assert(model->state().model_sibling == model->attach());
             assert(player->physics->animation_tail.join_table == &model->state().joins);
             assert(model->state().joins.rows[11].destination_object == &objects.object(model->attach()));
-            assert(!collision_component::component(*arena, primary));
-            assert(player_initialization::bind_primary_view(task).mode == 0);
-            assert(sonic::native_fields::player(*player->physics).join_mode == 0);
+            const auto collision = collision_component::component(*arena, primary);
+            assert(collision && collision->info[0].a == player->parameters.height);
+            assert(player_initialization::bind_primary_view(task).mode == 1);
+            assert(sonic::native_fields::player(*player->physics).join_mode == 1);
         } else {
             if (scenario == 0)
                 assert(prior.sibling == model->attach());
             assert(root.sibling == prior.sibling);
             assert(model->state().model_sibling == prior.sibling);
-            assert(player->physics->animation_tail.join_table &&
-                   !*player->physics->animation_tail.join_table);
+            if (scenario == 1) {
+                // Keep the old disconnected Metal graph input. The second
+                // PSetMotion stops on an unavailable blend pose after publication.
+                assert(player->physics->animation_tail.join_table == &model->state().metal_joins);
+                assert(sonic::native_fields::player(*player->physics).join_mode == 1);
+                assert(task->display == sonic_model::display && task->destructor == sonic_model::destroy);
+            } else {
+                assert(player->physics->animation_tail.join_table == &model->state().joins);
+            }
             const auto collision = collision_component::component(*arena, primary);
             assert(collision && collision->info_count == 2 && collision->info.size() == 2);
             assert(collision->info[0].a == player->parameters.height);
@@ -104,7 +115,7 @@ int main(int argc, char **argv) {
         assert(argc == 2);
         using namespace sadx;
         const std::filesystem::path directory(argv[1]);
-        const auto assets = native::app::load_assets(directory);
+        auto assets = native::app::load_assets(directory);
         auto pack = std::make_shared<const character_pack::CharacterPack>(
             character_pack::CharacterPack::load(directory / "characters/sonic-selection.actions"));
         const auto metadata = native::app::read_metadata(directory / "characters/sonic-actor.json");
@@ -133,11 +144,13 @@ int main(int argc, char **argv) {
             native::Display display(directory / "system", mode);
             native::Session session(display.output(), pack, display.frame_state(), display.arithmetic(),
                                     mode, assets.character_textures, 1, [](std::uint32_t) {});
+            session.attach_cleanup(display, assets.audio);
+            session.attach_regular_textures(native::app::load_regular_texture_assets(directory));
             session.load_player_assets(native::app::load_gamma_actor_assets(directory, *pack));
             const native::TitleAssets titles{};
             native::TitleScene scene(session, display, titles);
             native::SonicCallbackProbe::run(session, scene, display, directory, scenario);
         }
-        std::cout << "Real callback plus exact Root hunk: first normal collision/texture boundary; live Metal skip; changed-sibling splice/PJoin boundary; absent-model boundary; canonical aliases and animation scene consumer\n";
+        std::cout << "Real callback plus exact Root hunk: normal common model-slot boundary; live Metal skip; changed-sibling active-PJoin boundary; absent-model boundary; canonical aliases and animation scene consumer\n";
     }
 }

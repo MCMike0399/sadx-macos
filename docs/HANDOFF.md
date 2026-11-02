@@ -1027,3 +1027,21 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * The same admitted commit has nine passing native programs, shipping app/force-load closure and normal-input Display boundary at frame 1332, exit 1, with unchanged title image, qualified in the integration worktree. Main binaries have not been rebuilt this turn.
 * All 909 development observations and 733 FP partial identities are preserved, strict exit 2. Last full gate/cold source remains e9bf38a8; no actor frame or N3b acceptance.
 * Sonic integrator bfa7ff8a is explicitly released at max -j2; Gamma display worker 53a0367d retains the other build slot and sole Ghidra ownership.
+
+
+### 2026-11-02 — Sonic initialization integrated on fixed matrix base
+
+* Packet source fe617ecb consumes accepted e057f048 and exact shipping callback texture/scene borrowing; canonical captures, owners and matrix activation remain intact.
+* App/force-load and thirteen generated programs pass at -j2. Source/helper 650/1,162 cases retain exact old prefixes plus one exhaustion case; both model 80-case reports retain all 34 FP partials each, strict exit 2.
+* Three binding faults and two new failed-rollback/other-step negative faults are caught; 36 focused Python tests and static/profile checks pass. No full gate or cold export.
+* Fixed-base normal input stops at Gamma Fan at frame 1332, completed 1330, exit 1, with inspected identical outgoing-title image. Newer Main ba88c5cc includes fan 08884f1d and its separate Display frontier; no combined run is claimed.
+* The 1,460-path union retains all base, Sonic and fan protections. Local hash check has precisely 53 inherited binary and nine newer fan absences; no other drift. Root reconciles finite registration/hash/inventory changes and runs the coherent gate.
+* reference/packets/sonic-initialization-integration contains exact commands, review lineage, admission recipe and limits. No actor frame, N3b or whole-app low-memory recovery is proved. Heavy slot clear.
+
+### 2026-11-02 — Sonic initialization combined with Gamma fan
+
+* Main source 0df5f4d1 uses accepted e057f048 algorithms and actual shipping texture/scene callback wiring from fe617ecb. Newer Gamma fan and Display owners remain byte-identical.
+* Root app/force-load and five focused native programs pass. Fresh normal input reaches native_gamma_display at frame 1332, exit 1; inspected outgoing-title capture is unchanged.
+* Sonic candidate retains 650/1,162 exact cases and both 80-case model reports with 34 individual FP partials each, strict exit 2. No fresh full controller replay is claimed.
+* Root make check passes with all 1,460 protected files present and matching; source and judge commits remain separate. Final integration review, coherent gate and cold export remain pending.
+* Gamma display worker has been asked to hold heavy execution after its current command; Root awaits explicit slot-clear acknowledgement before the full gate. No actor frame or N3b claim.

@@ -1,0 +1,396 @@
+{
+ "passed": true,
+ "values_match": true,
+ "cases": 650,
+ "mismatch_count": 0,
+ "development": {
+  "source": {
+   "cases": 384,
+   "controlled_failure_prefixes": 276,
+   "mismatches": [],
+   "observation_sha256": "753aa8f6b7a4aada88d0b95f8352234bd41cbe077df6afabcf4eb2a8f88935ec",
+   "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+   "limits": [
+    "Lower calls controlled at original entries; no claim of their complete behavior.",
+    "Original source stores, three live Metal rereads, table selection and stage/act rule are compared; real resources are tested separately."
+   ]
+  },
+  "helpers": {
+   "primary_exhaustion": {
+    "input": [
+     3,
+     7,
+     101,
+     202,
+     303
+    ],
+    "source_calls": [
+     [
+      "CreateElementalTask",
+      2,
+      2,
+      4799600
+     ]
+    ],
+    "observation": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ]
+   },
+   "setup_cases": [
+    {
+     "input": [
+      0,
+      88,
+      2512090146,
+      3976162371,
+      2512083077
+     ],
+     "source_calls": [
+      [
+       "CreateElementalTask",
+       2,
+       2,
+       4799600
+      ],
+      [
+       "MAlloc",
+       136
+      ]
+     ],
+     "observation": [
+      1,
+      1,
+      136,
+      88,
+      0,
+      2512090146,
+      3976162371,
+      2512083077,
+      0,
+      0
+     ]
+    },
+    {
+     "input": [
+      0,
+      195,
+      26457426,
+      584674171,
+      122398082
+     ],
+     "source_calls": [
+      [
+       "CreateElementalTask",
+       2,
+       2,
+       4799600
+      ],
+      [
+       "MAlloc",
+       136
+      ]
+     ],
+     "observation": [
+      1,
+      1,
+      136,
+      195,
+      0,
+      26457426,
+      584674171,
+      122398082,
+      0,
+      0
+     ]
+    },
+    {
+     "input": [
+      0,
+      40,
+      2126127769,
+      2940064065,
+      2010916007
+     ],
+     "source_calls": [
+      [
+       "CreateElementalTask",
+       2,
+       2,
+       4799600
+      ],
+      [
+       "MAlloc",
+       136
+      ]
+     ],
+     "observation": [
+      1,
+      1,
+      136,
+      40,
+      0,
+      2126127769,
+      2940064065,
+      2010916007,
+      0,
+      0
+     ]
+    },
+    {
+     "input": [
+      0,
+      211,
+      2308608106,
+      535860499,
+      3507236287
+     ],
+     "source_calls": [
+      [
+       "CreateElementalTask",
+       2,
+       2,
+       4799600
+      ],
+      [
+       "MAlloc",
+       136
+      ]
+     ],
+     "observation": [
+      1,
+      1,
+      136,
+      211,
+      0,
+      2308608106,
+      535860499,
+      3507236287,
+      0,
+      0
+     ]
+    },
+    {
+     "input": [
+      2,
+      22,
+      343141164,
+      2144060844,
+      1428039620
+     ],
+     "source_calls": [
+      [
+       "CreateElementalTask",
+       2,
+       2,
+       4799600
+      ],
+      [
+       "MAlloc",
+       136
+      ],
+      [
+       "FreeTask",
+       285216768
+      ]
+     ],
+     "observation": [
+      0,
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "input": [
+      2,
+      251,
+      3620656326,
+      131512538,
+      101743539
+     ],
+     "source_calls": [
+      [
+       "CreateElementalTask",
+       2,
+       2,
+       4799600
+      ],
+      [
+       "MAlloc",
+       136
+      ],
+      [
+       "FreeTask",
+       285216768
+      ]
+     ],
+     "observation": [
+      0,
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "input": [
+      2,
+      238,
+      2593418208,
+      1445993758,
+      4231244005
+     ],
+     "source_calls": [
+      [
+       "CreateElementalTask",
+       2,
+       2,
+       4799600
+      ],
+      [
+       "MAlloc",
+       136
+      ],
+      [
+       "FreeTask",
+       285216768
+      ]
+     ],
+     "observation": [
+      0,
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "input": [
+      2,
+      165,
+      651020230,
+      2555766113,
+      1615473170
+     ],
+     "source_calls": [
+      [
+       "CreateElementalTask",
+       2,
+       2,
+       4799600
+      ],
+      [
+       "MAlloc",
+       136
+      ],
+      [
+       "FreeTask",
+       285216768
+      ]
+     ],
+     "observation": [
+      0,
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "input": [
+      1,
+      206,
+      1872583944,
+      3160387590,
+      831416779
+     ],
+     "source_calls": [
+      [
+       "CreateElementalTask",
+       2,
+       2,
+       4799600
+      ]
+     ],
+     "observation": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   ],
+   "common_cases": 256,
+   "common_observation_sha256": "bb519275a78da71d1c55ce828ffd2ea9acffcf0a1c57e1755ed95ad3c11824f8",
+   "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+   "helper_body_sha256": "ebc1c835f8c720ab70140748653eed80d0b22e8339f8ae08a336b7a5499f0eed",
+   "limits": [
+    "Setup lower calls controlled in original; native uses actual scheduler and arena.",
+    "Common-link tables use distinct controlled export identities and compare every sibling and failed-read prefix."
+   ]
+  }
+ },
+ "original_ranges_sha256": {
+  "0x49abeb-0x49ad2d": "5ac0015199b61c2848e1946f0f2756bb9540708e188c93815de58b0e3113e928",
+  "0x49be04-0x49be92": "5e5a6136fe4e348eaf1a0d11fb9e25dc2aac88044cebaf0e6e00a845ff7aa6c8",
+  "0x495860-0x4958bb": "ebc1c835f8c720ab70140748653eed80d0b22e8339f8ae08a336b7a5499f0eed",
+  "0x7d0af0-0x7d0b19": "84aba498b7a123dc47a8684b089a1d731563de28b3eaf9b27fd60aca403df074"
+ },
+ "limits": [
+  "Controlled source-site lower calls, not complete actor execution.",
+  "Production callback and inherited model/FP checks are separate packet evidence."
+ ],
+ "tracked_summary": {
+  "full_sha256": "016165d63c0917b6b24a880db90d40b31e979a9a0c71abe33fb1a037c3652823",
+  "full_bytes": 8761,
+  "lists_cut_to": 10,
+  "cut_lists": {
+   "development.helpers.primary_exhaustion.observation": 16,
+   "development.helpers.setup_cases[0].observation": 16,
+   "development.helpers.setup_cases[1].observation": 16,
+   "development.helpers.setup_cases[2].observation": 16,
+   "development.helpers.setup_cases[3].observation": 16,
+   "development.helpers.setup_cases[4].observation": 16,
+   "development.helpers.setup_cases[5].observation": 16,
+   "development.helpers.setup_cases[6].observation": 16,
+   "development.helpers.setup_cases[7].observation": 16,
+   "development.helpers.setup_cases[8].observation": 16
+  }
+ }
+}

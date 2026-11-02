@@ -1,0 +1,183 @@
+{
+  "base": "ba88c5cc",
+  "source": "0df5f4d1",
+  "candidate": "deea2511",
+  "accepted_correction": "e057f048",
+  "source_hashes": {
+    "src/apps/native_sonic_model_assets.hpp": "1c3f98cdcf7344fc800aee92fb4e39ef98cf7c1c6d84f42a3530ad48012e3e99",
+    "src/player/player_vertex_weld.cpp": "25685311ed2ce6c30d6ff3221e68df115fc80b82986c73d76dac5683b5f58c98",
+    "src/player/player_vertex_weld.hpp": "8f240c4647a8402995eb4ce69bc2d6f658fc91bfc0d095ec1bfd0be897a5d635",
+    "src/player/sonic_model.cpp": "ee98b609e753f398496eae71d056b03587f7d08989ebccdf6342ddc4347482e7",
+    "src/player/sonic_model.hpp": "20831210e29bcebc830a102ba01c65da7337b3c76cb6ad98fe106304da3d2e7c",
+    "src/runtime/native_selection_preview.cpp": "4f9e41e840a3914e6e076a623c93dadbb072bfe8f311a6075dd19a96f98425a9",
+    "src/runtime/native_sonic_binding.cpp": "d898b50c8f299e9ddd694b88c0e173650e24badb418414aae718c0ffeab6fd7e",
+    "src/runtime/native_sonic_context.hpp": "928b2c3acb4c560f89ecefcc98528f8f0dc091629a86786b73c19a53c18691d6",
+    "src/runtime/sonic_model_assets.cpp": "729ce96b23751b45a07bf955fd15f66877ad2780c1c8c4426e9474cab1fe3dca",
+    "src/runtime/sonic_model_assets.hpp": "2a98e4c94698cf35ff98996beb8e5c01eb4fefb461f5dc10b46f77bf13f1dea2"
+  },
+  "fan_preservation": {
+    "src/player/gamma_fan.cpp": "da687c5254efc9332ea48185a167f829ebc8b87adad0a1e5a47ceaab353189ab",
+    "src/player/gamma_fan.hpp": "81502a9861b2d57e9f3d715f0d7eba90b2850bb19904d992c553571cd89f9b69",
+    "src/runtime/native_gamma_binding.cpp": "8637818fa48f2aa141d22d5721a617583a6a95eec28939fe14e0abac499acee4",
+    "src/runtime/native_display.hpp": "6aca04a56f9a85f502c0d6d38a13b524ecbad9e0f8e01fbd5b142b9dfd4ca9c2",
+    "native-sources.txt": "e0db93c2a39d36d599fd3f16b880110497e9dcd66cfb14ab8b9444159696646e"
+  },
+  "source_algorithms_and_callback_identical_to_integrated_candidate": true,
+  "build": {
+    "command": "make -j2 -o build/native-controller-deps/include/SDL3/SDL.h build/sadx-native native-closure build/sonic-initialization-native-test build/sonic-model-native-test build/native-gamma-fan-test build/native-editor-binding-test build/sonic-animation-integration-test",
+    "exit": 0,
+    "log": "build/sonic-initialization-root-build.log",
+    "log_sha256": "904d4abaf9f7376125c76e2e7d2347bfa6f9c2849b90ca08fc2ef17f537c04f3"
+  },
+  "commands": [
+    {
+      "command": [
+        "./build/sonic-initialization-native-test",
+        "game/imported"
+      ],
+      "exit": 0,
+      "log": "build/sonic-fan-root-integration/unit-0.log",
+      "log_sha256": "44ddc320a5ef79ff6c01bbeb5c9d9f47dca1574f4c22d76e9cabe139b62aa2c4"
+    },
+    {
+      "command": [
+        "./build/sonic-model-native-test",
+        "game/imported"
+      ],
+      "exit": 0,
+      "log": "build/sonic-fan-root-integration/unit-1.log",
+      "log_sha256": "1a13f58d5e109cdd12de95cf5c8371fd21ed701d2070ef95c96d5eb298b9db08"
+    },
+    {
+      "command": [
+        "./build/native-gamma-fan-test",
+        "game/imported"
+      ],
+      "exit": 0,
+      "log": "build/sonic-fan-root-integration/unit-2.log",
+      "log_sha256": "a0bfcd4f6e6506e9471bec86da377aae2c6675bd1716c79a035f7b83545140d7"
+    },
+    {
+      "command": [
+        "./build/native-editor-binding-test",
+        "game/imported",
+        "build/sonic-fan-root-integration/editor.tsv"
+      ],
+      "exit": 0,
+      "log": "build/sonic-fan-root-integration/unit-3.log",
+      "log_sha256": "0e079fe0e86958d6977269dc177a95801e730353f95904a036c6d4ac00dde9ba"
+    },
+    {
+      "command": [
+        "./build/sonic-animation-integration-test",
+        "game/imported"
+      ],
+      "exit": 0,
+      "log": "build/sonic-fan-root-integration/unit-4.log",
+      "log_sha256": "bc15e84502922a06bb2b1fa0b06928437d254441b8783ba62c5a730452f1862a"
+    },
+    {
+      "command": [
+        "build/sadx-native",
+        "--assets",
+        "game/imported",
+        "--controller-library",
+        "build/native-controller-deps/lib/libSDL3.0.dylib",
+        "--offscreen",
+        "--paced",
+        "--exit-after",
+        "1550",
+        "--save-directory",
+        "build/sonic-fan-root-integration/savedata",
+        "--key-events",
+        "500:13:down,501:13:up,750:13:down,751:13:up,950:13:down,951:13:up,1050:13:down,1051:13:up,1300:13:down,1301:13:up",
+        "--screenshot",
+        "build/sonic-fan-root-integration/frontier.ppm"
+      ],
+      "exit": 1,
+      "log": "build/sonic-fan-root-integration/app.log",
+      "log_sha256": "7e7a05dbdd8f17959bcfb56060322c3a97c134fe692ba62573b5cbefdc9b0a16"
+    }
+  ],
+  "frontier": {
+    "boundary": "native_gamma_display",
+    "frames": 1332,
+    "exit": 1,
+    "capture_inspected": true,
+    "capture": "build/sonic-fan-root-integration/frontier.ppm",
+    "capture_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427",
+    "state": "build/sonic-fan-root-integration/state.json",
+    "state_sha256": "ae70b27e8d1d0b5d6bbedcfefd48dc0ac483c62226b1645f7726797440dc6b3e",
+    "app_sha256": "d1a21ad7b7eb4938462c028778c6ef26f3301c43221494a5647eda639d1ba138",
+    "image": "Unchanged outgoing Sonic Adventure DX title; no actor frame."
+  },
+  "judge": {
+    "prior_count": 1450,
+    "count": 1460,
+    "added": {
+      "reference/oracle-reports/sonic_initialization.json": "defa731d3cad3991227ba3036bc7cca8dc49935fc16e6d7e67cf3616d2875e40",
+      "reference/packets/sonic-initialization-native/prepare_wiring.py": "aef8845de57ea08c02b0b0cd9a548d410beadc85438f4349a3429be336a48666",
+      "reference/packets/sonic-initialization-native/verify_binding_faults.py": "cc64d9620bed740e6a5e31942f154edace6318ba8ba2fc9cfaacc981af3ddf71",
+      "reference/packets/sonic-initialization-native/verify_creation_failures.py": "72221a4ee5e321b8e63ba25e7fd63eaef7417a43c4f6df44c6e33e432e961924",
+      "reference/packets/sonic-initialization-native/verify_faults.py": "9c6ab551a2c7f1d719c61ab2b2a0f965c9d001b1e57ab5c739a42874ffe7cbb5",
+      "reference/packets/sonic-initialization-native/verify_helpers.py": "7cccac480a6b824e92a2a8ecfd81fa9300ebb51327e06ac49668d0ece0b01b61",
+      "reference/packets/sonic-initialization-native/verify_source.py": "1eec2d530d3b5bc69f4e1355eacd54f32b4759dc79702895c8aa032f59cb97f8",
+      "tests/probes/native_sonic_initialization_probe.cpp": "65608b48138fb860c58d1d6666a62c3b308ebe237637cd6c533991ec0d117173",
+      "tests/unit/sonic_initialization_native.mm": "c12ef1899c864b69ce439ccadbee587066279d634af8bf23a718406f2128dd01",
+      "tools/oracles/verify_original_sonic_initialization.py": "eb37b60f9ff5e37bb524b7af6cbb676385a1b971e9525cfd060b2557c71f2231"
+    },
+    "changed": {
+      "Makefile": {
+        "before": "067198327630fcebc2d83ea0f67af96c506037f4497f744a95d273a781a28663",
+        "after": "0cba1c584165d92128634efc522fdc882b06fba797f385b3d7e1315c4c9c9773"
+      },
+      "reference/packets/sonic-model-native/prepare_wiring.py": {
+        "before": "8ef957067f1756a829a242fd5d0a2505dbb0efea6853c50ccf69cafb190e68de",
+        "after": "00355cd33466e49b8829e06bbe5070ea9d157ef7093078657d89f0e438c700ea"
+      },
+      "reference/packets/sonic-model-native/verify_pair_observer.py": {
+        "before": "782ae5f5fa70f13bcb686734d42934e77b4f50e1ecb2d6d78e0bce0e115a38f8",
+        "after": "71f62a0ed78c6cc3c36211e40db2c909712d69ddcaeb2d83d35cb89c6ab36947"
+      },
+      "tests/unit/manifest.tsv": {
+        "before": "0e97044abb24f5ba35000296d7bdf4c30415ac685f0c94c03d06a3cf90366075",
+        "after": "afe5e0f85960bda2cdcbbd6dd7420c41e6f7b797cd95bf49dacf02efeb944c7d"
+      },
+      "tests/unit/native_editor_binding.mm": {
+        "before": "3a7440c34ede6a46b12018784a75c08e8c7f9036d753b4c609e3ee77b2c6586d",
+        "after": "a06b3bb7b4368adbbf6c3daa76aa3a85ef277a7ac19dffeeb14bd60525138d4f"
+      },
+      "tests/unit/player_vertex_weld.cpp": {
+        "before": "404efb90aa2d8f7b3c413ba7cf35a4db877276b39b274d000722a3a044ec8278",
+        "after": "00f1469dd6aae117b780d6046a3f200600e82a4e3a22fea886f10ad9060bc213"
+      },
+      "tests/unit/sonic_animation_integration.mm": {
+        "before": "351ad0e29b602ae28b2961ae4a7ac8c632666b5e8d515688049fb1995a484de1",
+        "after": "da9f8ea23873587a792d7fac843a01f70d3d23489d0e72979439e228a038d386"
+      },
+      "tests/unit/sonic_model_native.mm": {
+        "before": "3fb615742530fafc9d69254de6e026886748c853659868db2430532e97fadf62",
+        "after": "98ef73fa692941cb1e2352197598e55a193c1d55182c5aeefc0ad2e2292084ac"
+      }
+    },
+    "removed": []
+  },
+  "reused_qualification": {
+    "path": "reference/packets/sonic-initialization-integration/INTEGRATION.json",
+    "sha256": "b9869a3cf06cc0b60e7955622fcc75f4314074d58ebf4c0a2f688943c2ee41a2",
+    "scope": "650 development/1162 holdout exact; both 80-case model cohorts retain34 individual FP partials/strict2. Frozen58992/3072 controller captures are inherited, not freshly executed."
+  },
+  "limits": [
+    "Root reran five focused programs plus combined app/force-load; candidate algorithms and comparison contracts unchanged.",
+    "Independent final integration review pending.",
+    "No new full gate/cold source, complete actor frame, N3b or full-app low-memory qualification.",
+    "Reference/native firstGamma timing remains1334/1332."
+  ],
+  "root_static_checks": {
+    "command": "make check",
+    "exit": 0,
+    "log": "build/sonic-initialization-root-check.log",
+    "log_sha256": "6845530903f16ee29dc8c21b397fb5e5c791fdc9fb5f74a94c99b4c861db5e00",
+    "all_1460_protected_files_present_and_matching": true
+  }
+}

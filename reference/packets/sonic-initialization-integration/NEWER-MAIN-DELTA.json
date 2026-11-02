@@ -1,0 +1,28 @@
+{
+  "newer_main": "ba88c5cc",
+  "fan_integration": "08884f1d",
+  "fixed_qualification_base": "bdb61450",
+  "fan_protections": {
+    "reference/packets/gamma-fan-native/verify_binding_faults.py": "44ab3a981273e15e57321d7665df128ae24a958dd5b177120151b9166e400622",
+    "reference/packets/gamma-fan-native/verify_initialization.py": "6aa07dd953057777161476b02a5e3f79b37663629c3e751b06786a2a58fbf0df",
+    "reference/packets/gamma-fan-native/verify_packet.py": "ef2b4b5f18c6c4d0c3ab9562649d2bf0b6763fda0ea229113a77e5591f32142f",
+    "reference/packets/gamma-fan-native/verify_regressions.py": "382d2e8a95272ef6e6ea3de3c8b7faf49a408e266454472d873d591314f2633d",
+    "reference/packets/gamma-fan-native/verify_root_fixture.py": "73f221d09bb357f6c8e9a77b7f7b8bc1f41726d9dfaf21f3443972de73abf11a",
+    "tests/probes/gamma_fan_initialization.cpp": "befda49bf75a903d8044eef45324d2871fb990d9790608abcc8819cce73ff7c3",
+    "tests/probes/native_gamma_fan_probe.cpp": "d0c1363df91a0bff2d5109d2ea8b0b91c73730fb105b1e0bc973a7713665e424",
+    "tests/unit/native_gamma_fan.mm": "2dbf5ceecba809ee6b60846614a640f85ad5f83bb864c4e36df966ba45a5fbb4",
+    "tools/oracles/verify_original_gamma_fan.py": "de3984497e6f76818606e71ecc92c06231e823aec966053db0590f9409484ba5"
+  },
+  "source_delta": [
+    "src/player/gamma_fan.cpp",
+    "src/player/gamma_fan.hpp",
+    "src/player/gamma_selection_core.hpp",
+    "src/runtime/native_display.hpp",
+    "src/runtime/native_gamma_binding.cpp"
+  ],
+  "limits": [
+    "No fan source is imported or qualified in this fixed-base Sonic tree.",
+    "Root preserves Display::sine, gamma_fan source and tests plus all appended registrations during admission.",
+    "This tree normal-input frontier is Gamma Fan; latest Main frontier is Gamma Display."
+  ]
+}

@@ -662,3 +662,17 @@ build/native-gamma-fan-probe.dylib: tests/probes/native_gamma_fan_probe.cpp src/
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -dynamiclib $< src/player/gamma_fan.cpp build/libsadx-native.a -o $@
 build/native-gamma-fan-test: tests/unit/native_gamma_fan.mm src/apps/native_gamma_actor_assets.hpp src/runtime/native_player_system.hpp src/runtime/native_display.hpp build/libsadx-native.a $(NATIVE_PLATFORM_OBJECTS)
 	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) $< $(NATIVE_PLATFORM_OBJECTS) build/libsadx-native.a $(MAC_FRAMEWORKS) -o $@
+# Sonic mode-zero continuation and exact build-only Root callback wiring.
+build/native-sonic-initialization-probe.dylib: tests/probes/native_sonic_initialization_probe.cpp src/player/sonic_model.hpp build/libsadx-native.a Makefile
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -MMD -MP -dynamiclib $< build/libsadx-native.a -o $@
+build/sonic-initialization-selection-preview.cpp: src/runtime/native_selection_preview.cpp reference/packets/sonic-initialization-native/prepare_wiring.py
+	python3 reference/packets/sonic-initialization-native/prepare_wiring.py
+build/sonic-initialization-callback.o: build/sonic-initialization-selection-preview.cpp Makefile
+	$(CXX) $(CXXFLAGS) -MMD -MP $(INCLUDES) -c $< -o $@
+-include build/sonic-initialization-callback.d
+build/sonic-initialization-native-test: tests/unit/sonic_initialization_native.mm src/apps/native_sonic_model_assets.hpp src/apps/native_regular_texture_assets.hpp src/runtime/native_session.hpp src/runtime/native_player_system.hpp src/runtime/native_title_scene.hpp src/runtime/native_sonic_context.hpp Makefile build/sonic-initialization-callback.o build/libsadx-native.a $(NATIVE_PLATFORM_OBJECTS)
+	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) -MMD -MP $< build/sonic-initialization-callback.o $(NATIVE_PLATFORM_OBJECTS) build/libsadx-native.a $(MAC_FRAMEWORKS) -o $@
+
+-include build/native-sonic-initialization-probe.d build/sonic-initialization-native-test.d
+build/sonic-model-selection-preview.cpp: reference/packets/sonic-initialization-native/prepare_wiring.py
+build/sonic-model-native-test: src/apps/native_regular_texture_assets.hpp

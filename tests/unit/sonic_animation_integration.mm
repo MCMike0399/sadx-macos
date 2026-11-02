@@ -1,4 +1,5 @@
 #include "apps/native_gamma_actor_assets.hpp"
+#include "apps/native_regular_texture_assets.hpp"
 #include "apps/native_sonic_animation_assets.hpp"
 #include "runtime/native_display.hpp"
 #include "runtime/native_session.hpp"
@@ -56,7 +57,7 @@ struct SonicCallbackProbe {
         assert(&owner->table() == table_member && owner->table() == table);
         assert(&owner->resources() == resources);
         const auto entry_player = session.players_.registry.players[0]->allocation;
-        initialization_stop("sonic_LoadCharTextures");
+        initialization_stop("sonic_common_model_slot_20");
         assert(task->primary_state->action_at_0 == 1); // Source stores Stand before textures.
         assert(session.players_.current.player == entry_player);
         assert(session.players_.registry.players[0]->physics->animation_tail.table_at_140 == table);
@@ -81,13 +82,15 @@ int main(int argc, char **argv) {
         assert(argc == 2);
         using namespace sadx;
         const std::filesystem::path directory(argv[1]);
-        const auto assets = native::app::load_assets(directory);
+        auto assets = native::app::load_assets(directory);
         auto pack = std::make_shared<const character_pack::CharacterPack>(
             character_pack::CharacterPack::load(directory / "characters/sonic-selection.actions"));
         frame::ModeState mode;
         native::Display display(directory / "system", mode);
         native::Session session(display.output(), pack, display.frame_state(), display.arithmetic(),
                                 mode, assets.character_textures, 1, [](std::uint32_t) {});
+        session.attach_cleanup(display, assets.audio);
+        session.attach_regular_textures(native::app::load_regular_texture_assets(directory));
         session.load_player_assets(native::app::load_gamma_actor_assets(directory, *pack));
         const native::TitleAssets titles{};
         native::TitleScene scene(session, display, titles);

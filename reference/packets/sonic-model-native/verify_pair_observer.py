@@ -25,8 +25,8 @@ def main():
             'vertex.vertex_pairs = &declarations_.pairs[row.pairs - 1];',
             'vertex.vertex_pairs = &declarations_.pairs[(row.pairs == 1 ? 2 : row.pairs) - 1];'),
         'changed-pair-content': (
-            '    state_.joins = std::move(table);',
-            '    declarations_.pairs[0][0] ^= 1;\n    state_.joins = std::move(table);'),
+            '    state_.joins = bind(declarations_.joins);',
+            '    declarations_.pairs[0][0] ^= 1;\n    state_.joins = bind(declarations_.joins);'),
     }
     receipts = []
     for name, (before, after) in faults.items():
