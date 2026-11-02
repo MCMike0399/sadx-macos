@@ -1,0 +1,10 @@
+{
+  "source_commit": "daa443e4",
+  "command": "SADX_CONTENT_CORPUS=\"$PWD\" PYTHONPATH=tools/lib:tools/oracles reference/python/bin/python -m unittest discover -s tests/python -p test_capture_content_offline.py",
+  "exit_status": 0,
+  "tests": 6,
+  "skipped": 0,
+  "log": "build/native-actors-qualified-rasters.log",
+  "log_sha256": "39b258d0ad9b2931a023af07f6fb3ec8417f7a5bd965f984e8484f7742533883",
+  "relationship": "Separately executes the six qualified offline-raster checks skipped by the actual 617-test gate. That gate retains seven skips; the inherited volume case-alias capability remains skipped. No repeated full Python suite."
+}

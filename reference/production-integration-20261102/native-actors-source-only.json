@@ -1,0 +1,51 @@
+{
+  "revision": "daa443e4ef87d7828ce7962b9faf3402a1e1c8dc",
+  "source_directory": "/Users/burbujamc/Developer/sadx-macos/build/native-actors-source-only-td4ufuy6/source",
+  "qualification_directory": "/Users/burbujamc/Developer/sadx-macos/build/native-actors-source-only-td4ufuy6/qualification",
+  "archive_sha256": "bc28c910678de2ae2d1b3ed9274d59689bfccee56fdc0a67b7a8d95a06ea3285",
+  "initial_original_binaries": 0,
+  "initial_prebuilt_game_objects": 0,
+  "reused_dependency": "Pinned public SDL3/libusb headers/libraries copied locally with symlinks dereferenced; all game and numerical objects rebuilt.",
+  "command": [
+    "make",
+    "-C",
+    "/Users/burbujamc/Developer/sadx-macos/build/native-actors-source-only-td4ufuy6/source",
+    "-j2",
+    "-o",
+    "build/native-controller-deps/include/SDL3/SDL.h",
+    "build/sadx-native",
+    "native-closure"
+  ],
+  "build_exit_status": 0,
+  "build_log_sha256": "5916c376176ff35c7ce46df78a82b72f795243b53cd056f20ed4331b1991450c",
+  "app_command": [
+    "/Users/burbujamc/Developer/sadx-macos/build/native-actors-source-only-td4ufuy6/source/build/sadx-native",
+    "--assets",
+    "/Users/burbujamc/Developer/sadx-macos/game/imported",
+    "--offscreen",
+    "--paced",
+    "--exit-after",
+    "1550",
+    "--save-directory",
+    "/Users/burbujamc/Developer/sadx-macos/build/native-actors-source-only-td4ufuy6/qualification/savedata",
+    "--key-events",
+    "500:13:down,501:13:up,750:13:down,751:13:up,950:13:down,951:13:up,1050:13:down,1051:13:up,1300:13:down,1301:13:up",
+    "--screenshot",
+    "/Users/burbujamc/Developer/sadx-macos/build/native-actors-source-only-td4ufuy6/qualification/frontier.ppm"
+  ],
+  "app_exit_status": 1,
+  "stop": "native session stopped: native_gamma_set_motion",
+  "state": {
+    "frames": 1332,
+    "sprite_registry_count": 1,
+    "gamma_setup_assets_loaded": true,
+    "gamma_setup_registered": true
+  },
+  "app_sha256": "f4a7d67ccb6867bae398c7655deb3580800e5edbaaef2c39bd53d8487c8d4ecd",
+  "screenshot_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427",
+  "matches_integrated_image": true,
+  "limits": [
+    "Fresh source archive contains no original executable/DLL or prebuilt game objects; public dependencies copied, imported assets external.",
+    "Reached motion-setup stop only, no completed actor frame, N3b or full gameplay independence claim."
+  ]
+}

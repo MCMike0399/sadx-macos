@@ -911,3 +911,12 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Inherited Gamma regression summaries preserve counts, not per-case partial observations; no stronger identity claim is made. Particle update/display/destruction, Gamma release, actor rendering and N3b remain open.
 * Source-list conflict resolution retains both Sonic and effects entries. New registrations preserve every old judge path, including the 53 local corpus protections. gamma-effects-integration.json records the current checks and limits.
 * The animation worker cleared its build slot. Next is the serialized combined full gate; last recorded full gate remains 7bcfd78 until that succeeds.
+
+### 2026-11-02 — Combined native actor foundations gate passes
+
+* Full gate at daa443e4 exits 0: 320 native programs, 617 Python tests, reference R1–R4, three native menu/save journeys and sixteen startup comparisons. Its seven reported skips are preserved.
+* A separate same-source run passes all six qualified offline raster checks, with no skips. Only the inherited volume case-alias capability remains skipped across these checks.
+* A fresh git source export builds all maintained native/numerical objects and passes force-load closure without original binaries or prebuilt game objects. Only copied public SDL3/libusb products are reused.
+* The clean app reaches the same native_gamma_set_motion stop at frame 1332, exit 1, with identical outgoing-title image. This certifies a connected dependency checkpoint, not a completed actor frame or N3b.
+* native-actors-integration-gate.json, native-actors-qualified-rasters.json and native-actors-source-only.json preserve exact commands, hashes and limits. STATUS is regenerated from the real gate.
+* The Sonic animation worker's build slot is released. Next: real Gamma motion/pose consumers, Sonic animation integration and remaining actor lifecycles, retaining all inherited failures and explicit unknowns.
