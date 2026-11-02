@@ -21,16 +21,15 @@ void discard_task(TaskScheduler &scheduler, const TaskHandle &task) {
 void load_textures(texture_lifetime::List &) {
     throw std::runtime_error("native_particle_load_textures");
 }
-void update_task(TaskScheduler &, const TaskHandle &) {
-    throw std::runtime_error("native_particle_update");
+void display_particle(TaskScheduler &scheduler, Particle &particle, Frame *frames) {
+    const auto binding = std::dynamic_pointer_cast<Binding>(scheduler.callback_context(display_task));
+    if (!binding || !binding->display)
+        throw Failure(Operation::DisplayBinding);
+    binding->display(particle, frames);
 }
-void update_custom_task(TaskScheduler &, const TaskHandle &) {
-    throw std::runtime_error("native_particle_custom_update");
-}
-void display_task(TaskScheduler &, const TaskHandle &) {
-    throw std::runtime_error("native_particle_display");
-}
-void destroy_task(TaskScheduler &, const TaskHandle &) {
-    throw std::runtime_error("native_particle_destroy");
+void release_buffer(TaskWorkArena &arena, const TaskWorkHandle &buffer) {
+    const auto result = arena.release(buffer);
+    if (!result)
+        throw Failure(Operation::Release, Field::PositionX, result.failure);
 }
 } // namespace sadx::particles

@@ -1,0 +1,11 @@
+{
+  "command": [
+    "build/particle-old-gamma-effects-test",
+    "game/imported/gamma-effects.bin"
+  ],
+  "exit_status": -6,
+  "stdout": "",
+  "stderr": "Assertion failed: (stopped), function main, file gamma_effects.cpp, line 96.\n",
+  "test_sha256": "06611cd09533d38e513b5418e5c98617739e81ba0e46b62aab6324cf6c49783b",
+  "evidence": "The preexisting unit expects every callback to throw. Source-comparison-qualified empty update/display/destruction now complete; retain all original initializer checks and replace only this obsolete expectation with real scheduler lifecycle assertions."
+}

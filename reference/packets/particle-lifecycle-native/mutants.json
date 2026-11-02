@@ -1,0 +1,84 @@
+{
+  "mutants": [
+    {
+      "name": "unsigned-count",
+      "caught": true,
+      "exit_status": 1,
+      "cases": 149,
+      "value_failures": 6,
+      "source_sha256": "7a33d2555d9808e7293743397fd92e05cd20af57a20fd30df961c5b8e332561f",
+      "probe_sha256": "86bef15051e330e4b6ac373ef2c938b988e74edc3eb603ef99ec3ec902977d0c",
+      "report_sha256": "80b273461d02d939b3acc4a5f70787df6e1db99fcdc779d4c5b8ea4d8ae42434"
+    },
+    {
+      "name": "skip-update-display",
+      "caught": true,
+      "exit_status": 1,
+      "cases": 149,
+      "value_failures": 25,
+      "source_sha256": "bc546f8e4f5e847fac96e89f2aa4c01db1ab7aa9be7c99a92b4d01afdb67dbfb",
+      "probe_sha256": "0ebbda1989cd0102ede74303ec684b5e492875da1b15b4165db381e0ab71bb79",
+      "report_sha256": "882f32c9f254509c47f8440ac2c9cc948d2d12dde6f93b7f480ceddfb839a211"
+    },
+    {
+      "name": "skip-swapped-slot",
+      "caught": true,
+      "exit_status": 1,
+      "cases": 149,
+      "value_failures": 6,
+      "source_sha256": "6da48134045aff7478f502b48c3ea6c5f985c6b5349d8e6277ab18b1a103382e",
+      "probe_sha256": "8e9c7c83f1f185553826a46a6d866216953bdcce2a57812228c06dd0710040cd",
+      "report_sha256": "0388034a77659242822a7a16466a9d454e245ff6cd455a2f74b203ba35c8d271"
+    },
+    {
+      "name": "invert-custom-liveness",
+      "caught": true,
+      "exit_status": 1,
+      "cases": 149,
+      "value_failures": 17,
+      "source_sha256": "fa280677ea046faeda50be534d3e2b63aa5b5f55a1a72648c72bf89b59979995",
+      "probe_sha256": "aa183ac1482e5782294cc63994c396a1f8698a3e62f6d6f387f467cdaa301e92",
+      "report_sha256": "38c8b2529e5c474bc92f604f189259d15673240098e23b37ba5e40a38d2b11c2"
+    },
+    {
+      "name": "wrong-free-slot",
+      "caught": true,
+      "exit_status": 1,
+      "cases": 149,
+      "value_failures": 6,
+      "source_sha256": "a9e1ee214353520789380b68fb6100779103d22b3a4c819c00d9303526203218",
+      "probe_sha256": "a7cb5a6cf4d302abfb933e18deabbcb832712ea83e2aed7283cae1230c4f6837",
+      "report_sha256": "b59e03e5892196fb1fc7cf6507f4d055db9d1c9da69cf11e26579aac377ce6c7"
+    },
+    {
+      "name": "drop-vertical-acceleration",
+      "caught": true,
+      "exit_status": 1,
+      "cases": 149,
+      "value_failures": 13,
+      "source_sha256": "4eba884a688e3e4d97ca26fd967fc3295e3b55d3d872ad970d0e35626f6e9b2f",
+      "probe_sha256": "99a8f237e48374ab4f1ac12cfba965e2132ba60681fd3b0882465129815f43c0",
+      "report_sha256": "5e424ffb5fc620910bc8365e91061c853d3d019cac9a4fdecb14a84b140842ed"
+    },
+    {
+      "name": "reverse-release-order",
+      "caught": true,
+      "exit_status": 1,
+      "cases": 149,
+      "value_failures": 21,
+      "source_sha256": "ad75064ea20dc9a5155bba5b87ec3e77a26dbad71ec032da8ebbd1deffc6a627",
+      "probe_sha256": "c73d014b77edab4232376a90105ec8190cc0db51a18d5d78070f3170b585b193",
+      "report_sha256": "40c30eeb6a95ba3a4a61983a6331f30a4c1674b23f35313125d70c87733c44c9"
+    },
+    {
+      "name": "skip-loop-counter",
+      "caught": true,
+      "exit_status": 1,
+      "cases": 149,
+      "value_failures": 2,
+      "source_sha256": "3574dcad089e66d0424967681c2284cc7c9506a9b32f55b347fd10586c75e18e",
+      "probe_sha256": "f6a68a3ef3ef88f30f6200413d5f1f79e9feb2715634dd7edfcfe88079b2bb50",
+      "report_sha256": "05853b6d64aee97a9c93d9bc08d54bb07e0d3c2e2d8dd284435d8eb1a8d02ca6"
+    }
+  ]
+}

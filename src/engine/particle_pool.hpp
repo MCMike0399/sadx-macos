@@ -3,6 +3,7 @@
 #include "cpu/fidelity_float.hpp"
 #include "engine/native_texture_lifetime.hpp"
 #include "engine/task.hpp"
+#include <stdexcept>
 
 namespace sadx::particles {
 // One source animation record. The sentinel is a negative texture index.
@@ -16,7 +17,36 @@ struct Frame {
 struct Parameters {
     float drag, vertical_acceleration;
 };
-struct Particle;
+// These names describe the source slot roles. Two uninterpreted words between
+// velocity and animation are retained by the arena and never read by update.
+enum class Field : std::uint32_t {
+    PositionX = 0, PositionY = 4, PositionZ = 8,
+    VelocityX = 12, VelocityY = 16, VelocityZ = 20,
+    AnimationTime = 32, AnimationSpeed = 36, FrameIndex = 40, LoopCount = 44
+};
+enum class Operation {
+    Work, FrameRead, ActiveIndexRead, ParticleRead, ParticleStore, FreeIndexStore,
+    ActiveIndexStore, CustomUpdate, ArithmeticBinding, DisplayBinding, Release
+};
+// NOTSA: report the actual failed access without embedding guest PCs in game code.
+struct Failure : std::runtime_error {
+    Operation operation;
+    Field field;
+    TaskWorkFailure cause;
+    Failure(Operation, Field = Field::PositionX,
+            TaskWorkFailure = TaskWorkFailure::None);
+};
+// NOTSA: borrowed slot view. Each access reaches the
+// canonical arena separately, retaining source reads, stores and failure prefixes.
+struct Particle {
+    TaskWorkArena &arena;
+    TaskWorkHandle storage;
+    std::uint32_t byte_offset;
+    float scalar(Field) const;
+    void scalar(Field, float);
+    std::uint32_t word(Field) const;
+    void word(Field, std::uint32_t);
+};
 using Update = std::int32_t (*)(Particle &, const Parameters &, Frame *);
 // Typed view of the real task.awp allocation. Buffers retain their arena bytes,
 // including uninitialized active-index and particle storage.
@@ -31,14 +61,28 @@ struct Work {
 
 // STUB: SONIC 0x4228e0 NeonuLoadTexture not reached with Gamma's zero flags
 void load_textures(texture_lifetime::List &);
-// STUB: SONIC 0x4cc080 UpdateParticlePool awaiting update recovery
+// FUNCTION: SONIC 0x4cc080 UpdateParticlePool
 void update_task(TaskScheduler &, const TaskHandle &);
-// STUB: SONIC 0x4cc150 UpdateCustomParticlePool awaiting custom update recovery
+// FUNCTION: SONIC 0x4cc150 UpdateCustomParticlePool
 void update_custom_task(TaskScheduler &, const TaskHandle &);
-// STUB: SONIC 0x4cc040 DisplayParticlePool awaiting display recovery
+// FUNCTION: SONIC 0x4cc040 DisplayParticlePool
 void display_task(TaskScheduler &, const TaskHandle &);
-// STUB: SONIC 0x4cc1e0 DestroyParticlePool awaiting buffer cleanup recovery
+// FUNCTION: SONIC 0x4cc1e0 DestroyParticlePool
 void destroy_task(TaskScheduler &, const TaskHandle &);
+
+// NOTSA: Composition supplies the existing arithmetic and rendering owners through the
+// scheduler's callback context. Empty pools consume neither binding.
+struct Binding : TaskCallbackContext {
+    fidelity::Context &arithmetic;
+    std::function<void(Particle &, Frame *)> display;
+    explicit Binding(fidelity::Context &value) : arithmetic(value) {}
+};
+// STUB: SONIC 0x4cc540 DisplayParticle awaiting shared renderer composition
+void display_particle(TaskScheduler &, Particle &, Frame *);
+// FUNCTION: SONIC 0x4cc470 UpdateParticleAnimation
+std::int32_t update_animation(Particle &, Frame *, fidelity::Context &);
+// NOTSA: release seam permits source-ordered allocator observations and reentry.
+void release_buffer(TaskWorkArena &, const TaskWorkHandle &);
 
 // NOTSA: allocation seams preserve reentry and original failure prefixes in tests;
 // the product binds these directly to its existing scheduler and arena.
