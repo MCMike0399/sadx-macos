@@ -48,6 +48,17 @@ class Function:
         return result
 
 
+def observation_trace(origin, line, record):
+    resolved = str(Path(origin).resolve())
+    def trace(frame, event, arg):
+        if event == 'line' and str(Path(frame.f_code.co_filename).resolve()) == resolved and frame.f_lineno == line:
+            values = frame.f_locals
+            record({'case': values['n'], 'source': values['e'],
+                    'source_trace': values['st']['trace'], 'native_comparison': values['got_cmp']})
+        return trace
+    return trace
+
+
 def main():
     slug, library, destination = sys.argv[1:]
     output = Path(destination)
@@ -68,7 +79,9 @@ def main():
         def __getattr__(self, name):
             return Function(getattr(self.library, name), capture)
 
+    observed = []
     def record(value):
+        observed.append(value.get('case', len(observed)))
         observations.write((json.dumps(value, sort_keys=True, separators=(',', ':')) + '\n').encode())
 
     for value in list(vars(module).values()):
@@ -87,14 +100,7 @@ def main():
         lines = script.read_text().splitlines()
         line = next(i + 1 for i, text in enumerate(lines) if 'd=[i for i in range(256)' in text)
 
-        def trace(frame, event, arg):
-            if event == 'line' and frame.f_code.co_filename == str(script) and frame.f_lineno == line:
-                values = frame.f_locals
-                record({'case': values['n'], 'source': values['e'],
-                        'source_trace': values['st']['trace'], 'native_comparison': values['got_cmp']})
-            return trace
-
-        sys.settrace(trace)
+        sys.settrace(observation_trace(spec.origin, line, record))
     ctypes.CDLL = Library
     sys.argv = [str(script), '/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe',
                 library, '--output', str(output / f'{slug}.json')]
@@ -105,7 +111,9 @@ def main():
         abi.close()
         observations.close()
         ctypes.CDLL = real_cdll
-    receipt = {'slug': slug, 'exit': int(status), 'calls': capture['count'], 'schema': 2,
+    if len(observed) != capture['count'] or observed != list(range(capture['count'])):
+        raise RuntimeError(f"Original observation closure: {len(observed)} observations / {capture['count']} calls")
+    receipt = {'slug': slug, 'exit': int(status), 'calls': capture['count'], 'schema': 3, 'original_observations': len(observed),
                'files': {p.name: hashlib.sha256(p.read_bytes()).hexdigest()
                          for p in output.glob(f'{slug}.*')},
                'limits': 'Complete default native ABI and original observations; no reserved inputs.'}

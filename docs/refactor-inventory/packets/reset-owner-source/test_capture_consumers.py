@@ -5,6 +5,7 @@ import io
 import json
 from pathlib import Path
 import struct
+import sys
 import unittest
 
 spec = importlib.util.spec_from_file_location('capture', Path(__file__).with_name('capture_consumers.py'))
@@ -49,6 +50,19 @@ class CaptureTests(unittest.TestCase):
         self.assertEqual(parsed[0]['argument_count'], 5)
         self.assertEqual(parsed[0]['inputs'][0]['bytes'], 8)
         self.assertEqual(parsed[0]['function'], 'fake')
+
+    def test_real_trace_relative_filename(self):
+        origin = 'build/reset-fake-observer.py'
+        source = "n=0; e=[1]; st={'trace':['original']}; got_cmp=[1]\ne=e\n"
+        # compile uses a relative filename; the observer binds an absolute module origin.
+        seen = []
+        sys.settrace(capture.observation_trace(str(Path(origin).resolve()), 2, seen.append))
+        try:
+            exec(compile(source, origin, 'exec'), {})
+        finally:
+            sys.settrace(None)
+        self.assertEqual(seen, [{'case': 0, 'source': [1], 'source_trace': ['original'],
+                                 'native_comparison': [1]}])
 
     def test_truncated_reordered_and_unknown_fail_closed(self):
         data = self.run_fake(2, 2)
