@@ -1,0 +1,195 @@
+{
+  "schema": 1,
+  "source_commit": "a2bcdd9f2c324f0885016620ec49c3781a3ccd62",
+  "accepted_packets": {
+    "gamma_motion": "c6b57032",
+    "particle_lifecycle": "50fd7c33"
+  },
+  "reviews": {
+    "standards": "de59f139",
+    "motion_fidelity": "f568cebc",
+    "particle_fidelity": "66c695a3"
+  },
+  "root_binding": "Gamma effects callback registers one scheduler-owned particles::Binding borrowing its actual rendering arithmetic; repeated calls retain that owner and reject conflicts. No rendering binding or Gamma release helper added.",
+  "attempts": [
+    {
+      "source": "ea2eea1f",
+      "command": [
+        "build/sonic-animation-integration-test",
+        "game/imported"
+      ],
+      "exit_status": -6,
+      "stderr": "libc++abi: terminating due to uncaught exception of type std::runtime_error: native task scheduler used before initialization",
+      "cause": "Session constructor precedes Logo task scheduler initialization.",
+      "correction": "a2bcdd9f moves registration to live Gamma effects callback, preserving existing owners.",
+      "initial_fault_limit": "The initial mutation does not qualify a working source baseline; retained only as attempt history.",
+      "initial_app_sha256": "078646e6a5523c6d0aab8516943b7ab7040f021a5b045204f6cee74ede9c2362"
+    },
+    {
+      "check": "provenance",
+      "initial_result": "one missing UpdateParticleAnimation symbol due to headerless proposal parsing",
+      "correction": "register both supplied symbol rows",
+      "final_errors": 0
+    }
+  ],
+  "build_exit": 0,
+  "native_closure_exit": 0,
+  "programs": [
+    {
+      "command": [
+        "build/native-gamma-motion-test",
+        "game/imported",
+        "build/motion-particle-root/observations.tsv"
+      ],
+      "exit_status": 0,
+      "stdout": "Real Gamma initialization reaches PJoinVertexes; canonical motion, live scene, keys and aliases pass\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "build/particle-lifecycle-test"
+      ],
+      "exit_status": 0,
+      "stdout": "particle lifecycle: scheduler, pending replacement, borrowed slots, cleanup and explicit rendering boundary pass\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "build/gamma-effects-test",
+        "game/imported/gamma-effects.bin"
+      ],
+      "exit_status": 0,
+      "stdout": "Imported frame inverse, canonical arena/task ownership, cache/reentry and scheduler particle lifecycle pass\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "build/native-gamma-effects-test",
+        "game/imported"
+      ],
+      "exit_status": 0,
+      "stdout": "Real Gamma/PInitialize/setup/material caller reaches PSetMotion with shared hit list and pool\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "build/sonic-animation-assets-test",
+        "game/imported",
+        "build/motion-particle-root/sonic-table.tsv"
+      ],
+      "exit_status": 0,
+      "stdout": "",
+      "stderr": "149 declarations, 147 rows, imported preview closure, seven invalid declarations, two real Sonic binds and Stand playback pass\n"
+    },
+    {
+      "command": [
+        "build/sonic-animation-integration-test",
+        "game/imported"
+      ],
+      "exit_status": 0,
+      "stdout": "Session rejects null/replacement; stable Sonic owner/table/resources; actual callback preserves editor stop with absent/present metadata\n",
+      "stderr": ""
+    }
+  ],
+  "root_binding_fault": {
+    "mutation": "remove only live Gamma callback arithmetic registration",
+    "source_sha256": "e126b42a55aeb5037bf6f41562cc1b2b71ee1b51a57d5905b458b7acf1ce0753",
+    "exit_status": -6,
+    "stderr": "Assertion failed: (binding && &binding->arithmetic == &display.arithmetic()), function main, file native_gamma_motion.mm, line 337.\n",
+    "caught": true
+  },
+  "original_imported": {
+    "exit_status": 2,
+    "report": {
+      "scenarios": 3,
+      "compared_rows": 465,
+      "failures": [],
+      "fp_partials": [
+        {
+          "scenario": "idle_pose_a",
+          "row": 0,
+          "field": 9,
+          "source": 0,
+          "native": 32
+        },
+        {
+          "scenario": "idle_pose_b",
+          "row": 0,
+          "field": 9,
+          "source": 0,
+          "native": 32
+        }
+      ],
+      "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "dll_sha256": "76bbaa1b6aa23872648e6f1f39642e4262403e372b4c4b32f20f0ec89780c2a5",
+      "observation_sha256": "3bcab50e1e0d58096e2b1c174c20c0ad4fed6cb4ce9bc6800fed66ed008fca34",
+      "source_ranges": {
+        "0x44a800": {
+          "bytes": 1601,
+          "sha256": "fd780fe989ab1a2162b99383dee2fb6765f1a7223cbccad1c1bb2d98905a79dc"
+        },
+        "0x43f2a0": {
+          "bytes": 1872,
+          "sha256": "3f838787e21b95594cb3ad0647c4d48f1b7edbecb900f2989eb3b4cbbbadc8c9"
+        },
+        "0x446950": {
+          "bytes": 87,
+          "sha256": "1c2020014b22835480dbdb268e356de7b5ea3bc662565ce19507858402bcebea"
+        },
+        "0x439fc0": {
+          "bytes": 80,
+          "sha256": "f99fc24e7a17ec5f7d6b13b5eb1d6187301b589566621733ec546779e6cce830"
+        }
+      },
+      "limits": [
+        "Real imported Stand and preview actions; deterministic allocator supplier.",
+        "Controlled post-initialization transitions supplement the real Gamma caller.",
+        "No physical Windows, complete actor frame or allocator-policy claim."
+      ]
+    }
+  },
+  "particle_original": {
+    "exit_status": 2,
+    "cases": 1109,
+    "value_failures": 0,
+    "individual_fp_partials": 237,
+    "partial_identities_and_stream_equal_reviewed_packet": true,
+    "stream_sha256": "4284d0e486b6f9bed75b1b0e0dfb9b6fa266fb69b35d6c6d1e8fbb6d738a1005",
+    "raw_report_sha256": "2139addff48c64c179a82a81aa596e779de2e436d261d02a3b5c06a315495f9b"
+  },
+  "normal_input": {
+    "command": [
+      "build/sadx-native",
+      "--assets",
+      "game/imported",
+      "--offscreen",
+      "--paced",
+      "--exit-after",
+      "1550",
+      "--save-directory",
+      "build/motion-particle-root/savedata",
+      "--key-events",
+      "500:13:down,501:13:up,750:13:down,751:13:up,950:13:down,951:13:up,1050:13:down,1051:13:up,1300:13:down,1301:13:up",
+      "--screenshot",
+      "build/motion-particle-root/frontier.ppm"
+    ],
+    "exit_status": 1,
+    "frames": 1332,
+    "stop": "native session stopped: native_gamma_join_vertices",
+    "app_sha256": "11688bea30da76cf21f7f6691d434e5daab6831d588976042e0073e8dee25fd4",
+    "screenshot_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427"
+  },
+  "limits": [
+    "No new full gate or cold-source qualification yet. Last full gate daa443e4.",
+    "Image identical to inspected outgoing title; no completed actor frame or N3b.",
+    "Imported motion observation excludes independent transition-start/generated-header/root metadata and arbitrary aliases.",
+    "Particle drawing, spawning, Gamma global release and unsupported aliases remain open.",
+    "Unchanged motion/blend preservation and lifecycle holdout/mutants reused within independently reviewed packet limits; not rerun here."
+  ],
+  "static_check_exit": 0,
+  "judge": {
+    "protected_files": 1398,
+    "violations": 0,
+    "inherited_paths_removed": 0
+  }
+}

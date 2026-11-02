@@ -1,0 +1,112 @@
+{
+ "oracle": "particle_lifecycle",
+ "cases": 1109,
+ "value_failures": 0,
+ "fp_partials": [
+  {
+   "case_id": 1,
+   "original_flags": 0,
+   "native_flags": 32
+  },
+  {
+   "case_id": 2,
+   "original_flags": 0,
+   "native_flags": 32
+  },
+  {
+   "case_id": 3,
+   "original_flags": 0,
+   "native_flags": 34
+  },
+  {
+   "case_id": 4,
+   "original_flags": 0,
+   "native_flags": 35
+  },
+  {
+   "case_id": 28,
+   "original_flags": 0,
+   "native_flags": 32
+  },
+  {
+   "case_id": 31,
+   "original_flags": 0,
+   "native_flags": 32
+  },
+  {
+   "case_id": 32,
+   "original_flags": 0,
+   "native_flags": 32
+  },
+  {
+   "case_id": 55,
+   "original_flags": 0,
+   "native_flags": 32
+  },
+  {
+   "case_id": 56,
+   "original_flags": 0,
+   "native_flags": 32
+  },
+  {
+   "case_id": 57,
+   "original_flags": 0,
+   "native_flags": 32
+  }
+ ],
+ "mismatches": [],
+ "passed": false,
+ "seed": 476210,
+ "holdout": false,
+ "stream_sha256": "4284d0e486b6f9bed75b1b0e0dfb9b6fa266fb69b35d6c6d1e8fbb6d738a1005",
+ "source_ranges": {
+  "0x4cc040-0x4cc07f": "ca5ce3416919c48b3682c0430942b964b7222a2c4457a5316f6f4258c6ea0c25",
+  "0x4cc080-0x4cc14b": "e6c0cd873103a6629a275ef7122d4857463b43bf77fdb921f36ec9eee7a53574",
+  "0x4cc150-0x4cc1d3": "5716af058e104f11bc08506e3dfad76d1a71e91b23018ebdb77dc69236d504d2",
+  "0x4cc1e0-0x4cc20a": "4248c0fb2dab4adbc27eb908bd003bbc73969dec99d3580d1058f27eb8e0c21e",
+  "0x4cc470-0x4cc4fe": "8a768f91fb60cc583de33873d13cff0ec3f77b3cdaaa05b72841487ebf78eddf"
+ },
+ "probe_sha256": "241737df5520765e571ca877619a87e304c9aac0ca249343e580b542af0abc9e",
+ "coverage": {
+  "routine_0": 262,
+  "boundary_0_field_0": 1090,
+  "routine_1": 208,
+  "reentry_1": 130,
+  "reentry_2": 120,
+  "routine_2": 254,
+  "routine_3": 189,
+  "boundary_6_field_0": 1,
+  "boundary_3_field_0": 3,
+  "boundary_4_field_0": 1,
+  "boundary_2_field_0": 1,
+  "boundary_1_field_0": 3,
+  "boundary_8_field_0": 1,
+  "reentry_4": 3,
+  "boundary_5_field_0": 1,
+  "boundary_5_field_4": 1,
+  "boundary_5_field_8": 1,
+  "boundary_5_field_12": 1,
+  "boundary_5_field_16": 1,
+  "boundary_5_field_20": 1,
+  "boundary_5_field_32": 1,
+  "boundary_5_field_40": 1,
+  "boundary_5_field_44": 1,
+  "routine_4": 196,
+  "animation_result_0": 157,
+  "animation_result_4294967295": 30,
+  "animation_result_4294967294": 9
+ },
+ "limits": [
+  "DisplayParticle/custom updates/FreeMemory intercepted; renderer and native allocator ownership tested separately.",
+  "Mapped well-formed four-slot buffers and four-frame tables; arbitrary cross-allocation aliases remain unsupported.",
+  "All payload bits, counts, callback identities and observed prefixes compared; no actor/N3b claim."
+ ],
+ "tracked_summary": {
+  "full_sha256": "2139addff48c64c179a82a81aa596e779de2e436d261d02a3b5c06a315495f9b",
+  "full_bytes": 22571,
+  "lists_cut_to": 10,
+  "cut_lists": {
+   "fp_partials": 237
+  }
+ }
+}

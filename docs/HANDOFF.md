@@ -928,3 +928,13 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Main native app/force-load closure, four focused programs, the exact 2,352-byte original table comparison and make check pass. Main's judge reports 1,389 files and zero violations, preserving all inherited protections; inventory drift is reconciled.
 * Actual Sonic callback still stops at missing editor input before animation consumption. Normal input still stops at Gamma motion, frame 1332, exit 1, with the identical previously inspected title image. No actor frame or N3b claim.
 * sonic-animation-root-integration.json preserves the new checks. The last full gate and cold-source qualification remain daa443e4; next coherent gate follows the reached motion/lifecycle work.
+
+### 2026-11-02 — Motion and particle lifecycle connected (integration review pending)
+
+* Accepted Gamma motion c6b57032 and particle lifecycle 50fd7c33 are integrated, preserving source/judge commit separation. Gamma consumes the passed initialized player while its entry-time current-player alias remains null.
+* Actual Main normal input reaches native_gamma_join_vertices at frame 1332, exit 1, with the identical outgoing-title image. No completed actor frame or N3b claim.
+* Root's first arithmetic binding ran too early in Session construction and failed before scheduler initialization. Fix a2bcdd9f registers it in the live Gamma effects callback; repeated calls retain the same owner. The failed attempt remains recorded.
+* Native app/force-load, six focused programs and make check pass. An added nonempty caller check uses that real arithmetic owner and stops at the unrecovered renderer; removing the binding is caught.
+* Imported motion comparison retains 465 rows, zero value failures and two FP partials, strict exit 2. Particle comparison retains 1,109 cases, zero value failures and all 237 individual FP partials, strict exit 2. Unchanged broader preservation/holdouts/mutants remain reviewed packet evidence.
+* Judge sealing preserves all inherited paths: 1,398 protections, zero drift. Headerless symbol proposals required a corrected registration of both rows; provenance now passes. Inventory is reconciled.
+* motion-particle-integration.json retains exact checks, failures and scope limits. Particle rendering/spawning, Gamma release, vertex welding and later common-tail calls remain open. Root integration review precedes the next gate; last full gate/cold source remains daa443e4.

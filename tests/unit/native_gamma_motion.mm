@@ -332,6 +332,36 @@ int main(int argc, char **argv) {
     assert(retained_key.bytes && retained_key.byte_extent > 0 && !table_lifetime.expired());
     assert(tail.table_at_140->get() == table_lifetime.lock().get() &&
            *tail.buffer_at_148 == buffer);
+    const auto binding = std::dynamic_pointer_cast<particles::Binding>(
+        scheduler.callback_context(particles::update_task));
+    assert(binding && &binding->arithmetic == &display.arithmetic());
+    // Exercise the actual caller's binding after all retained motion observations.
+    std::array<particles::Frame, 3> frames{};
+    frames[0].texture_index = 0;
+    frames[1].texture_index = 1;
+    frames[1].parameters[0] = 10;
+    const auto controlled_pool = particles::create_pool(scheduler, *arena, 1, {0.125f, 0},
+                                                        frames.data(), nullptr);
+    const auto controlled =
+        std::static_pointer_cast<particles::Work>(controlled_pool->auxiliary_native_work);
+    const std::uint16_t index = 0;
+    assert(arena->write(controlled->active_indices, 0, &index, sizeof(index)));
+    assert(arena->fill(controlled->particles, 0, 0, 48));
+    controlled->active_count = 1;
+    particles::Particle particle{*arena, controlled->particles, 0};
+    particle.scalar(particles::Field::PositionX, 1);
+    particle.scalar(particles::Field::VelocityX, 2);
+    particle.scalar(particles::Field::AnimationSpeed, 0.25f);
+    bool renderer_missing = false;
+    try {
+        particles::update_task(scheduler, controlled_pool);
+    } catch (const particles::Failure &failure) {
+        renderer_missing = failure.operation == particles::Operation::DisplayBinding;
+    }
+    assert(renderer_missing && particle.scalar(particles::Field::PositionX) == 3 &&
+           particle.scalar(particles::Field::VelocityX) == 1.75f &&
+           particle.scalar(particles::Field::AnimationTime) == 0.25f);
+    assert(scheduler.destroy_task(controlled_pool));
     std::cout << "Real Gamma initialization reaches PJoinVertexes; canonical motion, live scene, "
                  "keys and aliases pass\n";
 }

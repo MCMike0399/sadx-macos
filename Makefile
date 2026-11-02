@@ -610,3 +610,8 @@ build/native-sonic-callback-test build/native-preview-events-test build/native-g
 
 build/native-gamma-motion-test: tests/unit/native_gamma_motion.mm src/apps/native_gamma_actor_assets.hpp src/runtime/native_player_system.hpp src/runtime/gamma_motion.hpp build/libsadx-native.a
 	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) $< build/libsadx-native.a -framework Foundation -o $@
+
+build/particle-lifecycle-test: tests/unit/particle_lifecycle.cpp src/engine/particle_pool.hpp build/libsadx-native.a
+	$(CXX) $(CXXFLAGS) $(INCLUDES) $< build/libsadx-native.a -o $@
+build/native-particle-lifecycle-probe.dylib: tests/probes/native_particle_lifecycle_probe.cpp src/engine/particle_pool.hpp src/engine/particle_pool_lifecycle_native.cpp src/engine/task.cpp src/engine/task_work.cpp src/cpu/x87_math.cpp src/cpu/crt_integer.cpp build/softfloat/softfloat.a
+	$(CXX) $(CXXFLAGS) -dynamiclib $(INCLUDES) tests/probes/native_particle_lifecycle_probe.cpp src/engine/particle_pool_lifecycle_native.cpp src/engine/task.cpp src/engine/task_work.cpp src/cpu/x87_math.cpp src/cpu/crt_integer.cpp build/softfloat/softfloat.a -o $@

@@ -252,3 +252,5 @@ SONIC	0x4cc1e0	function	DestroyParticlePool			42	ev_3eedefe5a6de8d9f7601dda9794a
 SONIC	0x91d168	data	GammaHitFrames	particle frames		748	ev_23c9733a8e8b40e3ffd00f1310e17501100ea5a4ef1f4421b500f44560c3fcad	First actual frame declaration including sentinel; inverse import
 SONIC	0x91d458	data	GammaBurstFrames	particle frames		220	ev_d29397a5381721ce16bfb4a42cd16fada9b052d9f62a7ad9b2becad05ba85b82	Guarded burst frame declaration including sentinel; inverse import
 SONIC	0x3c56df0	global	GammaBurstTask	native TaskHandle		4	ev_8e06c4947745aaf711c9f3b668e8076175e5919a8a19b414722b3d99f51c28ab	Single zero-initialized source task owner; spawn and separate release borrower remain unrecovered
+SONIC	0x4cc540	function	DisplayParticle			798	ev_ffb2f19d1ae58bfe11ce2c26b26deef0ed76acfed34e917c763b09a1b2a6c67c	Recovered particle lifecycle leaf; rendering remains an explicit lower binding
+SONIC	0x4cc470	function	UpdateParticleAnimation			142	ev_83ab3b05b3f6f0c91cdcb5cb639fc9608917ff8f9c55d3fd65e1a5b8d766ac17	Recovered particle lifecycle leaf; rendering remains an explicit lower binding

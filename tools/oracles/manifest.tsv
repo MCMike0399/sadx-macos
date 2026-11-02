@@ -40,3 +40,5 @@ gamma_setup_resource	build/native-gamma-setup-resource-probe.dylib	tools/oracles
 sprite_registry	build/native-sprite-registry-probe.dylib build/native-sprite-registry-prefix-probe.dylib	tools/oracles/verify_original_sprite_registry.py --exe "$(GAME_EXE)" --probe build/native-sprite-registry-probe.dylib --prefix-probe build/native-sprite-registry-prefix-probe.dylib --output build/oracles/sprite_registry.json
 
 gamma_effects	build/native-gamma-effects-probe.dylib	tools/oracles/verify_original_gamma_effects.py --exe "$(GAME_EXE)" --probe build/native-gamma-effects-probe.dylib --output build/oracles/gamma_effects.json
+
+particle_lifecycle	build/native-particle-lifecycle-probe.dylib	tools/oracles/verify_original_particle_lifecycle.py --exe "$(GAME_EXE)" --probe build/native-particle-lifecycle-probe.dylib --output build/oracles/particle_lifecycle.json
