@@ -650,3 +650,9 @@ build/sonic-model-native-test: tests/unit/sonic_model_native.mm src/apps/native_
 
 # Shared inline loader consumed by the app and existing Sonic integration witnesses.
 build/sadx-native build/sadx-native-closure build/sonic-animation-assets-test build/sonic-animation-integration-test build/native-editor-binding-test: src/apps/native_sonic_model_assets.hpp
+
+build/native-model-matrices-probe.dylib: tests/probes/native_model_matrices_probe.cpp src/engine/model_matrices.cpp src/engine/ninja_matrix_composition.cpp src/player/model_motion_matrices.cpp build/libsadx-core.a
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -dynamiclib $^ -o $@
+
+build/model-motion-matrices-test: tests/unit/model_motion_matrices.mm src/engine/model_matrices.cpp src/engine/ninja_matrix_composition.cpp src/player/model_motion_matrices.cpp src/player/model_motion_source.cpp build/libsadx-native.a
+	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) $^ -framework Foundation -o $@

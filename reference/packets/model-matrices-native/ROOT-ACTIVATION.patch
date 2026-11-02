@@ -1,0 +1,10 @@
+--- a/src/runtime/native_selection_preview.cpp
++++ b/src/runtime/native_selection_preview.cpp
+@@ -237,6 +237,7 @@
+                                     scene.session_.mission_editor_status_};
+     context.editor_state = &editor_state;
+     context.normalized_input = scene.input_.normalized_input;
++    context.model_matrices = &scene.session_.model_matrices_;
+     gamma_selection::run(context, task);
+ }
+ // NOTSA: native boundary for E102Display; source seam declared in the Gamma core.

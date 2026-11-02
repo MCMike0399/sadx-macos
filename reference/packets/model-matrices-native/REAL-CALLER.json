@@ -1,0 +1,70 @@
+{
+  "source_base": "03efe626",
+  "source_core": "b2271ed7",
+  "root_owner_patch_sha256": "d0b8bcae289c9ebb873d32c2158d6e2fbd95ee0a11365627555240ed571b4933",
+  "root_activation_patch_sha256": "ee9d4499616445a66b91553004f0d36ba710f6508195ec0b3024613a7cb6c1cf",
+  "source_initialization_evidence": "INITIALIZATION.json",
+  "source_snapshot_sha256": "bf7ae0fac5961a653600f89401441fe766f4f74bbfa1ea198a0a51356aa9bc7f",
+  "private_build_sources": 193,
+  "max_parallel_compiles": 2,
+  "shared_worktree_sources_unchanged": true,
+  "native_app_build_exit_status": 0,
+  "force_load_build_exit_status": 0,
+  "closure_check_exit_status": 0,
+  "build_record_path": "build/model-matrices-native/runtime-binding/build.json",
+  "build_record_sha256": "878850f9e31f6bf67de8b186c8ebfb81414040dc7b70e05df981df5321230d2f",
+  "command": [
+    "build/model-matrices-native/runtime-binding/sadx-native",
+    "--assets",
+    "game/imported",
+    "--controller-library",
+    "build/native-controller-deps/lib/libSDL3.0.dylib",
+    "--offscreen",
+    "--paced",
+    "--exit-after",
+    "1550",
+    "--save-directory",
+    "build/model-matrices-native/runtime-binding/save-final",
+    "--key-events",
+    "500:13:down,501:13:up,750:13:down,751:13:up,950:13:down,951:13:up,1050:13:down,1051:13:up,1300:13:down,1301:13:up",
+    "--screenshot",
+    "build/model-matrices-native/runtime-binding/native.ppm"
+  ],
+  "binary_sha256": "8c57cdd6c2cd7200c33f34995daffbdd7bb250b0989bd5a9b8e78f446e9dfb9d",
+  "exit_status": 1,
+  "frames": 1332,
+  "completed_frames": 1330,
+  "boundary": "native_gamma_update_fan",
+  "state_path": "build/model-matrices-native/runtime-binding/native-state.json",
+  "state_sha256": "76e43806ca7dc503a984cf16636993d6dec8b582fbf4a591398e4773ccce3cd8",
+  "capture_path": "build/model-matrices-native/runtime-binding/native.ppm",
+  "capture_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427",
+  "capture_identical_to_inspected_title": true,
+  "raw_reference_native_frame_delta": 2,
+  "save_input_sha256": {
+    "SONICADVENTURE_DX_CHAOGARDEN.snc": "53b585755ada51c7ed07d2f69ad3ddb195b5a6e48a838fc98533910205dae3e3",
+    "SonicDX02.snc": "3249b31891872b96be539348c005abf812c76af5e3e7c5f198ee65de008943e4",
+    "SonicDX01.snc": "15ac61323e0508d72a279f0f648f4b5007793cc0c8fb42bce9d893f00c265cf6"
+  },
+  "binding_faults": 5,
+  "limits": [
+    "Shared hunks are compiled source fixtures until Root applies/adopts their exact patches.",
+    "Active PJoin mode1 remains CalcMMMatrix stop; arguments/deformation/attachments are not qualified.",
+    "No completed actor frame, N3b, full gate or fresh source archive qualification."
+  ],
+  "source_getter_indices": [
+    54,
+    30,
+    39,
+    2,
+    37
+  ],
+  "source_z_rotation_signed_zero_components": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "symbol_extent_metadata": "Five exact override widths 48 -> 64; metadata is not a compiled C++ input; ROOT-PROVENANCE regenerates/checks the exact final patch.",
+  "provenance_evidence": "ROOT-PROVENANCE.json"
+}

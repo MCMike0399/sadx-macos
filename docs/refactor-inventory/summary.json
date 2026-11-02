@@ -1,12 +1,12 @@
 {
-  "accounted_open_entries": 1800,
-  "accounted_scope": 4511,
+  "accounted_open_entries": 1822,
+  "accounted_scope": 4554,
   "base_commit": "f6c4e538af463a2eaf4c1fe961f04e8443d51878",
   "baseline_removed_paths": [
     "src/player/player_animation_decode.cpp",
     "src/player/sonic_animation_operations.hpp"
   ],
-  "boundary_entries": 2607,
+  "boundary_entries": 2628,
   "checks_not_run": [
     "builds",
     "gate",
@@ -16,12 +16,12 @@
     "providers"
   ],
   "coverage": "exact tracked path equality; no semantic completeness or behavior verdict",
-  "current_open_entries": 1798,
-  "current_tracked_denominator": 4509,
+  "current_open_entries": 1820,
+  "current_tracked_denominator": 4552,
   "dispositions": {
     "already_conforming": 104,
     "needs_migration": 22,
-    "open_review": 1769,
+    "open_review": 1791,
     "reference_infrastructure": 7
   },
   "historical_baseline_members": 2,
@@ -43,46 +43,46 @@
       "sha256": "7b0d95acd547b356a3f7e0becc7aa0d39400c6eb0dd4083c8d6d4bc6646572ef"
     }
   ],
-  "maintained_and_script_entries": 1902,
+  "maintained_and_script_entries": 1924,
   "module_dispositions": {
     "already_conforming": 60,
     "needs_migration": 6,
-    "open_review": 1158
+    "open_review": 1174
   },
   "module_shards": [
     {
       "path": "modules.jsonl",
-      "records": 665,
-      "sha256": "def15bd8c3ece73b386374cf34752343b757c7d8383cdcc5d6faeb670accbb3c"
+      "records": 650,
+      "sha256": "a66d2ce767198c26878e41f36aaf1d4636bfc70aabb86d34fec53106a0fef98b"
     },
     {
       "path": "modules-002.jsonl",
-      "records": 559,
-      "sha256": "ac67f1ead18d9823cd614458dbb0f04234cb7081fcc04f04f01b042126da1251"
+      "records": 590,
+      "sha256": "64423919450033721847647d0a3982ae2055803553f4e2d9d172d200ad69aa8b"
     }
   ],
-  "modules": 1224,
-  "native_translation_units_listed": 159,
-  "native_translation_units_not_listed": 178,
+  "modules": 1240,
+  "native_translation_units_listed": 163,
+  "native_translation_units_not_listed": 179,
   "other_stub_mentions": 11,
   "production_recipe_membership": {
     "native_platform_object": 10,
-    "native_source_list": 159,
+    "native_source_list": 163,
     "native_source_wildcard": 32,
-    "not_a_production_translation_unit": 370,
-    "not_in_observed_production_recipes": 135,
+    "not_a_production_translation_unit": 375,
+    "not_in_observed_production_recipes": 136,
     "production_entrypoint": 1
   },
   "reviewed_stub_bindings": 2,
   "roots": {
-    "reference": 2550,
-    "src": 707,
-    "tests": 667,
+    "reference": 2578,
+    "src": 717,
+    "tests": 671,
     "third_party": 155,
-    "tools": 430
+    "tools": 431
   },
   "schema_version": 3,
-  "stub_annotations": 100,
+  "stub_annotations": 97,
   "systems": {
     "asset-boundaries": 23,
     "game-flow-ui": 109,
@@ -91,15 +91,15 @@
     "numeric-foundations": 35,
     "platform-app": 62,
     "player-animation-actors": 44,
-    "player-common": 108,
-    "reference-runtime": 59,
-    "render-math-device": 69,
+    "player-common": 112,
+    "reference-runtime": 61,
+    "render-math-device": 73,
     "render-queue-draw": 42,
     "save-profile": 26,
     "sound-movie": 27,
     "task-ownership": 6,
     "texture-lifetime": 23,
-    "tooling-judges": 1195
+    "tooling-judges": 1207
   },
-  "tracked_scope": 4509
+  "tracked_scope": 4552
 }

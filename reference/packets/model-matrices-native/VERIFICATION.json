@@ -1,0 +1,157 @@
+{
+  "base": "03efe626",
+  "source_commit": "b2271ed7",
+  "source_files": {
+    "native-sources.txt": "6065579c80ffbdbcbb123ea61fd25ea96be5b490222b2970768fbb3576cab2cb",
+    "src/engine/model_matrices.cpp": "20d6bb04db1f9ef5f6e17bfcafa604f926764cbddbdf5ca374e687373385ce4b",
+    "src/engine/model_matrices.hpp": "c2e845a7f630895e4b2bcbfaf762af43541eb73de5b28e4e0cc5c731efd93b4c",
+    "src/engine/ninja_matrix_composition.cpp": "1a0e92226a54e1be48c037e2c0848c9897ae19860304f6e2149fd3727fbc7b13",
+    "src/engine/ninja_matrix_composition.hpp": "adad655773196eca6bd9e81b30de733bfbd4f5dbbdb9ad9f590d4b093e5e9cd7",
+    "src/guest/model_matrices_reference.cpp": "26c29c45c652a3a2889b3503e88a1c81c6d7723de12f4a3812247012db1c41a2",
+    "src/guest/model_matrices_reference.hpp": "ac33201b2893f444d53a11483c295cadcc2beada88a218c9a48ed8e789bdd4fb",
+    "src/player/gamma_selection_core.hpp": "498777049c1421c7238676454c0146cfb3829a690c48ec017fe3467b8ca279b7",
+    "src/player/model_motion_matrices.cpp": "b01b03cb9817b8c3472759e4494204d143a7b364d0e58144e79aef13ed3493db",
+    "src/player/model_motion_matrices.hpp": "8c39a50de46d805c7c6b7bf5caeeed197fa0c0dd4e0273f3372bed11cb2dceb9",
+    "src/player/model_motion_source.cpp": "44348930c653faec3602a9582778b345f6e15ce90f6e27de02442c71df98bc85",
+    "src/player/model_motion_source.hpp": "b01af6374079622a7b1f483bf3719d7d408658cc615b33dd2acd2e59c86b8f3d",
+    "src/runtime/native_object_draw.cpp": "e4e9fcc31f14a0febc8291ba03cfde0dd9d840ed4a71b4475575925a3415153a"
+  },
+  "development": {
+    "cases": 1223,
+    "failure_prefixes": 27,
+    "value_mismatches": 0,
+    "flag_mismatches": 957,
+    "fixture_sha256": "64385b01736d5f9078349ee95c69254818f8718025e2c75137006d7005b4dc74",
+    "observations_sha256": "fa6c8bae47c0907ddb5c2b989e9e780f8afb417a3a57319d387ccfb3f4daf782",
+    "seed": 4948464,
+    "report_path": "build/oracles/model_matrices.json",
+    "report_sha256": "226d53ef35af234cf594651994d5c222a85ce2868090113ebc7b1d44e4b9ceae",
+    "strict_exit_status": 2,
+    "individual_partial_identity_sha256": "2db1e8362a35ae89e5311131695d69320a764731b3cbca3cdd7b1bc7665f41a9"
+  },
+  "final_holdout": {
+    "cases": 4935,
+    "failure_prefixes": 212,
+    "value_mismatches": 0,
+    "flag_mismatches": 3934,
+    "fixture_sha256": "45423c20f87073f56049029a30d02c0b5e76df4435260e72505bbbfcbe065db0",
+    "observations_sha256": "e39aefeaf284479902760ca47b6276d63f067593eb8b3cfeae3fc8cbb71caf46",
+    "seed": 1296910386,
+    "report_path": "build/model-matrices-native/final-holdout.json",
+    "report_sha256": "30fd4f71319a07b43a0a1006d7b7a40ae74b0485c19bf4e5275ce17255d44443",
+    "strict_exit_status": 2,
+    "individual_partial_identity_sha256": "9c40d7a4a9b9f138ab08e6ab9c1b2e5778a5451435b53c2032f0f42cd8b48bf6"
+  },
+  "real_imported": {
+    "scenarios": 3,
+    "rows": 774,
+    "value_mismatches": 0,
+    "fp_partials": 3,
+    "strict_exit_status": 2,
+    "report_path": "build/model-matrices-native/original-imported.json",
+    "report_sha256": "c768b86609ef715ac5777b5600888564ec64043fcfc1236adfa16f3f988d1b40"
+  },
+  "compiled_faults": {
+    "count": 12,
+    "passed": true,
+    "evidence": "FAULTS.json"
+  },
+  "builds": {
+    "native_app": 0,
+    "native_force_load_closure": 0,
+    "new_generated_unit_command": 0,
+    "inherited_motion_caller": 0,
+    "inherited_weld_caller": 0,
+    "inherited_input_caller": 0,
+    "max_make_jobs": 2,
+    "controller_dependencies": "Copied/dereferenced public products; SDL header recipe disabled with make -o"
+  },
+  "inherited_oracles": {
+    "gamma_input_buffer": {
+      "cases": 636,
+      "failure_prefixes": 469,
+      "value_mismatches": 0,
+      "exit_status": 0
+    },
+    "player_vertex_weld": {
+      "cases": 1200,
+      "failure_prefixes": 248,
+      "value_mismatches": 0,
+      "exit_status": 0
+    },
+    "player_coordinates": {
+      "cases": 23724,
+      "value_mismatches": 0,
+      "fp_status_differences": 21240,
+      "verdict": "partial",
+      "individual_old_partial_identity_claim": false
+    }
+  },
+  "inherited_caller_observations": {
+    "build/gamma-motion-observations.tsv": {
+      "bytes": 11144,
+      "sha256": "3bcab50e1e0d58096e2b1c174c20c0ad4fed6cb4ce9bc6800fed66ed008fca34"
+    },
+    "build/gamma-weld/imported-topology.tsv": {
+      "bytes": 12494,
+      "sha256": "87eb6646c42d99987fea1f207a6b40fde8f2b73443faa01ebcb50c6797d52c7c"
+    }
+  },
+  "normal_input": {
+    "exit_status": 1,
+    "frames": 1332,
+    "completed_frames": 1330,
+    "boundary": "native_gamma_update_fan",
+    "capture_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427",
+    "capture_inspected": true,
+    "runtime_binding_active": true,
+    "runtime_binding_location": "Private exact Root-patch native executable; shared worktree headers unchanged"
+  },
+  "runtime_initialization": {
+    "status": "measured original through first GammaUpdateFan entry",
+    "exit_status": 0,
+    "reference_frame": 1334,
+    "producer_calls": 0,
+    "count": 0,
+    "limit": 0,
+    "first_getter_index": 54,
+    "first_getter_result": 0,
+    "destination_preserved": true,
+    "source_snapshot_file": "INITIALIZATION-SNAPSHOTS.json",
+    "source_snapshot_sha256": "bf7ae0fac5961a653600f89401441fe766f4f74bbfa1ea198a0a51356aa9bc7f",
+    "scope": "One connected normal-input pinned-profile route; not all possible prior gameplay histories",
+    "execution_hold": false
+  },
+  "judge": {
+    "inherited_protections": 1418,
+    "manifest_unchanged": true,
+    "absent_inherited_inputs": 53,
+    "full_gate_run": false,
+    "root_admission_pending": true
+  },
+  "limits": [
+    "No actual actor frame, N3b, full gate or source archive qualification.",
+    "No active PJoin argument selection, deformation, attachment writes or four weld scratch consumers.",
+    "Original key-frame fixture access boundary is explicit; no hardware fault-PC claim.",
+    "Native imported/generated MDATA2 composition qualified; synthetic engine MDATA3 qualified; no actual generated MDATA3 caller qualification.",
+    "Arbitrary key/object/output aliasing remains unqualified; njMultiMatrix exact self-alias is covered."
+  ],
+  "root_binding": {
+    "owner_patch_compiled": true,
+    "native_app_and_force_load": true,
+    "closure_check": true,
+    "five_getters_and_z_rotation": true,
+    "compiled_binding_faults": 5,
+    "activation_guard_negatives": 3,
+    "reference_native_frame_delta": 2,
+    "provenance_errors": 0,
+    "owned_byte_identities": 175836
+  },
+  "reference_diagnostic_translator_compiled": true,
+  "clean_unit_output_parent": {
+    "created_fresh_directory": true,
+    "generated_recipe_exit_status": 0,
+    "fresh_output_exit_status": 0,
+    "observations_byte_identical": true
+  }
+}

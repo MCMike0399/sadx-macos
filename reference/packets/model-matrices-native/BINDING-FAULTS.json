@@ -1,0 +1,45 @@
+{
+  "faults": [
+    {
+      "name": "wrong-state-owner",
+      "compiled": true,
+      "exit_status": -6,
+      "caught": true,
+      "failure": "Assertion failed: (destination == state.matrices[node]), function main, file model_matrix_binding.mm, line 42.",
+      "mutated_source_sha256": "db4aa0cae117dd8580e98b8c5f4f08bd743ec086c3c920242a6a8d2fabee7778"
+    },
+    {
+      "name": "rejected-destination-write",
+      "compiled": true,
+      "exit_status": -6,
+      "caught": true,
+      "failure": "Assertion failed: (destination == previous), function main, file model_matrix_binding.mm, line 48.",
+      "mutated_source_sha256": "a4b3e4da45d68a323277a61fdf12e600f971235a29fa29058ea0f945b66f888e"
+    },
+    {
+      "name": "unsigned-index-truncation",
+      "compiled": true,
+      "exit_status": -6,
+      "caught": true,
+      "failure": "Assertion failed: (destination == previous), function main, file model_matrix_binding.mm, line 48.",
+      "mutated_source_sha256": "b431344a3a9032b0dbe00bc6038574e2f59f38cee07900dd6132c7d90f179366"
+    },
+    {
+      "name": "wrong-rotation-axis",
+      "compiled": true,
+      "exit_status": -6,
+      "caught": true,
+      "failure": "Assertion failed: (std::memcmp(rotated.data(), expected.data(), 64) == 0), function main, file model_matrix_binding.mm, line 77.",
+      "mutated_source_sha256": "f9b18f5f85f723b928b3571d90695659cb71225cd96278321e970c7bb5c72d94"
+    },
+    {
+      "name": "rotates-stack-instead-of-destination",
+      "compiled": true,
+      "exit_status": -6,
+      "caught": true,
+      "failure": "Assertion failed: (std::memcmp(rotated.data(), expected.data(), 64) == 0), function main, file model_matrix_binding.mm, line 77.",
+      "mutated_source_sha256": "5723d46b31828b67144e6f4513dc436d673e4bca56a6294923028eefdb35ad5a"
+    }
+  ],
+  "passed": true
+}

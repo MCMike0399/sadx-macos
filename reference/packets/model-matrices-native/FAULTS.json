@@ -1,0 +1,86 @@
+{
+  "faults": [
+    {
+      "name": "getter-equal-index",
+      "compiled": true,
+      "caught_by_value_difference": true,
+      "value_mismatches": 4,
+      "report": "build/model-matrices-native/faults/getter-equal-index/report.json"
+    },
+    {
+      "name": "getter-destroys-rejected-output",
+      "compiled": true,
+      "caught_by_value_difference": true,
+      "value_mismatches": 28,
+      "report": "build/model-matrices-native/faults/getter-destroys-rejected-output/report.json"
+    },
+    {
+      "name": "limit-without-clamp",
+      "compiled": true,
+      "caught_by_value_difference": true,
+      "value_mismatches": 14,
+      "report": "build/model-matrices-native/faults/limit-without-clamp/report.json"
+    },
+    {
+      "name": "wrapped-limit",
+      "compiled": true,
+      "caught_by_value_difference": true,
+      "value_mismatches": 202,
+      "report": "build/model-matrices-native/faults/wrapped-limit/report.json"
+    },
+    {
+      "name": "root-sibling-followed",
+      "compiled": true,
+      "caught_by_value_difference": true,
+      "value_mismatches": 2,
+      "report": "build/model-matrices-native/faults/root-sibling-followed/report.json"
+    },
+    {
+      "name": "mdata2-position-flag",
+      "compiled": true,
+      "caught_by_value_difference": true,
+      "value_mismatches": 8,
+      "report": "build/model-matrices-native/faults/mdata2-position-flag/report.json"
+    },
+    {
+      "name": "numeric-translate-order",
+      "compiled": true,
+      "caught_by_value_difference": true,
+      "value_mismatches": 144,
+      "report": "build/model-matrices-native/faults/numeric-translate-order/report.json"
+    },
+    {
+      "name": "matrix-product-order",
+      "compiled": true,
+      "caught_by_value_difference": true,
+      "value_mismatches": 199,
+      "report": "build/model-matrices-native/faults/matrix-product-order/report.json"
+    },
+    {
+      "name": "xyz-axis-order",
+      "compiled": true,
+      "caught_by_value_difference": true,
+      "value_mismatches": 401,
+      "report": "build/model-matrices-native/faults/xyz-axis-order/report.json"
+    },
+    {
+      "name": "imported-key-header-as-data",
+      "compiled": true,
+      "caught_by_native_owner_or_original_comparison": true,
+      "native_exit_status": 0
+    },
+    {
+      "name": "generated-node-stride",
+      "compiled": true,
+      "caught_by_native_owner_or_original_comparison": true,
+      "native_exit_status": -6
+    },
+    {
+      "name": "scene-root-instead-of-live-node",
+      "compiled": true,
+      "caught_by_native_owner_or_original_comparison": true,
+      "native_exit_status": -6
+    }
+  ],
+  "passed": true
+}

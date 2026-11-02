@@ -1,0 +1,111 @@
+--- a/src/runtime/native_player_system.hpp
++++ b/src/runtime/native_player_system.hpp
+@@ -1,5 +1,6 @@
+ #pragma once
+ #include "runtime/gamma_actor_assets.hpp"
++#include "engine/model_matrices.hpp"
+ #include "runtime/gamma_motion.hpp"
+ #include "runtime/sonic_animation_assets.hpp"
+ #include "runtime/character_texture_assets.hpp"
+@@ -69,5 +70,6 @@
+     character_pack::SceneState &scene;
+     const editor::View *editor_state = nullptr;
+     std::array<NativeAnalogInput, 8> *normalized_input = nullptr;
++    model_matrices::State *model_matrices = nullptr;
+ };
+ } // namespace sadx::gamma_selection
+--- a/src/runtime/native_session.hpp
++++ b/src/runtime/native_session.hpp
+@@ -244,6 +244,7 @@
+     std::shared_ptr<const character_pack::CharacterPack> character_pack_;
+     bootstrap::SonicActions actions_;
+     character_pack::SceneState character_scene_;
++    model_matrices::State model_matrices_;
+     ActionHandle knuckles_clear_, knuckles_transition_;
+     ActionHandle big_sit_, big_sit_repeat_, big_prepare_, big_cast_, big_cast_repeat_;
+     bootstrap::Services services_;
+--- a/src/runtime/native_gamma_binding.cpp
++++ b/src/runtime/native_gamma_binding.cpp
+@@ -340,12 +340,14 @@
+     gamma_input_buffer::restore(access, index);
+ }
+ // NOTSA: native boundary for GetMMMatrix; source seam declared in the Gamma core.
+-void get_model_matrix(Context &, unsigned, NinjaMatrix &) {
+-    missing("native_gamma_get_model_matrix");
++void get_model_matrix(Context &context, unsigned node, NinjaMatrix &destination) {
++    if (!context.model_matrices)
++        missing("native_gamma_get_model_matrix");
++    (void)model_matrices::get(*context.model_matrices, node, destination);
+ }
+ // NOTSA: native boundary for njRotateZ; source seam declared in the Gamma core.
+-void rotate_z(Context &, NinjaMatrix &, std::int32_t) {
+-    missing("native_gamma_rotate_z");
++void rotate_z(Context &context, NinjaMatrix &matrix, std::int32_t angle) {
++    context.rendering.rotate_matrix_z(matrix, angle);
+ }
+ // NOTSA: native boundary for GammaUpdateFan; source seam declared in the Gamma core.
+ void update_fan(Context &, Primary, const Player &, const TaskWorkHandle &) {
+--- a/src/player/gamma_selection_core.hpp
++++ b/src/player/gamma_selection_core.hpp
+@@ -53,15 +53,15 @@
+     std::uint32_t line_point_count = 0;
+     // GLOBAL: SONIC 0x3c53f68 GammaLineVertices size=24
+     std::array<NinjaVector, 2> line_vertices = {};
+-    // GLOBAL: SONIC 0x3c53ad8 GammaModelNode54Matrix size=48
++    // GLOBAL: SONIC 0x3c53ad8 GammaModelNode54Matrix size=64
+     NinjaMatrix node54_matrix = {};
+-    // GLOBAL: SONIC 0x3c53c48 GammaModelNode30Matrix size=48
++    // GLOBAL: SONIC 0x3c53c48 GammaModelNode30Matrix size=64
+     NinjaMatrix node30_matrix = {};
+-    // GLOBAL: SONIC 0x3c53b78 GammaModelNode39Matrix size=48
++    // GLOBAL: SONIC 0x3c53b78 GammaModelNode39Matrix size=64
+     NinjaMatrix node39_matrix = {};
+-    // GLOBAL: SONIC 0x3c53b20 GammaModelNode2Matrix size=48
++    // GLOBAL: SONIC 0x3c53b20 GammaModelNode2Matrix size=64
+     NinjaMatrix node2_matrix = {};
+-    // GLOBAL: SONIC 0x3c53c00 GammaModelNode37Matrix size=48
++    // GLOBAL: SONIC 0x3c53c00 GammaModelNode37Matrix size=64
+     NinjaMatrix node37_matrix = {};
+ };
+ 
+@@ -136,7 +136,7 @@
+ void update_laser_targets(Context &, const TaskWorkHandle &, std::uint8_t index);
+ // NOTSA: native/reference binding to the canonical model-matrix getter.
+ void get_model_matrix(Context &, unsigned node, NinjaMatrix &);
+-// STUB: SONIC 0x784fb0 njRotateZ
++// FUNCTION: SONIC 0x784fb0 njRotateZ
+ void rotate_z(Context &, NinjaMatrix &, std::int32_t angle);
+ // STUB: SONIC 0x4c2e90 GammaUpdateFan
+ void update_fan(Context &, Primary, const Player &, const TaskWorkHandle &);
+--- a/src/runtime/native_display.hpp
++++ b/src/runtime/native_display.hpp
+@@ -38,6 +38,10 @@
+     const LogoRenderer &output() const { return *output_; }
+     LogoFrame frame_state();
+     const D3dxViewport &viewport() const { return view_.depth.viewport; }
++    // NOTSA: matrix consumers borrow the renderer's existing numeric owner.
++    void rotate_matrix_z(NinjaMatrix &matrix, std::int32_t angle) {
++        coordinates_->rotate_z(matrix, angle, arithmetic_);
++    }
+     X87Context &arithmetic() { return arithmetic_; }
+     SseContext &sse() { return sse_; }
+     void set_camera();
+--- a/reference/symbols/overrides.tsv
++++ b/reference/symbols/overrides.tsv
+@@ -197,11 +197,11 @@
+ SONIC	0x3c53b64	global	GammaLineColors			4	ev_2f86a86b5e458c4a46ed9ceba4c3356e895691686cb9a4cd3c3e96ec964bf27f	Unique E102 store owner and source width from complete dossier.
+ SONIC	0x3c53b68	global	GammaLineTexture			4	ev_2f86a86b5e458c4a46ed9ceba4c3356e895691686cb9a4cd3c3e96ec964bf27f	Unique E102 store owner and source width from complete dossier.
+ SONIC	0x3c53b6c	global	GammaLinePointCount			4	ev_2f86a86b5e458c4a46ed9ceba4c3356e895691686cb9a4cd3c3e96ec964bf27f	Unique E102 store owner and source width from complete dossier.
+-SONIC	0x3c53ad8	global	GammaModelNode54Matrix			48	ev_2f86a86b5e458c4a46ed9ceba4c3356e895691686cb9a4cd3c3e96ec964bf27f	Unique E102 store owner and source width from complete dossier.
+-SONIC	0x3c53c48	global	GammaModelNode30Matrix			48	ev_2f86a86b5e458c4a46ed9ceba4c3356e895691686cb9a4cd3c3e96ec964bf27f	Unique E102 store owner and source width from complete dossier.
+-SONIC	0x3c53b78	global	GammaModelNode39Matrix			48	ev_2f86a86b5e458c4a46ed9ceba4c3356e895691686cb9a4cd3c3e96ec964bf27f	Unique E102 store owner and source width from complete dossier.
+-SONIC	0x3c53b20	global	GammaModelNode2Matrix			48	ev_2f86a86b5e458c4a46ed9ceba4c3356e895691686cb9a4cd3c3e96ec964bf27f	Unique E102 store owner and source width from complete dossier.
+-SONIC	0x3c53c00	global	GammaModelNode37Matrix			48	ev_2f86a86b5e458c4a46ed9ceba4c3356e895691686cb9a4cd3c3e96ec964bf27f	Unique E102 store owner and source width from complete dossier.
++SONIC	0x3c53ad8	global	GammaModelNode54Matrix			64	ev_81dc56ba83c73796eb7c2b6b6bbd7b4a6bea0ef483390954a57ffdc22efdb9fc	GetMMMatrix calls njSetMatrix; complete fresh dossier proves sixteen DWORD copies (64 bytes).
++SONIC	0x3c53c48	global	GammaModelNode30Matrix			64	ev_81dc56ba83c73796eb7c2b6b6bbd7b4a6bea0ef483390954a57ffdc22efdb9fc	GetMMMatrix calls njSetMatrix; complete fresh dossier proves sixteen DWORD copies (64 bytes).
++SONIC	0x3c53b78	global	GammaModelNode39Matrix			64	ev_81dc56ba83c73796eb7c2b6b6bbd7b4a6bea0ef483390954a57ffdc22efdb9fc	GetMMMatrix calls njSetMatrix; complete fresh dossier proves sixteen DWORD copies (64 bytes).
++SONIC	0x3c53b20	global	GammaModelNode2Matrix			64	ev_81dc56ba83c73796eb7c2b6b6bbd7b4a6bea0ef483390954a57ffdc22efdb9fc	GetMMMatrix calls njSetMatrix; complete fresh dossier proves sixteen DWORD copies (64 bytes).
++SONIC	0x3c53c00	global	GammaModelNode37Matrix			64	ev_81dc56ba83c73796eb7c2b6b6bbd7b4a6bea0ef483390954a57ffdc22efdb9fc	GetMMMatrix calls njSetMatrix; complete fresh dossier proves sixteen DWORD copies (64 bytes).
+ SONIC	0x4c3780	function	GammaUpdateLaserMode				ev_2f86a86b5e458c4a46ed9ceba4c3356e895691686cb9a4cd3c3e96ec964bf27f	Descriptive source caller role from complete E102 dossier; lower callee remains unrecovered.
+ SONIC	0x481460	function	GammaProcessAction				ev_2f86a86b5e458c4a46ed9ceba4c3356e895691686cb9a4cd3c3e96ec964bf27f	Descriptive source caller role from complete E102 dossier; lower callee remains unrecovered.
+ SONIC	0x47fb90	function	GammaUpdateActionState				ev_2f86a86b5e458c4a46ed9ceba4c3356e895691686cb9a4cd3c3e96ec964bf27f	Descriptive source caller role from complete E102 dossier; lower callee remains unrecovered.

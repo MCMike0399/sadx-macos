@@ -992,3 +992,12 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * sonic-model-input-gate.json, sonic-model-input-qualified-rasters.json and sonic-model-input-source-only.json retain exact commands and limits. STATUS is regenerated from the real gate. No completed actor frame or N3b claim follows.
 * Matrix worker 348117da was explicitly released after the gate (continuation 0a651d8d). It reports a private reference measurement at frame 1334: no earlier producer, zero initial count/buffer/scratch, invalid getter preserves destination. That candidate still requires final qualification/review; native timing remains 1332.
 * Next work is measured matrix activation and the remaining Sonic initialization calls, retaining all inherited numeric partials and explicit later boundaries.
+
+### 2026-11-02 — Measured matrix state and Gamma activation admitted
+
+* Reviews a906aec7/1cf36a71 accept 57593398 and its exact shared patches. Main core 32e3a533 and activation 31b22599 use one persistent Session matrix owner and the existing Display arithmetic/rotation primitives.
+* Original runtime proves zero initial count/limit/buffer/destinations/scratch and no prior producer. Getter order is 54, 30, 39, 2, 37; only node39 words 4–7 become negative zero. Reference/native timing stays 1334/1332.
+* Main normal input reaches native_gamma_update_fan at frame 1332, exit 1, with unchanged title image. Active PJoin still stops before unqualified matrix argument selection/deformation/attachments. No actor frame or N3b claim.
+* Native app/force-load, actual owner/getter/rotation fixture, imported/generated motion program and make check pass. All 1,223 core observations and 957 partial identities match the candidate; 774 imported rows retain zero value differences and three partials, strict exit 2.
+* Matrix annotations and symbol widths consistently cover 64 bytes. Historical no-runtime-witness text is identified as an earlier checkpoint. Warning evidence is rebound without retiring debt; all 1,441 protections remain.
+* model-matrices-root-integration.json retains focused proof. Last full gate/cold source remains e9bf38a8; next coherent qualification follows remaining initialization work.

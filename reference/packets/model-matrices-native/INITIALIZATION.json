@@ -1,0 +1,239 @@
+{
+  "exit_status": 0,
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "witness_source_sha256": "9e37dba7778b165c6383c4930edaab21e8e2a7e7479d48e62797aed293318134",
+  "private_output": "build/model-matrices-native/initialization-through-fan",
+  "runtime_qualified": true,
+  "make_command": [
+    "make",
+    "-j2",
+    "-o",
+    "build/native-controller-deps/include/SDL3/SDL.h",
+    "build/libsadx-core.a",
+    "build/libsadx-guest.a"
+  ],
+  "compile_command": [
+    "xcrun",
+    "clang++",
+    "-std=c++17",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-ffp-contract=off",
+    "-fno-fast-math",
+    "-arch",
+    "arm64",
+    "-mmacosx-version-min=14.0",
+    "-Isrc",
+    "-I/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4cf1f641/reference/python/lib/python3.14/site-packages/unicorn/include",
+    "tests/probes/model_matrix_initialization.cpp",
+    "build/libsadx-guest.a",
+    "build/libsadx-core.a",
+    "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4cf1f641/reference/python/lib/python3.14/site-packages/unicorn/lib/libunicorn.a",
+    "-lpthread",
+    "-o",
+    "build/model-matrices-native/initialization-through-fan/reference-witness"
+  ],
+  "run_command": [
+    "build/model-matrices-native/initialization-through-fan/reference-witness",
+    "/Users/burbujamc/Developer/sadx-macos/reference/updated-pc-reference/game",
+    "/Users/burbujamc/Developer/sadx-macos/reference/windows-system",
+    "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4cf1f641/build/model-matrices-native/initialization-through-fan/overlay",
+    "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4cf1f641/build/model-matrices-native/initialization-through-fan/original.json"
+  ],
+  "key_events": [
+    [
+      500,
+      13,
+      true
+    ],
+    [
+      501,
+      13,
+      false
+    ],
+    [
+      750,
+      13,
+      true
+    ],
+    [
+      751,
+      13,
+      false
+    ],
+    [
+      950,
+      13,
+      true
+    ],
+    [
+      951,
+      13,
+      false
+    ],
+    [
+      1050,
+      13,
+      true
+    ],
+    [
+      1051,
+      13,
+      false
+    ],
+    [
+      1300,
+      13,
+      true
+    ],
+    [
+      1301,
+      13,
+      false
+    ],
+    [
+      1500,
+      13,
+      true
+    ],
+    [
+      1501,
+      13,
+      false
+    ],
+    [
+      1700,
+      13,
+      true
+    ],
+    [
+      1701,
+      13,
+      false
+    ],
+    [
+      1900,
+      13,
+      true
+    ],
+    [
+      1901,
+      13,
+      false
+    ]
+  ],
+  "input_sha256": {
+    "/Users/burbujamc/Developer/sadx-macos/reference/updated-pc-reference/game/sonic.exe": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+    "/Users/burbujamc/Developer/sadx-macos/reference/windows-system/msvcp140.dll": "f0cda2a0cf1fe6fbbf579b9098462329d3aaa7513a207af2e0f33b01456e388a",
+    "/Users/burbujamc/Developer/sadx-macos/reference/windows-system/vcruntime140.dll": "2fa6efc053203460a23d3a25158f227d895d2dadc63acc1a372da97c3a4281c3",
+    "/Users/burbujamc/Developer/sadx-macos/reference/updated-pc-reference/game/mods/.modloader/SADXModLoader.dll": "3293cf354dcfc62274c2ad25c09041606d6ad55483f070c233111cd9b47a97ba",
+    "/Users/burbujamc/Developer/sadx-macos/reference/updated-pc-reference/game/mods/sadx-input-mod/sadx-input-mod.dll": "c5ccdcc7929da1f3d0c03b24da33c350d388bda41d3d1651797758205180b7f5",
+    "/Users/burbujamc/Developer/sadx-macos/reference/updated-pc-reference/game/mods/sadx-speedrun-mod/sadx-speedrun-mod.dll": "f3fc68a3058fb726142547018da860b170f137248e54b82712b52527e7b74802",
+    "/Users/burbujamc/Developer/sadx-macos/reference/updated-pc-reference/game/sonicDX.ini": "a630a4406dd461e6965388591cd30428e45bfac23684ff8f3268fac2d9d2ee81",
+    "/Users/burbujamc/Developer/sadx-macos/reference/updated-pc-reference/game/savedata/SONICADVENTURE_DX_CHAOGARDEN.snc": "53b585755ada51c7ed07d2f69ad3ddb195b5a6e48a838fc98533910205dae3e3",
+    "/Users/burbujamc/Developer/sadx-macos/reference/updated-pc-reference/game/savedata/SonicDX01.snc": "15ac61323e0508d72a279f0f648f4b5007793cc0c8fb42bce9d893f00c265cf6",
+    "/Users/burbujamc/Developer/sadx-macos/reference/updated-pc-reference/game/savedata/SonicDX02.snc": "3249b31891872b96be539348c005abf812c76af5e3e7c5f198ee65de008943e4"
+  },
+  "inputs_unchanged": true,
+  "binary_sha256": "7aca6fda4850adec7371d8e65298f662e83fa169a6cc370cc8482e35bf1f9de4",
+  "raw_report_sha256": "bf7ae0fac5961a653600f89401441fe766f4f74bbfa1ea198a0a51356aa9bc7f",
+  "finished": true,
+  "frames": 1334,
+  "getter_result": 0,
+  "getter_index": 54,
+  "destination_preserved": true,
+  "snapshots": [
+    {
+      "phase": "mapped",
+      "frame": 0,
+      "producer_calls": 0,
+      "gamma_entries": 0,
+      "count": 0,
+      "limit": 0,
+      "control_word": 0,
+      "stack_top": 0,
+      "stack_depth": 0,
+      "current_matrix_pointer": 0,
+      "buffer_sha256": "dd202c247abb39750c01079c22650e8bc916b4b64d3b99f64713d44fa7e84aa3",
+      "buffer_nonzero_words": 0,
+      "gamma_nonzero_words": 0,
+      "weld_nonzero_words": 0
+    },
+    {
+      "phase": "first_gamma_entry",
+      "frame": 1334,
+      "producer_calls": 0,
+      "gamma_entries": 1,
+      "count": 0,
+      "limit": 0,
+      "control_word": 127,
+      "stack_top": 4239627,
+      "stack_depth": 1,
+      "current_matrix_pointer": 61329224,
+      "buffer_sha256": "dd202c247abb39750c01079c22650e8bc916b4b64d3b99f64713d44fa7e84aa3",
+      "buffer_nonzero_words": 0,
+      "gamma_nonzero_words": 0,
+      "weld_nonzero_words": 0
+    },
+    {
+      "phase": "first_gamma_get_entry",
+      "frame": 1334,
+      "producer_calls": 0,
+      "gamma_entries": 1,
+      "count": 0,
+      "limit": 0,
+      "control_word": 127,
+      "stack_top": 4735155,
+      "stack_depth": 1,
+      "current_matrix_pointer": 61329224,
+      "buffer_sha256": "dd202c247abb39750c01079c22650e8bc916b4b64d3b99f64713d44fa7e84aa3",
+      "buffer_nonzero_words": 0,
+      "gamma_nonzero_words": 0,
+      "weld_nonzero_words": 0
+    },
+    {
+      "phase": "first_gamma_get_return",
+      "frame": 1334,
+      "producer_calls": 0,
+      "gamma_entries": 1,
+      "count": 0,
+      "limit": 0,
+      "control_word": 127,
+      "stack_top": 4735155,
+      "stack_depth": 1,
+      "current_matrix_pointer": 61329224,
+      "buffer_sha256": "dd202c247abb39750c01079c22650e8bc916b4b64d3b99f64713d44fa7e84aa3",
+      "buffer_nonzero_words": 0,
+      "gamma_nonzero_words": 0,
+      "weld_nonzero_words": 0
+    },
+    {
+      "phase": "first_gamma_fan_entry",
+      "frame": 1334,
+      "producer_calls": 0,
+      "gamma_entries": 1,
+      "count": 0,
+      "limit": 0,
+      "control_word": 127,
+      "stack_top": 4735229,
+      "stack_depth": 1,
+      "current_matrix_pointer": 61329224,
+      "buffer_sha256": "dd202c247abb39750c01079c22650e8bc916b4b64d3b99f64713d44fa7e84aa3",
+      "buffer_nonzero_words": 0,
+      "gamma_nonzero_words": 4,
+      "weld_nonzero_words": 0
+    }
+  ],
+  "scope": "Original first Gamma matrix tail through GammaUpdateFan entry; no actor-frame claim",
+  "getter_indices": [
+    54,
+    30,
+    39,
+    2,
+    37
+  ],
+  "tracked_snapshots": "INITIALIZATION-SNAPSHOTS.json",
+  "tracked_snapshot_sha256": "bf7ae0fac5961a653600f89401441fe766f4f74bbfa1ea198a0a51356aa9bc7f"
+}

@@ -1,0 +1,102 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "cases": 1223,
+ "failure_prefixes": 27,
+ "value_mismatches": 0,
+ "mismatches": [],
+ "individual_fp_partials": [
+  {
+   "case": 169,
+   "mode": 3,
+   "control_word": 127,
+   "source_flags": 0,
+   "native_flags": 32
+  },
+  {
+   "case": 170,
+   "mode": 3,
+   "control_word": 127,
+   "source_flags": 0,
+   "native_flags": 32
+  },
+  {
+   "case": 171,
+   "mode": 3,
+   "control_word": 127,
+   "source_flags": 0,
+   "native_flags": 32
+  },
+  {
+   "case": 175,
+   "mode": 3,
+   "control_word": 127,
+   "source_flags": 0,
+   "native_flags": 32
+  },
+  {
+   "case": 177,
+   "mode": 3,
+   "control_word": 127,
+   "source_flags": 0,
+   "native_flags": 32
+  },
+  {
+   "case": 180,
+   "mode": 3,
+   "control_word": 127,
+   "source_flags": 0,
+   "native_flags": 32
+  },
+  {
+   "case": 182,
+   "mode": 3,
+   "control_word": 127,
+   "source_flags": 0,
+   "native_flags": 32
+  },
+  {
+   "case": 183,
+   "mode": 3,
+   "control_word": 127,
+   "source_flags": 0,
+   "native_flags": 32
+  },
+  {
+   "case": 184,
+   "mode": 3,
+   "control_word": 127,
+   "source_flags": 0,
+   "native_flags": 32
+  },
+  {
+   "case": 188,
+   "mode": 3,
+   "control_word": 127,
+   "source_flags": 0,
+   "native_flags": 32
+  }
+ ],
+ "fp_partials": 957,
+ "flag_mismatches": 957,
+ "passed": false,
+ "values_match": true,
+ "fixture_sha256": "64385b01736d5f9078349ee95c69254818f8718025e2c75137006d7005b4dc74",
+ "observations_sha256": "fa6c8bae47c0907ddb5c2b989e9e780f8afb417a3a57319d387ccfb3f4daf782",
+ "seed": 4948464,
+ "limits": [
+  "Isolated source instructions; runtime initialization/order remains separate.",
+  "Unicorn x87 status omits precision flags raised by maintained native arithmetic; individual partials retained.",
+  "No hardware FP parity, active weld/attachment or actor-frame claim.",
+  "Failure prefixes compare count/limit/stack/storage, not exact hardware fault PCs.",
+  "Fixtures declare four keys/channel; source is stopped at the first undeclared key-frame read.",
+  "Fixtures use independent typed resources; arbitrary resource/output aliases unqualified."
+ ],
+ "tracked_summary": {
+  "full_sha256": "226d53ef35af234cf594651994d5c222a85ce2868090113ebc7b1d44e4b9ceae",
+  "full_bytes": 121926,
+  "lists_cut_to": 10,
+  "cut_lists": {
+   "individual_fp_partials": 957
+  }
+ }
+}

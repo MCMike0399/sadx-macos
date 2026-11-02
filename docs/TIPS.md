@@ -322,3 +322,18 @@ a fresh checkout can otherwise make the builder appear newer than the header.
 Root restored the four affected cache files from its retained libusb build and
 preserved incident copies; SDL runtime bytes were unchanged by that restoration.
 Receipt: `reference/production-integration-20261102/controller-cache-recovery.json`.
+
+## Model-matrix sampling and numeric entries
+
+* `njTranslate` (784be0) and `njTranslateV` (785070) accumulate differently.
+  The numeric entry sums Y/Z before X for column 0 and X/Y before Z for the
+  other columns. The vector entry uses Z/Y before X throughout. Reusing the
+  vector entry for sampled motion positions produced real one-ULP matrix
+  mismatches. See model-matrices-native/SOURCE-EVIDENCE.json and its 1,223-case
+  development comparison.
+* CalcMMMatrix's requested limit uses unsigned `requested + 1`, then clamps to
+  128. Its optional final copy independently shifts the original requested
+  index by six in a 32-bit register. Large unsigned indices can therefore wrap
+  back into the matrix buffer; clamping that final index changes behavior.
+  The final 4,935-case holdout retains both forms of wrapping. GetMMMatrix first
+  rejects invalid unsigned indices and preserves the destination.

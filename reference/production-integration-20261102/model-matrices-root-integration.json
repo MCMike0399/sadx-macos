@@ -1,0 +1,89 @@
+{
+  "base": "b7dcd2bc",
+  "source_commit": "31b225994da59943483d9c901078d3f931e4dddc",
+  "candidate": "57593398",
+  "reviews": {
+    "standards": "a906aec7",
+    "fidelity": "1cf36a71"
+  },
+  "warning_rebinding": {
+    "path": "src/runtime/native_session.hpp",
+    "old_sha256": "0571a037baee4fa54e817babc265e4cc5c12423be1c6874535e047ca84b0e876",
+    "new_sha256": "4c284e53a5c90fb434e9a52a6cdf4512cb69d81358b787adc00afaf4d56b98ea",
+    "declaration_unchanged": true,
+    "debt": "unrecovered_open_debt"
+  },
+  "documentation_correction": "SOURCE-EVIDENCE initialization limitation is marked as the original recovery checkpoint and points to the later measured qualification.",
+  "limits": [
+    "Focused integration pending; last full gate/cold source is e9bf38a8.",
+    "Active PJoin/deformation/attachments remain explicit; first-caller proof is reference1334 versusnative1332, no actor-frame equality claim."
+  ],
+  "native_build_exit": 0,
+  "native_closure_exit": 0,
+  "programs": [
+    {
+      "command": [
+        "/usr/bin/time",
+        "-p",
+        "./build/model-motion-matrices-test",
+        "game/imported",
+        "build/model-matrices-native/imported.tsv"
+      ],
+      "exit_status": 0,
+      "stdout": "Real Gamma Stand and generated transitions: live scene/key owners, 77 nonzero matrices, retained stack and explicit failure prefix pass\n",
+      "stderr": "real 0.28\nuser 0.00\nsys 0.00\n"
+    },
+    {
+      "command": [
+        "build/model-matrices-root/binding-test",
+        "game/imported"
+      ],
+      "exit_status": 0,
+      "stdout": "Root getter contract: 112 nonzero components, distinct live owners, unsigned rejection, count/limit/buffer retention and missing owner, explicit-matrix rotation/signed zeros and stack retention pass\n",
+      "stderr": ""
+    }
+  ],
+  "core_comparison": {
+    "cases": 1223,
+    "values_match": true,
+    "individual_fp_partials": 957,
+    "strict_exit_status": 2,
+    "complete_observations_and_partial_identities_equal_candidate": true,
+    "report_sha256": "226d53ef35af234cf594651994d5c222a85ce2868090113ebc7b1d44e4b9ceae"
+  },
+  "imported_comparison": {
+    "rows": 774,
+    "failures": 0,
+    "individual_fp_partials": 3,
+    "strict_exit_status": 2,
+    "complete_observations_and_partial_identities_equal_candidate": true
+  },
+  "normal_input": {
+    "command": [
+      "build/sadx-native",
+      "--assets",
+      "game/imported",
+      "--offscreen",
+      "--paced",
+      "--exit-after",
+      "1550",
+      "--save-directory",
+      "build/model-matrices-root/savedata",
+      "--key-events",
+      "500:13:down,501:13:up,750:13:down,751:13:up,950:13:down,951:13:up,1050:13:down,1051:13:up,1300:13:down,1301:13:up",
+      "--screenshot",
+      "build/model-matrices-root/frontier.ppm"
+    ],
+    "exit_status": 1,
+    "frames": 1332,
+    "stop": "native session stopped: native_gamma_update_fan",
+    "app_sha256": "205d00009aa07809bbc5225e52fe7252f9b5567e10436a7499521d298d8ba77c",
+    "screenshot_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427"
+  },
+  "static_check_exit": 0,
+  "judge": {
+    "protected_paths": 1441,
+    "violations": 0,
+    "inherited_paths_removed": 0
+  }
+}
