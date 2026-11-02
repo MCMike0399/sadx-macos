@@ -1,0 +1,71 @@
+{
+  "reason": "Move the Sonic reference transport into the existing isolated Sonic build source list, and restrict the compatibility include to the frozen witness TU. The maintained original verifiers and all default cases/comparisons remain unchanged.",
+  "source_candidate": "6676119dbcc5228c967c284cd88f5b203bd3327e",
+  "original_verifiers_unchanged": {
+    "tools/oracles/verify_original_sonic_player.py": true,
+    "tools/oracles/verify_original_sonic_actions.py": true
+  },
+  "corrected_charge_mutant": {
+    "name": "charge_callback_sound",
+    "build_command": [
+      "xcrun",
+      "clang++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-arch",
+      "arm64",
+      "-mmacosx-version-min=14.0",
+      "-I/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/sonic-controller-native/mutant-reference-scope/charge_callback_sound/include",
+      "-Isrc",
+      "build/sonic-controller-native/mutant-reference-scope/charge_callback_sound/witness.o",
+      "src/guest/sonic_player_reference.cpp",
+      "src/player/sonic_player.cpp",
+      "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/sonic-controller-native/source/reference-support.a",
+      "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/animation-judges/softfloat/softfloat.a",
+      "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/animation-judges/bochs/libbochs_fpatan.a",
+      "-o",
+      "build/sonic-controller-native/mutant-reference-scope/charge_callback_sound/test"
+    ],
+    "build_exit_status": 0,
+    "original_sha256": "ad23d5e7e01f8b259c009a8d71288c21cadfae5e8d2c65a719eda653d6401469",
+    "replacement_sha256": "2d39f3147c9f818b9798edfc03176f92b9be7640adef1bd4b90efda1b5993e4f",
+    "caught": true,
+    "judge_command": [
+      "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/sonic-controller-native/mutant-reference-scope/charge_callback_sound/test",
+      "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/sonic-controller-native/baseline/player-observations/report.constants.bin"
+    ],
+    "judge_exit_status": -6
+  },
+  "witness_compile": {
+    "command": [
+      "xcrun",
+      "clang++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-arch",
+      "arm64",
+      "-mmacosx-version-min=14.0",
+      "-I/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/sonic-controller-native/mutant-reference-scope/charge_callback_sound/include",
+      "-Isrc",
+      "-include",
+      "tests/reference/actor_current_fixture.hpp",
+      "-c",
+      "tests/unit/sonic_actions.cpp",
+      "-o",
+      "build/sonic-controller-native/mutant-reference-scope/charge_callback_sound/witness.o"
+    ],
+    "exit_status": 0,
+    "output": ""
+  },
+  "rejected_attempt": "The earlier reference-unit mutation command applied -include to all production source arguments. Its caught result is not used for qualification. The corrected recipe compiles witness.o separately; no production command has that forced include."
+}

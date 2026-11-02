@@ -1,0 +1,34 @@
+{
+  "reason": "Enable the newly added reference callback-contract unit in the isolated build recipe; fix its setup to actually replace the motion owner. No expected values, old judge inputs or comparisons change.",
+  "source_candidate": "25d1f12b83f7bab31cd8bd405891a06902cd73b9",
+  "baseline_library_sha256": "eeb78a789ba559121a4230f84feb735c8e5571510135ff7e5015aa1e004e43f0",
+  "test_sha256": "0c000a8a069498f5e92ef00f22083b7faba48b62633cf085b34e020a78bdfec2",
+  "frozen_old_compile_and_run": [
+    {
+      "command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Isrc",
+        "tests/unit/sonic_controller_reference.cpp",
+        "build/sonic-controller-native/baseline/player/sonic_player.dylib",
+        "-o",
+        "build/sonic-controller-native/source/old-reference-contract"
+      ],
+      "exit_status": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/sonic-controller-native/source/old-reference-contract"
+      ],
+      "exit_status": 0,
+      "output": "Reference Sonic callback reload contracts passed\n"
+    }
+  ],
+  "invalid_setup": "One prior expansion omitted the callback assignment and failed -Werror; an older executable was then printed by a shell sequence. That output is rejected as proof for the expansion. The accepted receipt compiles and runs freshly with both exit statuses checked."
+}

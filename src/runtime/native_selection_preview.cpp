@@ -3,6 +3,7 @@
 #include "runtime/native_display.hpp"
 #include "player/player_initialization.hpp"
 #include "runtime/native_event_actions_context.hpp"
+#include "runtime/native_sonic_context.hpp"
 
 namespace sadx::native {
 // NOTSA: adapts the source preview to the actual scheduler, primary/motion owners
@@ -181,8 +182,31 @@ void TitleScene::exec_selection_camera(TaskScheduler &scheduler, const TaskHandl
 }
 // These are the source task callback boundaries, reached by the real scheduler.
 // No actor update or render result is fabricated while its implementation is missing.
-void TitleScene::exec_selection_sonic(TaskScheduler &, const TaskHandle &) {
-    throw flow::UnrecoveredGameFlowCall("native_sonic_player_controller");
+void TitleScene::exec_selection_sonic(TaskScheduler &scheduler, const TaskHandle &task) {
+    auto &scene = callback_scene(scheduler, exec_selection_sonic);
+    scene.register_callback(initialize_player_auxiliary);
+    sonic::Context context{scene.session_.players_, scheduler, task, scene.display_.arithmetic()};
+    context.stage = &scene.session_.stage_;
+    context.events = &scene.session_.bootstrap_.event_work;
+    context.auxiliary = initialize_player_auxiliary;
+    // The imported parameter table contains all player rows. Sonic animation content
+    // has no native owner yet; Gamma's animation table cannot supply it.
+    if (scene.session_.players_.gamma_assets)
+        context.parameters = &scene.session_.players_.gamma_assets->parameters;
+    const auto primary = capture_event_primary(task);
+    const auto arena = scheduler.work_arena();
+    if (!arena)
+        throw sonic::Unavailable("sonic_task_arena");
+    context.read_event_mode = [arena, primary] {
+        return event_actions::move_mode(*arena, primary.allocation);
+    };
+    context.write_event_mode = [arena, primary](std::uint8_t mode) {
+        event_actions::set_move_mode(*arena, primary.allocation, mode);
+    };
+    context.read_event_link = [arena, primary] {
+        return event_actions::has_path(*arena, primary.allocation);
+    };
+    sonic::run(context);
 }
 void TitleScene::exec_selection_miles(TaskScheduler &, const TaskHandle &) {
     throw flow::UnrecoveredGameFlowCall("native_miles_player_controller");

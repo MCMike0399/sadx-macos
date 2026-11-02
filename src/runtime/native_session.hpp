@@ -194,6 +194,7 @@ class Session final : private flow::NativeServices {
 
   private:
     friend class TitleScene;
+    friend struct SonicCallbackProbe; // test-only observation of actual callback owners
     void attach_logo_scaling(Display &);
     flow::GameFlowState flow_;
     std::uint32_t global_timer_ = 0;

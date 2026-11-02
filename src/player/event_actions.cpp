@@ -70,6 +70,10 @@ std::uint8_t move_mode(TaskWorkArena &arena, const TaskWorkHandle &primary) {
     require(arena.read(event, kMoveMode, &mode, sizeof(mode)), Boundary::EventMode);
     return mode;
 }
+void set_move_mode(TaskWorkArena &arena, const TaskWorkHandle &primary, std::uint8_t mode) {
+    const auto event = event_work(arena, primary);
+    require(arena.write(event, kMoveMode, &mode, sizeof(mode)), Boundary::EventMode);
+}
 bool has_path(TaskWorkArena &arena, const TaskWorkHandle &primary) {
     const auto event = event_work(arena, primary);
     return reference(arena, event, kPathHead, Boundary::EventReference) != nullptr;

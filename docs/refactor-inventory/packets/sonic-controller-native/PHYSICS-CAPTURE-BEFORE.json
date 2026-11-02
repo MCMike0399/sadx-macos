@@ -1,0 +1,60 @@
+{
+  "review": "bab7168d",
+  "candidate": "c3998a4",
+  "scope": "Same-record physics replacement; both original and replacement are explicitly retained; parameters remain live",
+  "test_sha256": "8df6c48ae2da62b5c73ef52d420f34b2445661450ac2097fc1e676ea803d703a",
+  "commands": [
+    {
+      "kind": "compile",
+      "label": "old",
+      "command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Isrc",
+        "tests/unit/sonic_physics_capture_reference.cpp",
+        "build/sonic-controller-native/baseline/player/sonic_player.dylib",
+        "-o",
+        "build/sonic-controller-native/physics-capture/old-repro"
+      ],
+      "exit_status": 0,
+      "output": ""
+    },
+    {
+      "kind": "run",
+      "label": "old",
+      "exit_status": 0,
+      "output": "{\"received_original\":1,\"original_speed\":10,\"replacement_speed\":103,\"live_parameter\":19}\n"
+    },
+    {
+      "kind": "compile",
+      "label": "candidate",
+      "command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Isrc",
+        "tests/unit/sonic_physics_capture_reference.cpp",
+        "build/sonic-controller-native/qualified/sonic_player.dylib",
+        "-o",
+        "build/sonic-controller-native/physics-capture/candidate-repro"
+      ],
+      "exit_status": 0,
+      "output": ""
+    },
+    {
+      "kind": "run",
+      "label": "candidate",
+      "exit_status": 1,
+      "output": "{\"received_original\":0,\"original_speed\":3,\"replacement_speed\":110,\"live_parameter\":19}\n"
+    }
+  ]
+}

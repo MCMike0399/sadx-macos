@@ -1,0 +1,28 @@
+{
+  "source_fix": "c583076",
+  "scope": "Captured physics is non-owning and independent from mutable record; live parameters and per-helper recapture remain distinct. No successful native yaw behavior is supplied.",
+  "reference_old_current": {
+    "old_library_sha256": "eeb78a789ba559121a4230f84feb735c8e5571510135ff7e5015aa1e004e43f0",
+    "old_observations": "{\"case\":\"ground\",\"null\":0,\"nested\":0,\"original_identity\":1,\"nested_identity\":0,\"original_speed\":10,\"replacement_speed\":103,\"live_parameter\":19,\"good\":1}\n{\"case\":\"ground\",\"null\":1,\"nested\":0,\"original_identity\":1,\"nested_identity\":0,\"original_speed\":10,\"replacement_speed\":103,\"live_parameter\":19,\"good\":1}\n{\"case\":\"ground\",\"null\":0,\"nested\":1,\"original_identity\":1,\"nested_identity\":1,\"original_speed\":10,\"replacement_speed\":114,\"live_parameter\":19,\"good\":1}\n{\"case\":\"ground\",\"null\":1,\"nested\":1,\"original_identity\":1,\"nested_identity\":0,\"original_speed\":10,\"replacement_speed\":103,\"live_parameter\":19,\"good\":1}\n{\"case\":\"movement_capture\",\"null\":0,\"original_speed\":8,\"replacement_speed\":103,\"good\":1}\n{\"case\":\"movement_capture\",\"null\":1,\"original_speed\":8,\"replacement_speed\":103,\"good\":1}\n{\"case\":\"copy_finalize\",\"null\":0,\"callbacks\":1,\"original_speed\":7,\"replacement_speed\":3,\"good\":1}\n{\"case\":\"copy_finalize\",\"null\":1,\"callbacks\":1,\"original_speed\":7,\"replacement_speed\":103,\"good\":1}\n",
+    "current_observations": "{\"case\":\"ground\",\"null\":0,\"nested\":0,\"original_identity\":1,\"nested_identity\":0,\"original_speed\":10,\"replacement_speed\":103,\"live_parameter\":19,\"good\":1}\n{\"case\":\"ground\",\"null\":1,\"nested\":0,\"original_identity\":1,\"nested_identity\":0,\"original_speed\":10,\"replacement_speed\":103,\"live_parameter\":19,\"good\":1}\n{\"case\":\"ground\",\"null\":0,\"nested\":1,\"original_identity\":1,\"nested_identity\":1,\"original_speed\":10,\"replacement_speed\":114,\"live_parameter\":19,\"good\":1}\n{\"case\":\"ground\",\"null\":1,\"nested\":1,\"original_identity\":1,\"nested_identity\":0,\"original_speed\":10,\"replacement_speed\":103,\"live_parameter\":19,\"good\":1}\n{\"case\":\"movement_capture\",\"null\":0,\"original_speed\":8,\"replacement_speed\":103,\"good\":1}\n{\"case\":\"movement_capture\",\"null\":1,\"original_speed\":8,\"replacement_speed\":103,\"good\":1}\n{\"case\":\"copy_finalize\",\"null\":0,\"callbacks\":1,\"original_speed\":7,\"replacement_speed\":3,\"good\":1}\n{\"case\":\"copy_finalize\",\"null\":1,\"callbacks\":1,\"original_speed\":7,\"replacement_speed\":103,\"good\":1}\n",
+    "native_observations": "{\"null\":0,\"same_player\":1,\"acceleration_x\":0,\"speed\":3,\"new_speed\":103,\"target_yaw\":0}\n{\"null\":1,\"same_player\":1,\"acceleration_x\":0,\"speed\":3,\"new_speed\":103,\"target_yaw\":0}\n{\"null\":0,\"same_player\":1,\"acceleration_x\":4.225,\"speed\":3,\"new_speed\":103,\"target_yaw\":0}\n{\"case\":\"native_copy_finalize\",\"null\":0,\"callbacks\":1,\"original_speed\":7,\"replacement_speed\":3,\"good\":1}\n{\"case\":\"native_copy_finalize\",\"null\":1,\"callbacks\":1,\"original_speed\":7,\"replacement_speed\":103,\"good\":1}\n{\"case\":\"native_movement_capture\",\"null\":0,\"original_speed\":8,\"replacement_speed\":103,\"good\":1}\n{\"case\":\"native_movement_capture\",\"null\":1,\"original_speed\":8,\"replacement_speed\":103,\"good\":1}\n",
+    "regression_mutant_observation": "{\"case\":\"ground\",\"null\":0,\"nested\":0,\"original_identity\":0,\"nested_identity\":0,\"original_speed\":3,\"replacement_speed\":110,\"live_parameter\":19,\"good\":0}\n",
+    "regression_mutant_caught": true,
+    "mutation_original_sha256": "a7311aa1ebbff20a598becbd3ceb98bd4659b5c28307733795933655b8ead7e8",
+    "mutation_replacement_sha256": "1b31a5cb7582710ca39d4679135a82555efa8f410ae9fedfa5bd3a80e1032dac",
+    "reference_cases": 8,
+    "native_cases": 7,
+    "limits": [
+      "Controlled helper/callee-boundary witnesses, not a game frame",
+      "Original objects are retained explicitly; borrows add no physics ownership",
+      "All previous default observations and mutants remain required"
+    ]
+  },
+  "command_receipt": "build/sonic-controller-native/physics-capture/final/commands.json",
+  "old_source_scope_evidence": "ca640c5:src/player/sonic_player.cpp, movement 117-170, ground input 225-348, copy/finalize 349-415, predicate locals 579-1149, dispatch 1411-1517",
+  "test_hashes": {
+    "tests/unit/sonic_physics_capture_reference.cpp": "68cf014efd76a68bbc5ac14251515721ce48495dc84e0735b61a3a753129a4fd",
+    "tests/unit/sonic_physics_capture_native.cpp": "d66f87dc8283db63c22b227b1a6da8eaaa9edce7d680da5927c838cd5a635393",
+    "tools/oracles/sonic_controller/physics_capture.py": "fbab50d9139e812206c74052006edb2908021f9b4e77b4f7c0d7e31fbbfdde4e"
+  }
+}

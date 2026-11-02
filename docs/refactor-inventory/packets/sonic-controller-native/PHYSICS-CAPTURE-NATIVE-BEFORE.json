@@ -1,0 +1,73 @@
+{
+  "scope": "Real native ground algorithm and input callback; the uncomposed yaw callee is replaced only with a nonreturning observation, not success behavior",
+  "recipe": "Compile ground_acceleration_native.cpp with its uncomposed turn_ground_yaw stub renamed, then provide the observing throwing seam from the test TU. No game algorithm or compatibility fixture is replaced.",
+  "runs": [
+    {
+      "command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-arch",
+        "arm64",
+        "-mmacosx-version-min=14.0",
+        "-Isrc",
+        "-Ithird_party/bochs_fpatan",
+        "-Ithird_party/bochs_fpatan/source",
+        "-Ithird_party/bochs_fpatan/source/softfloat3e/include",
+        "-fPIC",
+        "-Dturn_ground_yaw=unobserved_ground_yaw_stub",
+        "-c",
+        "src/player/ground_acceleration_native.cpp",
+        "-o",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/sonic-controller-native/physics-capture/observed-ground-backend.o"
+      ],
+      "exit_status": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-arch",
+        "arm64",
+        "-mmacosx-version-min=14.0",
+        "-Isrc",
+        "-Ithird_party/bochs_fpatan",
+        "-Ithird_party/bochs_fpatan/source",
+        "-Ithird_party/bochs_fpatan/source/softfloat3e/include",
+        "-fPIC",
+        "tests/unit/sonic_physics_capture_native.cpp",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/sonic-controller-native/qualified/core.o",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/sonic-controller-native/qualified/native.o",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/sonic-controller-native/physics-capture/observed-ground-backend.o",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/sonic-controller-native/qualified/native-support.a",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/sonic-controller-native/qualified/softfloat/softfloat.a",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/sonic-controller-native/qualified/bochs/libbochs_fpatan.a",
+        "-o",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/sonic-controller-native/physics-capture/native-before"
+      ],
+      "exit_status": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/sonic-controller-native/physics-capture/native-before"
+      ],
+      "exit_status": 1,
+      "output": "{\"null\":0,\"same_player\":1,\"acceleration_x\":4.225,\"speed\":3,\"new_speed\":103,\"target_yaw\":0}\n{\"null\":1,\"wrong_stop\":\"sonic_player_physics\"}\n"
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "sonic_player": {
+    "cases": 28800,
+    "stored_mismatches": 0,
+    "status_mismatches": 2840,
+    "boundary_mismatches": null,
+    "strict_passed": false,
+    "case_sha256": "2acd398b460a3c6691a178fcb7b0862219ac1e11818909ad41cb8fb14e6f34fe",
+    "partial_records": 2840,
+    "capture": {
+      "slug": "sonic_player",
+      "records": 28800,
+      "verifier_exit_status": 0,
+      "full_stream_sha256": "2833d480dec1c99bef187812d6718dcd7acb9f4c51db43cbe29be2fe794382d9",
+      "compressed_sha256": "867c68b9c1d34fd0762aa1898e72843db6adcd45adb97f97336f942a82f007bc",
+      "raw_bytes": 24801598,
+      "no_holdout": true
+    },
+    "complete_case_observations": "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/sonic-controller-native/baseline/player-observations/cases.jsonl.gz",
+    "all_case_identity_digest": "23810d8371ee701ce2c7db5c0fa252be04b20f8d008ffd4c8413f716e778fe64",
+    "verifier_sha256": "d5b661520a090a7a4f4e4e6db71221c0e6bee1a24c9c8a01363f67af22f44c0a"
+  },
+  "sonic_actions": {
+    "cases": 30192,
+    "stored_mismatches": 0,
+    "status_mismatches": 2172,
+    "boundary_mismatches": 0,
+    "strict_passed": false,
+    "case_sha256": "011512a72d2c21b1ea2362ba8cf86393b52f13601b89055fa8137cd3d505053b",
+    "partial_records": 2172,
+    "capture": {
+      "slug": "sonic_actions",
+      "records": 30192,
+      "verifier_exit_status": 0,
+      "full_stream_sha256": "6d02f5a6a2a4b917ebd0f55f9edf525ae818742422f03d6235a58b79f94f0816",
+      "compressed_sha256": "631f8118c853b558d556197da8dd29ec832704e34755d6897f178c0dcd4fc3b4",
+      "raw_bytes": 24049958,
+      "no_holdout": true
+    },
+    "complete_case_observations": "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/sonic-controller-native/baseline/action-observations/cases.jsonl.gz",
+    "all_case_identity_digest": "7dd1ef7e690ff53f609ff709f20a38c47b1bdf6c1aba46cd14c18e542a4b5594",
+    "verifier_sha256": "d4076e926d22b4a2cfc0a5f4a4cf58b889f338a5019e0cf3d0a4b98a4560faf6"
+  },
+  "units": [
+    {
+      "command": [
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/sonic-controller-native/baseline/sonic-player-test",
+        "/Users/burbujamc/Developer/sadx-macos/build/assets/sonic-player-constants.bin",
+        "/Users/burbujamc/Developer/sadx-macos/build/assets/sonic-action-dispatch.bin",
+        "/Users/burbujamc/Developer/sadx-macos/build/assets/ninja-trig.f32",
+        "/Users/burbujamc/Developer/sadx-macos/build/assets/ninja-unit.f32"
+      ],
+      "exit_status": 0,
+      "output": "Sonic control dispatch and source availability tests passed across 12 explicit CW profiles\n"
+    },
+    {
+      "command": [
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/sonic-controller-native/baseline/sonic-actions-test",
+        "/Users/burbujamc/Developer/sadx-macos/build/assets/sonic-player-constants.bin"
+      ],
+      "exit_status": 0,
+      "output": "Grounded/running/jump/spindash predicate and partial-owner tests passed across12 explicit CW profiles\n"
+    },
+    {
+      "command": [
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/sonic-controller-native/baseline/animation-sonic-composition-test",
+        "/Users/burbujamc/Developer/sadx-macos/build/assets/sonic-player-constants.bin",
+        "/Users/burbujamc/Developer/sadx-macos/build/assets/player-parameters.bin"
+      ],
+      "exit_status": 0,
+      "output": "0,0,4,4832779,0,1074790400,0\n1,0,6,4832784,0,1076887552,0\n1,1,18,4832779,4499522,1074790400,0\n2,0,6,4832784,0,1076887552,0\n2,1,18,4832779,4499522,1074790400,0\nattachment,0,3,4828004,16\nattachment,1,12,4827966,14\n"
+    }
+  ],
+  "profile": {
+    "summary": {
+      "patches": 618,
+      "active_patches": 121,
+      "active_unhandled_patches": 79,
+      "reports": 2,
+      "declared_exe_ranges": 5,
+      "unhandled_overlaps": 0,
+      "handled_overlaps": 0,
+      "undetermined_overlaps": 0,
+      "reports_without_addressed_ranges": [
+        "capture.json"
+      ]
+    },
+    "unhandled_overlaps": [],
+    "handled_overlaps": [],
+    "undetermined_overlaps": [],
+    "report_ranges": {
+      "capture.json": {
+        "exe_ranges": 0,
+        "dll_ranges_skipped": 0,
+        "opaque_range_hashes": [],
+        "unparsed_keys": []
+      },
+      "report.json": {
+        "exe_ranges": 5,
+        "dll_ranges_skipped": 0,
+        "opaque_range_hashes": [],
+        "unparsed_keys": []
+      }
+    }
+  },
+  "production_source_modified": false,
+  "native_closure_checked": false,
+  "full_gate_run": false
+}

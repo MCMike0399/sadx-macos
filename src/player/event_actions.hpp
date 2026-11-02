@@ -64,6 +64,8 @@ PlayerEventActionNode *action_head(TaskWorkArena &, const TaskWorkHandle &primar
 PlayerEventActionNode *next_action(TaskWorkArena &, PlayerEventActionNode *);
 bool live(const PlayerEventActionNode &) noexcept;
 std::uint8_t move_mode(TaskWorkArena &, const TaskWorkHandle &primary);
+// NOTSA: Sonic stores the same event move-mode byte consumed by move_mode.
+void set_move_mode(TaskWorkArena &, const TaskWorkHandle &primary, std::uint8_t);
 bool has_path(TaskWorkArena &, const TaskWorkHandle &primary);
 // FUNCTION: SONIC 0x417e80 FUN_00417e80
 void initialize(Context &, const TaskWorkHandle &primary);

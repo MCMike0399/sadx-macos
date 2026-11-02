@@ -1,0 +1,5070 @@
+{
+  "review": "bab7168d",
+  "baseline_candidate": "c3998a4",
+  "source_fix": "c583076",
+  "source_hashes": {
+    "src/player/sonic_player.hpp": "32bda755d727c02422709d00b92b8bbf98bd02e5103603611b8767b794e1bd46",
+    "src/player/sonic_player_internal.hpp": "35c11bd7ddf67aa84f9ec22b8cf11dbea38889c801cfbdf436b8c0c7451fa006",
+    "src/guest/sonic_player_reference.cpp": "a7311aa1ebbff20a598becbd3ceb98bd4659b5c28307733795933655b8ead7e8",
+    "src/runtime/native_sonic_binding.cpp": "334a4fd8579d4b1cc3900aef8528d8693ca42724c5d19a12a644be5b44a6f176"
+  },
+  "witnesses": {
+    "old_library_sha256": "eeb78a789ba559121a4230f84feb735c8e5571510135ff7e5015aa1e004e43f0",
+    "old_observations": "{\"case\":\"ground\",\"null\":0,\"nested\":0,\"original_identity\":1,\"nested_identity\":0,\"original_speed\":10,\"replacement_speed\":103,\"live_parameter\":19,\"good\":1}\n{\"case\":\"ground\",\"null\":1,\"nested\":0,\"original_identity\":1,\"nested_identity\":0,\"original_speed\":10,\"replacement_speed\":103,\"live_parameter\":19,\"good\":1}\n{\"case\":\"ground\",\"null\":0,\"nested\":1,\"original_identity\":1,\"nested_identity\":1,\"original_speed\":10,\"replacement_speed\":114,\"live_parameter\":19,\"good\":1}\n{\"case\":\"ground\",\"null\":1,\"nested\":1,\"original_identity\":1,\"nested_identity\":0,\"original_speed\":10,\"replacement_speed\":103,\"live_parameter\":19,\"good\":1}\n{\"case\":\"movement_capture\",\"null\":0,\"original_speed\":8,\"replacement_speed\":103,\"good\":1}\n{\"case\":\"movement_capture\",\"null\":1,\"original_speed\":8,\"replacement_speed\":103,\"good\":1}\n{\"case\":\"copy_finalize\",\"null\":0,\"callbacks\":1,\"original_speed\":7,\"replacement_speed\":3,\"good\":1}\n{\"case\":\"copy_finalize\",\"null\":1,\"callbacks\":1,\"original_speed\":7,\"replacement_speed\":103,\"good\":1}\n",
+    "current_observations": "{\"case\":\"ground\",\"null\":0,\"nested\":0,\"original_identity\":1,\"nested_identity\":0,\"original_speed\":10,\"replacement_speed\":103,\"live_parameter\":19,\"good\":1}\n{\"case\":\"ground\",\"null\":1,\"nested\":0,\"original_identity\":1,\"nested_identity\":0,\"original_speed\":10,\"replacement_speed\":103,\"live_parameter\":19,\"good\":1}\n{\"case\":\"ground\",\"null\":0,\"nested\":1,\"original_identity\":1,\"nested_identity\":1,\"original_speed\":10,\"replacement_speed\":114,\"live_parameter\":19,\"good\":1}\n{\"case\":\"ground\",\"null\":1,\"nested\":1,\"original_identity\":1,\"nested_identity\":0,\"original_speed\":10,\"replacement_speed\":103,\"live_parameter\":19,\"good\":1}\n{\"case\":\"movement_capture\",\"null\":0,\"original_speed\":8,\"replacement_speed\":103,\"good\":1}\n{\"case\":\"movement_capture\",\"null\":1,\"original_speed\":8,\"replacement_speed\":103,\"good\":1}\n{\"case\":\"copy_finalize\",\"null\":0,\"callbacks\":1,\"original_speed\":7,\"replacement_speed\":3,\"good\":1}\n{\"case\":\"copy_finalize\",\"null\":1,\"callbacks\":1,\"original_speed\":7,\"replacement_speed\":103,\"good\":1}\n",
+    "native_observations": "{\"null\":0,\"same_player\":1,\"acceleration_x\":0,\"speed\":3,\"new_speed\":103,\"target_yaw\":0}\n{\"null\":1,\"same_player\":1,\"acceleration_x\":0,\"speed\":3,\"new_speed\":103,\"target_yaw\":0}\n{\"null\":0,\"same_player\":1,\"acceleration_x\":4.225,\"speed\":3,\"new_speed\":103,\"target_yaw\":0}\n{\"case\":\"native_copy_finalize\",\"null\":0,\"callbacks\":1,\"original_speed\":7,\"replacement_speed\":3,\"good\":1}\n{\"case\":\"native_copy_finalize\",\"null\":1,\"callbacks\":1,\"original_speed\":7,\"replacement_speed\":103,\"good\":1}\n{\"case\":\"native_movement_capture\",\"null\":0,\"original_speed\":8,\"replacement_speed\":103,\"good\":1}\n{\"case\":\"native_movement_capture\",\"null\":1,\"original_speed\":8,\"replacement_speed\":103,\"good\":1}\n",
+    "regression_mutant_observation": "{\"case\":\"ground\",\"null\":0,\"nested\":0,\"original_identity\":0,\"nested_identity\":0,\"original_speed\":3,\"replacement_speed\":110,\"live_parameter\":19,\"good\":0}\n",
+    "regression_mutant_caught": true,
+    "mutation_original_sha256": "a7311aa1ebbff20a598becbd3ceb98bd4659b5c28307733795933655b8ead7e8",
+    "mutation_replacement_sha256": "1b31a5cb7582710ca39d4679135a82555efa8f410ae9fedfa5bd3a80e1032dac",
+    "reference_cases": 8,
+    "native_cases": 7,
+    "limits": [
+      "Controlled helper/callee-boundary witnesses, not a game frame",
+      "Original objects are retained explicitly; borrows add no physics ownership",
+      "All previous default observations and mutants remain required"
+    ]
+  },
+  "current_compile_dependencies": [
+    {
+      "command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-arch",
+        "arm64",
+        "-mmacosx-version-min=14.0",
+        "-Isrc",
+        "-Ithird_party/bochs_fpatan",
+        "-Ithird_party/bochs_fpatan/source",
+        "-Ithird_party/bochs_fpatan/source/softfloat3e/include",
+        "-fPIC",
+        "-MMD",
+        "-c",
+        "src/player/sonic_player.cpp",
+        "-o",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/sonic-controller-native/physics-capture/final/core.o"
+      ],
+      "exit_status": 0,
+      "output": "",
+      "dependencies": {
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/SDKSettings.json": "7b93ad7e534cc4b31c6a4e39d19b5e0288acf2168c2649479a796d1cb51939fb",
+        "src/player/sonic_player.cpp": "c2b9cd7bd4772fc5e3411ec06c160f890201fff682162ae7e177717de8945fbf",
+        "src/player/sonic_player.hpp": "32bda755d727c02422709d00b92b8bbf98bd02e5103603611b8767b794e1bd46",
+        "src/cpu/fidelity_float.hpp": "c96aadce5ca6caa699fb3e9a0b44f791e1ac0420b31ceed31b5fca48118afb98",
+        "src/cpu/crt_integer.hpp": "f88d5d9b73239055150a35d0fe6363f773c7e62f5b2c1ce62eff5eaabe8333a6",
+        "src/cpu/x87_math.hpp": "51a50a217504b0ef2344521b38f670ba4d738965de1660ed677dd9f13ceb2412",
+        "src/cpu/x87_transcendental.hpp": "d165b4c0aec64391b80f3fa68e2427ba2f2840fbc45562b87dac2145cad33a72",
+        "src/engine/task.hpp": "3aa7e066178e5bc901d01bab6cc52881f3610fbb98a58558497dc442520aa726",
+        "src/engine/task_work.hpp": "f7d78c9979f63095bd47ad7c9ca1e56443b2b3863bb4d9bbf81157e3d72ee90d",
+        "src/player/player_initialization.hpp": "91b394d607c29c2a38841f22d7b9a2ce0539fdcf28f14d15ebd1cf6c796fecbe",
+        "src/player/player_acceleration.hpp": "3ca9bd3f7dfccec590eec2926fa0d0b0eea194e1fa1f014b0dcf250411273257",
+        "src/player/player_coordinates.hpp": "322331b4ca9a51e4a58a8133d9c1a323e7a223d84cbe44f83f029540a65057c0",
+        "src/engine/ninja_matrix.hpp": "685bb53adb905d5de2fa2a6accbb90586013797ae8dc7397e08dae19345d9c20",
+        "src/math/ninja_math.hpp": "44c9ff7f9ca56df1e95f523ec9b3c1fd8f0dea316d3df19585bc52f620e25530",
+        "src/player/player_motion.hpp": "932122d0744055727b47e1e8a6fc57e93a208454174c6e95c48cf1bd2c7b8cbb",
+        "src/player/player_input.hpp": "929cf1ce32c8d72a2b180354bd1287c3979494d6fb9a9ae69c645ecf7ac76603",
+        "src/player/player_state.hpp": "29e031f4b2437d0ddccb68273b28c698a45a872cd2ea8087e3d97eea0118cedd",
+        "src/player/player_task.hpp": "00c04da45b7641f1d1421eab366e173e742449ae828b883d2617f422c01d7ebd",
+        "src/player/player_physics.hpp": "08bf9f1949cdb7fd1605429c9b9663265e61d62352b9f5d018e7244a74738530",
+        "src/player/player_contact.hpp": "8f155fff829310c44430815156fe19c91782b2156620005a76e317921868e401",
+        "src/engine/scene_resource_reference.hpp": "2fc286670d1429050ecf4fe416dc3497528e40350e310bf4a18a1a70db95e796",
+        "src/player/player_animation_state.hpp": "7dcd3e8e250c5cdd6d416741a94eef18fe02d9de07a2b31d080f9863747ce043",
+        "src/player/player_projection.hpp": "d830d79cce6d907039fcfb20978dab81c8c413009b06d164389f3384297b285c",
+        "src/cpu/crt_acos.hpp": "cee67ca51ca14ce2652bb6d1146842cb518971bec54b8ffba298f23620468ceb",
+        "src/cpu/crt_asin.hpp": "632dc9cacad59e2d411d46f1019278beb4e65044f3f381d2ab57c31aa729c531",
+        "src/player/player_rotation_result.hpp": "d1acaa5c8f11148bb5d5d2a5c8f246b0e4f137ccab552022dddc25d7e3daa5a1",
+        "src/player/player_direction_reset.hpp": "4e654bd2f017c3b4b624821dd85fcb3fb0263883a7cde5e92e9bf772d10513ef",
+        "src/player/player_path.hpp": "c641e04038e333b720d308068a5f055935a7ebe9822f85f63c268f755ea2c6f2",
+        "src/cpu/crt_floor.hpp": "efd8637405898ae9aa3cb570275f13b5d645e1800be19c56674919b71c02166b",
+        "src/cpu/sse_math.hpp": "b0bed7f83c4b3ceec2070dee8a64de8045f2cc3bde412483690b8d4e6a7ef213"
+      }
+    },
+    {
+      "command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-arch",
+        "arm64",
+        "-mmacosx-version-min=14.0",
+        "-Isrc",
+        "-Ithird_party/bochs_fpatan",
+        "-Ithird_party/bochs_fpatan/source",
+        "-Ithird_party/bochs_fpatan/source/softfloat3e/include",
+        "-fPIC",
+        "-MMD",
+        "-c",
+        "src/guest/sonic_player_reference.cpp",
+        "-o",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/sonic-controller-native/physics-capture/final/reference.o"
+      ],
+      "exit_status": 0,
+      "output": "",
+      "dependencies": {
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/SDKSettings.json": "7b93ad7e534cc4b31c6a4e39d19b5e0288acf2168c2649479a796d1cb51939fb",
+        "src/guest/sonic_player_reference.cpp": "a7311aa1ebbff20a598becbd3ceb98bd4659b5c28307733795933655b8ead7e8",
+        "src/guest/sonic_player_reference.hpp": "37a969e44625b4d031916bfe3ee8c020702cfc38f54514517afde8b541e8a4f4",
+        "src/engine/game_controller.hpp": "cdb1f924ad72369f2a6e5c1073b857042a3a2317197aed53ef0041cd6f025336",
+        "src/engine/controller_values.hpp": "abbfb8000a4dc77da937481cff321e86a48dd1204507c348d1c39083424106b5",
+        "src/player/actor_current.hpp": "2a4b95915be5bf2c9fb2f7f1b37f99e4eb3323435e0fa3c2f9d21ff4ddb95b41",
+        "src/engine/task_work.hpp": "f7d78c9979f63095bd47ad7c9ca1e56443b2b3863bb4d9bbf81157e3d72ee90d",
+        "src/player/player_acceleration_air.hpp": "ab9ac6fb60cd312415aeb3a5dccb39fc7deb4d5681d54601a4bdb05987fc15aa",
+        "src/player/player_acceleration.hpp": "3ca9bd3f7dfccec590eec2926fa0d0b0eea194e1fa1f014b0dcf250411273257",
+        "src/player/player_coordinates.hpp": "322331b4ca9a51e4a58a8133d9c1a323e7a223d84cbe44f83f029540a65057c0",
+        "src/engine/ninja_matrix.hpp": "685bb53adb905d5de2fa2a6accbb90586013797ae8dc7397e08dae19345d9c20",
+        "src/math/ninja_math.hpp": "44c9ff7f9ca56df1e95f523ec9b3c1fd8f0dea316d3df19585bc52f620e25530",
+        "src/cpu/x87_math.hpp": "51a50a217504b0ef2344521b38f670ba4d738965de1660ed677dd9f13ceb2412",
+        "src/player/player_motion.hpp": "932122d0744055727b47e1e8a6fc57e93a208454174c6e95c48cf1bd2c7b8cbb",
+        "src/player/player_input.hpp": "929cf1ce32c8d72a2b180354bd1287c3979494d6fb9a9ae69c645ecf7ac76603",
+        "src/player/player_state.hpp": "29e031f4b2437d0ddccb68273b28c698a45a872cd2ea8087e3d97eea0118cedd",
+        "src/player/player_task.hpp": "00c04da45b7641f1d1421eab366e173e742449ae828b883d2617f422c01d7ebd",
+        "src/engine/task.hpp": "3aa7e066178e5bc901d01bab6cc52881f3610fbb98a58558497dc442520aa726",
+        "src/player/player_physics.hpp": "08bf9f1949cdb7fd1605429c9b9663265e61d62352b9f5d018e7244a74738530",
+        "src/player/player_contact.hpp": "8f155fff829310c44430815156fe19c91782b2156620005a76e317921868e401",
+        "src/engine/scene_resource_reference.hpp": "2fc286670d1429050ecf4fe416dc3497528e40350e310bf4a18a1a70db95e796",
+        "src/player/player_animation_state.hpp": "7dcd3e8e250c5cdd6d416741a94eef18fe02d9de07a2b31d080f9863747ce043",
+        "src/player/player_projection.hpp": "d830d79cce6d907039fcfb20978dab81c8c413009b06d164389f3384297b285c",
+        "src/cpu/crt_acos.hpp": "cee67ca51ca14ce2652bb6d1146842cb518971bec54b8ffba298f23620468ceb",
+        "src/cpu/crt_asin.hpp": "632dc9cacad59e2d411d46f1019278beb4e65044f3f381d2ab57c31aa729c531",
+        "src/cpu/x87_transcendental.hpp": "d165b4c0aec64391b80f3fa68e2427ba2f2840fbc45562b87dac2145cad33a72",
+        "src/player/player_rotation_result.hpp": "d1acaa5c8f11148bb5d5d2a5c8f246b0e4f137ccab552022dddc25d7e3daa5a1",
+        "src/player/player_direction_reset.hpp": "4e654bd2f017c3b4b624821dd85fcb3fb0263883a7cde5e92e9bf772d10513ef",
+        "src/player/player_path.hpp": "c641e04038e333b720d308068a5f055935a7ebe9822f85f63c268f755ea2c6f2",
+        "src/cpu/crt_floor.hpp": "efd8637405898ae9aa3cb570275f13b5d645e1800be19c56674919b71c02166b",
+        "src/cpu/sse_math.hpp": "b0bed7f83c4b3ceec2070dee8a64de8045f2cc3bde412483690b8d4e6a7ef213",
+        "src/player/player_rotation.hpp": "8bdf5a75ca53c7857db86c6f15778095257d3e58428de71b7f34e4b0b2cbeb32",
+        "src/player/player_heading.hpp": "42df76e4801ce3d90ec1ce2a06bff00a328f05a0e13979d2f8d0d7487e8aaf1c",
+        "src/player/player_acceleration_alternate.hpp": "bc15d77e8fddd57f88c03c21fe259a7f52063dc2ad7452c1db88b9c53f0ad36a",
+        "src/player/player_acceleration_ground.hpp": "2b8bc9a2115dffbb8c442c24dfd82ec31d807dae04478e40b5b02d9a47e0e9f6",
+        "src/player/player_animation.hpp": "256a63398aa93f7b84ca103c9195f44f0604cd30b41df38f28e39b3106fa744a",
+        "src/player/animation/animation.hpp": "d4387bc1aaa3ea1764512b1238a506d0b82e4b98e8c6276d249dea2b738dc576",
+        "src/cpu/fidelity_float.hpp": "c96aadce5ca6caa699fb3e9a0b44f791e1ac0420b31ceed31b5fca48118afb98",
+        "src/cpu/crt_integer.hpp": "f88d5d9b73239055150a35d0fe6363f773c7e62f5b2c1ce62eff5eaabe8333a6",
+        "src/player/animation/animation_content.hpp": "e23ff8d5b43fd3e046f94223dc530d20b99575477db372b3f2007972941ea4a7",
+        "src/player/animation/animation_outcome.hpp": "92e2c707681489181c2bd44912d188dfc2a0c07ef451d1d1e0fa00509ec82588",
+        "src/player/player_scene_resources.hpp": "87a118d948493bee0819900f83637ecd58f6d2bcf5422b45fd4c7ab374a3e52b",
+        "src/player/player_movement.hpp": "4801106ced0e4d0825bcf64e0235e9cc7dabbc87ff98242cdd2a1ed51daa327f",
+        "src/player/floor_angles.hpp": "22c502da8a5e4837735c57cdd080458adb2c460176c1c694bd08df187c8482f6",
+        "src/player/player_speed.hpp": "2a1a90303d24cd92dcd4282af64d19a70d62676bcfe76e4bcdfa6def5c4b5e25",
+        "src/player/player_position.hpp": "4a9343e6107b2cad271dfe2c369084a282f32b5c088f90c4bbd73fb40e3165de",
+        "src/player/player_startup.hpp": "2ca2671df869540b51680445e9b199e67ef4018b1f18d5062dce465e5e55020b",
+        "src/guest/sonic_player_sites.hpp": "33b652ae868523e93bd722f3a6bd43cf33fa79ef6c0d42ab7a18db13bb1c8d4f",
+        "src/player/sonic_player_sites.hpp": "1d6f4f979f3e0b0769ee91e14b773c5f305b7f258c89be7fa3396a26dedee8aa",
+        "src/player/player_hold.hpp": "12b258a7bb34d8b160284845810eca7d1684721a3e62e86685e90f108974e29d",
+        "src/player/sonic_player_internal.hpp": "35c11bd7ddf67aa84f9ec22b8cf11dbea38889c801cfbdf436b8c0c7451fa006",
+        "src/player/sonic_player.hpp": "32bda755d727c02422709d00b92b8bbf98bd02e5103603611b8767b794e1bd46",
+        "src/player/player_initialization.hpp": "91b394d607c29c2a38841f22d7b9a2ce0539fdcf28f14d15ebd1cf6c796fecbe"
+      }
+    },
+    {
+      "command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-arch",
+        "arm64",
+        "-mmacosx-version-min=14.0",
+        "-Isrc",
+        "-Ithird_party/bochs_fpatan",
+        "-Ithird_party/bochs_fpatan/source",
+        "-Ithird_party/bochs_fpatan/source/softfloat3e/include",
+        "-fPIC",
+        "-MMD",
+        "-c",
+        "src/runtime/native_sonic_binding.cpp",
+        "-o",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/sonic-controller-native/physics-capture/final/native.o"
+      ],
+      "exit_status": 0,
+      "output": "",
+      "dependencies": {
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/SDKSettings.json": "7b93ad7e534cc4b31c6a4e39d19b5e0288acf2168c2649479a796d1cb51939fb",
+        "src/runtime/native_sonic_binding.cpp": "334a4fd8579d4b1cc3900aef8528d8693ca42724c5d19a12a644be5b44a6f176",
+        "src/player/ground_acceleration.hpp": "35bde538be42156764534857ec3458a443932ab20a6f77832f87a649119f288f",
+        "src/player/player_state.hpp": "29e031f4b2437d0ddccb68273b28c698a45a872cd2ea8087e3d97eea0118cedd",
+        "src/player/player_motion.hpp": "932122d0744055727b47e1e8a6fc57e93a208454174c6e95c48cf1bd2c7b8cbb",
+        "src/math/ninja_math.hpp": "44c9ff7f9ca56df1e95f523ec9b3c1fd8f0dea316d3df19585bc52f620e25530",
+        "src/cpu/x87_math.hpp": "51a50a217504b0ef2344521b38f670ba4d738965de1660ed677dd9f13ceb2412",
+        "src/player/sonic_player_internal.hpp": "35c11bd7ddf67aa84f9ec22b8cf11dbea38889c801cfbdf436b8c0c7451fa006",
+        "src/player/player_heading.hpp": "42df76e4801ce3d90ec1ce2a06bff00a328f05a0e13979d2f8d0d7487e8aaf1c",
+        "src/player/player_coordinates.hpp": "322331b4ca9a51e4a58a8133d9c1a323e7a223d84cbe44f83f029540a65057c0",
+        "src/engine/ninja_matrix.hpp": "685bb53adb905d5de2fa2a6accbb90586013797ae8dc7397e08dae19345d9c20",
+        "src/player/sonic_player.hpp": "32bda755d727c02422709d00b92b8bbf98bd02e5103603611b8767b794e1bd46",
+        "src/cpu/fidelity_float.hpp": "c96aadce5ca6caa699fb3e9a0b44f791e1ac0420b31ceed31b5fca48118afb98",
+        "src/cpu/crt_integer.hpp": "f88d5d9b73239055150a35d0fe6363f773c7e62f5b2c1ce62eff5eaabe8333a6",
+        "src/cpu/x87_transcendental.hpp": "d165b4c0aec64391b80f3fa68e2427ba2f2840fbc45562b87dac2145cad33a72",
+        "src/engine/task.hpp": "3aa7e066178e5bc901d01bab6cc52881f3610fbb98a58558497dc442520aa726",
+        "src/engine/task_work.hpp": "f7d78c9979f63095bd47ad7c9ca1e56443b2b3863bb4d9bbf81157e3d72ee90d",
+        "src/player/player_initialization.hpp": "91b394d607c29c2a38841f22d7b9a2ce0539fdcf28f14d15ebd1cf6c796fecbe",
+        "src/player/player_acceleration.hpp": "3ca9bd3f7dfccec590eec2926fa0d0b0eea194e1fa1f014b0dcf250411273257",
+        "src/player/player_input.hpp": "929cf1ce32c8d72a2b180354bd1287c3979494d6fb9a9ae69c645ecf7ac76603",
+        "src/player/player_task.hpp": "00c04da45b7641f1d1421eab366e173e742449ae828b883d2617f422c01d7ebd",
+        "src/player/player_physics.hpp": "08bf9f1949cdb7fd1605429c9b9663265e61d62352b9f5d018e7244a74738530",
+        "src/player/player_contact.hpp": "8f155fff829310c44430815156fe19c91782b2156620005a76e317921868e401",
+        "src/engine/scene_resource_reference.hpp": "2fc286670d1429050ecf4fe416dc3497528e40350e310bf4a18a1a70db95e796",
+        "src/player/player_animation_state.hpp": "7dcd3e8e250c5cdd6d416741a94eef18fe02d9de07a2b31d080f9863747ce043",
+        "src/player/player_projection.hpp": "d830d79cce6d907039fcfb20978dab81c8c413009b06d164389f3384297b285c",
+        "src/cpu/crt_acos.hpp": "cee67ca51ca14ce2652bb6d1146842cb518971bec54b8ffba298f23620468ceb",
+        "src/cpu/crt_asin.hpp": "632dc9cacad59e2d411d46f1019278beb4e65044f3f381d2ab57c31aa729c531",
+        "src/player/player_rotation_result.hpp": "d1acaa5c8f11148bb5d5d2a5c8f246b0e4f137ccab552022dddc25d7e3daa5a1",
+        "src/player/player_direction_reset.hpp": "4e654bd2f017c3b4b624821dd85fcb3fb0263883a7cde5e92e9bf772d10513ef",
+        "src/player/player_path.hpp": "c641e04038e333b720d308068a5f055935a7ebe9822f85f63c268f755ea2c6f2",
+        "src/cpu/crt_floor.hpp": "efd8637405898ae9aa3cb570275f13b5d645e1800be19c56674919b71c02166b",
+        "src/cpu/sse_math.hpp": "b0bed7f83c4b3ceec2070dee8a64de8045f2cc3bde412483690b8d4e6a7ef213",
+        "src/player/sonic_player_sites.hpp": "1d6f4f979f3e0b0769ee91e14b773c5f305b7f258c89be7fa3396a26dedee8aa",
+        "src/player/sonic_player_seams.hpp": "7c26d94ffbef26442b7d375785aa07ab08a6ece5d5881fb90bd7d6a39117445d",
+        "src/runtime/native_sonic_context.hpp": "a00e8a8d513d447cb1065f0db3b33a92f871c23077d341ac75c6e198ca575bb7",
+        "src/engine/collision_component.hpp": "43c8c27b7ed6f6ff83a8f83a414b2e73bbb2a34e25c5e8230126118fc0fe8f0c",
+        "src/engine/game_controller.hpp": "cdb1f924ad72369f2a6e5c1073b857042a3a2317197aed53ef0041cd6f025336",
+        "src/engine/controller_values.hpp": "abbfb8000a4dc77da937481cff321e86a48dd1204507c348d1c39083424106b5",
+        "src/player/animation/animation.hpp": "d4387bc1aaa3ea1764512b1238a506d0b82e4b98e8c6276d249dea2b738dc576",
+        "src/player/animation/animation_content.hpp": "e23ff8d5b43fd3e046f94223dc530d20b99575477db372b3f2007972941ea4a7",
+        "src/player/animation/animation_outcome.hpp": "92e2c707681489181c2bd44912d188dfc2a0c07ef451d1d1e0fa00509ec82588",
+        "src/player/player_scene_resources.hpp": "87a118d948493bee0819900f83637ecd58f6d2bcf5422b45fd4c7ab374a3e52b",
+        "src/player/player_acceleration_air.hpp": "ab9ac6fb60cd312415aeb3a5dccb39fc7deb4d5681d54601a4bdb05987fc15aa",
+        "src/player/player_rotation.hpp": "8bdf5a75ca53c7857db86c6f15778095257d3e58428de71b7f34e4b0b2cbeb32",
+        "src/player/player_acceleration_alternate.hpp": "bc15d77e8fddd57f88c03c21fe259a7f52063dc2ad7452c1db88b9c53f0ad36a",
+        "src/player/player_acceleration_ground.hpp": "2b8bc9a2115dffbb8c442c24dfd82ec31d807dae04478e40b5b02d9a47e0e9f6",
+        "src/player/player_movement.hpp": "4801106ced0e4d0825bcf64e0235e9cc7dabbc87ff98242cdd2a1ed51daa327f",
+        "src/player/floor_angles.hpp": "22c502da8a5e4837735c57cdd080458adb2c460176c1c694bd08df187c8482f6",
+        "src/player/player_speed.hpp": "2a1a90303d24cd92dcd4282af64d19a70d62676bcfe76e4bcdfa6def5c4b5e25",
+        "src/player/player_position.hpp": "4a9343e6107b2cad271dfe2c369084a282f32b5c088f90c4bbd73fb40e3165de",
+        "src/runtime/native_player_system.hpp": "3031b79d8041ca521b3d5a00decc75d5dae234102988518bdfbfd8a09c474a24",
+        "src/runtime/gamma_actor_assets.hpp": "4df0c1eb5c0419a1215ab38913d84219312e5735828bed144905a00b66c53ea0",
+        "src/engine/character_pack.hpp": "0622405eeb2a6c8157a051bcc922a6c653e3878f076a0afbaf0ff94eac6c1065",
+        "src/engine/character_resources.hpp": "33e1c852d47b128bda60d0fdaab6d8fd1120113f752bf212be4009a190d11928",
+        "src/player/gamma_cursors.hpp": "ba1f87792521c6895909ca81af5769b788d1b7f9447e5f5add13dc4521b4aae0",
+        "src/player/player_join_vertices.hpp": "2eb1a3fa36657b0e6725d83b11342fa4fb31c6f55f34a4352cff7971a555aa7f",
+        "src/engine/character_geometry.hpp": "97f27d2d7c49afa2f63aff31e55b7a282b5a1adb4c9638542472fd8fd7dcdda5",
+        "src/player/actor_current.hpp": "2a4b95915be5bf2c9fb2f7f1b37f99e4eb3323435e0fa3c2f9d21ff4ddb95b41",
+        "src/player/gamma_selection_core.hpp": "eddfb0d7e4edb7c3d3607838fcb5560b39f501059c477f027e02c13ec61f49cc",
+        "src/game/game_bootstrap.hpp": "61e95071538b4f23602fda8460e10ea7ef251ff42d4b6ae1496c5ac718394f46",
+        "src/game/save_data.hpp": "b78b88eb49fa5623907fb4683b4fd5f349174b217b575ac6a3d55ba802d15080",
+        "src/game/character_textures.hpp": "f8bae2e68f5d8570ff3c071db8a5f86a114821dd426505cd834650c8c6ece9f0",
+        "src/game/regular_textures.hpp": "f0c17f3c50a0a0b1567c87fd474a9d24f6a7956cdc48d3d62f72a86f65f5b532",
+        "src/engine/native_texture_lifetime.hpp": "0e6883f0c6ca2457060a61a16daeec4e84a3f7e6e6206e5a0b3d894f0e7485c3",
+        "src/engine/graphics_frame.hpp": "001ebff8c298d0dd252433bfe9e5110a19b50ada0204185330db12a48ab22b09",
+        "src/engine/ninja_texture.hpp": "0026635ad4d01daa52c4ac76e91c4a53bc116912f209487dd662d90adac286d8",
+        "src/runtime/native_sonic_fields.hpp": "4e4dd882d8a092c2a5d8cfd3084a79d48b9007593320568dd75e06c27236c80a"
+      }
+    },
+    {
+      "command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-arch",
+        "arm64",
+        "-mmacosx-version-min=14.0",
+        "-Isrc",
+        "-Ithird_party/bochs_fpatan",
+        "-Ithird_party/bochs_fpatan/source",
+        "-Ithird_party/bochs_fpatan/source/softfloat3e/include",
+        "-fPIC",
+        "-Dturn_ground_yaw=unobserved_ground_yaw_stub",
+        "-MMD",
+        "-c",
+        "src/player/ground_acceleration_native.cpp",
+        "-o",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/sonic-controller-native/physics-capture/final/ground-observer.o"
+      ],
+      "exit_status": 0,
+      "output": "",
+      "dependencies": {
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/SDKSettings.json": "7b93ad7e534cc4b31c6a4e39d19b5e0288acf2168c2649479a796d1cb51939fb",
+        "src/player/ground_acceleration_native.cpp": "f1729d583f165daf41bf49296fb839b3b9d0badbc73c5b13977060c0670eece9",
+        "src/player/ground_acceleration_internal.hpp": "c9938bc44091750a8faeca2c6915b298295ff1e5dc2774718bef183657824595",
+        "src/cpu/fidelity_float.hpp": "c96aadce5ca6caa699fb3e9a0b44f791e1ac0420b31ceed31b5fca48118afb98",
+        "src/cpu/crt_integer.hpp": "f88d5d9b73239055150a35d0fe6363f773c7e62f5b2c1ce62eff5eaabe8333a6",
+        "src/cpu/x87_math.hpp": "51a50a217504b0ef2344521b38f670ba4d738965de1660ed677dd9f13ceb2412",
+        "src/cpu/x87_transcendental.hpp": "d165b4c0aec64391b80f3fa68e2427ba2f2840fbc45562b87dac2145cad33a72",
+        "src/player/ground_acceleration.hpp": "35bde538be42156764534857ec3458a443932ab20a6f77832f87a649119f288f",
+        "src/player/player_state.hpp": "29e031f4b2437d0ddccb68273b28c698a45a872cd2ea8087e3d97eea0118cedd",
+        "src/player/player_motion.hpp": "932122d0744055727b47e1e8a6fc57e93a208454174c6e95c48cf1bd2c7b8cbb",
+        "src/math/ninja_math.hpp": "44c9ff7f9ca56df1e95f523ec9b3c1fd8f0dea316d3df19585bc52f620e25530",
+        "src/player/player_coordinates.hpp": "322331b4ca9a51e4a58a8133d9c1a323e7a223d84cbe44f83f029540a65057c0",
+        "src/engine/ninja_matrix.hpp": "685bb53adb905d5de2fa2a6accbb90586013797ae8dc7397e08dae19345d9c20"
+      }
+    }
+  ],
+  "existing_program_checks": [
+    {
+      "command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-arch",
+        "arm64",
+        "-mmacosx-version-min=14.0",
+        "-Isrc",
+        "-include",
+        "tests/reference/actor_current_fixture.hpp",
+        "tests/unit/sonic_player.cpp",
+        "build/sonic-controller-native/physics-capture/final/core.o",
+        "build/sonic-controller-native/physics-capture/final/reference.o",
+        "build/sonic-controller-native/qualified/reference-support.a",
+        "build/sonic-controller-native/qualified/softfloat/softfloat.a",
+        "build/sonic-controller-native/qualified/bochs/libbochs_fpatan.a",
+        "-o",
+        "build/sonic-controller-native/physics-capture/final/sonic-player"
+      ],
+      "exit_status": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/sonic-controller-native/physics-capture/final/sonic-player",
+        "/Users/burbujamc/Developer/sadx-macos/build/assets/sonic-player-constants.bin",
+        "/Users/burbujamc/Developer/sadx-macos/build/assets/sonic-action-dispatch.bin",
+        "/Users/burbujamc/Developer/sadx-macos/build/assets/ninja-trig.f32",
+        "/Users/burbujamc/Developer/sadx-macos/build/assets/ninja-unit.f32"
+      ],
+      "exit_status": 0,
+      "output": "Sonic control dispatch and source availability tests passed across 12 explicit CW profiles\n"
+    },
+    {
+      "command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-arch",
+        "arm64",
+        "-mmacosx-version-min=14.0",
+        "-Isrc",
+        "-include",
+        "tests/reference/actor_current_fixture.hpp",
+        "tests/unit/sonic_actions.cpp",
+        "build/sonic-controller-native/physics-capture/final/core.o",
+        "build/sonic-controller-native/physics-capture/final/reference.o",
+        "build/sonic-controller-native/qualified/reference-support.a",
+        "build/sonic-controller-native/qualified/softfloat/softfloat.a",
+        "build/sonic-controller-native/qualified/bochs/libbochs_fpatan.a",
+        "-o",
+        "build/sonic-controller-native/physics-capture/final/sonic-actions"
+      ],
+      "exit_status": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/sonic-controller-native/physics-capture/final/sonic-actions",
+        "/Users/burbujamc/Developer/sadx-macos/build/assets/sonic-player-constants.bin"
+      ],
+      "exit_status": 0,
+      "output": "Grounded/running/jump/spindash predicate and partial-owner tests passed across12 explicit CW profiles\n"
+    },
+    {
+      "command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-arch",
+        "arm64",
+        "-mmacosx-version-min=14.0",
+        "-Isrc",
+        "tests/unit/sonic_controller_reference.cpp",
+        "build/sonic-controller-native/physics-capture/final/core.o",
+        "build/sonic-controller-native/physics-capture/final/reference.o",
+        "build/sonic-controller-native/qualified/reference-support.a",
+        "build/sonic-controller-native/qualified/softfloat/softfloat.a",
+        "build/sonic-controller-native/qualified/bochs/libbochs_fpatan.a",
+        "-o",
+        "build/sonic-controller-native/physics-capture/final/reference-contract"
+      ],
+      "exit_status": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/sonic-controller-native/physics-capture/final/reference-contract"
+      ],
+      "exit_status": 0,
+      "output": "Reference Sonic callback reload contracts passed\n"
+    },
+    {
+      "command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-arch",
+        "arm64",
+        "-mmacosx-version-min=14.0",
+        "-Isrc",
+        "-DANIMATION_TYPED",
+        "tests/unit/animation_sonic_composition.cpp",
+        "build/sonic-controller-native/physics-capture/final/core.o",
+        "build/sonic-controller-native/physics-capture/final/reference.o",
+        "build/sonic-controller-native/qualified/reference-support.a",
+        "build/sonic-controller-native/qualified/softfloat/softfloat.a",
+        "build/sonic-controller-native/qualified/bochs/libbochs_fpatan.a",
+        "-o",
+        "build/sonic-controller-native/physics-capture/final/animation-sonic-composition"
+      ],
+      "exit_status": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/sonic-controller-native/physics-capture/final/animation-sonic-composition",
+        "/Users/burbujamc/Developer/sadx-macos/build/assets/sonic-player-constants.bin",
+        "/Users/burbujamc/Developer/sadx-macos/build/assets/player-parameters.bin"
+      ],
+      "exit_status": 0,
+      "output": "0,0,4,4832779,0,1074790400,0\n1,0,6,4832784,0,1076887552,0\n1,1,18,4832779,4499522,1074790400,0\n2,0,6,4832784,0,1076887552,0\n2,1,18,4832779,4499522,1074790400,0\nattachment,0,3,4828004,16\nattachment,1,12,4827966,14\n"
+    },
+    {
+      "command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-arch",
+        "arm64",
+        "-mmacosx-version-min=14.0",
+        "-Isrc",
+        "tests/unit/sonic_controller_native.cpp",
+        "build/sonic-controller-native/physics-capture/final/core.o",
+        "build/sonic-controller-native/physics-capture/final/native.o",
+        "build/sonic-controller-native/qualified/native-support.a",
+        "build/sonic-controller-native/qualified/softfloat/softfloat.a",
+        "build/sonic-controller-native/qualified/bochs/libbochs_fpatan.a",
+        "-Wl,-map,build/sonic-controller-native/physics-capture/final/native-normal.map",
+        "-o",
+        "build/sonic-controller-native/physics-capture/final/native-normal"
+      ],
+      "exit_status": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/sonic-controller-native/physics-capture/final/native-normal"
+      ],
+      "exit_status": 0,
+      "output": "Controlled native Sonic ownership/order harness passed\n"
+    }
+  ],
+  "default_replays": {
+    "player": {
+      "slug": "sonic_player",
+      "records": 28800,
+      "complete_capture_sha256": "2833d480dec1c99bef187812d6718dcd7acb9f4c51db43cbe29be2fe794382d9",
+      "library_sha256": "b5e44bb332f421bf59c97af4a46d74c3bddd19c41482aa9bbbb10469788882ad",
+      "complete_output_sha256": "5ab822555235d1ee7f7da5905d6220c255d935b8bd623d077f5225f52db7f643",
+      "differences": [],
+      "exact": true,
+      "supplement": {
+        "records": 2,
+        "fixture_sha256": "d81539e8aff755d111e34cee45d8a96501f9571575b1149c98e8bc157ba61331",
+        "differences": [],
+        "exact": true
+      }
+    },
+    "action": {
+      "slug": "sonic_actions",
+      "records": 30192,
+      "complete_capture_sha256": "6d02f5a6a2a4b917ebd0f55f9edf525ae818742422f03d6235a58b79f94f0816",
+      "library_sha256": "fdf50733ed6e6153d1db2e2a38f2d710d430aec905d8b52d7df9ef5b9e8f16d3",
+      "complete_output_sha256": "1c053bf27ee83d3437b17ada073164a12a901a432fdbd98145e093c4f4f18747",
+      "differences": [],
+      "exact": true,
+      "supplement": {
+        "records": 0,
+        "differences": [],
+        "exact": true,
+        "scope": "player-only supplement does not apply to action ABI"
+      }
+    }
+  },
+  "default_fp_partials_preserved": {
+    "sonic_player": 2840,
+    "sonic_actions": 2172
+  },
+  "existing_six_mutants": [
+    {
+      "name": "collision_retained_damage",
+      "build_command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-arch",
+        "arm64",
+        "-mmacosx-version-min=14.0",
+        "-I/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/sonic-controller-native/physics-capture/mutants/collision_retained_damage/include",
+        "-Isrc",
+        "-dynamiclib",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/sonic-controller-native/source/sonic-probe.o",
+        "src/guest/sonic_player_reference.cpp",
+        "src/player/sonic_player.cpp",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/sonic-controller-native/source/reference-support.a",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/animation-judges/softfloat/softfloat.a",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/animation-judges/bochs/libbochs_fpatan.a",
+        "-o",
+        "build/sonic-controller-native/physics-capture/mutants/collision_retained_damage/probe.dylib"
+      ],
+      "build_exit_status": 0,
+      "original_sha256": "35c11bd7ddf67aa84f9ec22b8cf11dbea38889c801cfbdf436b8c0c7451fa006",
+      "replacement_sha256": "2bac3887305091257eee7858a861e52c6fa94798371e8ddee0c3a8214915c52f",
+      "caught": true,
+      "records": 28800,
+      "differences": 0,
+      "supplement": {
+        "records": 2,
+        "fixture_sha256": "d81539e8aff755d111e34cee45d8a96501f9571575b1149c98e8bc157ba61331",
+        "differences": [
+          {
+            "case": 0,
+            "name": "collision_damage_bit_four",
+            "returned": null,
+            "words": [
+              [
+                23,
+                191,
+                175
+              ]
+            ]
+          }
+        ],
+        "exact": false
+      },
+      "judge_exit_status": 1
+    },
+    {
+      "name": "local_speed_threshold",
+      "build_command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-arch",
+        "arm64",
+        "-mmacosx-version-min=14.0",
+        "-I/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/sonic-controller-native/physics-capture/mutants/local_speed_threshold/include",
+        "-Isrc",
+        "-dynamiclib",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/sonic-controller-native/source/sonic-probe.o",
+        "src/guest/sonic_player_reference.cpp",
+        "src/player/sonic_player.cpp",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/sonic-controller-native/source/reference-support.a",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/animation-judges/softfloat/softfloat.a",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/animation-judges/bochs/libbochs_fpatan.a",
+        "-o",
+        "build/sonic-controller-native/physics-capture/mutants/local_speed_threshold/probe.dylib"
+      ],
+      "build_exit_status": 0,
+      "original_sha256": "35c11bd7ddf67aa84f9ec22b8cf11dbea38889c801cfbdf436b8c0c7451fa006",
+      "replacement_sha256": "7b37786dceef2882d7ce6ec39d8d6d4dac8a1c0230b2320e2e742737e54ed342",
+      "caught": true,
+      "records": 28800,
+      "differences": 0,
+      "supplement": {
+        "records": 2,
+        "fixture_sha256": "d81539e8aff755d111e34cee45d8a96501f9571575b1149c98e8bc157ba61331",
+        "differences": [
+          {
+            "case": 1,
+            "name": "local_speed_between_thresholds",
+            "returned": null,
+            "words": [
+              [
+                7,
+                1014350479,
+                0
+              ]
+            ]
+          }
+        ],
+        "exact": false
+      },
+      "judge_exit_status": 1
+    },
+    {
+      "name": "charge_signed_timer",
+      "build_command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-arch",
+        "arm64",
+        "-mmacosx-version-min=14.0",
+        "-I/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/sonic-controller-native/physics-capture/mutants/charge_signed_timer/include",
+        "-Isrc",
+        "-dynamiclib",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/sonic-controller-native/source/action-probe.o",
+        "src/guest/sonic_player_reference.cpp",
+        "src/player/sonic_player.cpp",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/sonic-controller-native/source/reference-support.a",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/animation-judges/softfloat/softfloat.a",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/animation-judges/bochs/libbochs_fpatan.a",
+        "-o",
+        "build/sonic-controller-native/physics-capture/mutants/charge_signed_timer/probe.dylib"
+      ],
+      "build_exit_status": 0,
+      "original_sha256": "35c11bd7ddf67aa84f9ec22b8cf11dbea38889c801cfbdf436b8c0c7451fa006",
+      "replacement_sha256": "5e011b62a31ace10cc94c3a42542a0078d5839bf104db60315797f9e8fef39ea",
+      "caught": true,
+      "records": 30192,
+      "differences": 288,
+      "supplement": {
+        "records": 0,
+        "differences": [],
+        "exact": true,
+        "scope": "player-only supplement does not apply to action ABI"
+      },
+      "judge_exit_status": 1
+    },
+    {
+      "name": "charge_callback_sound",
+      "build_command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-arch",
+        "arm64",
+        "-mmacosx-version-min=14.0",
+        "-I/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/sonic-controller-native/physics-capture/mutants/charge_callback_sound/include",
+        "-Isrc",
+        "build/sonic-controller-native/physics-capture/mutants/charge_callback_sound/witness.o",
+        "src/guest/sonic_player_reference.cpp",
+        "src/player/sonic_player.cpp",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/sonic-controller-native/source/reference-support.a",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/animation-judges/softfloat/softfloat.a",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/animation-judges/bochs/libbochs_fpatan.a",
+        "-o",
+        "build/sonic-controller-native/physics-capture/mutants/charge_callback_sound/test"
+      ],
+      "build_exit_status": 0,
+      "original_sha256": "35c11bd7ddf67aa84f9ec22b8cf11dbea38889c801cfbdf436b8c0c7451fa006",
+      "replacement_sha256": "34bef588b69783a87493bb293de45748af2cefe886fa8994e14a381bea2aa941",
+      "caught": true,
+      "judge_command": [
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/sonic-controller-native/physics-capture/mutants/charge_callback_sound/test",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/sonic-controller-native/baseline/player-observations/report.constants.bin"
+      ],
+      "judge_exit_status": -6
+    },
+    {
+      "name": "forced_read_short_circuit",
+      "build_command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-arch",
+        "arm64",
+        "-mmacosx-version-min=14.0",
+        "-I/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/sonic-controller-native/physics-capture/mutants/forced_read_short_circuit/include",
+        "-Isrc",
+        "tests/unit/sonic_controller_native.cpp",
+        "src/player/sonic_player.cpp",
+        "src/runtime/native_sonic_binding.cpp",
+        "src/math/ninja_length.cpp",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/sonic-controller-native/source/native-support.a",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/animation-judges/softfloat/softfloat.a",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/animation-judges/bochs/libbochs_fpatan.a",
+        "-o",
+        "build/sonic-controller-native/physics-capture/mutants/forced_read_short_circuit/test"
+      ],
+      "build_exit_status": 0,
+      "original_sha256": "35c11bd7ddf67aa84f9ec22b8cf11dbea38889c801cfbdf436b8c0c7451fa006",
+      "replacement_sha256": "ee7870841f6496f0ea8d9d8c27c8c2179e6ec7feedc772007eeee0f6a7309355",
+      "caught": true,
+      "judge_command": [
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/sonic-controller-native/physics-capture/mutants/forced_read_short_circuit/test"
+      ],
+      "judge_exit_status": -6
+    },
+    {
+      "name": "native_flags_alias",
+      "build_command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-arch",
+        "arm64",
+        "-mmacosx-version-min=14.0",
+        "-I/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/sonic-controller-native/physics-capture/mutants/native_flags_alias/include",
+        "-Isrc",
+        "tests/unit/sonic_controller_native.cpp",
+        "src/player/sonic_player.cpp",
+        "src/runtime/native_sonic_binding.cpp",
+        "src/math/ninja_length.cpp",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/sonic-controller-native/source/native-support.a",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/animation-judges/softfloat/softfloat.a",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/animation-judges/bochs/libbochs_fpatan.a",
+        "-o",
+        "build/sonic-controller-native/physics-capture/mutants/native_flags_alias/test"
+      ],
+      "build_exit_status": 0,
+      "original_sha256": "4e4dd882d8a092c2a5d8cfd3084a79d48b9007593320568dd75e06c27236c80a",
+      "replacement_sha256": "ca7af9627549a4eb2a2f803f3385a902236d1915931214434014fa4ab64b4f35",
+      "caught": true,
+      "judge_command": [
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/sonic-controller-native/physics-capture/mutants/native_flags_alias/test"
+      ],
+      "judge_exit_status": -6
+    }
+  ],
+  "holdout": {
+    "sonic_player": {
+      "records": 1536,
+      "input_sha256": "8635b3c2e3a695df97274d6fdba0295f5f044b8da540fb765108a98427da2283",
+      "complete_observation_sha256": "ab9e942a24361d3fac24a2779d533c07131782bd8aac27a4bfff196f2fcce5bf",
+      "old_library_sha256": "eeb78a789ba559121a4230f84feb735c8e5571510135ff7e5015aa1e004e43f0",
+      "new_library_sha256": "b5e44bb332f421bf59c97af4a46d74c3bddd19c41482aa9bbbb10469788882ad",
+      "native_differences": [],
+      "inherited_source_differences": [
+        {
+          "case": 19,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 23,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 46,
+          "differences": [
+            [
+              17,
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "case": 54,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 62,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 72,
+          "differences": [
+            [
+              17,
+              0,
+              33
+            ]
+          ]
+        },
+        {
+          "case": 80,
+          "differences": [
+            [
+              17,
+              0,
+              32
+            ]
+          ]
+        },
+        {
+          "case": 86,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 94,
+          "differences": [
+            [
+              17,
+              0,
+              33
+            ]
+          ]
+        },
+        {
+          "case": 96,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 111,
+          "differences": [
+            [
+              17,
+              0,
+              32
+            ]
+          ]
+        },
+        {
+          "case": 113,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 115,
+          "differences": [
+            [
+              17,
+              0,
+              34
+            ]
+          ]
+        },
+        {
+          "case": 116,
+          "differences": [
+            [
+              17,
+              0,
+              32
+            ]
+          ]
+        },
+        {
+          "case": 118,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 120,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 138,
+          "differences": [
+            [
+              17,
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "case": 163,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 166,
+          "differences": [
+            [
+              17,
+              0,
+              32
+            ]
+          ]
+        },
+        {
+          "case": 168,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 177,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 180,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 189,
+          "differences": [
+            [
+              17,
+              0,
+              34
+            ]
+          ]
+        },
+        {
+          "case": 190,
+          "differences": [
+            [
+              17,
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "case": 197,
+          "differences": [
+            [
+              17,
+              0,
+              33
+            ]
+          ]
+        },
+        {
+          "case": 200,
+          "differences": [
+            [
+              17,
+              0,
+              32
+            ]
+          ]
+        },
+        {
+          "case": 216,
+          "differences": [
+            [
+              17,
+              0,
+              33
+            ]
+          ]
+        },
+        {
+          "case": 217,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 221,
+          "differences": [
+            [
+              17,
+              0,
+              33
+            ]
+          ]
+        },
+        {
+          "case": 222,
+          "differences": [
+            [
+              17,
+              0,
+              34
+            ]
+          ]
+        },
+        {
+          "case": 237,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 239,
+          "differences": [
+            [
+              17,
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "case": 256,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 260,
+          "differences": [
+            [
+              17,
+              0,
+              34
+            ]
+          ]
+        },
+        {
+          "case": 261,
+          "differences": [
+            [
+              17,
+              0,
+              33
+            ]
+          ]
+        },
+        {
+          "case": 263,
+          "differences": [
+            [
+              17,
+              0,
+              32
+            ]
+          ]
+        },
+        {
+          "case": 268,
+          "differences": [
+            [
+              17,
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "case": 272,
+          "differences": [
+            [
+              17,
+              0,
+              34
+            ]
+          ]
+        },
+        {
+          "case": 282,
+          "differences": [
+            [
+              17,
+              0,
+              34
+            ]
+          ]
+        },
+        {
+          "case": 294,
+          "differences": [
+            [
+              17,
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "case": 300,
+          "differences": [
+            [
+              17,
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "case": 304,
+          "differences": [
+            [
+              17,
+              0,
+              33
+            ]
+          ]
+        },
+        {
+          "case": 307,
+          "differences": [
+            [
+              17,
+              0,
+              33
+            ]
+          ]
+        },
+        {
+          "case": 309,
+          "differences": [
+            [
+              17,
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "case": 315,
+          "differences": [
+            [
+              17,
+              0,
+              33
+            ]
+          ]
+        },
+        {
+          "case": 316,
+          "differences": [
+            [
+              17,
+              0,
+              34
+            ]
+          ]
+        },
+        {
+          "case": 327,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 334,
+          "differences": [
+            [
+              17,
+              0,
+              33
+            ]
+          ]
+        },
+        {
+          "case": 335,
+          "differences": [
+            [
+              17,
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "case": 338,
+          "differences": [
+            [
+              17,
+              0,
+              32
+            ]
+          ]
+        },
+        {
+          "case": 346,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 359,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 364,
+          "differences": [
+            [
+              17,
+              0,
+              33
+            ]
+          ]
+        },
+        {
+          "case": 369,
+          "differences": [
+            [
+              17,
+              0,
+              33
+            ]
+          ]
+        },
+        {
+          "case": 370,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 373,
+          "differences": [
+            [
+              17,
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "case": 378,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 380,
+          "differences": [
+            [
+              17,
+              0,
+              32
+            ]
+          ]
+        },
+        {
+          "case": 390,
+          "differences": [
+            [
+              17,
+              0,
+              34
+            ]
+          ]
+        },
+        {
+          "case": 410,
+          "differences": [
+            [
+              17,
+              0,
+              33
+            ]
+          ]
+        },
+        {
+          "case": 426,
+          "differences": [
+            [
+              17,
+              0,
+              33
+            ]
+          ]
+        },
+        {
+          "case": 430,
+          "differences": [
+            [
+              17,
+              0,
+              34
+            ]
+          ]
+        },
+        {
+          "case": 431,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 471,
+          "differences": [
+            [
+              17,
+              0,
+              33
+            ]
+          ]
+        },
+        {
+          "case": 475,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 484,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 500,
+          "differences": [
+            [
+              17,
+              0,
+              32
+            ]
+          ]
+        },
+        {
+          "case": 502,
+          "differences": [
+            [
+              17,
+              0,
+              34
+            ]
+          ]
+        },
+        {
+          "case": 514,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 517,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 518,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 519,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 542,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 543,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 547,
+          "differences": [
+            [
+              17,
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "case": 553,
+          "differences": [
+            [
+              17,
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "case": 568,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 578,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 583,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 584,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 586,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 615,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 630,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 632,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 634,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 656,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 675,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 680,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 688,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 698,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 701,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 714,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 724,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 732,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 736,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 738,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 744,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 751,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 762,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 765,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 789,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 800,
+          "differences": [
+            [
+              17,
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "case": 802,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 810,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 818,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 827,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 832,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 836,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 852,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 854,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 855,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 860,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 861,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 901,
+          "differences": [
+            [
+              17,
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "case": 909,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 920,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 929,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 930,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 941,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 954,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 963,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 968,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 977,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 979,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 990,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1002,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1024,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1063,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1066,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1067,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1074,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1079,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1080,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1083,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1089,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1095,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1098,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1099,
+          "differences": [
+            [
+              17,
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "case": 1100,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1103,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1107,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1152,
+          "differences": [
+            [
+              17,
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "case": 1160,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1174,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1175,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1181,
+          "differences": [
+            [
+              17,
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "case": 1186,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1190,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1198,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1206,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1210,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1218,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1224,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1231,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1241,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1242,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1244,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1246,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1248,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1269,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1282,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1287,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1290,
+          "differences": [
+            [
+              17,
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "case": 1291,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1296,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1302,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1309,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1312,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1318,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1321,
+          "differences": [
+            [
+              17,
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "case": 1322,
+          "differences": [
+            [
+              17,
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "case": 1327,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1343,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1346,
+          "differences": [
+            [
+              17,
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "case": 1354,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1355,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1356,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1358,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1359,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1362,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1365,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1380,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1390,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1391,
+          "differences": [
+            [
+              17,
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "case": 1397,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1403,
+          "differences": [
+            [
+              17,
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "case": 1405,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1416,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1423,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1426,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1430,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1450,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1480,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1482,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1484,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1492,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1493,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1502,
+          "differences": [
+            [
+              17,
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "case": 1506,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1509,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1525,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1528,
+          "differences": [
+            [
+              17,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1530,
+          "differences": [
+            [
+              17,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1535,
+          "differences": [
+            [
+              17,
+              0,
+              3
+            ]
+          ]
+        }
+      ],
+      "exact_old_new": true
+    },
+    "sonic_actions": {
+      "records": 1536,
+      "input_sha256": "61e8290fbc61b1353178b966ead4540aae4eb52316d810c60e1ab687c94afe84",
+      "complete_observation_sha256": "91327b14847f021d5a8e5a094497085759ed972effd13dc6f6d0bb89a17abe75",
+      "old_library_sha256": "180e17d4c7ce71c33ecea0668efe84a4cfb67c1b4328f4ec3915c0d424d04c81",
+      "new_library_sha256": "fdf50733ed6e6153d1db2e2a38f2d710d430aec905d8b52d7df9ef5b9e8f16d3",
+      "native_differences": [],
+      "inherited_source_differences": [
+        {
+          "case": 7,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 12,
+          "differences": [
+            [
+              24,
+              0,
+              32
+            ]
+          ]
+        },
+        {
+          "case": 16,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 19,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 29,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 39,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 44,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 54,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 55,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 59,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 67,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 88,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 107,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 109,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 114,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 134,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 143,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 149,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 156,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 169,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 171,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 173,
+          "differences": [
+            [
+              24,
+              0,
+              32
+            ]
+          ]
+        },
+        {
+          "case": 180,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 193,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 210,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 214,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 220,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 221,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 226,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 230,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 238,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 243,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 249,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 268,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 271,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 274,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 277,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 285,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 293,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 301,
+          "differences": [
+            [
+              24,
+              0,
+              32
+            ]
+          ]
+        },
+        {
+          "case": 309,
+          "differences": [
+            [
+              24,
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "case": 310,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 315,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 322,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 327,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 352,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 365,
+          "differences": [
+            [
+              24,
+              0,
+              32
+            ]
+          ]
+        },
+        {
+          "case": 368,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 369,
+          "differences": [
+            [
+              24,
+              0,
+              32
+            ]
+          ]
+        },
+        {
+          "case": 385,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 397,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 404,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 409,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 411,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 412,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 422,
+          "differences": [
+            [
+              24,
+              0,
+              32
+            ]
+          ]
+        },
+        {
+          "case": 432,
+          "differences": [
+            [
+              24,
+              0,
+              32
+            ]
+          ]
+        },
+        {
+          "case": 434,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 451,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 458,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 460,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 470,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 480,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 496,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 507,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 510,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 511,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 512,
+          "differences": [
+            [
+              24,
+              0,
+              32
+            ]
+          ]
+        },
+        {
+          "case": 513,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 514,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 518,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 525,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 532,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 534,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 538,
+          "differences": [
+            [
+              24,
+              0,
+              32
+            ]
+          ]
+        },
+        {
+          "case": 544,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 555,
+          "differences": [
+            [
+              24,
+              0,
+              32
+            ]
+          ]
+        },
+        {
+          "case": 565,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 570,
+          "differences": [
+            [
+              24,
+              0,
+              32
+            ]
+          ]
+        },
+        {
+          "case": 571,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 580,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 589,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 591,
+          "differences": [
+            [
+              24,
+              0,
+              32
+            ]
+          ]
+        },
+        {
+          "case": 595,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 604,
+          "differences": [
+            [
+              24,
+              0,
+              32
+            ]
+          ]
+        },
+        {
+          "case": 606,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 610,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 613,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 615,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 619,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 622,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 630,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 637,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 643,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 654,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 663,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 673,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 682,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 684,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 698,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 710,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 734,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 740,
+          "differences": [
+            [
+              24,
+              0,
+              32
+            ]
+          ]
+        },
+        {
+          "case": 754,
+          "differences": [
+            [
+              24,
+              0,
+              32
+            ]
+          ]
+        },
+        {
+          "case": 755,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 769,
+          "differences": [
+            [
+              24,
+              0,
+              32
+            ]
+          ]
+        },
+        {
+          "case": 784,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 793,
+          "differences": [
+            [
+              24,
+              0,
+              32
+            ]
+          ]
+        },
+        {
+          "case": 794,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 795,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 802,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 804,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 815,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 819,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 835,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 841,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 843,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 857,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 890,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 891,
+          "differences": [
+            [
+              24,
+              0,
+              32
+            ]
+          ]
+        },
+        {
+          "case": 908,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 909,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 912,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 917,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 918,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 929,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 940,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 946,
+          "differences": [
+            [
+              24,
+              0,
+              32
+            ]
+          ]
+        },
+        {
+          "case": 961,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 967,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 985,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 989,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 990,
+          "differences": [
+            [
+              24,
+              0,
+              32
+            ]
+          ]
+        },
+        {
+          "case": 993,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 995,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1010,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1011,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1021,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1033,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1038,
+          "differences": [
+            [
+              24,
+              0,
+              32
+            ]
+          ]
+        },
+        {
+          "case": 1061,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1072,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1078,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1084,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1085,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1091,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1093,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1104,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1115,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1118,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1124,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1131,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1133,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1136,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1142,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1148,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1149,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1153,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1171,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1173,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1175,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1178,
+          "differences": [
+            [
+              24,
+              0,
+              32
+            ]
+          ]
+        },
+        {
+          "case": 1180,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1187,
+          "differences": [
+            [
+              24,
+              0,
+              32
+            ]
+          ]
+        },
+        {
+          "case": 1190,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1197,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1210,
+          "differences": [
+            [
+              24,
+              0,
+              32
+            ]
+          ]
+        },
+        {
+          "case": 1214,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1217,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1235,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1239,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1240,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1246,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1249,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1253,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1271,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1275,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1280,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1282,
+          "differences": [
+            [
+              24,
+              0,
+              32
+            ]
+          ]
+        },
+        {
+          "case": 1284,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1300,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1315,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1318,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1319,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1329,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1338,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1343,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1345,
+          "differences": [
+            [
+              24,
+              0,
+              32
+            ]
+          ]
+        },
+        {
+          "case": 1369,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1382,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1387,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1390,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1392,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1398,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1404,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1406,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1418,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1420,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1425,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1427,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1437,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1439,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1441,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1443,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1444,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1447,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1457,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1458,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1462,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1478,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1482,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1484,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1485,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1492,
+          "differences": [
+            [
+              24,
+              0,
+              32
+            ]
+          ]
+        },
+        {
+          "case": 1504,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1507,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1512,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "case": 1515,
+          "differences": [
+            [
+              24,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "case": 1530,
+          "differences": [
+            [
+              24,
+              0,
+              1
+            ]
+          ]
+        }
+      ],
+      "exact_old_new": true
+    },
+    "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+    "definition_sha256": "0adf6cdbb8f840cb685d61341a04ab248e43fbab635b6470dbbf52480cf7ae8d",
+    "limits": [
+      "Controlled source fixtures, not a Session/gameplay journey or Windows capture",
+      "Every original discrepancy is retained individually; none is excluded",
+      "Fresh definition requires Root's independent adequacy review"
+    ]
+  },
+  "baseline_and_old_evidence_unchanged": true,
+  "native_helper_observer": "The yaw observer is nonreturning; the normal native backend is separately linked/executed in existing_program_checks. No successful yaw or physics behavior is substituted.",
+  "native_scopes": "Ground input retains physics across same-record replace/null; movement and finalize recapture at entry; contact values read from the captured object after the input callback; borrowed physics has no shared ownership.",
+  "limitations": [
+    "Fresh independent review remains Root-owned",
+    "No native Session/model/common-tail/editor/event binding or new gameplay closure",
+    "No full gate, application journey, Main writes, providers, Ghidra, reset or reserved vectors",
+    "All inherited numeric failures and FP partials remain open; prior adequacy attempts retained"
+  ],
+  "native_normal_backend": {
+    "executable_sha256": "88ab2c68eb3e4a08e82cfc68042ef28fefe1a1c9f398b3fb964bdde3bbb48bea",
+    "map": "build/sonic-controller-native/physics-capture/final/native-normal.map",
+    "reference_acceleration_startup_and_controller_symbols_absent": true
+  }
+}

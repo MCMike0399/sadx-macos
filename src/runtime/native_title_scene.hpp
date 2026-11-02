@@ -74,6 +74,7 @@ class TitleScene final : private title_menu::Calls,
 
   private:
     InputServices input_;
+    friend struct SonicCallbackProbe; // test-only observation of actual callback owners
     Session &session_;
     Display &display_;
     const TitleAssets &assets_;
