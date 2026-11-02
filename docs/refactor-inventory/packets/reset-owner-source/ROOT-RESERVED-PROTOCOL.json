@@ -1,0 +1,118 @@
+{
+  "schema": 1,
+  "kind": "reset_reserved_protocol_v1",
+  "status": "PROPOSED_NOT_ADMITTED",
+  "root_admitted": false,
+  "production_source": "744d313ed6a7f02c7c3c5b47ecb78078dca592aa",
+  "qualified_packet": "e8984111fc218cfcf2d57bc0471c1db6ab75a1dc",
+  "reviewed_test_correction": "8132e2f5be205328ed80a9542e1d5df7a5dfddcc",
+  "immutable_old_source": "6255cc6cabcf14adb32867ea011f7491dbbddd2d",
+  "frozen_definition_sha256": "3e6700ab745a5b7648229d2fb6033cdcd1b9b45b185a854fd2c61f0de646e2d8",
+  "expected_order": [
+    "reserved-media-failure",
+    "reserved-task-failure",
+    "reserved-buffer-replacement",
+    "reserved-later-buffer-unknown",
+    "reserved-level-substitution",
+    "reserved-editor-read",
+    "reserved-native-frame-alias",
+    "reserved-media-reacquire"
+  ],
+  "generation": "No random generator or new seed. These are the eight already frozen literal definitions; no inputs executed.",
+  "bindings_status": "Runner and narrow real-Session test binding still need implementation, fake adequacy checks, fresh independent review, immutable identity seal and distinct affirmative Root admission. This proposal authorizes no execution.",
+  "cases": [
+    {
+      "id": "reserved-media-failure",
+      "frame": 2710631713,
+      "editor": 65025,
+      "fail_operation": "first media close",
+      "observe": "all preceding stores, complete pending payload, no later task/fog/seed"
+    },
+    {
+      "id": "reserved-task-failure",
+      "frame": 1480523139,
+      "editor": 33281,
+      "fail_operation": "task initializer",
+      "observe": "arena replacement prefix, pending payload, no level/fog/seed"
+    },
+    {
+      "id": "reserved-buffer-replacement",
+      "first_identity": 6656,
+      "second_identity": 6660,
+      "first_release_replaces_second_with": 6656,
+      "observe": "two calls despite aliases; first slot clears only after success"
+    },
+    {
+      "id": "reserved-later-buffer-unknown",
+      "first_identity": 6688,
+      "first_release_invalidates_second": true,
+      "observe": "unknown second read after successful first clear; no fog/seed"
+    },
+    {
+      "id": "reserved-level-substitution",
+      "mode": 0,
+      "set_alias_identity": 6720,
+      "camera_identity": 6724,
+      "observe": "SET/CAM release precedes callback read; callback substitution and failed return prefix"
+    },
+    {
+      "id": "reserved-editor-read",
+      "forced_word": 1,
+      "editor_initial": 65025,
+      "invalidate_after_borrow": true,
+      "observe": "forced read before editor validation, unavailable stops before action87 and upper guest bytes unchanged"
+    },
+    {
+      "id": "reserved-native-frame-alias",
+      "frame": 305443381,
+      "observe": "reached nonzero native_pending_text_window retained; reset makes same borrowed word zero"
+    },
+    {
+      "id": "reserved-media-reacquire",
+      "mode": 1,
+      "stop_replaces_player": true,
+      "observe": "reset replacement player, not cached player; replacement-null keeps earlier prefix"
+    }
+  ],
+  "common_reset_inputs": {
+    "frame": 2548384545,
+    "editor": 33025,
+    "first_guest_identity": 6656,
+    "second_guest_identity": 6660,
+    "seed": 305419896,
+    "owner_success_nested_boundary": 0
+  },
+  "operation_indices": {
+    "first_media_close": 9,
+    "initialize_tasks": 14,
+    "first_buffer_release_with_both_nonnull": 26,
+    "second_buffer_release_with_both_nonnull": 27,
+    "enable_fog_with_both_nonnull": 28
+  },
+  "observation_contract": {
+    "all_cases": "Exact ordered case IDs; input values/presence; reached operations/callback order; full return/failure/boundary and pending payload presence/value; all specified post-state and unknown facts. Missing/duplicated/reordered/truncated records reject.",
+    "reset_prefix": "Use existing immutable original reset observer/probe ABI for two known-input failure rows; compare all128u32words and native return, preserving original observer stop as a stop, not successful original return. Full higher-level pending payload is a separate interface observation.",
+    "unknown_facts": "Reference availability is interface evidence, not a hardware source read. Compare immutable-old/current interface prefixes and explicit diagnostic contracts; never fabricate source values or label absent-fact rows original-returned.",
+    "native_frame_alias": "Actual current Session pending-text path with its real TitleScene attached must throw native_pending_text_window for the nonzero canonical word, then actual reset must clear that same owner. This newly injected composition is not old arbitrary divergent native-state equivalence. Requires a narrow reviewed fixture; no pointer forging, private-macro layout tricks, guessed asset data or fake TitleScene.",
+    "editor": "Actual Sonic reader under its registered forced include, borrowed then invalidated sidecar; forced missing control precedes editor observation, forced1 still reaches editor unavailable before action87. Observe adjacent two guest bytes independently through source/serialization proof; do not infer width from the typed value alone.",
+    "media": "Mode1 real StreamPlayer replacement during stop and replacement-null control. Record actual receiver identities/ordered stop-reset calls and partial flags; do not cache or retain extra player ownership through diagnostic output.",
+    "buffers": "Two releases for equal guest identities, callback substitution and unknown second slot; preserve token map identity but never claim allocation ownership/free success.",
+    "level": "Mode0 SET/CAM releases before callback read, callback replacement and failed callback prefixes; record original callback identities and retained clear-after-success state."
+  },
+  "adequacy_required": [
+    "empty and0/0 domain rejection",
+    "partial/duplicated/reordered records and unexpected IDs",
+    "changed input scalar/optional presence and raw buffer bytes",
+    "changed return/boundary/pending argument presence or value",
+    "wrong binding/receiver identity and skipped real consumer",
+    "missing real Session nonzero path",
+    "unreviewed/missing/false admission rejection before any execution/output creation",
+    "existing destination refusal and immutable source/helper/probe/build identity checks"
+  ],
+  "unqualified_limits": [
+    "Task207 sourceFAIL and existing FP partial identities remain unchanged.",
+    "Reference initialized StopPCM41010d, mission cleanup, nonnull native buffer release and allocator/replacement lifetime remain open.",
+    "No gameplay route, x86 fallback, Windows constructor equivalence or measured63FPS claim."
+  ],
+  "execution_accounting": "Generated/attempted/source-returned/observer-stopped/interface-only/fully-observed/mismatched/unattempted records remain distinct; original outcomes and raw initial failures are retained. No new exclusion or accepted mismatch is authorized."
+}
