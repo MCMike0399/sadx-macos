@@ -39,5 +39,20 @@
     "build/current-leaf.txt": "4ced0242fc6338cc0d9c12e723c6c91d83fb00f41e84d2503d43c3d66aac096c"
   },
   "attempt_limit": "Initial command completed builds and both programs plus frozen order comparison, then cmp exited2 because Root guessed nonexistent build/reset-leaf-old.txt. Corrected comparison ONLY used existing build/old-leaf.txt/current-leaf.txt and passed; programs were not rerun.",
-  "remaining": "Fresh Standards recheck; Spec review of original frozen packet pending. No reserved inputs, original executions, library loads through Python, broad oracle reruns, gate or Main changes."
+  "remaining": "Fresh Standards recheck; Spec review of original frozen packet pending. No reserved inputs, original executions, library loads through Python, broad oracle reruns, gate or Main changes.",
+  "p3_follow_up": {
+    "review": "9ca61e64b78f1425fa0bca1e3230cca001885bd9",
+    "scope": "Seven long lines wrapped and five constexpr constants renamed kCamelCase. Reverse-name C++ token sequence equality preserves string/character tokens. No production Source change.",
+    "max_line_columns": 100,
+    "reverse_name_token_sequence_equal": true,
+    "test_sha256": "5475b2b24908157c07f79a354361871e6b390e5c6457686293a9429e1b9f333f",
+    "build_exit": 0,
+    "program_exit": 0,
+    "frozen_55_line_comparison_exit": 0,
+    "artifacts": {
+      "build/root-reset-style-plan2.log": "dd917012af68661b657bcc1314dc7f88f2be92a36a834dc182a9ae7829ef2be2",
+      "build/root-reset-style-build2.log": "dd917012af68661b657bcc1314dc7f88f2be92a36a834dc182a9ae7829ef2be2",
+      "build/root-reset-style-order2.txt": "6f67e39f498fb639745bbdb113de4cbe4063b006d326d808a6a6df9185c0a534"
+    }
+  }
 }

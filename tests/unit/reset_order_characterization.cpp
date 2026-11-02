@@ -90,18 +90,21 @@ void check_leaf_order() {
             fixture.ready = 1;
         if (scenario == LeafScenario::MissingSecondFlags)
             fixture.state.sound_record_flags_at_3b29304[1].reset();
-        if (scenario == LeafScenario::MissingListPresence || scenario == LeafScenario::PresentList) {
+        if (scenario == LeafScenario::MissingListPresence ||
+            scenario == LeafScenario::PresentList) {
             callee = 0x421fb0;
             if (scenario == LeafScenario::MissingListPresence)
                 fixture.state.word_at_3c5e8b8.reset();
         }
         if (scenario == LeafScenario::ReplaceMusicPlayer ||
-            scenario == LeafScenario::InvalidateMusicPlayer || scenario == LeafScenario::ClearVoicePlayer) {
+            scenario == LeafScenario::InvalidateMusicPlayer ||
+            scenario == LeafScenario::ClearVoicePlayer) {
             callee = 0x40cff0;
             argument = scenario == LeafScenario::ClearVoicePlayer ? 1 : 0;
         }
         if (scenario == LeafScenario::ReplaceLaterSetFileAndCallback ||
-            scenario == LeafScenario::FailedRelease || scenario == LeafScenario::MissingLevelCallback ||
+            scenario == LeafScenario::FailedRelease ||
+            scenario == LeafScenario::MissingLevelCallback ||
             scenario == LeafScenario::MissionDestructor) {
             callee = 0x4228f0;
             argument = scenario == LeafScenario::MissionDestructor ? 5 : 0;
@@ -116,7 +119,8 @@ void check_leaf_order() {
             callee = 0x785330;
             fixture.state.word_at_389d608.reset();
         }
-        const auto result = sadx::run_reset_leaf(callee, argument, fixture.state, [&](const auto &call) {
+        const auto result =
+            sadx::run_reset_leaf(callee, argument, fixture.state, [&](const auto &call) {
             calls.push_back(call);
             if (scenario == LeafScenario::ReplaceMusicPlayer)
                 fixture.state.player_at_3abdf9c = 27;
@@ -150,34 +154,34 @@ unsigned failed_call_for_case(unsigned case_id) {
 }
 
 void check_reset_order() {
-    constexpr unsigned missing_first_buffer = 0;
-    constexpr unsigned replace_second_buffer = 1;
-    constexpr unsigned missing_owner = 7;
-    constexpr unsigned cancelled_owner = 8;
-    constexpr unsigned unavailable_owner = 9;
+    constexpr unsigned kMissingFirstBuffer = 0;
+    constexpr unsigned kReplaceSecondBuffer = 1;
+    constexpr unsigned kMissingOwner = 7;
+    constexpr unsigned kCancelledOwner = 8;
+    constexpr unsigned kUnavailableOwner = 9;
     for (unsigned case_id = 0; case_id < 40; ++case_id) {
         sadx::reference::FrameMessageFact frame = 7;
         sadx::CrtRandState random;
         sadx::GameResetState state{
-            frame, 65535, case_id == missing_first_buffer ? std::optional<std::uint32_t>{} : 42,
+            frame, 65535, case_id == kMissingFirstBuffer ? std::optional<std::uint32_t>{} : 42,
             42, random};
         std::vector<sadx::GameResetCall> calls;
         sadx::GameResetRuntime runtime{state, [&](const auto &call) {
             calls.push_back(call);
-            if (call.callee == 0x780fb0 && case_id == replace_second_buffer)
+            if (call.callee == 0x780fb0 && case_id == kReplaceSecondBuffer)
                 state.heap_at_3b0e330 = 43;
             return sadx::GameLogicOwnerResult{
                 calls.size() == failed_call_for_case(case_id) ? sadx::GameLogicOwnerState::failed
                                                              : sadx::GameLogicOwnerState::completed,
                 123, {}};
         }};
-        if (case_id == missing_owner)
+        if (case_id == kMissingOwner)
             runtime.invoke = {};
-        if (case_id == cancelled_owner || case_id == unavailable_owner) {
+        if (case_id == kCancelledOwner || case_id == kUnavailableOwner) {
             runtime.invoke = [&](const auto &call) {
                 calls.push_back(call);
                 return sadx::GameLogicOwnerResult{
-                    case_id == cancelled_owner ? sadx::GameLogicOwnerState::cancelled
+                    case_id == kCancelledOwner ? sadx::GameLogicOwnerState::cancelled
                                                : sadx::GameLogicOwnerState::unavailable,
                     456, {}};
             };
@@ -186,10 +190,13 @@ void check_reset_order() {
         std::cout << "reset" << case_id << ' ' << static_cast<int>(result.failure) << ' '
                   << result.source_boundary << ' ' << result.nested_source_boundary << ' '
                   << frame.value_or(123) << ' ' << state.editor.value_or(123) << ' '
-                  << state.heap_at_3b290d0.value_or(123) << ' ' << state.heap_at_3b0e330.value_or(123)
-                  << ' ' << random.seed_at_2bcbdf8.value_or(123) << ' ' << bool(result.pending_call);
+                  << state.heap_at_3b290d0.value_or(123) << ' '
+                  << state.heap_at_3b0e330.value_or(123)
+                  << ' ' << random.seed_at_2bcbdf8.value_or(123) << ' '
+                  << bool(result.pending_call);
         for (const auto &call : calls)
-            std::cout << " call:" << call.source_call << ':' << call.callee << ':' << call.argument.value_or(0);
+            std::cout << " call:" << call.source_call << ':' << call.callee << ':'
+                      << call.argument.value_or(0);
         std::cout << '\n';
     }
 }
