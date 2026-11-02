@@ -1,6 +1,6 @@
 // Actual Sonic caller -> recovered updater -> existing common-tail boundary.
 // A typed build additionally checks native-runtime precedence over legacy binding.
-#include "player/sonic_player.hpp"
+#include "guest/sonic_player_reference.hpp"
 #ifdef ANIMATION_TYPED
 #include "player/animation/animation.hpp"
 #endif

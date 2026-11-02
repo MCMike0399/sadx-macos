@@ -1,6 +1,6 @@
 {
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
- "native_library_sha256": "38d9c9e06b0b3435cbe30b34940d465e780a82bd033687c8e37d11d893d03c67",
+ "native_library_sha256": "53f98cf505d4135cf1128822c32bd2e9dd0adf3b9ed61239386f08bdef96e085",
  "cases": 30192,
  "stored_mismatches": 0,
  "boundary_mismatches": 0,
@@ -260,10 +260,16 @@
   "Flag difference (status_mismatches): the native x87 status exception bits (PE 0x20 in the examples) are set where Unicorn 2.1.4 does not raise them (source 0). All compared values match; the hardware flags need the Intel capture (M4)."
  ],
  "native_sources": {
-  "src/player/sonic_player.hpp": "cd6c2556f5944cee132e040e80ae878ada8b0f388f7faa6e914a96df73842f87",
-  "src/player/sonic_player.cpp": "4b170e197fe8a048e875cd83757dc93558129280156afa87f3137b550af9200f",
-  "tests/probes/native_sonic_action_probe.cpp": "a32e1be6081014140f4cf1a46dff9d891016432b66da1c841d9223a9d07b7031",
-  "tools/oracles/verify_original_sonic_actions.py": "d4076e926d22b4a2cfc0a5f4a4cf58b889f338a5019e0cf3d0a4b98a4560faf6",
+  "src/player/sonic_player.hpp": "32bda755d727c02422709d00b92b8bbf98bd02e5103603611b8767b794e1bd46",
+  "src/player/sonic_player.cpp": "c2b9cd7bd4772fc5e3411ec06c160f890201fff682162ae7e177717de8945fbf",
+  "src/player/sonic_player_internal.hpp": "35c11bd7ddf67aa84f9ec22b8cf11dbea38889c801cfbdf436b8c0c7451fa006",
+  "src/player/sonic_player_sites.hpp": "1d6f4f979f3e0b0769ee91e14b773c5f305b7f258c89be7fa3396a26dedee8aa",
+  "src/player/sonic_player_seams.hpp": "7c26d94ffbef26442b7d375785aa07ab08a6ece5d5881fb90bd7d6a39117445d",
+  "src/guest/sonic_player_reference.cpp": "a7311aa1ebbff20a598becbd3ceb98bd4659b5c28307733795933655b8ead7e8",
+  "src/guest/sonic_player_reference.hpp": "37a969e44625b4d031916bfe3ee8c020702cfc38f54514517afde8b541e8a4f4",
+  "src/guest/sonic_player_sites.hpp": "33b652ae868523e93bd722f3a6bd43cf33fa79ef6c0d42ab7a18db13bb1c8d4f",
+  "tests/probes/native_sonic_action_probe.cpp": "72e304de2ccc2fac3ba012921c3c4c1bcda85b27012c6050e548135cdb197a01",
+  "tools/oracles/verify_original_sonic_actions.py": "7d3cc3ecfe401db91fad15d515f0d1bc70634ccd01e1bd788843e8268517a278",
   "src/player/player_task.hpp": "00c04da45b7641f1d1421eab366e173e742449ae828b883d2617f422c01d7ebd",
   "src/player/player_physics.hpp": "08bf9f1949cdb7fd1605429c9b9663265e61d62352b9f5d018e7244a74738530",
   "src/player/player_position.hpp": "4a9343e6107b2cad271dfe2c369084a282f32b5c088f90c4bbd73fb40e3165de",
@@ -281,12 +287,12 @@
   "src/cpu/fidelity_float.hpp": "c96aadce5ca6caa699fb3e9a0b44f791e1ac0420b31ceed31b5fca48118afb98"
  },
  "case_sha256": "011512a72d2c21b1ea2362ba8cf86393b52f13601b89055fa8137cd3d505053b",
- "seconds": 26.329378999769688,
+ "seconds": 21.78026062436402,
  "stored_state_matches": true,
  "passed": false,
  "tracked_summary": {
-  "full_sha256": "b55b23018edf9c4d3da2e4d1b1d024d594760a7e2cfa8c0fd61c9f351c3ecd29",
-  "full_bytes": 37487,
+  "full_sha256": "e733d01eb404d14946d1bddbcb14f193196c2f509b8cf311df48df08ce22ea7f",
+  "full_bytes": 38148,
   "lists_cut_to": 10,
   "cut_lists": {
    "status_examples": 40,

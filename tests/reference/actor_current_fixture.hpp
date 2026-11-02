@@ -1,7 +1,7 @@
 #pragma once
 // Reference-only forced include for frozen Sonic fixture translation units.
 // Do not inject into any production translation unit.
-#include "player/sonic_player.hpp"
+#include "guest/sonic_player_reference.hpp"
 
 namespace sadx::reference {
 template <typename T> struct PublicationReceipt {

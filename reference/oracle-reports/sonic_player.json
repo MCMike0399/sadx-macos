@@ -1,6 +1,6 @@
 {
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
- "native_library_sha256": "d7fbd2886b53ef6f5958267073540bb6e8c66c58af2e4faf874d090e850c2b84",
+ "native_library_sha256": "02670ed6a0c8a1bdfb98a936eaa61da5604886c3a820a89520302bb8ec096f8b",
  "profile": "actual Sonic control prefix plus explicitly seeded post-transform43eecc suffix",
  "cases": 28800,
  "by_entry": [
@@ -261,10 +261,16 @@
   "Native full-angle unavailable low16 stops before the high16 source write; known fixtures cover fully captured angles"
  ],
  "native_sources": {
-  "src/player/sonic_player.hpp": "cd6c2556f5944cee132e040e80ae878ada8b0f388f7faa6e914a96df73842f87",
-  "src/player/sonic_player.cpp": "4b170e197fe8a048e875cd83757dc93558129280156afa87f3137b550af9200f",
-  "tests/probes/native_sonic_player_probe.cpp": "ea27199dca1c3f9ea726e9e1be159ed14b4ec35ab594d975fe80d2f9cd25ca60",
-  "tools/oracles/verify_original_sonic_player.py": "d5b661520a090a7a4f4e4e6db71221c0e6bee1a24c9c8a01363f67af22f44c0a",
+  "src/player/sonic_player.hpp": "32bda755d727c02422709d00b92b8bbf98bd02e5103603611b8767b794e1bd46",
+  "src/player/sonic_player.cpp": "c2b9cd7bd4772fc5e3411ec06c160f890201fff682162ae7e177717de8945fbf",
+  "src/player/sonic_player_internal.hpp": "35c11bd7ddf67aa84f9ec22b8cf11dbea38889c801cfbdf436b8c0c7451fa006",
+  "src/player/sonic_player_sites.hpp": "1d6f4f979f3e0b0769ee91e14b773c5f305b7f258c89be7fa3396a26dedee8aa",
+  "src/player/sonic_player_seams.hpp": "7c26d94ffbef26442b7d375785aa07ab08a6ece5d5881fb90bd7d6a39117445d",
+  "src/guest/sonic_player_reference.cpp": "a7311aa1ebbff20a598becbd3ceb98bd4659b5c28307733795933655b8ead7e8",
+  "src/guest/sonic_player_reference.hpp": "37a969e44625b4d031916bfe3ee8c020702cfc38f54514517afde8b541e8a4f4",
+  "src/guest/sonic_player_sites.hpp": "33b652ae868523e93bd722f3a6bd43cf33fa79ef6c0d42ab7a18db13bb1c8d4f",
+  "tests/probes/native_sonic_player_probe.cpp": "d66392012a7b45086ff30b7a7da0422fc9b64c02a3028effbc0fcfd398a21a53",
+  "tools/oracles/verify_original_sonic_player.py": "36587afe4b988da56d1d3779538f31146d88377230096062ce10abf65cc899fc",
   "src/player/ground_acceleration.hpp": "35bde538be42156764534857ec3458a443932ab20a6f77832f87a649119f288f",
   "src/player/ground_acceleration.cpp": "c79890f79d3d092eb5bf45c73223467bc6bc20105199830f32a5fba44b4cecf0",
   "src/player/ground_acceleration_internal.hpp": "c9938bc44091750a8faeca2c6915b298295ff1e5dc2774718bef183657824595",
@@ -282,12 +288,12 @@
  "ground_prefix_stored_mismatches": 0,
  "ground_prefix_status_mismatches": 1632,
  "case_sha256": "2acd398b460a3c6691a178fcb7b0862219ac1e11818909ad41cb8fb14e6f34fe",
- "seconds": 23.008460416458547,
+ "seconds": 17.736067540943623,
  "stored_state_matches": true,
  "passed": false,
  "tracked_summary": {
-  "full_sha256": "7d5bf608217b8909329f92281a5351fe73d1aae12d187c4714c152bbb70e13f8",
-  "full_bytes": 25113,
+  "full_sha256": "2b6bc24bf19a3751586c10f011af4a17fa9467c89ed3930cef8dc20754bbb3a2",
+  "full_bytes": 25775,
   "lists_cut_to": 10,
   "cut_lists": {
    "examples": 30,

@@ -1,4 +1,4 @@
-#include "player/sonic_player.hpp"
+#include "guest/sonic_player_reference.hpp"
 #include <cassert>
 #include <cstring>
 #include <fstream>

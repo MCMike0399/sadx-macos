@@ -1,0 +1,30 @@
+{
+  "source": "src/runtime/native_session.hpp",
+  "rows": [
+    {
+      "before": "b7bcaf2502425c030f4af39be683a6b9a3a70bef18e4ef54b9fd59f6f11d1ac5",
+      "after": "3d83bca901f115ff9d1983c9743aa837829e37d3a99b4aa2322dcc2c52eb030c"
+    },
+    {
+      "before": "b7bcaf2502425c030f4af39be683a6b9a3a70bef18e4ef54b9fd59f6f11d1ac5",
+      "after": "3d83bca901f115ff9d1983c9743aa837829e37d3a99b4aa2322dcc2c52eb030c"
+    }
+  ],
+  "reason": "Only a test-only SonicCallbackProbe friend was added to this header. Save-warning ownership, declarations and behavior are byte-identical. Rebind two existing full-file fingerprints; keep unrecovered_open_debt and all save-warning limits.",
+  "source_diff": "diff --git a/src/runtime/native_session.hpp b/src/runtime/native_session.hpp\nindex 90c05105..3bd3693e 100644\n--- a/src/runtime/native_session.hpp\n+++ b/src/runtime/native_session.hpp\n@@ -194,6 +194,7 @@ class Session final : private flow::NativeServices {\n \n   private:\n     friend class TitleScene;\n+    friend struct SonicCallbackProbe; // test-only observation of actual callback owners\n     void attach_logo_scaling(Display &);\n     flow::GameFlowState flow_;\n     std::uint32_t global_timer_ = 0;\n",
+  "title_scene": {
+    "source": "src/runtime/native_title_scene.hpp",
+    "rows": [
+      {
+        "before": "6bbeb90ebb857292266180d33d2519eadcb8a8ac076cc6b667a9573951382d07",
+        "after": "14cfe2c9ad7900a3e2a4237d9d4bd28f1b4235af6ab30b5e8a45cd867e938019"
+      },
+      {
+        "before": "6bbeb90ebb857292266180d33d2519eadcb8a8ac076cc6b667a9573951382d07",
+        "after": "14cfe2c9ad7900a3e2a4237d9d4bd28f1b4235af6ab30b5e8a45cd867e938019"
+      }
+    ],
+    "reason": "Same test-only friend access, no save-warning behavior/declaration/ownership changes.",
+    "source_diff": "diff --git a/src/runtime/native_title_scene.hpp b/src/runtime/native_title_scene.hpp\nindex 8a83d69a..bd20ca76 100644\n--- a/src/runtime/native_title_scene.hpp\n+++ b/src/runtime/native_title_scene.hpp\n@@ -74,6 +74,7 @@ class TitleScene final : private title_menu::Calls,\n \n   private:\n     InputServices input_;\n+    friend struct SonicCallbackProbe; // test-only observation of actual callback owners\n     Session &session_;\n     Display &display_;\n     const TitleAssets &assets_;\n"
+  }
+}

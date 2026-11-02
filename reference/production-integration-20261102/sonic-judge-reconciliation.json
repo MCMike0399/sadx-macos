@@ -1,0 +1,103 @@
+{
+  "base": "5c1d44d72e03aad77a300df823d47a55271c9571",
+  "accepted_source": "80e4045150b63bda42807ed77c2b28b09433554d",
+  "accepted_recheck": "a1892eb9",
+  "scope": "Finite integration registry changes only; no tolerance, default input, expected value, exclusion or partial classification changed.",
+  "retirements": [
+    {
+      "key": "src/player/sonic_player.cpp::table",
+      "prior_review": {
+        "sha256": "8c10f93faf97038a8dae94424046caf2cd7dcb3600ae6eedb73d0da00d8f4b08",
+        "classification": "open_migration",
+        "purpose": "Sonic action classification returns basic-block PCs used by action dispatch.",
+        "evidence": [
+          {
+            "path": "src/player/sonic_player.cpp",
+            "line": 219,
+            "sha256": "4b170e197fe8a048e875cd83757dc93558129280156afa87f3137b550af9200f"
+          }
+        ],
+        "verification": [
+          "tests/unit/sonic_player.cpp",
+          "tools/oracles/verify_original_sonic_player.py"
+        ],
+        "verification_limit": "Evidence revalidated after animation binding changes. Dispatch meaning and OPEN_MIGRATION remain unchanged; no Sonic control-flow migration claimed."
+      },
+      "successor": {
+        "path": "src/player/sonic_player.cpp",
+        "symbol": "body",
+        "sha256": "c2b9cd7bd4772fc5e3411ec06c160f890201fff682162ae7e177717de8945fbf"
+      },
+      "reason": "Semantic Mode/Body switch replaces the PC result table. Reference sites retain ABI diagnostics; all complete default observations preserve dispatch outputs."
+    },
+    {
+      "key": "src/player/sonic_player.hpp::addresses",
+      "prior_review": {
+        "sha256": "a6a48f24e8e57254e7d94a66e99a962f8a805fc00b9058293169860c028b31b1",
+        "classification": "open_migration",
+        "purpose": "Executable addresses key Sonic numerical constants.",
+        "evidence": [
+          {
+            "path": "src/player/sonic_player.hpp",
+            "line": 70,
+            "sha256": "cd6c2556f5944cee132e040e80ae878ada8b0f388f7faa6e914a96df73842f87"
+          },
+          {
+            "path": "src/player/sonic_player.cpp",
+            "line": 1,
+            "sha256": "4b170e197fe8a048e875cd83757dc93558129280156afa87f3137b550af9200f"
+          }
+        ],
+        "verification": [
+          "tests/unit/sonic_player.cpp",
+          "tools/oracles/verify_original_sonic_player.py"
+        ],
+        "verification_limit": "Evidence revalidated after animation binding changes. Dispatch meaning and OPEN_MIGRATION remain unchanged; no Sonic control-flow migration claimed."
+      },
+      "successor": {
+        "path": "src/guest/sonic_player_reference.hpp",
+        "symbol": "addresses",
+        "sha256": "37a969e44625b4d031916bfe3ee8c020702cfc38f54514517afde8b541e8a4f4"
+      },
+      "reason": "Constant-address lookup metadata is reference-only; the shared native algorithm uses literals. This retirement alone is not behavioral readability progress."
+    }
+  ],
+  "new_sound_table": {
+    "key": "src/player/sonic_player_internal.hpp::kStageCharacterSounds",
+    "declaration_sha256": "9e6c9c2e5160aab4e74a4858052763929a315f528a34a9ea4de5275419e8e333",
+    "consumer": "play_sound character index, separate Gamma play_voice",
+    "packet": "docs/refactor-inventory/packets/sonic-controller-native/SOURCE-RANGES.json"
+  },
+  "inherited_basic_model_hash_rebindings": [
+    {
+      "table": "src/engine/basic_model.cpp::kTextureAddressModes",
+      "declaration_sha256": "4a988a14a931a3a90d57b30f210d8ceefe6929248391a268db8ecb5a698f7b0c",
+      "before": "92c102056e70380186cdb295e121916837ed9caead67996c6d99fda5c8ad0815",
+      "after": "c4edda79831212f6a8c66fe1f27b2c33390198d4bbbce313e73883adb5a022be",
+      "reason": "Inherited Main material consumer changed full source hash; exact aggregate fingerprint remains unchanged. Accepted material-event-integration.json retains its focused checks and FP partials."
+    },
+    {
+      "table": "src/engine/basic_model.cpp::kBlendModes",
+      "declaration_sha256": "1972de5a8e7ee2b2bb975c0ae3fb389a8d8c8c75480089dc865c518116f699dd",
+      "before": "92c102056e70380186cdb295e121916837ed9caead67996c6d99fda5c8ad0815",
+      "after": "c4edda79831212f6a8c66fe1f27b2c33390198d4bbbce313e73883adb5a022be",
+      "reason": "Inherited Main material consumer changed full source hash; exact aggregate fingerprint remains unchanged. Accepted material-event-integration.json retains its focused checks and FP partials."
+    },
+    {
+      "table": "src/engine/basic_model.cpp::kEnvironmentMapTransform",
+      "declaration_sha256": "e009f8d9a79b9fb08a35b5e262446608d3f09b885937b964d1260e925a9de6ae",
+      "before": "92c102056e70380186cdb295e121916837ed9caead67996c6d99fda5c8ad0815",
+      "after": "c4edda79831212f6a8c66fe1f27b2c33390198d4bbbce313e73883adb5a022be",
+      "reason": "Inherited Main material consumer changed full source hash; exact aggregate fingerprint remains unchanged. Accepted material-event-integration.json retains its focused checks and FP partials."
+    },
+    {
+      "table": "src/engine/basic_model.cpp::kResetTextureTransform",
+      "declaration_sha256": "0d2569ac5ca1abd9ea7b044fea53f663fe01e42f6ad49ce5cbbbb0e3be0922cf",
+      "before": "92c102056e70380186cdb295e121916837ed9caead67996c6d99fda5c8ad0815",
+      "after": "c4edda79831212f6a8c66fe1f27b2c33390198d4bbbce313e73883adb5a022be",
+      "reason": "Inherited Main material consumer changed full source hash; exact aggregate fingerprint remains unchanged. Accepted material-event-integration.json retains its focused checks and FP partials."
+    }
+  ],
+  "legacy_allowance_move": "docs/refactor-inventory/packets/sonic-controller-native/LEGACY-ALLOWANCE-MOVE.json",
+  "proof": "build/sonic-integration/replays preserves every frozen ABI record; original reports retain all value/FP observations. Full gate remains Root-owned."
+}

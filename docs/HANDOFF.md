@@ -893,3 +893,11 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Existing Gamma, weld, animation, asset, setup, model and event witnesses pass. Initial model-binding invocation omitted its second argument and failed; only that invocation was corrected and rerun. Original renderer 2,427 cases retain zero value failures and 172 FP partials; Gamma 1,422 retains zero value failures and 498 FP partials. Both make targets exit 2.
 * Source and judge adaptations remain separate. The fixture prerequisite and retained current reports are registered; material-event-integration.json records exact attempts and limits. No new combined gate, cold export, N3b or hardware qualification is claimed.
 * Next: integrate the accepted corrected Sonic controller against this tree and recover the actual reached effects cluster. Preserve the earlier libusb incident/recovery receipt and use isolated dependency copies.
+
+### 2026-11-02 — Reviewed Sonic integration and protection restoration (gate pending)
+
+* Accepted corrected Sonic source 80e4045 is connected through the actual TitleScene callback in Main source commits 5ae6c59a/fb5e8752. The canonical event binding captures primary identity and keeps action head separate from path.
+* Independent integration review a5d1af28 found no blocking source defect but rejected 53 removed binary-evidence protections. Root verified every retained file against Main's original hash and restored exactly those entries; all other candidate hashes remain unchanged.
+* The unchanged judge checker now reports 1,378 protected files and zero violations. sonic-judge-protection-restoration.json records every restored identity and the original candidate evidence. No artifact regeneration or reserved execution was used.
+* Candidate verification retains 58,992 default and 3,072 extra exact observations, 2,840/2,172 inherited FP partials, eleven affected programs and ten mutation checks. These are reviewed packet results; Main's combined gate is pending.
+* Actual normal input still stops at Gamma effects, frame 1332, before Sonic. Editor, Sonic animation, model/common-tail and other actors remain open; no completed actor frame or N3b claim. Next: Root preflight, Gamma effects integration and a coherent gate.

@@ -1,4 +1,4 @@
-#include "player/sonic_player.hpp"
+#include "guest/sonic_player_reference.hpp"
 #include "player/player_hold.hpp"
 #include <cstring>
 namespace {float scalar(std::uint32_t b){float v;std::memcpy(&v,&b,4);return v;}std::uint32_t bits(float v){std::uint32_t b;std::memcpy(&b,&v,4);return b;}}

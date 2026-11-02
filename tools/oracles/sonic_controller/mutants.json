@@ -1,0 +1,44 @@
+[
+  {
+    "name": "collision_retained_damage",
+    "source": "src/player/sonic_player_internal.hpp",
+    "old": "kDamageClassRetained = 240",
+    "new": "kDamageClassRetained = 224",
+    "judge": "sonic_player"
+  },
+  {
+    "name": "local_speed_threshold",
+    "source": "src/player/sonic_player_internal.hpp",
+    "old": ".compare(kTinyForwardSpeed)",
+    "new": ".compare(0.02f)",
+    "judge": "sonic_player"
+  },
+  {
+    "name": "charge_signed_timer",
+    "source": "src/player/sonic_player_internal.hpp",
+    "old": "static_cast<std::int16_t>(c.word(p, Word::Timer, Site::ChargePlayer))",
+    "new": "static_cast<std::uint16_t>(c.word(p, Word::Timer, Site::ChargePlayer))",
+    "judge": "sonic_actions"
+  },
+  {
+    "name": "charge_callback_sound",
+    "source": "src/player/sonic_player_internal.hpp",
+    "old": "c.play_attached_sound(767, Site::ChargePressSound)",
+    "new": "c.play_attached_sound(768, Site::ChargePressSound)",
+    "judge": "reference_unit"
+  },
+  {
+    "name": "forced_read_short_circuit",
+    "source": "src/player/sonic_player_internal.hpp",
+    "old": "const auto forced = c.forced(Site::Forced);",
+    "new": "const auto forced = editor ? std::int16_t{0} : c.forced(Site::Forced);",
+    "judge": "native_unit"
+  },
+  {
+    "name": "native_flags_alias",
+    "source": "src/runtime/native_sonic_fields.hpp",
+    "old": "return {held,\n            moving,\n            equipment,\n            flags,",
+    "new": "return {held,\n            moving,\n            equipment,\n            equipment,",
+    "judge": "native_unit"
+  }
+]

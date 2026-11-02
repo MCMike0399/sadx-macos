@@ -1,0 +1,968 @@
+{
+  "base_main": "5c1d44d72e03aad77a300df823d47a55271c9571",
+  "branch": "packet/sonic-integration-native",
+  "source_head": "fa1aa3c091a3eb73d6efe086f77aef09d80c2821",
+  "source_commits": [
+    "93d6dc6e",
+    "fa1aa3c0"
+  ],
+  "accepted_source": "80e4045150b63bda42807ed77c2b28b09433554d",
+  "accepted_correction": "c583076",
+  "accepted_prefix_annotations": "c3998a4",
+  "fresh_acceptance": "a1892eb9 (supplied by Root)",
+  "scope": "Reviewable worktree integration; Root owns Main admission and the coherent full gate.",
+  "source_hashes": "reference/production-integration-20261102/sonic-current-source-hashes.json",
+  "accepted_algorithm_hashes": {
+    "src/player/sonic_player.hpp": "32bda755d727c02422709d00b92b8bbf98bd02e5103603611b8767b794e1bd46",
+    "src/player/sonic_player_internal.hpp": "35c11bd7ddf67aa84f9ec22b8cf11dbea38889c801cfbdf436b8c0c7451fa006",
+    "src/guest/sonic_player_reference.cpp": "a7311aa1ebbff20a598becbd3ceb98bd4659b5c28307733795933655b8ead7e8",
+    "src/runtime/native_sonic_binding.cpp": "334a4fd8579d4b1cc3900aef8528d8693ca42724c5d19a12a644be5b44a6f176"
+  },
+  "all_accepted_packet_documents_byte_identical": true,
+  "bindings": {
+    "actual_callback": "TitleScene::exec_selection_sonic -> sonic::run",
+    "canonical": "Session PlayerSystem/current/registry, actual scheduler/task/arena, Display arithmetic, Session stage, bootstrap event flags and the existing imported full parameter table. No parameter or physics mirrors.",
+    "event": "bind_event_work captures primary allocation and state once. move_mode/set_move_mode/has_path use that allocation. Action head at eventwk+0x40 is distinct from path.list at +0x4c. Writes use the narrow semantic set_move_mode seam.",
+    "explicit_stops": "Editor and forced readers stay unbound; animation content, model graph/common tail, alternate model and motion/lower seams remain explicit. No Gamma animation table or seeded model graph."
+  },
+  "build": {
+    "start": "Empty local build directory; maintained native/numerical sources built locally. Public controller dependencies copied locally with symlinks dereferenced; no writable dependency symlink into Root.",
+    "commands": [
+      "make -j2 -o build/native-controller-deps/include/SDL3/SDL.h build/sadx-native native-closure",
+      "make -j2 -o build/native-controller-deps/include/SDL3/SDL.h UNICORN_DIR=/Users/burbujamc/Developer/sadx-macos/reference/python/lib/python3.14/site-packages/unicorn [affected borrower targets]"
+    ],
+    "native_app_exit_status": 0,
+    "native_force_load_closure": "PASS",
+    "banned": "Native links neither guest acceleration, reference adapters, PE loader/guest runtime nor Unicorn.",
+    "logs": [
+      "build/sonic-native-build.log",
+      "build/sonic-closure-units.log",
+      "build/sonic-borrower-build.log"
+    ],
+    "full_gate_run": false
+  },
+  "units": [
+    {
+      "command": [
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6176d6e5/build/sonic-player-test",
+        "build/assets/sonic-player-constants.bin",
+        "build/assets/sonic-action-dispatch.bin",
+        "build/assets/ninja-trig.f32",
+        "build/assets/ninja-unit.f32"
+      ],
+      "exit_status": 0,
+      "output": "Sonic control dispatch and source availability tests passed across 12 explicit CW profiles\n"
+    },
+    {
+      "command": [
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6176d6e5/build/sonic-actions-test",
+        "build/assets/sonic-player-constants.bin"
+      ],
+      "exit_status": 0,
+      "output": "Grounded/running/jump/spindash predicate and partial-owner tests passed across12 explicit CW profiles\n"
+    },
+    {
+      "command": [
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6176d6e5/build/animation-sonic-composition-test",
+        "build/assets/sonic-player-constants.bin",
+        "build/assets/player-parameters.bin"
+      ],
+      "exit_status": 0,
+      "output": "0,0,4,4832779,0,1074790400,0\n1,0,6,4832784,0,1076887552,0\n1,1,18,4832779,4499522,1074790400,0\n2,0,6,4832784,0,1076887552,0\n2,1,18,4832779,4499522,1074790400,0\nattachment,0,3,4828004,16\nattachment,1,12,4827966,14\n"
+    },
+    {
+      "command": [
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6176d6e5/build/actor-current-test"
+      ],
+      "exit_status": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6176d6e5/build/input-chain-test"
+      ],
+      "exit_status": 0,
+      "output": "Input chain: keyboard -> Input 2.6.1 OnInput -> ControllerPointers(raw_input) -> 40fdc0 engine pads passed.\n"
+    },
+    {
+      "command": [
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6176d6e5/build/player-scene-position-binding-test",
+        "build/assets/ninja-trig.f32",
+        "build/assets/ninja-unit.f32",
+        "build/assets/player-parameters.bin",
+        "build/assets/player-scene-position-constants.bin",
+        "build/assets/player-rotation-constants.bin",
+        "build/assets/player-contact-initialization-constants.bin",
+        "build/assets/player-contact-response-constants.bin",
+        "build/assets/player-contact-attribute-constants.bin",
+        "build/assets/floor-angle-constants.bin",
+        "build/assets/player-mesh-query-constants.bin",
+        "build/assets/coordinate-axis-constants.bin",
+        "\"$(GAME_EXE)\"",
+        "build/assets/player-scene-constants.bin",
+        "build/assets/player-position-constants.bin",
+        "build/assets/sonic-player-constants.bin",
+        "reference/original-player-scene-position-comparison.cases.bin"
+      ],
+      "exit_status": 1,
+      "output": "Pinned real-scene fixture corpus required\n"
+    },
+    {
+      "command": [
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6176d6e5/build/sonic-controller-reference-test"
+      ],
+      "exit_status": 0,
+      "output": "Reference Sonic callback reload contracts passed\n"
+    },
+    {
+      "command": [
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6176d6e5/build/sonic-physics-capture-reference-test"
+      ],
+      "exit_status": 0,
+      "output": "{\"case\":\"ground\",\"null\":0,\"nested\":0,\"original_identity\":1,\"nested_identity\":0,\"original_speed\":10,\"replacement_speed\":103,\"live_parameter\":19,\"good\":1}\n{\"case\":\"ground\",\"null\":1,\"nested\":0,\"original_identity\":1,\"nested_identity\":0,\"original_speed\":10,\"replacement_speed\":103,\"live_parameter\":19,\"good\":1}\n{\"case\":\"ground\",\"null\":0,\"nested\":1,\"original_identity\":1,\"nested_identity\":1,\"original_speed\":10,\"replacement_speed\":114,\"live_parameter\":19,\"good\":1}\n{\"case\":\"ground\",\"null\":1,\"nested\":1,\"original_identity\":1,\"nested_identity\":0,\"original_speed\":10,\"replacement_speed\":103,\"live_parameter\":19,\"good\":1}\n{\"case\":\"movement_capture\",\"null\":0,\"original_speed\":8,\"replacement_speed\":103,\"good\":1}\n{\"case\":\"movement_capture\",\"null\":1,\"original_speed\":8,\"replacement_speed\":103,\"good\":1}\n{\"case\":\"copy_finalize\",\"null\":0,\"callbacks\":1,\"original_speed\":7,\"replacement_speed\":3,\"good\":1}\n{\"case\":\"copy_finalize\",\"null\":1,\"callbacks\":1,\"original_speed\":7,\"replacement_speed\":103,\"good\":1}\n"
+    },
+    {
+      "command": [
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6176d6e5/build/sonic-controller-native-test"
+      ],
+      "exit_status": 0,
+      "output": "Controlled native Sonic ownership/order harness passed\n"
+    },
+    {
+      "command": [
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6176d6e5/build/sonic-physics-capture-native-test"
+      ],
+      "exit_status": 0,
+      "output": "{\"null\":0,\"same_player\":1,\"acceleration_x\":0,\"speed\":3,\"new_speed\":103,\"target_yaw\":0}\n{\"null\":1,\"same_player\":1,\"acceleration_x\":0,\"speed\":3,\"new_speed\":103,\"target_yaw\":0}\n{\"null\":0,\"same_player\":1,\"acceleration_x\":4.225,\"speed\":3,\"new_speed\":103,\"target_yaw\":0}\n{\"case\":\"native_copy_finalize\",\"null\":0,\"callbacks\":1,\"original_speed\":7,\"replacement_speed\":3,\"good\":1}\n{\"case\":\"native_copy_finalize\",\"null\":1,\"callbacks\":1,\"original_speed\":7,\"replacement_speed\":103,\"good\":1}\n{\"case\":\"native_movement_capture\",\"null\":0,\"original_speed\":8,\"replacement_speed\":103,\"good\":1}\n{\"case\":\"native_movement_capture\",\"null\":1,\"original_speed\":8,\"replacement_speed\":103,\"good\":1}\n"
+    },
+    {
+      "command": [
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6176d6e5/build/native-sonic-callback-test",
+        "/Users/burbujamc/Developer/sadx-macos/game/imported"
+      ],
+      "exit_status": 0,
+      "output": "Real Sonic callback publishes canonical current owners before the editor stop; captured event mode/path bindings survive primary replacement and reject release\n"
+    },
+    {
+      "command": [
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6176d6e5/build/player-scene-position-binding-test",
+        "build/assets/ninja-trig.f32",
+        "build/assets/ninja-unit.f32",
+        "build/assets/player-parameters.bin",
+        "build/assets/player-scene-position-constants.bin",
+        "build/assets/player-rotation-constants.bin",
+        "build/assets/player-contact-initialization-constants.bin",
+        "build/assets/player-contact-response-constants.bin",
+        "build/assets/player-contact-attribute-constants.bin",
+        "build/assets/floor-angle-constants.bin",
+        "build/assets/player-mesh-query-constants.bin",
+        "build/assets/coordinate-axis-constants.bin",
+        "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe",
+        "build/assets/player-scene-constants.bin",
+        "build/assets/player-position-constants.bin",
+        "build/assets/sonic-player-constants.bin",
+        "/Users/burbujamc/Developer/sadx-macos/reference/original-player-scene-position-comparison.cases.bin"
+      ],
+      "exit_status": 0,
+      "output": "Scene binding: 136 actual ECoast PSetPosition paths, 96 retained responses, live parameters, renderer failure and Sonic later-boundary diagnostics passed.\n",
+      "note": "Corrected invocation: resolved Make GAME_EXE and read the retained corpus from Root; initial invocation retained."
+    },
+    {
+      "command": [
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6176d6e5/build/native-sonic-callback-test",
+        "/Users/burbujamc/Developer/sadx-macos/game/imported"
+      ],
+      "exit_status": 0,
+      "output": "Real Sonic callback publishes canonical current owners before the editor stop; captured event mode/path bindings survive primary replacement and reject release\n",
+      "note": "Final expanded actual callback witness: both initial null and canonical initialized player publications."
+    }
+  ],
+  "unique_direct_programs": 11,
+  "python_tests": {
+    "collector_negatives": 5,
+    "address_dispatch": 17,
+    "exit_status": 0
+  },
+  "physics_capture": {
+    "old_library_sha256": "eeb78a789ba559121a4230f84feb735c8e5571510135ff7e5015aa1e004e43f0",
+    "old_observations": "{\"case\":\"ground\",\"null\":0,\"nested\":0,\"original_identity\":1,\"nested_identity\":0,\"original_speed\":10,\"replacement_speed\":103,\"live_parameter\":19,\"good\":1}\n{\"case\":\"ground\",\"null\":1,\"nested\":0,\"original_identity\":1,\"nested_identity\":0,\"original_speed\":10,\"replacement_speed\":103,\"live_parameter\":19,\"good\":1}\n{\"case\":\"ground\",\"null\":0,\"nested\":1,\"original_identity\":1,\"nested_identity\":1,\"original_speed\":10,\"replacement_speed\":114,\"live_parameter\":19,\"good\":1}\n{\"case\":\"ground\",\"null\":1,\"nested\":1,\"original_identity\":1,\"nested_identity\":0,\"original_speed\":10,\"replacement_speed\":103,\"live_parameter\":19,\"good\":1}\n{\"case\":\"movement_capture\",\"null\":0,\"original_speed\":8,\"replacement_speed\":103,\"good\":1}\n{\"case\":\"movement_capture\",\"null\":1,\"original_speed\":8,\"replacement_speed\":103,\"good\":1}\n{\"case\":\"copy_finalize\",\"null\":0,\"callbacks\":1,\"original_speed\":7,\"replacement_speed\":3,\"good\":1}\n{\"case\":\"copy_finalize\",\"null\":1,\"callbacks\":1,\"original_speed\":7,\"replacement_speed\":103,\"good\":1}\n",
+    "current_observations": "{\"case\":\"ground\",\"null\":0,\"nested\":0,\"original_identity\":1,\"nested_identity\":0,\"original_speed\":10,\"replacement_speed\":103,\"live_parameter\":19,\"good\":1}\n{\"case\":\"ground\",\"null\":1,\"nested\":0,\"original_identity\":1,\"nested_identity\":0,\"original_speed\":10,\"replacement_speed\":103,\"live_parameter\":19,\"good\":1}\n{\"case\":\"ground\",\"null\":0,\"nested\":1,\"original_identity\":1,\"nested_identity\":1,\"original_speed\":10,\"replacement_speed\":114,\"live_parameter\":19,\"good\":1}\n{\"case\":\"ground\",\"null\":1,\"nested\":1,\"original_identity\":1,\"nested_identity\":0,\"original_speed\":10,\"replacement_speed\":103,\"live_parameter\":19,\"good\":1}\n{\"case\":\"movement_capture\",\"null\":0,\"original_speed\":8,\"replacement_speed\":103,\"good\":1}\n{\"case\":\"movement_capture\",\"null\":1,\"original_speed\":8,\"replacement_speed\":103,\"good\":1}\n{\"case\":\"copy_finalize\",\"null\":0,\"callbacks\":1,\"original_speed\":7,\"replacement_speed\":3,\"good\":1}\n{\"case\":\"copy_finalize\",\"null\":1,\"callbacks\":1,\"original_speed\":7,\"replacement_speed\":103,\"good\":1}\n",
+    "native_observations": "{\"null\":0,\"same_player\":1,\"acceleration_x\":0,\"speed\":3,\"new_speed\":103,\"target_yaw\":0}\n{\"null\":1,\"same_player\":1,\"acceleration_x\":0,\"speed\":3,\"new_speed\":103,\"target_yaw\":0}\n{\"null\":0,\"same_player\":1,\"acceleration_x\":4.225,\"speed\":3,\"new_speed\":103,\"target_yaw\":0}\n{\"case\":\"native_copy_finalize\",\"null\":0,\"callbacks\":1,\"original_speed\":7,\"replacement_speed\":3,\"good\":1}\n{\"case\":\"native_copy_finalize\",\"null\":1,\"callbacks\":1,\"original_speed\":7,\"replacement_speed\":103,\"good\":1}\n{\"case\":\"native_movement_capture\",\"null\":0,\"original_speed\":8,\"replacement_speed\":103,\"good\":1}\n{\"case\":\"native_movement_capture\",\"null\":1,\"original_speed\":8,\"replacement_speed\":103,\"good\":1}\n",
+    "regression_mutant_observation": "{\"case\":\"ground\",\"null\":0,\"nested\":0,\"original_identity\":0,\"nested_identity\":0,\"original_speed\":3,\"replacement_speed\":110,\"live_parameter\":19,\"good\":0}\n",
+    "regression_mutant_caught": true,
+    "mutation_original_sha256": "a7311aa1ebbff20a598becbd3ceb98bd4659b5c28307733795933655b8ead7e8",
+    "mutation_replacement_sha256": "1b31a5cb7582710ca39d4679135a82555efa8f410ae9fedfa5bd3a80e1032dac",
+    "reference_cases": 8,
+    "native_cases": 7,
+    "limits": [
+      "Controlled helper/callee-boundary witnesses, not a game frame",
+      "Original objects are retained explicitly; borrows add no physics ownership",
+      "All previous default observations and mutants remain required"
+    ]
+  },
+  "default_replays": {
+    "sonic_player": {
+      "slug": "sonic_player",
+      "records": 28800,
+      "complete_capture_sha256": "2833d480dec1c99bef187812d6718dcd7acb9f4c51db43cbe29be2fe794382d9",
+      "library_sha256": "1e2145fcd7c886216da5e5c2582fabd7fe11cd14beb56174dd237c16e71076d2",
+      "complete_output_sha256": "5ab822555235d1ee7f7da5905d6220c255d935b8bd623d077f5225f52db7f643",
+      "differences": [],
+      "exact": true,
+      "supplement": {
+        "records": 2,
+        "fixture_sha256": "d81539e8aff755d111e34cee45d8a96501f9571575b1149c98e8bc157ba61331",
+        "differences": [],
+        "exact": true
+      }
+    },
+    "sonic_actions": {
+      "slug": "sonic_actions",
+      "records": 30192,
+      "complete_capture_sha256": "6d02f5a6a2a4b917ebd0f55f9edf525ae818742422f03d6235a58b79f94f0816",
+      "library_sha256": "f147a442a07a9762cea6273b047104241c978c9e07d6db3e656669bf7feef6d0",
+      "complete_output_sha256": "1c053bf27ee83d3437b17ada073164a12a901a432fdbd98145e093c4f4f18747",
+      "differences": [],
+      "exact": true,
+      "supplement": {
+        "records": 0,
+        "differences": [],
+        "exact": true,
+        "scope": "player-only supplement does not apply to action ABI"
+      }
+    }
+  },
+  "original_defaults": {
+    "sonic_player": {
+      "cases": 28800,
+      "stored_mismatches": 0,
+      "status_mismatches": 2840,
+      "case_sha256": "2acd398b460a3c6691a178fcb7b0862219ac1e11818909ad41cb8fb14e6f34fe",
+      "stored_state_matches": true,
+      "passed": false,
+      "native_library_sha256": "02670ed6a0c8a1bdfb98a936eaa61da5604886c3a820a89520302bb8ec096f8b",
+      "classification": "partial",
+      "full_report_sha256": "2b6bc24bf19a3751586c10f011af4a17fa9467c89ed3930cef8dc20754bbb3a2",
+      "report_summary": "reference/oracle-reports/sonic_player.json",
+      "native_sources": {
+        "src/player/sonic_player.hpp": "32bda755d727c02422709d00b92b8bbf98bd02e5103603611b8767b794e1bd46",
+        "src/player/sonic_player.cpp": "c2b9cd7bd4772fc5e3411ec06c160f890201fff682162ae7e177717de8945fbf",
+        "src/player/sonic_player_internal.hpp": "35c11bd7ddf67aa84f9ec22b8cf11dbea38889c801cfbdf436b8c0c7451fa006",
+        "src/player/sonic_player_sites.hpp": "1d6f4f979f3e0b0769ee91e14b773c5f305b7f258c89be7fa3396a26dedee8aa",
+        "src/player/sonic_player_seams.hpp": "7c26d94ffbef26442b7d375785aa07ab08a6ece5d5881fb90bd7d6a39117445d",
+        "src/guest/sonic_player_reference.cpp": "a7311aa1ebbff20a598becbd3ceb98bd4659b5c28307733795933655b8ead7e8",
+        "src/guest/sonic_player_reference.hpp": "37a969e44625b4d031916bfe3ee8c020702cfc38f54514517afde8b541e8a4f4",
+        "src/guest/sonic_player_sites.hpp": "33b652ae868523e93bd722f3a6bd43cf33fa79ef6c0d42ab7a18db13bb1c8d4f",
+        "tests/probes/native_sonic_player_probe.cpp": "d66392012a7b45086ff30b7a7da0422fc9b64c02a3028effbc0fcfd398a21a53",
+        "tools/oracles/verify_original_sonic_player.py": "36587afe4b988da56d1d3779538f31146d88377230096062ce10abf65cc899fc",
+        "src/player/ground_acceleration.hpp": "35bde538be42156764534857ec3458a443932ab20a6f77832f87a649119f288f",
+        "src/player/ground_acceleration.cpp": "c79890f79d3d092eb5bf45c73223467bc6bc20105199830f32a5fba44b4cecf0",
+        "src/player/ground_acceleration_internal.hpp": "c9938bc44091750a8faeca2c6915b298295ff1e5dc2774718bef183657824595",
+        "src/player/ground_acceleration_native.cpp": "f1729d583f165daf41bf49296fb839b3b9d0badbc73c5b13977060c0670eece9",
+        "src/player/ground_arithmetic.hpp": "703a0c6c05cc2d1a6ee2e694ea48b7cc094b3ff8ca6f3dfc786791870272e7c9",
+        "src/player/ground_friction.cpp": "63ef1ec097115555b2e7bcb33f212d3678efe69a3cb326b8db2edfd5af01b58d",
+        "src/guest/ground_acceleration_reference.hpp": "2da1d2ac5be19c17e4b71cdee209e07956b3ebebb0fdf03716044382e0e5471a",
+        "src/guest/player_acceleration_ground.cpp": "2dfdea7e29e79b2d6b95897b38165246821e7ccf5ff98e7a73f2acad1eaf4f75",
+        "src/guest/player_acceleration_friction.cpp": "c2b099a18a612ab4d8c11670827bea33b9066d262e79d65844f493a2ac7e2ad1",
+        "src/player/player_acceleration_ground.hpp": "2b8bc9a2115dffbb8c442c24dfd82ec31d807dae04478e40b5b02d9a47e0e9f6",
+        "src/player/player_acceleration_friction.hpp": "fc27f80b502de6f0bcdf4ac8dd840eb9a176f6d04d6a8a57dea609cc8e11c705",
+        "src/cpu/fidelity_float.hpp": "c96aadce5ca6caa699fb3e9a0b44f791e1ac0420b31ceed31b5fca48118afb98"
+      },
+      "ground_prefix_cases": 4032,
+      "ground_prefix_stored_mismatches": 0,
+      "ground_prefix_status_mismatches": 1632
+    },
+    "sonic_actions": {
+      "cases": 30192,
+      "stored_mismatches": 0,
+      "status_mismatches": 2172,
+      "case_sha256": "011512a72d2c21b1ea2362ba8cf86393b52f13601b89055fa8137cd3d505053b",
+      "stored_state_matches": true,
+      "passed": false,
+      "native_library_sha256": "53f98cf505d4135cf1128822c32bd2e9dd0adf3b9ed61239386f08bdef96e085",
+      "classification": "partial",
+      "full_report_sha256": "e733d01eb404d14946d1bddbcb14f193196c2f509b8cf311df48df08ce22ea7f",
+      "report_summary": "reference/oracle-reports/sonic_actions.json",
+      "native_sources": {
+        "src/player/sonic_player.hpp": "32bda755d727c02422709d00b92b8bbf98bd02e5103603611b8767b794e1bd46",
+        "src/player/sonic_player.cpp": "c2b9cd7bd4772fc5e3411ec06c160f890201fff682162ae7e177717de8945fbf",
+        "src/player/sonic_player_internal.hpp": "35c11bd7ddf67aa84f9ec22b8cf11dbea38889c801cfbdf436b8c0c7451fa006",
+        "src/player/sonic_player_sites.hpp": "1d6f4f979f3e0b0769ee91e14b773c5f305b7f258c89be7fa3396a26dedee8aa",
+        "src/player/sonic_player_seams.hpp": "7c26d94ffbef26442b7d375785aa07ab08a6ece5d5881fb90bd7d6a39117445d",
+        "src/guest/sonic_player_reference.cpp": "a7311aa1ebbff20a598becbd3ceb98bd4659b5c28307733795933655b8ead7e8",
+        "src/guest/sonic_player_reference.hpp": "37a969e44625b4d031916bfe3ee8c020702cfc38f54514517afde8b541e8a4f4",
+        "src/guest/sonic_player_sites.hpp": "33b652ae868523e93bd722f3a6bd43cf33fa79ef6c0d42ab7a18db13bb1c8d4f",
+        "tests/probes/native_sonic_action_probe.cpp": "72e304de2ccc2fac3ba012921c3c4c1bcda85b27012c6050e548135cdb197a01",
+        "tools/oracles/verify_original_sonic_actions.py": "7d3cc3ecfe401db91fad15d515f0d1bc70634ccd01e1bd788843e8268517a278",
+        "src/player/player_task.hpp": "00c04da45b7641f1d1421eab366e173e742449ae828b883d2617f422c01d7ebd",
+        "src/player/player_physics.hpp": "08bf9f1949cdb7fd1605429c9b9663265e61d62352b9f5d018e7244a74738530",
+        "src/player/player_position.hpp": "4a9343e6107b2cad271dfe2c369084a282f32b5c088f90c4bbd73fb40e3165de",
+        "src/player/ground_acceleration.hpp": "35bde538be42156764534857ec3458a443932ab20a6f77832f87a649119f288f",
+        "src/player/ground_acceleration.cpp": "c79890f79d3d092eb5bf45c73223467bc6bc20105199830f32a5fba44b4cecf0",
+        "src/player/ground_acceleration_internal.hpp": "c9938bc44091750a8faeca2c6915b298295ff1e5dc2774718bef183657824595",
+        "src/player/ground_acceleration_native.cpp": "f1729d583f165daf41bf49296fb839b3b9d0badbc73c5b13977060c0670eece9",
+        "src/player/ground_arithmetic.hpp": "703a0c6c05cc2d1a6ee2e694ea48b7cc094b3ff8ca6f3dfc786791870272e7c9",
+        "src/player/ground_friction.cpp": "63ef1ec097115555b2e7bcb33f212d3678efe69a3cb326b8db2edfd5af01b58d",
+        "src/guest/ground_acceleration_reference.hpp": "2da1d2ac5be19c17e4b71cdee209e07956b3ebebb0fdf03716044382e0e5471a",
+        "src/guest/player_acceleration_ground.cpp": "2dfdea7e29e79b2d6b95897b38165246821e7ccf5ff98e7a73f2acad1eaf4f75",
+        "src/guest/player_acceleration_friction.cpp": "c2b099a18a612ab4d8c11670827bea33b9066d262e79d65844f493a2ac7e2ad1",
+        "src/player/player_acceleration_ground.hpp": "2b8bc9a2115dffbb8c442c24dfd82ec31d807dae04478e40b5b02d9a47e0e9f6",
+        "src/player/player_acceleration_friction.hpp": "fc27f80b502de6f0bcdf4ac8dd840eb9a176f6d04d6a8a57dea609cc8e11c705",
+        "src/cpu/fidelity_float.hpp": "c96aadce5ca6caa699fb3e9a0b44f791e1ac0420b31ceed31b5fca48118afb98"
+      }
+    }
+  },
+  "original_verifier_commands": [
+    {
+      "command": [
+        "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+        "tools/oracles/verify_original_sonic_player.py",
+        "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe",
+        "build/native-sonic-player-probe.dylib",
+        "--output",
+        "build/oracles/sonic_player.json"
+      ],
+      "exit_status": 0,
+      "log": "build/sonic-integration/sonic_player-original.log"
+    },
+    {
+      "command": [
+        "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+        "tools/oracles/verify_original_sonic_actions.py",
+        "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe",
+        "build/native-sonic-action-probe.dylib",
+        "--output",
+        "build/oracles/sonic_actions.json"
+      ],
+      "exit_status": 0,
+      "log": "build/sonic-integration/sonic_actions-original.log"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/oracles/verdict.py",
+        "build/oracles/sonic_player.json",
+        "build/oracles/sonic_actions.json"
+      ],
+      "exit_status": 0,
+      "output": "partial  build/oracles/sonic_player.json: values match; status_mismatches=2840, ground_prefix_status_mismatches=1632 (see limits)\npartial  build/oracles/sonic_actions.json: values match; status_mismatches=2172 (see limits)\n"
+    }
+  ],
+  "extra_observations": {
+    "sonic_player": {
+      "records": 1536,
+      "input_sha256": "8635b3c2e3a695df97274d6fdba0295f5f044b8da540fb765108a98427da2283",
+      "complete_observation_sha256": "ab9e942a24361d3fac24a2779d533c07131782bd8aac27a4bfff196f2fcce5bf",
+      "exact_old_new": true,
+      "inherited_fp_partials": 204,
+      "all_individual_partial_identities_unchanged": true
+    },
+    "sonic_actions": {
+      "records": 1536,
+      "input_sha256": "61e8290fbc61b1353178b966ead4540aae4eb52316d810c60e1ab687c94afe84",
+      "complete_observation_sha256": "91327b14847f021d5a8e5a094497085759ed972effd13dc6f6d0bb89a17abe75",
+      "exact_old_new": true,
+      "inherited_fp_partials": 219,
+      "all_individual_partial_identities_unchanged": true
+    }
+  },
+  "mutations": {
+    "existing": [
+      {
+        "name": "collision_retained_damage",
+        "build_command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-I/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6176d6e5/build/sonic-integration/mutants/collision_retained_damage/include",
+          "-Isrc",
+          "-dynamiclib",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6176d6e5/build/sonic-integration/qualified/sonic-probe.o",
+          "src/guest/sonic_player_reference.cpp",
+          "src/player/sonic_player.cpp",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6176d6e5/build/sonic-integration/qualified/reference-support.a",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6176d6e5/build/animation-judges/softfloat/softfloat.a",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6176d6e5/build/animation-judges/bochs/libbochs_fpatan.a",
+          "-o",
+          "build/sonic-integration/mutants/collision_retained_damage/probe.dylib"
+        ],
+        "build_exit_status": 0,
+        "original_sha256": "35c11bd7ddf67aa84f9ec22b8cf11dbea38889c801cfbdf436b8c0c7451fa006",
+        "replacement_sha256": "2bac3887305091257eee7858a861e52c6fa94798371e8ddee0c3a8214915c52f",
+        "caught": true,
+        "records": 28800,
+        "differences": 0,
+        "supplement": {
+          "records": 2,
+          "fixture_sha256": "d81539e8aff755d111e34cee45d8a96501f9571575b1149c98e8bc157ba61331",
+          "differences": [
+            {
+              "case": 0,
+              "name": "collision_damage_bit_four",
+              "returned": null,
+              "words": [
+                [
+                  23,
+                  191,
+                  175
+                ]
+              ]
+            }
+          ],
+          "exact": false
+        },
+        "judge_exit_status": 1
+      },
+      {
+        "name": "local_speed_threshold",
+        "build_command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-I/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6176d6e5/build/sonic-integration/mutants/local_speed_threshold/include",
+          "-Isrc",
+          "-dynamiclib",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6176d6e5/build/sonic-integration/qualified/sonic-probe.o",
+          "src/guest/sonic_player_reference.cpp",
+          "src/player/sonic_player.cpp",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6176d6e5/build/sonic-integration/qualified/reference-support.a",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6176d6e5/build/animation-judges/softfloat/softfloat.a",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6176d6e5/build/animation-judges/bochs/libbochs_fpatan.a",
+          "-o",
+          "build/sonic-integration/mutants/local_speed_threshold/probe.dylib"
+        ],
+        "build_exit_status": 0,
+        "original_sha256": "35c11bd7ddf67aa84f9ec22b8cf11dbea38889c801cfbdf436b8c0c7451fa006",
+        "replacement_sha256": "7b37786dceef2882d7ce6ec39d8d6d4dac8a1c0230b2320e2e742737e54ed342",
+        "caught": true,
+        "records": 28800,
+        "differences": 0,
+        "supplement": {
+          "records": 2,
+          "fixture_sha256": "d81539e8aff755d111e34cee45d8a96501f9571575b1149c98e8bc157ba61331",
+          "differences": [
+            {
+              "case": 1,
+              "name": "local_speed_between_thresholds",
+              "returned": null,
+              "words": [
+                [
+                  7,
+                  1014350479,
+                  0
+                ]
+              ]
+            }
+          ],
+          "exact": false
+        },
+        "judge_exit_status": 1
+      },
+      {
+        "name": "charge_signed_timer",
+        "build_command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-I/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6176d6e5/build/sonic-integration/mutants/charge_signed_timer/include",
+          "-Isrc",
+          "-dynamiclib",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6176d6e5/build/sonic-integration/qualified/action-probe.o",
+          "src/guest/sonic_player_reference.cpp",
+          "src/player/sonic_player.cpp",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6176d6e5/build/sonic-integration/qualified/reference-support.a",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6176d6e5/build/animation-judges/softfloat/softfloat.a",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6176d6e5/build/animation-judges/bochs/libbochs_fpatan.a",
+          "-o",
+          "build/sonic-integration/mutants/charge_signed_timer/probe.dylib"
+        ],
+        "build_exit_status": 0,
+        "original_sha256": "35c11bd7ddf67aa84f9ec22b8cf11dbea38889c801cfbdf436b8c0c7451fa006",
+        "replacement_sha256": "5e011b62a31ace10cc94c3a42542a0078d5839bf104db60315797f9e8fef39ea",
+        "caught": true,
+        "records": 30192,
+        "differences": 288,
+        "supplement": {
+          "records": 0,
+          "differences": [],
+          "exact": true,
+          "scope": "player-only supplement does not apply to action ABI"
+        },
+        "judge_exit_status": 1
+      },
+      {
+        "name": "charge_callback_sound",
+        "build_command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-I/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6176d6e5/build/sonic-integration/mutants/charge_callback_sound/include",
+          "-Isrc",
+          "build/sonic-integration/mutants/charge_callback_sound/witness.o",
+          "src/guest/sonic_player_reference.cpp",
+          "src/player/sonic_player.cpp",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6176d6e5/build/sonic-integration/qualified/reference-support.a",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6176d6e5/build/animation-judges/softfloat/softfloat.a",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6176d6e5/build/animation-judges/bochs/libbochs_fpatan.a",
+          "-o",
+          "build/sonic-integration/mutants/charge_callback_sound/test"
+        ],
+        "build_exit_status": 0,
+        "original_sha256": "35c11bd7ddf67aa84f9ec22b8cf11dbea38889c801cfbdf436b8c0c7451fa006",
+        "replacement_sha256": "34bef588b69783a87493bb293de45748af2cefe886fa8994e14a381bea2aa941",
+        "caught": true,
+        "judge_command": [
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6176d6e5/build/sonic-integration/mutants/charge_callback_sound/test",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-4c28e725/build/sonic-controller-native/baseline/player-observations/report.constants.bin"
+        ],
+        "judge_exit_status": -6
+      },
+      {
+        "name": "forced_read_short_circuit",
+        "build_command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-I/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6176d6e5/build/sonic-integration/mutants/forced_read_short_circuit/include",
+          "-Isrc",
+          "tests/unit/sonic_controller_native.cpp",
+          "src/player/sonic_player.cpp",
+          "src/runtime/native_sonic_binding.cpp",
+          "src/math/ninja_length.cpp",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6176d6e5/build/sonic-integration/qualified/native-support.a",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6176d6e5/build/animation-judges/softfloat/softfloat.a",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6176d6e5/build/animation-judges/bochs/libbochs_fpatan.a",
+          "-o",
+          "build/sonic-integration/mutants/forced_read_short_circuit/test"
+        ],
+        "build_exit_status": 0,
+        "original_sha256": "35c11bd7ddf67aa84f9ec22b8cf11dbea38889c801cfbdf436b8c0c7451fa006",
+        "replacement_sha256": "ee7870841f6496f0ea8d9d8c27c8c2179e6ec7feedc772007eeee0f6a7309355",
+        "caught": true,
+        "judge_command": [
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6176d6e5/build/sonic-integration/mutants/forced_read_short_circuit/test"
+        ],
+        "judge_exit_status": -6
+      },
+      {
+        "name": "native_flags_alias",
+        "build_command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-I/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6176d6e5/build/sonic-integration/mutants/native_flags_alias/include",
+          "-Isrc",
+          "tests/unit/sonic_controller_native.cpp",
+          "src/player/sonic_player.cpp",
+          "src/runtime/native_sonic_binding.cpp",
+          "src/math/ninja_length.cpp",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6176d6e5/build/sonic-integration/qualified/native-support.a",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6176d6e5/build/animation-judges/softfloat/softfloat.a",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6176d6e5/build/animation-judges/bochs/libbochs_fpatan.a",
+          "-o",
+          "build/sonic-integration/mutants/native_flags_alias/test"
+        ],
+        "build_exit_status": 0,
+        "original_sha256": "4e4dd882d8a092c2a5d8cfd3084a79d48b9007593320568dd75e06c27236c80a",
+        "replacement_sha256": "ca7af9627549a4eb2a2f803f3385a902236d1915931214434014fa4ab64b4f35",
+        "caught": true,
+        "judge_command": [
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6176d6e5/build/sonic-integration/mutants/native_flags_alias/test"
+        ],
+        "judge_exit_status": -6
+      }
+    ],
+    "new_glue": [
+      {
+        "name": "rebound_primary",
+        "compile_command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-Isrc",
+          "-Itests/fixtures",
+          "-c",
+          "build/sonic-integration/glue-mutants/rebound_primary/replacement.cpp",
+          "-o",
+          "build/sonic-integration/glue-mutants/rebound_primary/replacement.o"
+        ],
+        "compile_exit_status": 0,
+        "compile_output": "",
+        "caught": true,
+        "link_command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-Isrc",
+          "-Itests/fixtures",
+          "-fobjc-arc",
+          "tests/unit/native_sonic_callback.mm",
+          "build/sonic-integration/glue-mutants/rebound_primary/replacement.o",
+          "build/libsadx-native.a",
+          "-framework",
+          "Foundation",
+          "-o",
+          "build/sonic-integration/glue-mutants/rebound_primary/test"
+        ],
+        "link_exit_status": 0,
+        "link_output": "",
+        "command": [
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6176d6e5/build/sonic-integration/glue-mutants/rebound_primary/test",
+          "/Users/burbujamc/Developer/sadx-macos/game/imported"
+        ],
+        "exit_status": -6,
+        "output": "Assertion failed: (event_actions::move_mode(*arena, primary) == 7), function run, file native_sonic_callback.mm, line 72.\n",
+        "witness_sha256": "0e34e7c1786a09645c947df2f48097deb62a2fa20e479b3110b4f881b380b22d"
+      },
+      {
+        "name": "action_as_path",
+        "compile_command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-Isrc",
+          "-Itests/fixtures",
+          "-c",
+          "build/sonic-integration/glue-mutants/action_as_path/replacement.cpp",
+          "-o",
+          "build/sonic-integration/glue-mutants/action_as_path/replacement.o"
+        ],
+        "compile_exit_status": 0,
+        "compile_output": "",
+        "caught": true,
+        "link_command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-Isrc",
+          "-Itests/fixtures",
+          "-fobjc-arc",
+          "tests/unit/native_sonic_callback.mm",
+          "build/sonic-integration/glue-mutants/action_as_path/replacement.o",
+          "build/libsadx-native.a",
+          "-framework",
+          "Foundation",
+          "-o",
+          "build/sonic-integration/glue-mutants/action_as_path/test"
+        ],
+        "link_exit_status": 0,
+        "link_output": "",
+        "command": [
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6176d6e5/build/sonic-integration/glue-mutants/action_as_path/test",
+          "/Users/burbujamc/Developer/sadx-macos/game/imported"
+        ],
+        "exit_status": -6,
+        "output": "Assertion failed: (!context.read_event_link()), function run, file native_sonic_callback.mm, line 64.\n",
+        "witness_sha256": "0e34e7c1786a09645c947df2f48097deb62a2fa20e479b3110b4f881b380b22d"
+      },
+      {
+        "name": "callback_bypass",
+        "compile_command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-Isrc",
+          "-Itests/fixtures",
+          "-c",
+          "build/sonic-integration/glue-mutants/callback_bypass/replacement.cpp",
+          "-o",
+          "build/sonic-integration/glue-mutants/callback_bypass/replacement.o"
+        ],
+        "compile_exit_status": 0,
+        "compile_output": "",
+        "caught": true,
+        "link_command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-Isrc",
+          "-Itests/fixtures",
+          "-fobjc-arc",
+          "tests/unit/native_sonic_callback.mm",
+          "build/sonic-integration/glue-mutants/callback_bypass/replacement.o",
+          "build/libsadx-native.a",
+          "-framework",
+          "Foundation",
+          "-o",
+          "build/sonic-integration/glue-mutants/callback_bypass/test"
+        ],
+        "link_exit_status": 0,
+        "link_output": "",
+        "command": [
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6176d6e5/build/sonic-integration/glue-mutants/callback_bypass/test",
+          "/Users/burbujamc/Developer/sadx-macos/game/imported"
+        ],
+        "exit_status": -6,
+        "output": "Assertion failed: (stopped), function run, file native_sonic_callback.mm, line 30.\n",
+        "witness_sha256": "0e34e7c1786a09645c947df2f48097deb62a2fa20e479b3110b4f881b380b22d"
+      }
+    ],
+    "capture_regression": "Caught by physics_capture.py; eight reference and seven native capture scopes pass."
+  },
+  "normal_input_frontier": {
+    "command": [
+      "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6176d6e5/build/sadx-native",
+      "--assets",
+      "/Users/burbujamc/Developer/sadx-macos/game/imported",
+      "--offscreen",
+      "--paced",
+      "--exit-after",
+      "1550",
+      "--save-directory",
+      "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6176d6e5/build/sonic-integration/frontier/savedata",
+      "--key-events",
+      "500:13:down,501:13:up,750:13:down,751:13:up,950:13:down,951:13:up,1050:13:down,1051:13:up,1300:13:down,1301:13:up",
+      "--capture-directory",
+      "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6176d6e5/build/sonic-integration/frontier/captures",
+      "--capture-at",
+      "1300,1380,1381,1382",
+      "--screenshot",
+      "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6176d6e5/build/sonic-integration/frontier/frontier.ppm"
+    ],
+    "exit_status": 1,
+    "state": {
+      "frames": 1332,
+      "sprite_registry_count": 1,
+      "gamma_setup_assets_loaded": true,
+      "gamma_setup_registered": true
+    },
+    "stop": "native_gamma_initialize_effects",
+    "app_sha256": "c9ae165017c7deaa50c0f8f3539d9c8b212b9232dc2cdb2a8f5eafaec908907b",
+    "screenshot_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427",
+    "screenshot_inspected": true,
+    "screenshot_identical_to_material_event_receipt": true,
+    "sonic_callback_reached": false,
+    "completed_sonic_frame": false
+  },
+  "readability": {
+    "sonic_cpp_before": {
+      "hex_literals": 547,
+      "address_identifiers": 171,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 65,
+      "multi_statement_lines": 2,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 86,
+      "address_comments": 0
+    },
+    "sonic_cpp_after": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "new_shared_body": "All tracked readability metrics are zero in Sonic core/internal/site/seam/native binding files; behavior remains in the game-tier shared template.",
+    "lower_module_lexical_counts": {
+      "src/cpu/crt_acos.cpp": {
+        "hex_literals": 17,
+        "multi_statement_lines": 1,
+        "emulator_arithmetic": 15
+      },
+      "src/cpu/crt_argument.cpp": {
+        "hex_literals": 6,
+        "multi_statement_lines": 1,
+        "emulator_arithmetic": 3
+      },
+      "src/cpu/crt_asin.cpp": {
+        "hex_literals": 25,
+        "multi_statement_lines": 2,
+        "emulator_arithmetic": 23,
+        "address_comments": 1
+      },
+      "src/player/floor_angles.cpp": {
+        "hex_literals": 7,
+        "multi_statement_lines": 1,
+        "emulator_arithmetic": 16
+      },
+      "src/player/ground_acceleration.cpp": {
+        "emulator_arithmetic": 1
+      },
+      "src/player/ground_acceleration_native.cpp": {},
+      "src/player/ground_friction.cpp": {
+        "emulator_arithmetic": 5
+      },
+      "src/player/player_acceleration_air.cpp": {
+        "hex_literals": 19,
+        "long_lines": 4,
+        "multi_statement_lines": 2,
+        "emulator_arithmetic": 26
+      },
+      "src/player/player_input.cpp": {
+        "hex_literals": 21,
+        "emulator_arithmetic": 11
+      },
+      "src/player/player_motion.cpp": {
+        "hex_literals": 1,
+        "emulator_arithmetic": 13
+      },
+      "src/player/player_movement.cpp": {
+        "emulator_arithmetic": 5
+      },
+      "src/player/player_projection.cpp": {
+        "hex_literals": 3,
+        "multi_statement_lines": 8,
+        "emulator_arithmetic": 9
+      },
+      "src/player/player_rotation.cpp": {
+        "hex_literals": 54,
+        "long_lines": 4,
+        "multi_statement_lines": 10,
+        "emulator_arithmetic": 90
+      },
+      "src/player/player_speed.cpp": {
+        "hex_literals": 33,
+        "emulator_arithmetic": 42,
+        "address_comments": 3
+      },
+      "src/player/sonic_player.cpp": {}
+    },
+    "limits": "Nonzero lexical counts are not individually semantic violations: CPU numerical helpers and established ExactFloat modules have legitimate arithmetic. Legacy floor_angles, air/input/motion/movement/projection/rotation/speed implementations retain their own readability/fidelity limits. No entire newly linked closure is classified readable; inherited floor_angles/player_reaction failures remain open, and local-speed oracle covers a seeded suffix."
+  },
+  "registry_changes": [
+    "Reference includes only in existing direct consumers; accepted packet sources/tools/tests added unchanged.",
+    "Five new unit manifest registrations and explicit native/reference/private-observer recipes.",
+    "Original verifier native_sources metadata extended to shared core/internal/site/seam and reference files only; no oracle logic, inputs, expected values, tolerances or exclusions changed.",
+    "Exact legacy identifier allowance relocation; historical owner snapshot retained, live owner checks pass.",
+    "Sonic readability ratchet reduction, reviewed sound table and two immutable constexpr retirements. Four inherited basic-model aggregate fingerprints remain unchanged; only full-source evidence hashes are rebound.",
+    "Retired obsolete Sonic address-call signature with full prior evidence; 41 game-tier dispatch sites become zero. Checker semantics unchanged; HEAD consistency rechecked after judge commit.",
+    "Two save-warning STUB evidence headers rebound for test-only friend declarations; behavior remains unrecovered_open_debt.",
+    "Tracked report summaries and exhaustive refactor scope regenerated; no full-dependency conformance claim."
+  ],
+  "setup_attempts": [
+    "Initial make symbols failed because this isolated checkout lacks the ignored sa-tools Git checkout; provenance passes with the existing Root symbol database supplied read-only.",
+    "Initial player-scene-position-binding manual invocation left Make GAME_EXE unresolved and lacked the retained local corpus; corrected invocation resolves the original EXE and reads the existing Root corpus, then passes all 136/96 cases.",
+    "Initial holdout invocation used system Python without Unicorn; rerun with the pinned existing reference venv passes all 3072 records.",
+    "Initial constexpr/address-dispatch/inventory checks exposed stale integration metadata; finite evidenced migrations preserve all prior classifications/lineage, and the source/test checkers were not weakened."
+  ],
+  "remaining_prerequisites": [
+    "Normal route first requires Gamma initialize-effects recovery; it stops before Sonic at frame 1332.",
+    "Actual ordered CheckEditMode editor word and forced word readers need canonical owners/callers. Never substitute zero defaults.",
+    "Native Sonic animation TableStorage must be built from its own imported actions/content; the full shared parameter table is already borrowed, Gamma animation cannot supply Sonic.",
+    "Canonical alternate-model flag, real model initialization/display/common tail and remaining action bodies.",
+    "Native Motion dependencies and actual hold/position/collision, ground direction/yaw, sound/effects/camera and named stage/damage/animation seams. Lower-module readability/fidelity debt remains as enumerated."
+  ],
+  "not_run": [
+    "Full gate (Root-owned)",
+    "Clean source archive/export qualification",
+    "N3b actor-frame/image acceptance or completed Sonic frame",
+    "New hardware, Windows capture or 63 FPS gameplay qualification",
+    "Fresh Ghidra or reserved Task/reset cohorts",
+    "Schedules, storage, push or Main writes"
+  ]
+}

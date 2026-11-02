@@ -62,7 +62,7 @@
         {
           "path": "src/engine/basic_model.cpp",
           "line": 40,
-          "sha256": "92c102056e70380186cdb295e121916837ed9caead67996c6d99fda5c8ad0815"
+          "sha256": "c4edda79831212f6a8c66fe1f27b2c33390198d4bbbce313e73883adb5a022be"
         }
       ],
       "verification": [
@@ -79,7 +79,7 @@
         {
           "path": "src/engine/basic_model.cpp",
           "line": 41,
-          "sha256": "92c102056e70380186cdb295e121916837ed9caead67996c6d99fda5c8ad0815"
+          "sha256": "c4edda79831212f6a8c66fe1f27b2c33390198d4bbbce313e73883adb5a022be"
         }
       ],
       "verification": [
@@ -96,7 +96,7 @@
         {
           "path": "src/engine/basic_model.cpp",
           "line": 43,
-          "sha256": "92c102056e70380186cdb295e121916837ed9caead67996c6d99fda5c8ad0815"
+          "sha256": "c4edda79831212f6a8c66fe1f27b2c33390198d4bbbce313e73883adb5a022be"
         }
       ],
       "verification": [
@@ -113,7 +113,7 @@
         {
           "path": "src/engine/basic_model.cpp",
           "line": 45,
-          "sha256": "92c102056e70380186cdb295e121916837ed9caead67996c6d99fda5c8ad0815"
+          "sha256": "c4edda79831212f6a8c66fe1f27b2c33390198d4bbbce313e73883adb5a022be"
         }
       ],
       "verification": [
@@ -448,45 +448,6 @@
         "tools/oracles/verify_original_scene_input_producer.py"
       ],
       "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
-    },
-    "src/player/sonic_player.cpp::table": {
-      "sha256": "8c10f93faf97038a8dae94424046caf2cd7dcb3600ae6eedb73d0da00d8f4b08",
-      "classification": "open_migration",
-      "purpose": "Sonic action classification returns basic-block PCs used by action dispatch.",
-      "evidence": [
-        {
-          "path": "src/player/sonic_player.cpp",
-          "line": 219,
-          "sha256": "4b170e197fe8a048e875cd83757dc93558129280156afa87f3137b550af9200f"
-        }
-      ],
-      "verification": [
-        "tests/unit/sonic_player.cpp",
-        "tools/oracles/verify_original_sonic_player.py"
-      ],
-      "verification_limit": "Evidence revalidated after animation binding changes. Dispatch meaning and OPEN_MIGRATION remain unchanged; no Sonic control-flow migration claimed."
-    },
-    "src/player/sonic_player.hpp::addresses": {
-      "sha256": "a6a48f24e8e57254e7d94a66e99a962f8a805fc00b9058293169860c028b31b1",
-      "classification": "open_migration",
-      "purpose": "Executable addresses key Sonic numerical constants.",
-      "evidence": [
-        {
-          "path": "src/player/sonic_player.hpp",
-          "line": 70,
-          "sha256": "cd6c2556f5944cee132e040e80ae878ada8b0f388f7faa6e914a96df73842f87"
-        },
-        {
-          "path": "src/player/sonic_player.cpp",
-          "line": 1,
-          "sha256": "4b170e197fe8a048e875cd83757dc93558129280156afa87f3137b550af9200f"
-        }
-      ],
-      "verification": [
-        "tests/unit/sonic_player.cpp",
-        "tools/oracles/verify_original_sonic_player.py"
-      ],
-      "verification_limit": "Evidence revalidated after animation binding changes. Dispatch meaning and OPEN_MIGRATION remain unchanged; no Sonic control-flow migration claimed."
     },
     "src/game/game_cleanup.cpp::life_slots": {
       "sha256": "fe2b8ba060a7297790c0665720eb4412a7c19c39dd3bad86592fe69462142d20",
@@ -894,6 +855,23 @@
         "tests/python/test_gamma_setup_resource.py"
       ],
       "verification_limit": "Actual valid/synthetic import inverse, malformed magic/count/truncation checks passed in this integration; this classification does not certify particle gameplay."
+    },
+    "src/player/sonic_player_internal.hpp::kStageCharacterSounds": {
+      "sha256": "9e6c9c2e5160aab4e74a4858052763929a315f528a34a9ea4de5275419e8e333",
+      "classification": "typed_content",
+      "purpose": "Eight source character sound identifiers indexed by character, consumed by play_sound; Gamma uses the explicit voice branch. No instruction dispatch or executable lookup.",
+      "evidence": [
+        {
+          "path": "src/player/sonic_player_internal.hpp",
+          "line": 719,
+          "sha256": "35c11bd7ddf67aa84f9ec22b8cf11dbea38889c801cfbdf436b8c0c7451fa006"
+        }
+      ],
+      "verification": [
+        "tools/oracles/sonic_controller/observe.py",
+        "tools/oracles/verify_original_sonic_actions.py"
+      ],
+      "verification_limit": "Accepted source packet plus current complete old/current records. Not native sound composition or a completed actor frame."
     }
   },
   "retired": {
@@ -982,6 +960,87 @@
         "path": "src/player/animation/sonic_animation_content.hpp",
         "symbol": "kSonicRecipes",
         "sha256": "4a19944124840a61fa4a97aae8c6bfa6bfb39c76db76f958e8148ba48946da4a"
+      },
+      "history": []
+    },
+    "src/player/sonic_player.cpp::table": {
+      "review": {
+        "sha256": "8c10f93faf97038a8dae94424046caf2cd7dcb3600ae6eedb73d0da00d8f4b08",
+        "classification": "open_migration",
+        "purpose": "Sonic action classification returns basic-block PCs used by action dispatch.",
+        "evidence": [
+          {
+            "path": "src/player/sonic_player.cpp",
+            "line": 219,
+            "sha256": "4b170e197fe8a048e875cd83757dc93558129280156afa87f3137b550af9200f"
+          }
+        ],
+        "verification": [
+          "tests/unit/sonic_player.cpp",
+          "tools/oracles/verify_original_sonic_player.py"
+        ],
+        "verification_limit": "Evidence revalidated after animation binding changes. Dispatch meaning and OPEN_MIGRATION remain unchanged; no Sonic control-flow migration claimed."
+      },
+      "outcome": "migrated",
+      "reason": "Semantic Mode/Body switch replaces the PC result table. Reference sites retain ABI diagnostics; all complete default observations preserve dispatch outputs.",
+      "evidence": [
+        {
+          "path": "reference/production-integration-20261102/sonic-judge-reconciliation.json",
+          "line": 1,
+          "sha256": "b998087f54c27101690b34eb39790d818b9ea15cb78519446f1d5be6255cf52b"
+        }
+      ],
+      "verification": [
+        "tools/oracles/sonic_controller/observe.py",
+        "tests/unit/sonic_controller_native.cpp"
+      ],
+      "successor": {
+        "path": "src/player/sonic_player.cpp",
+        "symbol": "body",
+        "sha256": "c2b9cd7bd4772fc5e3411ec06c160f890201fff682162ae7e177717de8945fbf"
+      },
+      "history": []
+    },
+    "src/player/sonic_player.hpp::addresses": {
+      "review": {
+        "sha256": "a6a48f24e8e57254e7d94a66e99a962f8a805fc00b9058293169860c028b31b1",
+        "classification": "open_migration",
+        "purpose": "Executable addresses key Sonic numerical constants.",
+        "evidence": [
+          {
+            "path": "src/player/sonic_player.hpp",
+            "line": 70,
+            "sha256": "cd6c2556f5944cee132e040e80ae878ada8b0f388f7faa6e914a96df73842f87"
+          },
+          {
+            "path": "src/player/sonic_player.cpp",
+            "line": 1,
+            "sha256": "4b170e197fe8a048e875cd83757dc93558129280156afa87f3137b550af9200f"
+          }
+        ],
+        "verification": [
+          "tests/unit/sonic_player.cpp",
+          "tools/oracles/verify_original_sonic_player.py"
+        ],
+        "verification_limit": "Evidence revalidated after animation binding changes. Dispatch meaning and OPEN_MIGRATION remain unchanged; no Sonic control-flow migration claimed."
+      },
+      "outcome": "migrated",
+      "reason": "Constant-address lookup metadata is reference-only; the shared native algorithm uses literals. This retirement alone is not behavioral readability progress.",
+      "evidence": [
+        {
+          "path": "reference/production-integration-20261102/sonic-judge-reconciliation.json",
+          "line": 1,
+          "sha256": "b998087f54c27101690b34eb39790d818b9ea15cb78519446f1d5be6255cf52b"
+        }
+      ],
+      "verification": [
+        "tools/oracles/sonic_controller/observe.py",
+        "tests/unit/sonic_controller_native.cpp"
+      ],
+      "successor": {
+        "path": "src/guest/sonic_player_reference.hpp",
+        "symbol": "addresses",
+        "sha256": "37a969e44625b4d031916bfe3ee8c020702cfc38f54514517afde8b541e8a4f4"
       },
       "history": []
     }

@@ -1,5 +1,5 @@
 #include "player/actor_current.hpp"
-#include "player/sonic_player.hpp"
+#include "guest/sonic_player_reference.hpp"
 #include <cassert>
 #include <stdexcept>
 #include <type_traits>

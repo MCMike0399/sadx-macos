@@ -576,3 +576,18 @@ build/native-preview-events-test: tests/unit/native_preview_events.mm src/apps/n
 	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) $< build/libsadx-native.a -framework Foundation -o $@
 
 build/native-gamma-binding-test: tests/fixtures/character_material_consumer.hpp
+
+# Accepted shared Sonic body: native witnesses exclude the reference/core archive.
+build/sonic-controller-native-test: tests/unit/sonic_controller_native.cpp build/libsadx-native.a
+	$(CXX) $(CXXFLAGS) $(INCLUDES) $< build/libsadx-native.a -o $@
+build/sonic-controller-reference-test: tests/unit/sonic_controller_reference.cpp build/libsadx-guest.a build/libsadx-core.a
+	$(CXX) $(CXXFLAGS) $(INCLUDES) $< build/libsadx-guest.a build/libsadx-core.a -o $@
+build/sonic-physics-capture-reference-test: tests/unit/sonic_physics_capture_reference.cpp build/libsadx-guest.a build/libsadx-core.a
+	$(CXX) $(CXXFLAGS) $(INCLUDES) $< build/libsadx-guest.a build/libsadx-core.a -o $@
+# Private yaw observation TU throws at the uncomposed boundary; never shipping behavior.
+build/sonic-ground-observer.o: src/player/ground_acceleration_native.cpp src/player/ground_acceleration_internal.hpp
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -Dturn_ground_yaw=unobserved_ground_yaw_stub -c $< -o $@
+build/sonic-physics-capture-native-test: tests/unit/sonic_physics_capture_native.cpp build/sonic-ground-observer.o build/libsadx-native.a
+	$(CXX) $(CXXFLAGS) $(INCLUDES) $< build/sonic-ground-observer.o build/libsadx-native.a -o $@
+build/native-sonic-callback-test: tests/unit/native_sonic_callback.mm build/libsadx-native.a
+	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) $< build/libsadx-native.a -framework Foundation -o $@

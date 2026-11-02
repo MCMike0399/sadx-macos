@@ -1,6 +1,6 @@
 #include "input/input_mod_pad.hpp"
 #include "player/scene_input_producer.hpp"
-#include "player/sonic_player.hpp"
+#include "guest/sonic_player_reference.hpp"
 #include <iostream>
 #include <stdexcept>
 // Keyboard events -> InputState (Input 2.6.1 ramp) -> Input mod OnInput ->

@@ -18,7 +18,7 @@ STARTUP = ["src/player/player_startup.cpp", "src/player/player_state.cpp",
            "src/player/player_task.cpp", "src/guest/player_initialization_reference.cpp",
            "src/engine/task.cpp", "src/engine/task_work.cpp", "src/cpu/x87_math.cpp"]
 SONIC = list(dict.fromkeys(COMMON + STARTUP + [
-    "src/player/sonic_player.cpp", "src/player/actor_current.cpp", "src/player/player_hold.cpp",
+    "src/player/sonic_player.cpp", "src/guest/sonic_player_reference.cpp", "src/player/actor_current.cpp", "src/player/player_hold.cpp",
     "src/player/player_motion.cpp", "src/player/player_input.cpp", "src/player/player_coordinates.cpp",
     "src/player/player_movement.cpp", "src/player/player_position.cpp", "src/player/player_rotation.cpp",
     "src/player/player_projection.cpp", "src/player/player_acceleration_air.cpp",

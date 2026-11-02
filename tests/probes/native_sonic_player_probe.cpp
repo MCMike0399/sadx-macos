@@ -1,4 +1,4 @@
-#include "player/sonic_player.hpp"
+#include "guest/sonic_player_reference.hpp"
 #include <cstring>
 namespace   {
     float scalar(std::uint32_t bits)  {
