@@ -983,3 +983,12 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Existing caller assertions remain: initialization sets Stand before the texture stop, and a repeated callback now reaches unbound controls. No fixture mode reset hides that transition. Failed former-boundary expectations remain recorded.
 * The generated callback equals the shipping source; header dependencies and inline-loader prerequisites are complete. Only the unchanged sound-table consumer fingerprint was rebound. No inherited protection was removed.
 * Normal input remains at Gamma GetMMMatrix, frame 1332, exit 1, with unchanged title image. sonic-model-root-integration.json records focused scope. Full gate/cold qualification remains e1946df8 until the next combined run succeeds.
+
+### 2026-11-02 — Sonic model/input integration gate and cold build pass
+
+* Full gate at e9bf38a8 exits 0: 330 native programs, 622 Python tests, reference R1–R4, three native menu/save journeys and sixteen startup comparisons. Seven skips remain reported.
+* Six qualified offline raster checks pass separately with no skips; only the inherited volume case-alias capability remains skipped across those checks.
+* Fresh source-export native build and force-load closure pass without original EXE/DLL or prebuilt game objects. Only copied public SDL3/libusb is reused. Normal input still reaches GetMMMatrix at frame 1332, exit 1, with the identical outgoing-title image.
+* sonic-model-input-gate.json, sonic-model-input-qualified-rasters.json and sonic-model-input-source-only.json retain exact commands and limits. STATUS is regenerated from the real gate. No completed actor frame or N3b claim follows.
+* Matrix worker 348117da was explicitly released after the gate (continuation 0a651d8d). It reports a private reference measurement at frame 1334: no earlier producer, zero initial count/buffer/scratch, invalid getter preserves destination. That candidate still requires final qualification/review; native timing remains 1332.
+* Next work is measured matrix activation and the remaining Sonic initialization calls, retaining all inherited numeric partials and explicit later boundaries.

@@ -1,0 +1,51 @@
+{
+  "revision": "e9bf38a88c4523f954c35acb1a5579c89952bb9e",
+  "source_directory": "/Users/burbujamc/Developer/sadx-macos/build/sonic-model-input-source-only-6zu7phdj/source",
+  "qualification_directory": "/Users/burbujamc/Developer/sadx-macos/build/sonic-model-input-source-only-6zu7phdj/qualification",
+  "archive_sha256": "a7e6ea3bf9a5d8dba81962a445965308a13922b05cb3415c1dcee64643b8a14d",
+  "initial_original_binaries": 0,
+  "initial_prebuilt_game_objects": 0,
+  "reused_dependency": "Copied pinned public SDL3/libusb headers/libraries only; all maintained native/numerical code rebuilt.",
+  "command": [
+    "make",
+    "-C",
+    "/Users/burbujamc/Developer/sadx-macos/build/sonic-model-input-source-only-6zu7phdj/source",
+    "-j2",
+    "-o",
+    "build/native-controller-deps/include/SDL3/SDL.h",
+    "build/sadx-native",
+    "native-closure"
+  ],
+  "build_exit_status": 0,
+  "build_log_sha256": "ed3048c2e259ca95388af9df19027bb49343d28c0ab0fa87ecde976c29177006",
+  "app_command": [
+    "/Users/burbujamc/Developer/sadx-macos/build/sonic-model-input-source-only-6zu7phdj/source/build/sadx-native",
+    "--assets",
+    "/Users/burbujamc/Developer/sadx-macos/game/imported",
+    "--offscreen",
+    "--paced",
+    "--exit-after",
+    "1550",
+    "--save-directory",
+    "/Users/burbujamc/Developer/sadx-macos/build/sonic-model-input-source-only-6zu7phdj/qualification/savedata",
+    "--key-events",
+    "500:13:down,501:13:up,750:13:down,751:13:up,950:13:down,951:13:up,1050:13:down,1051:13:up,1300:13:down,1301:13:up",
+    "--screenshot",
+    "/Users/burbujamc/Developer/sadx-macos/build/sonic-model-input-source-only-6zu7phdj/qualification/frontier.ppm"
+  ],
+  "app_exit_status": 1,
+  "stop": "native session stopped: native_gamma_get_model_matrix",
+  "state": {
+    "frames": 1332,
+    "sprite_registry_count": 1,
+    "gamma_setup_assets_loaded": true,
+    "gamma_setup_registered": true
+  },
+  "app_sha256": "0ab6a60c9bed36c4e37961cdd3ee271b409a20fe614138f9b0396a636e504f6d",
+  "screenshot_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427",
+  "matches_integrated_image": true,
+  "limits": [
+    "Fresh source archive has no original executable/DLL or prebuilt game objects; public dependencies copied and imported assets external.",
+    "GetMMMatrix stop only; no actor frame, N3b or full gameplay qualification."
+  ]
+}
