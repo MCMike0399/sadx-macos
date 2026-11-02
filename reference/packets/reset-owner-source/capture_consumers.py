@@ -15,6 +15,9 @@ import struct
 import sys
 
 
+CONTRACT_PATH = Path(__file__).resolve().parents[3] / 'docs/refactor-inventory/packets/reset-owner-source/CAPTURE-CONTRACTS.json'
+CONTRACT_SHA256 = 'e941d44fe9f673a53e55a37997e2637280e8f00a60c97f88500593fd81f05397'
+
 def argument(value):
     if isinstance(value, ctypes.Array):
         data = bytes(value)
@@ -116,7 +119,9 @@ def main():
     slug, library, destination = sys.argv[1:4]
     source_root = Path(sys.argv[4]) if len(sys.argv) == 5 else Path('.')
     output = new_destination(Path(destination))
-    contracts = json.loads(Path(__file__).with_name('CAPTURE-CONTRACTS.json').read_text())
+    if hashlib.sha256(CONTRACT_PATH.read_bytes()).hexdigest() != CONTRACT_SHA256:
+        raise ValueError('frozen default contract changed')
+    contracts = json.loads(CONTRACT_PATH.read_text())
     contract = contracts[slug]
     script = source_root / 'tools/oracles' / f'verify_original_{slug}.py'
     spec = importlib.util.spec_from_file_location('reset_capture_judge', script)
@@ -173,7 +178,7 @@ def main():
     receipt = {'slug': slug, 'exit': int(status), 'calls': capture['count'], 'schema': 4, 'original_observations': len(observed),
                'source_git_base': __import__('subprocess').check_output(['git','rev-parse','HEAD'],text=True).strip(),
                'helper_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
-               'contract_sha256': hashlib.sha256(Path(__file__).with_name('CAPTURE-CONTRACTS.json').read_bytes()).hexdigest(),
+               'contract_sha256': hashlib.sha256(CONTRACT_PATH.read_bytes()).hexdigest(),
                'comparison_old_base': contract['immutable_old_base'],
                'compiled_model_sha256': hashlib.sha256(Path(library).read_bytes()).hexdigest(),
                'executed_judge_sha256': hashlib.sha256(script.read_bytes()).hexdigest(),

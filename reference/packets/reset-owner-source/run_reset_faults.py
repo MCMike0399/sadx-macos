@@ -43,6 +43,7 @@ def main():
     original = SOURCE.read_bytes()
     frozen = hashlib.sha256(original).hexdigest()
     expected = Path('docs/refactor-inventory/packets/reset-owner-source/old-order.txt').read_bytes()
+    assert hashlib.sha256(expected).hexdigest() == '6f67e39f498fb639745bbdb113de4cbe4063b006d326d808a6a6df9185c0a534'
     environment = dict(os.environ, PYTHONPATH='tools/lib:tools/oracles')
     results = []
     try:
