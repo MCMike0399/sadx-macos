@@ -1011,3 +1011,11 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * App/force-load, new real caller, eight inherited caller programs and static checks pass at -j2. Eleven unchanged judges retain numeric results and all emitted partial identities; imported matrices retain 774 rows and three partials.
 * Root owns the minimal Display/source-list hunks, test registration, inventory and admission. All 1,441 protections remain, including 53 local absences; the finite proposal adds nine paths. No manifest refresh or full gate was run.
 * PACKET.md and VERIFICATION.json retain source, owner, caller, commands and limits. Active PJoin arguments/deformation/attachments and display/controller bodies remain explicit boundaries; shared Session/PlayerSystem fields and later Gamma code are unchanged.
+
+### 2026-11-02 — Gamma display source checkpoint under Root heavy hold
+
+* Packet gamma-display-native reuses admitted fan bytes. Its baseline app and force-load build pass; normal input reaches display at frame 1332 with the inspected outgoing title, exit 1.
+* Complete display and helper dossiers are retained with evidence IDs. Display changes live sibling links and writes the existing GammaWeldInfo first source-object alias, rather than a new cache owner.
+* The draft display placement and render-state leaves are uncompiled. A private import appends 169 records and preserves all 3,328 prior records and action bindings; original inputs remain untouched.
+* Both owned 2 GiB Ghidra sessions closed normally. Root requested heavy hold before new compilation, oracles or app execution. No new cohort or full gate was started.
+* SOURCE-EVIDENCE.json and ROOT-WIRING.patch preserve the draft and exact shared-owner integration proposal. Qualification and actual renderer progress remain open; no actor frame or N3b claim.

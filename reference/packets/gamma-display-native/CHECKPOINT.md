@@ -1,0 +1,38 @@
+# Gamma display source checkpoint
+
+This is an uncompiled draft, not an integration or rendering result. Root requested
+heavy hold on 2026-11-02 after the completed dossier/import work. Both owned Ghidra
+sessions closed normally; no worker build, oracle or app process remains active.
+No full gate is authorized. Resume heavy work only after Root explicitly releases it.
+
+The admitted fan source is reused unchanged in prerequisite commits 2ad7a4e9 and
+1cb3885f, equivalent to c8967938/bdfb4359. Root now admits it through 08884f1d.
+The initial private app/force-load build passed with its exact sine/source-list patch.
+Normal input reproduced display at frame 1332, exit 1, completed 1330, with the
+inspected outgoing title. This evidence predates every new display source edit.
+
+The complete 2,515-byte display dossier and event-animation helper are retained
+under ignored reference/inventory-raw/gamma-display-native. SOURCE-EVIDENCE.json
+records evidence IDs/hashes. The source draft covers sibling selection, the real
+weld source alias, palette 4, display suppression guard, canonical texture/render
+state, matrix placement, collision-center writes and the first action boundary.
+Walking sway, event blending, hidden-tail behavior and later attachments remain
+explicit dependencies. The first action renderer remains unimplemented; no actor
+frame or N3b completion is claimed.
+
+A private asset import appends 169 records while retaining all 3,328 old records,
+all 22 action bindings and old pack bytes except the count word. It supplies missing
+Gamma table rows without reinterpreting existing IDs. Original game/Windows and
+Main source inputs are unchanged. The new app reader treats absent display rows
+as unavailable at consumption, preserving old pack usability before display.
+
+ROOT-WIRING.patch targets admitted fan Main ba88c5cc and changes only exact hunks
+for Display's borrowed state, a palette operation, real callback composition and
+two native source entries. It is not applied to tracked shared files. Private
+headers/source fixture await compilation after the hold. Root must preserve all
+1,460 protections now described by the combined Sonic/fan integration; no judge
+manifest refresh, inventory retirement or old test change is included here.
+
+Remaining: compile/fix this draft; validate original source/store/failure order and
+leaf state with faults/holdout; unchanged affected regressions; actual caller/app
+and private normal-input capture. Retain every inherited partial/failure identity.
