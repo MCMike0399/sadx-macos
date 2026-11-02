@@ -9,13 +9,23 @@ constexpr std::uint32_t kIgnoreAmbient = 0x00080000;
 constexpr std::int32_t kHalfTurn = 32768;
 
 // NOTSA: the two writes select live sibling links, not detached model copies.
-void select_body(Context &context, std::uint16_t upgrades) {
+void select_body(Context &context, ObjectTable table, std::uint16_t upgrades) {
     const bool upgraded = (upgrades & kLaserBlaster) != 0;
-    const auto first = object_row(context, upgraded ? 16 : 14);
-    store_sibling(context, object_row(context, 22), first);
-    const auto second = object_row(context, upgraded ? 20 : 18);
-    store_sibling(context, object_row(context, 23), second);
-    const auto selected = sibling(context, object_row(context, 22));
+    // The equipped branch loads the destination before its selected sibling.
+    // The ordinary branch does the reverse; aliases/failures can distinguish it.
+    if (upgraded) {
+        const auto destination = object_row(context, table, 22);
+        const auto first = object_row(context, table, 16);
+        store_sibling(context, destination, first);
+    } else {
+        const auto first = object_row(context, table, 14);
+        store_sibling(context, object_row(context, table, 22), first);
+    }
+    table = object_table(context);
+    const auto second = object_row(context, table, upgraded ? 20 : 18);
+    store_sibling(context, object_row(context, table, 23), second);
+    table = object_table(context);
+    const auto selected = sibling(context, object_row(context, table, 22));
     store_weld_source(context, child(context, selected));
 }
 
@@ -38,9 +48,12 @@ NinjaVector place_body(Context &context) {
     auto offset = transform_vector(context, local);
     pop(context);
     const auto saved_offset = offset;
-    offset.x = (exact(context, offset.x) + position(context, Axis::X)).rounded();
-    offset.y = (exact(context, offset.y) + position(context, Axis::Y)).rounded();
-    offset.z = (exact(context, offset.z) + position(context, Axis::Z)).rounded();
+    const auto x = exact(context, offset.x);
+    offset.x = (x + position(context, Axis::X)).rounded();
+    const auto y = exact(context, offset.y);
+    offset.y = (y + position(context, Axis::Y)).rounded();
+    const auto z = exact(context, offset.z);
+    offset.z = (z + position(context, Axis::Z)).rounded();
     translate(context, offset);
     capture_collision_info(context);
     store_collision_center(context, 0, Axis::X, offset.x);
@@ -62,9 +75,10 @@ NinjaVector place_body(Context &context) {
 
 void display(Context &context, const TaskHandle &task) {
     capture(context, task);
+    const auto table = object_table(context);
     const auto upgrades = equipment(context);
     capture_extra(context);
-    select_body(context, upgrades);
+    select_body(context, table, upgrades);
     select_palette(context, 4);
     auto animation = requested_animation(context);
     if (animation_mode(context) == 2)

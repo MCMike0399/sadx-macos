@@ -38,6 +38,7 @@ void capture(Context &context, const TaskHandle &task) {
     if (!task) missing("native_gamma_display_task");
     context.task = task;
     context.primary = task->primary_work;
+    context.primary_state = task->primary_state;
     context.player = gamma_selection::player_for_motion(context.owner, task->motion_work);
 }
 std::uint16_t equipment(Context &context) {
@@ -48,9 +49,13 @@ std::uint16_t equipment(Context &context) {
 void capture_extra(Context &context) {
     context.extra = gamma_selection::extra_work(context.owner, context.player);
 }
-ObjectId object_row(Context &context, unsigned index) {
+ObjectTable object_table(Context &context) {
     if (!context.owner.players.gamma_assets) missing("native_gamma_display_assets");
-    const auto &rows = context.owner.players.gamma_assets->display_objects;
+    return &context.owner.players.gamma_assets->display_objects;
+}
+ObjectId object_row(Context &, ObjectTable table, unsigned index) {
+    if (!table) missing("native_gamma_display_object_table");
+    const auto &rows = *static_cast<const std::map<unsigned, ObjectId> *>(table);
     const auto found = rows.find(index);
     if (found == rows.end())
         missing("native_gamma_display_object_row_" + std::to_string(index));
@@ -75,10 +80,14 @@ void select_palette(Context &context, std::int32_t value) {
     context.owner.display_palette(value);
 }
 std::uint16_t requested_animation(Context &context) {
-    return player_initialization::bind_initialized_player(context.player).requested_animation;
+    const auto &value = physics(context).requested_animation_at_124;
+    if (!value) missing("native_gamma_display_requested_animation");
+    return *value;
 }
 std::uint16_t current_animation(Context &context) {
-    return player_initialization::bind_initialized_player(context.player).current_animation;
+    const auto &value = physics(context).current_animation_at_126;
+    if (!value) missing("native_gamma_display_current_animation");
+    return *value;
 }
 std::int16_t animation_mode(Context &context) {
     const auto &mode = physics(context).animation_mode_at_120;
@@ -86,18 +95,21 @@ std::int16_t animation_mode(Context &context) {
     return *mode;
 }
 std::uint16_t status(Context &context) {
-    return player_initialization::bind_primary_view(context.task).status;
+    if (!context.primary_state) missing("native_gamma_display_primary");
+    return context.primary_state->orientation.flags;
 }
 float motion_height(Context &context) {
     constexpr unsigned kMotionHeight = 284;
     return read<float>(context, context.player->allocation, kMotionHeight);
 }
 std::int32_t angle(Context &context, Axis field) {
-    return player_initialization::bind_primary_view(context.task).rotation[axis(field)];
+    if (!context.primary_state) missing("native_gamma_display_primary");
+    return context.primary_state->orientation.angles[axis(field)];
 }
 float position(Context &context, Axis field) {
-    auto view = player_initialization::bind_primary_view(context.task);
-    return component(view.position, field);
+    if (!context.primary_state || !context.primary_state->position)
+        missing("native_gamma_display_position");
+    return component(*context.primary_state->position, field);
 }
 fidelity::ExactFloat exact(Context &context, float value) {
     return {context.arithmetic(), value};

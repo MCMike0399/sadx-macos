@@ -6,6 +6,7 @@
 
 namespace sadx::gamma_display {
 using ObjectId = character_pack::ResourceId;
+using ObjectTable = const void *; // NOTSA: borrowed table identity, resolved by its binding.
 struct Context;
 enum class Axis { X, Y, Z };
 
@@ -13,7 +14,8 @@ enum class Axis { X, Y, Z };
 void capture(Context &, const TaskHandle &);
 std::uint16_t equipment(Context &);
 void capture_extra(Context &);
-ObjectId object_row(Context &, unsigned);
+ObjectTable object_table(Context &);
+ObjectId object_row(Context &, ObjectTable, unsigned);
 ObjectId sibling(Context &, ObjectId);
 ObjectId child(Context &, ObjectId);
 void store_sibling(Context &, ObjectId, ObjectId);

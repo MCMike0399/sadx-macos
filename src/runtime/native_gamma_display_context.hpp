@@ -11,6 +11,7 @@ struct Context {
     gamma_selection::Context &owner;
     TaskHandle task;
     TaskWorkHandle primary, extra;
+    std::shared_ptr<PlayerTaskState> primary_state;
     player_initialization::PlayerHandle player;
     std::shared_ptr<collision_component::Work> collision;
     explicit Context(gamma_selection::Context &owner) : owner(owner) {}
