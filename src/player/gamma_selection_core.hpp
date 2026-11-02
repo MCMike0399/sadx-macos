@@ -53,15 +53,15 @@ struct State {
     std::uint32_t line_point_count = 0;
     // GLOBAL: SONIC 0x3c53f68 GammaLineVertices size=24
     std::array<NinjaVector, 2> line_vertices = {};
-    // GLOBAL: SONIC 0x3c53ad8 GammaModelNode54Matrix size=48
+    // GLOBAL: SONIC 0x3c53ad8 GammaModelNode54Matrix size=64
     NinjaMatrix node54_matrix = {};
-    // GLOBAL: SONIC 0x3c53c48 GammaModelNode30Matrix size=48
+    // GLOBAL: SONIC 0x3c53c48 GammaModelNode30Matrix size=64
     NinjaMatrix node30_matrix = {};
-    // GLOBAL: SONIC 0x3c53b78 GammaModelNode39Matrix size=48
+    // GLOBAL: SONIC 0x3c53b78 GammaModelNode39Matrix size=64
     NinjaMatrix node39_matrix = {};
-    // GLOBAL: SONIC 0x3c53b20 GammaModelNode2Matrix size=48
+    // GLOBAL: SONIC 0x3c53b20 GammaModelNode2Matrix size=64
     NinjaMatrix node2_matrix = {};
-    // GLOBAL: SONIC 0x3c53c00 GammaModelNode37Matrix size=48
+    // GLOBAL: SONIC 0x3c53c00 GammaModelNode37Matrix size=64
     NinjaMatrix node37_matrix = {};
 };
 
@@ -136,7 +136,7 @@ void join_vertices(Context &, Primary, const TaskWorkHandle &, const Player &);
 void update_laser_targets(Context &, const TaskWorkHandle &, std::uint8_t index);
 // NOTSA: native/reference binding to the canonical model-matrix getter.
 void get_model_matrix(Context &, unsigned node, NinjaMatrix &);
-// STUB: SONIC 0x784fb0 njRotateZ
+// FUNCTION: SONIC 0x784fb0 njRotateZ
 void rotate_z(Context &, NinjaMatrix &, std::int32_t angle);
 // STUB: SONIC 0x4c2e90 GammaUpdateFan
 void update_fan(Context &, Primary, const Player &, const TaskWorkHandle &);

@@ -1,5 +1,6 @@
 #pragma once
 #include "runtime/gamma_actor_assets.hpp"
+#include "engine/model_matrices.hpp"
 #include "runtime/gamma_motion.hpp"
 #include "runtime/sonic_animation_assets.hpp"
 #include "runtime/character_texture_assets.hpp"
@@ -69,5 +70,6 @@ struct Context {
     character_pack::SceneState &scene;
     const editor::View *editor_state = nullptr;
     std::array<NativeAnalogInput, 8> *normalized_input = nullptr;
+    model_matrices::State *model_matrices = nullptr;
 };
 } // namespace sadx::gamma_selection

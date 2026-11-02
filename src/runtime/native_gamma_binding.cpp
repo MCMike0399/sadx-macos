@@ -340,12 +340,14 @@ void update_laser_targets(Context &context, const TaskWorkHandle &work, std::uin
     gamma_input_buffer::restore(access, index);
 }
 // NOTSA: native boundary for GetMMMatrix; source seam declared in the Gamma core.
-void get_model_matrix(Context &, unsigned, NinjaMatrix &) {
-    missing("native_gamma_get_model_matrix");
+void get_model_matrix(Context &context, unsigned node, NinjaMatrix &destination) {
+    if (!context.model_matrices)
+        missing("native_gamma_get_model_matrix");
+    (void)model_matrices::get(*context.model_matrices, node, destination);
 }
 // NOTSA: native boundary for njRotateZ; source seam declared in the Gamma core.
-void rotate_z(Context &, NinjaMatrix &, std::int32_t) {
-    missing("native_gamma_rotate_z");
+void rotate_z(Context &context, NinjaMatrix &matrix, std::int32_t angle) {
+    context.rendering.rotate_matrix_z(matrix, angle);
 }
 // NOTSA: native boundary for GammaUpdateFan; source seam declared in the Gamma core.
 void update_fan(Context &, Primary, const Player &, const TaskWorkHandle &) {

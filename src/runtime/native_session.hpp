@@ -244,6 +244,7 @@ class Session final : private flow::NativeServices {
     std::shared_ptr<const character_pack::CharacterPack> character_pack_;
     bootstrap::SonicActions actions_;
     character_pack::SceneState character_scene_;
+    model_matrices::State model_matrices_;
     ActionHandle knuckles_clear_, knuckles_transition_;
     ActionHandle big_sit_, big_sit_repeat_, big_prepare_, big_cast_, big_cast_repeat_;
     bootstrap::Services services_;

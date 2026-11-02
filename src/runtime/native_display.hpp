@@ -38,6 +38,10 @@ class Display {
     const LogoRenderer &output() const { return *output_; }
     LogoFrame frame_state();
     const D3dxViewport &viewport() const { return view_.depth.viewport; }
+    // NOTSA: matrix consumers borrow the renderer's existing numeric owner.
+    void rotate_matrix_z(NinjaMatrix &matrix, std::int32_t angle) {
+        coordinates_->rotate_z(matrix, angle, arithmetic_);
+    }
     X87Context &arithmetic() { return arithmetic_; }
     SseContext &sse() { return sse_; }
     void set_camera();

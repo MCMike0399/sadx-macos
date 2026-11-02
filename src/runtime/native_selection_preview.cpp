@@ -239,6 +239,7 @@ void TitleScene::exec_selection_gamma(TaskScheduler &scheduler, const TaskHandle
                                     scene.session_.mission_editor_status_};
     context.editor_state = &editor_state;
     context.normalized_input = scene.input_.normalized_input;
+    context.model_matrices = &scene.session_.model_matrices_;
     gamma_selection::run(context, task);
 }
 // NOTSA: native boundary for E102Display; source seam declared in the Gamma core.
