@@ -1,0 +1,18 @@
+{
+  "base": "eb49adc75d5398780664b43d77d5061be6260a7d",
+  "source": "4a33d28",
+  "judge": "12c2e14",
+  "protected_candidates_sha256": {
+    "reference/packets/character-materials-native/inspect_source.py": "6f2cabb4c272f27266b0c518b6a8b3a947717f833aa5792fa33fe079d732e426",
+    "reference/packets/character-materials-native/verify.py": "695876fdf8d28413e847b768e5300eae550d2dbcaee5a3253e15eaf3047ce979",
+    "tests/fixtures/character_material_consumer.hpp": "c6848852924404622e38964b21449c793e2cdb2b618f29ef3f5b6aa506b8916b",
+    "tests/probes/native_basic_model_probe.cpp": "90dfdcc21b59368900a2ca17ccaca2009e7587459c0c08d3dfb8893c8be9cd89",
+    "tests/unit/animation_gamma_shared_binding.mm": "517e552538b8503822eea81fadc4b3852f76c606d8551d192906778459384a4a",
+    "tests/unit/model_binding.cpp": "3e5748dd21732f5c534bb95074788611168dff216d3660510ca8b368a00d85c8",
+    "tests/unit/native_gamma_binding.mm": "a83117520e37c8393b6e4b7aefafbdf401e3d7977991711c564b9ee9a3c017c5",
+    "tests/unit/native_gamma_weld_cursors.mm": "16f30d1fcf70d97c6f1eef4ee1c6db8b432c60ef242e45a220740b9979135ca8"
+  },
+  "build_dependency_addition": "build/native-gamma-binding-test: tests/fixtures/character_material_consumer.hpp",
+  "source_symbol_global_registration": "No additions. The new record header is included through existing character_geometry; no new translation unit or source address owner.",
+  "manifest_policy": "Root owns manifest refresh after independent review. Existing registrations remain valid; do not add duplicate rows. This packet does not refresh shared judge manifest."
+}
