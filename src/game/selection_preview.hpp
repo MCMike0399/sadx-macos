@@ -123,9 +123,10 @@ struct PlayerEventActionNode;
 }
 
 namespace sadx::selection_preview {
+using ActionTail = PlayerEventActionNode *;
 struct ActionState {
     // GLOBAL: SONIC 0x3c5ff68 CharSelActionTails size=24
-    std::array<PlayerEventActionNode *, 6> tails{};
+    std::array<ActionTail, 6> tails = {};
 };
 // NOTSA: accesses imported sequences and live owners at each source read. In
 // particular, a queued action may mutate work, selection, or the event list.
