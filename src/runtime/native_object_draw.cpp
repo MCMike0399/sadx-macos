@@ -5,7 +5,7 @@
 
 namespace sadx::object_draw {
 namespace {
-// STUB: SONIC 0x781770 njRotateXYZ numeric operation binding not yet verified
+// NOTSA: object-draw binding remains explicit; the numeric primitive is recovered separately.
 void rotate_default(Context &, std::array<std::int32_t, 3>) {
     throw flow::UnrecoveredGameFlowCall("native_object_rotate_xyz");
 }

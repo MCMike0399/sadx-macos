@@ -134,7 +134,7 @@ void set_motion(Context &, const Player &);
 void join_vertices(Context &, Primary, const TaskWorkHandle &, const Player &);
 // NOTSA: binds gamma_input_buffer::restore to the actual extra-work and input owners.
 void update_laser_targets(Context &, const TaskWorkHandle &, std::uint8_t index);
-// STUB: SONIC 0x4b82d0 GetMMMatrix
+// NOTSA: native/reference binding to the canonical model-matrix getter.
 void get_model_matrix(Context &, unsigned node, NinjaMatrix &);
 // STUB: SONIC 0x784fb0 njRotateZ
 void rotate_z(Context &, NinjaMatrix &, std::int32_t angle);
