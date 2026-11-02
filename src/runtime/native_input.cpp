@@ -416,6 +416,9 @@ AnalogSnapshot Input::analog_snapshot(std::size_t player) const {
     const auto &value = impl_->scene.normalized_analogs.at(player);
     return {value.angle, value.magnitude};
 }
+std::array<NativeAnalogInput, 8> &Input::normalized_analogs() {
+    return impl_->scene.normalized_analogs;
+}
 std::array<std::uint32_t, 5> Input::button_masks() const {
     return impl_->scene.masks;
 }

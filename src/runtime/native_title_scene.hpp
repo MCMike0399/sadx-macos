@@ -12,6 +12,7 @@
 #include "engine/font_native.hpp"
 #include "runtime/title_assets.hpp"
 #include "game/selection_preview.hpp"
+#include "player/scene_input_producer.hpp"
 #include <functional>
 
 namespace sadx::native {
@@ -54,6 +55,7 @@ class TitleScene final : private title_menu::Calls,
         std::function<std::int32_t(std::int32_t)> soft_reset_check;
         std::function<std::int32_t(std::int32_t)> key_pressed;
         std::function<std::uint32_t()> pressed_buttons;
+        std::array<NativeAnalogInput, 8> *normalized_input = nullptr;
     };
     void attach_input(InputServices input) { input_ = std::move(input); }
     void initialize();

@@ -263,7 +263,8 @@ class Application {
             [this](std::int32_t index) {
                 return static_cast<std::int32_t>(input->key_state(index).pressed);
             },
-            [this] { return input->pressed(0); }
+            [this] { return input->pressed(0); },
+            &input->normalized_analogs()
         });
         configure_movie();
     }

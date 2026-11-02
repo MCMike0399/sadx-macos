@@ -3,6 +3,7 @@
 #include "input/input_initial_state.hpp"
 #include "input/input_mod_pad.hpp"
 #include "player/player_input_producer.hpp"
+#include "player/scene_input_producer.hpp"
 #include <array>
 #include <cstdint>
 #include <memory>
@@ -124,6 +125,8 @@ class Input {
     ControllerInputValues engine_snapshot(std::size_t player) const;
     std::uint32_t published_held(std::size_t player) const;
     AnalogSnapshot analog_snapshot(std::size_t player) const;
+    // NOTSA: borrow the same input_dataG storage updated by GetControllers.
+    std::array<NativeAnalogInput, 8> &normalized_analogs();
     std::array<std::uint32_t, 5> button_masks() const;
 
   private:

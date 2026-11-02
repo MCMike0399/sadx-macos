@@ -59,7 +59,9 @@ struct NativeSceneInputState {
     std::array<ControllerInputValues, 8> engine_pads{};
     std::array<std::uint32_t, 4> held{}, pressed{}, held_output{}, pressed_output{};
     std::array<std::int32_t, 4> repeat{};
-    std::array<NativeAnalogInput, 8> raw_analogs{}, normalized_analogs{};
+    std::array<NativeAnalogInput, 8> raw_analogs{};
+    // GLOBAL: SONIC 0x3b0e7a0 input_dataG size=64
+    std::array<NativeAnalogInput, 8> normalized_analogs = {};
     // Source load-image values, in GameControllerButtonMasks declaration order.
     std::array<std::uint32_t, 5> masks{{1026, 4, 1026, 512, 512}};
 };

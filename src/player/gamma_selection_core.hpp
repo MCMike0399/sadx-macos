@@ -132,7 +132,7 @@ void initialize_effects(Context &);
 void set_motion(Context &, const Player &);
 // STUB: SONIC 0x43fa90 PJoinVertexes
 void join_vertices(Context &, Primary, const TaskWorkHandle &, const Player &);
-// STUB: SONIC 0x4c3870 GammaUpdateLaserTargets
+// NOTSA: binds gamma_input_buffer::restore to the actual extra-work and input owners.
 void update_laser_targets(Context &, const TaskWorkHandle &, std::uint8_t index);
 // STUB: SONIC 0x4b82d0 GetMMMatrix
 void get_model_matrix(Context &, unsigned node, NinjaMatrix &);

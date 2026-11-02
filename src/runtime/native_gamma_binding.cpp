@@ -2,7 +2,9 @@
 #include "runtime/native_display.hpp"
 #include "player/selection_player_queries.hpp"
 #include "player/player_vertex_weld.hpp"
+#include "player/gamma_input_buffer.hpp"
 #include "game/game_mode.hpp"
+#include <cstring>
 
 namespace sadx::gamma_selection {
 namespace {
@@ -300,9 +302,42 @@ void join_vertices(Context &context, Primary, const TaskWorkHandle &, const Play
         vertex_weld::restore(**table, arena(context), context.scene);
     }
 }
-// NOTSA: native boundary for GammaUpdateLaserTargets; source seam declared in the Gamma core.
-void update_laser_targets(Context &, const TaskWorkHandle &, std::uint8_t) {
-    missing("native_gamma_update_laser_targets");
+// NOTSA: input_buf remains in the actual E102WK arena allocation. No typed
+// mirror is introduced; later buffer producers must write this same storage.
+void update_laser_targets(Context &context, const TaskWorkHandle &work, std::uint8_t index) {
+    struct InputAccess final : gamma_input_buffer::Access {
+        Context &context;
+        const TaskWorkHandle &work;
+        InputAccess(Context &context, const TaskWorkHandle &work) : context(context), work(work) {}
+        std::int32_t buffered_angle() override {
+            constexpr unsigned kLatestAngle = 556;
+            std::int32_t value;
+            if (!arena(context).read(work, kLatestAngle, &value, sizeof(value)))
+                missing("native_gamma_buffered_input_angle");
+            return value;
+        }
+        NativeAnalogInput &destination(std::int32_t player) {
+            if (!context.normalized_input)
+                missing("native_gamma_normalized_input_owner");
+            if (player < 0 || static_cast<unsigned>(player) >= context.normalized_input->size())
+                missing("native_gamma_normalized_input_slot");
+            return (*context.normalized_input)[static_cast<unsigned>(player)];
+        }
+        void store_angle(std::int32_t player, std::int32_t angle) override {
+            destination(player).angle = angle;
+        }
+        std::uint32_t buffered_stroke_bits() override {
+            constexpr unsigned kLatestStroke = 560;
+            std::uint32_t bits;
+            if (!arena(context).read(work, kLatestStroke, &bits, sizeof(bits)))
+                missing("native_gamma_buffered_input_stroke");
+            return bits;
+        }
+        void store_stroke_bits(std::int32_t player, std::uint32_t bits) override {
+            std::memcpy(&destination(player).magnitude, &bits, sizeof(bits));
+        }
+    } access(context, work);
+    gamma_input_buffer::restore(access, index);
 }
 // NOTSA: native boundary for GetMMMatrix; source seam declared in the Gamma core.
 void get_model_matrix(Context &, unsigned, NinjaMatrix &) {
