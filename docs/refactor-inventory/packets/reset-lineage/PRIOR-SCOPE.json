@@ -1,0 +1,29 @@
+{
+  "status": "UNACTIVATED_PRIOR_RECORDS_ONLY",
+  "immutable_main": "d5e9febc98d23597e4f01acd0fce336aba0ac211",
+  "policy_path": "docs/refactor-inventory/review.json",
+  "policy_sha256": "3f322255fdb921e77c335abe12ddd5cd36bf965aee1de1366de66958ad014891",
+  "members": [
+    {
+      "historical_path": "src/game/game_reset.cpp",
+      "source_snapshot": "docs/refactor-inventory/packets/reset-lineage/prior/game_reset.cpp.txt",
+      "source_sha256": "2ff4f746fb3ef4b2cc0272af108f98e54caef38db2a40232f9955b5b4c9b384f",
+      "prior_review": "docs/refactor-inventory/packets/reset-lineage/prior/game_reset.cpp.review.json",
+      "review_sha256": "f83e605a695ec63a2fe20f86d7484432c6cb246184f6cfb80798212179d52238",
+      "prior_member": "docs/refactor-inventory/packets/reset-lineage/prior/game_reset.cpp.member.json",
+      "prior_member_sha256": "aa4522708067b25d98c6e4f0362ae8f5807ecf30ace308f9874be4feb7b0610d",
+      "retained_obligation_blocks": 18
+    },
+    {
+      "historical_path": "src/game/game_reset_leaves.cpp",
+      "source_snapshot": "docs/refactor-inventory/packets/reset-lineage/prior/game_reset_leaves.cpp.txt",
+      "source_sha256": "298701e955489b8b8ada5aede75c143453471a1928f5e72b2a0f3dc74f971521",
+      "prior_review": "docs/refactor-inventory/packets/reset-lineage/prior/game_reset_leaves.cpp.review.json",
+      "review_sha256": "681f54da86a298fc83cdcca6ccc2c4470e8a3a71ec90edc0825681985480f6cc",
+      "prior_member": "docs/refactor-inventory/packets/reset-lineage/prior/game_reset_leaves.cpp.member.json",
+      "prior_member_sha256": "9c17dcf3b1b763bd81845f7f93c26b361a0386ff071d8ca8606e44f50773afb8",
+      "retained_obligation_blocks": 18
+    }
+  ],
+  "limits": "Preserves complete current authored prior review and every semantic resolution, accepted-judge scope/limit and classification limit. No active ledger/receipt edit, debt closure or migration credit. Fresh edge review, committed integrated successors and predecessor-preserving ledger generation remain Root-owned after qualification."
+}
