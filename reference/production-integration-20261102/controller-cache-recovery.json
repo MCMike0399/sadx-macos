@@ -1,0 +1,36 @@
+{
+  "incident": "material worker installed libusb through a shared dependency symlink; no Root game source or assets were changed",
+  "recovery": "Copied four original install artifacts from the retained Root libusb build; preserved incident copies separately. No configure/build/install command was run.",
+  "records": [
+    {
+      "path": "build/native-controller-deps/include/libusb-1.0/libusb.h",
+      "before_sha256": "8c77e192d53960966c42d5f6ef204e3be88c9ff3ca431acdd5c6039689b3fe0b",
+      "restore_source": "build/native-controller-sources/libusb-1.0.29/libusb/libusb.h",
+      "restored_sha256": "8c77e192d53960966c42d5f6ef204e3be88c9ff3ca431acdd5c6039689b3fe0b"
+    },
+    {
+      "path": "build/native-controller-deps/lib/libusb-1.0.a",
+      "before_sha256": "13c4a43a2fb77a46aa8671f4bfd0cb7b44e55557341ee9c6d9615d50c4cfb81a",
+      "restore_source": "build/native-controller-libusb/libusb/.libs/libusb-1.0.a",
+      "restored_sha256": "b36fea15126602ed86c740c7c275dab51040b5989be05ea8e85e68182f024864"
+    },
+    {
+      "path": "build/native-controller-deps/lib/libusb-1.0.la",
+      "before_sha256": "ffda41f2102e14991a2ad4f8f940d5812c8dc4bab6f0731693d7d4df0b013bba",
+      "restore_source": "build/native-controller-libusb/libusb/.libs/libusb-1.0.lai",
+      "restored_sha256": "5e70df691f5baeb170d19bb56a9f7f12d4e9945df2317fbbb86342d0d55bc8ee"
+    },
+    {
+      "path": "build/native-controller-deps/lib/pkgconfig/libusb-1.0.pc",
+      "before_sha256": "5aad25eba0c13ba36a7f8793e4a36a94d065970a5e503473b7ae8f5b0f1583e9",
+      "restore_source": "build/native-controller-libusb/libusb-1.0.pc",
+      "restored_sha256": "01d83b42da7941c1181d774d1147ba7072db5512c29b534fbe61010d13570e50"
+    }
+  ],
+  "backup": "/Users/burbujamc/Developer/sadx-macos/build/controller-cache-incident-6_d1vzyq",
+  "sdl_library_sha256_before_and_after_restore": "98d32eb9ac4c8784c418f70fa33f7f58c1360417b749800bc599d84857b76d6a",
+  "limits": [
+    "No claim of pre-incident byte identity for the replaced static archive without an earlier installed hash; restored artifact is the retained Root build output.",
+    "SDL runtime bytes were not changed by this recovery. No physical controller test was run."
+  ]
+}

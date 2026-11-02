@@ -310,3 +310,15 @@ so keep its integer value. See library-initial-162-evidence.json and fieldmap.js
 A survey report can remain identical when buffer counts change: the relevant drawing
 owners are still skipped. Verify initialized state after the consumer as well as the
 report. The library-defaults configuration-bypass mutant exposed exactly this gap.
+
+## Isolate native controller dependency installs across worktrees
+
+A worker build on 2026-11-02 followed a writable dependency-directory symlink and
+installed libusb into Root before SDL configuration was stopped. Copy the pinned
+`build/native-controller-deps` tree into a worker/export build instead of linking
+a writable install destination across worktrees. When reusing that verified copy,
+mark `build/native-controller-deps/include/SDL3/SDL.h` old with make's `-o` option;
+a fresh checkout can otherwise make the builder appear newer than the header.
+Root restored the four affected cache files from its retained libusb build and
+preserved incident copies; SDL runtime bytes were unchanged by that restoration.
+Receipt: `reference/production-integration-20261102/controller-cache-recovery.json`.

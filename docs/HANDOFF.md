@@ -869,3 +869,11 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * A clean source archive contains no original EXE/DLL or prebuilt game objects; all maintained and numerical code rebuilds. Only pinned SDL3/libusb is reused. Native app and force-load closure pass, and normal input reaches the same material boundary at frame 1332 with one setup sprite and identical inspected title image.
 * Gate, raster and cold-build receipts are under reference/production-integration-20261102. Gamma retains all 498 FP partials and strict exit 2; other inherited failures remain open. No complete actor frame, N3b, gameplay cadence or new hardware claim.
 * Next is shared mutable material ownership and real Gamma material binding. Event-action candidate b05ab74 and Sonic controller candidate 0aefb44 remain under independent review; neither is integrated. Reset reservations and stopped schedules/storage remain unchanged.
+
+### 2026-11-02 — Candidate reviews and dependency-cache recovery (no new gate)
+
+* Event-action source received bounded acceptance; Root corrected witness formatting and added nonzero primary sentinels in private packet f44cd4a. Expanded 3,260/5,260 comparisons and eight mutations pass, with all prior inputs preserved.
+* Sonic review found same-record physics replacement changed captured identity. Root corrected prefix annotations at c3998a4; the worker returned source correction c583076/head 80e4045 with focused scope witnesses and preserved default/extra observations. Fresh review is pending.
+* Material candidate 4116566 reports the next effects boundary but remains unmerged pending review. Its first build modified four Root libusb cache files through a shared symlink. Root preserved those incident copies and restored the files from retained Root build/source outputs; SDL runtime bytes stayed unchanged during repair.
+* controller-cache-recovery.json records exact paths/hashes and limits. Worker guidance now requires local dependency copies and the make old-header option. No Root game source or assets changed in this incident; no new hardware qualification is claimed.
+* Last actual full gate remains 7bcfd78 (311 native programs, 612 Python tests), with the separately recorded raster and cold-build supplements. Main still stops at the material binding; no new N3b claim.

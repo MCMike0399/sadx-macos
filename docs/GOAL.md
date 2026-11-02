@@ -667,6 +667,9 @@ item 4 on, each item is one or more steps.
 * **Builds.**
   * One owner runs shared builds and the gate.
   * Workers build in their own worktree.
+  * Copy reusable native-controller dependencies locally; do not symlink a writable
+    install destination into Root. Use make's `-o build/native-controller-deps/include/SDL3/SDL.h`
+    for a verified reused copy so newer checkout mtimes cannot trigger a shared install.
   * Before a full gate, preflight the affected build: target registration in
     `tests/unit/manifest.tsv`, Make generator prerequisites, probe freshness (`.dylib`
     newer than its source), and profile-patch tracking.
