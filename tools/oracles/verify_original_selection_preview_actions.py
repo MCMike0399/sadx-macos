@@ -20,10 +20,17 @@ WORK, PREVIEW = DATA + 0x100, DATA + 0x200
 TASKS = [DATA + 0x1000 + 128 * n for n in range(7)]
 PRIMARY = [DATA + 0x2000 + 128 * n for n in range(7)]
 EVENTS = [DATA + 0x3000 + 128 * n for n in range(6)]
-NODES = [[DATA + 0x4000 + 256 * n + 32 * k for k in range(4)] for n in range(6)]
+NODES = [[DATA + 0x4000 + 512 * n + 32 * k for k in range(12)] for n in range(6)]
+REPLACEMENTS = [[DATA + 0xa000 + 128 * n + 32 * k for k in range(2)] for n in range(6)]
+OLD_TAILS = [DATA + 0xb000 + 32 * n for n in range(6)]
+REGISTERED_PRIMARY, REGISTERED_EVENT = DATA + 0x8000, DATA + 0x8100
+REGISTERED_NODES = [DATA + 0x8200, DATA + 0x8220]
 SEQUENCES = [DATA + 0x6000 + 64 * n for n in range(6)]
 LINKS = [DATA + 0x7000 + 64 * n for n in range(6)]
-IDS = {node: n * 8 + k + 1 for n, nodes in enumerate(NODES) for k, node in enumerate(nodes)}
+IDS = {node: n * 32 + k + 1 for n, nodes in enumerate(NODES) for k, node in enumerate(nodes)}
+IDS.update({node: 600 + n * 2 + k for n, nodes in enumerate(REPLACEMENTS) for k, node in enumerate(nodes)})
+IDS.update({node: 500 + n for n, node in enumerate(OLD_TAILS)})
+IDS.update({node: 700 + n for n, node in enumerate(REGISTERED_NODES)})
 
 class Source:
     def __init__(self, image):
@@ -59,7 +66,7 @@ class Source:
             task, action, texture, speed, loop, link = args
             slot = TASKS.index(task)
             assert texture == slot + 100
-            self.trace.extend([2, slot, action, link, 2 if speed == 0x3f000000 else 1, loop])
+            self.trace.extend([2, slot, action, link, speed, loop, texture])
         self.calls += 1
         if self.calls == self.v[13]:
             self.failure = 5
@@ -78,6 +85,12 @@ class Source:
             self.put(WORK + 4 * (slot + 1), 0)
         if self.v[9] & 16:
             self.put(task + 32, 0)
+        if self.v[9] & 32:
+            self.put(EVENTS[slot] + 64, REPLACEMENTS[slot][0])
+        if self.v[9] & 64:
+            self.put(EVENTS[slot] + 64, 0)
+        if self.v[9] & 128:
+            self.put(PRIMARY[slot] + 60, 0)
         m.reg_write(UC_X86_REG_EAX, 0)
         m.reg_write(UC_X86_REG_EIP, self.get(sp))
         m.reg_write(UC_X86_REG_ESP, sp + 4)
@@ -87,7 +100,7 @@ class Source:
         self.trace, self.calls, self.failure, self.fault = [], 0, 0, None
         m = self.m
         m.context_restore(self.initial)
-        m.mem_write(DATA, bytes(0x9000))
+        m.mem_write(DATA, bytes(0xc000))
         self.put(0x3c5ff80, 0 if v[5] else PREVIEW)
         self.put(PREVIEW + 44, 0 if v[4] else WORK + 128)
         self.put(WORK + 52, v[2], 1)
@@ -96,15 +109,21 @@ class Source:
             self.put(WORK + 4 * n, 0 if v[3] & (1 << n) else TASKS[n])
             self.put(WORK + 45 + n, v[16 + n], 1)
             self.put(TASKS[n] + 32, 0 if v[6] & (1 << n) else PRIMARY[n])
-            self.put(0x3b42e10 + 4 * n, 0 if v[14] and n == 1 else PRIMARY[n])
+            registered = REGISTERED_PRIMARY if v[39] and n == 1 else PRIMARY[n]
+            self.put(0x3b42e10 + 4 * n, 0 if v[14] and n == 1 else registered)
             if n == 1:
-                self.put(PRIMARY[n] + 12, v[15])
+                self.put(PRIMARY[n] + 12, v[40] if v[39] else v[15])
+                self.put(REGISTERED_PRIMARY + 12, v[15])
+                self.put(REGISTERED_PRIMARY + 60, REGISTERED_EVENT)
+                self.put(REGISTERED_EVENT + 64, REGISTERED_NODES[0])
+                self.put(REGISTERED_NODES[0] + 16, REGISTERED_NODES[1])
             if n >= 6:
                 continue
             self.put(PRIMARY[n] + 60, 0 if v[8] & (1 << n) else EVENTS[n])
             self.put(EVENTS[n] + 64, 0 if v[7] & (1 << n) else NODES[n][0])
-            self.put(0x3c5ff68 + 4 * n, 0)
-            for k in range(4):
+            self.put(0x3c5ff68 + 4 * n, OLD_TAILS[n] if v[38] else 0)
+            self.put(REPLACEMENTS[n][0] + 16, REPLACEMENTS[n][1])
+            for k in range(len(NODES[n])):
                 self.put(NODES[n][k] + 16, NODES[n][k+1] if k+1 < v[32+n] else 0)
             self.put(0x7f0788 + 16 * n + 4, n + 100)
             self.put(0x7f0788 + 16 * n + 8, SEQUENCES[n])
@@ -129,8 +148,14 @@ class Source:
             out[16+n] = self.get(PRIMARY[n]+1, 1)
             out[24+n] = self.get(PRIMARY[n]+5, 1)
             if n < 6:
-                out[32+n] = IDS.get(self.get(0x3c5ff68+4*n), 0)
+                tail = self.get(0x3c5ff68+4*n)
+                out[32+n] = IDS[tail] if tail else 0
         out[40] = len(self.trace)
+        registered = self.get(0x3b42e14)
+        if registered:
+            out[41] = self.get(registered + 12)
+            out[42] = self.get(registered + 1, 1)
+            out[43] = self.get(registered + 5, 1)
         out[64:64+len(self.trace)] = self.trace
         return out
 
@@ -172,6 +197,21 @@ def cases(seed, count):
         if rng.randrange(4) == 0: v[rng.choice([6,7,8])] = rng.randrange(128)
         v[14] = rng.randrange(8) == 0
         rows.append(v)
+    # Supplement the original cohort; all previously generated inputs stay intact.
+    for absent in range(128):
+        v = base(); v[38] = 1; v[3] = absent; rows.append(v)
+    for failure in range(1, 19):
+        v = base(); v[38] = 1; v[13] = failure; rows.append(v)
+    for slot in range(6):
+        v = base(); v[38] = 1; v[32 + slot] = 11; rows.append(v)
+        for effect in (32, 64, 128):
+            v = base(); v[38] = 1; v[9] = effect; v[3] = 127 ^ (1 << slot)
+            rows.append(v)
+    for captured, registered in ((0x12345678, 0xa7654321), (0xa0000001, 0x20000002)):
+        for counter in (0, 1, 2):
+            v = base(); v[38] = 1; v[39] = 1; v[40] = captured; v[15] = registered
+            v[1] = 1; v[16:23] = [counter]*7; v[32+1] = 11
+            rows.append(v)
     return rows
 
 
@@ -199,6 +239,7 @@ def main():
         if diff:
             failures.append({'case': n, 'input': v, 'diff': diff, 'source_fault': source.fault})
     report = {'passed': not failures, 'cases': len(rows), 'seed': args.seed, 'outcomes': outcomes,
+              'observation_schema': 2,
               'failures': failures, 'source_sha256': image.sha256,
               'native_library_sha256': hashlib.sha256(Path(args.library).read_bytes()).hexdigest(),
               'input_stream_sha256': input_digest.hexdigest(),

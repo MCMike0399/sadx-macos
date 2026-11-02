@@ -3,6 +3,14 @@
 #include <cassert>
 #include <iostream>
 
+// Fixture-only node definition; this program does not link a production event engine.
+namespace sadx {
+struct PlayerEventActionNode {
+    PlayerEventActionNode *next = nullptr;
+    unsigned id = 0;
+};
+}
+
 namespace p = sadx::selection_preview;
 namespace {
 struct MissingEventEngine {};
@@ -54,6 +62,12 @@ void preview_callback(sadx::TaskScheduler &scheduler, const sadx::TaskHandle &ta
 int main() {
     sadx::TaskScheduler scheduler;
     const auto context = std::make_shared<Context>();
+    std::array<sadx::PlayerEventActionNode, 6> retained_tails{};
+    for (std::size_t slot = 0; slot < retained_tails.size(); ++slot) {
+        retained_tails[slot].id = 100 + slot;
+        context->actions.tails[slot] = &retained_tails[slot];
+    }
+    const auto original_tails = context->actions.tails;
     assert(scheduler.register_callback_context(preview_callback, context));
     context->preview.task = scheduler.append_task(3, preview_callback).task;
     const auto first = std::make_shared<p::Work>();
@@ -73,6 +87,7 @@ int main() {
     catch (const MissingEventEngine &) { stopped = true; }
     assert(stopped && context->reached_actions == 1);
     assert(current->motion_counts[0] == 0); // Failed idle queue is not published as started.
+    assert(context->actions.tails == original_tails);
     assert(scheduler.destroy_task(context->preview.task));
     context->preview.task.reset();
     bool absent = false;
@@ -84,5 +99,9 @@ int main() {
     const auto reentry = std::static_pointer_cast<p::Work>(context->preview.task->auxiliary_native_work);
     assert(reentry->warmup_frames == 0 && reentry->selected_motion == 0);
     assert((reentry->motion_counts == std::array<std::int8_t, 7>{}));
+    assert(context->actions.tails == original_tails);
+    // Newly empty actor slots preserve the old borrowed tails across reentry.
+    p::update_actions(*reentry, context->actions, context->selected, *context);
+    assert(context->actions.tails == original_tails);
     std::cout << "preview actions: live task/work, scheduler lower stop, cancel/reentry passed\n";
 }

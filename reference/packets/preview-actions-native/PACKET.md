@@ -4,6 +4,17 @@ Base `ca640c5`; branch `packet/preview-actions-native`. This is new recovery of
 `CharSel_KeepCharactersFromFalling` and the selection-byte setter, not an unbound
 existing implementation. The existing upper preview lifecycle stays unchanged.
 
+Root review correction: `review-corrections.json` supplements the original
+qualification without changing the core or header. Independent review found no
+core defect but rejected complete observation coverage. The observer now records
+exact speed bits and texture identity, distinct registered/captured Miles state,
+old nonzero tails, eleven-node lists and post-callback list replacement/invalidation.
+All original inputs are retained, with 176 added cases: 4,013 development and 7,013
+retained-holdout cases pass. All seven existing and six added mutations are caught.
+The scheduler test preserves borrowed tails through a failed queue and task reentry.
+Original `qualification.json` remains historical; native bindings and acceptance
+still require the Root work below and fresh review of these corrections.
+
 Source: pinned PC image `6b0937ca…24cd74`, cached REA callee evidence
 `ev_386942168b7f965037441ed40f3c2aeb73266c445fbd9ff228f98c561c098dd6`,
 mod-loader `CharMdlWk`, `EVENT_ACTION_LIST`, `EV_SetAction`, `SetInputP`, existing

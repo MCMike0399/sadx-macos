@@ -1,4 +1,4 @@
-"""Seven bounded source faults for the new preview action core; never edits shipping source."""
+"""Bounded source and binding faults; never edits shipping source or the actual probe."""
 import argparse
 import hashlib
 import json
@@ -17,6 +17,18 @@ MUTANTS = [
     ('tail-traversal', 'while (auto *next = calls.next_action(tail))',
      'if (auto *next = calls.next_action(tail))'),
     ('selection-gate', 'selected == slot', 'selected != slot'),
+    ('retained-tails', 'constexpr std::int8_t kEventInput = 12;',
+     'state.tails = {}; constexpr std::int8_t kEventInput = 12;'),
+    ('non-miles-speed', 'slot == 1 ? 0.5f : 0.25f', 'slot == 1 ? 0.5f : 0.125f'),
+    ('texture-identity', 'const auto action = calls.action(slot, 0);\n            auto &textures = calls.textures(slot);',
+     'const auto action = calls.action(slot, 0);\n            auto &textures = calls.textures((slot + 1) % 6);'),
+    ('four-node-cap', 'while (auto *next = calls.next_action(tail))\n            tail = next;',
+     'unsigned traversed = 1; while (auto *next = calls.next_action(tail)) {\n'
+     '            if (++traversed > 4) break; tail = next; }'),
+    ('registered-counter', 'return *registered_primaries[1]->source_counter_at_c;',
+     'return *primaries[1]->source_counter_at_c;', 'probe'),
+    ('registered-event-list', 'return heads[n];',
+     'return n == 1 && in[39] ? &registered_nodes[0] : heads[n];', 'probe'),
 ]
 
 
@@ -27,15 +39,21 @@ def main():
     out = ROOT / args.output_dir
     out.mkdir(parents=True, exist_ok=True)
     original = (ROOT / 'src/game/selection_preview_actions.cpp').read_text()
+    original_probe = (ROOT / 'tests/probes/native_selection_preview_actions_probe.cpp').read_text()
     results = []
-    for name, old, new in MUTANTS:
-        assert original.count(old) == 1, name
+    for mutation in MUTANTS:
+        name, old, new = mutation[:3]
+        binding_fault = len(mutation) == 4 and mutation[3] == 'probe'
+        text = original_probe if binding_fault else original
+        assert text.count(old) == 1, name
         source, library, report = out / (name+'.cpp'), out / (name+'.dylib'), out / (name+'.json')
-        source.write_text(original.replace(old, new))
+        source.write_text(text.replace(old, new))
+        core = 'src/game/selection_preview_actions.cpp' if binding_fault else str(source)
+        probe = str(source) if binding_fault else 'tests/probes/native_selection_preview_actions_probe.cpp'
         command = ['clang++', '-std=c++17', '-O2', '-Wall', '-Wextra', '-Werror',
-                   '-ffp-contract=off', '-fno-fast-math', '-Isrc', '-dynamiclib', str(source),
+                   '-ffp-contract=off', '-fno-fast-math', '-Isrc', '-dynamiclib', core,
                    'src/engine/task.cpp', 'src/engine/task_work.cpp',
-                   'tests/probes/native_selection_preview_actions_probe.cpp', '-o', str(library)]
+                   probe, '-o', str(library)]
         subprocess.run(command, cwd=ROOT, check=True, capture_output=True)
         result = subprocess.run([sys.executable, 'tools/oracles/verify_original_selection_preview_actions.py',
                                  args.exe, str(library), '--output', str(report), '--cases', '100'],
@@ -43,6 +61,7 @@ def main():
         assert report.exists(), result.stderr
         body = json.loads(report.read_text())
         row = {'compiled_source_sha256': hashlib.sha256(source.read_bytes()).hexdigest(),
+               'mutated_target': 'probe binding' if binding_fault else 'core',
                'name': name, 'caught': not body['passed'], 'exit_status': result.returncode,
                'failed_cases': len(body['failures']), 'first_case': body['failures'][0] if body['failures'] else None}
         results.append(row)

@@ -837,3 +837,11 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * New original comparison: 3,837 development and 6,837 final holdout cases pass exactly; 7 of 7 action mutants are caught. Unchanged upper preview: 3,608 development and 5,608 holdout cases pass strictly. Direct source-only scheduler/owner lower-stop test passes.
 * Readability, layers and unique legacy owners pass; profile has zero UNHANDLED overlaps. Stock provenance needs the proposed CharSelActionTails symbol row. Shared registration/judge files were intentionally untouched.
 * reference/packets/preview-actions-native/PACKET.md supplies exact bindings, texture identities, source evidence, checks and remaining EV_SetAction/event-owner seams. No event engine, actor/render completion, visible N3b progress, full gate or app run is claimed; inherited failures/partials remain open.
+
+### 2026-11-01 — Preview action observation corrections (N3b, no gate)
+
+* Independent review accepted the bounded core but found retained-tail, argument and registered/captured-player observation gaps. Root fixed only probes, the new oracle and its focused tests/mutants; game source/header match 4914274 byte for byte.
+* Exact texture identity and speed bits, nonzero old tails, eleven-node chains, callback list replacement/invalidation and distinct Miles primaries now compare against original execution. All 3,837 development and 6,837 holdout inputs remain unchanged, with 176 additions each.
+* Expanded development 4,013 and retained holdout 7,013 pass; all seven original plus six new mutations are caught. Scheduler lower-stop/task-reentry test preserves old tails. Whitespace/input preservation checks pass.
+* One initial unit link included unrelated upper-preview source without its numerical dependencies and failed; the corrected focused recipe passes. Original reports remain intact; review-corrections.json records the supplement.
+* No new game behavior, app run, full gate or N3b completion. Imported texture binding, event ownership and native lower calls remain open. Fresh correction review and Gamma packet review precede integration.
