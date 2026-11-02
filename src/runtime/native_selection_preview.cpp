@@ -199,7 +199,7 @@ void TitleScene::exec_selection_gamma(TaskScheduler &scheduler, const TaskHandle
         scene.session_.stage_, scene.session_.act_,
         display_selection_gamma, destroy_selection_gamma, initialize_player_auxiliary,
         texture_views.catalog(scene.session_.character_resources_.loaded()),
-        scene.session_.regular_resources_.state(), &texture_services};
+        scene.session_.regular_resources_.state(), &texture_services, scene.session_.sprites_};
     gamma_selection::run(context, task);
 }
 // NOTSA: native boundary for E102Display; source seam declared in the Gamma core.

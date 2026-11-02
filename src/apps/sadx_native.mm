@@ -208,7 +208,8 @@ class Application {
             this->configuration.assets, *characters));
         if (std::filesystem::exists(this->configuration.assets / "characters/gamma-actor.json"))
             session.load_player_assets(sadx::native::app::load_gamma_actor_assets(
-                this->configuration.assets, *characters));
+                this->configuration.assets, *characters),
+                sadx::native::app::load_gamma_setup_definition(this->configuration.assets));
         session.attach_character_labels(sadx::native::app::load_character_label_textures(
             this->configuration.assets));
         session.attach_character_completion(sadx::native::app::load_character_completion_assets(
@@ -570,7 +571,11 @@ class Application {
                 bank_sample_count += banks.sample_count(bank);
             }
         }
+        const auto sprite_setup = session.sprite_setup_progress();
         output << "{\"execution\":\"native\",\"frames\":" << frames
+               << ",\"sprite_registry_count\":" << sprite_setup.registered_count
+               << ",\"gamma_setup_assets_loaded\":" << (sprite_setup.gamma_assets_loaded ? "true" : "false")
+               << ",\"gamma_setup_registered\":" << (sprite_setup.gamma_registered ? "true" : "false")
                   << ",\"game_mode\":" << static_cast<int>(session.flow_state().mode)
                   << ",\"game_state\":" << session.game_state().game_mode
                   << ",\"stage\":" << session.stage()

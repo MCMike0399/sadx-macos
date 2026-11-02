@@ -122,7 +122,7 @@ void load_character_textures(Context &, std::uint8_t character);
 TaskWorkHandle allocate_zero(Context &, unsigned count, unsigned bytes);
 // STUB: SONIC 0x4c2e10 GammaInitializeCursors
 void initialize_cursors(Context &, const TaskWorkHandle &);
-// STUB: SONIC 0x4c5420 GammaLoadSetupResource
+// FUNCTION: SONIC 0x4c5420 GammaLoadSetupResource
 void load_setup_resource(Context &);
 // NOTSA: time-HUD composition remains unimplemented; creation belongs to TaskScheduler::create_child.
 void create_time_hud(Context &, unsigned level, const TaskHandle &);

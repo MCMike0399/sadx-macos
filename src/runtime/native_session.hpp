@@ -84,6 +84,14 @@ class Session final : private flow::NativeServices {
     }
 
     std::uint32_t logic_loop_count() const { return secondary_loop_count_; }
+    // NOTSA: read-only evidence from the actual setup and shared registry owners.
+    struct SpriteSetupProgress {
+        std::uint32_t registered_count;
+        bool gamma_assets_loaded, gamma_registered;
+    };
+    SpriteSetupProgress sprite_setup_progress() const {
+        return {sprites_.count, bool(players_.gamma_setup_asset), bool(players_.gamma_setup.sprite)};
+    }
     std::optional<file_select::FileInfo> selected_save_file() const {
         auto node = save_file_list_;
         for (unsigned index = 0; node && index < bootstrap_.card_state; ++index)
@@ -133,7 +141,8 @@ class Session final : private flow::NativeServices {
     void attach_menu_dialogs(MenuDialogAssets);
     void attach_main_menu(MainMenuAssets);
     void attach_character_selection(CharacterSelectionAssets);
-    void load_player_assets(GammaActorAssets assets);
+    void load_player_assets(GammaActorAssets assets,
+                            std::optional<std::vector<std::uint8_t>> setup_definition = {});
     void attach_character_completion(character_completion::Catalog catalog) {
         if (character_completion_)
             throw std::runtime_error("native character completion resources already attached");
@@ -230,7 +239,6 @@ class Session final : private flow::NativeServices {
     std::shared_ptr<const character_pack::CharacterPack> character_pack_;
     bootstrap::SonicActions actions_;
     character_pack::SceneState character_scene_;
-    PlayerSystem players_;
     ActionHandle knuckles_clear_, knuckles_transition_;
     ActionHandle big_sit_, big_sit_repeat_, big_prepare_, big_cast_, big_cast_repeat_;
     bootstrap::Services services_;
@@ -239,6 +247,9 @@ class Session final : private flow::NativeServices {
     frame::RendererState renderer_;
     LogoScene logo_;
     CharacterResources character_resources_;
+    // Registry users are destroyed before their imported definitions, texlists and arena.
+    PlayerSystem players_;
+    sprite_registry::State sprites_;
     RegularResources regular_resources_;
     regular_textures::Services regular_texture_services();
     void load_regular_object_textures(std::uint32_t);

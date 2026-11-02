@@ -227,8 +227,11 @@ void initialize_cursors(Context &context, const TaskWorkHandle &allocation) {
     missing("native_gamma_E102WK_cursor_allocation_identity");
 }
 // NOTSA: native boundary for GammaLoadSetupResource; source seam declared in the Gamma core.
-void load_setup_resource(Context &) {
-    missing("native_gamma_load_setup_resource");
+void load_setup_resource(Context &context) {
+    // Keep the source boundary explicit when an older imported pack lacks setup content.
+    if (!context.players.gamma_setup_asset)
+        missing("native_gamma_load_setup_resource");
+    gamma_setup::load_resource(context.players.gamma_setup, context.sprites, arena(context));
 }
 // NOTSA: native boundary for CreateChildTask; source seam declared in the Gamma core.
 void create_time_hud(Context &, unsigned, const TaskHandle &) {

@@ -1,8 +1,10 @@
 #pragma once
 #include "runtime/gamma_actor_assets.hpp"
+#include "runtime/character_texture_assets.hpp"
 #include "engine/character_geometry.hpp"
 #include "player/actor_current.hpp"
 #include "player/gamma_selection_core.hpp"
+#include "player/gamma_setup_resource.hpp"
 #include "game/game_bootstrap.hpp"
 #include "game/character_textures.hpp"
 
@@ -28,9 +30,14 @@ struct PlayerSystem {
     gamma_cursors::Templates gamma_cursor_templates;
     std::deque<GammaExtraWork> gamma_work;
     std::unique_ptr<GammaActorAssets> gamma_assets;
+    std::unique_ptr<const gamma_setup::Asset> gamma_setup_asset;
+    gamma_setup::State gamma_setup;
 };
 // NOTSA: existing session asset load binds imported declarations to its shared scene owners.
 void bind_gamma_resources(PlayerSystem &, character_pack::SceneState &, const GammaActorAssets &);
+// NOTSA: bind imported setup content to the same character texlist used by rendering.
+void bind_gamma_setup_resources(PlayerSystem &, const CharacterTextureAssets &,
+    std::array<std::vector<regular_textures::List>, 9> &, const std::vector<std::uint8_t> &);
 } // namespace sadx::native
 
 namespace sadx::gamma_selection {
@@ -46,5 +53,6 @@ struct Context {
     regular_textures::CharacterCatalog character_textures;
     regular_textures::State *texture_state;
     regular_textures::Services *texture_services;
+    sprite_registry::State &sprites;
 };
 } // namespace sadx::gamma_selection

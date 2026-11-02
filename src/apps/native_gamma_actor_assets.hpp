@@ -1,8 +1,22 @@
 #pragma once
 #include "apps/native_assets.hpp"
 #include "runtime/gamma_actor_assets.hpp"
+#include <fstream>
+#include <iterator>
 
 namespace sadx::native::app {
+// NOTSA: old imported packs remain usable until the setup consumer is reached.
+inline std::optional<std::vector<std::uint8_t>>
+load_gamma_setup_definition(const std::filesystem::path &directory) {
+    const auto path = directory / "gamma-setup.bin";
+    if (!std::filesystem::exists(path))
+        return std::nullopt;
+    std::ifstream stream(path, std::ios::binary);
+    if (!stream)
+        throw std::runtime_error("cannot read imported Gamma setup definition");
+    return std::vector<std::uint8_t>{std::istreambuf_iterator<char>(stream), {}};
+}
+
 // NOTSA: exact word decoding at the imported-content boundary, without FP arithmetic.
 inline float actor_scalar(std::uint32_t word) {
     float value;
