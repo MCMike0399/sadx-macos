@@ -36,7 +36,7 @@ TaskWorkResult allocate_zeroed(TaskWorkArena &arena, std::uint32_t count, std::u
     live->count = post_count;
     live->head = replacement;
     if (fail)
-        return {TaskWorkFailure::exhausted, {}};
+        return {TaskWorkFailure::Exhausted, {}};
     const auto bytes = ((size + 3) & ~std::uint32_t{3}) * count;
     auto result = arena.allocate(bytes);
     if (result)
