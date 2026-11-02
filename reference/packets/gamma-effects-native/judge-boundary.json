@@ -1,0 +1,27 @@
+{
+  "source_commit": "1be3bc6d",
+  "change": "Existing setup-only fixture intentionally does not bind effects. Its exact next missing-asset boundary was renamed after the effects body was implemented; only that diagnostic string changes. Every fixture/input/material/owner/texture assertion is unchanged. The new effects caller test separately binds real content and reaches PSetMotion.",
+  "before": {
+    "command": [
+      "build/native-gamma-binding-test",
+      "game/imported"
+    ],
+    "exit_status": 1,
+    "stdout": "PASS: imported Gamma -> canonical collision/ordinary textures/cursors -> setup boundary\n",
+    "stderr": "first real lower boundary\n"
+  },
+  "after": {
+    "command": [
+      "build/native-gamma-binding-test",
+      "game/imported"
+    ],
+    "exit_status": 0,
+    "stdout": "PASS: imported Gamma -> canonical collision/ordinary textures/cursors -> setup boundary\nPASS: imported Gamma -> canonical collision/ordinary textures/cursors -> setup boundary\n",
+    "stderr": ""
+  },
+  "scope": [
+    "tests/unit/native_gamma_binding.mm"
+  ],
+  "canonical_manifest": "Root-owned, unchanged",
+  "full_gate": "not run by request"
+}

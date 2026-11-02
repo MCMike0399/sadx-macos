@@ -193,7 +193,7 @@ void check_binding(const std::filesystem::path &directory, bool with_setup = fal
     bool stopped = false;
     try { gamma::run(context, task); }
     catch (const flow::UnrecoveredGameFlowCall &error) {
-        require(std::string(error.what()) == (with_setup ? "native_gamma_initialize_effects" :
+        require(std::string(error.what()) == (with_setup ? "native_gamma_effects_import" :
                 "native_gamma_load_setup_resource"), "first real lower boundary");
         stopped = true;
     }
