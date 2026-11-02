@@ -1,0 +1,240 @@
+diff --git a/native-sources.txt b/native-sources.txt
+index 4808e014..7c89dcae 100644
+--- a/native-sources.txt
++++ b/native-sources.txt
+@@ -124,6 +124,7 @@ src/game/library_initial_state.cpp
+ src/player/actor_current.cpp
+ src/player/event_actions.cpp
+ src/player/gamma_selection_core.cpp
++src/player/gamma_input_buffer.cpp
+ src/player/gamma_setup_resource.cpp
+ src/player/selection_player_queries.cpp
+ src/engine/collision_component.cpp
+diff --git a/src/apps/sadx_native.mm b/src/apps/sadx_native.mm
+index c58d44d5..5f5e8dee 100644
+--- a/src/apps/sadx_native.mm
++++ b/src/apps/sadx_native.mm
+@@ -263,7 +263,8 @@ explicit Application(Options configuration, id<MTLDevice> device)
+             [this](std::int32_t index) {
+                 return static_cast<std::int32_t>(input->key_state(index).pressed);
+             },
+-            [this] { return input->pressed(0); }
++            [this] { return input->pressed(0); },
++            &input->normalized_analogs()
+         });
+         configure_movie();
+     }
+diff --git a/src/player/gamma_input_buffer.cpp b/src/player/gamma_input_buffer.cpp
+new file mode 100644
+index 00000000..451e8f47
+--- /dev/null
++++ b/src/player/gamma_input_buffer.cpp
+@@ -0,0 +1,10 @@
++#include "player/gamma_input_buffer.hpp"
++
++namespace sadx::gamma_input_buffer {
++void restore(Access &access, std::int32_t player) {
++    const auto angle = access.buffered_angle();
++    access.store_angle(player, angle);
++    const auto stroke = access.buffered_stroke_bits();
++    access.store_stroke_bits(player, stroke);
++}
++} // namespace sadx::gamma_input_buffer
+diff --git a/src/player/gamma_input_buffer.hpp b/src/player/gamma_input_buffer.hpp
+new file mode 100644
+index 00000000..2ee27986
+--- /dev/null
++++ b/src/player/gamma_input_buffer.hpp
+@@ -0,0 +1,18 @@
++#pragma once
++#include <cstdint>
++
++namespace sadx::gamma_input_buffer {
++// NOTSA: ordered access to E102WK.input_buf[7] and the existing input_dataG
++// owner. Separate operations preserve a completed angle store if stroke fails.
++struct Access {
++    virtual ~Access() = default;
++    virtual std::int32_t buffered_angle() = 0;
++    virtual void store_angle(std::int32_t player, std::int32_t angle) = 0;
++    virtual std::uint32_t buffered_stroke_bits() = 0;
++    virtual void store_stroke_bits(std::int32_t player, std::uint32_t bits) = 0;
++};
++// The earlier descriptive symbol name predates recovery: this restores the
++// latest buffered analog input, without inspecting laser targets or task lists.
++// FUNCTION: SONIC 0x4c3870 GammaUpdateLaserTargets
++void restore(Access &, std::int32_t player);
++} // namespace sadx::gamma_input_buffer
+diff --git a/src/player/gamma_selection_core.hpp b/src/player/gamma_selection_core.hpp
+index 2aebdc82..24bdcec6 100644
+--- a/src/player/gamma_selection_core.hpp
++++ b/src/player/gamma_selection_core.hpp
+@@ -132,7 +132,7 @@ void initialize_effects(Context &);
+ void set_motion(Context &, const Player &);
+ // STUB: SONIC 0x43fa90 PJoinVertexes
+ void join_vertices(Context &, Primary, const TaskWorkHandle &, const Player &);
+-// STUB: SONIC 0x4c3870 GammaUpdateLaserTargets
++// NOTSA: binds gamma_input_buffer::restore to the actual extra-work and input owners.
+ void update_laser_targets(Context &, const TaskWorkHandle &, std::uint8_t index);
+ // STUB: SONIC 0x4b82d0 GetMMMatrix
+ void get_model_matrix(Context &, unsigned node, NinjaMatrix &);
+diff --git a/src/player/scene_input_producer.hpp b/src/player/scene_input_producer.hpp
+index 7de35de5..17098c71 100644
+--- a/src/player/scene_input_producer.hpp
++++ b/src/player/scene_input_producer.hpp
+@@ -59,7 +59,9 @@ struct NativeSceneInputState {
+     std::array<ControllerInputValues, 8> engine_pads{};
+     std::array<std::uint32_t, 4> held{}, pressed{}, held_output{}, pressed_output{};
+     std::array<std::int32_t, 4> repeat{};
+-    std::array<NativeAnalogInput, 8> raw_analogs{}, normalized_analogs{};
++    std::array<NativeAnalogInput, 8> raw_analogs{};
++    // GLOBAL: SONIC 0x3b0e7a0 input_dataG size=64
++    std::array<NativeAnalogInput, 8> normalized_analogs = {};
+     // Source load-image values, in GameControllerButtonMasks declaration order.
+     std::array<std::uint32_t, 5> masks{{1026, 4, 1026, 512, 512}};
+ };
+diff --git a/src/runtime/native_gamma_binding.cpp b/src/runtime/native_gamma_binding.cpp
+index 12192f05..fd7a5d77 100644
+--- a/src/runtime/native_gamma_binding.cpp
++++ b/src/runtime/native_gamma_binding.cpp
+@@ -2,7 +2,9 @@
+ #include "runtime/native_display.hpp"
+ #include "player/selection_player_queries.hpp"
+ #include "player/player_vertex_weld.hpp"
++#include "player/gamma_input_buffer.hpp"
+ #include "game/game_mode.hpp"
++#include <cstring>
+ 
+ namespace sadx::gamma_selection {
+ namespace {
+@@ -300,9 +302,42 @@ void join_vertices(Context &context, Primary, const TaskWorkHandle &, const Play
+         vertex_weld::restore(**table, arena(context), context.scene);
+     }
+ }
+-// NOTSA: native boundary for GammaUpdateLaserTargets; source seam declared in the Gamma core.
+-void update_laser_targets(Context &, const TaskWorkHandle &, std::uint8_t) {
+-    missing("native_gamma_update_laser_targets");
++// NOTSA: input_buf remains in the actual E102WK arena allocation. No typed
++// mirror is introduced; later buffer producers must write this same storage.
++void update_laser_targets(Context &context, const TaskWorkHandle &work, std::uint8_t index) {
++    struct InputAccess final : gamma_input_buffer::Access {
++        Context &context;
++        const TaskWorkHandle &work;
++        InputAccess(Context &context, const TaskWorkHandle &work) : context(context), work(work) {}
++        std::int32_t buffered_angle() override {
++            constexpr unsigned kLatestAngle = 556;
++            std::int32_t value;
++            if (!arena(context).read(work, kLatestAngle, &value, sizeof(value)))
++                missing("native_gamma_buffered_input_angle");
++            return value;
++        }
++        NativeAnalogInput &destination(std::int32_t player) {
++            if (!context.normalized_input)
++                missing("native_gamma_normalized_input_owner");
++            if (player < 0 || static_cast<unsigned>(player) >= context.normalized_input->size())
++                missing("native_gamma_normalized_input_slot");
++            return (*context.normalized_input)[static_cast<unsigned>(player)];
++        }
++        void store_angle(std::int32_t player, std::int32_t angle) override {
++            destination(player).angle = angle;
++        }
++        std::uint32_t buffered_stroke_bits() override {
++            constexpr unsigned kLatestStroke = 560;
++            std::uint32_t bits;
++            if (!arena(context).read(work, kLatestStroke, &bits, sizeof(bits)))
++                missing("native_gamma_buffered_input_stroke");
++            return bits;
++        }
++        void store_stroke_bits(std::int32_t player, std::uint32_t bits) override {
++            std::memcpy(&destination(player).magnitude, &bits, sizeof(bits));
++        }
++    } access(context, work);
++    gamma_input_buffer::restore(access, index);
+ }
+ // NOTSA: native boundary for GetMMMatrix; source seam declared in the Gamma core.
+ void get_model_matrix(Context &, unsigned, NinjaMatrix &) {
+diff --git a/src/runtime/native_input.cpp b/src/runtime/native_input.cpp
+index ed1bebe1..95bae685 100644
+--- a/src/runtime/native_input.cpp
++++ b/src/runtime/native_input.cpp
+@@ -416,6 +416,9 @@ AnalogSnapshot Input::analog_snapshot(std::size_t player) const {
+     const auto &value = impl_->scene.normalized_analogs.at(player);
+     return {value.angle, value.magnitude};
+ }
++std::array<NativeAnalogInput, 8> &Input::normalized_analogs() {
++    return impl_->scene.normalized_analogs;
++}
+ std::array<std::uint32_t, 5> Input::button_masks() const {
+     return impl_->scene.masks;
+ }
+diff --git a/src/runtime/native_input.hpp b/src/runtime/native_input.hpp
+index a10d58e5..93df5ac4 100644
+--- a/src/runtime/native_input.hpp
++++ b/src/runtime/native_input.hpp
+@@ -3,6 +3,7 @@
+ #include "input/input_initial_state.hpp"
+ #include "input/input_mod_pad.hpp"
+ #include "player/player_input_producer.hpp"
++#include "player/scene_input_producer.hpp"
+ #include <array>
+ #include <cstdint>
+ #include <memory>
+@@ -124,6 +125,8 @@ class Input {
+     ControllerInputValues engine_snapshot(std::size_t player) const;
+     std::uint32_t published_held(std::size_t player) const;
+     AnalogSnapshot analog_snapshot(std::size_t player) const;
++    // NOTSA: borrow the same input_dataG storage updated by GetControllers.
++    std::array<NativeAnalogInput, 8> &normalized_analogs();
+     std::array<std::uint32_t, 5> button_masks() const;
+ 
+   private:
+diff --git a/src/runtime/native_player_system.hpp b/src/runtime/native_player_system.hpp
+index 79e80d32..9915e600 100644
+--- a/src/runtime/native_player_system.hpp
++++ b/src/runtime/native_player_system.hpp
+@@ -8,6 +8,7 @@
+ #include "player/gamma_selection_core.hpp"
+ #include "player/gamma_setup_resource.hpp"
+ #include "player/gamma_effects.hpp"
++#include "player/scene_input_producer.hpp"
+ #include "game/game_bootstrap.hpp"
+ #include "game/editor_state.hpp"
+ #include "game/character_textures.hpp"
+@@ -67,5 +68,6 @@ struct Context {
+     sprite_registry::State &sprites;
+     character_pack::SceneState &scene;
+     const editor::View *editor_state = nullptr;
++    std::array<NativeAnalogInput, 8> *normalized_input = nullptr;
+ };
+ } // namespace sadx::gamma_selection
+diff --git a/src/runtime/native_selection_preview.cpp b/src/runtime/native_selection_preview.cpp
+index 7074485d..4e9c6d1c 100644
+--- a/src/runtime/native_selection_preview.cpp
++++ b/src/runtime/native_selection_preview.cpp
+@@ -236,6 +236,7 @@ void TitleScene::exec_selection_gamma(TaskScheduler &scheduler, const TaskHandle
+     const editor::View editor_state{scene.session_.editor_status_,
+                                     scene.session_.mission_editor_status_};
+     context.editor_state = &editor_state;
++    context.normalized_input = scene.input_.normalized_input;
+     gamma_selection::run(context, task);
+ }
+ // NOTSA: native boundary for E102Display; source seam declared in the Gamma core.
+diff --git a/src/runtime/native_title_scene.hpp b/src/runtime/native_title_scene.hpp
+index bd20ca76..61b688f7 100644
+--- a/src/runtime/native_title_scene.hpp
++++ b/src/runtime/native_title_scene.hpp
+@@ -12,6 +12,7 @@
+ #include "engine/font_native.hpp"
+ #include "runtime/title_assets.hpp"
+ #include "game/selection_preview.hpp"
++#include "player/scene_input_producer.hpp"
+ #include <functional>
+ 
+ namespace sadx::native {
+@@ -54,6 +55,7 @@ class TitleScene final : private title_menu::Calls,
+         std::function<std::int32_t(std::int32_t)> soft_reset_check;
+         std::function<std::int32_t(std::int32_t)> key_pressed;
+         std::function<std::uint32_t()> pressed_buttons;
++        std::array<NativeAnalogInput, 8> *normalized_input = nullptr;
+     };
+     void attach_input(InputServices input) { input_ = std::move(input); }
+     void initialize();

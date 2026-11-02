@@ -1,0 +1,88 @@
+{
+  "base": "06f6d652",
+  "unchanged_at_start": {
+    "reference/oracle-reports/gamma_cursors.json": "7b91d25a6449bb0a66e6ff411a9de8e1ffcc1db5add2f8edfe8c287e17db2145",
+    "reference/oracle-reports/gamma_effects.json": "72c7d9327d0665a33cf380822e6423c356a63c1220d005461ec021aaf9931502",
+    "reference/oracle-reports/gamma_selection_core.json": "b9e4fbd1691e784584405e8cd16a7b9e60f326ec74eb2aa03e76d2234af17eb8",
+    "reference/oracle-reports/gamma_setup_resource.json": "d86d84723a5c7093f1fed22ff52ad87601bea63d36c834f84c9903903ca1eea1",
+    "reference/oracle-reports/player_vertex_weld.json": "1cef3613342cf2497a1a3f42ac842ad9de1f4414f41c25c29884461e75a934f2",
+    "src/player/gamma_cursors.cpp": "cce66f08eb505fd245689ad73c51de49e6cb5489f8a1f8d9e4e59d3861492bf4",
+    "src/player/gamma_cursors.hpp": "ba1f87792521c6895909ca81af5769b788d1b7f9447e5f5add13dc4521b4aae0",
+    "src/player/gamma_effects.cpp": "550ef0fac73849f265a6b3546aabe5b170644eb439e734d9b584a92aa0baf883",
+    "src/player/gamma_effects.hpp": "0c28bab68b3e29aa2417cfb1dc8cd1fea0313a175939a8d2a56d787f9f10dcb6",
+    "src/player/gamma_selection_core.cpp": "489d333f086900b3827f4fba2448549331b5756ffe79e617853e1481d1731dde",
+    "src/player/gamma_selection_core.hpp": "e9f86d6b09f6581aca4b5d5289faf460e9779867df471172c74af0c4c8e36c58",
+    "src/player/gamma_setup_resource.cpp": "f8900b313b373365722b1368abf5ad31b978ec20347dfc51140b22b59b71ee94",
+    "src/player/gamma_setup_resource.hpp": "ef102ccfcf8c18108decf63796fd3ef2e528461c2e37fc0da1d7189492764711",
+    "src/player/player_motion.cpp": "b342527eb4a6d4edf6a7de4965070012f004e0a00e7b0dc70370d32a9f3c615b",
+    "src/player/player_motion.hpp": "932122d0744055727b47e1e8a6fc57e93a208454174c6e95c48cf1bd2c7b8cbb",
+    "src/player/player_vertex_weld.cpp": "0dff867ae833f9a1e7a2ba0111f9f032d33b1c64eef12212ba4dc39191e27e60",
+    "src/player/player_vertex_weld.hpp": "08342aa56f2798c874d86593e0d3708317f45d0278ec1d3d404fd58652fb7650",
+    "src/runtime/gamma_actor_assets.hpp": "f079fd1c71a22d056f4cbb2b32e0194e1c408ac4f3f74680d580bd0d6c549315",
+    "src/runtime/gamma_motion.cpp": "c5ae4066a471b6c3b6867a04234552a95add0d017a9bbaae9a5b1571ee2f53e9",
+    "src/runtime/gamma_motion.hpp": "b869e7ec531d869097011d4016b67d79a3135e8fe933e60090bae4b135960ce8",
+    "src/runtime/native_gamma_assets_native.cpp": "8d35671287ded1cb4f083decb06da63973af3d921b22a887713efff2a9c05c1d",
+    "src/runtime/native_gamma_binding.cpp": "9a6415954c040583b9580a692ba16d655262dbfb8f5fb44c88cc4c1f5db274c4",
+    "src/runtime/native_gamma_resources_native.cpp": "18e9957a65b180e4ff44ceb2588597c7483de6dab15dbde005926469b86ab739",
+    "tests/probes/gamma_asset_pack_check.cpp": "390f4ebc551d8c30f4d1dee3163b203401f55bd893059b626f3b7e89b0979d17",
+    "tests/probes/native_gamma_cursors_probe.cpp": "6e4b461e8b1cbea91c53d7d335515244c09224a6796a8271ae1443fda868e925",
+    "tests/probes/native_gamma_effects_probe.cpp": "2f267def1d6cfb159bb9d866ba1fd35efaf9e4523c4fd495debcee380cb9e99e",
+    "tests/probes/native_gamma_selection_core_probe.cpp": "f1f5119da472f78651428ac79b4a5435e80acb359bf2a0c2f816b2670195a517",
+    "tests/probes/native_gamma_setup_resource_probe.cpp": "d7a46337c830760665e3f3bd28452f82af77af0a3e9013bb29f426a58952d957",
+    "tests/unit/native_gamma_binding.mm": "00f5e3aee86641cda3b6c6c348b6a4f800f8f7b1d781cf8b35c11253784c386e",
+    "tests/unit/native_gamma_effects.mm": "3c70e8acc9d6f2df35c7f72a0f5664c8e27f57ba1bbc389b6676e8f4eac6e394",
+    "tests/unit/native_gamma_motion.mm": "842efd3f2c845916dbb2591150648f7bf48c8a0683f596eab790c83de2f46e6c",
+    "tests/unit/native_gamma_vertex_weld.mm": "7d775345a1319785aec7068d3fb3be977e09c9f20ca2c87b4e35a304d0858097",
+    "tests/unit/native_gamma_weld_cursors.mm": "16f30d1fcf70d97c6f1eef4ee1c6db8b432c60ef242e45a220740b9979135ca8",
+    "tools/oracles/check_character_resource_gamma.py": "8cf12856bc1a48af48b7b5161363519846302d0032f2fb976c991359bde80c2c",
+    "tools/oracles/mutate_gamma_cursors.py": "f7a2b1c3fef053fe19c8909e96e4d684e11aca68724b59b70adff2940a49a1e3",
+    "tools/oracles/mutate_gamma_effects.py": "cb6d89c0e2538b17ccdea4dfed0e120064a028d76d0881a8cc9eee792d2970e0",
+    "tools/oracles/mutate_gamma_selection_core.py": "f19c1e581df6b56c2f4c88d3c97881765863d342119490fd9acb77ba03e7b538",
+    "tools/oracles/mutate_gamma_setup_resource.py": "442640dac8c6f6d06560e1bedc3818ab2d11c40911d1029cb5d1c1bcdc12abf1",
+    "tools/oracles/mutate_player_vertex_weld.py": "970a7b9f1552d47b810b26dff817ee8c3c8e67f51af6fa5a221e2e3fd04dde9f",
+    "tools/oracles/mutate_player_vertex_weld_binding.py": "2379605392373fe25dceb0e37b8f394f70b1f9044b323ed0b4d9adcd32981bca",
+    "tools/oracles/verify_original_gamma_cursors.py": "e62fb12206a9f28dfb087abc05543f9946822284da7f3890b353f3a2a150daf0",
+    "tools/oracles/verify_original_gamma_effects.py": "10bf7f30793a0f71f0f056188fa048cd5ce29f870712d44bae824aca09707246",
+    "tools/oracles/verify_original_gamma_selection_core.py": "b62020db7b643a941079b15b2e0b931885ace95b40bb1ec3329a61439604aada",
+    "tools/oracles/verify_original_gamma_setup_resource.py": "ffdf9624279ce1fbf6095dc698755d215a63d4c2ffe5c2621fa235e402149388",
+    "tools/oracles/verify_original_player_vertex_weld.py": "8749141a3312bff8e2cb9f5e7412e1fab1d8996db1b5e1fe7a3e3a7c4ecb1132"
+  },
+  "limits": [
+    "Hash preservation does not establish individual FP partial identities absent from inherited summaries.",
+    "No reserved Task/reset execution or full gate."
+  ],
+  "changed_with_reason": {
+    "src/player/gamma_selection_core.hpp": {
+      "before": "e9f86d6b09f6581aca4b5d5289faf460e9779867df471172c74af0c4c8e36c58",
+      "after": "90783c7831f1ae62fec6e8de06e7ade6f721a240497501b0b77e748429c499a7",
+      "reason": "Actual restoration binding or source annotation migrated to recovered module; neighboring game logic unchanged."
+    },
+    "src/runtime/native_gamma_binding.cpp": {
+      "before": "9a6415954c040583b9580a692ba16d655262dbfb8f5fb44c88cc4c1f5db274c4",
+      "after": "655ca657969855cd4f5e32f00222a9863acdf0827fca43fc46b72c41436f5caa",
+      "reason": "Actual restoration binding or source annotation migrated to recovered module; neighboring game logic unchanged."
+    },
+    "tests/unit/native_gamma_motion.mm": {
+      "before": "842efd3f2c845916dbb2591150648f7bf48c8a0683f596eab790c83de2f46e6c",
+      "after": "4545f331c7116fb3f6073792d4e0a58f37c53ad21a4b5008cde446ed0b7014bd",
+      "reason": "Diagnostic-only expectation: old fixtures supply no normalized input owner and now stop at that precise missing binding; all prior observations unchanged."
+    },
+    "tests/unit/native_gamma_vertex_weld.mm": {
+      "before": "7d775345a1319785aec7068d3fb3be977e09c9f20ca2c87b4e35a304d0858097",
+      "after": "da60ecd814e7573e87e534593bcb1627c1357daadc6f0bb9af891ac527edd32f",
+      "reason": "Diagnostic-only expectation: old fixtures supply no normalized input owner and now stop at that precise missing binding; all prior observations unchanged."
+    }
+  },
+  "observation_streams": {
+    "motion": {
+      "bytes": 11144,
+      "identical": true,
+      "sha256": "3bcab50e1e0d58096e2b1c174c20c0ad4fed6cb4ce9bc6800fed66ed008fca34"
+    },
+    "topology": {
+      "bytes": 12494,
+      "identical": true,
+      "sha256": "87eb6646c42d99987fea1f207a6b40fde8f2b73443faa01ebcb50c6797d52c7c"
+    }
+  }
+}

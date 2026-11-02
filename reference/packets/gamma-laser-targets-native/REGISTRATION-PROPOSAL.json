@@ -1,0 +1,32 @@
+{
+  "canonical_manifest_unchanged": true,
+  "inherited_protections": 1412,
+  "inherited_entries_removed": 0,
+  "inherited_missing_local_files": 53,
+  "changed_protected_paths": [
+    "Makefile",
+    "tests/unit/manifest.tsv",
+    "tests/unit/native_gamma_motion.mm",
+    "tests/unit/native_gamma_vertex_weld.mm"
+  ],
+  "new_protected_paths": [
+    "reference/oracle-reports/gamma_input_buffer.json",
+    "tests/probes/native_gamma_input_buffer_probe.cpp",
+    "tests/unit/native_gamma_input_buffer.mm",
+    "tools/oracles/mutate_gamma_input_buffer.py",
+    "tools/oracles/verify_original_gamma_input_buffer.py"
+  ],
+  "new_source_files": [
+    "src/player/gamma_input_buffer.hpp",
+    "src/player/gamma_input_buffer.cpp"
+  ],
+  "new_source_owner": "NativeSceneInputState.normalized_analogs input_dataG size64; existing product owner, no counterpart exception needed",
+  "constexpr_consumer_refresh_only": [
+    "src/runtime/native_input.cpp::masks",
+    "src/runtime/native_input.cpp::directions"
+  ],
+  "constexpr_reason": "Only the native input owner borrowing method was appended; existing tables and their consumers unchanged. Root reconciles exact file fingerprints.",
+  "root_inventory": "Reconcile only changed owner/module fingerprints on admission; no inventory regenerated here.",
+  "limit": "Finite proposal only; do not remove the53 absent inherited evidence inputs or copy an older canonical manifest.",
+  "constexpr_source_sha256": "d9aee6b59a5d23c10cea951c7ecf1353d3e763ddfce4f1fc7d343f6dffc621af"
+}

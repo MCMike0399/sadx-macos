@@ -1,0 +1,221 @@
+{
+  "source_commit": "ace1a719",
+  "original_development": {
+    "cases": 636,
+    "failure_prefixes": 469,
+    "mismatches": 0,
+    "observation_sha256": "159a561f12f9ac95a5aa6619bd2e27156ec6c4f4d77b1f3b279f4bc9298d3ac2"
+  },
+  "original_holdout": {
+    "cases": 2172,
+    "seed": 1195986512,
+    "failure_prefixes": 1755,
+    "mismatches": 0,
+    "observation_sha256": "7e5ebdc84c34fd11871f63de7d80c53b198ed57e959d9fc0fbb8182d0f0fa272"
+  },
+  "compiled_faults": {
+    "count": 7,
+    "all_caught": true
+  },
+  "original_first_caller": {
+    "slots": 8,
+    "passed": true
+  },
+  "focused_checks": {
+    "native_app_build": 0,
+    "native_force_load_closure": 0,
+    "new_native_caller_and_generated_command": 0,
+    "inherited_motion_caller": 0,
+    "inherited_weld_caller": 0,
+    "provenance": 0,
+    "readability": 0,
+    "layers": 0,
+    "global_owners": 0,
+    "profile_unhandled_overlaps": 0,
+    "constexpr_consumer_fingerprints": "2 pending Root review; no table/consumer behavior changed",
+    "judge_registration": "finite proposal;53 inherited absent inputs retained",
+    "generated_native_command": "/usr/bin/time -p ./build/native-gamma-input-buffer-test game/imported"
+  },
+  "normal_input": {
+    "command": [
+      "build/sadx-native",
+      "--assets",
+      "game/imported",
+      "--offscreen",
+      "--paced",
+      "--exit-after",
+      "1550",
+      "--save-directory",
+      "build/gamma-laser-targets/final-save",
+      "--key-events",
+      "500:13:down,501:13:up,750:13:down,751:13:up,950:13:down,951:13:up,1050:13:down,1051:13:up,1300:13:down,1301:13:up",
+      "--screenshot",
+      "build/gamma-laser-targets/final.ppm"
+    ],
+    "exit_status": 1,
+    "frames": 1332,
+    "completed_frames": 1330,
+    "boundary": "native session stopped: native_gamma_get_model_matrix",
+    "capture_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427",
+    "capture_identical_to_baseline": true,
+    "image_inspected": true,
+    "preview_actors": [
+      {
+        "retired": false,
+        "mode": 0,
+        "id": 0,
+        "player_index": 0,
+        "character": 0,
+        "status": 0,
+        "position": [
+          400,
+          0,
+          -20
+        ],
+        "rotation": [
+          0,
+          16384,
+          0
+        ],
+        "aim_y": 16384
+      },
+      {
+        "retired": false,
+        "mode": 0,
+        "id": 0,
+        "player_index": 1,
+        "character": 2,
+        "status": 0,
+        "position": [
+          400,
+          0,
+          -20
+        ],
+        "rotation": [
+          0,
+          16384,
+          0
+        ],
+        "aim_y": 0
+      },
+      {
+        "retired": false,
+        "mode": 0,
+        "id": 0,
+        "player_index": 2,
+        "character": 3,
+        "status": 0,
+        "position": [
+          400,
+          0,
+          -20
+        ],
+        "rotation": [
+          0,
+          16384,
+          0
+        ],
+        "aim_y": 0
+      },
+      {
+        "retired": false,
+        "mode": 0,
+        "id": 0,
+        "player_index": 3,
+        "character": 5,
+        "status": 0,
+        "position": [
+          400,
+          0,
+          -20
+        ],
+        "rotation": [
+          0,
+          16384,
+          0
+        ],
+        "aim_y": 0
+      },
+      {
+        "retired": false,
+        "mode": 0,
+        "id": 0,
+        "player_index": 4,
+        "character": 7,
+        "status": 0,
+        "position": [
+          400,
+          0,
+          -20
+        ],
+        "rotation": [
+          0,
+          16384,
+          0
+        ],
+        "aim_y": 0
+      },
+      {
+        "retired": false,
+        "mode": 1,
+        "id": 2,
+        "player_index": 5,
+        "character": 6,
+        "status": 1,
+        "position": [
+          400,
+          0,
+          -20
+        ],
+        "rotation": [
+          0,
+          16384,
+          0
+        ],
+        "aim_y": 0
+      },
+      {
+        "retired": false,
+        "mode": 0,
+        "id": 0,
+        "player_index": 6,
+        "character": 0,
+        "status": 0,
+        "position": [
+          400,
+          0,
+          -20
+        ],
+        "rotation": [
+          0,
+          17112,
+          0
+        ],
+        "aim_y": 0
+      }
+    ],
+    "app_sha256": "4d36485d4df183afefe38542094426eba5415625facd2fdc0807fedf381b662d",
+    "final_relink_and_repeat_confirmed": true,
+    "save_input_sha256": {
+      "SONICADVENTURE_DX_CHAOGARDEN.snc": "53b585755ada51c7ed07d2f69ad3ddb195b5a6e48a838fc98533910205dae3e3",
+      "SonicDX02.snc": "3249b31891872b96be539348c005abf812c76af5e3e7c5f198ee65de008943e4",
+      "SonicDX01.snc": "15ac61323e0508d72a279f0f648f4b5007793cc0c8fb42bce9d893f00c265cf6"
+    }
+  },
+  "attempts": [
+    "The new failure fixture initially assumed requested size560 excluded padded allocator payload. Arena intentionally allows rounded padding; corrected only this new fixture to deny stroke via existing payload transport. No allocator code or inherited judge changed.",
+    "One Makefile patch anchor used the platform-link rule rather than the existing Foundation-only caller rule; patch rejected without editing, corrected to actual rule.",
+    "One provenance initializer spelling used braces without equals; parser rejected it, corrected to explicit = {} before source commit."
+  ],
+  "limits": [
+    "No complete actor frame, N3b, active welding or matrix producer is claimed. GetMMMatrix remains explicit and no matrix is fabricated.",
+    "Full gate/cold unavailable-images build/Root review/admission not run.",
+    "Adjacent buffer producer4c3780 analyzed but not implemented; later existing-player modes remain explicit stops.",
+    "No inherited numeric oracle inputs/tolerances/mutants changed; individual FP partial identities absent from older Gamma summaries cannot be established from counts.",
+    "No Main writes, push, agents, new checkout, reserved Task/reset execution, schedules, storage or provider change."
+  ],
+  "judge_commits": [
+    "aacb5e98",
+    "3a6f30d2"
+  ]
+}

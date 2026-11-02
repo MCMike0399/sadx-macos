@@ -1,0 +1,103 @@
+{
+  "base": "06f6d652",
+  "source_commit": "ace1a719",
+  "fresh_owned_ghidra": {
+    "heap": "2G",
+    "closed": true,
+    "results": [
+      {
+        "path": "reference/inventory-raw/gamma-laser-targets-native/open.json",
+        "sha256": "b8edd9e7221568a0bfc1b57724b03adb1869699828f54ae163997d6a06ec3a82",
+        "evidence_id": null,
+        "operation": null,
+        "parameters": null,
+        "subject_sha256": null
+      },
+      {
+        "path": "reference/inventory-raw/gamma-laser-targets-native/close.json",
+        "sha256": "16f6e9c5c36efaf26f3e18b38eac382119caeaf9caa6e9661235f23fe114613b",
+        "evidence_id": null,
+        "operation": null,
+        "parameters": null,
+        "subject_sha256": null
+      },
+      {
+        "path": "reference/inventory-raw/gamma-laser-targets-native/input-publication-xrefs.json",
+        "sha256": "a72161e53d4332d64ae406a474e607f0805082c4554003b2bb07b483b0734f20",
+        "evidence_id": "ev_16a8f05355d753f8e8a6f6e12954a4c5fa64aaeba4e4e7131baee5023d7aa9ff",
+        "operation": "xrefs",
+        "parameters": {
+          "address": "0x3b0e7a0"
+        },
+        "subject_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74"
+      },
+      {
+        "path": "reference/inventory-raw/gamma-laser-targets-native/laser-targets.json",
+        "sha256": "4b68355ca02646e9e5d9d3f10b3456a6cba569691876418fda713ec33d7cdeef",
+        "evidence_id": "ev_55d320b6e82244cb91f5bdce7fc47fd7fa7a838c8adfaa3c3240b272437eb801",
+        "operation": "analyze_function",
+        "parameters": {
+          "procedure": "0x4c3870"
+        },
+        "subject_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74"
+      },
+      {
+        "path": "reference/inventory-raw/gamma-laser-targets-native/input-stroke-xrefs.json",
+        "sha256": "a9982e31cb2c55a85412ae5361299e06d02e5f3317dde66d65762fa437a522ae",
+        "evidence_id": "ev_171576663ad24f07d6375704c90ec799dee8e52a4ffa653ce54ed7987fe6a174",
+        "operation": "xrefs",
+        "parameters": {
+          "address": "0x3b0e7a4"
+        },
+        "subject_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74"
+      },
+      {
+        "path": "reference/inventory-raw/gamma-laser-targets-native/gamma-input-buffer-producer.json",
+        "sha256": "e758d61b77958e268cecb935558464e78f749ca2881bcc0fea56517e674f25d8",
+        "evidence_id": "ev_f04216e9e9d743e33d195b009ed2b4e4f03e55911c70f58005e813da50b9c7a7",
+        "operation": "analyze_function",
+        "parameters": {
+          "procedure": "0x4c3780"
+        },
+        "subject_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74"
+      }
+    ]
+  },
+  "body": {
+    "entry": "0x4c3870",
+    "exclusive_end": "0x4c3893",
+    "bytes": 35,
+    "callees": [],
+    "operations": [
+      "Read E102WK.input_buf[7].angle at +0x22c",
+      "Store input_dataG[player].angle",
+      "Read E102WK.input_buf[7].stroke raw bits at +0x230",
+      "Store input_dataG[player].stroke raw bits"
+    ],
+    "source_index_type": "32-bit int; actual E102 caller supplies zero-extended task player byte"
+  },
+  "layout": {
+    "sdk": "reference/sadx-mod-loader/SADXModLoader/include/SADXStructsNew.h:E102WK/_INPUT",
+    "input_buf_offset": 500,
+    "entries": 8,
+    "entry_bytes": 8,
+    "latest_angle_offset": 556,
+    "latest_stroke_offset": 560,
+    "allocation_bytes": 580
+  },
+  "canonical_owners": {
+    "buffer": "Existing E102WK TaskWorkArena allocation; no new typed mirror",
+    "destination": "native::Input::Impl.scene.normalized_analogs; annotated NativeSceneInputState owner input_dataG size64",
+    "player": "Existing passed player allocation/free-work reference; no current-player alias refresh"
+  },
+  "initialization_proof": {
+    "native": "Actual CAlloc580 and complete native first callback; all16 buffer words observed zero at GetMMMatrix stop",
+    "original": "original-caller.json executes actual E102 and 4c3870 with inherited concrete lower receipts; all8 slots; 4c3780 absent before first restoration",
+    "later_producer": "4c3780 shifts input_buf and optionally temporarily publishes oldest input; full dossier analyzed, native seam still explicit/unrecovered",
+    "limit": "No claim that PE BSS alone proves runtime state. Initial destination contents are overwritten, not assumed zero."
+  },
+  "judge_commits": [
+    "aacb5e98",
+    "3a6f30d2"
+  ]
+}
