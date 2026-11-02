@@ -1,0 +1,53 @@
+{
+  "base": "b7dcd2bc",
+  "latest_main": "bdb61450",
+  "new_paths": {
+    "reference/oracle-reports/sonic_initialization.json": "081801779bf9a36b2b4fda22f7c7858828c323ed18d37fe73b8eadc23a218f62",
+    "reference/packets/sonic-initialization-native/prepare_wiring.py": "aef8845de57ea08c02b0b0cd9a548d410beadc85438f4349a3429be336a48666",
+    "reference/packets/sonic-initialization-native/verify_binding_faults.py": "f9aaeb5df4b1d510d4626f38101ea18e6c3ef97dbb466aedc22c55cef17eb594",
+    "reference/packets/sonic-initialization-native/verify_faults.py": "9c6ab551a2c7f1d719c61ab2b2a0f965c9d001b1e57ab5c739a42874ffe7cbb5",
+    "reference/packets/sonic-initialization-native/verify_helpers.py": "0a3a9720242b4d58a7b9bd129ac4f6006aef9152cd61a1b92b60f4877d63ef9b",
+    "reference/packets/sonic-initialization-native/verify_source.py": "1eec2d530d3b5bc69f4e1355eacd54f32b4759dc79702895c8aa032f59cb97f8",
+    "tests/probes/native_sonic_initialization_probe.cpp": "a3445bff7276a6969e83d55d38e41b6cd26e63f73bd0f7801e607c3156551a02",
+    "tests/unit/sonic_initialization_native.mm": "92a1be3b1dbe8b62724b4600bc958c49427bd354e51ea66b12706f2a0c50fa59",
+    "tools/oracles/verify_original_sonic_initialization.py": "80dbfa851e6aa5a27d5661c8ac7445cea72ec06c5a9d40015d84cc9a59bbde3d"
+  },
+  "changed_existing": {
+    "tests/unit/sonic_model_native.mm": {
+      "base": "3fb615742530fafc9d69254de6e026886748c853659868db2430532e97fadf62",
+      "main": "3fb615742530fafc9d69254de6e026886748c853659868db2430532e97fadf62",
+      "candidate": "98ef73fa692941cb1e2352197598e55a193c1d55182c5aeefc0ad2e2292084ac"
+    },
+    "reference/packets/sonic-model-native/verify_pair_observer.py": {
+      "base": "782ae5f5fa70f13bcb686734d42934e77b4f50e1ecb2d6d78e0bce0e115a38f8",
+      "main": "782ae5f5fa70f13bcb686734d42934e77b4f50e1ecb2d6d78e0bce0e115a38f8",
+      "candidate": "71f62a0ed78c6cc3c36211e40db2c909712d69ddcaeb2d83d35cb89c6ab36947"
+    },
+    "tests/unit/sonic_animation_integration.mm": {
+      "base": "351ad0e29b602ae28b2961ae4a7ac8c632666b5e8d515688049fb1995a484de1",
+      "main": "351ad0e29b602ae28b2961ae4a7ac8c632666b5e8d515688049fb1995a484de1",
+      "candidate": "89525af32b98e61b0cbb18de75712af82721a2c075ad8122c2106ad4f118d948"
+    },
+    "tests/unit/manifest.tsv": {
+      "base": "37b52fca0c24e0322c85b3922072e225c8a5defcd0541b35cbd3c711db45170c",
+      "main": "d02c284e3e2ed21b115501620d1178a5722ec05301342cd4d7b4f052efb80c92",
+      "candidate": "d903860ce0c3bada9cc74af6e023b9403f53a56f20d2dbd13849154261c280e0"
+    },
+    "tests/unit/native_editor_binding.mm": {
+      "base": "3a7440c34ede6a46b12018784a75c08e8c7f9036d753b4c609e3ee77b2c6586d",
+      "main": "3a7440c34ede6a46b12018784a75c08e8c7f9036d753b4c609e3ee77b2c6586d",
+      "candidate": "84da1133b77f1048e8f90395720a23b3b473396fc5118ed167b6b1e8bce71334"
+    },
+    "reference/packets/sonic-model-native/prepare_wiring.py": {
+      "base": "8ef957067f1756a829a242fd5d0a2505dbb0efea6853c50ccf69cafb190e68de",
+      "main": "8ef957067f1756a829a242fd5d0a2505dbb0efea6853c50ccf69cafb190e68de",
+      "candidate": "00355cd33466e49b8829e06bbe5070ea9d157ef7093078657d89f0e438c700ea"
+    },
+    "Makefile": {
+      "base": "6018ed8465de39a8a54234e936b87d5ab96b9f1b7ce11761d404c2b2de2fe275",
+      "main": "72728bad45f14930134e4fa64b4e1dd6b4d1bd2e204d61ec94a7186d0ea4f92a",
+      "candidate": "2e36c51995850c29d6b1c41f636c8f8cf766619b335f3438e3df73c88a037c50"
+    }
+  },
+  "instruction": "Apply only owned hunks, preserve newer Main changes, then hash the final Root files. Never replace the current Main manifest with the candidate snapshot."
+}

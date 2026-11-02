@@ -12,7 +12,9 @@ struct SonicJoinDeclaration {
     std::size_t pairs = 0;
 };
 struct SonicModelDeclarations {
-    character_pack::ResourceId attach = 0, root = 0;
+    character_pack::ResourceId attach = 0, root = 0, join_target = 0;
+    std::array<character_pack::ResourceId, 3> direct_ahead{};
+    std::array<SonicJoinDeclaration, 8> metal_joins{};
     std::array<SonicJoinDeclaration, 37> joins{};
     std::vector<std::vector<std::uint16_t>> pairs;
     std::vector<collision_component::Info> collision;
@@ -29,6 +31,7 @@ class SonicModelAssets {
     sonic_model::State &state() { return state_; }
     character_pack::ResourceId attach() const { return declarations_.attach; }
     character_pack::ResourceId root() const { return declarations_.root; }
+    character_pack::ResourceId join_target() const { return declarations_.join_target; }
     const std::vector<collision_component::Info> &collision() const {
         return declarations_.collision;
     }

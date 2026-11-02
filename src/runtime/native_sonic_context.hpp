@@ -56,6 +56,11 @@ struct Context {
     std::function<bool()> read_event_link{};
     // NOTSA: borrows the Sonic owner's declarations and the session's live scene.
     native::SonicModelAssets *model = nullptr;
+    const std::int16_t *act = nullptr;
+    character_pack::SceneState *scene = nullptr;
+    regular_textures::CharacterCatalog character_textures{nullptr, nullptr, 0};
+    regular_textures::State *texture_state = nullptr;
+    regular_textures::Services *texture_services = nullptr;
 };
 // NOTSA: native-facing entry points execute the same template body as the reference adapter.
 // NOTSA: bind event reads/stores to the callback's captured primary allocation.

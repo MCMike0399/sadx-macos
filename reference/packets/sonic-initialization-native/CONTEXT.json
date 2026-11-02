@@ -1,0 +1,74 @@
+{
+  "base": "b7dcd2bc",
+  "source_dossier": {
+    "path": "/Users/burbujamc/Developer/sadx-macos/reference/ghidra-gameplay-live-recovery/sonic-main.json",
+    "sha256": "1d0efdf6304ebc671bbc101955ac70cc7c5f72bbb9e13e4a2dcb61234fe9b1fb",
+    "evidence_id": "ev_ba234573e6c1cb6b8bfca460cf97a528b7eeb9d3603e124fb4fcfaca6f8082a6",
+    "complete_body": "49a9b0..49bfbb inclusive"
+  },
+  "helper": {
+    "name": "CollisionCrashThing_Load",
+    "entry": "0x495860",
+    "size": 91,
+    "sha256": "ebc1c835f8c720ab70140748653eed80d0b22e8339f8ae08a336b7a5499f0eed",
+    "boundary_source": "Cached complete Sonic dossier callee body range; pinned PE bytes disassembled locally, no fresh Ghidra session"
+  },
+  "direct_ahead_initializer": {
+    "range": "0x7d0af0-0x7d0b19",
+    "sha256": "84aba498b7a123dc47a8684b089a1d731563de28b3eaf9b27fd60aca403df074",
+    "slots": [
+      50,
+      52,
+      51
+    ],
+    "owner": "SonicModelAssets.state.direct_ahead, source 3c55d58..3c55d63"
+  },
+  "original_ranges_sha256": {
+    "0x49abeb-0x49ad2d": "5ac0015199b61c2848e1946f0f2756bb9540708e188c93815de58b0e3113e928",
+    "0x49be04-0x49be92": "5e5a6136fe4e348eaf1a0d11fb9e25dc2aac88044cebaf0e6e00a845ff7aa6c8",
+    "0x495860-0x4958bb": "ebc1c835f8c720ab70140748653eed80d0b22e8339f8ae08a336b7a5499f0eed",
+    "0x7d0af0-0x7d0b19": "84aba498b7a123dc47a8684b089a1d731563de28b3eaf9b27fd60aca403df074"
+  },
+  "preserved_numeric_contracts": {
+    "src/player/sonic_player.cpp": {
+      "sha256": "c2b9cd7bd4772fc5e3411ec06c160f890201fff682162ae7e177717de8945fbf",
+      "unchanged_from_base": true
+    },
+    "src/player/sonic_player_internal.hpp": {
+      "sha256": "4960d3c64eb6d5e11ae5ed74f93ff1302709ca21a10d96d780a869e28bdfa827",
+      "unchanged_from_base": true
+    },
+    "src/player/sonic_player_sites.hpp": {
+      "sha256": "1d6f4f979f3e0b0769ee91e14b773c5f305b7f258c89be7fa3396a26dedee8aa",
+      "unchanged_from_base": true
+    },
+    "src/guest/sonic_player_reference.cpp": {
+      "sha256": "0847b4cbe5238333fd8259358e566c7a67171274ef737ef055a9ce11aef5e6f7",
+      "unchanged_from_base": true
+    },
+    "src/guest/sonic_player_reference.hpp": {
+      "sha256": "37a969e44625b4d031916bfe3ee8c020702cfc38f54514517afde8b541e8a4f4",
+      "unchanged_from_base": true
+    },
+    "src/guest/sonic_player_sites.hpp": {
+      "sha256": "33b652ae868523e93bd722f3a6bd43cf33fa79ef6c0d42ab7a18db13bb1c8d4f",
+      "unchanged_from_base": true
+    },
+    "src/runtime/native_sonic_fields.hpp": {
+      "sha256": "e17fde213d8bfa35a56df1d76a6234233215b48e56adb07b7e2de0cb9d913a22",
+      "unchanged_from_base": true
+    },
+    "tests/probes/native_sonic_player_probe.cpp": {
+      "sha256": "d66392012a7b45086ff30b7a7da0422fc9b64c02a3028effbc0fcfd398a21a53",
+      "unchanged_from_base": true
+    },
+    "tests/probes/native_sonic_action_probe.cpp": {
+      "sha256": "72e304de2ccc2fac3ba012921c3c4c1bcda85b27012c6050e548135cdb197a01",
+      "unchanged_from_base": true
+    }
+  },
+  "limits": [
+    "No fresh Ghidra, matrix recovery, reference adapter or shared controller algorithm change.",
+    "Root callback hunk is a build-only exact application; shipping shared callback remains byte-identical to base."
+  ]
+}

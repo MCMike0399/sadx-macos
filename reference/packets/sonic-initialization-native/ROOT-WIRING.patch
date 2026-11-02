@@ -1,0 +1,17 @@
+--- a/src/runtime/native_selection_preview.cpp
++++ b/src/runtime/native_selection_preview.cpp
+@@ -203,6 +203,14 @@
+     }
+     context.animation_table = &assets->table();
+     context.model = assets->model();
++    context.act = &scene.session_.act_;
++    context.scene = &scene.session_.character_scene_;
++    CharacterTextureViews texture_views(scene.session_.character_resources_.assets(),
++                                        scene.session_.character_resources_.lists());
++    auto texture_services = scene.session_.regular_texture_services();
++    context.character_textures = texture_views.catalog(scene.session_.character_resources_.loaded());
++    context.texture_state = scene.session_.regular_resources_.state();
++    context.texture_services = &texture_services;
+     animation::Runtime animation{scheduler.work_arena().get(), assets->resources(),
+                                  &scene.session_.character_scene_.objects};
+     context.animation = &animation;

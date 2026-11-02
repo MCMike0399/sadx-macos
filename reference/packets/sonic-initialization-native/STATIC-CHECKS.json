@@ -1,0 +1,47 @@
+[
+  {
+    "command": [
+      "python3",
+      "tools/gate/check_provenance.py"
+    ],
+    "exit": 0,
+    "stdout": "Provenance: {'FUNCTION': 546, 'GLOBAL': 109, 'STUB': 105, 'PATCH': 2, 'DATA': 7}, 168652 legacy/annotated byte identities, 0 errors\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "python3",
+      "tools/gate/check_global_owners.py"
+    ],
+    "exit": 0,
+    "stdout": "159059 owned bytes, 0 with more than one owner struct\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "python3",
+      "tools/gate/check_layers.py"
+    ],
+    "exit": 0,
+    "stdout": "12 layers, 0 known exceptions, 0 violations\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "python3",
+      "tools/gate/check_readability.py"
+    ],
+    "exit": 0,
+    "stdout": "Readability: 553 files, {'hex_literals': 2368, 'address_identifiers': 1188, 'address_calls': 61, 'goto': 0, 'address_labels': 0, 'long_lines': 932, 'multi_statement_lines': 1536, 'large_decimal_literals': 231, 'emulator_arithmetic': 3103, 'address_comments': 1029}, 0 regressions\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "python3",
+      "tools/gate/check_constexpr_tables.py"
+    ],
+    "exit": 0,
+    "stdout": "Constexpr table reviews: 48 active, 52 historical, {'named_structure': 12, 'numeric_encoding': 19, 'open_migration': 11, 'open_review': 0, 'reference_metadata': 0, 'typed_content': 6}, retired {'migrated': 4, 'justified_removal': 0}, prior dispositions {'named_structure': 0, 'numeric_encoding': 0, 'open_migration': 3, 'open_review': 1, 'reference_metadata': 0, 'typed_content': 0}, unresolved retirements 0, 0 problems\n",
+    "stderr": ""
+  }
+]

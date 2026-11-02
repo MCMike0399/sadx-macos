@@ -1,0 +1,37 @@
+{
+  "main": "bdb61450",
+  "protected_paths": 1441,
+  "patch_checks": [
+    {
+      "command": [
+        "git",
+        "apply",
+        "--check",
+        "--directory=build/sonic-initialization-main-compat",
+        "reference/packets/sonic-initialization-native/ROOT-WIRING.patch"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "apply",
+        "--check",
+        "--directory=build/sonic-initialization-main-compat",
+        "reference/packets/sonic-initialization-native/ROOT-CALLER-TESTS.patch"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "ordering": "Consume candidate source/judge edits first. The caller patch expects the preceding missing-texture-owner diagnostic in the two old witnesses.",
+  "scope": "Read-only private source fixture checks; no rebase, shared header replacement or Main write.",
+  "main_route_user_report": "GammaUpdateFan at1332/title; active PJoin argument selection/deformation/attachments remain explicit.",
+  "limits": [
+    "Candidate runtime evidence remains based on b7dcd2bc.",
+    "Latest Main compile/gate belongs to Root; these are exact hunk applicability checks."
+  ]
+}

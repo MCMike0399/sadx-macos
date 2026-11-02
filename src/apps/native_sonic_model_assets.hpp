@@ -19,6 +19,15 @@ load_sonic_model_assets(NSDictionary *actor, const character_pack::CharacterPack
             integer(row[@"object"], 1, pack.record_count(), "Sonic object identity"));
         (index == 0 ? result.attach : result.root) = identity;
     }
+    result.join_target = static_cast<character_pack::ResourceId>(
+        integer(dictionary(objects[2], "Sonic join target")[@"object"], 1, pack.record_count(),
+                "Sonic join target identity"));
+    (void)integer(dictionary(objects[2], "Sonic join target")[@"index"], 22, 22,
+                  "Sonic join target slot");
+    const auto direct = array(actor[@"direct_ahead_objects"], 3, "Sonic direct-ahead objects");
+    for (std::size_t index = 0; index < result.direct_ahead.size(); ++index)
+        result.direct_ahead[index] = static_cast<character_pack::ResourceId>(
+            integer(direct[index], 1, pack.record_count(), "Sonic direct-ahead object identity"));
     id pair_rows = actor[@"vertex_pairs"];
     if (![pair_rows isKindOfClass:NSArray.class])
         throw std::runtime_error("invalid Sonic vertex-pair declarations");
@@ -32,31 +41,35 @@ load_sonic_model_assets(NSDictionary *actor, const character_pack::CharacterPack
         for (id pair in pairs) {
             const auto words = array(pair, 2, "Sonic vertex pair");
             for (id word in words)
-                values.push_back(static_cast<std::uint16_t>(
-                    integer(word, 0, UINT16_MAX, "Sonic vertex index")));
+                values.push_back(
+                    static_cast<std::uint16_t>(integer(word, 0, UINT16_MAX, "Sonic vertex index")));
         }
         result.pairs.push_back(std::move(values));
     }
     const auto joins = dictionary(actor[@"joins"], "Sonic join declarations");
-    const auto rows = array(joins[@"sonic"], result.joins.size(), "Sonic join rows");
-    for (std::size_t index = 0; index < result.joins.size(); ++index) {
-        const auto row = dictionary(rows[index], "Sonic join row");
-        auto &target = result.joins[index];
-        auto object = [&](NSString *key) {
-            return static_cast<character_pack::ResourceId>(
-                integer(row[key], 0, pack.record_count(), "Sonic join object"));
-        };
-        target.object = object(@"object");
-        target.source = object(@"source_object");
-        target.destination = object(@"destination_object");
-        target.count = integer(row[@"vertex_count"], 0, UINT8_MAX, "Sonic join count");
-        target.mode = integer(row[@"input_mode"], INT8_MIN, INT8_MAX, "Sonic join mode");
-        target.source_depth = integer(row[@"source_node"], 0, UINT8_MAX, "Sonic source node");
-        target.destination_depth = integer(row[@"destination_node"], 0, UINT8_MAX,
-                                           "Sonic destination node");
-        (void)integer(row[@"original_vertices"], 0, 0, "Sonic original allocation");
-        target.pairs = integer(row[@"vertex_pairs"], 0, result.pairs.size(), "Sonic pair row");
-    }
+    const auto decode_joins = [&](NSString *name, auto &target_rows) {
+        const auto rows = array(joins[name], target_rows.size(), "Sonic join rows");
+        for (std::size_t index = 0; index < target_rows.size(); ++index) {
+            const auto row = dictionary(rows[index], "Sonic join row");
+            auto &target = target_rows[index];
+            auto object = [&](NSString *key) {
+                return static_cast<character_pack::ResourceId>(
+                    integer(row[key], 0, pack.record_count(), "Sonic join object"));
+            };
+            target.object = object(@"object");
+            target.source = object(@"source_object");
+            target.destination = object(@"destination_object");
+            target.count = integer(row[@"vertex_count"], 0, UINT8_MAX, "Sonic join count");
+            target.mode = integer(row[@"input_mode"], INT8_MIN, INT8_MAX, "Sonic join mode");
+            target.source_depth = integer(row[@"source_node"], 0, UINT8_MAX, "Sonic source node");
+            target.destination_depth =
+                integer(row[@"destination_node"], 0, UINT8_MAX, "Sonic destination node");
+            (void)integer(row[@"original_vertices"], 0, 0, "Sonic original allocation");
+            target.pairs = integer(row[@"vertex_pairs"], 0, result.pairs.size(), "Sonic pair row");
+        }
+    };
+    decode_joins(@"sonic", result.joins);
+    decode_joins(@"metal", result.metal_joins);
     const auto words = array(actor[@"collision_words"], 24, "Sonic collision records");
     for (std::size_t index = 0; index < 2; ++index) {
         std::array<std::uint32_t, 12> record{};
@@ -70,7 +83,8 @@ load_sonic_model_assets(NSDictionary *actor, const character_pack::CharacterPack
         };
         collision_component::Info info{};
         info.kind = static_cast<std::uint8_t>(record[0]);
-        info.form = static_cast<collision_component::Form>(static_cast<std::uint8_t>(record[0] >> 8));
+        info.form =
+            static_cast<collision_component::Form>(static_cast<std::uint8_t>(record[0] >> 8));
         info.push = static_cast<std::uint8_t>(record[0] >> 16);
         info.damage = static_cast<std::uint8_t>(record[0] >> 24);
         info.attributes = record[1];

@@ -1,0 +1,604 @@
+{
+  "base": "b417154c",
+  "source_commit": "3a7111fc",
+  "finding": "Fidelity P2 review 1fc948b0: rolled-back CreateElementalTask work exhaustion must return null.",
+  "fix": "One player helper translates SourcePoolExhausted or WorkFailure/Exhausted at primary/motion initialization with a retired task. Other failures propagate. Both setup and effect callers retain source null handling.",
+  "source_hashes": {
+    "src/player/sonic_model.cpp": "ee98b609e753f398496eae71d056b03587f7d08989ebccdf6342ddc4347482e7",
+    "src/player/sonic_model.hpp": "20831210e29bcebc830a102ba01c65da7337b3c76cb6ad98fe106304da3d2e7c",
+    "src/runtime/native_sonic_binding.cpp": "d898b50c8f299e9ddd694b88c0e173650e24badb418414aae718c0ffeab6fd7e"
+  },
+  "judge_hashes": {
+    "tests/unit/sonic_initialization_native.mm": "b0d60250f0c266859428ca488ed319533c820042bd1ef34a5f396e9302888169",
+    "tests/probes/native_sonic_initialization_probe.cpp": "65608b48138fb860c58d1d6666a62c3b308ebe237637cd6c533991ec0d117173",
+    "reference/packets/sonic-initialization-native/verify_helpers.py": "7cccac480a6b824e92a2a8ecfd81fa9300ebb51327e06ac49668d0ece0b01b61",
+    "reference/packets/sonic-initialization-native/verify_creation_failures.py": "72221a4ee5e321b8e63ba25e7fd63eaef7417a43c4f6df44c6e33e432e961924"
+  },
+  "original_creation": {
+    "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+    "observations": [
+      {
+        "flags": 2,
+        "failing_allocation": 1,
+        "setup": true,
+        "result": 0,
+        "calls": [
+          [
+            "AllocateTask"
+          ],
+          [
+            "MAlloc",
+            64
+          ],
+          [
+            "DestroyTask",
+            285216768
+          ]
+        ],
+        "published_primary": 0
+      },
+      {
+        "flags": 2,
+        "failing_allocation": 1,
+        "setup": false,
+        "result": 0,
+        "calls": [
+          [
+            "AllocateTask"
+          ],
+          [
+            "MAlloc",
+            64
+          ],
+          [
+            "DestroyTask",
+            285216768
+          ]
+        ],
+        "published_primary": 0
+      },
+      {
+        "flags": 3,
+        "failing_allocation": 1,
+        "setup": false,
+        "result": 0,
+        "calls": [
+          [
+            "AllocateTask"
+          ],
+          [
+            "MAlloc",
+            64
+          ],
+          [
+            "DestroyTask",
+            285216768
+          ]
+        ],
+        "published_primary": 0
+      },
+      {
+        "flags": 3,
+        "failing_allocation": 2,
+        "setup": false,
+        "result": 0,
+        "calls": [
+          [
+            "AllocateTask"
+          ],
+          [
+            "MAlloc",
+            64
+          ],
+          [
+            "MAlloc",
+            64
+          ],
+          [
+            "DestroyTask",
+            285216768
+          ]
+        ],
+        "published_primary": 285220864
+      }
+    ],
+    "creation_body_sha256": "25f15490017cb13f14c0295057370f03f0739414b9129402640239b4ed3aa960",
+    "helper_body_sha256": "ebc1c835f8c720ab70140748653eed80d0b22e8339f8ae08a336b7a5499f0eed",
+    "limits": [
+      "Original AllocateTask, MAlloc and DestroyTask are controlled.",
+      "Native scheduler rollback and later Sonic publications are checked separately."
+    ]
+  },
+  "preservation": [
+    {
+      "name": "source",
+      "cohort": "dev",
+      "old": "build/sonic-weld-dispatch-correction/source-dev.json",
+      "old_sha256": "f3b400f3194a4b5c3b825b45d72e17c9ecf4fec333c8efd3d91c2c4d57cf91b8",
+      "new": "build/sonic-exhaustion-correction/source-dev.json",
+      "new_sha256": "f3b400f3194a4b5c3b825b45d72e17c9ecf4fec333c8efd3d91c2c4d57cf91b8",
+      "all_prior_observations_equal": true
+    },
+    {
+      "name": "helpers",
+      "cohort": "dev",
+      "old": "build/sonic-weld-dispatch-correction/helpers-dev.json",
+      "old_sha256": "b8cc2d5c6eff499eaea27cb44587d03bdf936daaa235212a1e0851a921df58e8",
+      "new": "build/sonic-exhaustion-correction/helpers-dev.json",
+      "new_sha256": "d76a2300988f36df7a5c26dcf8c807396737a2d201262c1d72a3faeae55ed927",
+      "all_prior_observations_equal": true
+    },
+    {
+      "name": "source",
+      "cohort": "holdout",
+      "old": "build/sonic-weld-dispatch-correction/source-holdout.json",
+      "old_sha256": "472c3e45b1d0b35ab5afcae7adc569e9d59594185fbf824a697596be221d982c",
+      "new": "build/sonic-exhaustion-correction/source-holdout.json",
+      "new_sha256": "472c3e45b1d0b35ab5afcae7adc569e9d59594185fbf824a697596be221d982c",
+      "all_prior_observations_equal": true
+    },
+    {
+      "name": "helpers",
+      "cohort": "holdout",
+      "old": "build/sonic-weld-dispatch-correction/helpers-holdout.json",
+      "old_sha256": "929cda50e209cdd62786c8cb417b92a47f507f241aef4565ff5e68e99b17bce4",
+      "new": "build/sonic-exhaustion-correction/helpers-holdout.json",
+      "new_sha256": "f5acdaac0bade04135554110452469e33dcb511a3b3f199bd8639d1028852cbf",
+      "all_prior_observations_equal": true
+    }
+  ],
+  "existing_caller_test_unchanged_except_append": true,
+  "commands": [
+    {
+      "command": [
+        "./build/sonic-initialization-native-test",
+        "game/imported"
+      ],
+      "exit": 0,
+      "log": "build/sonic-exhaustion-correction/command-0.log",
+      "log_sha256": "44ddc320a5ef79ff6c01bbeb5c9d9f47dca1574f4c22d76e9cabe139b62aa2c4"
+    },
+    {
+      "command": [
+        "reference/python/bin/python",
+        "reference/packets/sonic-initialization-native/verify_source.py",
+        "build/native-sonic-initialization-probe.dylib",
+        "--output",
+        "build/sonic-exhaustion-correction/source-dev.json"
+      ],
+      "exit": 0,
+      "log": "build/sonic-exhaustion-correction/command-1.log",
+      "log_sha256": "ed80ce5e903dc8ad99339d08bab0699e8c7d4dbf3ac5ef4aac51a682a960c2dd"
+    },
+    {
+      "command": [
+        "reference/python/bin/python",
+        "reference/packets/sonic-initialization-native/verify_source.py",
+        "build/native-sonic-initialization-probe.dylib",
+        "--holdout",
+        "--output",
+        "build/sonic-exhaustion-correction/source-holdout.json"
+      ],
+      "exit": 0,
+      "log": "build/sonic-exhaustion-correction/command-2.log",
+      "log_sha256": "208fe2851390a98bf83985c0908a31277499d35397d036caccf20246acdd19be"
+    },
+    {
+      "command": [
+        "reference/python/bin/python",
+        "reference/packets/sonic-initialization-native/verify_helpers.py",
+        "build/native-sonic-initialization-probe.dylib",
+        "--output",
+        "build/sonic-exhaustion-correction/helpers-dev.json"
+      ],
+      "exit": 0,
+      "log": "build/sonic-exhaustion-correction/command-3.log",
+      "log_sha256": "b579bd45ded81ab431caa2a68a6fb7f267d16d8a702447d510c306dc4251f44a"
+    },
+    {
+      "command": [
+        "reference/python/bin/python",
+        "reference/packets/sonic-initialization-native/verify_helpers.py",
+        "build/native-sonic-initialization-probe.dylib",
+        "--holdout",
+        "--output",
+        "build/sonic-exhaustion-correction/helpers-holdout.json"
+      ],
+      "exit": 0,
+      "log": "build/sonic-exhaustion-correction/command-4.log",
+      "log_sha256": "2f3fe11ff3a75305e0476f58a7351711ab76e98b8aa028a92e0858a102341f09"
+    },
+    {
+      "command": [
+        "reference/python/bin/python",
+        "reference/packets/sonic-initialization-native/verify_faults.py"
+      ],
+      "exit": 0,
+      "log": "build/sonic-exhaustion-correction/command-5.log",
+      "log_sha256": "b0df74ecc231687de4e7355700d84056f64b4a1d25b7402b757d7f41ee3edeb3"
+    },
+    {
+      "command": [
+        "reference/python/bin/python",
+        "reference/packets/sonic-initialization-native/verify_binding_faults.py"
+      ],
+      "exit": 0,
+      "log": "build/sonic-exhaustion-correction/command-6.log",
+      "log_sha256": "4a1db5e142bf6385c691f2c964ce17d4d188f089a58c6797c2f365af4065f3c7"
+    }
+  ],
+  "coverage": [
+    "Actual scheduler primary exhaustion in setup helper, effect primary exhaustion, jiggle primary and motion exhaustion.",
+    "Source initialize_resources continues through both motions, table publication, both factories and callback installation using controlled lower calls with real creation helpers.",
+    "Uninitialized pool, unavailable primary writes and failed rollback still throw.",
+    "One appended original/native setup-primary case per cohort; old input streams and observations unchanged."
+  ],
+  "faults": [
+    {
+      "name": "revert-exhaustion",
+      "source": "build/sonic-exhaustion-correction/revert-exhaustion.cpp",
+      "source_sha256": "24e81f7f59429a0ee262c6cde124645ecf84b4facc9f55cc9e1f36630c4921bc",
+      "binary": "build/sonic-exhaustion-correction/revert-exhaustion",
+      "binary_sha256": "78c6adf4dd3d5bf892935c02e9747032a366f3f376ebd088b128d0e1691316ba",
+      "compile": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-arch",
+        "arm64",
+        "-mmacosx-version-min=14.0",
+        "-Isrc",
+        "-c",
+        "build/sonic-exhaustion-correction/revert-exhaustion.cpp",
+        "-o",
+        "build/sonic-exhaustion-correction/revert-exhaustion.o"
+      ],
+      "link": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-arch",
+        "arm64",
+        "-mmacosx-version-min=14.0",
+        "-fobjc-arc",
+        "-Isrc",
+        "-Itests/fixtures",
+        "-MMD",
+        "-MP",
+        "tests/unit/sonic_initialization_native.mm",
+        "build/sonic-exhaustion-correction/revert-exhaustion.o",
+        "build/sonic-initialization-callback.o",
+        "build/obj/platform/mac/mac_clock.o",
+        "build/obj/platform/mac/mac_audio.o",
+        "build/obj/platform/mac/hid_switch_controller.o",
+        "build/obj/platform/mac/mac_movie.o",
+        "build/obj/platform/mac/metal_device_frame.o",
+        "build/obj/platform/mac/mac_audio_playback.o",
+        "build/obj/platform/mac/mac_sound_bank.o",
+        "build/obj/platform/mac/mac_sound_effects.o",
+        "build/obj/platform/mac/mac_save_files.o",
+        "build/obj/platform/mac/mac_save_writer.o",
+        "build/libsadx-native.a",
+        "-framework",
+        "Foundation",
+        "-framework",
+        "AppKit",
+        "-framework",
+        "Metal",
+        "-framework",
+        "MetalKit",
+        "-framework",
+        "QuartzCore",
+        "-framework",
+        "CoreGraphics",
+        "-framework",
+        "ImageIO",
+        "-framework",
+        "GameController",
+        "-framework",
+        "AudioToolbox",
+        "-framework",
+        "AVFoundation",
+        "-framework",
+        "CoreMedia",
+        "-framework",
+        "CoreVideo",
+        "-o",
+        "build/sonic-exhaustion-correction/revert-exhaustion"
+      ],
+      "exit": -6,
+      "stderr": "Assertion failed: (!threw && absent), function exhaust, file sonic_initialization_native.mm, line 57.\n"
+    },
+    {
+      "name": "reject-effect-exhaustion",
+      "source": "build/sonic-exhaustion-correction/reject-effect-exhaustion.cpp",
+      "source_sha256": "728c3151f5296d639e898cd2327a0882da2aa5821620063039ef88e0da95806a",
+      "binary": "build/sonic-exhaustion-correction/reject-effect-exhaustion",
+      "binary_sha256": "6afd0fde74d8b9c935d058a4c55f753702bdd4b7b3c2d3d4351082f573b52a64",
+      "compile": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-arch",
+        "arm64",
+        "-mmacosx-version-min=14.0",
+        "-Isrc",
+        "-c",
+        "build/sonic-exhaustion-correction/reject-effect-exhaustion.cpp",
+        "-o",
+        "build/sonic-exhaustion-correction/reject-effect-exhaustion.o"
+      ],
+      "link": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-arch",
+        "arm64",
+        "-mmacosx-version-min=14.0",
+        "-fobjc-arc",
+        "-Isrc",
+        "-Itests/fixtures",
+        "-MMD",
+        "-MP",
+        "tests/unit/sonic_initialization_native.mm",
+        "build/sonic-exhaustion-correction/reject-effect-exhaustion.o",
+        "build/sonic-initialization-callback.o",
+        "build/obj/platform/mac/mac_clock.o",
+        "build/obj/platform/mac/mac_audio.o",
+        "build/obj/platform/mac/hid_switch_controller.o",
+        "build/obj/platform/mac/mac_movie.o",
+        "build/obj/platform/mac/metal_device_frame.o",
+        "build/obj/platform/mac/mac_audio_playback.o",
+        "build/obj/platform/mac/mac_sound_bank.o",
+        "build/obj/platform/mac/mac_sound_effects.o",
+        "build/obj/platform/mac/mac_save_files.o",
+        "build/obj/platform/mac/mac_save_writer.o",
+        "build/libsadx-native.a",
+        "-framework",
+        "Foundation",
+        "-framework",
+        "AppKit",
+        "-framework",
+        "Metal",
+        "-framework",
+        "MetalKit",
+        "-framework",
+        "QuartzCore",
+        "-framework",
+        "CoreGraphics",
+        "-framework",
+        "ImageIO",
+        "-framework",
+        "GameController",
+        "-framework",
+        "AudioToolbox",
+        "-framework",
+        "AVFoundation",
+        "-framework",
+        "CoreMedia",
+        "-framework",
+        "CoreVideo",
+        "-o",
+        "build/sonic-exhaustion-correction/reject-effect-exhaustion"
+      ],
+      "exit": -6,
+      "stderr": "Assertion failed: (!threw && absent), function exhaust, file sonic_initialization_native.mm, line 57.\n"
+    },
+    {
+      "name": "reject-motion-exhaustion",
+      "source": "build/sonic-exhaustion-correction/reject-motion-exhaustion.cpp",
+      "source_sha256": "bd004244d01e94829bb102bbd066dc7ff795769abd367e2faf9b6db819be5ad1",
+      "binary": "build/sonic-exhaustion-correction/reject-motion-exhaustion",
+      "binary_sha256": "2626b70ff3586ffea1c4ceb0fc5dfe22c6810b4c5fef47706990812fd77dbe2e",
+      "compile": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-arch",
+        "arm64",
+        "-mmacosx-version-min=14.0",
+        "-Isrc",
+        "-c",
+        "build/sonic-exhaustion-correction/reject-motion-exhaustion.cpp",
+        "-o",
+        "build/sonic-exhaustion-correction/reject-motion-exhaustion.o"
+      ],
+      "link": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-arch",
+        "arm64",
+        "-mmacosx-version-min=14.0",
+        "-fobjc-arc",
+        "-Isrc",
+        "-Itests/fixtures",
+        "-MMD",
+        "-MP",
+        "tests/unit/sonic_initialization_native.mm",
+        "build/sonic-exhaustion-correction/reject-motion-exhaustion.o",
+        "build/sonic-initialization-callback.o",
+        "build/obj/platform/mac/mac_clock.o",
+        "build/obj/platform/mac/mac_audio.o",
+        "build/obj/platform/mac/hid_switch_controller.o",
+        "build/obj/platform/mac/mac_movie.o",
+        "build/obj/platform/mac/metal_device_frame.o",
+        "build/obj/platform/mac/mac_audio_playback.o",
+        "build/obj/platform/mac/mac_sound_bank.o",
+        "build/obj/platform/mac/mac_sound_effects.o",
+        "build/obj/platform/mac/mac_save_files.o",
+        "build/obj/platform/mac/mac_save_writer.o",
+        "build/libsadx-native.a",
+        "-framework",
+        "Foundation",
+        "-framework",
+        "AppKit",
+        "-framework",
+        "Metal",
+        "-framework",
+        "MetalKit",
+        "-framework",
+        "QuartzCore",
+        "-framework",
+        "CoreGraphics",
+        "-framework",
+        "ImageIO",
+        "-framework",
+        "GameController",
+        "-framework",
+        "AudioToolbox",
+        "-framework",
+        "AVFoundation",
+        "-framework",
+        "CoreMedia",
+        "-framework",
+        "CoreVideo",
+        "-o",
+        "build/sonic-exhaustion-correction/reject-motion-exhaustion"
+      ],
+      "exit": -6,
+      "stderr": "Assertion failed: (!threw && absent), function exhaust, file sonic_initialization_native.mm, line 57.\n"
+    },
+    {
+      "name": "swallow-unavailable-work",
+      "source": "build/sonic-exhaustion-correction/swallow-unavailable-work.cpp",
+      "source_sha256": "a70a0405ea057ada5ccf23ecc93f81abd87e7091a946027ae9c0a02fc92bd1ce",
+      "binary": "build/sonic-exhaustion-correction/swallow-unavailable-work",
+      "binary_sha256": "55330b7162a9a13dd7f30c01cd0118aa7aafd0a59faf5277f5802ac2c79ed390",
+      "compile": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-arch",
+        "arm64",
+        "-mmacosx-version-min=14.0",
+        "-Isrc",
+        "-c",
+        "build/sonic-exhaustion-correction/swallow-unavailable-work.cpp",
+        "-o",
+        "build/sonic-exhaustion-correction/swallow-unavailable-work.o"
+      ],
+      "link": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-arch",
+        "arm64",
+        "-mmacosx-version-min=14.0",
+        "-fobjc-arc",
+        "-Isrc",
+        "-Itests/fixtures",
+        "-MMD",
+        "-MP",
+        "tests/unit/sonic_initialization_native.mm",
+        "build/sonic-exhaustion-correction/swallow-unavailable-work.o",
+        "build/sonic-initialization-callback.o",
+        "build/obj/platform/mac/mac_clock.o",
+        "build/obj/platform/mac/mac_audio.o",
+        "build/obj/platform/mac/hid_switch_controller.o",
+        "build/obj/platform/mac/mac_movie.o",
+        "build/obj/platform/mac/metal_device_frame.o",
+        "build/obj/platform/mac/mac_audio_playback.o",
+        "build/obj/platform/mac/mac_sound_bank.o",
+        "build/obj/platform/mac/mac_sound_effects.o",
+        "build/obj/platform/mac/mac_save_files.o",
+        "build/obj/platform/mac/mac_save_writer.o",
+        "build/libsadx-native.a",
+        "-framework",
+        "Foundation",
+        "-framework",
+        "AppKit",
+        "-framework",
+        "Metal",
+        "-framework",
+        "MetalKit",
+        "-framework",
+        "QuartzCore",
+        "-framework",
+        "CoreGraphics",
+        "-framework",
+        "ImageIO",
+        "-framework",
+        "GameController",
+        "-framework",
+        "AudioToolbox",
+        "-framework",
+        "AVFoundation",
+        "-framework",
+        "CoreMedia",
+        "-framework",
+        "CoreVideo",
+        "-o",
+        "build/sonic-exhaustion-correction/swallow-unavailable-work"
+      ],
+      "exit": -6,
+      "stderr": "Assertion failed: (threw), function check_creation_exhaustion, file sonic_initialization_native.mm, line 126.\n"
+    }
+  ],
+  "retained_core_and_binding_faults": 16,
+  "artifacts": {
+    "build/sonic-exhaustion-correction/original-creation.json": "3f72b213037f813549dceaca1879dff7f5c38a1804018ce8885d8cc4302fa029",
+    "build/sonic-exhaustion-correction/faults.json": "510089b27a52349e84cb28be155589df436dfbfee70fc339e8d1f2a1824c6745",
+    "build/sonic-exhaustion-correction/sonic-initialization-faults/receipts.json": "c4311a7fedc5e51ab0f7fb58f1b01a0fc276aa22f16ec7ede56e5edb64508771",
+    "build/sonic-exhaustion-correction/sonic-initialization-binding-faults/receipts.json": "f7d82f2b2f7af2db63162bf63e60e5cbdc38c59be9b7d9c3b07b1190a720c650"
+  },
+  "limits": [
+    "Focused candidate correction only; Main still bdb61450.",
+    "The continuation witness controls later motion/weld operations; it does not claim full-app low-memory recovery.",
+    "Original CreateElementalTask/495860 execute against pinned bytes with controlled AllocateTask/MAlloc/DestroyTask; native scheduler rollback is tested separately.",
+    "Inherited numeric partials and original packet receipts remain unchanged; full controller captures not rerun.",
+    "No full gate, cold source, actor frame or N3b claim."
+  ],
+  "artifact_note": "Rerunning the existing fixed-output mutation scripts replaced their ignored mutable build outputs. Prior tracked receipts remain historical. This correction copies its new outputs under build/sonic-exhaustion-correction; WELD-DISPATCH-CORRECTION prior raw binding receipt is superseded by the rerun here, not a hash-preservation claim.",
+  "attempts": [
+    "Initial new source-witness import used EDI from verify_source; corrected to unicorn.x86_const before any execution."
+  ]
+}

@@ -1,0 +1,58 @@
+[
+  {
+    "command": [
+      "python3",
+      "tools/gate/check_provenance.py"
+    ],
+    "exit": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/burbujamc/.t3/worktrees/sadx-macos/t3-9d9a2430/tools/gate/check_provenance.py\", line 323, in <module>\n    raise SystemExit(main())\n                     ~~~~^^\n  File \"/Users/burbujamc/.t3/worktrees/sadx-macos/t3-9d9a2430/tools/gate/check_provenance.py\", line 315, in main\n    errors, counts, owned = check(args.root, json.loads(args.database.read_text()), json.loads(args.baseline.read_text()))\n                                                        ~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py\", line 787, in read_text\n    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:\n         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py\", line 771, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: '/Users/burbujamc/.t3/worktrees/sadx-macos/t3-9d9a2430/build/symbols/symbols.json'\n"
+  },
+  {
+    "command": [
+      "python3",
+      "tools/gate/check_global_owners.py"
+    ],
+    "exit": 0,
+    "stdout": "159059 owned bytes, 0 with more than one owner struct\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "python3",
+      "tools/gate/check_layers.py"
+    ],
+    "exit": 0,
+    "stdout": "12 layers, 0 known exceptions, 0 violations\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "python3",
+      "tools/gate/check_readability.py"
+    ],
+    "exit": 0,
+    "stdout": "Readability: 561 files, {'hex_literals': 2368, 'address_identifiers': 1188, 'address_calls': 61, 'goto': 0, 'address_labels': 0, 'long_lines': 932, 'multi_statement_lines': 1536, 'large_decimal_literals': 231, 'emulator_arithmetic': 3103, 'address_comments': 1029}, 0 regressions\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "python3",
+      "tools/gate/check_constexpr_tables.py"
+    ],
+    "exit": 0,
+    "stdout": "Constexpr table reviews: 48 active, 52 historical, {'named_structure': 12, 'numeric_encoding': 19, 'open_migration': 11, 'open_review': 0, 'reference_metadata': 0, 'typed_content': 6}, retired {'migrated': 4, 'justified_removal': 0}, prior dispositions {'named_structure': 0, 'numeric_encoding': 0, 'open_migration': 3, 'open_review': 1, 'reference_metadata': 0, 'typed_content': 0}, unresolved retirements 0, 0 problems\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--check",
+      "HEAD"
+    ],
+    "exit": 0,
+    "stdout": "",
+    "stderr": ""
+  }
+]

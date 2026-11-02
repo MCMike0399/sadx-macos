@@ -1,0 +1,267 @@
+{
+  "base": "d2417497",
+  "source_commit": "6086c26b600a9f6b6d45750c3e07eb7daba9f44e",
+  "finding": "Standards P2 from 56c4806c: source weld dispatch in native adapter",
+  "correction": "Player update_prefix owns active/init/restore and post-success mode publication; native lambdas validate owners lazily.",
+  "source_hashes": {
+    "src/player/player_vertex_weld.hpp": "8f240c4647a8402995eb4ce69bc2d6f658fc91bfc0d095ec1bfd0be897a5d635",
+    "src/player/player_vertex_weld.cpp": "25685311ed2ce6c30d6ff3221e68df115fc80b82986c73d76dac5683b5f58c98",
+    "src/runtime/native_sonic_binding.cpp": "c14f8b4111c85560443723223c345facd0c2ea6ed867d736d3fc0c2f81983619"
+  },
+  "judge_hashes": {
+    "tests/unit/player_vertex_weld.cpp": "00f1469dd6aae117b780d6046a3f200600e82a4e3a22fea886f10ad9060bc213",
+    "reference/packets/sonic-initialization-native/verify_binding_faults.py": "cc64d9620bed740e6a5e31942f154edace6318ba8ba2fc9cfaacc981af3ddf71"
+  },
+  "unchanged_weld_bodies": true,
+  "oracle_preservation": [
+    {
+      "name": "source-dev",
+      "baseline": "build/sonic-initialization-source.json",
+      "current": "build/sonic-weld-dispatch-correction/source-dev.json",
+      "complete_json_equal": true,
+      "baseline_sha256": "f3b400f3194a4b5c3b825b45d72e17c9ecf4fec333c8efd3d91c2c4d57cf91b8",
+      "current_sha256": "f3b400f3194a4b5c3b825b45d72e17c9ecf4fec333c8efd3d91c2c4d57cf91b8"
+    },
+    {
+      "name": "source-holdout",
+      "baseline": "build/sonic-initialization-holdout.json",
+      "current": "build/sonic-weld-dispatch-correction/source-holdout.json",
+      "complete_json_equal": true,
+      "baseline_sha256": "472c3e45b1d0b35ab5afcae7adc569e9d59594185fbf824a697596be221d982c",
+      "current_sha256": "472c3e45b1d0b35ab5afcae7adc569e9d59594185fbf824a697596be221d982c"
+    },
+    {
+      "name": "helpers-dev",
+      "baseline": "build/sonic-initialization-helpers.json",
+      "current": "build/sonic-weld-dispatch-correction/helpers-dev.json",
+      "complete_json_equal": true,
+      "baseline_sha256": "b8cc2d5c6eff499eaea27cb44587d03bdf936daaa235212a1e0851a921df58e8",
+      "current_sha256": "b8cc2d5c6eff499eaea27cb44587d03bdf936daaa235212a1e0851a921df58e8"
+    },
+    {
+      "name": "helpers-holdout",
+      "baseline": "build/sonic-initialization-helpers-holdout.json",
+      "current": "build/sonic-weld-dispatch-correction/helpers-holdout.json",
+      "complete_json_equal": true,
+      "baseline_sha256": "929cda50e209cdd62786c8cb417b92a47f507f241aef4565ff5e68e99b17bce4",
+      "current_sha256": "929cda50e209cdd62786c8cb417b92a47f507f241aef4565ff5e68e99b17bce4"
+    }
+  ],
+  "commands": [
+    {
+      "command": [
+        "./build/player-vertex-weld-test",
+        "game/imported/characters/sonic-selection.actions"
+      ],
+      "exit": 0,
+      "log": "build/sonic-weld-dispatch-correction/command-0.log",
+      "log_sha256": "5109c7902854afd8829f71f2d814ad61702171a1006b03c23460d849147b9ab1"
+    },
+    {
+      "command": [
+        "./build/sonic-initialization-native-test",
+        "game/imported"
+      ],
+      "exit": 0,
+      "log": "build/sonic-weld-dispatch-correction/command-1.log",
+      "log_sha256": "ba8756433c89c0678eef6bf1a7669e1385386b00886e3db857dee4c6e96af08a"
+    },
+    {
+      "command": [
+        "./build/sonic-model-native-test",
+        "game/imported"
+      ],
+      "exit": 0,
+      "log": "build/sonic-weld-dispatch-correction/command-2.log",
+      "log_sha256": "1a13f58d5e109cdd12de95cf5c8371fd21ed701d2070ef95c96d5eb298b9db08"
+    },
+    {
+      "command": [
+        "reference/python/bin/python",
+        "reference/packets/sonic-initialization-native/verify_source.py",
+        "build/native-sonic-initialization-probe.dylib",
+        "--output",
+        "build/sonic-weld-dispatch-correction/source-dev.json"
+      ],
+      "exit": 0,
+      "log": "build/sonic-weld-dispatch-correction/command-3.log",
+      "log_sha256": "ed80ce5e903dc8ad99339d08bab0699e8c7d4dbf3ac5ef4aac51a682a960c2dd"
+    },
+    {
+      "command": [
+        "reference/python/bin/python",
+        "reference/packets/sonic-initialization-native/verify_source.py",
+        "build/native-sonic-initialization-probe.dylib",
+        "--holdout",
+        "--output",
+        "build/sonic-weld-dispatch-correction/source-holdout.json"
+      ],
+      "exit": 0,
+      "log": "build/sonic-weld-dispatch-correction/command-4.log",
+      "log_sha256": "208fe2851390a98bf83985c0908a31277499d35397d036caccf20246acdd19be"
+    },
+    {
+      "command": [
+        "reference/python/bin/python",
+        "reference/packets/sonic-initialization-native/verify_helpers.py",
+        "build/native-sonic-initialization-probe.dylib",
+        "--output",
+        "build/sonic-weld-dispatch-correction/helpers-dev.json"
+      ],
+      "exit": 0,
+      "log": "build/sonic-weld-dispatch-correction/command-5.log",
+      "log_sha256": "b579bd45ded81ab431caa2a68a6fb7f267d16d8a702447d510c306dc4251f44a"
+    },
+    {
+      "command": [
+        "reference/python/bin/python",
+        "reference/packets/sonic-initialization-native/verify_helpers.py",
+        "build/native-sonic-initialization-probe.dylib",
+        "--holdout",
+        "--output",
+        "build/sonic-weld-dispatch-correction/helpers-holdout.json"
+      ],
+      "exit": 0,
+      "log": "build/sonic-weld-dispatch-correction/command-6.log",
+      "log_sha256": "2f3fe11ff3a75305e0476f58a7351711ab76e98b8aa028a92e0858a102341f09"
+    },
+    {
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_player_vertex_weld.py",
+        "reference/updated-pc-reference/game/sonic.exe",
+        "build/native-player-vertex-weld-probe.dylib",
+        "--output",
+        "build/sonic-weld-dispatch-correction/weld.json"
+      ],
+      "exit": 0,
+      "log": "build/sonic-weld-dispatch-correction/command-7.log",
+      "log_sha256": "7c73a50ad87ab33f8081e1a75760d14e8f2b4ed10b735c16b215caa197b2833f"
+    },
+    {
+      "command": [
+        "reference/python/bin/python",
+        "reference/packets/sonic-initialization-native/verify_binding_faults.py"
+      ],
+      "exit": 0,
+      "log": "build/sonic-weld-dispatch-correction/command-8.log",
+      "log_sha256": "4a1db5e142bf6385c691f2c964ce17d4d188f089a58c6797c2f365af4065f3c7"
+    },
+    {
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/mutate_player_vertex_weld.py",
+        "reference/updated-pc-reference/game/sonic.exe",
+        "--output",
+        "build/sonic-weld-dispatch-correction/weld-mutants.json"
+      ],
+      "exit": 0,
+      "log": "build/sonic-weld-dispatch-correction/command-9.log",
+      "log_sha256": "a91fda3f043bd24b2ce8cead46f56bc0eb5b95462fa4789597a4c4900b130b36"
+    }
+  ],
+  "dispatch_coverage": "All 65,536 signed-short modes plus three thrown operations preserve failure mode and branch selection.",
+  "weld_comparison": {
+    "cases": 1200,
+    "mismatch_count": 0,
+    "all_inputs_sha256": "ef768f9131ba22d587a1779f096952724ee01d0aa34be3dd6eb8e0ac72bad1f9",
+    "source_stream_sha256": "9efde391d8a56f18f3127a59ffda78f15c1427e6592ec3f91482ced669557b4c",
+    "native_stream_sha256": "9efde391d8a56f18f3127a59ffda78f15c1427e6592ec3f91482ced669557b4c",
+    "failure_prefix_cases": 248
+  },
+  "weld_mutants": {
+    "report": "build/sonic-weld-dispatch-correction/weld-mutants.json",
+    "sha256": "affed71663775987882e79bb9fb9487334204d65614d873a7729841cd4c13fbb",
+    "all_caught": true,
+    "count": 7
+  },
+  "binding_mutants": {
+    "report": "build/sonic-initialization-binding-faults/receipts.json",
+    "sha256": "8b06c4b9208c741ceb9ac242f725deb90a2b149662d851c2984528235a41c003",
+    "results": [
+      {
+        "name": "captured_allocation_reloaded",
+        "exit": -6,
+        "stderr": "scenario 0 boundary sonic_common_model_slot_20\nscenario 1 boundary sonic_join_vertices_CalcMMMatrix\nscenario 2 boundary sonic_join_vertices_CalcMMMatrix\nscenario 3 boundary sonic_common_model_slot_20\nscenario 4 boundary sonic_common_model_slot_20\nscenario 5 boundary controlled_missing_texture_archive\nscenario 6 boundary sonic_common_model_slot_20\nAssertion failed: (words[0] == 0 && words[1] == 0), function run, file sonic_initialization_native.mm, line 145.\n"
+      },
+      {
+        "name": "captured_physics_reloaded",
+        "exit": -6,
+        "stderr": "scenario 0 boundary sonic_common_model_slot_20\nscenario 1 boundary sonic_join_vertices_CalcMMMatrix\nscenario 2 boundary sonic_join_vertices_CalcMMMatrix\nscenario 3 boundary sonic_common_model_slot_20\nscenario 4 boundary sonic_common_model_slot_20\nscenario 5 boundary controlled_missing_texture_archive\nscenario 6 boundary sonic_common_model_slot_20\nAssertion failed: (physics->animation_tail.buffer_at_148 && *physics->animation_tail.buffer_at_148), function run, file sonic_initialization_native.mm, line 190.\n"
+      },
+      {
+        "name": "active_table_consumed_before_matrix",
+        "exit": -6,
+        "stderr": "scenario 0 boundary sonic_common_model_slot_20\nscenario 1 boundary sonic_common_remaining_tail\nAssertion failed: (boundary == (scenario == 7 ? \"sonic_common_remaining_tail\" : scenario == 1 || scenario == 2 ? \"sonic_join_vertices_CalcMMMatrix\" : \"sonic_common_model_slot_20\")), function run, file sonic_initialization_native.mm, line 131.\n"
+      }
+    ]
+  },
+  "dispatch_mutants": [
+    {
+      "name": "premature-mode",
+      "source_sha256": "9bce2b8f39f1875d2f4b42c2d259b328b6ad6cfa9b93e2fb6ee3ca6b5b080b16",
+      "binary_sha256": "58c420a9ad1d5397f7e7deecfa03b89d4e2c2f8e1b16a4a8d688d4e03ec786ec",
+      "compile_command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-arch",
+        "arm64",
+        "-mmacosx-version-min=14.0",
+        "-Isrc",
+        "tests/unit/player_vertex_weld.cpp",
+        "build/sonic-weld-dispatch-correction/premature-mode.cpp",
+        "src/engine/character_pack.cpp",
+        "src/engine/character_geometry.cpp",
+        "src/engine/task_work.cpp",
+        "-o",
+        "build/sonic-weld-dispatch-correction/premature-mode"
+      ],
+      "compile_exit": 0,
+      "exit": -6,
+      "stderr": "Assertion failed: (mode == 0), function operator(), file player_vertex_weld.cpp, line 17.\n"
+    },
+    {
+      "name": "skip-restore",
+      "source_sha256": "7f810cb8e68a8fc4735aedfc244f52d79210e083e6ada1833dbbf22af8a038df",
+      "binary_sha256": "fb52e5de9907b8ec42f15bc4c0c0c3e064943b73ce3b686bff917e71a12a8692",
+      "compile_command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-arch",
+        "arm64",
+        "-mmacosx-version-min=14.0",
+        "-Isrc",
+        "tests/unit/player_vertex_weld.cpp",
+        "build/sonic-weld-dispatch-correction/skip-restore.cpp",
+        "src/engine/character_pack.cpp",
+        "src/engine/character_geometry.cpp",
+        "src/engine/task_work.cpp",
+        "-o",
+        "build/sonic-weld-dispatch-correction/skip-restore"
+      ],
+      "compile_exit": 0,
+      "exit": -6,
+      "stderr": "Assertion failed: (restored == (raw != 0 && raw != 1)), function check_dispatch, file player_vertex_weld.cpp, line 23.\n"
+    }
+  ],
+  "limits": [
+    "Focused correction only; Main unchanged.",
+    "Active processing remains the explicit CalcMMMatrix boundary before table access.",
+    "No complete actor frame, N3b, full gate or cold-source claim.",
+    "Original packet qualification receipts are preserved; inherited FP partials remain partial."
+  ]
+}

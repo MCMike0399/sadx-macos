@@ -165,6 +165,19 @@ void initialize(PlayerJoinTable &table, TaskWorkArena &arena, character_pack::Sc
     }
 }
 
+void update_prefix(std::int16_t &mode, const std::function<void()> &process_active,
+                   const std::function<void()> &initialize_table,
+                   const std::function<void()> &restore_table) {
+    if (mode == 1) {
+        process_active();
+    } else if (mode == 0) {
+        initialize_table();
+        mode = 1;
+    } else {
+        restore_table();
+    }
+}
+
 void restore(PlayerJoinTable &table, TaskWorkArena &arena, character_pack::SceneState &scene) {
     for (std::size_t index = 0;; ++index) {
         auto &join = row_at(table, index);

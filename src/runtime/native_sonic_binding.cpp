@@ -1,4 +1,5 @@
 #include "player/ground_acceleration.hpp"
+#include "player/player_vertex_weld.hpp"
 #include "player/sonic_player_internal.hpp"
 #include "player/sonic_player_seams.hpp"
 #include "runtime/native_sonic_context.hpp"
@@ -555,6 +556,140 @@ struct Binding {
         (void)site;
     }
     [[noreturn]] void unrecovered(Site, Operation) { missing("sonic_unrecovered_body"); }
+    struct ModelCalls final : sonic_model::Calls {
+        Binding &binding;
+        const Player &player;
+        native::SonicModelAssets &model;
+        ModelCalls(Binding &binding, const Player &player, native::SonicModelAssets &model)
+            : binding(binding), player(player), model(model) {}
+        void join_vertices() override {
+            auto &mode =
+                require(native_fields::player(binding.physics(player)).join_mode, "sonic_join_mode");
+            binding.join_model_vertices(player, mode);
+        }
+        void initialize_collision() override {
+            (void)collision_component::initialize(binding.arena(), binding.object,
+                                                  binding.orientation().flags, model.collision(), 2, 0,
+                                                  binding.fp());
+        }
+        void store_collision_height() override {
+            const auto collision =
+                collision_component::component(binding.arena(), binding.primary_allocation);
+            if (!collision || collision->info.empty())
+                missing("sonic_model_collision_info");
+            collision->info[0].a = player.record->parameters.height;
+        }
+    };
+    struct ResourceCalls final : sonic_model::InitializationCalls {
+        Binding &binding;
+        const Player &player;
+        native::SonicModelAssets &model;
+        std::int16_t &join_mode;
+        const TaskWorkHandle allocation;
+        ResourceCalls(Binding &binding, const Player &player, native::SonicModelAssets &model,
+                      std::int16_t &join_mode)
+            : binding(binding), player(player), model(model), join_mode(join_mode),
+              allocation(player.record->allocation) {}
+        void load_textures(std::uint8_t character) override {
+            auto &context = binding.context;
+            if (!context.texture_state || !context.texture_services)
+                missing("sonic_character_texture_owner");
+            regular_textures::load_character(character, context.character_textures,
+                                             *context.texture_state, *context.texture_services);
+        }
+        std::uint8_t metal() override { return binding.alternate(Site::InitializeAlternate); }
+        void clear_free_word(unsigned index) override {
+            // Native transport into the canonical playerwk free union. No
+            // typed owner currently shadows these two source-written words.
+            constexpr unsigned kFreeTailOffset = 148;
+            const std::uint32_t zero = 0;
+            if (!binding.arena().write(allocation, kFreeTailOffset + index * sizeof(zero), &zero,
+                                       sizeof(zero)))
+                missing("sonic_initialization_free_word");
+        }
+        std::uint8_t player_index() override { return binding.index(); }
+        void load_collision_task(std::uint8_t index) override {
+            (void)sonic_model::load_collision_task(model.state().direct_ahead, index,
+                                                   binding.scheduler(), binding.arena());
+        }
+        void set_motion() override {
+            if (!binding.context.animation)
+                missing("sonic_set_motion");
+            animation::View view{binding.physics(player), allocation};
+            const auto result = animation::update(view, *binding.context.animation, binding.fp());
+            if (!result) {
+                const auto text = "sonic_motion_phase_" +
+                                  std::to_string(static_cast<unsigned>(result.phase)) + "_failure_" +
+                                  std::to_string(static_cast<unsigned>(result.failure)) + ":" +
+                                  result.unavailable_resource_reason;
+                throw Unavailable(text.c_str());
+            }
+        }
+        std::int16_t stage() override {
+            if (!binding.context.stage)
+                missing("sonic_stage");
+            return *binding.context.stage;
+        }
+        std::uint16_t act() override {
+            if (!binding.context.act)
+                missing("sonic_act");
+            return static_cast<std::uint16_t>(*binding.context.act);
+        }
+        character_pack::ObjectResource *join_target() override {
+            return &model.objects().object(model.join_target());
+        }
+        void publish_join_table(PlayerJoinTable &table) override {
+            binding.physics(player).animation_tail.join_table = &table;
+        }
+        void join_vertices() override { binding.join_model_vertices(player, join_mode); }
+        void create_effect(unsigned flags) override {
+            const auto callback =
+                flags == 2 ? sonic_model::initialize_effect : sonic_model::initialize_jiggle;
+            const auto task =
+                sonic_model::create_initialization_task(binding.scheduler(), flags, 3, callback);
+            if (!task)
+                return;
+            player_initialization::establish_zeroed_primary(binding.scheduler(), task);
+            player_initialization::bind_primary_view(task).player_index = binding.index();
+        }
+        void install_callbacks() override {
+            binding.object->destructor = sonic_model::destroy;
+            binding.object->display = sonic_model::display;
+        }
+    };
+    struct CommonCalls final : sonic_model::CommonTailCalls {
+        Binding &binding;
+        const Player &player;
+        std::int16_t &mode;
+        CommonCalls(Binding &binding, const Player &player, std::int16_t &mode)
+            : binding(binding), player(player), mode(mode) {}
+        std::uint16_t status() override { return binding.orientation().flags; }
+        std::uint8_t metal() override { return binding.alternate(Site::InitializeAlternate); }
+        std::uint16_t equipment() override {
+            return binding.word(player, Word::Equipment, Site::CommonAnimation);
+        }
+        sonic_model::ObjectId model_slot(unsigned index) override {
+            // The importer currently declares slots 5, 6 and 22 only.
+            // Do not infer the other export slots from a similar object.
+            const auto boundary = "sonic_common_model_slot_" + std::to_string(index);
+            throw Unavailable(boundary.c_str());
+        }
+        void join_vertices() override { binding.join_model_vertices(player, mode); }
+    };
+    void join_model_vertices(const Player &player, std::int16_t &mode) {
+        const auto with_table = [&](auto operation) {
+            auto &table = require(physics(player).animation_tail.join_table, "sonic_join_table");
+            if (!table)
+                missing("sonic_null_join_table");
+            if (!context.scene)
+                missing("sonic_character_scene");
+            operation(*table, arena(), *context.scene);
+        };
+        vertex_weld::update_prefix(
+            mode, [] { missing("sonic_join_vertices_CalcMMMatrix"); },
+            [&] { with_table(vertex_weld::initialize); },
+            [&] { with_table(vertex_weld::restore); });
+    }
     [[noreturn]] void initialize_model(Site site) {
         if (!context.model)
             missing("sonic_model_graph");
@@ -563,31 +698,19 @@ struct Binding {
         auto &state = physics(p);
         auto fields = native_fields::player(state);
         auto primary = native_fields::primary(task());
-        struct ModelCalls final : sonic_model::Calls {
-            Binding &binding;
-            const Player &player;
-            native::SonicModelAssets &model;
-            ModelCalls(Binding &binding, const Player &player, native::SonicModelAssets &model)
-                : binding(binding), player(player), model(model) {}
-            void join_vertices() override { missing("sonic_PJoinVertexes"); }
-            void initialize_collision() override {
-                (void)collision_component::initialize(binding.arena(), binding.object,
-                    binding.orientation().flags, model.collision(), 2, 0, binding.fp());
-            }
-            void store_collision_height() override {
-                const auto collision = collision_component::component(binding.arena(),
-                                                                      binding.primary_allocation);
-                if (!collision || collision->info.empty())
-                    missing("sonic_model_collision_info");
-                collision->info[0].a = player.record->parameters.height;
-            }
-        } calls(*this, p, model);
+        ModelCalls calls(*this, p, model);
         sonic_model::Player view{require(state.animation_tail.join_table, "sonic_join_table"),
-            require(fields.join_mode, "sonic_join_mode"),
-            require(fields.idle_timer, "sonic_idle_timer"), require(primary.mode, "sonic_mode")};
+                                 player_initialization::bind_join_vertex_mode(captured),
+                                 require(fields.idle_timer, "sonic_idle_timer"),
+                                 require(primary.mode, "sonic_mode")};
         sonic_model::initialize_prefix(model.state(), model.objects(), model.attach(), model.root(),
-                                      view, site == Site::InitializeAlternateModel, calls);
-        missing("sonic_LoadCharTextures");
+                                       view, site == Site::InitializeAlternateModel, calls);
+        ResourceCalls resources(*this, p, model, view.join_mode);
+        sonic_model::initialize_resources(model.state(), resources);
+        CommonCalls common(*this, p, view.join_mode);
+        sonic_model::update_common_model_links(model.objects(), common);
+        // The remaining tail begins with another live Metal sound branch.
+        missing("sonic_common_remaining_tail");
     }
     void character_id(std::uint8_t value) { task().character_id = value; }
     void initialize(Site) {
@@ -853,3 +976,21 @@ void idle_animation(Context &) { throw Unavailable("sonic_idle_animation"); }
 void bounce(Context &) { throw Unavailable("sonic_bounce"); }
 void walk_animation(Context &) { throw Unavailable("sonic_walk_animation"); }
 } // namespace sadx::sonic::calls
+
+namespace sadx::sonic_model {
+void collision_task(TaskScheduler &, const TaskHandle &) {
+    throw sonic::Unavailable("sonic_direct_ahead_exec");
+}
+void initialize_effect(TaskScheduler &, const TaskHandle &) {
+    throw sonic::Unavailable("sonic_initialization_effect_exec");
+}
+void initialize_jiggle(TaskScheduler &, const TaskHandle &) {
+    throw sonic::Unavailable("sonic_jiggle_exec");
+}
+void destroy(TaskScheduler &, const TaskHandle &) {
+    throw sonic::Unavailable("sonic_destructor");
+}
+void display(TaskScheduler &, const TaskHandle &) {
+    throw sonic::Unavailable("sonic_display");
+}
+} // namespace sadx::sonic_model
