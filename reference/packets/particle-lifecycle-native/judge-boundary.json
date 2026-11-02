@@ -7,5 +7,14 @@
   "stdout": "",
   "stderr": "Assertion failed: (stopped), function main, file gamma_effects.cpp, line 96.\n",
   "test_sha256": "06611cd09533d38e513b5418e5c98617739e81ba0e46b62aab6324cf6c49783b",
-  "evidence": "The preexisting unit expects every callback to throw. Source-comparison-qualified empty update/display/destruction now complete; retain all original initializer checks and replace only this obsolete expectation with real scheduler lifecycle assertions."
+  "evidence": "The preexisting unit expects every callback to throw. Source-comparison-qualified empty update/display/destruction now complete; retain all original initializer checks and replace only this obsolete expectation with real scheduler lifecycle assertions.",
+  "adaptation": {
+    "test_sha256": "73fd33f578023934420598ff160439eb18bc71db886b866c6ba96014ed6c990d",
+    "command": [
+      "build/gamma-effects-test",
+      "game/imported/gamma-effects.bin"
+    ],
+    "exit_status": 0,
+    "coverage": "All previous initializer assertions retained; real empty update/display, delayed FreeTask, fixture-supplied Root global clear, actual Gamma reentry, shared mutable frame identity, old/new task coexistence, all three arena buffer releases and scheduler-owned work release."
+  }
 }

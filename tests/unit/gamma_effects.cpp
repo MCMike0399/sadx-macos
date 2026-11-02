@@ -90,11 +90,24 @@ int main(int argc, char **argv) {
     gamma_effects::initialize(state, asset, scheduler, *arena, arithmetic);
     assert(state.burst_task == task && asset.hit[0].global_index == 981 &&
            asset.burst[0].global_index == 117 && arena->blocks().size() == blocks);
-    for (auto callback : {task->exec, task->display, task->destructor}) {
-        bool stopped = false;
-        try { callback(scheduler, task); } catch (const std::runtime_error &) { stopped = true; }
-        assert(stopped);
-    }
+    assert(scheduler.run_index(4) && scheduler.display_index(4));
+    assert(work->active_count == 0 && work->frames == asset.burst.data());
+    const auto buffers = std::array{work->free_indices, work->active_indices, work->particles};
+    assert(scheduler.free_task(task));
+    assert(!task->retired() && task->exec == TaskScheduler::destroy_callback);
+    // NOTSA: fixture supplies Root's separate global-clear binding after FreeTask.
+    state.burst_task.reset();
+    gamma_effects::initialize(state, asset, scheduler, *arena, arithmetic);
+    const auto replacement = state.burst_task;
+    const auto replacement_work =
+        std::static_pointer_cast<particles::Work>(replacement->auxiliary_native_work);
+    assert(replacement && replacement != task && !task->retired());
+    assert(replacement_work->frames == work->frames && work->frames == asset.burst.data());
+    assert(asset.burst[0].global_index == first.global_index);
+    assert(scheduler.run_index(4) && scheduler.display_index(4));
+    assert(task->retired() && !replacement->retired() && work->allocation->released());
+    for (const auto &buffer : buffers) assert(buffer->released());
+    assert(scheduler.destroy_task(replacement));
     TaskScheduler rollback;
     auto rollback_arena = std::make_shared<TaskWorkArena>();
     assert(rollback.initialize_source_pool(rollback_arena, {}));
@@ -116,5 +129,5 @@ int main(int argc, char **argv) {
     while (exhausted.source_free_slots()) assert(exhausted.allocate_task(3, nullptr));
     assert(!particles::create_pool(exhausted, *other_arena, 40, {0.125f, -0.5f},
                                    asset.burst.data(), nullptr));
-    std::cout << "Imported frame inverse, canonical arena/task ownership, cache/reentry and explicit callbacks pass\n";
+    std::cout << "Imported frame inverse, canonical arena/task ownership, cache/reentry and scheduler particle lifecycle pass\n";
 }
