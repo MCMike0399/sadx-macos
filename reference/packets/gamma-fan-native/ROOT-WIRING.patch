@@ -1,0 +1,20 @@
+--- a/src/runtime/native_display.hpp
++++ b/src/runtime/native_display.hpp
+@@ -41,6 +41,10 @@
+     // NOTSA: matrix consumers borrow the renderer's existing numeric owner.
+     void rotate_matrix_z(NinjaMatrix &matrix, std::int32_t angle) {
+         coordinates_->rotate_z(matrix, angle, arithmetic_);
++    }
++    // NOTSA: the fan borrows the existing display sine coefficients and arithmetic.
++    X87Value sine(std::int32_t angle) {
++        return NinjaMath(sine_, arithmetic_).sin_extended(angle);
+     }
+     X87Context &arithmetic() { return arithmetic_; }
+     SseContext &sse() { return sse_; }
+--- a/native-sources.txt
++++ b/native-sources.txt
+@@ -161,3 +161,4 @@
+ src/engine/ninja_matrix_composition.cpp
+ src/player/model_motion_matrices.cpp
+ src/player/model_motion_source.cpp
++src/player/gamma_fan.cpp

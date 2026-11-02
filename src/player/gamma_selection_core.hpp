@@ -138,7 +138,7 @@ void update_laser_targets(Context &, const TaskWorkHandle &, std::uint8_t index)
 void get_model_matrix(Context &, unsigned node, NinjaMatrix &);
 // FUNCTION: SONIC 0x784fb0 njRotateZ
 void rotate_z(Context &, NinjaMatrix &, std::int32_t angle);
-// STUB: SONIC 0x4c2e90 GammaUpdateFan
+// NOTSA: binds gamma_fan::update to the passed player and existing extra work.
 void update_fan(Context &, Primary, const Player &, const TaskWorkHandle &);
 // STUB: SONIC 0x47fd50 E102Display
 void display(Context &, const TaskHandle &);

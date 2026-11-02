@@ -3,6 +3,7 @@
 #include "player/selection_player_queries.hpp"
 #include "player/player_vertex_weld.hpp"
 #include "player/gamma_input_buffer.hpp"
+#include "player/gamma_fan.hpp"
 #include "game/game_mode.hpp"
 #include <cstring>
 
@@ -349,9 +350,44 @@ void get_model_matrix(Context &context, unsigned node, NinjaMatrix &destination)
 void rotate_z(Context &context, NinjaMatrix &matrix, std::int32_t angle) {
     context.rendering.rotate_matrix_z(matrix, angle);
 }
-// NOTSA: native boundary for GammaUpdateFan; source seam declared in the Gamma core.
-void update_fan(Context &, Primary, const Player &, const TaskWorkHandle &) {
-    missing("native_gamma_update_fan");
+// NOTSA: the fan borrows the passed initialized player and existing extra allocation.
+void update_fan(Context &context, Primary, const Player &player, const TaskWorkHandle &work) {
+    struct FanAccess final : gamma_fan::Access {
+        Context &context;
+        const Player player;
+        const TaskWorkHandle work;
+        FanAccess(Context &context, const Player &player, const TaskWorkHandle &work)
+            : context(context), player(player), work(work) {}
+        float lateral_speed() override { return physics(player).motion.speed.z; }
+        float forward_speed() override { return physics(player).motion.speed.x; }
+        std::uint32_t phase() override {
+            constexpr unsigned kFanPhase = 28;
+            std::uint32_t value;
+            if (!arena(context).read(work, kFanPhase, &value, sizeof(value)))
+                missing("native_gamma_fan_phase_read");
+            return value;
+        }
+        void store_phase(std::uint32_t value) override {
+            constexpr unsigned kFanPhase = 28;
+            if (!arena(context).write(work, kFanPhase, &value, sizeof(value)))
+                missing("native_gamma_fan_phase_store");
+        }
+        fidelity::ExactFloat sine(std::int32_t angle) override {
+            return fidelity::ExactFloat::retained(context.rendering.arithmetic(),
+                                                  context.rendering.sine(angle));
+        }
+        void store_height(float value) override {
+            constexpr unsigned kFanHeight = 24;
+            if (!arena(context).write(work, kFanHeight, &value, sizeof(value)))
+                missing("native_gamma_fan_height_store");
+        }
+        void store_tilt(std::int32_t value) override {
+            constexpr unsigned kFanTilt = 40;
+            if (!arena(context).write(work, kFanTilt, &value, sizeof(value)))
+                missing("native_gamma_fan_tilt_store");
+        }
+    } access(context, player, work);
+    gamma_fan::update(access, context.rendering.arithmetic());
 }
 // NOTSA: native boundary for E102Display; source seam declared in the Gamma core.
 void display(Context &, const TaskHandle &) {

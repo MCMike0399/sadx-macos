@@ -1,0 +1,65 @@
+{
+  "base": "bdb61450",
+  "dossiers": [
+    {
+      "path": "reference/inventory-raw/gamma-fan-native/target/gamma-fan.json",
+      "sha256": "38eb65da36344003f50aeab8ea50bc0618362215ba23c19cc762895f95b2356d",
+      "evidence_id": "ev_5bfe0baff22b4ec274dfe2d2d7093146939d9010a0d00ebacbf38be62f2813e0",
+      "operation": "analyze_function",
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x4c2e90",
+            "end": "0x4c2f41"
+          }
+        ],
+        "total_bytes": 178,
+        "span_bytes": 178,
+        "non_contiguous": false,
+        "contains_entry": true
+      }
+    },
+    {
+      "path": "reference/inventory-raw/gamma-fan-native/target/fan-callees.json",
+      "sha256": "79fdfcc543cfae1bcd97b5d00ce5c4fb86d3888771286db6135d32207a3d0010",
+      "evidence_id": "ev_515b9ef961143cde22363fb6b11dfbf538c119b10fc3eb1e16f919616668b7de",
+      "operation": "batch_decompile",
+      "body": null
+    },
+    {
+      "path": "reference/inventory-raw/gamma-fan-native/target/fan-callers.json",
+      "sha256": "56bba4e7ea1d24ee61c0f2d9144b9d5139fae5c0668954a7bc1343bee1d7b346",
+      "evidence_id": "ev_f5f8eb5f8c605cb21fc012fde7b01f403b984ed254a66698731e991fbbb9e568",
+      "operation": "xrefs",
+      "body": null
+    }
+  ],
+  "complete_body": {
+    "start": "0x4c2e90",
+    "end_inclusive": "0x4c2f41",
+    "bytes": 178
+  },
+  "source_signature": "void GammaUpdateFan(taskwk *unused, playerwk *captured_player, E102WK *captured_extra); cdecl, three stack arguments",
+  "name_verification": "Reads playerwk.spd.z then spd.x; updates E102WK.fan_ydif_ang, fan_yofs, fan_ang[2]. Caller-derived name agrees with the complete body and SDK field names.",
+  "callees": {
+    "0x644340": "Existing crt_ftol, native helper reused unchanged; original routine executes in the new oracle.",
+    "0x788290": "Existing NinjaMath::sin_extended with existing Display coefficients/arithmetic; original routine executes in the new oracle."
+  },
+  "initialization": "E102 mode 0 calls CAlloc(1,580), with real arena zero-fill; PInitialize sets canonical physics.motion.speed to {0,0,0}. Existing original first-entry witness and new full original fan witness qualify route-specific entry facts. No new C++ state field.",
+  "ownership": "No new global or mutable resource. Existing E102WK arena raw words 24/28/40; canonical initialized Player physics speed 56/64; existing Display sine/arithmetic.",
+  "arithmetic": "ExactFloat expressions retain source precision and all m64 multiplies, existing CRT conversion and sine. Integer phase wraps at 32 bits, tilt compares signed low32 and clamps to [-4551,4551].",
+  "raw_evidence": "Ignored reference/inventory-raw/gamma-fan-native is durable inside supplied worktree.",
+  "ghidra": {
+    "heap": "2G",
+    "closed": true,
+    "initial_full_generated_seed_query": "No procedure exists at target; complete error and export retained.",
+    "successful_profile": "Tracked focused seeds include standard source seed list and the three target entries. No GUI/session rename.",
+    "seed_sha256": "851d435b860aafc1b8dd9c0e3e6b18a8da8e5fdc60a6a5be1a64902e351d4d8a"
+  },
+  "limits": [
+    "Decompiler omits x87 arguments into _ftol; complete assembly and original instruction judge provide those expressions.",
+    "No new model/geometry/material/particle processing; display remains a loud boundary."
+  ]
+}
