@@ -187,7 +187,7 @@ EXE/DLL, no prebuilt game objects) runs it from imported assets.
 | N1 | SEGA/Sonic Team logos | done (16 states + images vs reference) |
 | N2 | Intro movie (play and Skipma), title, audible Start | done |
 | N3a | FileSelect, dialog, MainMenu, fresh save/load/restart, empty profile | done (`native-file-select`, `native-main-menu`, `native-fresh-save`) |
-| N3b | **CharacterSelect**: all preview actors initialised, updated and drawn; cursor/cancel/reentry; music/voice; Sonic confirmed → story entry | **in progress**: source `024715a` registers the real Gamma setup sprite and stops at `native_gamma_shared_material_binding`, frame 1332, exit 1. Full gate and cold build qualified at `7bcfd78`; image remains outgoing title, not a complete actor frame. |
+| N3b | **CharacterSelect**: all preview actors initialised, updated and drawn; cursor/cancel/reentry; music/voice; Sonic confirmed → story entry | **in progress**: material/event integration `013c2ed` reaches `native_gamma_initialize_effects`, frame 1332, exit 1. Image remains outgoing title. Last full gate/cold qualification is earlier `7bcfd78`; the newer combined gate is pending. |
 | N4 | Story entry: the opening event (played or skipped as the profile does) → Station Square drawn from the imported pack with the real camera | open |
 | N5 | Sonic controllable at Chaos 0: run, jump, spin/homing attack, hurt, rings, with the boss active; first frames match the reference trace | open |
 | N6 | Chaos 0 defeated → natural story return → save progression | open |
@@ -416,7 +416,12 @@ native run reproduce the stop. Receipts are in `reference/production-integration
 The gate records seven skips; a separate six-test raster supplement executes all six
 offline raster checks, leaving the volume case-alias capability skip. Preview
 action dispatch is integrated but still needs the separate native event-action
-candidate. Sonic controller and event-action candidates await independent review.
+candidate. Subsequent integration: event source and actual preview bindings at
+`8a1427d` have independent integration acceptance `a2d19476`. Accepted material
+source through `013c2ed` advances normal input to `native_gamma_initialize_effects`
+at frame 1332 with the same image. Focused checks pass; a combined gate is pending.
+Corrected Sonic controller `80e4045` has bounded independent acceptance and awaits
+integration against these shared owners.
 
 First delivery target: a complete native CharacterSelect frame with real scheduled
 actors, then repeated updates, cursor/motion, cancel/reentry and Sonic confirmation.
@@ -425,8 +430,8 @@ Advancing one missing call is dependency progress only.
 | Caller | Canonical owner | Packet assignment | Integration check |
 |---|---|---|---|
 | Gamma mode zero → setup resource | sprite registry and Gamma result; imported definition | Source `024715a`, integration gate and cold build qualified at `7bcfd78` | Actual normal input passes setup with one registry node; original comparisons and imported-byte checks pass |
-| Scheduler → Sonic controller | existing PlayerSystem/current-player, task arena and animation owners | Readable source candidate `0aefb44` awaits independent review and native Session binding | Complete unchanged oracle observations, failure identities and mutants; native closure with explicit missing callees |
-| Preview update/selection → actions and motion | preview work, actor tasks and existing animation state | Action/motion dispatch is integrated; event-action queue candidate `b05ab74` awaits independent review/binding | Callback/order comparison, cancellation/reentry checks and native binding contract |
+| Scheduler → Sonic controller | existing PlayerSystem/current-player, task arena and animation owners | Corrected source `80e4045` is independently accepted; integration is next | Complete unchanged oracle observations, failure identities and mutants; native closure with explicit missing callees |
+| Preview update/selection → actions and motion | preview work, actor tasks and existing animation state | Event queue and actual preview bindings are integrated at `8a1427d`; combined gate pending | Real PInitialize/queue/texture witness and ownership mutant pass; complete app actor frame remains open |
 | Gamma setup → materials/effects/common tail/display | mutable scene and shared player/animation/geometry state | Integrator sequences returned packets and assigns reached leaves | Real repeated actor frame; live material aliasing and full reached common tail |
 | Scheduler → Miles/Knuckles/Amy/Big | shared player contracts and each actor's state | Subsequent independent actor packets after common contracts stabilize | All scheduled actors initialize, update, draw and destroy |
 | Confirmation → summary/story entry | Session flow, sequence and stage owners | Integrator binds the actual native caller chain | New N3b normal-input journey, content/state/audio checks, draw-suppression mutant, source-only build and full gate |
