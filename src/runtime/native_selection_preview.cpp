@@ -189,11 +189,18 @@ void TitleScene::exec_selection_sonic(TaskScheduler &scheduler, const TaskHandle
     context.stage = &scene.session_.stage_;
     context.events = &scene.session_.bootstrap_.event_work;
     context.auxiliary = initialize_player_auxiliary;
-    // The imported parameter table contains all player rows. Sonic animation content
-    // has no native owner yet; Gamma's animation table cannot supply it.
+    // The imported parameter table contains all player rows.
     if (scene.session_.players_.gamma_assets)
         context.parameters = &scene.session_.players_.gamma_assets->parameters;
     sonic::bind_event_work(context);
+    const auto &assets = scene.session_.players_.sonic_animation_assets;
+    if (!assets) {
+        sonic::run(context);
+        return;
+    }
+    context.animation_table = &assets->table();
+    animation::Runtime animation{scheduler.work_arena().get(), assets->resources()};
+    context.animation = &animation;
     sonic::run(context);
 }
 void TitleScene::exec_selection_miles(TaskScheduler &, const TaskHandle &) {

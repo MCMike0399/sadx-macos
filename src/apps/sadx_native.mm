@@ -26,6 +26,7 @@
 #include "apps/native_main_menu_assets.hpp"
 #include "apps/native_character_selection_assets.hpp"
 #include "apps/native_gamma_actor_assets.hpp"
+#include "apps/native_sonic_animation_assets.hpp"
 #include "apps/native_character_select_label_assets.hpp"
 #include "apps/native_character_completion_assets.hpp"
 #include "player/player_initialization.hpp"
@@ -206,6 +207,9 @@ class Application {
         session.attach_main_menu(sadx::native::app::load_main_menu_assets(this->configuration.assets));
         session.attach_character_selection(sadx::native::app::load_character_selection_assets(
             this->configuration.assets, *characters));
+        if (std::filesystem::exists(this->configuration.assets / "characters/sonic-animation.json"))
+            session.load_sonic_animation_assets(sadx::native::app::load_sonic_animation_assets(
+                this->configuration.assets, *characters));
         if (std::filesystem::exists(this->configuration.assets / "characters/gamma-actor.json"))
             session.load_player_assets(sadx::native::app::load_gamma_actor_assets(
                 this->configuration.assets, *characters),

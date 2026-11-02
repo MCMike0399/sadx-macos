@@ -143,6 +143,7 @@ class Session final : private flow::NativeServices {
     void attach_menu_dialogs(MenuDialogAssets);
     void attach_main_menu(MainMenuAssets);
     void attach_character_selection(CharacterSelectionAssets);
+    void load_sonic_animation_assets(std::unique_ptr<SonicAnimationAssets>);
     void load_player_assets(GammaActorAssets assets,
                             std::optional<std::vector<std::uint8_t>> setup_definition = {},
                             std::optional<std::vector<std::uint8_t>> effects_definition = {});

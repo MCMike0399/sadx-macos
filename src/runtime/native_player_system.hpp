@@ -1,5 +1,6 @@
 #pragma once
 #include "runtime/gamma_actor_assets.hpp"
+#include "runtime/sonic_animation_assets.hpp"
 #include "runtime/character_texture_assets.hpp"
 #include "engine/character_geometry.hpp"
 #include "player/actor_current.hpp"
@@ -31,6 +32,7 @@ struct PlayerSystem {
     gamma_cursors::Templates gamma_cursor_templates;
     std::deque<GammaExtraWork> gamma_work;
     std::unique_ptr<GammaActorAssets> gamma_assets;
+    std::unique_ptr<SonicAnimationAssets> sonic_animation_assets;
     std::unique_ptr<const gamma_setup::Asset> gamma_setup_asset;
     gamma_setup::State gamma_setup;
     std::unique_ptr<gamma_effects::Asset> gamma_effects_asset;
