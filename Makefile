@@ -622,3 +622,11 @@ build/native-editor-state-probe.dylib: tests/probes/native_editor_state_probe.cp
 	$(CXX) $(CXXFLAGS) -dynamiclib $(INCLUDES) $< -o $@
 build/native-editor-binding-test: tests/unit/native_editor_binding.mm build/libsadx-native.a
 	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) $< build/libsadx-native.a -framework Foundation -o $@
+
+# PJoinVertexes initialization/backup lifetime and exact object-node traversal.
+build/player-vertex-weld-test: tests/unit/player_vertex_weld.cpp src/player/player_vertex_weld.cpp src/player/player_vertex_weld.hpp src/engine/character_pack.cpp src/engine/character_geometry.cpp src/engine/task_work.cpp
+	$(CXX) $(CXXFLAGS) $(INCLUDES) tests/unit/player_vertex_weld.cpp src/player/player_vertex_weld.cpp src/engine/character_pack.cpp src/engine/character_geometry.cpp src/engine/task_work.cpp -o $@
+build/native-player-vertex-weld-probe.dylib: tests/probes/native_player_vertex_weld_probe.cpp tests/probes/vertex_weld_fixture.hpp src/player/player_vertex_weld.cpp src/player/player_vertex_weld.hpp src/engine/character_pack.cpp src/engine/character_geometry.cpp src/engine/task_work.cpp
+	$(CXX) $(CXXFLAGS) -dynamiclib $(INCLUDES) tests/probes/native_player_vertex_weld_probe.cpp src/player/player_vertex_weld.cpp src/engine/character_pack.cpp src/engine/character_geometry.cpp src/engine/task_work.cpp -o $@
+build/native-gamma-vertex-weld-test: tests/unit/native_gamma_vertex_weld.mm src/apps/native_gamma_actor_assets.hpp src/runtime/native_player_system.hpp build/libsadx-native.a
+	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) $< build/libsadx-native.a -framework Foundation -o $@

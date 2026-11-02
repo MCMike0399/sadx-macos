@@ -1,0 +1,17 @@
+{
+  "command": [
+    "build/native-gamma-motion-test",
+    "game/imported",
+    "build/gamma-weld/pre-adaptation.tsv"
+  ],
+  "exit_status": -6,
+  "stdout": "",
+  "stderr": "Assertion failed: (std::string(error.what()) == \"native_gamma_join_vertices\"), function main, file native_gamma_motion.mm, line 256.\n",
+  "reason": "Unchanged old witness expects unrecovered PJoinVertexes; recovered prefix now reaches the next source call.",
+  "source_commit": "e3c9a33d",
+  "protected_path": "tests/unit/native_gamma_motion.mm",
+  "old_sha256": "649e7cd738f61e1b71d3fea70e97ff24d7037dd7d5ca11d15895ed398ceccaf3",
+  "new_sha256": "842efd3f2c845916dbb2591150648f7bf48c8a0683f596eab790c83de2f46e6c",
+  "exact_change": "One assertion string: native_gamma_join_vertices -> native_gamma_update_laser_targets. No input, numeric observation, expected value, tolerance or mutant changes.",
+  "manifest_policy": "Canonical sealing remains Root-owned. Preserve all 1398 inherited paths including 53 absent local binary inputs."
+}

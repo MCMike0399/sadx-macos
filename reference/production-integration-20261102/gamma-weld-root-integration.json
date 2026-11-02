@@ -1,0 +1,163 @@
+{
+  "schema": 1,
+  "source_commit": "993baed65e23d0ecb3aa9db01e0fab289e74f60b",
+  "accepted_candidate": "cdf05b41",
+  "reviews": {
+    "standards": "67687b4b",
+    "fidelity": "d5e68301"
+  },
+  "scope": "PJoinVertexes initialization/restoration prefix and complete GetNodeIndex/helper. Active CalcMMMatrix processing remains explicit.",
+  "source_integration": "Reviewed source patch merged in place; current Sonic editor and provenance changes preserved. Existing multi-argument test rows retained; new registrations appended.",
+  "native_build_exit": 0,
+  "native_closure_exit": 0,
+  "provenance_exit": 0,
+  "programs": [
+    {
+      "command": [
+        "/usr/bin/time",
+        "-p",
+        "./build/player-vertex-weld-test",
+        "game/imported/characters/sonic-selection.actions"
+      ],
+      "exit_status": 0,
+      "stdout": "Weld backups and restoration borrow all four actual scene arrays\n",
+      "stderr": "real 0.20\nuser 0.00\nsys 0.00\n"
+    },
+    {
+      "command": [
+        "/usr/bin/time",
+        "-p",
+        "./build/native-gamma-vertex-weld-test",
+        "game/imported",
+        "build/gamma-weld/imported-topology.tsv"
+      ],
+      "exit_status": 0,
+      "stdout": "Actual Gamma common tail initializes canonical weld nodes and reaches laser targets; captured null alias and active matrix boundary preserved\n",
+      "stderr": "real 0.17\nuser 0.00\nsys 0.00\n"
+    },
+    {
+      "command": [
+        "/usr/bin/time",
+        "-p",
+        "./build/native-gamma-motion-test",
+        "game/imported",
+        "build/gamma-motion-observations.tsv"
+      ],
+      "exit_status": 0,
+      "stdout": "Real Gamma initialization reaches PJoinVertexes; canonical motion, live scene, keys and aliases pass\n",
+      "stderr": "real 0.29\nuser 0.00\nsys 0.00\n"
+    },
+    {
+      "command": [
+        "/usr/bin/time",
+        "-p",
+        "./build/native-editor-binding-test",
+        "game/imported",
+        "build/editor-native.tsv"
+      ],
+      "exit_status": 0,
+      "stdout": "81 production callback editor pairs; shared Gamma signed results; missing read order; initialized player/table; actual cleanup uses canonical word\n",
+      "stderr": "real 0.19\nuser 0.00\nsys 0.01\n"
+    }
+  ],
+  "development_oracle": {
+    "cases": 1200,
+    "mismatch_count": 0,
+    "failure_prefix_cases": 248,
+    "passed": true,
+    "report_sha256": "c98db0d2d99aa9bc1aa6c610f92f4d32bc40351290951a098451d2e7a844a95f"
+  },
+  "imported_original": {
+    "passed": true,
+    "mismatch_count": 0,
+    "report_sha256": "6b73a13aadf6a38680b6ab3396cf53a1cee431f07ce698557321d5de97815046",
+    "gamma": {
+      "objects": 589,
+      "rows": 5,
+      "source_depths": [
+        [
+          37,
+          0
+        ],
+        [
+          46,
+          0
+        ],
+        [
+          20,
+          0
+        ],
+        [
+          8,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "native_depths": [
+        [
+          37,
+          0
+        ],
+        [
+          46,
+          0
+        ],
+        [
+          20,
+          0
+        ],
+        [
+          8,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "source_mode": 1,
+      "native_mode": 1,
+      "passed": true,
+      "topology_sha256": "87eb6646c42d99987fea1f207a6b40fde8f2b73443faa01ebcb50c6797d52c7c"
+    }
+  },
+  "motion_observation_sha256": "3bcab50e1e0d58096e2b1c174c20c0ad4fed6cb4ce9bc6800fed66ed008fca34",
+  "normal_input": {
+    "command": [
+      "build/sadx-native",
+      "--assets",
+      "game/imported",
+      "--offscreen",
+      "--paced",
+      "--exit-after",
+      "1550",
+      "--save-directory",
+      "build/gamma-weld-root/savedata",
+      "--key-events",
+      "500:13:down,501:13:up,750:13:down,751:13:up,950:13:down,951:13:up,1050:13:down,1051:13:up,1300:13:down,1301:13:up",
+      "--screenshot",
+      "build/gamma-weld-root/frontier.ppm"
+    ],
+    "exit_status": 1,
+    "frames": 1332,
+    "stop": "native session stopped: native_gamma_update_laser_targets",
+    "app_sha256": "1cca117d4fa0ffbd7c73d6e7bfb33c8e7eb3572d2501a458ddfeb31b7f9754b4",
+    "screenshot_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427"
+  },
+  "limits": [
+    "Focused Main qualification only; last full gate/cold source remains e1946df8.",
+    "Active deformation, matrices and attachment outputs are unqualified. No completed actor frame or N3b.",
+    "Exact fault PCs, arbitrary overlapping/interior pointers and untested callback mutations are outside the accepted prefix.",
+    "Existing Task code and inherited failures remain; the new allocator receipt is not allocator requalification.",
+    "Accepted holdout and mutation evidence reused because product bodies remain identical, not rerun here."
+  ],
+  "static_check_exit": 0,
+  "judge": {
+    "protected_paths": 1412,
+    "violations": 0,
+    "inherited_paths_removed": 0
+  }
+}

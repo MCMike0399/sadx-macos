@@ -1,0 +1,1191 @@
+diff --git a/Makefile b/Makefile
+index 56c6240b..bf30cdf5 100644
+--- a/Makefile
++++ b/Makefile
+@@ -617,0 +618,8 @@ build/native-particle-lifecycle-probe.dylib: tests/probes/native_particle_lifecy
++
++# PJoinVertexes initialization/backup lifetime and exact object-node traversal.
++build/player-vertex-weld-test: tests/unit/player_vertex_weld.cpp src/player/player_vertex_weld.cpp src/player/player_vertex_weld.hpp src/engine/character_pack.cpp src/engine/character_geometry.cpp src/engine/task_work.cpp
++	$(CXX) $(CXXFLAGS) $(INCLUDES) tests/unit/player_vertex_weld.cpp src/player/player_vertex_weld.cpp src/engine/character_pack.cpp src/engine/character_geometry.cpp src/engine/task_work.cpp -o $@
++build/native-player-vertex-weld-probe.dylib: tests/probes/native_player_vertex_weld_probe.cpp tests/probes/vertex_weld_fixture.hpp src/player/player_vertex_weld.cpp src/player/player_vertex_weld.hpp src/engine/character_pack.cpp src/engine/character_geometry.cpp src/engine/task_work.cpp
++	$(CXX) $(CXXFLAGS) -dynamiclib $(INCLUDES) tests/probes/native_player_vertex_weld_probe.cpp src/player/player_vertex_weld.cpp src/engine/character_pack.cpp src/engine/character_geometry.cpp src/engine/task_work.cpp -o $@
++build/native-gamma-vertex-weld-test: tests/unit/native_gamma_vertex_weld.mm src/apps/native_gamma_actor_assets.hpp src/runtime/native_player_system.hpp build/libsadx-native.a
++	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) $< build/libsadx-native.a -framework Foundation -o $@
+diff --git a/reference/oracle-reports/player_vertex_weld.json b/reference/oracle-reports/player_vertex_weld.json
+new file mode 100644
+index 00000000..f4421394
+--- /dev/null
++++ b/reference/oracle-reports/player_vertex_weld.json
+@@ -0,0 +1,113 @@
++{
++ "slug": "player_vertex_weld",
++ "cases": 1200,
++ "seed": 1196903492,
++ "original_development_cohort": {
++  "cases": 1024,
++  "stream_sha256": [
++   "a45f646455b27f5c53591dd70fb36506ee19f2ffe0387f48ef37b7eb2a96bfff",
++   "a45f646455b27f5c53591dd70fb36506ee19f2ffe0387f48ef37b7eb2a96bfff"
++  ],
++  "inputs_sha256": "e024fb197533f785fd7c3ff817df05c4b9547080e0e08931bea0108bdad49061"
++ },
++ "all_inputs_sha256": "ef768f9131ba22d587a1779f096952724ee01d0aa34be3dd6eb8e0ac72bad1f9",
++ "observer_schema": 2,
++ "passed": true,
++ "mismatch_count": 0,
++ "values_match": true,
++ "failure_prefix_cases": 248,
++ "active_matrix_boundary_cases": 170,
++ "allocator_receipts": 258,
++ "source_stream_sha256": "9efde391d8a56f18f3127a59ffda78f15c1427e6592ec3f91482ced669557b4c",
++ "native_stream_sha256": "9efde391d8a56f18f3127a59ffda78f15c1427e6592ec3f91482ced669557b4c",
++ "node_stream_sha256": "15c38860578831073a023215aee0d73304c9ddd4121c479b20dc06dd47c745f4",
++ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
++ "exe_ranges": [
++  [
++   "0x43fa90",
++   "0x440375"
++  ],
++  [
++   "0x439f60",
++   "0x439fb8"
++  ],
++  [
++   "0x439360",
++   "0x4393b2"
++  ]
++ ],
++ "original_ranges_sha256": {
++  "43fa90-440375": "573e7d4c5928c572594462f57e59929b5a2dbef946146ab2b2a3eea46e255393",
++  "439f60-439fb8": "7fad57af897c3bec580f7da3981465048c824fb571fad04cb67a5f5d685893ad",
++  "439360-4393b2": "fb6d1e7e8d49cf9990a45e3d0c95d184802dd6c5e97b40728c526b035cc06253"
++ },
++ "probe_sha256": "e76926243b27b3081e0d242fc85dd511d2b95475c369568512b5d3a9bd76eb32",
++ "mismatches": [],
++ "imported_gamma": {
++  "objects": 589,
++  "rows": 5,
++  "source_depths": [
++   [
++    37,
++    0
++   ],
++   [
++    46,
++    0
++   ],
++   [
++    20,
++    0
++   ],
++   [
++    8,
++    0
++   ],
++   [
++    0,
++    0
++   ]
++  ],
++  "native_depths": [
++   [
++    37,
++    0
++   ],
++   [
++    46,
++    0
++   ],
++   [
++    20,
++    0
++   ],
++   [
++    8,
++    0
++   ],
++   [
++    0,
++    0
++   ]
++  ],
++  "source_mode": 1,
++  "native_mode": 1,
++  "passed": true,
++  "topology_sha256": "87eb6646c42d99987fea1f207a6b40fde8f2b73443faa01ebcb50c6797d52c7c"
++ },
++ "limits": [
++  "Initialization and backup restoration only; active branch stops at CalcMMMatrix.",
++  "No active deformation or attachment-vector or matrix-buffer claim.",
++  "MAlloc/FreeMemory are ordered receipts; actual native arena owns all backups.",
++  "Receipt counts are source diagnostics; native handles, bytes and release lifetime compare.",
++  "One invocation per case; native unit separately exercises repeated cleanup.",
++  "All 48 scene words, both backup images, depths and owner identities compared.",
++  "Original x86 instructions execute; node flags and child/sibling order are varied."
++ ],
++ "tracked_summary": {
++  "full_sha256": "6b73a13aadf6a38680b6ab3396cf53a1cee431f07ce698557321d5de97815046",
++  "full_bytes": 2897,
++  "lists_cut_to": 10,
++  "cut_lists": {}
++ }
++}
+diff --git a/tests/probes/native_player_vertex_weld_probe.cpp b/tests/probes/native_player_vertex_weld_probe.cpp
+new file mode 100644
+index 00000000..5eab4acf
+--- /dev/null
++++ b/tests/probes/native_player_vertex_weld_probe.cpp
+@@ -0,0 +1,97 @@
++#include "player/player_vertex_weld.hpp"
++#include "vertex_weld_fixture.hpp"
++#include <algorithm>
++
++extern "C" int sadx_native_player_vertex_weld(const std::uint32_t *input, std::uint32_t *output) {
++    using namespace sadx;
++    std::fill_n(output, 192, 0);
++    const auto pack = weld_fixture::pack(input);
++    character_pack::SceneState scene(pack);
++    weld_fixture::topology(scene, input);
++    TaskWorkArena arena;
++    if (input[9]) {
++        const auto filler = arena.allocate(TaskWorkArena::usable_bytes - input[9] - 32);
++        if (!filler)
++            return 0;
++    }
++    TaskWorkHandle previous;
++    if (input[8]) {
++        previous = arena.allocate(input[8]).work;
++        if (!previous)
++            return 0;
++        if (!arena.write(previous, 0, input + 80, input[8]))
++            return 0;
++    }
++    std::vector<std::uint16_t> pairs;
++    for (unsigned index = 12; index < 20; ++index)
++        pairs.push_back(static_cast<std::uint16_t>(input[index]));
++    PlayerJoinVertex join{};
++    join.object = weld_fixture::object(scene, input[5]);
++    join.source_object = weld_fixture::object(scene, input[3]);
++    join.destination_object = weld_fixture::object(scene, input[4]);
++    join.vertex_count = static_cast<std::uint8_t>(input[2]);
++    join.input_mode = static_cast<std::int8_t>(input[1]);
++    join.source_depth = static_cast<std::uint8_t>(input[6]);
++    join.destination_depth = static_cast<std::uint8_t>(input[7]);
++    join.original_vertices = previous;
++    join.vertex_pairs = input[30] ? nullptr : &pairs;
++    PlayerJoinTable table{{join, {}}};
++    auto mode = static_cast<std::int16_t>(input[0]);
++    try {
++        if (mode == 0) {
++            vertex_weld::initialize(table, arena, scene);
++            mode = 1;
++        } else if (mode == 1) {
++            output[0] = 2; // Explicit unrecovered CalcMMMatrix boundary.
++        } else {
++            vertex_weld::restore(table, arena, scene);
++        }
++    } catch (const vertex_weld::Error &) {
++        output[0] = 1;
++    }
++    const auto &result = table.rows[0];
++    output[1] = static_cast<std::uint16_t>(mode);
++    output[2] = result.original_vertices ? result.original_vertices->data_offset() : 0;
++    output[3] = previous ? previous->data_offset() : 0;
++    output[4] = previous && previous->released();
++    output[5] = result.source_depth;
++    output[6] = result.destination_depth;
++    output[7] = static_cast<std::uint8_t>(result.input_mode);
++    output[8] = result.vertex_count;
++    output[9] = result.original_vertices ? result.original_vertices->requested_size() : 0;
++    output[10] = arena.free_head() ? *arena.free_head() + 1 : 0;
++    output[11] = previous ? previous->requested_size() : 0;
++    for (unsigned vector = 0; vector < 4; ++vector) {
++        const auto &values = scene.geometry.vector_words(10 + vector);
++        std::copy(values.begin(), values.end(), output + 32 + vector * 12);
++    }
++    if (result.original_vertices) {
++        const auto count = std::min(192U, result.original_vertices->requested_size());
++        std::copy_n(arena.source_bytes().data() + result.original_vertices->data_offset(), count,
++                    reinterpret_cast<std::uint8_t *>(output + 80));
++    }
++    if (previous)
++        std::copy_n(arena.source_bytes().data() + previous->data_offset(), input[8],
++                    reinterpret_cast<std::uint8_t *>(output + 128));
++    output[16] = table.rows[0].object == join.object;
++    output[17] = table.rows[0].source_object == join.source_object;
++    output[18] = table.rows[0].destination_object == join.destination_object;
++    output[19] = table.rows[0].vertex_pairs == join.vertex_pairs;
++    return 1;
++}
++
++extern "C" int sadx_native_player_node_index(const std::uint32_t *input, std::int32_t *output) {
++    const auto pack = weld_fixture::pack(input);
++    sadx::character_pack::SceneState scene(pack);
++    weld_fixture::topology(scene, input);
++    try {
++        output[0] =
++            sadx::vertex_weld::node_index(weld_fixture::object(scene, input[5]),
++                                          weld_fixture::object(scene, input[3]), scene.objects);
++        output[1] = 0;
++    } catch (const sadx::vertex_weld::Error &) {
++        output[0] = 0;
++        output[1] = 1;
++    }
++    return 1;
++}
+diff --git a/tests/probes/vertex_weld_fixture.hpp b/tests/probes/vertex_weld_fixture.hpp
+new file mode 100644
+index 00000000..7eda94fe
+--- /dev/null
++++ b/tests/probes/vertex_weld_fixture.hpp
+@@ -0,0 +1,65 @@
++#pragma once
++#include "engine/character_geometry.hpp"
++
++namespace weld_fixture {
++using namespace sadx::character_pack;
++using Bytes = std::vector<std::uint8_t>;
++inline void append(Bytes &bytes, std::uint32_t value) {
++    for (unsigned byte = 0; byte < 4; ++byte)
++        bytes.push_back(static_cast<std::uint8_t>(value >> (byte * 8)));
++}
++inline Bytes words(std::initializer_list<std::uint32_t> values) {
++    Bytes bytes;
++    for (const auto value : values)
++        append(bytes, value);
++    return bytes;
++}
++inline void record(Bytes &bytes, ResourceKind kind, const Bytes &payload) {
++    append(bytes, static_cast<std::uint32_t>(kind));
++    append(bytes, static_cast<std::uint32_t>(payload.size()));
++    bytes.insert(bytes.end(), payload.begin(), payload.end());
++}
++inline CharacterPack pack(const std::uint32_t *input) {
++    Bytes bytes{'S', 'D', 'X', 'A', 'C', 'T', '0', '1'};
++    for (const auto value : {13, 2, 100, 1, 101, 4})
++        append(bytes, value);
++    record(bytes, ResourceKind::Action, words({2, 3}));
++    record(bytes, ResourceKind::Object, words({0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0}));
++    record(bytes, ResourceKind::Motion, words({5, 1, 3 + (2 << 16), 3}));
++    record(bytes, ResourceKind::Action, words({2, 3}));
++    auto tracks = words({3});
++    tracks.resize(52);
++    record(bytes, ResourceKind::Tracks, tracks);
++    record(bytes, ResourceKind::Model,
++           words({10, input[31] & 1 ? 0U : 11U, 4, 0, 0, 0, 0, 0, 0, 0, 0}));
++    record(bytes, ResourceKind::Object, words({0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8}));
++    record(bytes, ResourceKind::Object, words({0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}));
++    record(bytes, ResourceKind::Model,
++           words({12, input[31] & 2 ? 0U : 13U, 4, 0, 0, 0, 0, 0, 0, 0, 0}));
++    for (unsigned vector = 0; vector < 4; ++vector) {
++        auto payload = words({4});
++        for (unsigned component = 0; component < 12; ++component)
++            append(payload, input[32 + vector * 12 + component]);
++        record(bytes, ResourceKind::Vectors, payload);
++    }
++    return CharacterPack::decode(bytes);
++}
++inline ResourceId object_id(unsigned index) {
++    constexpr ResourceId ids[]{2, 7, 8, 0};
++    return ids[index];
++}
++inline void topology(SceneState &scene, const std::uint32_t *input) {
++    for (unsigned index = 0; index < 3; ++index) {
++        auto &object = scene.objects.object(object_id(index));
++        object.child = object_id(input[20 + index * 2]);
++        object.sibling = object_id(input[21 + index * 2]);
++        object.evaluation_flags = input[26 + index];
++        if (input[29] & (1U << index))
++            object.model = 0;
++    }
++}
++inline ObjectResource *object(SceneState &scene, unsigned index) {
++    const auto id = object_id(index);
++    return id ? &scene.objects.object(id) : nullptr;
++}
++} // namespace weld_fixture
+diff --git a/tests/unit/manifest.tsv b/tests/unit/manifest.tsv
+index 5753f2ad..af3a4177 100644
+--- a/tests/unit/manifest.tsv
++++ b/tests/unit/manifest.tsv
+@@ -335,0 +336,2 @@ particle-lifecycle
++player-vertex-weld	game/imported/characters/sonic-selection.actions
++native-gamma-vertex-weld	game/imported build/gamma-weld/imported-topology.tsv
+diff --git a/tests/unit/native_gamma_motion.mm b/tests/unit/native_gamma_motion.mm
+index 2f299ec8..f97caed5 100644
+--- a/tests/unit/native_gamma_motion.mm
++++ b/tests/unit/native_gamma_motion.mm
+@@ -256 +256 @@ int main(int argc, char **argv) {
+-        assert(std::string(error.what()) == "native_gamma_join_vertices");
++        assert(std::string(error.what()) == "native_gamma_update_laser_targets");
+diff --git a/tests/unit/native_gamma_vertex_weld.mm b/tests/unit/native_gamma_vertex_weld.mm
+new file mode 100644
+index 00000000..d1fe7e80
+--- /dev/null
++++ b/tests/unit/native_gamma_vertex_weld.mm
+@@ -0,0 +1,186 @@
++#include "apps/native_gamma_actor_assets.hpp"
++#include "game/game_mode.hpp"
++#include "player/player_vertex_weld.hpp"
++#include "runtime/native_display.hpp"
++#include "runtime/native_player_system.hpp"
++#include <cassert>
++#include <fstream>
++#include <iostream>
++
++namespace {
++void unrecovered(sadx::TaskScheduler &, const sadx::TaskHandle &) {
++    throw std::runtime_error("unexpected actor callback");
++}
++} // namespace
++int main(int argc, char **argv) {
++    using namespace sadx;
++    assert(argc == 3);
++    const std::filesystem::path directory(argv[1]);
++    const auto pack =
++        character_pack::CharacterPack::load(directory / "characters/sonic-selection.actions");
++    native::PlayerSystem players;
++    players.gamma_assets = std::make_unique<native::GammaActorAssets>(
++        native::app::load_gamma_actor_assets(directory, pack));
++    players.gamma_motion_assets =
++        std::make_unique<native::GammaMotionAssets>(pack, *players.gamma_assets);
++    character_pack::SceneState scene(pack);
++    native::bind_gamma_resources(players, scene, *players.gamma_assets);
++    TaskScheduler scheduler;
++    auto arena = std::make_shared<TaskWorkArena>();
++    assert(scheduler.initialize_source_pool(arena, {}));
++    const auto task = scheduler.create_element(7, 3, nullptr).task;
++    assert(task);
++    player_initialization::establish_zeroed_primary(scheduler, task);
++    player_initialization::establish_zeroed_motion(scheduler, task);
++    auto pose = player_initialization::bind_primary_view(task);
++    pose.id = 2;
++    pose.player_index = 5;
++    pose.status = 0x14;
++    pose.position = {13, 27, -9};
++    pose.rotation = {111, 222, 333};
++    auto primary_owner = task->primary_state;
++    auto motion_owner = task->motion_state;
++    std::int32_t card = 0;
++    std::uint32_t timer = 0, movie = 0;
++    std::int16_t rings = 0;
++    std::uint16_t game_mode = 0;
++    bootstrap::State bootstrap({card, timer, rings, movie, game_mode});
++    bootstrap.event_work[393] = bootstrap.event_work[465] = 1;
++    bootstrap.frames = 17;
++    frame::ModeState timing;
++    native::Display display(directory / "system", timing);
++    auto texture_assets = native::app::load_assets(directory).character_textures;
++    std::array<std::vector<regular_textures::List>, 9> lists;
++    for (unsigned character = 0; character < lists.size(); ++character) {
++        lists[character].resize(texture_assets[character].size());
++        for (unsigned i = 0; i < lists[character].size(); ++i)
++            lists[character][i].entries.resize(texture_assets[character][i].texture_count);
++    }
++    std::array<std::int8_t, 9> loaded{};
++    native::CharacterTextureViews views(texture_assets, lists);
++    std::uint8_t resync = 0;
++    const std::int32_t language = 1;
++    regular_textures::List *common = nullptr;
++    std::array<regular_textures::List *, 32> regular{};
++    const regular_textures::Localizations localizations{};
++    regular_textures::State texture_state{resync, language, common, regular, localizations, {}, {}};
++    regular_textures::Services services{
++        [&](std::string_view name) {
++            return regular_textures::ArchiveResult{1, display.output().load_pvm_archive(name)};
++        },
++        [&](regular_textures::List &list) {
++            return display.output().load_individual_textures(list);
++        },
++        [](std::string_view message) { throw std::runtime_error(std::string(message)); }};
++    const auto setup = native::app::load_gamma_setup_definition(directory);
++    const auto effects = native::app::load_gamma_effects_definition(directory);
++    assert(setup && !effects.empty());
++    native::bind_gamma_setup_resources(players, texture_assets, lists, *setup);
++    native::bind_gamma_effects_resources(players, texture_assets, lists, effects);
++    auto &asset = *players.gamma_effects_asset;
++    assert(asset.textures == &lists[6][4] && asset.textures != &lists[6][2]);
++    const std::int16_t stage = 0, act = 0;
++    sprite_registry::State sprites;
++    gamma_selection::Context context{players,
++                                     scheduler,
++                                     bootstrap,
++                                     display,
++                                     task,
++                                     stage,
++                                     act,
++                                     unrecovered,
++                                     unrecovered,
++                                     unrecovered,
++                                     views.catalog(loaded),
++                                     &texture_state,
++                                     &services,
++                                     sprites,
++                                     scene};
++    const auto arithmetic_control = display.arithmetic().control_word();
++    bool stopped = false;
++    try {
++        gamma_selection::run(context, task);
++    } catch (const flow::UnrecoveredGameFlowCall &error) {
++        assert(std::string(error.what()) == "native_gamma_update_laser_targets");
++        stopped = true;
++    }
++    assert(stopped && players.gamma_effects.burst_task && pose.status == 1);
++    assert(display.arithmetic().control_word() == arithmetic_control);
++    const auto pool_task = players.gamma_effects.burst_task;
++    assert(scheduler.list_head(4) == pool_task);
++    const auto work = std::static_pointer_cast<particles::Work>(pool_task->auxiliary_native_work);
++    assert(work->allocation == pool_task->auxiliary_work && work->frames == asset.burst.data() &&
++           work->capacity == 40 && work->active_count == 0);
++    assert(asset.hit[0].global_index == lists[6][4].entries[1]->global_index &&
++           asset.burst[0].global_index == lists[6][4].entries[0]->global_index);
++    assert(lists[6][4].entries[1] != lists[6][2].entries[1] &&
++           lists[6][4].entries[1]->global_index != lists[6][2].entries[1]->global_index);
++    assert(sprites.head == players.gamma_setup.sprite && sprites.count == 1);
++    assert(players.registry.tasks[5] == task && task->primary_state == primary_owner &&
++           task->motion_state == motion_owner && players.current.primary == task->primary_work);
++    const auto player = players.registry.players[5];
++    assert(player && !players.current.player); // Entry captured NULL before PInitialize.
++    auto &state = *player->physics;
++    auto &tail = state.animation_tail;
++    assert(state.join_vertex_mode_at_122 == 1);
++    assert(tail.join_table && *tail.join_table == &players.gamma_weld);
++    const auto parent = std::filesystem::path(argv[2]).parent_path();
++    if (!parent.empty())
++        std::filesystem::create_directories(parent);
++    std::ofstream observations(argv[2]);
++    assert(observations);
++    for (character_pack::ResourceId id = 1; id <= pack.record_count(); ++id) {
++        if (pack.record(id).kind != character_pack::ResourceKind::Object)
++            continue;
++        const auto &object = scene.objects.object(id);
++        observations << "object " << id << ' ' << object.evaluation_flags << ' ' << object.child
++                     << ' ' << object.sibling << '\n';
++    }
++    observations << "mode " << *state.join_vertex_mode_at_122 << '\n';
++    // Original PJoinVertexes over this actual imported graph: SOURCE-EVIDENCE
++    // and the independent imported-topology comparison retain the source result.
++    const std::array<std::uint8_t, 5> expected_depths{37, 46, 20, 8, 0};
++    for (unsigned index = 0; index < players.gamma_weld.rows.size(); ++index) {
++        const auto &row = players.gamma_weld.rows[index];
++        const auto &declaration = players.gamma_assets->joins[index];
++        assert(row.object ==
++               (declaration.object ? &scene.objects.object(declaration.object) : nullptr));
++        assert(row.source_object == (declaration.source_object
++                                         ? &scene.objects.object(declaration.source_object)
++                                         : nullptr));
++        assert(!row.destination_object && !row.original_vertices && !row.vertex_pairs);
++        assert(row.vertex_count == declaration.vertex_count &&
++               row.input_mode == declaration.input_mode);
++        assert(row.destination_depth == 0);
++        assert(row.source_depth == expected_depths[index]);
++        observations << "row " << declaration.object << ' ' << declaration.source_object << ' '
++                     << declaration.destination_object << ' ' << unsigned(row.vertex_count) << ' '
++                     << int(row.input_mode) << ' ' << unsigned(row.source_depth) << ' '
++                     << unsigned(row.destination_depth) << '\n';
++    }
++    observations.close();
++    // Source mode 4 overwrites an existing original pointer without freeing it.
++    // This controlled reentry follows the real table, arena and passed player.
++    auto previous = arena->allocate(96).work;
++    assert(previous);
++    players.gamma_weld.rows[0].original_vertices = previous;
++    state.join_vertex_mode_at_122 = 0;
++    gamma_selection::join_vertices(context, pose, task->motion_work, player);
++    assert(state.join_vertex_mode_at_122 == 1 && !previous->released());
++    assert(!players.gamma_weld.rows[0].original_vertices && !players.current.player);
++    // Active processing must fail before a sentinel could hide missing matrices.
++    const auto saved = tail.join_table;
++    tail.join_table.reset();
++    bool matrix_missing = false;
++    try {
++        gamma_selection::join_vertices(context, pose, task->motion_work, player);
++    } catch (const flow::UnrecoveredGameFlowCall &error) {
++        matrix_missing = std::string(error.what()) == "native_gamma_join_vertices_CalcMMMatrix";
++    }
++    assert(matrix_missing && !tail.join_table);
++    tail.join_table = saved;
++    assert(players.current.primary == task->primary_work && !players.current.player);
++    std::cout
++        << "Actual Gamma common tail initializes canonical weld nodes and reaches laser targets; "
++           "captured null alias and active matrix boundary preserved\n";
++}
+diff --git a/tests/unit/player_vertex_weld.cpp b/tests/unit/player_vertex_weld.cpp
+new file mode 100644
+index 00000000..366474f1
+--- /dev/null
++++ b/tests/unit/player_vertex_weld.cpp
+@@ -0,0 +1,112 @@
++#include "player/player_vertex_weld.hpp"
++#include <array>
++#include <cassert>
++#include <iostream>
++#include <set>
++
++int main(int argc, char **argv) {
++    assert(argc == 2);
++    using namespace sadx;
++    using namespace sadx::character_pack;
++    const auto pack = CharacterPack::load(argv[1]);
++    SceneState scene(pack);
++    TaskWorkArena arena;
++    std::array<ObjectResource *, 2> objects{};
++    std::array<ModelResource, 2> models{};
++    unsigned found = 0;
++    std::set<ResourceId> used;
++    for (ResourceId id = 1; id <= pack.record_count() && found < 2; ++id) {
++        if (pack.record(id).kind != ResourceKind::Object)
++            continue;
++        auto &object = scene.objects.object(id);
++        if (!object.model)
++            continue;
++        const auto model = pack.model(object.model);
++        if (model.vertex_count < 2 || !model.normals || model.points == model.normals ||
++            used.count(model.points) || used.count(model.normals))
++            continue;
++        objects[found] = &object;
++        models[found++] = model;
++        used.insert(model.points);
++        used.insert(model.normals);
++    }
++    assert(found == 2);
++    const std::array<ResourceId, 4> vectors{models[0].points, models[0].normals, models[1].points,
++                                            models[1].normals};
++    std::array<std::vector<std::uint32_t>, 4> expected;
++    std::array<const std::uint32_t *, 4> storage{};
++    for (unsigned vector = 0; vector < vectors.size(); ++vector) {
++        auto &words = scene.geometry.vector_words(vectors[vector]);
++        for (unsigned word = 0; word < words.size(); ++word)
++            words[word] = 0x31000000U + vector * 0x10000U + word * 97U;
++        expected[vector] = words;
++        storage[vector] = words.data();
++    }
++    const std::vector<std::uint16_t> pairs{1, 0, 0, 1};
++    PlayerJoinVertex join{};
++    join.object = objects[0];
++    join.source_object = objects[0];
++    join.destination_object = objects[1];
++    join.vertex_count = 2;
++    join.input_mode = 1;
++    join.vertex_pairs = &pairs;
++    PlayerJoinTable table{{join, {}}};
++    vertex_weld::initialize(table, arena, scene);
++    const auto backup = table.rows[0].original_vertices;
++    assert(backup && backup->requested_size() == 96 && !backup->released());
++    for (unsigned vertex = 0; vertex < 2; ++vertex) {
++        for (unsigned vector = 0; vector < 4; ++vector) {
++            const auto point = pairs[vertex * 2 + vector / 2];
++            for (unsigned axis = 0; axis < 3; ++axis) {
++                const auto offset = vertex * 48 + vector * 12 + axis * 4;
++                std::uint32_t word;
++                assert(arena.read(backup, offset, &word, 4));
++                assert(word == expected[vector][point * 3 + axis]);
++                // Teardown must read the current arena block, not an initializer snapshot.
++                word = 0x72000000U + vertex * 0x10000U + vector * 0x100U + axis;
++                assert(arena.write(backup, offset, &word, 4));
++                expected[vector][point * 3 + axis] = word;
++            }
++        }
++    }
++    for (const auto resource : vectors) {
++        auto &words = scene.geometry.vector_words(resource);
++        for (unsigned word = 0; word < 6; ++word)
++            words[word] = 0x11000000U + word;
++    }
++    vertex_weld::restore(table, arena, scene);
++    assert(backup->released() && !table.rows[0].original_vertices);
++    for (unsigned vector = 0; vector < vectors.size(); ++vector) {
++        const auto &actual = scene.geometry.vector_words(vectors[vector]);
++        assert(actual.data() == storage[vector]);
++        assert(actual == expected[vector]);
++    }
++    // Repeated cleanup has no backup and must not reinterpret the pointer as live.
++    vertex_weld::restore(table, arena, scene);
++    // A fresh initialization observes current geometry and owns a new handle,
++    // even if the arena can reuse an earlier source address.
++    vertex_weld::initialize(table, arena, scene);
++    const auto second = table.rows[0].original_vertices;
++    assert(second && second != backup && !second->released());
++    vertex_weld::initialize(table, arena, scene);
++    const auto third = table.rows[0].original_vertices;
++    assert(third && third != second && !second->released());
++    vertex_weld::restore(table, arena, scene);
++    assert(third->released() && !second->released());
++    vertex_weld::initialize(table, arena, scene);
++    const auto fourth = table.rows[0].original_vertices;
++    const auto replacement = arena.allocate(96).work;
++    assert(fourth && replacement);
++    bool reentered = false;
++    arena.set_metadata_writer([&](std::uint32_t, std::optional<std::uint32_t>) {
++        if (!reentered) {
++            reentered = true;
++            table.rows[0].original_vertices = replacement;
++        }
++    });
++    vertex_weld::restore(table, arena, scene);
++    arena.set_metadata_writer({});
++    assert(reentered && fourth->released() && !replacement->released());
++    assert(!table.rows[0].original_vertices);
++    std::cout << "Weld backups and restoration borrow all four actual scene arrays\n";
++}
+diff --git a/tools/oracles/mutate_player_vertex_weld.py b/tools/oracles/mutate_player_vertex_weld.py
+new file mode 100644
+index 00000000..4ec37a08
+--- /dev/null
++++ b/tools/oracles/mutate_player_vertex_weld.py
+@@ -0,0 +1,74 @@
++#!/usr/bin/env python3
++"""Compile bounded product faults and run the unchanged new weld comparison."""
++import argparse
++import json
++from pathlib import Path
++import subprocess
++import sys
++
++ROOT = Path(__file__).resolve().parents[2]
++
++
++def main():
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument('exe')
++    parser.add_argument('--output', default='build/gamma-weld/mutations.json')
++    args = parser.parse_args()
++    source = (ROOT / 'src/player/player_vertex_weld.cpp').read_text()
++    faults = [
++        ('destination-depth', 'join.destination_depth = 0;', 'join.destination_depth = 1;'),
++        ('normal-owner', 'model_vector(source, true,', 'model_vector(source, false,'),
++        ('failed-backup-publication', 'join.original_vertices = allocation.work;',
++         'join.original_vertices = {};'),
++        ('skip-free', 'arena.release(allocation)',
++         'TaskWorkResult{TaskWorkFailure::None, {}}'),
++        ('drop-restored-z', '(*words)[destination] = word;',
++         'if (component != 2) (*words)[destination] = word;'),
++        ('no-restoration', '(*words)[destination] = word;', '(void)word;'),
++        ('node-order', '->child', '->sibling'),
++    ]
++    results = []
++    directory = ROOT / 'build/gamma-weld/mutants'
++    directory.mkdir(parents=True, exist_ok=True)
++    for name, before, after in faults:
++        assert before in source, name
++        if name == 'node-order':
++            changed = source.replace('->child', '->temporary').replace('->sibling', '->child')
++            changed = changed.replace('->temporary', '->sibling')
++        else:
++            changed = source.replace(before, after)
++        product = directory / f'{name}.cpp'
++        probe = directory / f'{name}.dylib'
++        report = directory / f'{name}.json'
++        product.write_text(changed)
++        command = ['xcrun', 'clang++', '-std=c++17', '-O2', '-Wall', '-Wextra', '-Werror',
++                   '-ffp-contract=off', '-fno-fast-math', '-arch', 'arm64',
++                   '-mmacosx-version-min=14.0', '-dynamiclib', '-Isrc', '-Itests/probes',
++                   'tests/probes/native_player_vertex_weld_probe.cpp', str(product),
++                   'src/engine/character_pack.cpp', 'src/engine/character_geometry.cpp',
++                   'src/engine/task_work.cpp', '-o', str(probe)]
++        compiled = subprocess.run(command, cwd=ROOT, capture_output=True, text=True)
++        result = {'name': name, 'compile_exit': compiled.returncode,
++                  'compile_stderr': compiled.stderr, 'command': command}
++        if compiled.returncode == 0:
++            check = subprocess.run([sys.executable, 'tools/oracles/verify_original_player_vertex_weld.py',
++                                    args.exe, str(probe), '--cases', '1024', '--output', str(report)],
++                                   cwd=ROOT, capture_output=True, text=True)
++            result.update(check_exit=check.returncode, stdout=check.stdout, stderr=check.stderr)
++            if report.exists():
++                data = json.loads(report.read_text())
++                result['mismatch_count'] = data['mismatch_count']
++            result['caught'] = check.returncode == 1 and result.get('mismatch_count', 0) > 0
++        else:
++            result['caught'] = False
++        results.append(result)
++        print(name, 'caught' if result['caught'] else 'NOT CAUGHT', flush=True)
++    output = ROOT / args.output
++    output.parent.mkdir(parents=True, exist_ok=True)
++    output.write_text(json.dumps({'all_caught': all(row['caught'] for row in results),
++                                 'faults': results}, indent=2) + '\n')
++    return 0 if all(row['caught'] for row in results) else 1
++
++
++if __name__ == '__main__':
++    raise SystemExit(main())
+diff --git a/tools/oracles/mutate_player_vertex_weld_binding.py b/tools/oracles/mutate_player_vertex_weld_binding.py
+new file mode 100644
+index 00000000..78cf4e94
+--- /dev/null
++++ b/tools/oracles/mutate_player_vertex_weld_binding.py
+@@ -0,0 +1,101 @@
++#!/usr/bin/env python3
++"""Actual caller and arena reentry faults; no replacement actor/controller logic."""
++import argparse
++import json
++from pathlib import Path
++import subprocess
++
++ROOT = Path(__file__).resolve().parents[2]
++
++
++def main():
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument('--assets', default='game/imported')
++    parser.add_argument('--output', default='build/gamma-weld/binding-mutations.json')
++    args = parser.parse_args()
++    original = (ROOT / 'src/runtime/native_gamma_binding.cpp').read_text()
++    first = original.index('void join_vertices(Context &context')
++    last = original.index('// NOTSA: native boundary for GammaUpdateLaserTargets', first)
++    body = original[first:last]
++    initialize = 'vertex_weld::initialize(**table, arena(context), context.scene);'
++    assert initialize in body
++    faults = [
++        ('captured-null-alias', body.replace('bind_join_vertex_mode(player)',
++                                            'bind_join_vertex_mode(context.players.current.player ? '
++                                            'context.players.registry.allocations.at('
++                                            'context.players.current.player.get()) : Player{})')),
++        ('copied-weld-table', body.replace(initialize,
++             'auto copied_table = **table;\n        '
++             'vertex_weld::initialize(copied_table, arena(context), context.scene);')),
++        ('skipped-initialization', body.replace(initialize, '(void)table;')),
++    ]
++    directory = ROOT / 'build/gamma-weld/binding-faults'
++    directory.mkdir(parents=True, exist_ok=True)
++    results = []
++    flags = ['xcrun', 'clang++', '-std=c++17', '-O2', '-Wall', '-Wextra', '-Werror',
++             '-ffp-contract=off', '-fno-fast-math', '-arch', 'arm64',
++             '-mmacosx-version-min=14.0', '-Isrc', '-Itests/fixtures']
++    for name, replacement in faults:
++        source = directory / f'{name}.cpp'
++        obj = directory / f'{name}.o'
++        executable = directory / name
++        source.write_text(original[:first] + replacement + original[last:])
++        compile_command = flags + ['-c', str(source), '-o', str(obj)]
++        compiled = subprocess.run(compile_command, cwd=ROOT, capture_output=True, text=True)
++        row = {'name': name, 'compile_exit': compiled.returncode,
++               'compile_stderr': compiled.stderr, 'compile_command': compile_command}
++        if compiled.returncode == 0:
++            link_command = flags + ['-fobjc-arc', 'tests/unit/native_gamma_vertex_weld.mm',
++                                   str(obj), 'build/libsadx-native.a', '-framework', 'Foundation',
++                                   '-o', str(executable)]
++            linked = subprocess.run(link_command, cwd=ROOT, capture_output=True, text=True)
++            row.update(link_exit=linked.returncode, link_stderr=linked.stderr,
++                       link_command=link_command)
++            if linked.returncode == 0:
++                command = [str(executable), args.assets, str(directory / f'{name}.tsv')]
++                run = subprocess.run(command, cwd=ROOT, capture_output=True, text=True)
++                row.update(run_exit=run.returncode, stdout=run.stdout, stderr=run.stderr,
++                           command=command)
++        row['caught'] = row.get('run_exit') == -6
++        results.append(row)
++        print(name, 'caught' if row['caught'] else 'NOT CAUGHT', flush=True)
++
++    # FreeMemory receives a captured pointer. Reentry can replace the row's org
++    # field during metadata stores; freeing through that field by reference is wrong.
++    source = (ROOT / 'src/player/player_vertex_weld.cpp').read_text()
++    before = 'const auto result = arena.release(allocation);'
++    assert before in source
++    source = source.replace(before, 'const auto result = arena.release(join.original_vertices);')
++    # Remove the now-unused capture so -Werror does not substitute for the observer.
++    source = source.replace('const auto allocation = join.original_vertices;\n        const auto result',
++                            'const auto result')
++    product = directory / 'uncaptured-free.cpp'
++    obj = directory / 'uncaptured-free.o'
++    executable = directory / 'uncaptured-free'
++    product.write_text(source)
++    compiled = subprocess.run(flags + ['-c', str(product), '-o', str(obj)],
++                              cwd=ROOT, capture_output=True, text=True)
++    row = {'name': 'uncaptured-free', 'compile_exit': compiled.returncode,
++           'compile_stderr': compiled.stderr}
++    if compiled.returncode == 0:
++        linked = subprocess.run(flags + ['tests/unit/player_vertex_weld.cpp', str(obj),
++                                'build/libsadx-native.a', '-o', str(executable)],
++                                cwd=ROOT, capture_output=True, text=True)
++        row.update(link_exit=linked.returncode, link_stderr=linked.stderr)
++        if linked.returncode == 0:
++            run = subprocess.run([str(executable), str(Path(args.assets) /
++                                 'characters/sonic-selection.actions')], cwd=ROOT,
++                                 capture_output=True, text=True)
++            row.update(run_exit=run.returncode, stdout=run.stdout, stderr=run.stderr)
++    row['caught'] = row.get('run_exit') == -6
++    results.append(row)
++    print(row['name'], 'caught' if row['caught'] else 'NOT CAUGHT', flush=True)
++    output = ROOT / args.output
++    output.parent.mkdir(parents=True, exist_ok=True)
++    output.write_text(json.dumps({'all_caught': all(row['caught'] for row in results),
++                                 'faults': results}, indent=2) + '\n')
++    return 0 if all(row['caught'] for row in results) else 1
++
++
++if __name__ == '__main__':
++    raise SystemExit(main())
+diff --git a/tools/oracles/verify_original_player_vertex_weld.py b/tools/oracles/verify_original_player_vertex_weld.py
+new file mode 100644
+index 00000000..39498303
+--- /dev/null
++++ b/tools/oracles/verify_original_player_vertex_weld.py
+@@ -0,0 +1,368 @@
++#!/usr/bin/env python3
++"""Original PJoinVertexes initialization/cleanup and complete GetNodeIndex.
++
++The active matrix branch stops at its real CalcMMMatrix call. It is not judged
++as native welding. MAlloc/FreeMemory are bounded ordered allocation receipts;
++the unchanged TaskWorkArena implementation is independently qualified.
++"""
++import argparse
++import ctypes
++import hashlib
++import json
++from pathlib import Path
++import random
++import struct
++import sys
++
++sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'lib'))
++from pe_image import PEImage
++import unicorn
++from unicorn.x86_const import UC_X86_REG_EAX, UC_X86_REG_EIP, UC_X86_REG_ESP
++
++SOURCE_SHA = '6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74'
++JOIN, NODE, SEARCH = 0x43fa90, 0x439f60, 0x439360
++ALLOC, FREE, CALCULATE = 0x40b220, 0x40b310, 0x4b81f0
++BASE, HEAP, ARENA = 0x10000000, 0x20000000, 0x1000000
++PLAYER, TABLE = BASE + 0x100, BASE + 0x600
++OBJECTS = [BASE + 0x400 + index * 64 for index in range(3)] + [0]
++MODELS = [BASE + 0x300, BASE + 0x340]
++VECTORS = [BASE + 0x2fd0 + index * 0x2000 for index in range(4)]
++STACK, STOP = BASE + 0xef00, BASE + 0xff00
++PAIRS = BASE + 0x10ff0
++
++
++def packed(words):
++    return struct.pack('<' + 'I' * len(words), *words)
++
++
++class Source:
++    def __init__(self, image):
++        assert image.sha256 == SOURCE_SHA
++        assert unicorn.__version__ == '2.1.4'
++        self.m = m = unicorn.Uc(unicorn.UC_ARCH_X86, unicorn.UC_MODE_32)
++        for page, size in [(0x43f000, 8192), (0x439000, 4096), (0x40b000, 4096),
++                           (0x4b8000, 4096), (BASE, 4096), (BASE + 0xa000, 0x6000),
++                           (BASE + 0x10000, 4096),
++                           (HEAP, ARENA)]:
++            m.mem_map(page, size)
++        for vector in VECTORS:
++            m.mem_map(vector & ~4095, 4096)
++        for first, last in [(JOIN, 0x440375), (NODE, 0x439fb8), (SEARCH, 0x4393b2)]:
++            m.mem_write(first, image.read(first, last - first))
++        m.hook_add(unicorn.UC_HOOK_CODE, self.hook)
++
++    def put(self, at, value, size=4):
++        self.m.mem_write(at, (value & ((1 << (8 * size)) - 1)).to_bytes(size, 'little'))
++
++    def get(self, at, size=4):
++        return int.from_bytes(self.m.mem_read(at, size), 'little')
++
++    def allocate(self, requested):
++        total = (requested + 63) & ~31
++        if not requested or self.next + total > ARENA:
++            return 0
++        pointer = HEAP + self.next + 32
++        self.next += total
++        # The independently qualified arena retains its terminal sentinel in
++        # the free list after an exact-full allocation (task_work unit 31–33).
++        self.free_head = self.next
++        self.allocations[pointer] = requested
++        self.m.mem_write(pointer, b'\xff' * requested)
++        return pointer
++
++    def hook(self, m, at, size, _):
++        if at == CALCULATE:
++            self.failure = 2
++            m.emu_stop()
++            return
++        if at not in (ALLOC, FREE):
++            return
++        sp = m.reg_read(UC_X86_REG_ESP)
++        argument = self.get(sp + 4)
++        if at == ALLOC:
++            result = self.allocate(argument)
++            self.receipts.append(['allocate', argument, result - HEAP if result else 0])
++            m.reg_write(UC_X86_REG_EAX, result)
++        else:
++            self.released.add(argument)
++            if argument:
++                self.free_head = argument - HEAP - 32
++            self.receipts.append(['free', argument - HEAP if argument else 0])
++        m.reg_write(UC_X86_REG_EIP, self.get(sp))
++        m.reg_write(UC_X86_REG_ESP, sp + 4)
++
++    def prepare(self, values):
++        v = values
++        self.next = ARENA - v[9] if v[9] else 0
++        self.free_head = self.next
++        self.allocations, self.released, self.receipts = {}, set(), []
++        self.failure = 0
++        self.m.mem_write(BASE, bytes(4096))
++        for index, address in enumerate(OBJECTS[:3]):
++            self.put(address, v[26 + index])
++            self.put(address + 4, 0 if v[29] & (1 << index) else MODELS[int(index == 2)])
++            self.put(address + 44, OBJECTS[v[20 + index * 2]])
++            self.put(address + 48, OBJECTS[v[21 + index * 2]])
++        for index, address in enumerate(MODELS):
++            self.put(address, VECTORS[index * 2])
++            self.put(address + 4, 0 if v[31] & (1 << index) else VECTORS[index * 2 + 1])
++        for index, address in enumerate(VECTORS):
++            self.m.mem_write(address, packed(v[32 + index * 12:44 + index * 12]))
++        self.previous = self.allocate(v[8]) if v[8] else 0
++        if v[8]:
++            assert self.previous
++            self.m.mem_write(self.previous, packed(v[80:128])[:v[8]])
++        self.put(PLAYER + 0x122, v[0], 2)
++        self.put(PLAYER + 0x144, TABLE)
++        self.put(TABLE, OBJECTS[v[5]])
++        self.put(TABLE + 4, OBJECTS[v[3]])
++        self.put(TABLE + 8, OBJECTS[v[4]])
++        for offset, word in zip(range(12, 16), v[2:3] + v[1:2] + v[6:8]):
++            self.put(TABLE + offset, word, 1)
++        self.put(TABLE + 16, self.previous)
++        self.put(TABLE + 20, 0 if v[30] else PAIRS)
++        for index, word in enumerate(v[12:20]):
++            self.put(PAIRS + index * 2, word, 2)
++        # Real source arguments reach CalcMMMatrix; no matrix value is fabricated.
++        self.put(PLAYER + 0x140, BASE + 0x700)
++        self.put(BASE + 0x700, BASE + 0x800)
++        self.put(BASE + 0x704, 3, 1)
++        self.put(BASE + 0x800, OBJECTS[0])
++        self.m.mem_write(STACK, packed([STOP, 0, 0, PLAYER]))
++        self.m.reg_write(UC_X86_REG_ESP, STACK)
++
++    def run(self, values):
++        self.prepare(values)
++        try:
++            self.m.emu_start(JOIN, STOP, count=100000)
++        except unicorn.UcError:
++            self.failure = 1
++        out = [0] * 192
++        out[0] = self.failure
++        out[1] = self.get(PLAYER + 0x122, 2)
++        pointer = self.get(TABLE + 16)
++        out[2] = pointer - HEAP if pointer else 0
++        out[3] = self.previous - HEAP if self.previous else 0
++        out[4] = int(bool(self.previous) and self.previous in self.released)
++        out[5:9] = [self.get(TABLE + 14, 1), self.get(TABLE + 15, 1),
++                     self.get(TABLE + 13, 1), self.get(TABLE + 12, 1)]
++        out[9] = self.allocations[pointer] if pointer else 0
++        out[10] = self.free_head + 1 if self.free_head is not None else 0
++        out[11] = self.allocations[self.previous] if self.previous else 0
++        out[16:20] = [int(self.get(TABLE + offset) == expected) for offset, expected in
++                       [(0, OBJECTS[values[5]]), (4, OBJECTS[values[3]]),
++                        (8, OBJECTS[values[4]]), (20, 0 if values[30] else PAIRS)]]
++        for index, address in enumerate(VECTORS):
++            out[32 + index * 12:44 + index * 12] = struct.unpack('<12I', self.m.mem_read(address, 48))
++        if pointer:
++            size = min(192, self.allocations[pointer])
++            out[80:80 + size // 4] = struct.unpack('<' + 'I' * (size // 4), self.m.mem_read(pointer, size))
++        if self.previous:
++            size = values[8]
++            out[128:128 + size // 4] = struct.unpack('<' + 'I' * (size // 4), self.m.mem_read(self.previous, size))
++        return out
++
++    def node(self, values):
++        self.prepare(values)
++        self.m.mem_write(STACK, packed([STOP, OBJECTS[values[5]], OBJECTS[values[3]]]))
++        try:
++            self.m.emu_start(NODE, STOP, count=10000)
++        except unicorn.UcError:
++            return [0, 1]
++        return [ctypes.c_int32(self.m.reg_read(UC_X86_REG_EAX)).value, 0]
++
++    def imported(self, path):
++        objects, rows, native_mode = {}, [], None
++        for line in Path(path).read_text().splitlines():
++            kind, *values = line.split()
++            values = list(map(int, values))
++            if kind == 'object':
++                objects[values[0]] = values[1:]
++            elif kind == 'row':
++                rows.append(values)
++            elif kind == 'mode':
++                native_mode = values[0]
++        assert objects and len(rows) == 5 and native_mode is not None
++        object_base = 0x30000000
++        extent = ((max(objects) + 1) * 64 + 4095) & ~4095
++        self.m.mem_map(object_base, extent)
++        def pointer(identity):
++            return object_base + identity * 64 if identity else 0
++        for identity, (flags, child, sibling) in objects.items():
++            assert not child or child in objects
++            assert not sibling or sibling in objects
++            self.put(pointer(identity), flags)
++            self.put(pointer(identity) + 44, pointer(child))
++            self.put(pointer(identity) + 48, pointer(sibling))
++        self.prepare(case(random.Random(0), 0))
++        self.put(PLAYER + 0x122, 0, 2)
++        self.m.mem_write(TABLE, bytes(24 * len(rows)))
++        for index, row in enumerate(rows):
++            root, source, destination, count, mode, _, _ = row
++            address = TABLE + index * 24
++            for offset, value in [(0, pointer(root)), (4, pointer(source)), (8, pointer(destination))]:
++                self.put(address + offset, value)
++            self.put(address + 12, count, 1)
++            self.put(address + 13, mode, 1)
++        self.m.reg_write(UC_X86_REG_ESP, STACK)
++        self.m.emu_start(JOIN, STOP, count=1000000)
++        actual = [[self.get(TABLE + index * 24 + 14, 1), self.get(TABLE + index * 24 + 15, 1)]
++                  for index in range(len(rows))]
++        expected = [row[5:] for row in rows]
++        source_mode = self.get(PLAYER + 0x122, 2)
++        return {'objects': len(objects), 'rows': len(rows), 'source_depths': actual,
++                'native_depths': expected, 'source_mode': source_mode,
++                'native_mode': native_mode,
++                'passed': actual == expected and source_mode == native_mode == 1,
++                'topology_sha256': hashlib.sha256(Path(path).read_bytes()).hexdigest()}
++
++
++def case(rng, index):
++    values = [0] * 128
++    values[0] = rng.choice([0, 0, 0, 2, 65535, 1])
++    values[1] = rng.choice(list(range(11)) + [127, 128, 255])
++    values[2] = rng.randrange(5)
++    values[3:6] = [rng.randrange(4) for _ in range(3)]
++    values[6:8] = [rng.randrange(256), rng.randrange(256)]
++    values[8] = rng.choice([0, 192])
++    values[9] = rng.choice([0, 0, 0, 32, 64, 128, 256, 512]) if not values[8] else 0
++    values[12:20] = [rng.randrange(5) for _ in range(8)]
++    # Acyclic topology: chains, child/sibling ordering and disconnected targets.
++    values[20:26] = rng.choice([[1, 3, 3, 2, 3, 3], [1, 2, 3, 3, 3, 3],
++                               [3, 1, 2, 3, 3, 3], [3, 3, 3, 3, 3, 3]])
++    values[26:29] = [rng.getrandbits(32) for _ in range(3)]
++    values[32:128] = [rng.getrandbits(32) for _ in range(96)]
++    if index < 80:
++        # Complete successful backups/restoration, alias cases and all source modes.
++        values[0] = 0 if index < 40 else 2
++        values[1] = index % 10
++        values[2] = index % 5
++        values[3:6] = [1, 2, 0]
++        values[8] = 0 if index < 40 else 192
++        values[9] = 0
++        values[12:20] = [0, 3, 1, 2, 2, 1, 3, 0]
++    return values
++
++
++def main():
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument('exe')
++    parser.add_argument('probe')
++    parser.add_argument('--cases', type=int, default=1024)
++    parser.add_argument('--seed', type=lambda value: int(value, 0), default=0x47574c44)
++    parser.add_argument('--output', default='build/oracles/player_vertex_weld.json')
++    parser.add_argument('--imported-topology')
++    args = parser.parse_args()
++    image = PEImage(args.exe)
++    source = Source(image)
++    library = ctypes.CDLL(str(Path(args.probe).resolve()))
++    native = library.sadx_native_player_vertex_weld
++    native.argtypes = [ctypes.POINTER(ctypes.c_uint32), ctypes.POINTER(ctypes.c_uint32)]
++    node = library.sadx_native_player_node_index
++    node.argtypes = [ctypes.POINTER(ctypes.c_uint32), ctypes.POINTER(ctypes.c_int32)]
++    rng = random.Random(args.seed)
++    mismatches, failures, active, receipts = [], 0, 0, 0
++    original_hash, native_hash = hashlib.sha256(), hashlib.sha256()
++    node_hash = hashlib.sha256()
++    cases = [case(rng, index) for index in range(args.cases)]
++    # Preserve every existing development input. Append width/null-pointer cases
++    # instead of replacing the earlier cohort or reducing its random coverage.
++    extra_rng = random.Random(args.seed ^ 0x50414952)
++    for index in range(64):
++        values = case(extra_rng, index)
++        values[0] = 0 if index < 32 else 2
++        values[2] = [0, 4, 5, 127, 128, 255][index % 6]
++        values[3:6] = [1, 2, 0]
++        values[8] = 0 if index < 32 else 192
++        values[9] = 0
++        values[30] = int(index % 4 == 0)
++        values[12:20] = [0, 3, 1, 2, 2, 1, 3, 0]
++        cases.append(values)
++    for index in range(64):
++        values = case(extra_rng, index)
++        values[0] = 0 if index < 32 else 2
++        values[1] = 1 + index % 3
++        values[2] = index % 5
++        values[3:6] = [1, 2, 0]
++        values[8] = 0 if index < 32 else 192
++        values[9] = 0
++        values[29] = index % 8
++        values[12:20] = [0, 3, 1, 2, 2, 1, 3, 0]
++        cases.append(values)
++    for index in range(48):
++        values = case(extra_rng, index)
++        values[0] = 0 if index < 24 else 2
++        values[1] = 1 + index % 3
++        values[2] = index % 5
++        values[3:6] = [1, 2, 0]
++        values[8] = 0 if index < 24 else 192
++        values[9] = 0
++        values[31] = index % 4
++        values[12:20] = [0, 3, 1, 2, 2, 1, 3, 0]
++        cases.append(values)
++    input_hash = hashlib.sha256()
++    prefix_streams = None
++    prefix_inputs = None
++    for index, values in enumerate(cases):
++        argument = (ctypes.c_uint32 * 128)(*values)
++        input_hash.update(packed(values))
++        actual = (ctypes.c_uint32 * 192)()
++        assert native(argument, actual) == 1
++        expected = source.run(values)
++        original_hash.update(packed(expected))
++        native_hash.update(packed(actual))
++        failures += expected[0] == 1
++        active += expected[0] == 2
++        receipts += len(source.receipts)
++        different = [word for word, pair in enumerate(zip(expected, actual)) if pair[0] != pair[1]]
++        node_result = (ctypes.c_int32 * 2)()
++        assert node(argument, node_result) == 1
++        expected_node = source.node(values)
++        node_hash.update(packed([value & 0xffffffff for value in expected_node]))
++        if index == args.cases - 1:
++            prefix_streams = [original_hash.hexdigest(), native_hash.hexdigest()]
++            prefix_inputs = input_hash.hexdigest()
++        if different or list(node_result) != expected_node:
++            mismatches.append({'case': index, 'words': different,
++                               'source': [expected[word] for word in different],
++                               'native': [actual[word] for word in different],
++                               'source_node': expected_node, 'native_node': list(node_result),
++                               'input': values})
++    imported = source.imported(args.imported_topology) if args.imported_topology else None
++    matched = not mismatches and (not imported or imported['passed'])
++    report = {
++        'slug': 'player_vertex_weld', 'cases': len(cases), 'seed': args.seed,
++        'original_development_cohort': {'cases': args.cases, 'stream_sha256': prefix_streams,
++                                        'inputs_sha256': prefix_inputs},
++        'all_inputs_sha256': input_hash.hexdigest(), 'observer_schema': 2,
++        'passed': matched, 'mismatch_count': len(mismatches),
++        'values_match': matched, 'failure_prefix_cases': failures,
++        'active_matrix_boundary_cases': active, 'allocator_receipts': receipts,
++        'source_stream_sha256': original_hash.hexdigest(),
++        'native_stream_sha256': native_hash.hexdigest(), 'node_stream_sha256': node_hash.hexdigest(),
++        'source_sha256': image.sha256,
++        'exe_ranges': [[hex(JOIN), '0x440375'], [hex(NODE), '0x439fb8'],
++                       [hex(SEARCH), '0x4393b2']],
++        'original_ranges_sha256': {
++            f'{start:x}-{end:x}': hashlib.sha256(image.read(start, end - start)).hexdigest()
++            for start, end in [(JOIN, 0x440375), (NODE, 0x439fb8), (SEARCH, 0x4393b2)]},
++        'probe_sha256': hashlib.sha256(Path(args.probe).read_bytes()).hexdigest(),
++        'mismatches': mismatches[:20],
++        'imported_gamma': imported,
++        'limits': ['Initialization and backup restoration only; active branch stops at CalcMMMatrix.',
++                   'No active deformation or attachment-vector or matrix-buffer claim.',
++                   'MAlloc/FreeMemory are ordered receipts; actual native arena owns all backups.',
++                   'Receipt counts are source diagnostics; native handles, bytes and release lifetime compare.',
++                   'One invocation per case; native unit separately exercises repeated cleanup.',
++                   'All 48 scene words, both backup images, depths and owner identities compared.',
++                   'Original x86 instructions execute; node flags and child/sibling order are varied.']}
++    path = Path(args.output)
++    path.parent.mkdir(parents=True, exist_ok=True)
++    path.write_text(json.dumps(report, indent=2) + '\n')
++    print(json.dumps({key: report[key] for key in ['cases', 'mismatch_count', 'failure_prefix_cases',
++                                                 'active_matrix_boundary_cases', 'passed']}))
++    return 0 if matched else 1
++
++
++if __name__ == '__main__':
++    raise SystemExit(main())

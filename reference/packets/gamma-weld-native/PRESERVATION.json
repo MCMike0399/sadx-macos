@@ -1,0 +1,157 @@
+{
+  "base": "acdb5a04",
+  "root_qualified_head_user_reported": "05eaa6c3",
+  "root_gate_and_cold_source_user_reported": "e1946df8",
+  "unchanged_evidence": [
+    {
+      "path": "src/runtime/gamma_motion.cpp",
+      "sha256": "c5ae4066a471b6c3b6867a04234552a95add0d017a9bbaae9a5b1571ee2f53e9",
+      "unchanged_from_base": true
+    },
+    {
+      "path": "src/runtime/gamma_motion.hpp",
+      "sha256": "b869e7ec531d869097011d4016b67d79a3135e8fe933e60090bae4b135960ce8",
+      "unchanged_from_base": true
+    },
+    {
+      "path": "src/player/animation/animation_engine.hpp",
+      "sha256": "16762bf5e07deee358494995e6ce21c4014055c741b0504a1323f0fe5ae56eff",
+      "unchanged_from_base": true
+    },
+    {
+      "path": "src/player/player_animation.cpp",
+      "sha256": "48eefd19e6d65f20c0c41729a9484d938c84df419d7156eed1b33e1e255a5497",
+      "unchanged_from_base": true
+    },
+    {
+      "path": "src/player/player_animation_blend.cpp",
+      "sha256": "a1f6733277da77371fd705af198f5aad3480b62e26a5733a71a220361aa3e94a",
+      "unchanged_from_base": true
+    },
+    {
+      "path": "src/player/gamma_effects.cpp",
+      "sha256": "550ef0fac73849f265a6b3546aabe5b170644eb439e734d9b584a92aa0baf883",
+      "unchanged_from_base": true
+    },
+    {
+      "path": "src/engine/particle_pool_lifecycle_native.cpp",
+      "sha256": "7f12567f73a2108b98e6895781fa809ecf39c7a708d226764b31bc24b272d6f4",
+      "unchanged_from_base": true
+    },
+    {
+      "path": "src/runtime/sonic_animation_assets.cpp",
+      "sha256": "7d741c5fbc987d50190fc3e7b3b86efbad1c7e7641bcbb4067506a357cbd8716",
+      "unchanged_from_base": true
+    },
+    {
+      "path": "src/player/sonic_player.cpp",
+      "sha256": "c2b9cd7bd4772fc5e3411ec06c160f890201fff682162ae7e177717de8945fbf",
+      "unchanged_from_base": true
+    },
+    {
+      "path": "tools/oracles/verify_original_gamma_selection_core.py",
+      "sha256": "b62020db7b643a941079b15b2e0b931885ace95b40bb1ec3329a61439604aada",
+      "unchanged_from_base": true
+    },
+    {
+      "path": "tools/oracles/verify_original_gamma_effects.py",
+      "sha256": "10bf7f30793a0f71f0f056188fa048cd5ce29f870712d44bae824aca09707246",
+      "unchanged_from_base": true
+    },
+    {
+      "path": "tools/oracles/verify_original_player_animation.py",
+      "sha256": "3501d8cd23af6671f3b70ebd13c762d4723a22091b0627d701821c52809331cf",
+      "unchanged_from_base": true
+    },
+    {
+      "path": "tools/oracles/verify_original_player_animation_blend.py",
+      "sha256": "1cb4fdd24fe6ad64083b05ed5f85123f6b6fae794fc1f22a88a3b62c9b4e5dc9",
+      "unchanged_from_base": true
+    },
+    {
+      "path": "tests/probes/native_gamma_selection_core_probe.cpp",
+      "sha256": "f1f5119da472f78651428ac79b4a5435e80acb359bf2a0c2f816b2670195a517",
+      "unchanged_from_base": true
+    },
+    {
+      "path": "tests/probes/native_gamma_effects_probe.cpp",
+      "sha256": "2f267def1d6cfb159bb9d866ba1fd35efaf9e4523c4fd495debcee380cb9e99e",
+      "unchanged_from_base": true
+    },
+    {
+      "path": "reference/packets/gamma-motion-native/VERIFICATION.json",
+      "sha256": "f34825fa5153b7391cc06d8bebb3a4f4cccccc218b84bc9cf320d2b4d73e5a7b",
+      "unchanged_from_base": true
+    },
+    {
+      "path": "reference/production-integration-20261102/motion-particle-integration.json",
+      "sha256": "3ba086645ddc9dceb52a8abb81b05fde4e5a6025a98358240caa8f7a384697f9",
+      "unchanged_from_base": true
+    },
+    {
+      "function": "native_gamma_binding.cpp::initialize_effects",
+      "sha256": "5b8dc239199259bfbc8c60a79cd3472a723df6e26f3a89659698c4899ef11ee3",
+      "unchanged_from_base": true
+    }
+  ],
+  "all_listed_unchanged": true,
+  "judge_manifest_sha256": "601133d4f76f9fa802e1e89cbea27867f59b6c409a738082d7d7e95d8dc5856b",
+  "judge_manifest_byte_identical": true,
+  "inherited_protected_entries": 1398,
+  "absent_inherited_inputs_retained": [
+    "reference/oracle-reports/air_acceleration.cases.bin",
+    "reference/oracle-reports/axis_projection.cases.bin",
+    "reference/oracle-reports/collision_shapes.cases.bin",
+    "reference/oracle-reports/floor_angles.cases.bin",
+    "reference/oracle-reports/frame_completion.cases.bin",
+    "reference/oracle-reports/game_frame_control.cases.bin",
+    "reference/oracle-reports/game_logic.cases.bin",
+    "reference/oracle-reports/game_loop.cases.bin",
+    "reference/oracle-reports/game_mode.cases.bin",
+    "reference/oracle-reports/game_scene_logic.cases.bin",
+    "reference/oracle-reports/ground_acceleration.cases.bin",
+    "reference/oracle-reports/ninja_queue_consumer.cases.bin",
+    "reference/oracle-reports/ninja_queue_lifecycle.cases.bin",
+    "reference/oracle-reports/ninja_render.cases.bin",
+    "reference/oracle-reports/ninja_sprite.cases.bin",
+    "reference/oracle-reports/ninja_sprite_display.cases.bin",
+    "reference/oracle-reports/ninja_sprite_queue.cases.bin",
+    "reference/oracle-reports/ninja_texture_selection.cases.bin",
+    "reference/oracle-reports/player_animation.constants.bin",
+    "reference/oracle-reports/player_auxiliary_effect.cases.bin",
+    "reference/oracle-reports/player_contact_attributes.cases.bin",
+    "reference/oracle-reports/player_contact_initializer.cases.bin",
+    "reference/oracle-reports/player_contact_response.constants.bin",
+    "reference/oracle-reports/player_coordinates.cases.bin",
+    "reference/oracle-reports/player_direction_reset.cases.bin",
+    "reference/oracle-reports/player_heading.angle-cases.bin",
+    "reference/oracle-reports/player_heading.cases.bin",
+    "reference/oracle-reports/player_input.cases.bin",
+    "reference/oracle-reports/player_input_producer.cases.bin",
+    "reference/oracle-reports/player_mesh_math.cases.bin",
+    "reference/oracle-reports/player_mesh_query.cases.bin",
+    "reference/oracle-reports/player_mesh_registry.cases.bin",
+    "reference/oracle-reports/player_movement.cases.bin",
+    "reference/oracle-reports/player_path.cases.bin",
+    "reference/oracle-reports/player_plane.cases.bin",
+    "reference/oracle-reports/player_position.cases.bin",
+    "reference/oracle-reports/player_reaction.cases.bin",
+    "reference/oracle-reports/player_rotation.cases.bin",
+    "reference/oracle-reports/player_scene.cases.bin",
+    "reference/oracle-reports/player_scene_helpers.cases.bin",
+    "reference/oracle-reports/player_scene_position.cases.bin",
+    "reference/oracle-reports/player_speed.cases.bin",
+    "reference/oracle-reports/player_startup.cases.bin",
+    "reference/oracle-reports/projection_angle.cases.bin",
+    "reference/oracle-reports/scene_input_producer.cases.bin",
+    "reference/oracle-reports/scene_mesh_bounds.cases.bin",
+    "reference/oracle-reports/sonic_actions.constants.bin",
+    "reference/oracle-reports/sonic_player.constants.bin",
+    "reference/oracle-reports/sonic_player.dispatch.bin",
+    "reference/oracle-reports/speedrun_limiter.cases.bin",
+    "reference/oracle-reports/task_lifecycle.cases.bin",
+    "reference/oracle-reports/task_work.cases.bin",
+    "reference/oracle-reports/x87_memory.cases.bin"
+  ],
+  "note": "Reused exact unchanged implementation/judge/packet evidence; these are not newly rerun numeric comparisons."
+}

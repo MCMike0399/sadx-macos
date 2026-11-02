@@ -1,0 +1,187 @@
+{
+  "source_before": "e3c9a33d",
+  "defect": "Source captures model pointers before its count guard, but dereferences each model/vector only when consumed. The draft dereferenced both descriptors before that guard and before source backup prefixes.",
+  "original_assembly_boundaries": {
+    "initialize_model_pointer_reads": [
+      "0x4401fa",
+      "0x440200"
+    ],
+    "initialize_count_guard": "0x44020f",
+    "first_source_model_dereference": "0x440227",
+    "first_destination_model_dereference": "0x440288",
+    "restore_model_pointer_reads": [
+      "0x43facd",
+      "0x43fad3"
+    ],
+    "restore_count_guard": "0x43fadf",
+    "restore_first_model_dereference": "0x43faf7"
+  },
+  "failed_expanded_comparison": {
+    "cases": 1152,
+    "mismatch_count": 22,
+    "report_sha256": "e9be8c5a499efd2852688d9953a6851e1ad14ff43346c7feb16a1cafc23a9e37",
+    "first_cases": [
+      {
+        "case": 1092,
+        "words": [
+          80,
+          81,
+          82,
+          83,
+          84,
+          85
+        ],
+        "source": [
+          900220179,
+          1633930878,
+          2825912276,
+          1739005253,
+          1230580505,
+          3010683573
+        ],
+        "native": [
+          4294967295,
+          4294967295,
+          4294967295,
+          4294967295,
+          4294967295,
+          4294967295
+        ]
+      },
+      {
+        "case": 1093,
+        "words": [
+          0,
+          1,
+          5,
+          6
+        ],
+        "source": [
+          0,
+          1,
+          1,
+          2
+        ],
+        "native": [
+          1,
+          0,
+          140,
+          94
+        ]
+      },
+      {
+        "case": 1098,
+        "words": [
+          0,
+          1,
+          5,
+          6
+        ],
+        "source": [
+          0,
+          1,
+          255,
+          255
+        ],
+        "native": [
+          1,
+          0,
+          40,
+          15
+        ]
+      },
+      {
+        "case": 1100,
+        "words": [
+          80,
+          81,
+          82,
+          83,
+          84,
+          85
+        ],
+        "source": [
+          4159469179,
+          92228827,
+          2329442090,
+          1273084235,
+          1799512435,
+          2577986520
+        ],
+        "native": [
+          4294967295,
+          4294967295,
+          4294967295,
+          4294967295,
+          4294967295,
+          4294967295
+        ]
+      },
+      {
+        "case": 1101,
+        "words": [
+          80,
+          81,
+          82,
+          83,
+          84,
+          85
+        ],
+        "source": [
+          1263077342,
+          3981655900,
+          1700747809,
+          2567020908,
+          2102863930,
+          513124513
+        ],
+        "native": [
+          4294967295,
+          4294967295,
+          4294967295,
+          4294967295,
+          4294967295,
+          4294967295
+        ]
+      }
+    ]
+  },
+  "after_source_correction_before_receipt_model_fix": {
+    "cases": 1200,
+    "mismatch_count": 2,
+    "mismatches": [
+      {
+        "case": 250,
+        "words": [
+          10
+        ],
+        "source": [
+          0
+        ],
+        "native": [
+          16777217
+        ]
+      },
+      {
+        "case": 323,
+        "words": [
+          10
+        ],
+        "source": [
+          0
+        ],
+        "native": [
+          16777217
+        ]
+      }
+    ],
+    "diagnosis": "Only newly observed free-head word 10 differs. The new source-side allocator receipt incorrectly maps an exact-full terminal sentinel to null. All model/normal/geometry/backup/mode/depth comparisons now match. This receipt defect is fixed separately from game source."
+  },
+  "unchanged_prior_contract": {
+    "test": "tests/unit/task_work.cpp:31-33",
+    "test_sha256": "66656fceeb7e2b6152ce2c2e2813613ad61ae7c921da526e43d1992f88e6c55d",
+    "report": "reference/oracle-reports/task_work.json",
+    "report_sha256": "6ed29a14db992370e57f41fe6995858894321043fbaba08a798a43151153b4b6",
+    "meaning": "Exact allocation retains free_head == usable_bytes (terminal sentinel), not null. Read/reused only; no reserved Task/reset execution."
+  }
+}

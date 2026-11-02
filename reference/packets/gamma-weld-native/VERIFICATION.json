@@ -1,0 +1,993 @@
+{
+  "scope": "Recovered PJoinVertexes initialization/backup-restoration prefix and complete GetNodeIndex/helper. NOT complete welding.",
+  "base": "acdb5a04b06c642ebb0f9f7ac836da5fcd50d5ec",
+  "source_commit": "cba33e6b",
+  "source_commits": [
+    "6853fd06",
+    "e3c9a33d",
+    "cba33e6b"
+  ],
+  "source_sha256": {
+    "native-sources.txt": "ddc1475ee409f58e7b9cc9921736afb9e89a48316cd3188eddb2c5453e48baa5",
+    "src/engine/character_geometry.hpp": "d59bfddfaba28238f07db2a9b823d09e3590bbeca5ee627d37538b5120c190af",
+    "src/player/player_initialization.hpp": "2e527c66b49b7e7128f7da7a4b0bf8eee156bf004fc837f0ad7aca6cd574d8d4",
+    "src/player/player_startup.cpp": "ccb4deb697530fd968bbab86c1d2b840187329893073c6dfebc1089a124a0103",
+    "src/player/player_vertex_weld.cpp": "0dff867ae833f9a1e7a2ba0111f9f032d33b1c64eef12212ba4dc39191e27e60",
+    "src/player/player_vertex_weld.hpp": "08342aa56f2798c874d86593e0d3708317f45d0278ec1d3d404fd58652fb7650",
+    "src/runtime/native_gamma_binding.cpp": "d3c515cd718da7f03faafb46caa5b9abac21c074939a43e325c3bce17e5b8610"
+  },
+  "assets_sha256": {
+    "characters/sonic-selection.actions": "c414e173bf4bf9f803f24d61642e233ff9650fe9276d70da2ac3939fee2b5d7f",
+    "characters/gamma-actor.json": "26f0643c7b8572d1601b23ef071b4346c46bdf1d8eaa3c654f3152582c90357e",
+    "characters/sonic-actor.json": "7dad8512e63b6dad022210f11113d69cda399f8c29f7a93f68f5c6c03fe29e71",
+    "gamma-effects.bin": "d1a054abf595756ee0ec740db3129b4b891f148db756f44250b250ffe4d09d60",
+    "gamma-setup.bin": "e1814676525022ba2458bfa9f85059490253fbe5c1d72967243ba96b53bd8dc0"
+  },
+  "source_verdict": {
+    "slug": "player_vertex_weld",
+    "cases": 1200,
+    "seed": 1196903492,
+    "original_development_cohort": {
+      "cases": 1024,
+      "stream_sha256": [
+        "a45f646455b27f5c53591dd70fb36506ee19f2ffe0387f48ef37b7eb2a96bfff",
+        "a45f646455b27f5c53591dd70fb36506ee19f2ffe0387f48ef37b7eb2a96bfff"
+      ],
+      "inputs_sha256": "e024fb197533f785fd7c3ff817df05c4b9547080e0e08931bea0108bdad49061"
+    },
+    "all_inputs_sha256": "ef768f9131ba22d587a1779f096952724ee01d0aa34be3dd6eb8e0ac72bad1f9",
+    "observer_schema": 2,
+    "passed": true,
+    "mismatch_count": 0,
+    "values_match": true,
+    "failure_prefix_cases": 248,
+    "active_matrix_boundary_cases": 170,
+    "allocator_receipts": 258,
+    "source_stream_sha256": "9efde391d8a56f18f3127a59ffda78f15c1427e6592ec3f91482ced669557b4c",
+    "native_stream_sha256": "9efde391d8a56f18f3127a59ffda78f15c1427e6592ec3f91482ced669557b4c",
+    "node_stream_sha256": "15c38860578831073a023215aee0d73304c9ddd4121c479b20dc06dd47c745f4",
+    "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+    "exe_ranges": [
+      [
+        "0x43fa90",
+        "0x440375"
+      ],
+      [
+        "0x439f60",
+        "0x439fb8"
+      ],
+      [
+        "0x439360",
+        "0x4393b2"
+      ]
+    ],
+    "original_ranges_sha256": {
+      "43fa90-440375": "573e7d4c5928c572594462f57e59929b5a2dbef946146ab2b2a3eea46e255393",
+      "439f60-439fb8": "7fad57af897c3bec580f7da3981465048c824fb571fad04cb67a5f5d685893ad",
+      "439360-4393b2": "fb6d1e7e8d49cf9990a45e3d0c95d184802dd6c5e97b40728c526b035cc06253"
+    },
+    "probe_sha256": "e76926243b27b3081e0d242fc85dd511d2b95475c369568512b5d3a9bd76eb32",
+    "imported_gamma": {
+      "objects": 589,
+      "rows": 5,
+      "source_depths": [
+        [
+          37,
+          0
+        ],
+        [
+          46,
+          0
+        ],
+        [
+          20,
+          0
+        ],
+        [
+          8,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "native_depths": [
+        [
+          37,
+          0
+        ],
+        [
+          46,
+          0
+        ],
+        [
+          20,
+          0
+        ],
+        [
+          8,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "source_mode": 1,
+      "native_mode": 1,
+      "passed": true,
+      "topology_sha256": "87eb6646c42d99987fea1f207a6b40fde8f2b73443faa01ebcb50c6797d52c7c"
+    },
+    "limits": [
+      "Initialization and backup restoration only; active branch stops at CalcMMMatrix.",
+      "No active deformation or attachment-vector or matrix-buffer claim.",
+      "MAlloc/FreeMemory are ordered receipts; actual native arena owns all backups.",
+      "Receipt counts are source diagnostics; native handles, bytes and release lifetime compare.",
+      "One invocation per case; native unit separately exercises repeated cleanup.",
+      "All 48 scene words, both backup images, depths and owner identities compared.",
+      "Original x86 instructions execute; node flags and child/sibling order are varied."
+    ]
+  },
+  "holdout_verdict": {
+    "slug": "player_vertex_weld",
+    "cases": 2224,
+    "seed": 1464159300,
+    "original_development_cohort": {
+      "cases": 2048,
+      "stream_sha256": [
+        "355e9e4b04dab878998df7a6c31a7140b084bc4af6011a4b19788e6ebae378fe",
+        "355e9e4b04dab878998df7a6c31a7140b084bc4af6011a4b19788e6ebae378fe"
+      ],
+      "inputs_sha256": "c1a75f4c37a96be98beb9cf3006c68e3c7958f8926f96f92ac1f5e48714613b4"
+    },
+    "all_inputs_sha256": "6b90f5efda9cc9c0ad3dd0abc3d9ab2e6a92f66b9a73536f563a0733ab315c52",
+    "observer_schema": 2,
+    "passed": true,
+    "mismatch_count": 0,
+    "values_match": true,
+    "failure_prefix_cases": 395,
+    "active_matrix_boundary_cases": 302,
+    "allocator_receipts": 373,
+    "source_stream_sha256": "68453aee4260fb77b6f9a5082d05c0cc93a4c66f9ec804361f8e9c151b1b5678",
+    "native_stream_sha256": "68453aee4260fb77b6f9a5082d05c0cc93a4c66f9ec804361f8e9c151b1b5678",
+    "node_stream_sha256": "80579d40ca79c3439ae73a80248033f0f829dc6eab79da0ea4856a1b6890b44f",
+    "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+    "exe_ranges": [
+      [
+        "0x43fa90",
+        "0x440375"
+      ],
+      [
+        "0x439f60",
+        "0x439fb8"
+      ],
+      [
+        "0x439360",
+        "0x4393b2"
+      ]
+    ],
+    "original_ranges_sha256": {
+      "43fa90-440375": "573e7d4c5928c572594462f57e59929b5a2dbef946146ab2b2a3eea46e255393",
+      "439f60-439fb8": "7fad57af897c3bec580f7da3981465048c824fb571fad04cb67a5f5d685893ad",
+      "439360-4393b2": "fb6d1e7e8d49cf9990a45e3d0c95d184802dd6c5e97b40728c526b035cc06253"
+    },
+    "probe_sha256": "e76926243b27b3081e0d242fc85dd511d2b95475c369568512b5d3a9bd76eb32",
+    "imported_gamma": null,
+    "limits": [
+      "Initialization and backup restoration only; active branch stops at CalcMMMatrix.",
+      "No active deformation or attachment-vector or matrix-buffer claim.",
+      "MAlloc/FreeMemory are ordered receipts; actual native arena owns all backups.",
+      "Receipt counts are source diagnostics; native handles, bytes and release lifetime compare.",
+      "One invocation per case; native unit separately exercises repeated cleanup.",
+      "All 48 scene words, both backup images, depths and owner identities compared.",
+      "Original x86 instructions execute; node flags and child/sibling order are varied."
+    ]
+  },
+  "native_programs": {
+    "programs": [
+      {
+        "command": [
+          "build/native-gamma-motion-test",
+          "game/imported",
+          "build/gamma-weld/qualified-motion.tsv"
+        ],
+        "exit_status": 0,
+        "stdout": "Real Gamma initialization reaches PJoinVertexes; canonical motion, live scene, keys and aliases pass\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "build/native-gamma-weld-cursors-test",
+          "game/imported"
+        ],
+        "exit_status": 0,
+        "stdout": "PASS: canonical Gamma weld store and real cursor allocations reach setup boundary\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "build/native-gamma-effects-test",
+          "game/imported"
+        ],
+        "exit_status": 0,
+        "stdout": "Real Gamma/PInitialize/setup/material caller reaches PSetMotion with shared hit list and pool\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "build/animation-gamma-shared-binding-test",
+          "game/imported"
+        ],
+        "exit_status": 0,
+        "stdout": "Two real Gamma players share one imported table; isolated state and failed-binding prefixes pass\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "build/player-vertex-weld-test",
+          "game/imported/characters/sonic-selection.actions"
+        ],
+        "exit_status": 0,
+        "stdout": "Weld backups and restoration borrow all four actual scene arrays\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "build/native-gamma-vertex-weld-test",
+          "game/imported",
+          "build/gamma-weld/imported-topology.tsv"
+        ],
+        "exit_status": 0,
+        "stdout": "Actual Gamma common tail initializes canonical weld nodes and reaches laser targets; captured null alias and active matrix boundary preserved\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "build/gamma-weld/player-initialization-native-test"
+        ],
+        "exit_status": 0,
+        "stdout": "Actual flags6/7 primary binding, canonical pose aliases, typed startup and explicit auxiliary boundary pass\n",
+        "stderr": ""
+      }
+    ],
+    "motion_preservation": {
+      "byte_identical": true,
+      "bytes": 11144,
+      "before_sha256": "3bcab50e1e0d58096e2b1c174c20c0ad4fed6cb4ce9bc6800fed66ed008fca34",
+      "current_sha256": "3bcab50e1e0d58096e2b1c174c20c0ad4fed6cb4ce9bc6800fed66ed008fca34"
+    }
+  },
+  "core_faults": {
+    "all_caught": true,
+    "faults": [
+      {
+        "name": "destination-depth",
+        "compile_exit": 0,
+        "compile_stderr": "",
+        "command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-dynamiclib",
+          "-Isrc",
+          "-Itests/probes",
+          "tests/probes/native_player_vertex_weld_probe.cpp",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-83362981/build/gamma-weld/mutants/destination-depth.cpp",
+          "src/engine/character_pack.cpp",
+          "src/engine/character_geometry.cpp",
+          "src/engine/task_work.cpp",
+          "-o",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-83362981/build/gamma-weld/mutants/destination-depth.dylib"
+        ],
+        "check_exit": 1,
+        "stdout": "{\"cases\": 1200, \"mismatch_count\": 187, \"failure_prefix_cases\": 248, \"active_matrix_boundary_cases\": 170, \"passed\": false}\n",
+        "stderr": "",
+        "mismatch_count": 187,
+        "caught": true
+      },
+      {
+        "name": "normal-owner",
+        "compile_exit": 0,
+        "compile_stderr": "",
+        "command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-dynamiclib",
+          "-Isrc",
+          "-Itests/probes",
+          "tests/probes/native_player_vertex_weld_probe.cpp",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-83362981/build/gamma-weld/mutants/normal-owner.cpp",
+          "src/engine/character_pack.cpp",
+          "src/engine/character_geometry.cpp",
+          "src/engine/task_work.cpp",
+          "-o",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-83362981/build/gamma-weld/mutants/normal-owner.dylib"
+        ],
+        "check_exit": 1,
+        "stdout": "{\"cases\": 1200, \"mismatch_count\": 198, \"failure_prefix_cases\": 248, \"active_matrix_boundary_cases\": 170, \"passed\": false}\n",
+        "stderr": "",
+        "mismatch_count": 198,
+        "caught": true
+      },
+      {
+        "name": "failed-backup-publication",
+        "compile_exit": 0,
+        "compile_stderr": "",
+        "command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-dynamiclib",
+          "-Isrc",
+          "-Itests/probes",
+          "tests/probes/native_player_vertex_weld_probe.cpp",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-83362981/build/gamma-weld/mutants/failed-backup-publication.cpp",
+          "src/engine/character_pack.cpp",
+          "src/engine/character_geometry.cpp",
+          "src/engine/task_work.cpp",
+          "-o",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-83362981/build/gamma-weld/mutants/failed-backup-publication.dylib"
+        ],
+        "check_exit": 1,
+        "stdout": "{\"cases\": 1200, \"mismatch_count\": 122, \"failure_prefix_cases\": 248, \"active_matrix_boundary_cases\": 170, \"passed\": false}\n",
+        "stderr": "",
+        "mismatch_count": 122,
+        "caught": true
+      },
+      {
+        "name": "skip-free",
+        "compile_exit": 0,
+        "compile_stderr": "",
+        "command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-dynamiclib",
+          "-Isrc",
+          "-Itests/probes",
+          "tests/probes/native_player_vertex_weld_probe.cpp",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-83362981/build/gamma-weld/mutants/skip-free.cpp",
+          "src/engine/character_pack.cpp",
+          "src/engine/character_geometry.cpp",
+          "src/engine/task_work.cpp",
+          "-o",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-83362981/build/gamma-weld/mutants/skip-free.dylib"
+        ],
+        "check_exit": 1,
+        "stdout": "{\"cases\": 1200, \"mismatch_count\": 101, \"failure_prefix_cases\": 248, \"active_matrix_boundary_cases\": 170, \"passed\": false}\n",
+        "stderr": "",
+        "mismatch_count": 101,
+        "caught": true
+      },
+      {
+        "name": "drop-restored-z",
+        "compile_exit": 0,
+        "compile_stderr": "",
+        "command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-dynamiclib",
+          "-Isrc",
+          "-Itests/probes",
+          "tests/probes/native_player_vertex_weld_probe.cpp",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-83362981/build/gamma-weld/mutants/drop-restored-z.cpp",
+          "src/engine/character_pack.cpp",
+          "src/engine/character_geometry.cpp",
+          "src/engine/task_work.cpp",
+          "-o",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-83362981/build/gamma-weld/mutants/drop-restored-z.dylib"
+        ],
+        "check_exit": 1,
+        "stdout": "{\"cases\": 1200, \"mismatch_count\": 119, \"failure_prefix_cases\": 248, \"active_matrix_boundary_cases\": 170, \"passed\": false}\n",
+        "stderr": "",
+        "mismatch_count": 119,
+        "caught": true
+      },
+      {
+        "name": "no-restoration",
+        "compile_exit": 0,
+        "compile_stderr": "",
+        "command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-dynamiclib",
+          "-Isrc",
+          "-Itests/probes",
+          "tests/probes/native_player_vertex_weld_probe.cpp",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-83362981/build/gamma-weld/mutants/no-restoration.cpp",
+          "src/engine/character_pack.cpp",
+          "src/engine/character_geometry.cpp",
+          "src/engine/task_work.cpp",
+          "-o",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-83362981/build/gamma-weld/mutants/no-restoration.dylib"
+        ],
+        "check_exit": 1,
+        "stdout": "{\"cases\": 1200, \"mismatch_count\": 119, \"failure_prefix_cases\": 248, \"active_matrix_boundary_cases\": 170, \"passed\": false}\n",
+        "stderr": "",
+        "mismatch_count": 119,
+        "caught": true
+      },
+      {
+        "name": "node-order",
+        "compile_exit": 0,
+        "compile_stderr": "",
+        "command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-dynamiclib",
+          "-Isrc",
+          "-Itests/probes",
+          "tests/probes/native_player_vertex_weld_probe.cpp",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-83362981/build/gamma-weld/mutants/node-order.cpp",
+          "src/engine/character_pack.cpp",
+          "src/engine/character_geometry.cpp",
+          "src/engine/task_work.cpp",
+          "-o",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-83362981/build/gamma-weld/mutants/node-order.dylib"
+        ],
+        "check_exit": 1,
+        "stdout": "{\"cases\": 1200, \"mismatch_count\": 98, \"failure_prefix_cases\": 248, \"active_matrix_boundary_cases\": 170, \"passed\": false}\n",
+        "stderr": "",
+        "mismatch_count": 98,
+        "caught": true
+      }
+    ]
+  },
+  "caller_and_reentry_faults": {
+    "all_caught": true,
+    "faults": [
+      {
+        "name": "captured-null-alias",
+        "compile_exit": 0,
+        "compile_stderr": "",
+        "compile_command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-Isrc",
+          "-Itests/fixtures",
+          "-c",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-83362981/build/gamma-weld/binding-faults/captured-null-alias.cpp",
+          "-o",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-83362981/build/gamma-weld/binding-faults/captured-null-alias.o"
+        ],
+        "link_exit": 0,
+        "link_stderr": "",
+        "link_command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-Isrc",
+          "-Itests/fixtures",
+          "-fobjc-arc",
+          "tests/unit/native_gamma_vertex_weld.mm",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-83362981/build/gamma-weld/binding-faults/captured-null-alias.o",
+          "build/libsadx-native.a",
+          "-framework",
+          "Foundation",
+          "-o",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-83362981/build/gamma-weld/binding-faults/captured-null-alias"
+        ],
+        "run_exit": -6,
+        "stdout": "",
+        "stderr": "libc++abi: terminating due to uncaught exception of type sadx::player_initialization::Error: player initialization dependency is unavailable\n",
+        "command": [
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-83362981/build/gamma-weld/binding-faults/captured-null-alias",
+          "game/imported",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-83362981/build/gamma-weld/binding-faults/captured-null-alias.tsv"
+        ],
+        "caught": true
+      },
+      {
+        "name": "copied-weld-table",
+        "compile_exit": 0,
+        "compile_stderr": "",
+        "compile_command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-Isrc",
+          "-Itests/fixtures",
+          "-c",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-83362981/build/gamma-weld/binding-faults/copied-weld-table.cpp",
+          "-o",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-83362981/build/gamma-weld/binding-faults/copied-weld-table.o"
+        ],
+        "link_exit": 0,
+        "link_stderr": "",
+        "link_command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-Isrc",
+          "-Itests/fixtures",
+          "-fobjc-arc",
+          "tests/unit/native_gamma_vertex_weld.mm",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-83362981/build/gamma-weld/binding-faults/copied-weld-table.o",
+          "build/libsadx-native.a",
+          "-framework",
+          "Foundation",
+          "-o",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-83362981/build/gamma-weld/binding-faults/copied-weld-table"
+        ],
+        "run_exit": -6,
+        "stdout": "",
+        "stderr": "Assertion failed: (row.source_depth == expected_depths[index]), function main, file native_gamma_vertex_weld.mm, line 155.\n",
+        "command": [
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-83362981/build/gamma-weld/binding-faults/copied-weld-table",
+          "game/imported",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-83362981/build/gamma-weld/binding-faults/copied-weld-table.tsv"
+        ],
+        "caught": true
+      },
+      {
+        "name": "skipped-initialization",
+        "compile_exit": 0,
+        "compile_stderr": "",
+        "compile_command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-Isrc",
+          "-Itests/fixtures",
+          "-c",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-83362981/build/gamma-weld/binding-faults/skipped-initialization.cpp",
+          "-o",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-83362981/build/gamma-weld/binding-faults/skipped-initialization.o"
+        ],
+        "link_exit": 0,
+        "link_stderr": "",
+        "link_command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-Isrc",
+          "-Itests/fixtures",
+          "-fobjc-arc",
+          "tests/unit/native_gamma_vertex_weld.mm",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-83362981/build/gamma-weld/binding-faults/skipped-initialization.o",
+          "build/libsadx-native.a",
+          "-framework",
+          "Foundation",
+          "-o",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-83362981/build/gamma-weld/binding-faults/skipped-initialization"
+        ],
+        "run_exit": -6,
+        "stdout": "",
+        "stderr": "Assertion failed: (row.source_depth == expected_depths[index]), function main, file native_gamma_vertex_weld.mm, line 155.\n",
+        "command": [
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-83362981/build/gamma-weld/binding-faults/skipped-initialization",
+          "game/imported",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-83362981/build/gamma-weld/binding-faults/skipped-initialization.tsv"
+        ],
+        "caught": true
+      },
+      {
+        "name": "uncaptured-free",
+        "compile_exit": 0,
+        "compile_stderr": "",
+        "link_exit": 0,
+        "link_stderr": "",
+        "run_exit": -6,
+        "stdout": "",
+        "stderr": "Assertion failed: (reentered && fourth->released() && !replacement->released()), function main, file player_vertex_weld.cpp, line 109.\n",
+        "caught": true
+      }
+    ]
+  },
+  "normal_input": {
+    "command": [
+      "build/sadx-native",
+      "--assets",
+      "game/imported",
+      "--offscreen",
+      "--paced",
+      "--exit-after",
+      "1550",
+      "--save-directory",
+      "build/gamma-weld/qualified-savedata",
+      "--key-events",
+      "500:13:down,501:13:up,750:13:down,751:13:up,950:13:down,951:13:up,1050:13:down,1051:13:up,1300:13:down,1301:13:up",
+      "--screenshot",
+      "build/gamma-weld/qualified-frontier.ppm"
+    ],
+    "exit_status": 1,
+    "source_commit": "cba33e6b",
+    "stdout_json": "build/gamma-weld/qualified-frontier.json",
+    "stderr": "native session stopped: native_gamma_update_laser_targets\n",
+    "app_sha256": "4e7ec6805df4a4034d862cf85e18b249688163f63aa90b4b10964d6b12c9e34f",
+    "save_input_sha256": {
+      "SONICADVENTURE_DX_CHAOGARDEN.snc": "53b585755ada51c7ed07d2f69ad3ddb195b5a6e48a838fc98533910205dae3e3",
+      "SonicDX02.snc": "3249b31891872b96be539348c005abf812c76af5e3e7c5f198ee65de008943e4",
+      "SonicDX01.snc": "15ac61323e0508d72a279f0f648f4b5007793cc0c8fb42bce9d893f00c265cf6"
+    },
+    "screenshot_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427",
+    "frames": 1332,
+    "completed_frames": 1330,
+    "preview_actors": [
+      {
+        "retired": false,
+        "mode": 0,
+        "id": 0,
+        "player_index": 0,
+        "character": 0,
+        "status": 0,
+        "position": [
+          400,
+          0,
+          -20
+        ],
+        "rotation": [
+          0,
+          16384,
+          0
+        ],
+        "aim_y": 16384
+      },
+      {
+        "retired": false,
+        "mode": 0,
+        "id": 0,
+        "player_index": 1,
+        "character": 2,
+        "status": 0,
+        "position": [
+          400,
+          0,
+          -20
+        ],
+        "rotation": [
+          0,
+          16384,
+          0
+        ],
+        "aim_y": 0
+      },
+      {
+        "retired": false,
+        "mode": 0,
+        "id": 0,
+        "player_index": 2,
+        "character": 3,
+        "status": 0,
+        "position": [
+          400,
+          0,
+          -20
+        ],
+        "rotation": [
+          0,
+          16384,
+          0
+        ],
+        "aim_y": 0
+      },
+      {
+        "retired": false,
+        "mode": 0,
+        "id": 0,
+        "player_index": 3,
+        "character": 5,
+        "status": 0,
+        "position": [
+          400,
+          0,
+          -20
+        ],
+        "rotation": [
+          0,
+          16384,
+          0
+        ],
+        "aim_y": 0
+      },
+      {
+        "retired": false,
+        "mode": 0,
+        "id": 0,
+        "player_index": 4,
+        "character": 7,
+        "status": 0,
+        "position": [
+          400,
+          0,
+          -20
+        ],
+        "rotation": [
+          0,
+          16384,
+          0
+        ],
+        "aim_y": 0
+      },
+      {
+        "retired": false,
+        "mode": 1,
+        "id": 2,
+        "player_index": 5,
+        "character": 6,
+        "status": 1,
+        "position": [
+          400,
+          0,
+          -20
+        ],
+        "rotation": [
+          0,
+          16384,
+          0
+        ],
+        "aim_y": 0
+      },
+      {
+        "retired": false,
+        "mode": 0,
+        "id": 0,
+        "player_index": 6,
+        "character": 0,
+        "status": 0,
+        "position": [
+          400,
+          0,
+          -20
+        ],
+        "rotation": [
+          0,
+          17112,
+          0
+        ],
+        "aim_y": 0
+      }
+    ]
+  },
+  "baseline_normal_input": {
+    "exit_status": 1,
+    "stop": "native_gamma_join_vertices",
+    "frames": 1332,
+    "completed_frames": 1330,
+    "screenshot_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427"
+  },
+  "native_build": {
+    "command": "make -j2 -o build/native-controller-deps/include/SDL3/SDL.h build/sadx-native build/sadx-native-closure build/native-player-vertex-weld-probe.dylib build/player-vertex-weld-test build/native-gamma-vertex-weld-test build/native-gamma-motion-test build/native-gamma-weld-cursors-test build/native-gamma-effects-test build/animation-gamma-shared-binding-test",
+    "exit_status": 0,
+    "log_sha256": "dd8b7e971530ea64d0401c09191c7fb6037651cfc77ab97bac38dad0034f1f0b",
+    "dependency_reuse": "Local dereferenced public SDL3/libusb copy; no game source objects reused from Root. No unavailable-images export claim."
+  },
+  "force_load_closure": {
+    "command": "make -j2 -o build/native-controller-deps/include/SDL3/SDL.h native-closure",
+    "exit_status": 0,
+    "log_sha256": "258abc9758a72ba5c9bddfd171e1681b972046614067f25514738e51397aa024"
+  },
+  "static_checks": [
+    {
+      "command": [
+        "python3",
+        "tools/gate/check_readability.py"
+      ],
+      "exit_status": 0,
+      "stdout": "Readability: 546 files, {'hex_literals': 2368, 'address_identifiers': 1188, 'address_calls': 61, 'goto': 0, 'address_labels': 0, 'long_lines': 932, 'multi_statement_lines': 1536, 'large_decimal_literals': 231, 'emulator_arithmetic': 3103, 'address_comments': 1029}, 0 regressions\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "tools/gate/check_layers.py"
+      ],
+      "exit_status": 0,
+      "stdout": "12 layers, 0 known exceptions, 0 violations\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "tools/gate/check_global_owners.py"
+      ],
+      "exit_status": 0,
+      "stdout": "159059 owned bytes, 0 with more than one owner struct\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "tools/gate/check_constexpr_tables.py"
+      ],
+      "exit_status": 0,
+      "stdout": "Constexpr table reviews: 48 active, 52 historical, {'named_structure': 12, 'numeric_encoding': 19, 'open_migration': 11, 'open_review': 0, 'reference_metadata': 0, 'typed_content': 6}, retired {'migrated': 4, 'justified_removal': 0}, prior dispositions {'named_structure': 0, 'numeric_encoding': 0, 'open_migration': 3, 'open_review': 1, 'reference_metadata': 0, 'typed_content': 0}, unresolved retirements 0, 0 problems\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "tools/gate/check_provenance.py",
+        "--database",
+        "build/gamma-weld/proposed-symbols.json"
+      ],
+      "exit_status": 0,
+      "stdout": "Provenance: {'FUNCTION': 543, 'GLOBAL': 103, 'STUB': 102, 'PATCH': 2, 'DATA': 7}, 167492 legacy/annotated byte identities, 0 errors\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "tools/gate/check_provenance.py"
+      ],
+      "exit_status": 1,
+      "stdout": "src/player/player_vertex_weld.cpp:82: FUNCTION SONIC 0x439360 FindPlayerObjectNode absent from symbol database (or wrong kind)\nProvenance: {'FUNCTION': 543, 'GLOBAL': 103, 'STUB': 102, 'PATCH': 2, 'DATA': 7}, 167492 legacy/annotated byte identities, 1 errors\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "tools/gate/check_judge.py"
+      ],
+      "exit_status": 1,
+      "stdout": "JUDGE: changed judge input: Makefile\nJUDGE: missing judge input: reference/oracle-reports/air_acceleration.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/axis_projection.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/collision_shapes.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/floor_angles.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/frame_completion.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/game_frame_control.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/game_logic.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/game_loop.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/game_mode.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/game_scene_logic.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/ground_acceleration.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/ninja_queue_consumer.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/ninja_queue_lifecycle.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/ninja_render.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/ninja_sprite.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/ninja_sprite_display.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/ninja_sprite_queue.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/ninja_texture_selection.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/player_animation.constants.bin\nJUDGE: missing judge input: reference/oracle-reports/player_auxiliary_effect.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/player_contact_attributes.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/player_contact_initializer.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/player_contact_response.constants.bin\nJUDGE: missing judge input: reference/oracle-reports/player_coordinates.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/player_direction_reset.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/player_heading.angle-cases.bin\nJUDGE: missing judge input: reference/oracle-reports/player_heading.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/player_input.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/player_input_producer.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/player_mesh_math.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/player_mesh_query.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/player_mesh_registry.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/player_movement.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/player_path.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/player_plane.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/player_position.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/player_reaction.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/player_rotation.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/player_scene.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/player_scene_helpers.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/player_scene_position.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/player_speed.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/player_startup.cases.bin\nJUDGE: unmanifested judge input: reference/oracle-reports/player_vertex_weld.json\nJUDGE: missing judge input: reference/oracle-reports/projection_angle.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/scene_input_producer.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/scene_mesh_bounds.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/sonic_actions.constants.bin\nJUDGE: missing judge input: reference/oracle-reports/sonic_player.constants.bin\nJUDGE: missing judge input: reference/oracle-reports/sonic_player.dispatch.bin\nJUDGE: missing judge input: reference/oracle-reports/speedrun_limiter.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/task_lifecycle.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/task_work.cases.bin\nJUDGE: missing judge input: reference/oracle-reports/x87_memory.cases.bin\nJUDGE: unmanifested judge input: tests/probes/native_player_vertex_weld_probe.cpp\nJUDGE: unmanifested judge input: tests/probes/vertex_weld_fixture.hpp\nJUDGE: changed judge input: tests/unit/manifest.tsv\nJUDGE: changed judge input: tests/unit/native_gamma_motion.mm\nJUDGE: unmanifested judge input: tests/unit/native_gamma_vertex_weld.mm\nJUDGE: unmanifested judge input: tests/unit/player_vertex_weld.cpp\nJUDGE: unmanifested judge input: tools/oracles/mutate_player_vertex_weld.py\nJUDGE: unmanifested judge input: tools/oracles/mutate_player_vertex_weld_binding.py\nJUDGE: unmanifested judge input: tools/oracles/verify_original_player_vertex_weld.py\nJudge manifest: 1353 files, 64 violations\n",
+      "stderr": ""
+    }
+  ],
+  "profile": {
+    "summary": {
+      "patches": 618,
+      "active_patches": 121,
+      "active_unhandled_patches": 79,
+      "reports": 1,
+      "declared_exe_ranges": 3,
+      "unhandled_overlaps": 0,
+      "handled_overlaps": 0,
+      "undetermined_overlaps": 0,
+      "reports_without_addressed_ranges": []
+    },
+    "unhandled_overlaps": [],
+    "handled_overlaps": [],
+    "undetermined_overlaps": [],
+    "report_ranges": {
+      "player_vertex_weld.json": {
+        "exe_ranges": 3,
+        "dll_ranges_skipped": 0,
+        "opaque_range_hashes": [],
+        "unparsed_keys": []
+      }
+    }
+  },
+  "arithmetic": "Only integer/pointer decisions and raw 32-bit copies; no new floating-point operations or ExactFloat.",
+  "attempts": [
+    "First synthetic model payload was 40 instead of the existing schema 44 bytes; fixture decode rejected it before source comparison. Corrected only the new fixture.",
+    "The old motion witness fails its old stop-name assertion against the new source. Only that diagnostic string is adapted; all 11144 observation bytes remain identical.",
+    "First alias fault had a TaskWorkHandle/PlayerHandle compile mismatch. Corrected the fault to resolve the captured alias through the canonical registry; final fault compiles and is caught.",
+    "Source review exposed eager model reads. Appended model/normal cases without removing older inputs; the old source has 22 mismatches. cba33e6b fixes the source read timing.",
+    "The new allocator receipt misrepresented exact-full free-list sentinel as null, causing only two word-10 mismatches. Corrected from the unchanged existing task_work test/report contract. No reserved Task/reset execution.",
+    "An attempted check-native-closure target does not exist; the correct native-closure target and force-load link pass."
+  ],
+  "limits": [
+    "Active mode 1 remains stopped at native_gamma_join_vertices_CalcMMMatrix; its source argument selection, traversal, matrices, welding and attachment outputs are unqualified.",
+    "Failure-prefix state matches; exact exception instruction addresses are not compared. Allocation receipts do not independently re-prove the allocator.",
+    "Holdout and dev preserve the earlier cohorts and append width, null-model and null-normal cases. Observer schema 2 adds requested allocation extent and free-list identity.",
+    "No full gate, unavailable-binaries source export, reserved Task/reset campaign, push or Main modification. Root owns review, registration, admission and full gate.",
+    "Existing numeric algorithms/verifiers/FP partials are reused through exact unchanged hashes in PRESERVATION.json; broad original comparisons were not rerun.",
+    "Same outgoing-title image, no completed actor frame or N3b claim."
+  ],
+  "pending_registration": "Canonical provenance has one new helper name pending. Judge check has 53 retained absent inputs, 3 changed old protected paths and 8 new paths; no inherited entry was removed.",
+  "judge_commit": "b93b54cd"
+}

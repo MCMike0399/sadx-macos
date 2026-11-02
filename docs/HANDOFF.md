@@ -956,3 +956,12 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Main has 1,404 protected paths with zero drift; no inherited protection was removed. The counterpart catalog preserves the reference fixture and rejects additional owners; warning debt remains open.
 * Normal input still stops at Gamma welding at frame 1332, exit 1, with identical title image. Dynamic alternate-model behavior, models/common tails and N3b remain open; last full gate/cold source is e1946df8.
 * sonic-editor-root-integration.json records this admission. Gamma's qualified weld initialization/restoration prefix is now awaiting independent review; active matrix-based welding remains explicit.
+
+### 2026-11-02 — Gamma weld initialization/restoration prefix admitted
+
+* Reviews 67687b4b/d5e68301 accept cdf05b41 within its declared prefix. Main source 993baed6 preserves passed-player/current-alias behavior, canonical geometry and arena-backed backup lifetimes. Active mode 1 still stops at CalcMMMatrix before table consumption.
+* Actual Main normal input reaches native_gamma_update_laser_targets at frame 1332, exit 1, with identical outgoing-title image. No complete welding, actor frame or N3b claim.
+* Native app/force-load, four generated caller/owner commands and make check pass. The 1,200-case original comparison has zero mismatches, including 248 failure prefixes. Original traversal of the real 589-object graph matches all five rows and mode publication.
+* Source/judge separation is retained. Makefile and unit registrations were appended around the current Sonic additions and corrected argument rows. The evidenced helper symbol is registered; all 1,412 protections are present, with none removed.
+* gamma-weld-root-integration.json records exact checks and limits. Accepted holdout/mutant evidence is reused; allocator correctness, exact fault PCs and arbitrary alias mutations remain unqualified. Last full gate/cold source remains e1946df8.
+* Sonic model initialization continues independently. Next required Gamma work includes laser targets, model matrices and the remaining common tail, followed by an integrated actor-frame check.

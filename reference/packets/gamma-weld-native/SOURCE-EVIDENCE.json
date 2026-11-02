@@ -1,0 +1,144 @@
+{
+  "base": "acdb5a04b06c642ebb0f9f7ac836da5fcd50d5ec",
+  "fresh_owned_ghidra": {
+    "heap": "2G",
+    "provider_closed": true,
+    "queries": [
+      {
+        "path": "reference/inventory-raw/gamma-weld-recovery/weld-calculate-model-matrices.json",
+        "sha256": "0159105fe96a526cd37d4e8425653a0e3d4447d96626ff922669820616a4a23f",
+        "evidence_id": "ev_bcbe9ba3649c6dd1bac7b361bd630715b19f12c16f18fc78cbc1757d5e1950a1",
+        "parameters": {
+          "procedure": "0x4b81f0"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x4b81f0",
+              "end": "0x4b82c1"
+            }
+          ],
+          "total_bytes": 210,
+          "span_bytes": 210,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "subject_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74"
+      },
+      {
+        "path": "reference/inventory-raw/gamma-weld-recovery/weld-get-model-matrix.json",
+        "sha256": "2e1011e3558469360e73932b017cfeebf807260f6e9c9999ab7a7f202d806ea5",
+        "evidence_id": "ev_a99c3d88d77a0c2d001c2d8aac4412bc01b495e4e0a32cc8d102a929990a1f0c",
+        "parameters": {
+          "procedure": "0x4b82d0"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x4b82d0",
+              "end": "0x4b82f6"
+            }
+          ],
+          "total_bytes": 39,
+          "span_bytes": 39,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "subject_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74"
+      },
+      {
+        "path": "reference/inventory-raw/gamma-weld-recovery/weld-model-matrix-producer.json",
+        "sha256": "871322adfdd528eb4bfe5530e4ee4f133f836e70552d303fbe790a2921ee5a4f",
+        "evidence_id": "ev_4140e6ca59c957b7fd43db15ef4d8bb17d3b8341cd9495500334a549ae71476f",
+        "parameters": {
+          "procedure": "0x4b7d00"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x4b7d00",
+              "end": "0x4b81e5"
+            }
+          ],
+          "total_bytes": 1254,
+          "span_bytes": 1254,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "subject_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74"
+      },
+      {
+        "path": "reference/inventory-raw/gamma-weld-recovery/weld-node-index-helper.json",
+        "sha256": "f459840dfdae33584d8590e9d04815c7f5d51e404e3ce0003f7164acf78a9697",
+        "evidence_id": "ev_423fa60c0bf846a64894123ce729936e20a8c155001eec4fac46e47b970a4d53",
+        "parameters": {
+          "procedure": "0x439360"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x439360",
+              "end": "0x4393b1"
+            }
+          ],
+          "total_bytes": 82,
+          "span_bytes": 82,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "subject_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74"
+      },
+      {
+        "path": "reference/inventory-raw/gamma-weld-recovery/weld-node-index.json",
+        "sha256": "f4e74e570825776467c78baf33509ee0cef1b005284ae683a27aab1d34e99f48",
+        "evidence_id": "ev_be5d176533e7f96a0f0e282782616acd0ab1fcbc1e5b055e9090ce124966bb1a",
+        "parameters": {
+          "procedure": "0x439f60"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x439f60",
+              "end": "0x439fb7"
+            }
+          ],
+          "total_bytes": 88,
+          "span_bytes": 88,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "subject_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74"
+      }
+    ]
+  },
+  "cached_join_dossier": {
+    "path": "/Users/burbujamc/Developer/sadx-wt-normal-uv-strip/reference/inventory-raw/gamma-weld-cursor-recovery-20261026/gamma-next-43fa90.json",
+    "local_copy": "reference/inventory-raw/gamma-weld-native-cached/join-vertices.json",
+    "sha256": "2dec8a0c3418bb6944416f2943ec74d369652638834915e7b3676e55f42e4652",
+    "evidence_id": "ev_ebda3d9ab7749eb17fae5a4747cf23de66cd4600597882eb53209b2b361adecb"
+  },
+  "implemented_scope": [
+    "PJoinVertexes initialization and backup restoration only",
+    "Complete GetNodeIndex and its recursive helper"
+  ],
+  "unimplemented_scope": [
+    "Active PJoinVertexes branch and geometric welding",
+    "CalcMMMatrix/GetMMMatrix source state and motion traversal",
+    "Six attachment-vector outputs"
+  ],
+  "notes": [
+    "No matrices, animation samples or normals were fabricated.",
+    "Native binding consumes the passed initialized Player and preserves the entry-captured null alias.",
+    "First normal-input invocation takes initialization and reaches GammaUpdateLaserTargets."
+  ]
+}

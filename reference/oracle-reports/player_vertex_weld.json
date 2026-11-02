@@ -1,0 +1,62 @@
+{
+ "slug": "player_vertex_weld",
+ "cases": 1200,
+ "seed": 1196903492,
+ "original_development_cohort": {
+  "cases": 1024,
+  "stream_sha256": [
+   "a45f646455b27f5c53591dd70fb36506ee19f2ffe0387f48ef37b7eb2a96bfff",
+   "a45f646455b27f5c53591dd70fb36506ee19f2ffe0387f48ef37b7eb2a96bfff"
+  ],
+  "inputs_sha256": "e024fb197533f785fd7c3ff817df05c4b9547080e0e08931bea0108bdad49061"
+ },
+ "all_inputs_sha256": "ef768f9131ba22d587a1779f096952724ee01d0aa34be3dd6eb8e0ac72bad1f9",
+ "observer_schema": 2,
+ "passed": true,
+ "mismatch_count": 0,
+ "values_match": true,
+ "failure_prefix_cases": 248,
+ "active_matrix_boundary_cases": 170,
+ "allocator_receipts": 258,
+ "source_stream_sha256": "9efde391d8a56f18f3127a59ffda78f15c1427e6592ec3f91482ced669557b4c",
+ "native_stream_sha256": "9efde391d8a56f18f3127a59ffda78f15c1427e6592ec3f91482ced669557b4c",
+ "node_stream_sha256": "15c38860578831073a023215aee0d73304c9ddd4121c479b20dc06dd47c745f4",
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "exe_ranges": [
+  [
+   "0x43fa90",
+   "0x440375"
+  ],
+  [
+   "0x439f60",
+   "0x439fb8"
+  ],
+  [
+   "0x439360",
+   "0x4393b2"
+  ]
+ ],
+ "original_ranges_sha256": {
+  "43fa90-440375": "573e7d4c5928c572594462f57e59929b5a2dbef946146ab2b2a3eea46e255393",
+  "439f60-439fb8": "7fad57af897c3bec580f7da3981465048c824fb571fad04cb67a5f5d685893ad",
+  "439360-4393b2": "fb6d1e7e8d49cf9990a45e3d0c95d184802dd6c5e97b40728c526b035cc06253"
+ },
+ "probe_sha256": "e76926243b27b3081e0d242fc85dd511d2b95475c369568512b5d3a9bd76eb32",
+ "mismatches": [],
+ "imported_gamma": null,
+ "limits": [
+  "Initialization and backup restoration only; active branch stops at CalcMMMatrix.",
+  "No active deformation or attachment-vector or matrix-buffer claim.",
+  "MAlloc/FreeMemory are ordered receipts; actual native arena owns all backups.",
+  "Receipt counts are source diagnostics; native handles, bytes and release lifetime compare.",
+  "One invocation per case; native unit separately exercises repeated cleanup.",
+  "All 48 scene words, both backup images, depths and owner identities compared.",
+  "Original x86 instructions execute; node flags and child/sibling order are varied."
+ ],
+ "tracked_summary": {
+  "full_sha256": "c98db0d2d99aa9bc1aa6c610f92f4d32bc40351290951a098451d2e7a844a95f",
+  "full_bytes": 2263,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

@@ -1,0 +1,22 @@
+{
+  "source_commit": "cba33e6b",
+  "source_unchanged_for_judge_fix": true,
+  "defect": "New receipt helper dropped the terminal sentinel after an exact-full allocation.",
+  "failed_report_sha256": "75c8ab30644e1fb8c6c123bfb740383e5f54dcd035aa6b4c246a9d17f79ba6ce",
+  "failed_cases": [
+    250,
+    323
+  ],
+  "failed_words": [
+    10
+  ],
+  "actual": "free_head offset 16777216; encoded observation 16777217",
+  "incorrect_mock": "null; encoded observation 0",
+  "evidence": "Unchanged tests/unit/task_work.cpp:31-33 and reference/oracle-reports/task_work.json; hashes retained in LAZY-READ-CORRECTION.json. Read only, not rerun.",
+  "correction": "self.free_head = self.next, including next == ARENA",
+  "result": {
+    "dev_cases": 1200,
+    "holdout_cases": 2224,
+    "mismatches": 0
+  }
+}

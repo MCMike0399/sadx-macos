@@ -1,0 +1,81 @@
+{
+  "source_commit": "cba33e6b",
+  "inherited_entries": 1398,
+  "manifest_sha256": "601133d4f76f9fa802e1e89cbea27867f59b6c409a738082d7d7e95d8dc5856b",
+  "manifest_unchanged": true,
+  "delta": [
+    {
+      "path": "Makefile",
+      "kind": "changed existing protection",
+      "old_sha256": "3134d52d4474ddd56f93e8dd1e855badc09012a0c8476851a2cf2cf09df04e12",
+      "proposed_sha256": "f21f1361a739ad4bb62c81ae982f151eb2c0d82c816adfda1b1eac21df7a4f21"
+    },
+    {
+      "path": "tests/unit/manifest.tsv",
+      "kind": "changed existing protection",
+      "old_sha256": "ebd227c6a443c70dd6258b12bf92a7a0ee2ee7244a0da2c014d803101e692c7d",
+      "proposed_sha256": "3ad7a37387dda4753a0b6198192eebf7ee2fe4de79721e7cc6474245d622cf3e"
+    },
+    {
+      "path": "tests/unit/native_gamma_motion.mm",
+      "kind": "changed existing protection",
+      "old_sha256": "649e7cd738f61e1b71d3fea70e97ff24d7037dd7d5ca11d15895ed398ceccaf3",
+      "proposed_sha256": "842efd3f2c845916dbb2591150648f7bf48c8a0683f596eab790c83de2f46e6c"
+    },
+    {
+      "path": "tests/unit/player_vertex_weld.cpp",
+      "kind": "addition",
+      "old_sha256": null,
+      "proposed_sha256": "404efb90aa2d8f7b3c413ba7cf35a4db877276b39b274d000722a3a044ec8278"
+    },
+    {
+      "path": "tests/unit/native_gamma_vertex_weld.mm",
+      "kind": "addition",
+      "old_sha256": null,
+      "proposed_sha256": "7d775345a1319785aec7068d3fb3be977e09c9f20ca2c87b4e35a304d0858097"
+    },
+    {
+      "path": "tests/probes/native_player_vertex_weld_probe.cpp",
+      "kind": "addition",
+      "old_sha256": null,
+      "proposed_sha256": "866b64d70b520158aaae3c853010d71a89f912077b811f1fbeec7e2c187e7642"
+    },
+    {
+      "path": "tests/probes/vertex_weld_fixture.hpp",
+      "kind": "addition",
+      "old_sha256": null,
+      "proposed_sha256": "3860345f6a6b283f7f46c6d6a462409459548abd695016127f99835c0a3d85f4"
+    },
+    {
+      "path": "tools/oracles/verify_original_player_vertex_weld.py",
+      "kind": "addition",
+      "old_sha256": null,
+      "proposed_sha256": "8749141a3312bff8e2cb9f5e7412e1fab1d8996db1b5e1fe7a3e3a7c4ecb1132"
+    },
+    {
+      "path": "tools/oracles/mutate_player_vertex_weld.py",
+      "kind": "addition",
+      "old_sha256": null,
+      "proposed_sha256": "970a7b9f1552d47b810b26dff817ee8c3c8e67f51af6fa5a221e2e3fd04dde9f"
+    },
+    {
+      "path": "tools/oracles/mutate_player_vertex_weld_binding.py",
+      "kind": "addition",
+      "old_sha256": null,
+      "proposed_sha256": "2379605392373fe25dceb0e37b8f394f70b1f9044b323ed0b4d9adcd32981bca"
+    },
+    {
+      "path": "reference/oracle-reports/player_vertex_weld.json",
+      "kind": "addition",
+      "old_sha256": null,
+      "proposed_sha256": "bd9e9113c264181f790b524730af9ebe1fb0e98658e51a070e5863523265f186"
+    }
+  ],
+  "root_merge_requirements": [
+    "Retain every current Main protected identity, including all 53 ignored inputs absent from this worktree. Do not copy this worker manifest or refresh by omission.",
+    "Main already corrected two TSV rows. Preserve those corrections and append only the two new registrations. Recompute the final merged Makefile/TSV hashes on Main.",
+    "Add symbol-proposals.tsv through the canonical symbol inventory; do not use the temporary proposed-symbols.json as the real database.",
+    "Classify the new player_vertex_weld module as a recovered initialization/restore prefix with active processing still open; reconcile touched existing module fingerprints.",
+    "Source, judge and prose commits remain separate; Root independently reviews and runs the admission gate."
+  ]
+}

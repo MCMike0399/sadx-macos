@@ -1,0 +1,17 @@
+{
+  "status": "Executed: 1200 dev and 2224 holdout pass, real caller/scene consumers pass, seven core and four caller/reentry faults caught.",
+  "test": "tests/unit/player_vertex_weld.cpp",
+  "scope": [
+    "Four distinct authoritative mutable arrays; all 24 affected backup words observed with nonzero components.",
+    "Actual arena backup changed after initialization; restoration must consume it.",
+    "Scene array identity and entire vector contents checked, including untouched words.",
+    "Real handle release and second cleanup checked."
+  ],
+  "pending": [
+    "Root symbol/inventory/judge admission and full gate",
+    "Active matrix traversal, welding and attachment production"
+  ],
+  "inherited_manifest_sha256": "601133d4f76f9fa802e1e89cbea27867f59b6c409a738082d7d7e95d8dc5856b",
+  "manifest_byte_identical_to_base": true,
+  "protection_policy": "No refresh by omission; retain all 1398 inherited protections including 53 absent ignored inputs."
+}
