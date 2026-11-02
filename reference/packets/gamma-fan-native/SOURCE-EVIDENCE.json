@@ -61,5 +61,76 @@
   "limits": [
     "Decompiler omits x87 arguments into _ftol; complete assembly and original instruction judge provide those expressions.",
     "No new model/geometry/material/particle processing; display remains a loud boundary."
-  ]
+  ],
+  "constants": [
+    {
+      "address": "0x7dcb10",
+      "bytes": 4,
+      "encoding": "0000803f",
+      "value": 1.0
+    },
+    {
+      "address": "0x7dcb2c",
+      "bytes": 4,
+      "encoding": "00000000",
+      "value": 0.0
+    },
+    {
+      "address": "0x7e6c48",
+      "bytes": 4,
+      "encoding": "00004841",
+      "value": 12.5
+    },
+    {
+      "address": "0x7dccd0",
+      "bytes": 8,
+      "encoding": "000000000000f040",
+      "value": 65536.0
+    },
+    {
+      "address": "0x7e0998",
+      "bytes": 8,
+      "encoding": "176cc1166cc166bf",
+      "value": -0.002777777777777778
+    },
+    {
+      "address": "0x7dcb34",
+      "bytes": 4,
+      "encoding": "00002041",
+      "value": 10.0
+    },
+    {
+      "address": "0x7df1a0",
+      "bytes": 8,
+      "encoding": "176cc1166cc1663f",
+      "value": 0.002777777777777778
+    }
+  ],
+  "fields": {
+    "playerwk.spd.x": {
+      "offset": 56,
+      "width": 4,
+      "owner": "Player.physics.motion.speed.x"
+    },
+    "playerwk.spd.z": {
+      "offset": 64,
+      "width": 4,
+      "owner": "Player.physics.motion.speed.z"
+    },
+    "E102WK.fan_yofs": {
+      "offset": 24,
+      "width": 4,
+      "type": "float"
+    },
+    "E102WK.fan_ydif_ang": {
+      "offset": 28,
+      "width": 4,
+      "type": "int32 phase word, wrap arithmetic"
+    },
+    "E102WK.fan_ang[2]": {
+      "offset": 40,
+      "width": 4,
+      "type": "int32 signed tilt"
+    }
+  }
 }

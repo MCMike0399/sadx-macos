@@ -1,0 +1,13 @@
+--- a/Makefile
++++ b/Makefile
+@@ -658,0 +659,6 @@
++
++# Gamma fan source body and real common-tail binding.
++build/native-gamma-fan-probe.dylib: tests/probes/native_gamma_fan_probe.cpp src/player/gamma_fan.cpp src/player/gamma_fan.hpp build/libsadx-native.a
++	$(CXX) $(CXXFLAGS) $(INCLUDES) -dynamiclib $< src/player/gamma_fan.cpp build/libsadx-native.a -o $@
++build/native-gamma-fan-test: tests/unit/native_gamma_fan.mm src/apps/native_gamma_actor_assets.hpp src/runtime/native_player_system.hpp src/runtime/native_display.hpp build/libsadx-native.a $(NATIVE_PLATFORM_OBJECTS)
++	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) $< $(NATIVE_PLATFORM_OBJECTS) build/libsadx-native.a $(MAC_FRAMEWORKS) -o $@
+--- a/tests/unit/manifest.tsv
++++ b/tests/unit/manifest.tsv
+@@ -345,0 +346 @@
++native-gamma-fan	game/imported

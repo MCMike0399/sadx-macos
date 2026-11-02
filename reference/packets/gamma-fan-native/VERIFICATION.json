@@ -1,0 +1,176 @@
+{
+  "base": "bdb61450",
+  "source_commit": "c8967938",
+  "development": {
+    "cases": 909,
+    "failure_prefixes": 609,
+    "value_mismatches": 0,
+    "individual_fp_partials": 733,
+    "strict_exit_status": 2,
+    "seed": 4992656,
+    "report_path": "build/oracles/gamma_fan.json",
+    "report_sha256": "19325d294593c71e33d544b84e29f918f7ce95a00cb2cb58766f89160d4e1484",
+    "partial_identity_sha256": "d294e1ac7d6e86ab84f6fb81a03cebab3e5dc47da9e9b41089dadfcc8f33e0a0",
+    "original_stream_sha256": "a3da08035a4531c8c939c27a76d27fc9697f961af579727b8105a24d2d8e8a13",
+    "native_stream_sha256": "55012a1c1f35fa4e505a2bbfe860f6f99fe6d0366200addcade01e259a908b43"
+  },
+  "final_holdout": {
+    "cases": 4493,
+    "failure_prefixes": 3781,
+    "value_mismatches": 0,
+    "individual_fp_partials": 3434,
+    "strict_exit_status": 2,
+    "seed": 2655595536,
+    "report_path": "build/oracles/gamma_fan_holdout.json",
+    "report_sha256": "7c87e5305eae544489651e6fbed940f421d608e1571f354abc36a5e8fdffea2c",
+    "partial_identity_sha256": "ed49fa83543e89454303bea819ea8b09e34e29ccb2b9f7e2b231e96faf10589e",
+    "original_stream_sha256": "e546135c5efc531e03be688400cd7a3583df7b413826825cd84226028f118adf",
+    "native_stream_sha256": "80bddc9d2ba7e8317ff1a9377b2ee874c55e79cb21689e6b53809cce81ff5ce4"
+  },
+  "actual_caller": {
+    "source": "tests/unit/native_gamma_fan.mm",
+    "exit_status": 0,
+    "checks": [
+      "Real PInitialize/resources/scene, full initial common tail and genuine display stop.",
+      "Passed initialized Player, captured null current-player alias, canonical registry/task/extra allocation.",
+      "Nonzero speeds, 145 extra words, all 2048 model-buffer words and all 80 Gamma destination words.",
+      "Foreign current_extra unchanged; repeated phase accumulation and live speed reload after store observer.",
+      "Height-store failure keeps completed phase and prior height/tilt."
+    ]
+  },
+  "original_runtime": "INITIALIZATION.json",
+  "original_runtime_checker": "verify_initialization.py",
+  "compiled_core_faults": {
+    "count": 7,
+    "evidence": "FAULTS.json"
+  },
+  "compiled_binding_faults": {
+    "count": 4,
+    "evidence": "BINDING-FAULTS.json"
+  },
+  "builds": {
+    "final-build-bound-app": 0,
+    "final-build-probe": 0,
+    "build-original-witness": 0,
+    "build-existing-callers": 0,
+    "build-root-judge-recipes": 0
+  },
+  "inherited_callers": {
+    "native-gamma-binding": 0,
+    "native-gamma-effects": 0,
+    "native-gamma-motion": 0,
+    "native-gamma-vertex-weld": 0,
+    "native-gamma-input-buffer": 0,
+    "sonic-animation-assets": 0,
+    "sonic-model-native": 0,
+    "model-motion-matrices": 0
+  },
+  "inherited_oracles": "REGRESSIONS.json",
+  "preservation": "PRESERVATION.json",
+  "actual_normal_input": {
+    "exit_status": 1,
+    "frames": 1332,
+    "completed_frames": 1330,
+    "boundary": "native_gamma_display",
+    "game_mode": 12,
+    "game_state": 21,
+    "sprite_registry_count": 1,
+    "state_path": "build/gamma-fan-native/final-state.json",
+    "state_sha256": "338fdeda62425687f21094103526fe84dcedcb240a3fe383bd1d8fef256b1ed6",
+    "capture_path": "build/gamma-fan-native/final.ppm",
+    "capture_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427",
+    "baseline_capture_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427",
+    "binary_sha256": "a1e2d924026bfc023dbcd61a1f7798c51246947ed3c37dba9e0f23551c2829bf",
+    "capture_inspected": true,
+    "reference_frame": 1334
+  },
+  "imported_matrix_regression": {
+    "scenarios": 3,
+    "compared_rows": 774,
+    "failures": [],
+    "fp_partials": [
+      {
+        "scenario": "stand",
+        "row": 0,
+        "field": 4,
+        "source": 0,
+        "native": 32
+      },
+      {
+        "scenario": "idle_pose_a",
+        "row": 0,
+        "field": 4,
+        "source": 0,
+        "native": 32
+      },
+      {
+        "scenario": "idle_pose_b",
+        "row": 0,
+        "field": 4,
+        "source": 0,
+        "native": 32
+      }
+    ],
+    "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+    "values_match": true,
+    "flag_mismatches": 3,
+    "passed": false,
+    "dll_sha256": "76bbaa1b6aa23872648e6f1f39642e4262403e372b4c4b32f20f0ec89780c2a5",
+    "observation_sha256": "5ba87d6d33f7613d561ddf913fd77e48dd45ec63b334ed2465b3df56c560e272",
+    "limits": [
+      "Original allocator policy supplied by deterministic fixture.",
+      "Actual actions, generated keys and live pose edits; controlled post-initialization callers.",
+      "No first full-route GetMMMatrix state, active welding, attachments, actor frame or N3b claim."
+    ]
+  },
+  "root_wiring": "ROOT-WIRING.patch",
+  "root_judge_registration": "ROOT-JUDGE.patch",
+  "root_patch_verification": "ROOT-FIXTURE.json",
+  "judge_proposal": "JUDGE-PROPOSAL.json",
+  "max_make_jobs": 2,
+  "limits": [
+    "Strict FP fidelity remains partial; complete lists/streams remain in ignored durable build/oracles.",
+    "Gamma selection and animation status summaries emit counts only; no individual-identity claim is added.",
+    "Root owns Display/source-list wiring, finite registration, global inventories, independent review and admission.",
+    "Active PJoin still stops before unqualified CalcMMMatrix arguments/deformation/attachments.",
+    "No display/controller, completed actor frame, N3b, full gate or cold-source qualification."
+  ],
+  "qualification_corrections": [
+    {
+      "kind": "new fixture",
+      "fact": "Initial mathematical sine expectation 0x3e47c5c2 was wrong. Pinned table and original runtime prove 0x3e47c5ac. Source values already matched; no existing judge changed."
+    },
+    {
+      "kind": "fault compile",
+      "fact": "First wrong-player fault failed unused-parameter Werror. Fault-only compilation now permits unused parameters; all four compile and fail caller assertions. Compile failure is not counted."
+    },
+    {
+      "kind": "missing local input",
+      "fact": "Sonic-model judge initially lacked CHRMODELS_orig.dll; a read-only local alias resolved it, and only remaining judges reran."
+    },
+    {
+      "kind": "distinct development cohorts",
+      "fact": "Initial 903 cases had 744 partials. Six new pointer-wrap/null cases also consume RNG draws before random inputs. Final 909 cases have 733 partials. This is not an FP fidelity improvement."
+    }
+  ],
+  "static_checks": {
+    "layers": 0,
+    "owners": 0,
+    "provenance": 0,
+    "readability": 0,
+    "constexpr": 0,
+    "profile": 0,
+    "diff-check": 0,
+    "committed_diff": 0
+  },
+  "canonical_judge_check": {
+    "exit_status": 1,
+    "violations": 62,
+    "inherited_absences": 53,
+    "new_unregistered_inputs": 9,
+    "inherited_present_drift": 0,
+    "manifest_unchanged": true
+  },
+  "root_recipe_caller_exit_status": 0,
+  "root_judge_patch_sha256": "b9207a248505183aff2b64d73a5970da8dc7cf684fddb15db6120d1488b8a44c"
+}

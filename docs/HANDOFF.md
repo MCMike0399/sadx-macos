@@ -1001,3 +1001,13 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Native app/force-load, actual owner/getter/rotation fixture, imported/generated motion program and make check pass. All 1,223 core observations and 957 partial identities match the candidate; 774 imported rows retain zero value differences and three partials, strict exit 2.
 * Matrix annotations and symbol widths consistently cover 64 bytes. Historical no-runtime-witness text is identified as an earlier checkpoint. Warning evidence is rebound without retiring debt; all 1,441 protections remain.
 * model-matrices-root-integration.json retains focused proof. Last full gate/cold source remains e9bf38a8; next coherent qualification follows remaining initialization work.
+
+### 2026-11-02 — Gamma fan native candidate reaches display
+
+* Packet gamma-fan-native, base bdb61450, source c8967938 recovers the complete 178-byte fan body. It borrows the passed initialized Player and original E102WK arena words; the captured current-player alias stays null.
+* Original first call at frame 1334 proves zero speed/fan input and returns phase 2048, height 0x3e47c5ac and zero tilt. Full extra words, matrix buffers/destinations, weld scratch and stack are retained; original inputs are unchanged.
+* Private exact Root wiring advances normal input to native_gamma_display at frame 1332, exit 1, completed 1330. The inspected outgoing-title capture is unchanged; no completed actor frame or N3b claim.
+* Development 909 and final holdout 4,493 cases have zero value mismatches, with 733 and 3,434 individual FP partials, strict exit 2. Seven compiled core and four compiled binding faults are caught.
+* App/force-load, new real caller, eight inherited caller programs and static checks pass at -j2. Eleven unchanged judges retain numeric results and all emitted partial identities; imported matrices retain 774 rows and three partials.
+* Root owns the minimal Display/source-list hunks, test registration, inventory and admission. All 1,441 protections remain, including 53 local absences; the finite proposal adds nine paths. No manifest refresh or full gate was run.
+* PACKET.md and VERIFICATION.json retain source, owner, caller, commands and limits. Active PJoin arguments/deformation/attachments and display/controller bodies remain explicit boundaries; shared Session/PlayerSystem fields and later Gamma code are unchanged.
