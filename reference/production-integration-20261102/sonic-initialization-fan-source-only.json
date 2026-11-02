@@ -1,0 +1,63 @@
+{
+  "revision": "709f274447895b9e53a377d9b158bf8a87830a45",
+  "source_directory": "/Users/burbujamc/Developer/sadx-macos/build/sonic-fan-source-only-xe7zt8xw/source",
+  "qualification_directory": "/Users/burbujamc/Developer/sadx-macos/build/sonic-fan-source-only-xe7zt8xw/qualification",
+  "archive_sha256": "efe4d72175b44d6b0990876412a715f2dc8e52df44ab866f67b340662398528a",
+  "initial_original_binaries": [],
+  "initial_prebuilt_game_objects": [],
+  "reused_dependency": "Copied pinned public SDL3/libusb headers/libraries only; all maintained game code rebuilt.",
+  "command": [
+    "caffeinate",
+    "-dims",
+    "make",
+    "-C",
+    "/Users/burbujamc/Developer/sadx-macos/build/sonic-fan-source-only-xe7zt8xw/source",
+    "-j2",
+    "-o",
+    "build/native-controller-deps/include/SDL3/SDL.h",
+    "build/sadx-native",
+    "native-closure"
+  ],
+  "build_exit_status": 0,
+  "build_seconds": 42.23397994041443,
+  "build_log_sha256": "67e9a9a08e78c017584ca9a446ba760f9e269af0d6d800e5f7e8c0264a40adf9",
+  "asset_pack_sha256": "c414e173bf4bf9f803f24d61642e233ff9650fe9276d70da2ac3939fee2b5d7f",
+  "save_input": {
+    "SONICADVENTURE_DX_CHAOGARDEN.snc": "53b585755ada51c7ed07d2f69ad3ddb195b5a6e48a838fc98533910205dae3e3",
+    "SonicDX02.snc": "3249b31891872b96be539348c005abf812c76af5e3e7c5f198ee65de008943e4",
+    "SonicDX01.snc": "15ac61323e0508d72a279f0f648f4b5007793cc0c8fb42bce9d893f00c265cf6"
+  },
+  "app_command": [
+    "/Users/burbujamc/Developer/sadx-macos/build/sonic-fan-source-only-xe7zt8xw/source/build/sadx-native",
+    "--assets",
+    "/Users/burbujamc/Developer/sadx-macos/game/imported",
+    "--controller-library",
+    "/Users/burbujamc/Developer/sadx-macos/build/sonic-fan-source-only-xe7zt8xw/source/build/native-controller-deps/lib/libSDL3.0.dylib",
+    "--offscreen",
+    "--paced",
+    "--exit-after",
+    "1550",
+    "--save-directory",
+    "/Users/burbujamc/Developer/sadx-macos/build/sonic-fan-source-only-xe7zt8xw/qualification/savedata",
+    "--key-events",
+    "500:13:down,501:13:up,750:13:down,751:13:up,950:13:down,951:13:up,1050:13:down,1051:13:up,1300:13:down,1301:13:up",
+    "--screenshot",
+    "/Users/burbujamc/Developer/sadx-macos/build/sonic-fan-source-only-xe7zt8xw/qualification/frontier.ppm"
+  ],
+  "app_exit_status": 1,
+  "stop": "native session stopped: native_gamma_display",
+  "state": {
+    "frames": 1332,
+    "sprite_registry_count": 1,
+    "gamma_setup_assets_loaded": true,
+    "gamma_setup_registered": true
+  },
+  "app_sha256": "d1a21ad7b7eb4938462c028778c6ef26f3301c43221494a5647eda639d1ba138",
+  "screenshot_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427",
+  "limits": [
+    "Clean source archive contains no original executable/DLL or prebuilt game objects; only public dependencies copied, imported assets external.",
+    "Display boundary only, no actor frame, N3b or complete gameplay qualification."
+  ],
+  "matches_integrated_image": true,
+  "capture_inspection": "Raw screenshot is byte-identical to the inspected combined Main outgoing-title capture."
+}

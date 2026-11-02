@@ -1,0 +1,10 @@
+{
+  "source_commit": "709f274447895b9e53a377d9b158bf8a87830a45",
+  "command": "SADX_CONTENT_CORPUS=\"$PWD\" PYTHONPATH=tools/lib:tools/oracles reference/python/bin/python -m unittest discover -s tests/python -p test_capture_content_offline.py",
+  "exit_status": 0,
+  "tests": 6,
+  "skipped": 0,
+  "log": "build/sonic-fan-gate/qualified-rasters.log",
+  "log_sha256": "73c7fdf4a735538480226a73d272255e9ebcdb35928425c36d0829ca7105067f",
+  "relationship": "Separately executes all six qualified offline raster checks omitted by the actual622-test gate. Its seven skips remain reported; the inherited volume case-alias capability remains skipped."
+}

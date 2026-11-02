@@ -1045,3 +1045,12 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Sonic candidate retains 650/1,162 exact cases and both 80-case model reports with 34 individual FP partials each, strict exit 2. No fresh full controller replay is claimed.
 * Root make check passes with all 1,460 protected files present and matching; source and judge commits remain separate. Final integration review, coherent gate and cold export remain pending.
 * Gamma display worker has been asked to hold heavy execution after its current command; Root awaits explicit slot-clear acknowledgement before the full gate. No actor frame or N3b claim.
+
+### 2026-11-02 — Sonic/fan integration full gate and cold source qualified
+
+* Reviews b1df6ead and 6be50e40 accept the final combined integration at 709f2744 without findings.
+* Full make -j10 gate exits 0: 333 native programs, 622 Python tests with seven reported skips, reference R1–R4, three native menu/save journeys and sixteen startup comparisons.
+* Six omitted offline raster checks pass separately with no skips; only the inherited volume case-alias capability remains skipped. All numerical partial/failure limits remain explicit.
+* Fresh git source archive contains no original EXE/DLL or prebuilt game objects. Copied public SDL/libusb only; native build and force-load closure pass at -j2. Normal input reaches Display at frame 1332, exit 1, with the identical inspected title image.
+* sonic-initialization-fan-gate.json, sonic-initialization-fan-qualified-rasters.json and sonic-initialization-fan-source-only.json retain commands and limits. No actor frame, N3b, active welding or complete gameplay acceptance.
+* Gamma display draft b5a3cea9 remains separate and unqualified; Root releases worker 53a0367d after this serialized qualification to finish source comparisons and real renderer composition.

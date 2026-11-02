@@ -187,7 +187,7 @@ EXE/DLL, no prebuilt game objects) runs it from imported assets.
 | N1 | SEGA/Sonic Team logos | done (16 states + images vs reference) |
 | N2 | Intro movie (play and Skipma), title, audible Start | done |
 | N3a | FileSelect, dialog, MainMenu, fresh save/load/restart, empty profile | done (`native-file-select`, `native-main-menu`, `native-fresh-save`) |
-| N3b | **CharacterSelect**: all preview actors initialised, updated and drawn; cursor/cancel/reentry; music/voice; Sonic confirmed → story entry | **in progress**: fan integration `08884f1d` reaches `native_gamma_display`, frame 1332, exit 1. Image remains outgoing title. Combined full gate and cold-source qualification pass at `e9bf38a8`; CharacterSelect remains incomplete. |
+| N3b | **CharacterSelect**: all preview actors initialised, updated and drawn; cursor/cancel/reentry; music/voice; Sonic confirmed → story entry | **in progress**: fan integration `08884f1d` reaches `native_gamma_display`, frame 1332, exit 1. Image remains outgoing title. Combined full gate and cold-source qualification pass at `709f2744`; CharacterSelect remains incomplete. |
 | N4 | Story entry: the opening event (played or skipped as the profile does) → Station Square drawn from the imported pack with the real camera | open |
 | N5 | Sonic controllable at Chaos 0: run, jump, spin/homing attack, hurt, rings, with the boss active; first frames match the reference trace | open |
 | N6 | Chaos 0 defeated → natural story return → save progression | open |
@@ -391,50 +391,38 @@ are in STATUS; the current assessment and retained frontier are in section 6.1.
 
 ## 6. What is next, in order
 
-### 6.1 Current execution plan (reviewed 2026-11-01, qualified 2026-11-02)
+### 6.1 Current execution plan (updated 2026-11-02)
 
-The assessment at `75f5a20` started from gate `bf61403`, recorded by
-`reference/production-integration-20261101/task-owner-gate.json`: 306 native
-programs and 607 Python tests. Native FileSelect/MainMenu/fresh-save and reference
-R1–R4 pass within their recorded limits. Source-only receipt
-`reference/production-integration-20261101/native-source-only-frontier.json`
-observed Gamma setup at frame 1382 on its named older revision. Source inspection
-at `75f5a20` retains that seam. The current app reproduces it with normal input and
-isolated saves at frame 1332, exit 1, recorded in
-`reference/production-integration-20261101/native-route-review.json`. Its inspected
-image remains outgoing title. `make -j2 build/sadx-native` reported up to date;
-this was not a clean rebuild or a new full gate. Preserve the differing input
-schedules and frame numbers rather than claiming aligned frame parity.
-
-Update: source `024715a` passes the setup call with one actual registry node and
-reaches `native_gamma_shared_material_binding` at the same frame 1332 and input
-schedule. The inspected image remains outgoing title. The run and source diff are
-bound by `reference/production-integration-20261101/gamma-setup-native-frontier.json`;
-`gamma-setup-integration.json` records focused checks. Full gate at `7bcfd78` exits
-zero (311 native programs, 612 Python tests); same-source cold export/closure and
-native run reproduce the stop. Receipts are in `reference/production-integration-20261102`.
-The gate records seven skips; a separate six-test raster supplement executes all six
-offline raster checks, leaving the volume case-alias capability skip. Preview
-action dispatch is integrated but still needs the separate native event-action
-candidate. Subsequent integration: event source and actual preview bindings at
-`8a1427d` have independent integration acceptance `a2d19476`. Accepted material
-source through `013c2ed` advances normal input to `native_gamma_initialize_effects`
-at frame 1332 with the same image. Focused checks pass; a combined gate is pending.
-Corrected Sonic controller `80e4045` has bounded independent acceptance and awaits
-integration against these shared owners.
+Main `709f2744` combines the accepted Sonic initialization continuation with
+Gamma fan, motion, matrices, weld initialization, effects, shared materials and
+setup resources. Both integration reviews accept it within their bounded scope.
+A fresh combined native run reaches `native_gamma_display` at frame 1332, exit 1,
+with the unchanged outgoing-title image. This is not a completed actor frame.
+The original first-Gamma witness runs at frame 1334; retain that timing difference.
+Focused evidence is in
+`reference/production-integration-20261102/sonic-initialization-root-integration.json`.
+The full gate and fresh source-only build pass at `709f2744`: 333 native programs,
+622 Python tests, reference R1–R4, three native menu/save journeys and sixteen
+startup comparisons. Six offline raster checks pass separately; the inherited
+volume case-alias capability remains skipped. The source-only app retains the
+same display boundary and image. Receipts are
+`sonic-initialization-fan-{gate,qualified-rasters,source-only}.json` under
+`reference/production-integration-20261102`; STATUS records the actual gate.
+Earlier setup/material/effects frontiers are historical receipts in HANDOFF and
+`reference/production-integration-*`, not pending work to recover again.
 
 First delivery target: a complete native CharacterSelect frame with real scheduled
 actors, then repeated updates, cursor/motion, cancel/reentry and Sonic confirmation.
 Advancing one missing call is dependency progress only.
 
-| Caller | Canonical owner | Packet assignment | Integration check |
+| Caller | Canonical owner | Current work | Acceptance still required |
 |---|---|---|---|
-| Gamma mode zero → setup resource | sprite registry and Gamma result; imported definition | Source `024715a`, integration gate and cold build qualified at `7bcfd78` | Actual normal input passes setup with one registry node; original comparisons and imported-byte checks pass |
-| Scheduler → Sonic controller | existing PlayerSystem/current-player, task arena and animation owners | Corrected source `80e4045` is independently accepted; integration is next | Complete unchanged oracle observations, failure identities and mutants; native closure with explicit missing callees |
-| Preview update/selection → actions and motion | preview work, actor tasks and existing animation state | Event queue and actual preview bindings are integrated at `8a1427d`; combined gate pending | Real PInitialize/queue/texture witness and ownership mutant pass; complete app actor frame remains open |
-| Gamma setup → materials/effects/common tail/display | mutable scene and shared player/animation/geometry state | Integrator sequences returned packets and assigns reached leaves | Real repeated actor frame; live material aliasing and full reached common tail |
-| Scheduler → Miles/Knuckles/Amy/Big | shared player contracts and each actor's state | Subsequent independent actor packets after common contracts stabilize | All scheduled actors initialize, update, draw and destroy |
-| Confirmation → summary/story entry | Session flow, sequence and stage owners | Integrator binds the actual native caller chain | New N3b normal-input journey, content/state/audio checks, draw-suppression mutant, source-only build and full gate |
+| Gamma mode zero and common tail before display | Session registry/matrices, PlayerSystem, arena, mutable scene and imported resources | Integrated; setup, materials, effects, motion, weld initialization, input restore, matrix getters and fan reach display | Preserve source order/aliases and all inherited partials while completing later consumers |
+| Gamma display and scheduled display callback | Existing Display/SceneState, task player/extra work and weld table | `packet/gamma-display-native` has an unqualified draft and append-only asset proposal; finish source comparisons and real renderer composition | Actual actor drawing and repeated update/display/destruction, with live shared materials and geometry |
+| Scheduler → Sonic initialization/common tail | PlayerSystem registry/current-player, task arena, existing animation/model/texture owners | Integrated source initializes real player/resources and reaches missing object slot 20; Metal/changed-sibling paths reach active matrix composition | Required model exports, active welding argument selection/deformation/attachments, remaining common tail and real display |
+| Preview actions and selection motion | Canonical event queue, preview tails, character resources and task owners | Action core and native event/caller bindings are integrated | Full-menu cursor, cancellation/reentry and confirmation with all actual actors |
+| Scheduler → Miles/Knuckles/Amy/Big | Shared player contracts and each actor's source state | Native callbacks remain open; assign independent caller clusters once their shared prerequisites are stable | All scheduled actors initialize, update, draw and destroy together |
+| Confirmation → summary/story entry | Session flow, sequence and stage owners | Uncomposed route remains open after actor work | New N3b normal-input journey with content/state/audio checks, draw-suppression fault, source-only build and full gate |
 
 Reproduce the retained frontier with a fresh binary and isolated save output before
 behavior-bearing edits. Keep input, state, image and actual exit status. Existing
