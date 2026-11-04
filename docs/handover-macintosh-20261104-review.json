@@ -1,0 +1,45 @@
+{
+  "review_date": "2026-11-04",
+  "reviewed_main": "05ff1c5efb8e40a609371a26b498ac080da87322",
+  "published_draft": "1aa91341d3d2c26b821c09b0701ed1c2709a0d18",
+  "advisor_task": "2efe53fb-82d5-47a5-8864-e924241c5c42",
+  "advisor_verdict": "No P1; checkpoint preservation accepted, bootstrap readiness conditional on two P2 and one P3 correction",
+  "findings": [
+    {
+      "priority": "P2",
+      "finding": "Environment setup described versions without executable Python/venv/packages or pinned sa_tools checkout instructions.",
+      "resolution": "Added exact package/interpreter checks, new-venv-only install, real pinned checkout verification and preserve-on-mismatch behavior."
+    },
+    {
+      "priority": "P2",
+      "finding": "Draft branch includes two already admitted fan commits.",
+      "resolution": "Named and excluded both patch-equivalent commits; listed display-specific history from114a9db3 and current shared-wiring preservation."
+    },
+    {
+      "priority": "P3",
+      "finding": "Fixed destination and save-directory examples could overwrite reception evidence or reuse altered saves.",
+      "resolution": "Unique mktemp reception/run directories; six manifest hashes and tar hash checked; three saves verified before/after copy; separate stdout/stderr/exit retained."
+    }
+  ],
+  "root_validation": {
+    "shell_syntax_blocks": 6,
+    "python_heredoc_syntax": [
+      "PY_BASELINE",
+      "PY_ENV",
+      "PY_PROTECTED",
+      "PY_RECEPTION"
+    ],
+    "private_extraction_and_six_manifests_pass": true,
+    "baseline_save_copy_hashes_pass": true,
+    "existing_pinned_environment_check_pass": true,
+    "all_1460_local_protections_pass": true,
+    "duplicate_fan_commit_identity_pass": true
+  },
+  "acceptance_scope": "Published source, checkpoint preservation and corrected continuation instructions are ready for transfer. Actual Macintosh reception/build/reproduction remains a required destination-side gate.",
+  "limits": [
+    "No package installation, Git clone, rsync transfer, SADX build/test/game/Ghidra/service restart was executed by the validation.",
+    "Missing-input transfer/promotion path inspected and syntax-checked, not exercised over SSH on Macintosh.",
+    "Baseline run program syntax and save preflight checked; app not executed.",
+    "Macintosh reception, tools, inputs, GUI/controller and reproduction remain unverified until performed there."
+  ]
+}

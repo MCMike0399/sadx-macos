@@ -1062,3 +1062,10 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Gamma display checkpoint is published separately at packet/gamma-display-native, head 1aa91341. The interrupted edit is preserved; retained logs reveal bounded development checks plus failed caller/asset-overlay attempts, not complete qualification.
 * The private supplement under ~/.local/state/sadx-macintosh-handover-20261104 retains ignored dossiers/logs, project memory and canonical archive restore manifests. Game assets and compiled binaries remain outside Git.
 * Qualified game source remains 709f2744: 333 native programs, 622 Python tests, cold-source Display1332/title; no actor frame or N3b. This documentation-only handover adds no new runtime qualification.
+
+### 2026-11-04 — Advisor challenges and closes handover instruction gaps
+
+* Independent advisor 2efe53fb accepts published checkpoint preservation with no P1, conditional on bootstrap corrections: executable Python/sa_tools setup, explicit duplicate fan exclusions and fresh reception/save paths.
+* The handover now gives five destination reception gates, exact pins/package checks, six manifest verification, safe regular-file extraction, missing-protected-input staging and unique save-copy/run evidence.
+* Root validates shell/Python command syntax, private extraction and all six manifests, three save-copy hashes, the existing pinned venv and all 1,460 protections. Fan commits 2ad7a4e9/1cb3885f are explicitly excluded; display history starts at 114a9db3.
+* docs/handover-macintosh-20261104-review.json records findings, corrections and limits. No SADX runtime/build/service was restarted; actual Macintosh reception and baseline remain destination-side requirements.

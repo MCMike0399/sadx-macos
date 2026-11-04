@@ -41,12 +41,42 @@ open debt; migrate the systems the route actually needs. For relevant work, read
 METHOD, ARCHITECTURE, JUDGE, TESTING, SOURCES and TIPS. Older history and packet
 notes can describe superseded frontiers; trust the pinned receipt and its scope.
 
+## Reception checklist — complete these gates in order
+
+1. Inspect Macintosh's checkout and local edits. Fetch the published Main and
+   draft refs; verify the qualified source is an ancestor of Main and the draft
+   pin matches section 1. Keep a reception record of the exact fetched heads.
+2. Copy the private supplement into a newly allocated staging directory. Verify
+   the pinned tar hash and all six manifest digests before extracting evidence.
+3. Bootstrap or verify the explicit Python interpreter/venv, Git submodule and
+   pinned sa_tools checkout (section 8). Recover exact private game/reference
+   inputs and any of the 53 ignored protected files that are absent (section 6).
+4. Verify all 1,460 protected hashes. Build Main, then reproduce Display1332 with
+   a fresh hash-checked save copy and separately captured stdout/stderr/exit.
+5. Resume only the isolated display candidate. Exclude its two duplicate fan
+   commits; reconcile display-specific work with current Sonic callback wiring.
+
+Read the rest of this prompt before starting. Reception is complete only when
+these checks pass **on Macintosh**. The independent advisor checked publication,
+local preservation and instructions on DiveMac; Macintosh tools, inputs, GUI,
+controller access and baseline reproduction have not yet been exercised here.
+
+Advisor review and final corrections are recorded in
+`docs/handover-macintosh-20261104-review.json`. The advisor found no P1 publication
+or preservation defect. The two P2 bootstrap/history gaps and one P3 reusable-path
+gap were corrected and checked by the handover owner. Command syntax, private
+extraction, six manifest digests and the baseline save-copy preflight pass locally;
+the destination-side gates above still need to run on Macintosh.
+
 ## 1. Recover the Git checkpoint before building
 
 - Qualified game/source-and-judge revision:
   `709f274447895b9e53a377d9b158bf8a87830a45`.
 - Main before this handover documentation:
   `499ff5161ed7405ae85bf92bdff688dc8eecc288`.
+- First independently audited handover publication:
+  `05ff1c5efb8e40a609371a26b498ac080da87322`. Subsequent final documentation
+  corrections descend from it; record the actual `origin/main` head when received.
 - Main includes the tested implementation. Later handover commits add documentation
   and generated accounting only; they do not imply a new runtime gate.
 - Published unfinished branch: `packet/gamma-display-native`, exact handover head
@@ -56,18 +86,31 @@ notes can describe superseded frontiers; trust the pinned receipt and its scope.
   actual partial/failed attempt logs discovered during the final audit.
 - **Do not merge that draft into Main as qualified work.** Its shared-file patch
   targets older Main `ba88c5cc`; reconcile it with the current Sonic callback.
+- The draft contains two already admitted fan commits: **2ad7a4e9** (source)
+  and **1cb3885f** (qualification). `git cherry main origin/packet/gamma-display-native`
+  marks them with `-`; exclude both from display admission. Fan source, caller test
+  and oracle trees already match Main. The display-specific candidate starts at
+  **114a9db3**, followed by **43f5f0d4**, **b5a3cea9**, **28459d88** and **1aa91341**.
+  Inspect that delta against its parent; keep Main's newer Sonic callback, fan,
+  matrix owners and all current judge registrations. This list identifies the
+  candidate history; it does not authorize treating it as a qualified full merge.
 
 Use an existing Macintosh checkout without overwriting local edits. Fetch and
 fast-forward Main only when its worktree is clean and the update is compatible:
 
 ```sh
+set -e
+test -z "$(git status --porcelain)" # If dirty, preserve and inspect the edits first.
 git fetch origin
-git status --short
 git switch main
 git merge --ff-only origin/main
 git submodule update --init --recursive
 git fetch origin refs/heads/packet/gamma-display-native:refs/remotes/origin/packet/gamma-display-native
-git rev-parse origin/packet/gamma-display-native
+git merge-base --is-ancestor 709f274447895b9e53a377d9b158bf8a87830a45 origin/main
+git merge-base --is-ancestor 05ff1c5efb8e40a609371a26b498ac080da87322 origin/main
+test "$(git rev-parse origin/packet/gamma-display-native)" = \
+  1aa91341d3d2c26b821c09b0701ed1c2709a0d18
+git rev-parse origin/main origin/packet/gamma-display-native
 ```
 
 The last command must identify the head above, or a later explicitly understood
@@ -312,20 +355,64 @@ bundle `private-evidence-and-restore.tar.gz` SHA256 is
 It excludes the full game/input trees and compiled game libraries. Private links
 may still point to DiveMac paths: inspect rather than execute through them.
 
-From Macintosh, copy it into a fresh private destination, for example:
+From Macintosh, in the repository root, allocate a fresh reception directory.
+Run the following block in one shell; it exports the path for later save setup.
+Each rerun creates a new destination and retains all earlier reception evidence:
 
 ```sh
-mkdir -p "$HOME/.local/state/sadx-macintosh-handover-20261104"
+set -e
+mkdir -p "$HOME/.local/state"
+export SADX_RECEPTION_DIR="$(mktemp -d "$HOME/.local/state/sadx-macintosh-reception.XXXXXX")"
 rsync -a DiveMac:/Users/burbujamc/.local/state/sadx-macintosh-handover-20261104/ \
-  "$HOME/.local/state/sadx-macintosh-handover-20261104/"
-shasum -a 256 "$HOME/.local/state/sadx-macintosh-handover-20261104/private-evidence-and-restore.tar.gz"
+  "$SADX_RECEPTION_DIR/"
+python3 - <<'PY_RECEPTION'
+import hashlib, json, os, shutil, tarfile
+from pathlib import Path, PurePosixPath
+reception = Path(os.environ['SADX_RECEPTION_DIR'])
+archive = reception / 'private-evidence-and-restore.tar.gz'
+expected = 'b9582ee82d1164b888e68400d7d7d955f18ca331a46d16d4ab2fe6255b27a0b7'
+assert hashlib.sha256(archive.read_bytes()).hexdigest() == expected
+index = json.loads(Path('docs/handover-macintosh-20261104-recovery.json').read_text())
+for batch in index['batches']:
+    manifest = json.loads((reception / (batch['id'] + '.manifest.json')).read_text())
+    receipt = json.loads((reception / (batch['id'] + '.json')).read_text())
+    digest = hashlib.sha256(json.dumps(manifest['files'], sort_keys=True,
+                            separators=(',', ':')).encode()).hexdigest()
+    assert digest == batch['manifest_sha256'] == manifest['manifest_sha256']
+    assert receipt['manifest_sha256'] == digest and receipt['status'] == 'archived'
+    assert receipt['restore_rehearsed']
+# Recover ordinary context/evidence files only. Preserve link targets in a ledger
+# rather than creating links to DiveMac paths or extracting through them.
+staging = reception / 'extracted'
+staging.mkdir()
+links = []
+with tarfile.open(archive, 'r:gz') as bundle:
+    for member in bundle:
+        parts = PurePosixPath(member.name)
+        assert not parts.is_absolute() and '..' not in parts.parts
+        destination = staging.joinpath(*parts.parts)
+        if member.isdir():
+            destination.mkdir(parents=True, exist_ok=True)
+        elif member.isfile():
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            with bundle.extractfile(member) as src, destination.open('xb') as dst:
+                shutil.copyfileobj(src, dst)
+        elif member.issym() or member.islnk():
+            links.append({'name': member.name, 'target': member.linkname})
+        else:
+            raise AssertionError('Unexpected special entry: ' + member.name)
+(reception / 'preserved-link-targets.json').write_text(json.dumps(links, indent=2) + '\n')
+print('Verified supplement and six manifests; reception:', reception)
+PY_RECEPTION
 ```
 
-Review tar entries before extracting to private staging. It includes the ignored
-Gamma display dossiers, generated fixture/logs/saves and partial reports, project
-memory, and storage restore maps. Use it as evidence/context, then verify current
-checkout inputs. Import only relevant durable notes into Macintosh's own canonical
-Claude memory; preserve its device-specific configuration. Never send it to devbox.
+The supplement has the ignored Gamma display dossiers, generated fixture/logs,
+saves, partial reports, project memory and storage restore maps. Reconstruct
+required private overlay links against verified local inputs; the extracted link
+ledger does not itself make the old fixture runnable. Use context as evidence,
+then verify current checkout inputs. Import relevant durable notes into Macintosh's
+own canonical Claude memory and preserve its device configuration. Keep the
+reception directory private and outside Git; never send it to devbox.
 The full local packet branch/ref list is an index, not a claim that every historical
 branch is published; required current source is on Main and the published draft.
 
@@ -390,9 +477,55 @@ Use a login shell and native arm64 Xcode command-line tools. The DiveMac qualifi
 build used Python3.14.7, Unicorn2.1.4, capstone5.0.9, clang-format18.1.8,
 REA6.4.0, Ghidra12.1.4/JDK27, SDL3.4.2 and libusb1.0.29. These are reproduction
 facts, not permission to upgrade toolchains or providers. Prefer the pinned setup.
-Recreate a venv rather than copying its absolute-path scripts. `reference/python`
-/bin/pip was stale; invoke `reference/python/bin/python -m pip`. Pin the same
-interpreter across timed helper processes; macOS mixed3.14/3.9 clocks can disagree.
+Recreate a venv rather than copying its absolute-path scripts. The following
+bootstrap explicitly selects Homebrew Python3.14; verify that the selected binary
+is the qualified3.14.7 before creating anything. If the installed interpreter
+has changed, recover the pinned toolchain or investigate the difference first.
+An existing venv is only inspected, never replaced or upgraded by this block.
+To replace one later, explicitly preserve it at a fresh backup path first.
+
+```sh
+set -e
+export SADX_BOOTSTRAP_PYTHON=/opt/homebrew/opt/python@3.14/bin/python3.14
+"$SADX_BOOTSTRAP_PYTHON" -c 'import platform,sys; assert sys.version_info[:3] == (3,14,7), sys.version; assert platform.machine() == "arm64"; print(sys.executable,sys.version)'
+if [ ! -e reference/python ] && [ ! -L reference/python ]; then
+  "$SADX_BOOTSTRAP_PYTHON" -m venv reference/python
+  reference/python/bin/python -m pip install \
+    'unicorn==2.1.4' 'capstone==5.0.9' 'clang-format==18.1.8'
+fi
+reference/python/bin/python - <<'PY_ENV'
+import importlib.metadata as metadata, platform, sys
+assert sys.version_info[:3] == (3,14,7), sys.version
+assert platform.machine() == 'arm64'
+for name, expected in [('unicorn','2.1.4'), ('capstone','5.0.9'),
+                       ('clang-format','18.1.8')]:
+    actual = metadata.version(name)
+    assert actual == expected, (name, actual, expected)
+    print(name, actual)
+import unicorn, capstone
+print('Interpreter:', sys.executable)
+PY_ENV
+# The symbol generator requires a real Git checkout at the pinned commit,
+# including unchanged committed label bytes, not just a copied label file.
+if [ ! -e reference/sa-tools ] && [ ! -L reference/sa-tools ]; then
+  git clone --no-checkout https://github.com/X-Hax/sa_tools.git reference/sa-tools
+  git -C reference/sa-tools checkout --detach b72d52f37c21a2f7215711e3516360a63aea12da
+fi
+test "$(git -C reference/sa-tools rev-parse HEAD)" = \
+  b72d52f37c21a2f7215711e3516360a63aea12da
+git -C reference/sa-tools diff --exit-code HEAD -- GameConfig/PC_SADX/sonic_labels.txt
+test "$(git -C reference/sadx-mod-loader rev-parse HEAD)" = \
+  eb4cdcca9637d611a98b910fcfed6ce18580451c
+xcrun clang++ --version
+reference/python/bin/python -m pip --version
+```
+
+If an existing environment/checkout fails a check, stop that step, preserve it,
+and diagnose; do not silently update its packages or reset its working files.
+`reference/python/bin/pip` on DiveMac was stale, hence module invocation above.
+Pin the same interpreter across timed helper processes; macOS mixed3.14/3.9 clocks
+can disagree. REA/Ghidra are needed only when current cached evidence cannot answer
+the source question; their exact setup remains in METHOD and source-evidence files.
 
 Regenerate symbols from pinned inputs (`make symbols`), then run checkers. A
 missing generated symbol database can cause provenance failures before any source
@@ -408,28 +541,112 @@ libusb build damaged four Root cache files; the recovery receipt is retained.
 When deliberately reusing an already qualified local dependency product, use
 `-o build/native-controller-deps/include/SDL3/SDL.h`; first verify the product exists.
 
-First establish source and inputs, then:
+First establish source and private inputs before claiming build readiness.
+
+An isolated checkout missing53 protected files is an input-recovery issue. Identify
+missing paths from `reference/judge-manifest.json`, stage those exact bytes from
+DiveMac (or their verified archive), hash each against the committed manifest, and
+promote only into absent destinations. Preserve any present-file mismatch for
+investigation. Re-run the checker until all1460 protections pass; never update the
+manifest to describe missing inputs.
+
+For the common fresh-checkout case, this bounded recovery command copies only
+missing protected files from DiveMac into private staging. It refuses present
+mismatches and validates every staged hash before writing an absent destination.
+Run it once per reception directory; use a new reception for another attempt:
 
 ```sh
-make symbols
-make -j2 build/sadx-native native-closure
-python3 tools/gate/check_judge.py
+reference/python/bin/python - <<'PY_PROTECTED'
+import hashlib, json, os, subprocess
+from pathlib import Path, PurePosixPath
+root = Path.cwd()
+reception = Path(os.environ['SADX_RECEPTION_DIR'])
+files = json.loads((root / 'reference/judge-manifest.json').read_text())['files']
+missing = []
+for name, expected in files.items():
+    parts = PurePosixPath(name)
+    assert not parts.is_absolute() and '..' not in parts.parts
+    path = root / name
+    if path.is_file():
+        assert hashlib.sha256(path.read_bytes()).hexdigest() == expected, name
+    else:
+        assert not path.exists() and not path.is_symlink(), name
+        missing.append(name)
+if missing:
+    incoming = reception / 'protected-inputs'
+    incoming.mkdir()
+    listing = reception / 'protected-missing-files.txt'
+    listing.write_text(''.join(name + '\n' for name in missing))
+    subprocess.run(['rsync', '-a', '--files-from=' + str(listing),
+                    'DiveMac:/Users/burbujamc/Developer/sadx-macos/',
+                    str(incoming) + '/'], check=True)
+    for name in missing:
+        source = incoming / name
+        assert source.is_file() and not source.is_symlink(), name
+        assert hashlib.sha256(source.read_bytes()).hexdigest() == files[name], name
+    for name in missing:
+        target = root / name
+        target.parent.mkdir(parents=True, exist_ok=True)
+        with (incoming / name).open('rb') as source, target.open('xb') as output:
+            import shutil
+            shutil.copyfileobj(source, output)
+subprocess.run(['reference/python/bin/python', 'tools/gate/check_judge.py'], check=True)
+print('All committed protections verified; copied', len(missing), 'missing inputs')
+PY_PROTECTED
 ```
 
-An isolated checkout missing53 protected files is an input-recovery issue, not
-permission to change judges. Create a **new private copy** of the retained baseline
-save set, never play against the only retained copy. Its three file hashes are in
-`sonic-initialization-fan-source-only.json`; the set is included in the private
-Gamma display baseline bundle. Verify before use. After saving stdout/stderr and
-actual exit status, run:
+This recovers protected evidence, not the entire game/imported/source-input trees.
+Verify those separately against SOURCES and the private supplement's MANIFEST.
+After private-input recovery, check protections and build Main:
 
 ```sh
-build/sadx-native --assets game/imported \
-  --controller-library build/native-controller-deps/lib/libSDL3.0.dylib \
-  --offscreen --paced --exit-after 1550 \
-  --save-directory build/macintosh-baseline/savedata \
-  --key-events '500:13:down,501:13:up,750:13:down,751:13:up,950:13:down,951:13:up,1050:13:down,1051:13:up,1300:13:down,1301:13:up' \
-  --screenshot build/macintosh-baseline/frontier.ppm
+reference/python/bin/python tools/gate/check_judge.py
+make symbols
+make -j2 build/sadx-native native-closure
+```
+
+Use the reception directory from section6 and run the following from Main's
+repository root after the build. It creates a unique output directory, verifies
+and copies all three retained saves, saves the exact argv, and records stdout,
+stderr and the real return code independently. It will not reuse earlier saves
+or rewrite reception evidence:
+
+```sh
+reference/python/bin/python - <<'PY_BASELINE'
+import hashlib, json, os, shutil, subprocess, tempfile
+from pathlib import Path
+root = Path.cwd()
+reception = Path(os.environ['SADX_RECEPTION_DIR'])
+saved = reception / 'extracted/gamma-display/build/gamma-display-native/baseline-save'
+expected = json.loads((root / 'reference/production-integration-20261102/sonic-initialization-fan-source-only.json').read_text())['save_input']
+run = Path(tempfile.mkdtemp(prefix='macintosh-baseline-', dir=root / 'build'))
+saves = run / 'savedata'
+saves.mkdir()
+for name, digest in expected.items():
+    source = saved / name
+    assert hashlib.sha256(source.read_bytes()).hexdigest() == digest, name
+    target = saves / name
+    shutil.copy2(source, target)
+    assert hashlib.sha256(target.read_bytes()).hexdigest() == digest, name
+(run / 'initial-save-hashes.json').write_text(json.dumps(expected, indent=2) + '\n')
+argv = [str(root / 'build/sadx-native'), '--assets', str(root / 'game/imported'),
+        '--controller-library', str(root / 'build/native-controller-deps/lib/libSDL3.0.dylib'),
+        '--offscreen', '--paced', '--exit-after', '1550', '--save-directory', str(saves),
+        '--key-events', '500:13:down,501:13:up,750:13:down,751:13:up,950:13:down,951:13:up,1050:13:down,1051:13:up,1300:13:down,1301:13:up',
+        '--screenshot', str(run / 'frontier.ppm')]
+(run / 'argv.json').write_text(json.dumps(argv, indent=2) + '\n')
+with (run / 'stdout.log').open('wb') as stdout, (run / 'stderr.log').open('wb') as stderr:
+    result = subprocess.run(argv, cwd=root, stdout=stdout, stderr=stderr)
+(run / 'exit-status.json').write_text(json.dumps({'exit_status': result.returncode}) + '\n')
+print('Retained run:', run, 'exit:', result.returncode)
+assert result.returncode == 1
+state = json.loads(next(line for line in (run / 'stdout.log').read_text().splitlines()
+                        if line.startswith('{') and '"execution":"native"' in line))
+assert state['frames'] == 1332
+assert 'native session stopped: native_gamma_display' in (run / 'stderr.log').read_text()
+assert hashlib.sha256((run / 'frontier.ppm').read_bytes()).hexdigest() == \
+    'c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427'
+PY_BASELINE
 ```
 
 Expected current Main: exit1, Display1332/title hash above. Inspect the capture
