@@ -1,0 +1,63 @@
+Evidence: ev_cca3bf341601116c060c2de9cae1742604b05ee864b61f262908d8e2c659ea8b
+Original: 6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74
+
+
+void FUN_004053d0(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  uint uVar1;
+  uint *in_EAX;
+  int iVar2;
+
+  if ((loop_count == 0) && ((uint *)0xfffff < in_EAX)) {
+    uVar1 = *in_EAX;
+    if ((0xfffff < uVar1) && ((0xfffff < in_EAX[1] && (iVar2 = isTextureNG(0), iVar2 == 0)))) {
+      DAT_03abd95c = param_4;
+      DAT_03abd9a4 = param_2;
+      CallbackModelScale = 0;
+      FUN_004051d0(param_1);
+      SetObjectDrawFunctions();
+      ProcessAnimatedModelNode__(uVar1);
+      CallbackModelScale = 0;
+    }
+  }
+  return;
+}
+
+
+0x4053d0: MOV ECX, dword ptr [0x03b1117c]
+0x4053d6: TEST ECX, ECX
+0x4053d8: JNZ 0x0040544e
+0x4053da: CMP EAX, 0x100000
+0x4053df: JC 0x0040544e
+0x4053e1: PUSH ESI
+0x4053e2: MOV ESI, dword ptr [EAX + 0x4]
+0x4053e5: PUSH EDI
+0x4053e6: MOV EDI, dword ptr [EAX]
+0x4053e8: CMP EDI, 0x100000
+0x4053ee: JC 0x0040544c
+0x4053f0: CMP ESI, 0x100000
+0x4053f6: JC 0x0040544c
+0x4053f8: MOV EAX, [0x03abd950]
+0x4053fd: PUSH 0x0
+0x4053ff: CALL 0x00403250
+0x405404: ADD ESP, 0x4
+0x405407: TEST EAX, EAX
+0x405409: JNZ 0x0040544c
+0x40540b: MOV EDX, dword ptr [ESP + 0xc]
+0x40540f: MOV EAX, dword ptr [ESP + 0x18]
+0x405413: MOV ECX, dword ptr [ESP + 0x10]
+0x405417: PUSH EDX
+0x405418: MOV [0x03abd95c], EAX
+0x40541d: MOV dword ptr [0x03abd9a4], ECX
+0x405423: MOV dword ptr [0x03ab9930], 0x0
+0x40542d: CALL 0x004051d0
+0x405432: MOV ECX, EDI
+0x405434: CALL 0x00405260
+0x405439: PUSH EDI
+0x40543a: CALL 0x004050c0
+0x40543f: ADD ESP, 0x8
+0x405442: MOV dword ptr [0x03ab9930], 0x0
+0x40544c: POP EDI
+0x40544d: POP ESI
+0x40544e: RET

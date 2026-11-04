@@ -1,0 +1,21 @@
+Evidence: ev_815ac5e1e3ae0446b1face098311d1b191e987410faab7c1cf2e8f1bb550a6c2
+Original: 6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74
+
+
+void ds_ActionClipNoScale(undefined4 param_1,undefined4 param_2)
+
+{
+  FUN_004053d0(param_2,0,0,__DrawModel);
+  return;
+}
+
+
+0x407020: MOV EAX, dword ptr [ESP + 0x8]
+0x407024: PUSH 0x403470
+0x407029: PUSH 0x0
+0x40702b: PUSH 0x0
+0x40702d: PUSH EAX
+0x40702e: MOV EAX, dword ptr [ESP + 0x14]
+0x407032: CALL 0x004053d0
+0x407037: ADD ESP, 0x10
+0x40703a: RET

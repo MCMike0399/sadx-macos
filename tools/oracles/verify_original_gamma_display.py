@@ -116,7 +116,7 @@ def fixtures(count, seed):
 def main():
     p=argparse.ArgumentParser();p.add_argument('exe');p.add_argument('probe')
     p.add_argument('--cases',type=int,default=1024);p.add_argument('--seed',type=lambda s:int(s,0),default=0x47fd50)
-    p.add_argument('--output',default='build/oracles/gamma_display.json');args=p.parse_args()
+    p.add_argument('--body',action='store_true');p.add_argument('--output',default='build/oracles/gamma_display.json');args=p.parse_args()
     image=PEImage(args.exe); source=Source(image)
     library=ctypes.CDLL(str(Path(args.probe).resolve()));native=library.sadx_native_gamma_display
     native.argtypes=[ctypes.POINTER(ctypes.c_uint32),ctypes.POINTER(ctypes.c_uint32)];native.restype=ctypes.c_int
@@ -139,5 +139,9 @@ def main():
         'source_ranges':{f'{ENTRY:#x}-{END:#x}':hashlib.sha256(image.read(ENTRY,END-ENTRY)).hexdigest()},
         'scope':'integer topology prefix only; stops before first palette call; no placement or rendering claim',
         'observations_sha256':hashlib.sha256(observation_path.read_bytes()).hexdigest()}
-    path.write_text(json.dumps(report,indent=2)+'\n');print(json.dumps(report));return int(bool(failures))
+    if args.body:
+        from gamma_display_body_judge import judge
+        report['body'] = judge(image, library, args.cases, args.seed ^ 0xabc, path)
+        if report['body']['value_failures']: report['status'] = 'fail'
+    path.write_text(json.dumps(report,indent=2)+'\n');print(json.dumps(report));return int(report['status'] == 'fail')
 if __name__=='__main__':raise SystemExit(main())

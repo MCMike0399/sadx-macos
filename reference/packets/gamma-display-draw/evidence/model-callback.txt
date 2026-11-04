@@ -1,0 +1,33 @@
+Evidence: ev_14edd956a0a748f7578f02cb20cc621a0962b215b3d73b8fc7f2aa5c5b85490b
+Original: 6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74
+
+
+void __DrawModel(uint param_1)
+
+{
+  if (param_1 < 0x100000) {
+    return;
+  }
+  if ((SimpleModelDrawingEnabled != '\0') && (lig_curGjPaletteNo___ < 1)) {
+    dsSimpleDrawModel();
+    return;
+  }
+  njDrawModel();
+  return;
+}
+
+
+0x403470: MOV EAX, dword ptr [ESP + 0x4]
+0x403474: CMP EAX, 0x100000
+0x403479: JC 0x004034a1
+0x40347b: MOV CL, byte ptr [0x0090a0a0]
+0x403481: TEST CL, CL
+0x403483: JZ 0x00403498
+0x403485: MOV ECX, dword ptr [0x03b12208]
+0x40348b: TEST ECX, ECX
+0x40348d: JG 0x00403498
+0x40348f: MOV dword ptr [ESP + 0x4], EAX
+0x403493: JMP 0x00401430
+0x403498: MOV dword ptr [ESP + 0x4], EAX
+0x40349c: JMP 0x0077ef70
+0x4034a1: RET

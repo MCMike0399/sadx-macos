@@ -1,0 +1,69 @@
+Evidence: ev_edbf9732d5557cdd1172cbf4a698660c6538af53ded99bddaa9e88e04f219e81
+Original: 6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74
+
+
+/* WARNING: Removing unreachable block (ram,0x00784e44) */
+
+void E102ObjectCallback(int param_1)
+
+{
+  float fVar1;
+  float fVar2;
+  float fVar3;
+  float fVar4;
+  float *pfVar5;
+  float10 fVar6;
+  float fVar7;
+
+  if (param_1 == *(int *)(E102_OBJECTS + 0x30)) {
+    if (*(int *)(e102_work_ptr + 0x8c) != 0) {
+      fVar6 = (float10)njSin();
+      fVar7 = (float)fVar6;
+      fVar6 = (float10)njCos();
+      pfVar5 = _nj_current_matrix_ptr_;
+      fVar1 = *_nj_current_matrix_ptr_;
+      fVar3 = _nj_current_matrix_ptr_[2];
+      fVar2 = _nj_current_matrix_ptr_[1];
+      fVar4 = _nj_current_matrix_ptr_[3];
+      *_nj_current_matrix_ptr_ =
+           (float)((float10)fVar1 * fVar6 - (float10)fVar7 * (float10)_nj_current_matrix_ptr_[8]);
+      pfVar5[1] = (float)((float10)fVar2 * fVar6 - (float10)fVar7 * (float10)pfVar5[9]);
+      pfVar5[2] = (float)((float10)fVar3 * fVar6 - (float10)fVar7 * (float10)pfVar5[10]);
+      pfVar5[3] = (float)((float10)fVar4 * fVar6 - (float10)fVar7 * (float10)pfVar5[0xb]);
+      pfVar5[8] = (float)((float10)fVar1 * (float10)fVar7 + fVar6 * (float10)pfVar5[8]);
+      pfVar5[9] = (float)((float10)fVar2 * (float10)fVar7 + fVar6 * (float10)pfVar5[9]);
+      pfVar5[10] = (float)((float10)fVar3 * (float10)fVar7 + fVar6 * (float10)pfVar5[10]);
+      pfVar5[0xb] = (float)((float10)fVar4 * (float10)fVar7 + fVar6 * (float10)pfVar5[0xb]);
+      return;
+    }
+  }
+  else if (param_1 == *(int *)(E102_OBJECTS + 0x70)) {
+    njTranslate(0,*(float *)(e102_work_ptr + 0x90) + *(float *)(e102_work_ptr + 0x90),0);
+  }
+  return;
+}
+
+
+0x47f990: MOV ECX, dword ptr [0x03a8af6c]
+0x47f996: MOV EAX, dword ptr [ESP + 0x4]
+0x47f99a: CMP EAX, dword ptr [ECX + 0x30]
+0x47f99d: JNZ 0x0047f9b8
+0x47f99f: MOV EAX, [0x03c53b70]
+0x47f9a4: MOV ECX, dword ptr [EAX + 0x8c]
+0x47f9aa: TEST ECX, ECX
+0x47f9ac: JZ 0x0047f9d9
+0x47f9ae: MOVZX EDX, CX
+0x47f9b1: XOR ECX, ECX
+0x47f9b3: JMP 0x00784e20
+0x47f9b8: CMP EAX, dword ptr [ECX + 0x70]
+0x47f9bb: JNZ 0x0047f9d9
+0x47f9bd: MOV EAX, [0x03c53b70]
+0x47f9c2: FLD float ptr [EAX + 0x90]
+0x47f9c8: PUSH 0x0
+0x47f9ca: PUSH ECX
+0x47f9cb: FADD ST0, ST0
+0x47f9cd: XOR ECX, ECX
+0x47f9cf: FSTP float ptr [ESP]
+0x47f9d2: PUSH 0x0
+0x47f9d4: CALL 0x00784be0
+0x47f9d9: RET

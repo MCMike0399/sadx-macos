@@ -1,0 +1,92 @@
+Evidence: ev_0c77a1ad39091c26062c54d515fc6a5aefdff7e852268a39106624a6e94429b4
+Original: 6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74
+
+
+void FUN_00404b60(int param_1,int param_2,uint param_3,float *param_4)
+
+{
+  int iVar1;
+  float fVar2;
+  float fVar3;
+  int *piVar4;
+  int *piVar5;
+  int iVar6;
+  float local_8 [2];
+
+  piVar4 = (int *)(param_2 * 0x10 + param_1);
+  iVar1 = *piVar4;
+  local_8[0] = 1.0;
+  piVar5 = (int *)(((param_2 + 1U) % param_3) * 0x10 + param_1);
+  iVar6 = *piVar5 - iVar1;
+  local_8[1] = (float)iVar6;
+  if (iVar6 < 0) {
+    local_8[1] = local_8[1] + 4.2949673e+09;
+  }
+  fVar2 = (float)iVar1;
+  if (iVar1 < 0) {
+    fVar2 = fVar2 + 4.2949673e+09;
+  }
+  fVar2 = (DAT_03ab991c - fVar2) / local_8[0 < iVar6];
+  fVar3 = 1.0 - fVar2;
+  *param_4 = fVar2 * (float)piVar5[1] + fVar3 * (float)piVar4[1];
+  param_4[1] = fVar2 * (float)piVar5[2] + fVar3 * (float)piVar4[2];
+  param_4[2] = fVar2 * (float)piVar5[3] + fVar3 * (float)piVar4[3];
+  return;
+}
+
+
+0x404b60: SUB ESP, 0x8
+0x404b63: MOV EAX, dword ptr [ESP + 0x10]
+0x404b67: MOV ECX, EAX
+0x404b69: PUSH ESI
+0x404b6a: MOV ESI, dword ptr [ESP + 0x10]
+0x404b6e: SHL ECX, 0x4
+0x404b71: ADD ECX, ESI
+0x404b73: XOR EDX, EDX
+0x404b75: INC EAX
+0x404b76: DIV dword ptr [ESP + 0x18]
+0x404b7a: MOV EAX, dword ptr [ECX]
+0x404b7c: MOV dword ptr [ESP + 0x4], 0x3f800000
+0x404b84: SHL EDX, 0x4
+0x404b87: ADD EDX, ESI
+0x404b89: MOV ESI, dword ptr [EDX]
+0x404b8b: SUB ESI, EAX
+0x404b8d: TEST ESI, ESI
+0x404b8f: MOV dword ptr [ESP + 0x14], ESI
+0x404b93: FILD dword ptr [ESP + 0x14]
+0x404b97: JGE 0x00404b9f
+0x404b99: FADD float ptr [0x007dcb7c]
+0x404b9f: TEST EAX, EAX
+0x404ba1: FSTP float ptr [ESP + 0x8]
+0x404ba5: MOV dword ptr [ESP + 0x14], EAX
+0x404ba9: FILD dword ptr [ESP + 0x14]
+0x404bad: JGE 0x00404bb5
+0x404baf: FADD float ptr [0x007dcb7c]
+0x404bb5: FSUBR float ptr [0x03ab991c]
+0x404bbb: XOR EAX, EAX
+0x404bbd: TEST ESI, ESI
+0x404bbf: SETG AL
+0x404bc2: POP ESI
+0x404bc3: FDIV float ptr [ESP + EAX*0x4]
+0x404bc7: MOV EAX, dword ptr [ESP + 0x18]
+0x404bcb: FLD float ptr [0x007dcb10]
+0x404bd1: FSUB ST0, ST1
+0x404bd3: FLD ST0
+0x404bd5: FMUL float ptr [ECX + 0x4]
+0x404bd8: FLD ST2
+0x404bda: FMUL float ptr [EDX + 0x4]
+0x404bdd: FADDP
+0x404bdf: FSTP float ptr [EAX]
+0x404be1: FLD ST0
+0x404be3: FMUL float ptr [ECX + 0x8]
+0x404be6: FLD ST2
+0x404be8: FMUL float ptr [EDX + 0x8]
+0x404beb: FADDP
+0x404bed: FSTP float ptr [EAX + 0x4]
+0x404bf0: FMUL float ptr [ECX + 0xc]
+0x404bf3: FXCH
+0x404bf5: FMUL float ptr [EDX + 0xc]
+0x404bf8: FADDP
+0x404bfa: FSTP float ptr [EAX + 0x8]
+0x404bfd: ADD ESP, 0x8
+0x404c00: RET

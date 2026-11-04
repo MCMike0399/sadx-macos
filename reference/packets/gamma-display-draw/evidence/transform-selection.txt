@@ -1,0 +1,60 @@
+Evidence: ev_1202548737178c28be56d15ffaf7c21212868c93fbfa1a97a5d155faa07282a1
+Original: 6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74
+
+
+void SetObjectDrawFunctions(void)
+
+{
+  byte *in_ECX;
+
+  DAT_03ab9878 = (&PTR_FUN_00900870)[ObjectDrawFuncs_Index];
+  DAT_03abd980 = TranslateObject;
+  if ((motion_type & 1) == 0) {
+    DAT_03abd980 = TranslateObject_Simple;
+  }
+  if ((motion_type & 2) == 0) {
+    DAT_03ab98e8 = RotateObjectZYX_Simple;
+    if ((*in_ECX & 0x20) == 0) {
+      DAT_03ab98e8 = RotateObjectXYZ_Simple;
+    }
+  }
+  else if ((*in_ECX & 0x20) == 0) {
+    DAT_03ab98e8 = RotateObjectXYZ;
+  }
+  else {
+    DAT_03ab98e8 = RotateObjectZYX;
+  }
+  DAT_03ab983c = ScaleObject;
+  if ((motion_type & 4) == 0) {
+    DAT_03ab983c = ScaleObject_Simple;
+  }
+  return;
+}
+
+
+0x405260: MOVZX EAX, word ptr [0x03ab9904]
+0x405267: MOV EDX, dword ptr [EAX*0x4 + 0x900870]
+0x40526e: MOV AL, [0x03ab9894]
+0x405273: TEST AL, 0x1
+0x405275: MOV dword ptr [0x03ab9878], EDX
+0x40527b: MOV dword ptr [0x03abd980], 0x404cc0
+0x405285: JNZ 0x00405291
+0x405287: MOV dword ptr [0x03abd980], 0x404ee0
+0x405291: TEST AL, 0x2
+0x405293: MOV DL, byte ptr [ECX]
+0x405295: JZ 0x004052b4
+0x405297: TEST DL, 0x20
+0x40529a: JZ 0x004052a8
+0x40529c: MOV dword ptr [0x03ab98e8], 0x404e50
+0x4052a6: JMP 0x004052cd
+0x4052a8: MOV dword ptr [0x03ab98e8], 0x404dc0
+0x4052b2: JMP 0x004052cd
+0x4052b4: TEST DL, 0x20
+0x4052b7: MOV dword ptr [0x03ab98e8], 0x404f20
+0x4052c1: JNZ 0x004052cd
+0x4052c3: MOV dword ptr [0x03ab98e8], 0x404f00
+0x4052cd: TEST AL, 0x4
+0x4052cf: MOV dword ptr [0x03ab983c], 0x404d40
+0x4052d9: JNZ 0x004052e5
+0x4052db: MOV dword ptr [0x03ab983c], 0x404f40
+0x4052e5: RET

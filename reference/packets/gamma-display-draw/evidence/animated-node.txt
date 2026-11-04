@@ -1,0 +1,143 @@
+Evidence: ev_2e57b29b50ec81d5c4272e2cc6c48544b2aebb8135f33ff40c3466c6ce8c2806
+Original: 6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74
+
+
+void ProcessAnimatedModelNode__(byte *param_1)
+
+{
+  int iVar1;
+
+  do {
+    njPushMatrixEx();
+    if ((*param_1 & 0x40) == 0) {
+      (*DAT_03ab9878)(param_1);
+    }
+    else {
+      njTranslate(*(undefined4 *)(param_1 + 8),*(undefined4 *)(param_1 + 0xc),
+                  *(undefined4 *)(param_1 + 0x10));
+      if ((*param_1 & 0x20) == 0) {
+        njRotateXYZ(*(undefined4 *)(param_1 + 0x18),*(undefined4 *)(param_1 + 0x1c));
+      }
+      else {
+        njRotateZYX(*(undefined4 *)(param_1 + 0x18),*(undefined4 *)(param_1 + 0x1c));
+      }
+      njScale(*(undefined4 *)(param_1 + 0x20),*(undefined4 *)(param_1 + 0x24),
+              *(undefined4 *)(param_1 + 0x28));
+    }
+    if (DAT_03ab9908 != (code *)0x0) {
+      (*DAT_03ab9908)(param_1);
+    }
+    iVar1 = *(int *)(param_1 + 4);
+    if ((iVar1 != 0) && ((*param_1 & 8) == 0)) {
+      if ((CallbackModelScale != 0.0) && (*(float *)(iVar1 + 0x24) != 0.0)) {
+        iVar1 = dsCheckViewV(iVar1 + 0x18,CallbackModelScale * *(float *)(iVar1 + 0x24));
+        if (iVar1 == 0) goto LAB_004051a2;
+      }
+      (*DAT_03abd95c)(*(undefined4 *)(param_1 + 4),DAT_03abd9a4,CallbackModelScale);
+    }
+LAB_004051a2:
+    if (*(int *)(param_1 + 0x2c) != 0) {
+      ProcessAnimatedModelNode__(*(int *)(param_1 + 0x2c));
+    }
+    njPopMatrixEx();
+    param_1 = *(byte **)(param_1 + 0x30);
+    if (param_1 == (byte *)0x0) {
+      return;
+    }
+  } while( true );
+}
+
+
+0x4050c0: PUSH ESI
+0x4050c1: MOV ESI, dword ptr [ESP + 0x8]
+0x4050c5: CALL 0x00781c80
+0x4050ca: TEST byte ptr [ESI], 0x40
+0x4050cd: JNZ 0x004050db
+0x4050cf: PUSH ESI
+0x4050d0: CALL dword ptr [0x03ab9878]
+0x4050d6: ADD ESP, 0x4
+0x4050d9: JMP 0x0040512c
+0x4050db: MOV EAX, dword ptr [ESI + 0x10]
+0x4050de: MOV ECX, dword ptr [ESI + 0xc]
+0x4050e1: MOV EDX, dword ptr [ESI + 0x8]
+0x4050e4: PUSH EAX
+0x4050e5: PUSH ECX
+0x4050e6: PUSH EDX
+0x4050e7: XOR ECX, ECX
+0x4050e9: CALL 0x00784be0
+0x4050ee: TEST byte ptr [ESI], 0x20
+0x4050f1: JZ 0x00405107
+0x4050f3: MOV EAX, dword ptr [ESI + 0x1c]
+0x4050f6: MOV ECX, dword ptr [ESI + 0x18]
+0x4050f9: MOV EDX, dword ptr [ESI + 0x14]
+0x4050fc: PUSH EAX
+0x4050fd: PUSH ECX
+0x4050fe: XOR ECX, ECX
+0x405100: CALL 0x007819c0
+0x405105: JMP 0x00405119
+0x405107: MOV EDX, dword ptr [ESI + 0x1c]
+0x40510a: MOV EAX, dword ptr [ESI + 0x18]
+0x40510d: PUSH EDX
+0x40510e: MOV EDX, dword ptr [ESI + 0x14]
+0x405111: PUSH EAX
+0x405112: XOR ECX, ECX
+0x405114: CALL 0x00781770
+0x405119: MOV ECX, dword ptr [ESI + 0x28]
+0x40511c: MOV EDX, dword ptr [ESI + 0x24]
+0x40511f: MOV EAX, dword ptr [ESI + 0x20]
+0x405122: PUSH ECX
+0x405123: PUSH EDX
+0x405124: PUSH EAX
+0x405125: XOR ECX, ECX
+0x405127: CALL 0x00784c70
+0x40512c: MOV EAX, [0x03ab9908]
+0x405131: TEST EAX, EAX
+0x405133: JZ 0x0040513b
+0x405135: PUSH ESI
+0x405136: CALL EAX
+0x405138: ADD ESP, 0x4
+0x40513b: MOV ECX, dword ptr [ESI + 0x4]
+0x40513e: TEST ECX, ECX
+0x405140: JZ 0x004051a2
+0x405142: TEST byte ptr [ESI], 0x8
+0x405145: JNZ 0x004051a2
+0x405147: FLD float ptr [0x03ab9930]
+0x40514d: FCOMP float ptr [0x007dcb2c]
+0x405153: FNSTSW AX
+0x405155: TEST AH, 0x44
+0x405158: JNP 0x00405187
+0x40515a: FLD float ptr [ECX + 0x24]
+0x40515d: FCOMP float ptr [0x007dcb2c]
+0x405163: FNSTSW AX
+0x405165: TEST AH, 0x44
+0x405168: JNP 0x00405187
+0x40516a: FLD float ptr [0x03ab9930]
+0x405170: PUSH ECX
+0x405171: FMUL float ptr [ECX + 0x24]
+0x405174: ADD ECX, 0x18
+0x405177: FSTP float ptr [ESP]
+0x40517a: PUSH ECX
+0x40517b: CALL 0x00403330
+0x405180: ADD ESP, 0x8
+0x405183: TEST EAX, EAX
+0x405185: JZ 0x004051a2
+0x405187: MOV ECX, dword ptr [0x03ab9930]
+0x40518d: MOV EDX, dword ptr [0x03abd9a4]
+0x405193: MOV EAX, dword ptr [ESI + 0x4]
+0x405196: PUSH ECX
+0x405197: PUSH EDX
+0x405198: PUSH EAX
+0x405199: CALL dword ptr [0x03abd95c]
+0x40519f: ADD ESP, 0xc
+0x4051a2: MOV EAX, dword ptr [ESI + 0x2c]
+0x4051a5: TEST EAX, EAX
+0x4051a7: JZ 0x004051b2
+0x4051a9: PUSH EAX
+0x4051aa: CALL 0x004050c0
+0x4051af: ADD ESP, 0x4
+0x4051b2: CALL 0x007816e0
+0x4051b7: MOV ESI, dword ptr [ESI + 0x30]
+0x4051ba: TEST ESI, ESI
+0x4051bc: JNZ 0x004050c5
+0x4051c2: POP ESI
+0x4051c3: RET

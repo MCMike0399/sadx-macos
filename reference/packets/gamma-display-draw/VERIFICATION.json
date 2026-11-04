@@ -1,0 +1,357 @@
+{
+  "status": "incomplete",
+  "base": "fbc1eec",
+  "branch": "packet/draw-path",
+  "source_commit": "7ad3c08",
+  "gamma_body_submitted": false,
+  "commands": [
+    {
+      "command": "make -j2 build/sadx-native build/native-gamma-display-test",
+      "exit": 2,
+      "log": "build/worker-logs/baseline-build.log",
+      "limit": "unneeded SDL rebuild attempted missing cmake"
+    },
+    {
+      "command": "make -j2 -o build/native-controller-deps/include/SDL3/SDL.h build/sadx-native build/native-gamma-display-test",
+      "exit": 0,
+      "log": "build/worker-logs/baseline-build-2.log"
+    },
+    {
+      "command": "make -j2 build/native-gamma-display-probe.dylib",
+      "exit": 0,
+      "log": "build/worker-logs/probe-build.log"
+    },
+    {
+      "command": "reference/python/bin/python tools/oracles/verify_original_gamma_display.py '/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe' build/native-gamma-display-probe.dylib --cases 64 --body --output build/oracles/gamma_display_dev.json",
+      "exit": 132,
+      "log": "build/worker-logs/body-dev.log",
+      "limit": "Unicorn initialization trap; no original or native case comparison executed"
+    },
+    {
+      "command": "PYTHONFAULTHANDLER=1 reference/python/bin/python tools/oracles/verify_original_gamma_display.py '/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe' build/native-gamma-display-probe.dylib --cases 0 --output build/oracles/prefix.json",
+      "exit": 132,
+      "limit": "diagnostic stack identifies init_cache_info during mem_map"
+    },
+    {
+      "command": "reference/python/bin/python reference/packets/gamma-display-draw/replay_retained.py /Users/burbujamc/.local/state/sadx-macintosh-reception.oUTxv5/extracted/gamma-display/build/oracles/gamma_display.json",
+      "exit": 0
+    },
+    {
+      "command": "reference/python/bin/python reference/packets/gamma-display-draw/verify_faults.py '/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe' --compile-only",
+      "exit": 0,
+      "compiled_faults": 5
+    },
+    {
+      "command": "make -j2 -o build/native-controller-deps/include/SDL3/SDL.h build/object-draw-test build/native-gamma-display-test",
+      "exit": 0,
+      "log": "build/worker-logs/model-dispatch-build.log"
+    },
+    {
+      "command": "./build/object-draw-test",
+      "exit": 0
+    },
+    {
+      "command": "./build/native-gamma-display-test build/gamma-display-native/assets",
+      "exit": 0,
+      "frontier": "native_gamma_display_action_clip_no_scale"
+    },
+    {
+      "command": "make -j2 check",
+      "exit": 2,
+      "log": "build/worker-logs/check-final-2.log",
+      "judge_registration_violations": 31
+    },
+    {
+      "command": "make -j2 -o build/native-controller-deps/include/SDL3/SDL.h build/sadx-native",
+      "exit": 0,
+      "log": "build/worker-logs/final-app-build.log"
+    },
+    {
+      "argv": [
+        "build/sadx-native",
+        "--assets",
+        "build/gamma-display-native/assets",
+        "--controller-library",
+        "build/native-controller-deps/lib/libSDL3.0.dylib",
+        "--offscreen",
+        "--paced",
+        "--exit-after",
+        "1550",
+        "--save-directory",
+        "build/gamma-display-native/baseline-save",
+        "--key-events",
+        "500:13:down,501:13:up,750:13:down,751:13:up,950:13:down,951:13:up,1050:13:down,1051:13:up,1300:13:down,1301:13:up",
+        "--screenshot",
+        "build/gamma-display-native/final.ppm"
+      ],
+      "exit": 1,
+      "log": "build/gamma-display-native/final-app.log",
+      "frame": null,
+      "stop": "Metal device unavailable",
+      "screenshot_sha256": null
+    },
+    {
+      "command": "python3 tools/gate/check_layers.py",
+      "exit": 0,
+      "limit": null
+    },
+    {
+      "command": "python3 tools/gate/check_global_owners.py",
+      "exit": 0,
+      "limit": null
+    },
+    {
+      "command": "python3 tools/gate/check_provenance.py",
+      "exit": 0,
+      "limit": null
+    },
+    {
+      "command": "python3 tools/gate/check_readability.py",
+      "exit": 0,
+      "limit": null
+    },
+    {
+      "command": "python3 tools/gate/check_profile_patches.py",
+      "exit": 0,
+      "limit": "standalone profile checker saw zero oracle report ranges; explicit recovered-body intersections are in SOURCE-EVIDENCE.json"
+    },
+    {
+      "command": "reference/python/bin/python reference/packets/gamma-display-draw/native_sensitivity.py",
+      "exit": 0,
+      "scope": "native-only; no original-body differential verdict"
+    }
+  ],
+  "retained_topology_replay": {
+    "cases": 1126,
+    "retained_report": "/Users/burbujamc/.local/state/sadx-macintosh-reception.oUTxv5/extracted/gamma-display/build/oracles/gamma_display.json",
+    "retained_report_sha256": "52aacb2c40e11afa2004a50489628a25b342193206fbffb79479a723a6ddd1cc",
+    "observations_sha256": "85f83fbbc0beb9cfd263530fa7003da887089358ac1800dd7105991972820c9d",
+    "retained_observations_sha256": "85f83fbbc0beb9cfd263530fa7003da887089358ac1800dd7105991972820c9d",
+    "match": true,
+    "scope": "native replay matches retained original aggregate commitment; no fresh original execution, placement, holdout or draw verdict"
+  },
+  "native_only_fault_sensitivity": {
+    "topology_cases": 1126,
+    "body_cases": 1024,
+    "cases": 2150,
+    "faults": [
+      {
+        "name": "wrong-first-sibling",
+        "native_baseline_differences": 793,
+        "first_difference": 0
+      },
+      {
+        "name": "missing-table-reload",
+        "native_baseline_differences": 1241,
+        "first_difference": 0
+      },
+      {
+        "name": "wrong-weld-source",
+        "native_baseline_differences": 1177,
+        "first_difference": 0
+      },
+      {
+        "name": "wrong-center-height",
+        "native_baseline_differences": 963,
+        "first_difference": 1127
+      },
+      {
+        "name": "missing-gamma-callback",
+        "native_baseline_differences": 654,
+        "first_difference": 1127
+      }
+    ],
+    "native_baseline_digest": "827bb3d4901b9f32a579388af05b9fb8cfacb0276ad725fc1cf3ee298713c866",
+    "scope": "native-only sensitivity; topology baseline separately matches retained original commitment; no source body/holdout differential verdict"
+  },
+  "fault_builds": [
+    {
+      "name": "wrong-first-sibling",
+      "build_command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-arch",
+        "arm64",
+        "-mmacosx-version-min=14.0",
+        "-Isrc",
+        "-dynamiclib",
+        "tests/probes/native_gamma_display_probe.cpp",
+        "/Users/burbujamc/Developer/sadx-worktrees/draw-path/build/gamma-display-draw-faults/wrong-first-sibling.cpp",
+        "build/libsadx-native.a",
+        "-o",
+        "/Users/burbujamc/Developer/sadx-worktrees/draw-path/build/gamma-display-draw-faults/wrong-first-sibling.dylib"
+      ],
+      "build_exit": 0
+    },
+    {
+      "name": "missing-table-reload",
+      "build_command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-arch",
+        "arm64",
+        "-mmacosx-version-min=14.0",
+        "-Isrc",
+        "-dynamiclib",
+        "tests/probes/native_gamma_display_probe.cpp",
+        "/Users/burbujamc/Developer/sadx-worktrees/draw-path/build/gamma-display-draw-faults/missing-table-reload.cpp",
+        "build/libsadx-native.a",
+        "-o",
+        "/Users/burbujamc/Developer/sadx-worktrees/draw-path/build/gamma-display-draw-faults/missing-table-reload.dylib"
+      ],
+      "build_exit": 0
+    },
+    {
+      "name": "wrong-weld-source",
+      "build_command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-arch",
+        "arm64",
+        "-mmacosx-version-min=14.0",
+        "-Isrc",
+        "-dynamiclib",
+        "tests/probes/native_gamma_display_probe.cpp",
+        "/Users/burbujamc/Developer/sadx-worktrees/draw-path/build/gamma-display-draw-faults/wrong-weld-source.cpp",
+        "build/libsadx-native.a",
+        "-o",
+        "/Users/burbujamc/Developer/sadx-worktrees/draw-path/build/gamma-display-draw-faults/wrong-weld-source.dylib"
+      ],
+      "build_exit": 0
+    },
+    {
+      "name": "wrong-center-height",
+      "build_command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-arch",
+        "arm64",
+        "-mmacosx-version-min=14.0",
+        "-Isrc",
+        "-dynamiclib",
+        "tests/probes/native_gamma_display_probe.cpp",
+        "/Users/burbujamc/Developer/sadx-worktrees/draw-path/build/gamma-display-draw-faults/wrong-center-height.cpp",
+        "build/libsadx-native.a",
+        "-o",
+        "/Users/burbujamc/Developer/sadx-worktrees/draw-path/build/gamma-display-draw-faults/wrong-center-height.dylib"
+      ],
+      "build_exit": 0
+    },
+    {
+      "name": "missing-gamma-callback",
+      "build_command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-arch",
+        "arm64",
+        "-mmacosx-version-min=14.0",
+        "-Isrc",
+        "-dynamiclib",
+        "tests/probes/native_gamma_display_probe.cpp",
+        "/Users/burbujamc/Developer/sadx-worktrees/draw-path/build/gamma-display-draw-faults/missing-gamma-callback.cpp",
+        "build/libsadx-native.a",
+        "-o",
+        "/Users/burbujamc/Developer/sadx-worktrees/draw-path/build/gamma-display-draw-faults/missing-gamma-callback.dylib"
+      ],
+      "build_exit": 0
+    }
+  ],
+  "body_oracle": {
+    "development_original_execution": "blocked",
+    "holdout_original_execution": "not run",
+    "faults_compiled": 5,
+    "faults_qualified_against_original_body": 0,
+    "boundary": "0x4800b4, before frame/action selection",
+    "common_seams": [
+      "palette backend",
+      "Ninja matrix numeric leaves",
+      "queue material backend"
+    ],
+    "FP_flags_compared": false
+  },
+  "branch_measurement": {
+    "actual_constructor_caller": "ordinary empty-event-list branch",
+    "normal_input": "not freshly measured; Metal unavailable",
+    "user_supplied_retained_normal_observation": {
+      "frame": 1332,
+      "stop": "native_gamma_display_action_clip_no_scale",
+      "implied_branch": "ordinary"
+    }
+  },
+  "app": {
+    "frame": null,
+    "stop": "Metal device unavailable",
+    "exit": 1,
+    "screenshot_sha256": null
+  },
+  "review": {
+    "agent": "/root/review_gamma_packet",
+    "findings_corrected": [
+      "cdecl texture selection must not pop stack argument",
+      "scope ends before action/frame selection"
+    ],
+    "conclusion": "no further concrete bugs in reviewed partial changes; original-body qualification and Gamma draw continuation incomplete"
+  },
+  "not_run": [
+    "full gate",
+    "full oracle suite",
+    "source-only build",
+    "fresh render_state_snapshot oracle",
+    "original body differential development/holdout verdicts",
+    "original-body fault kills",
+    "successful normal-input frame/screenshot"
+  ],
+  "limits": [
+    "No Gamma animated draw implementation or new caller boundary",
+    "Unicorn host initialization trap in sandbox",
+    "Metal unavailable",
+    "Protected judge manifest left untouched; make check fails pending registration",
+    "REA close process cleanup confirmation denied; post-analysis completion and removed sockets observed",
+    "No FP flag or pixel parity claim",
+    "Active angle sampler hook not qualified at the normal caller"
+  ],
+  "judge_proposal_files": [
+    "tests/probes/native_gamma_display_probe.cpp",
+    "tools/oracles/verify_original_gamma_display.py",
+    "tools/oracles/gamma_display_body_judge.py",
+    "reference/packets/gamma-display-draw/verify_faults.py",
+    "reference/packets/gamma-display-draw/replay_retained.py",
+    "reference/packets/gamma-display-draw/native_sensitivity.py",
+    "reference/packets/gamma-display-draw/faults.json"
+  ]
+}

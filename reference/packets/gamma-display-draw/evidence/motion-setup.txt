@@ -1,0 +1,80 @@
+Evidence: ev_80216f23e76c1b0118cc2c97670dbc28ead3974df9c4b0356271770db15e2065
+Original: 6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74
+
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+void FUN_004051d0(float param_1)
+
+{
+  uint uVar1;
+  float fVar2;
+  uint uVar3;
+  int iVar4;
+  undefined4 *unaff_ESI;
+
+  if (unaff_ESI == (undefined4 *)0x0) {
+    ObjectDrawFuncs_Index = 0;
+    _motion_type = 0;
+  }
+  else {
+    uVar1 = unaff_ESI[1];
+    uVar3 = FUN_00644340();
+    iVar4 = (uVar3 / uVar1) * uVar1;
+    fVar2 = (float)iVar4;
+    if (iVar4 < 0) {
+      fVar2 = fVar2 + 4.2949673e+09;
+    }
+    _motion_type = *(undefined2 *)(unaff_ESI + 2);
+    param_1 = param_1 - fVar2;
+    nj_motion_data_info_ = *unaff_ESI;
+    ObjectDrawFuncs_Index = *(ushort *)((int)unaff_ESI + 10) & 0xff3f;
+    _motion_nbFrame = unaff_ESI[1];
+  }
+  DAT_03ab9924 = 0;
+  DAT_03ab991c = param_1;
+  DAT_03ab992c = 0;
+  return;
+}
+
+
+0x4051d0: PUSH ECX
+0x4051d1: FLD float ptr [ESP + 0x8]
+0x4051d5: PUSH EBX
+0x4051d6: XOR EBX, EBX
+0x4051d8: CMP ESI, EBX
+0x4051da: JZ 0x00405237
+0x4051dc: FSTP ST0
+0x4051de: PUSH EDI
+0x4051df: FLD float ptr [ESP + 0x10]
+0x4051e3: MOV EDI, dword ptr [ESI + 0x4]
+0x4051e6: CALL 0x00644340
+0x4051eb: XOR EDX, EDX
+0x4051ed: DIV EDI
+0x4051ef: IMUL EAX, EDI
+0x4051f2: TEST EAX, EAX
+0x4051f4: MOV dword ptr [ESP + 0x8], EAX
+0x4051f8: FILD dword ptr [ESP + 0x8]
+0x4051fc: JGE 0x00405204
+0x4051fe: FADD float ptr [0x007dcb7c]
+0x405204: MOV CX, word ptr [ESI + 0x8]
+0x405208: FSUBR float ptr [ESP + 0x10]
+0x40520c: MOV EDX, dword ptr [ESI]
+0x40520e: XOR EAX, EAX
+0x405210: MOV AX, word ptr [ESI + 0xa]
+0x405214: MOV dword ptr [0x03ab9910], EDX
+0x40521a: MOV word ptr [0x03ab9894], CX
+0x405221: POP EDI
+0x405222: AND EAX, 0xff3f
+0x405227: MOV [0x03ab9904], AX
+0x40522d: MOV EAX, dword ptr [ESI + 0x4]
+0x405230: MOV [0x03ab9920], EAX
+0x405235: JMP 0x00405245
+0x405237: MOV word ptr [0x03ab9904], BX
+0x40523e: MOV word ptr [0x03ab9894], BX
+0x405245: MOV dword ptr [0x03ab9924], EBX
+0x40524b: FSTP float ptr [0x03ab991c]
+0x405251: MOV dword ptr [0x03ab992c], EBX
+0x405257: POP EBX
+0x405258: POP ECX
+0x405259: RET

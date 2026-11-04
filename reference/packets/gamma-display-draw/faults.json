@@ -1,0 +1,7 @@
+[
+  {"name":"wrong-first-sibling", "old":"object_row(context, table, 14)", "new":"object_row(context, table, 18)"},
+  {"name":"missing-table-reload", "old":"table = object_table(context);", "new":"/* compiled fault: retain the stale table */"},
+  {"name":"wrong-weld-source", "old":"store_weld_source(context, child(context, selected));", "new":"store_weld_source(context, selected);"},
+  {"name":"wrong-center-height", "old":"const NinjaVector local{0, motion_height(context), 0};", "new":"const NinjaVector local{0, motion_height(context) + 1.0f, 0};"},
+  {"name":"missing-gamma-callback", "old":"    set_object_callback(context);", "new":"    /* compiled fault: omit the Gamma callback */"}
+]

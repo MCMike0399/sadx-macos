@@ -1,0 +1,533 @@
+{
+  "original_exe_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "evidence": [
+    {
+      "label": "draw-action",
+      "evidence_id": "ev_cca3bf341601116c060c2de9cae1742604b05ee864b61f262908d8e2c659ea8b",
+      "raw_dossier_sha256": "3ffdaf6c3ce2dd46b820bc1a3fe9cf52fad87c66cdfd2cd8273a3867006e0520",
+      "procedure": {
+        "address": "0x4053d0",
+        "name": "FUN_004053d0",
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x4053d0",
+              "end": "0x40544e"
+            }
+          ],
+          "total_bytes": 127,
+          "span_bytes": 127,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "signature": "undefined FUN_004053d0()",
+        "locals": []
+      },
+      "retained_extract": "reference/packets/gamma-display-draw/evidence/draw-action.txt",
+      "extract_sha256": "64f73617d539f828478f1399e84d7d0441ac50192de4e441b3d5d582e7283162"
+    },
+    {
+      "label": "action-wrapper",
+      "evidence_id": "ev_815ac5e1e3ae0446b1face098311d1b191e987410faab7c1cf2e8f1bb550a6c2",
+      "raw_dossier_sha256": "8e1d03bd49fe43f257e163c9e1ae39d0cb414017f8781018017163ff26f91cfb",
+      "procedure": {
+        "address": "0x407020",
+        "name": "ds_ActionClipNoScale",
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x407020",
+              "end": "0x40703a"
+            }
+          ],
+          "total_bytes": 27,
+          "span_bytes": 27,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "signature": "undefined ds_ActionClipNoScale()",
+        "locals": []
+      },
+      "retained_extract": "reference/packets/gamma-display-draw/evidence/action-wrapper.txt",
+      "extract_sha256": "7cbaca6c60267296a2a4101f9a531b47c790f4445e577822aae2b5b619b5728b"
+    },
+    {
+      "label": "model-callback",
+      "evidence_id": "ev_14edd956a0a748f7578f02cb20cc621a0962b215b3d73b8fc7f2aa5c5b85490b",
+      "raw_dossier_sha256": "1c5624cd44408c981d6661a4729554c216cdc2f77a8f12906df79ed3fd40303f",
+      "procedure": {
+        "address": "0x403470",
+        "name": "__DrawModel",
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x403470",
+              "end": "0x4034a1"
+            }
+          ],
+          "total_bytes": 50,
+          "span_bytes": 50,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "signature": "undefined __DrawModel()",
+        "locals": []
+      },
+      "retained_extract": "reference/packets/gamma-display-draw/evidence/model-callback.txt",
+      "extract_sha256": "8b2ac6006e336b77f89f5250292067071b4884c08a11a406ade5296b58e1332d"
+    },
+    {
+      "label": "gamma-object-callback",
+      "evidence_id": "ev_edbf9732d5557cdd1172cbf4a698660c6538af53ded99bddaa9e88e04f219e81",
+      "raw_dossier_sha256": "4ee3ff858249f5212422a979d33bfba707095945ee042e5b0830c81292fcf312",
+      "procedure": {
+        "address": "0x47f990",
+        "name": "E102ObjectCallback",
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x47f990",
+              "end": "0x47f9d9"
+            }
+          ],
+          "total_bytes": 74,
+          "span_bytes": 74,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "signature": "undefined E102ObjectCallback()",
+        "locals": [
+          {
+            "description": "undefined4 local_8 @ Stack[-0x8]:4",
+            "provenance": "ghidra-function-database"
+          }
+        ]
+      },
+      "retained_extract": "reference/packets/gamma-display-draw/evidence/gamma-object-callback.txt",
+      "extract_sha256": "6e308056752c588d9ee32012caa603d4430360672d78d77dfe64c249fa090db7"
+    },
+    {
+      "label": "animated-node",
+      "evidence_id": "ev_2e57b29b50ec81d5c4272e2cc6c48544b2aebb8135f33ff40c3466c6ce8c2806",
+      "raw_dossier_sha256": "1c3018ab36ca5ac5924bf3408410cce03e43fb10cc5b3c90980a6a85691a196b",
+      "procedure": {
+        "address": "0x4050c0",
+        "name": "ProcessAnimatedModelNode__",
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x4050c0",
+              "end": "0x4051c3"
+            }
+          ],
+          "total_bytes": 260,
+          "span_bytes": 260,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "signature": "undefined ProcessAnimatedModelNode__()",
+        "locals": []
+      },
+      "retained_extract": "reference/packets/gamma-display-draw/evidence/animated-node.txt",
+      "extract_sha256": "645f9d70102098dfa6805facddcb1ee3256615d03d53fca663091020b637323f"
+    },
+    {
+      "label": "motion-setup",
+      "evidence_id": "ev_80216f23e76c1b0118cc2c97670dbc28ead3974df9c4b0356271770db15e2065",
+      "raw_dossier_sha256": "03c806db39efcb630bb7eebbfc0f882d14d7705db129dcc54b005e08987d4ece",
+      "procedure": {
+        "address": "0x4051d0",
+        "name": "FUN_004051d0",
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x4051d0",
+              "end": "0x405259"
+            }
+          ],
+          "total_bytes": 138,
+          "span_bytes": 138,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "signature": "undefined FUN_004051d0()",
+        "locals": []
+      },
+      "retained_extract": "reference/packets/gamma-display-draw/evidence/motion-setup.txt",
+      "extract_sha256": "caf405d26b5c9ef9963504d9f331453eb66e48ce703e044b3e827fc6ac07b60a"
+    },
+    {
+      "label": "transform-selection",
+      "evidence_id": "ev_1202548737178c28be56d15ffaf7c21212868c93fbfa1a97a5d155faa07282a1",
+      "raw_dossier_sha256": "76617556cfae8c33bff70b9bb6aa467742b225c1b1800654a0d375812eb61358",
+      "procedure": {
+        "address": "0x405260",
+        "name": "SetObjectDrawFunctions",
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x405260",
+              "end": "0x4052e5"
+            }
+          ],
+          "total_bytes": 134,
+          "span_bytes": 134,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "signature": "undefined SetObjectDrawFunctions()",
+        "locals": []
+      },
+      "retained_extract": "reference/packets/gamma-display-draw/evidence/transform-selection.txt",
+      "extract_sha256": "9ca03c0ea1f95b27d4767708dc6662971e3ac93d8e1eb94928451fbdff076270"
+    },
+    {
+      "label": "sample-angles",
+      "evidence_id": "ev_64576db1e9e706d2af41cae567b9309e4d5f342bb9554230f658c2a6cde7ae69",
+      "raw_dossier_sha256": "3267fd681162cceb44688f3bd2f10481cfa7b331c5fc4cd5c4552587103772b9",
+      "procedure": {
+        "address": "0x404c10",
+        "name": "FUN_00404c10",
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x404c10",
+              "end": "0x404cbe"
+            }
+          ],
+          "total_bytes": 175,
+          "span_bytes": 175,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "signature": "undefined FUN_00404c10()",
+        "locals": [
+          {
+            "description": "undefined4 local_4 @ Stack[-0x4]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_8 @ Stack[-0x8]:4",
+            "provenance": "ghidra-function-database"
+          }
+        ]
+      },
+      "retained_extract": "reference/packets/gamma-display-draw/evidence/sample-angles.txt",
+      "extract_sha256": "dcbd0ac764529bdf21de8e7e86566a385308983f5b8f15079b818834464c0572"
+    },
+    {
+      "label": "sample-vectors",
+      "evidence_id": "ev_0c77a1ad39091c26062c54d515fc6a5aefdff7e852268a39106624a6e94429b4",
+      "raw_dossier_sha256": "1a1bfde0212408710ad68104ad44be3f2723a160d6ded972d151328242644562",
+      "procedure": {
+        "address": "0x404b60",
+        "name": "FUN_00404b60",
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x404b60",
+              "end": "0x404c00"
+            }
+          ],
+          "total_bytes": 161,
+          "span_bytes": 161,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "signature": "undefined FUN_00404b60()",
+        "locals": [
+          {
+            "description": "undefined4 local_4 @ Stack[-0x4]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_8 @ Stack[-0x8]:4",
+            "provenance": "ghidra-function-database"
+          }
+        ]
+      },
+      "retained_extract": "reference/packets/gamma-display-draw/evidence/sample-vectors.txt",
+      "extract_sha256": "99b5dec907956d13bd017c131b81ce0214cbd7a7d678538094e5a5b0de4e7764"
+    },
+    {
+      "label": "object-callback-users",
+      "evidence_id": "ev_6a30ee7f17becc8a395e469c6bfdc102ad1fbdbc261a36b3cacb47bbed1b838d",
+      "normalized_result": [
+        "0x7802d0",
+        "0x79301f"
+      ],
+      "raw_dossier_sha256": "d4a2af42969a534adf576687539bcc729a9d750544eb4317e34c69c2586723ec"
+    },
+    {
+      "label": "animated-callback-users",
+      "evidence_id": "ev_a4aa56aca91d0bde51cc49526419e553ccd8b497250ef1bb0970296bf651eb76",
+      "normalized_result": [
+        "0x40512c",
+        "0x405e3c",
+        "0x4068fd"
+      ],
+      "raw_dossier_sha256": "6b7820438854e2faefedb3662640857c695235ec3e7fd3615f3003d0b6c32954"
+    },
+    {
+      "label": "ninja-callback-read",
+      "evidence_id": "ev_3dc3230c9618b3d71554223cacebb8dcab450548460a75369d69c15b2be3fa29",
+      "normalized_result": {
+        "address": "0x79301f",
+        "status": "decoded",
+        "procedure": "0x793010",
+        "architecture": "x86:LE:32:default",
+        "mode": "default",
+        "bytes": "a14488d003",
+        "length": 5,
+        "mnemonic": "MOV",
+        "raw_disassembly": "MOV EAX,[0x03d08844]",
+        "operands": [
+          {
+            "index": 0,
+            "raw": "EAX",
+            "provider_type": 512,
+            "components": [
+              {
+                "kind": "register",
+                "text": "EAX",
+                "value": "EAX",
+                "bit_width": 32
+              }
+            ],
+            "memory_addressing": "unavailable"
+          },
+          {
+            "index": 1,
+            "raw": "[0x03d08844]",
+            "provider_type": 8320,
+            "components": [
+              {
+                "kind": "address",
+                "text": "03d08844",
+                "value": "0x3d08844",
+                "bit_width": null
+              }
+            ],
+            "memory_addressing": "unavailable"
+          }
+        ],
+        "flow": {
+          "kind": "fallthrough",
+          "conditional": false,
+          "computed": false,
+          "direct_destinations": [],
+          "classification_evidence": [
+            {
+              "source": "ghidra-listing-flow-type",
+              "value": "FALL_THROUGH"
+            }
+          ]
+        },
+        "references": [
+          {
+            "target_address": "0x3d08844",
+            "type": "READ",
+            "call": false,
+            "jump": false,
+            "indirect": false,
+            "computed": false,
+            "operand_index": 1,
+            "source_address": "0x79301f",
+            "data": true,
+            "read": true,
+            "write": false,
+            "primary": true,
+            "provenance": "ghidra-reference-manager",
+            "source": "default"
+          }
+        ],
+        "limitations": [
+          "Operand components are Ghidra Listing decoder tokens; effective memory base/index/displacement roles and per-instruction context mode are unavailable. The mode field is the program language variant."
+        ]
+      },
+      "raw_dossier_sha256": "cede1d0bd87a79d9561fff403b32a82062d67302872b09626fe0643d8c824e7e"
+    }
+  ],
+  "profile_intersections": [
+    {
+      "label": "draw-action",
+      "ranges": [
+        {
+          "start": "0x4053d0",
+          "end": "0x40544e"
+        }
+      ],
+      "active_patch_overlaps": []
+    },
+    {
+      "label": "action-wrapper",
+      "ranges": [
+        {
+          "start": "0x407020",
+          "end": "0x40703a"
+        }
+      ],
+      "active_patch_overlaps": []
+    },
+    {
+      "label": "model-callback",
+      "ranges": [
+        {
+          "start": "0x403470",
+          "end": "0x4034a1"
+        }
+      ],
+      "active_patch_overlaps": []
+    },
+    {
+      "label": "gamma-object-callback",
+      "ranges": [
+        {
+          "start": "0x47f990",
+          "end": "0x47f9d9"
+        }
+      ],
+      "active_patch_overlaps": []
+    },
+    {
+      "label": "animated-node",
+      "ranges": [
+        {
+          "start": "0x4050c0",
+          "end": "0x4051c3"
+        }
+      ],
+      "active_patch_overlaps": []
+    },
+    {
+      "label": "motion-setup",
+      "ranges": [
+        {
+          "start": "0x4051d0",
+          "end": "0x405259"
+        }
+      ],
+      "active_patch_overlaps": []
+    },
+    {
+      "label": "transform-selection",
+      "ranges": [
+        {
+          "start": "0x405260",
+          "end": "0x4052e5"
+        }
+      ],
+      "active_patch_overlaps": []
+    },
+    {
+      "label": "sample-angles",
+      "ranges": [
+        {
+          "start": "0x404c10",
+          "end": "0x404cbe"
+        }
+      ],
+      "active_patch_overlaps": [
+        {
+          "va": "0x404c10",
+          "size": 5,
+          "owner": "loader",
+          "kind": "jump",
+          "target": "LinearMotionA_r",
+          "condition": "unconditional: interpolation::init() from InitMods (routes to original while interpolation::enabled=false)",
+          "active": true,
+          "source_ref": "InterpolationFixes.cpp:141",
+          "handled_by": null,
+          "original_bytes": "83ec08568b"
+        }
+      ]
+    },
+    {
+      "label": "sample-vectors",
+      "ranges": [
+        {
+          "start": "0x404b60",
+          "end": "0x404c00"
+        }
+      ],
+      "active_patch_overlaps": []
+    }
+  ],
+  "angle_sampler_profile_limit": {
+    "source": "reference/sadx-mod-loader/SADXModLoader/InterpolationFixes.cpp",
+    "sha256": "afb7139711dc78d8f070d833fab5dd4c5b37bba02f790c11d654910c2033e2b3",
+    "fact": "LinearMotionA_r hooks 0x404c10 unconditionally; dispatches to original only while interpolation::enabled is false. Its initial value is false, but this packet did not measure it at the normal-input display caller."
+  }
+}

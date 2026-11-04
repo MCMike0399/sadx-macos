@@ -1,0 +1,81 @@
+Evidence: ev_64576db1e9e706d2af41cae567b9309e4d5f342bb9554230f658c2a6cde7ae69
+Original: 6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74
+
+
+void FUN_00404c10(void)
+
+{
+  undefined4 uVar1;
+  undefined4 *unaff_EBX;
+
+  uVar1 = FUN_00644340();
+  *unaff_EBX = uVar1;
+  uVar1 = FUN_00644340();
+  unaff_EBX[1] = uVar1;
+  uVar1 = FUN_00644340();
+  unaff_EBX[2] = uVar1;
+  return;
+}
+
+
+0x404c10: SUB ESP, 0x8
+0x404c13: PUSH ESI
+0x404c14: MOV ESI, EAX
+0x404c16: SHL ESI, 0x4
+0x404c19: ADD ESI, ECX
+0x404c1b: INC EAX
+0x404c1c: XOR EDX, EDX
+0x404c1e: DIV dword ptr [ESP + 0x10]
+0x404c22: PUSH EDI
+0x404c23: MOV dword ptr [ESP + 0x8], 0x3f800000
+0x404c2b: MOV EDI, EDX
+0x404c2d: SHL EDI, 0x4
+0x404c30: MOV EAX, dword ptr [EDI + ECX*0x1]
+0x404c33: ADD EDI, ECX
+0x404c35: MOV ECX, dword ptr [ESI]
+0x404c37: SUB EAX, ECX
+0x404c39: TEST EAX, EAX
+0x404c3b: MOV dword ptr [ESP + 0x14], EAX
+0x404c3f: FILD dword ptr [ESP + 0x14]
+0x404c43: JGE 0x00404c4b
+0x404c45: FADD float ptr [0x007dcb7c]
+0x404c4b: TEST ECX, ECX
+0x404c4d: FSTP float ptr [ESP + 0xc]
+0x404c51: MOV dword ptr [ESP + 0x14], ECX
+0x404c55: FILD dword ptr [ESP + 0x14]
+0x404c59: JGE 0x00404c61
+0x404c5b: FADD float ptr [0x007dcb7c]
+0x404c61: FSUBR float ptr [0x03ab991c]
+0x404c67: XOR ECX, ECX
+0x404c69: TEST EAX, EAX
+0x404c6b: SETG CL
+0x404c6e: FDIV float ptr [ESP + ECX*0x4 + 0x8]
+0x404c72: FLD float ptr [0x007dcb10]
+0x404c78: FSUB ST0, ST1
+0x404c7a: FILD dword ptr [ESI + 0x4]
+0x404c7d: FMUL ST1
+0x404c7f: FILD dword ptr [EDI + 0x4]
+0x404c82: FMUL ST3
+0x404c84: FADDP
+0x404c86: CALL 0x00644340
+0x404c8b: MOV dword ptr [EBX], EAX
+0x404c8d: FILD dword ptr [ESI + 0x8]
+0x404c90: FMUL ST1
+0x404c92: FILD dword ptr [EDI + 0x8]
+0x404c95: FMUL ST3
+0x404c97: FADDP
+0x404c99: CALL 0x00644340
+0x404c9e: MOV dword ptr [EBX + 0x4], EAX
+0x404ca1: FILD dword ptr [ESI + 0xc]
+0x404ca4: FMUL ST1
+0x404ca6: FILD dword ptr [EDI + 0xc]
+0x404ca9: FMUL ST3
+0x404cab: FADDP
+0x404cad: CALL 0x00644340
+0x404cb2: FSTP ST0
+0x404cb4: POP EDI
+0x404cb5: FSTP ST0
+0x404cb7: MOV dword ptr [EBX + 0x8], EAX
+0x404cba: POP ESI
+0x404cbb: ADD ESP, 0x8
+0x404cbe: RET
