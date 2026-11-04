@@ -6,7 +6,7 @@
 namespace sadx::gamma_display {
 namespace {
 [[noreturn]] void missing(const std::string &fact) {
-    throw flow::UnrecoveredGameFlowCall(fact);
+    throw flow::UnrecoveredGameFlowCall(fact.c_str());
 }
 TaskWorkArena &arena(Context &context) {
     const auto owner = context.owner.scheduler.work_arena();

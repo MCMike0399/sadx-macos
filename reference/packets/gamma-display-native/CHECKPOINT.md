@@ -53,3 +53,12 @@ stops before palette 4 and makes no placement/arithmetic/draw claim. Placement,
 SetMaterial's scratch store and actual app/scheduler evidence still need their
 own complete comparisons after release. verify_packet.py records finite argv
 and uses an exact private callback-source override at maximum -j2.
+
+## Macintosh handover preservation — 2026-11-04
+
+The user requested publishing Main and a complete Macintosh handover. The sole
+interrupted working edit changes the failure exception argument to `fact.c_str()`
+in native_gamma_display_binding.cpp. It is committed here for transport, without
+a build or a fidelity claim. The exact saved patch SHA-256 is `503a54f5cd842e90d0a4c06b2f10842c1cff07ef246bc1c2fbb99c0105fddab1`.
+The source and deferred tests remain unqualified. Main source 709f2744 and its
+recorded gate are separate from this draft. DiveMac workers remain stopped.
