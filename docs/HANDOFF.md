@@ -1054,3 +1054,11 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Fresh git source archive contains no original EXE/DLL or prebuilt game objects. Copied public SDL/libusb only; native build and force-load closure pass at -j2. Normal input reaches Display at frame 1332, exit 1, with the identical inspected title image.
 * sonic-initialization-fan-gate.json, sonic-initialization-fan-qualified-rasters.json and sonic-initialization-fan-source-only.json retain commands and limits. No actor frame, N3b, active welding or complete gameplay acceptance.
 * Gamma display draft b5a3cea9 remains separate and unqualified; Root releases worker 53a0367d after this serialized qualification to finish source comparisons and real renderer composition.
+
+### 2026-11-04 — Macintosh takeover and publication
+
+* The user requested publishing Main and a complete Macintosh handover. DiveMac SADX jobs remain stopped; unrelated services remain running.
+* docs/HANDOVER-MACINTOSH-20261104.md contains the takeover prompt, verified frontier, qualification limits, inputs, recovery paths and next display tasks. The adjacent recovery JSON maps all 46 offloaded directories and six archive manifests.
+* Gamma display checkpoint is published separately at packet/gamma-display-native, head 1aa91341. The interrupted edit is preserved; retained logs reveal bounded development checks plus failed caller/asset-overlay attempts, not complete qualification.
+* The private supplement under ~/.local/state/sadx-macintosh-handover-20261104 retains ignored dossiers/logs, project memory and canonical archive restore manifests. Game assets and compiled binaries remain outside Git.
+* Qualified game source remains 709f2744: 333 native programs, 622 Python tests, cold-source Display1332/title; no actor frame or N3b. This documentation-only handover adds no new runtime qualification.
