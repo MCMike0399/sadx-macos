@@ -1,0 +1,98 @@
+{
+  "kind": "Historical interrupted attempt receipts; not complete qualification",
+  "recorded_on": "2026-11-04",
+  "draft": "b5a3cea95c135d9bc58a001915e53bf7bf87e624",
+  "preserved_edit": "28459d8811097d609e1193c35bf350e7443679ec",
+  "records": [
+    {
+      "stage": "build-app",
+      "exit": 0,
+      "exit_file": "build/gamma-display-native/build-app.exit",
+      "log": "build/gamma-display-native/build-app.log",
+      "log_sha256": "134eeda3353b63c251436b4fd9009b83e98f08c9d8012ec3f972d46d03cfcfe4"
+    },
+    {
+      "stage": "build-caller",
+      "exit": 0,
+      "exit_file": "build/gamma-display-native/build-caller.exit",
+      "log": "build/gamma-display-native/build-caller.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "stage": "build-probe-gamma-display",
+      "exit": 0,
+      "exit_file": "build/gamma-display-native/build-probe-gamma-display.exit",
+      "log": "build/gamma-display-native/build-probe-gamma-display.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "stage": "build-probe-render-state-snapshot",
+      "exit": 0,
+      "exit_file": "build/gamma-display-native/build-probe-render-state-snapshot.exit",
+      "log": "build/gamma-display-native/build-probe-render-state-snapshot.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "stage": "caller",
+      "exit": -6,
+      "exit_file": "build/gamma-display-native/caller.exit",
+      "log": "build/gamma-display-native/caller.log",
+      "log_sha256": "64cd002d053f161b180b145e76d22eb390990180fc3f5b93f77fba8e39258ca0"
+    },
+    {
+      "stage": "gamma_display",
+      "exit": 0,
+      "exit_file": "build/gamma-display-native/gamma_display.exit",
+      "log": "build/gamma-display-native/gamma_display.log",
+      "log_sha256": "46e6be6cb2fd51272bbcf667f966ba4a731fc92746e0fcaaa28841928facfcfe"
+    },
+    {
+      "stage": "normal-input",
+      "exit": 1,
+      "exit_file": "build/gamma-display-native/normal-input.exit",
+      "log": "build/gamma-display-native/normal-input.log",
+      "log_sha256": "9bc7cd692a2ee516d97671f01d9b7fafa0ff5cc2c98849d0885b61f4e9e12b28"
+    },
+    {
+      "stage": "render_state_snapshot",
+      "exit": 0,
+      "exit_file": "build/gamma-display-native/render_state_snapshot.exit",
+      "log": "build/gamma-display-native/render_state_snapshot.log",
+      "log_sha256": "c3c53cd4a63c02bf5e21224fcb07d5af37df8b09b4637d322029a46136bef9ec"
+    }
+  ],
+  "reports": {
+    "gamma_display": {
+      "path": "build/oracles/gamma_display.json",
+      "sha256": "52aacb2c40e11afa2004a50489628a25b342193206fbffb79479a723a6ddd1cc",
+      "summary": {
+        "cases": 1126,
+        "seed": 4717904,
+        "value_failures": 0,
+        "failure_prefixes": 1026,
+        "status": "pass",
+        "scope": "integer topology prefix only; stops before first palette call; no placement or rendering claim",
+        "observations_sha256": "85f83fbbc0beb9cfd263530fa7003da887089358ac1800dd7105991972820c9d"
+      }
+    },
+    "render_state_snapshot": {
+      "path": "build/oracles/render_state_snapshot.json",
+      "sha256": "a11ad946aab2fd1c55126a413eb6262ec9165770aa81bc1acec2922b93f3a765",
+      "summary": {
+        "cases": 1066,
+        "seed": 4429088,
+        "value_failures": 0,
+        "status": "pass",
+        "scope": "seven integer leaves; native object callback domain is None/Gamma; SetMaterial excluded",
+        "observations_sha256": "3ea385a5d5df3d13b40cdfd40b49ee1892ad5e24c6eac0f89fd64e8f508eab8b"
+      }
+    }
+  },
+  "limits": [
+    "Read-only inspection of retained ignored logs, not rerun on handover day.",
+    "Exact generated private headers/source and source mtimes must be audited before attributing any result to the final checkpoint.",
+    "No holdout, faults, placement fidelity, passing actual caller, actor frame or N3b qualification.",
+    "caller.exit -6: collision->info[0].center.x == pose.position.x assertion at native_gamma_display.mm:142.",
+    "normal-input.exit 1: imported sample resolves outside asset directory; no display-path progress established."
+  ]
+}

@@ -62,3 +62,16 @@ in native_gamma_display_binding.cpp. It is committed here for transport, without
 a build or a fidelity claim. The exact saved patch SHA-256 is `503a54f5cd842e90d0a4c06b2f10842c1cff07ef246bc1c2fbb99c0105fddab1`.
 The source and deferred tests remain unqualified. Main source 709f2744 and its
 recorded gate are separate from this draft. DiveMac workers remain stopped.
+
+## Retained attempts discovered during final handover audit
+
+Earlier uncompiled statements above describe the heavy-hold checkpoint. The
+brief release before the user stop left ignored logs: build-app, both probes and
+caller compilation exited 0; development topology reported 1,126 cases and
+render-state reported 1,066, with zero recorded value failures. These are bounded
+historical attempts. Actual caller exited -6 on its collision-center X assertion;
+normal input exited 1 with `imported sample resolves outside asset directory`.
+No successful display run, holdout or complete qualification is established.
+Read `INTERRUPTED-ATTEMPTS.json` and recover the private logs/generated fixture
+before relying on these results. Macintosh must audit exact source dependencies
+and fix or diagnose both failures, preserving the old cases.
