@@ -18,6 +18,15 @@ std::int32_t draw_simple_model(ModelId model, Context &context) {
     return 0;
 }
 
+void draw_callback_model(ModelId model, State state, Context &context) {
+    if (model == 0)
+        return;
+    if (state.simple_draw_enabled != 0 && state.lighting_palette < 1)
+        draw_simple_model(model, context);
+    else
+        draw_model(context, model);
+}
+
 void draw_objects(ObjectId root, State state, Context &context) {
     while (root != 0) {
         const auto &node = object(context, root);
@@ -37,10 +46,7 @@ void draw_objects(ObjectId root, State state, Context &context) {
                 scale_current(context, node.scale);
         }
         if (!has(flags, ObjectFlags::Hide) && node.model != 0) {
-            if (state.simple_draw_enabled != 0 && state.lighting_palette <= 0)
-                draw_simple_model(node.model, context);
-            else
-                draw_model(context, node.model);
+            draw_callback_model(node.model, state, context);
         }
         if (!has(flags, ObjectFlags::Break))
             draw_objects(node.child, state, context);

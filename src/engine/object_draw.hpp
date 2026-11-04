@@ -56,6 +56,10 @@ void draw_model(Context &context, ModelId id);
 
 // FUNCTION: SONIC 0x401430 dsSimpleDrawModel
 std::int32_t draw_simple_model(ModelId model, Context &context);
+// Imported model identities denote validated objects; zero is the null source
+// pointer. Invalid low guest pointers are classified by reference bindings.
+// FUNCTION: SONIC 0x403470 __DrawModel
+void draw_callback_model(ModelId model, State state, Context &context);
 // FUNCTION: SONIC 0x4034b0 DrawObject
 void draw_objects(ObjectId root, State state, Context &context);
 // FUNCTION: SONIC 0x408530 dsDrawObject
