@@ -35,7 +35,7 @@ struct Fixture {
     std::shared_ptr<PlayerAnimationAllocatedAction> action = std::make_shared<PlayerAnimationAllocatedAction>();
     std::shared_ptr<PlayerAnimationAllocatedMotion> motion = std::make_shared<PlayerAnimationAllocatedMotion>();
     Fixture() {
-        player.animation_mode_at_120 = 3;
+        player.animation_mode = 3;
         player.requested_animation_at_124 = 0;
         player.current_animation_at_126 = 0;
         player.previous_animation_at_128 = 77;
@@ -98,7 +98,7 @@ void record(const std::string& name, Fixture& fixture, const PlayerAnimationResu
               << result.callee_address << ',' << result.nested_source_boundary << ','
               << static_cast<unsigned>(result.work_failure.value_or(TaskWorkFailure::None)) << ','
               << result.work_failure.has_value() << ',' << result.completed << ',' << result.wrap_iterations << "],\"state\":["
-              << fixture.player.animation_mode_at_120.value_or(-99) << ','
+              << fixture.player.animation_mode.value_or(-99) << ','
               << fixture.player.requested_animation_at_124.value_or(65535) << ','
               << fixture.player.current_animation_at_126.value_or(65535) << ','
               << fixture.player.previous_animation_at_128.value_or(65535) << ','
@@ -106,7 +106,7 @@ void record(const std::string& name, Fixture& fixture, const PlayerAnimationResu
               << fixture.tail.timer_at_12c.value_or(65535) << ','
               << bits(fixture.tail.frame_at_130.value_or(-99)) << ','
               << fixture.fp.exception_flags() << ',' << fixture.fp.control_word() << "],\"known\":["
-              << fixture.player.animation_mode_at_120.has_value() << ','
+              << fixture.player.animation_mode.has_value() << ','
               << fixture.player.requested_animation_at_124.has_value() << ','
               << fixture.player.current_animation_at_126.has_value() << ','
               << fixture.player.previous_animation_at_128.has_value() << ','
@@ -150,7 +150,7 @@ void missingness() {
     using F = PlayerAnimationFailure;
     failure("current", false, [](auto& f) { f.player.current_animation_at_126.reset(); }, F::unknown_field, 0x44a808);
     failure("requested", false, [](auto& f) { f.player.requested_animation_at_124.reset(); }, F::unknown_field, 0x44a80c);
-    failure("mode", false, [](auto& f) { f.player.animation_mode_at_120.reset(); }, F::unknown_field, 0x44a825);
+    failure("mode", false, [](auto& f) { f.player.animation_mode.reset(); }, F::unknown_field, 0x44a825);
     failure("timer", false, [](auto& f) { f.tail.timer_at_12c.reset(); }, F::unknown_field, 0x44a842);
     failure("table-unknown", false, [](auto& f) { f.tail.table_at_140.reset(); }, F::unknown_field, 0x44a948);
     failure("table-null", false, [](auto& f) { f.tail.table_at_140 = std::shared_ptr<const PlayerAnimationTable>{}; }, F::null_resource, 0x44a948);
@@ -164,19 +164,19 @@ void missingness() {
     failure("motion-null", false, [](auto& f) { f.resources.actions[0].motion = AnimationResourceReference{}; }, F::null_resource, 0x44a975);
     failure("motion-unresolved", false, [](auto& f) { f.resources.motions.erase(0); }, F::unresolved_resource, 0x44a975);
     failure("frame-count", false, [](auto& f) { f.resources.motions[0].frame_count.reset(); }, F::unknown_field, 0x44a975);
-    failure("transition", false, [](auto& f) { f.player.animation_mode_at_120 = 2; f.table->records[0].transition_step.reset(); }, F::unknown_field, 0x44a921);
-    failure("target-mode", false, [](auto& f) { f.player.animation_mode_at_120 = 2; f.table->records[0].transition_step = 1; f.table->records[0].mode.reset(); }, F::unknown_field, 0x44a93b);
-    failure("next", false, [](auto& f) { f.player.animation_mode_at_120 = 1; f.table->records[0].transition_step = 1; f.table->records[0].next.reset(); }, F::unknown_field, 0x44a90c);
-    failure("release-count", false, [](auto& f) { f.player.animation_mode_at_120 = 14; f.table->records[0].object_count.reset(); }, F::unknown_field, 0x43fa00);
+    failure("transition", false, [](auto& f) { f.player.animation_mode = 2; f.table->records[0].transition_step.reset(); }, F::unknown_field, 0x44a921);
+    failure("target-mode", false, [](auto& f) { f.player.animation_mode = 2; f.table->records[0].transition_step = 1; f.table->records[0].mode.reset(); }, F::unknown_field, 0x44a93b);
+    failure("next", false, [](auto& f) { f.player.animation_mode = 1; f.table->records[0].transition_step = 1; f.table->records[0].next.reset(); }, F::unknown_field, 0x44a90c);
+    failure("release-count", false, [](auto& f) { f.player.animation_mode = 14; f.table->records[0].object_count.reset(); }, F::unknown_field, 0x43fa00);
     for (unsigned mode : {9U, 10U, 11U}) {
         const auto boundary = mode == 9 ? 0x44aa00U : mode == 10 ? 0x44aaa5U : 0x44ab52U;
-        failure("arena-" + std::to_string(mode), false, [=](auto& f) { f.player.animation_mode_at_120 = mode; f.runtime.arena = nullptr; }, F::missing_arena, boundary);
-        failure("allocation-" + std::to_string(mode), false, [=](auto& f) { f.player.animation_mode_at_120 = mode; f.view.player_allocation.reset(); }, F::unresolved_resource, boundary);
-        failure("null-alias-" + std::to_string(mode), false, [=](auto& f) { f.player.animation_mode_at_120 = mode; require(bool(f.arena.set_reference(f.work, mode == 9 ? 0x138 : 0x13c, {})), "null alias"); }, F::null_resource, boundary);
-        failure("foreign-alias-" + std::to_string(mode), false, [=](auto& f) { f.player.animation_mode_at_120 = mode; require(bool(f.arena.set_reference(f.work, mode == 9 ? 0x138 : 0x13c, f.arena.allocate(64).work)), "foreign alias"); }, F::unresolved_resource, boundary);
-        failure("wrong-offset-" + std::to_string(mode), false, [=](auto& f) { f.player.animation_mode_at_120 = mode; require(bool(f.arena.set_reference_view(f.work, mode == 9 ? 0x138 : 0x13c, f.work, 4)), "bad alias offset"); }, F::unresolved_resource, boundary);
+        failure("arena-" + std::to_string(mode), false, [=](auto& f) { f.player.animation_mode = mode; f.runtime.arena = nullptr; }, F::missing_arena, boundary);
+        failure("allocation-" + std::to_string(mode), false, [=](auto& f) { f.player.animation_mode = mode; f.view.player_allocation.reset(); }, F::unresolved_resource, boundary);
+        failure("null-alias-" + std::to_string(mode), false, [=](auto& f) { f.player.animation_mode = mode; require(bool(f.arena.set_reference(f.work, mode == 9 ? 0x138 : 0x13c, {})), "null alias"); }, F::null_resource, boundary);
+        failure("foreign-alias-" + std::to_string(mode), false, [=](auto& f) { f.player.animation_mode = mode; require(bool(f.arena.set_reference(f.work, mode == 9 ? 0x138 : 0x13c, f.arena.allocate(64).work)), "foreign alias"); }, F::unresolved_resource, boundary);
+        failure("wrong-offset-" + std::to_string(mode), false, [=](auto& f) { f.player.animation_mode = mode; require(bool(f.arena.set_reference_view(f.work, mode == 9 ? 0x138 : 0x13c, f.work, 4)), "bad alias offset"); }, F::unresolved_resource, boundary);
     }
-    failure("charge-unknown", false, [](auto& f) { f.player.animation_mode_at_120 = 10; f.player.source_charge_at_0.reset(); }, F::unknown_field, 0x44aaa5);
+    failure("charge-unknown", false, [](auto& f) { f.player.animation_mode = 10; f.player.source_charge_at_0.reset(); }, F::unknown_field, 0x44aaa5);
     failure("selected-object", true, [](auto& f) { f.resources.actions[0].object.reset(); }, F::unknown_field, 0x43f2c8);
     failure("selected-object-null", true, [](auto& f) { f.resources.actions[0].object = SceneResourceReference{}; }, F::null_resource, 0x439fe2);
     failure("object-map", true, [](auto& f) { f.resources.objects = nullptr; }, F::unresolved_resource, 0x439fe2);
@@ -239,12 +239,12 @@ void missingness() {
         }, F::unknown_field, sample);
     }
     failure("arena-unobserved-alias", false, [](auto& f) {
-        f.player.animation_mode_at_120 = 9;
+        f.player.animation_mode = 9;
         auto fresh = f.arena.allocate(512).work;
         f.view.player_allocation = fresh;
     }, F::work_failed, 0x44aa00);
     failure("arena-released-player", false, [](auto& f) {
-        f.player.animation_mode_at_120 = 9;
+        f.player.animation_mode = 9;
         require(bool(f.arena.release(f.work)), "release player fixture");
     }, F::work_failed, 0x44aa00);
 }
@@ -253,7 +253,7 @@ void ordering() {
     {
         Fixture f;
         f.tail.table_at_140.reset();
-        f.player.animation_mode_at_120 = 3;
+        f.player.animation_mode = 3;
         auto result = reset_player_animation_frame(f.view, f.runtime, f.fp);
         require(bool(result) && f.tail.frame_at_130 == 0.25F && f.tail.start_at_134 == 0, "reset lazy fields");
         record("reset-unreached-table", f, result);
@@ -268,7 +268,7 @@ void ordering() {
     }
     for (unsigned mode : {9U, 10U, 11U}) {
         Fixture f;
-        f.player.animation_mode_at_120 = mode;
+        f.player.animation_mode = mode;
         auto first = f.update();
         require(bool(first), "first live alias");
         f.player.motion.speed.x = 6;
@@ -334,10 +334,10 @@ void ordering() {
         const auto bytes = *found->physical_next - head;
         auto pressure = f.arena.allocate(bytes - available - 32);
         require(bool(pressure), "controlled exhaustion");
-        f.player.animation_mode_at_120 = 0;
+        f.player.animation_mode = 0;
         f.tail.buffer_at_148.reset();
         auto result = f.update();
-        require(f.player.animation_mode_at_120 == 1 && f.tail.frame_at_130 == 0 && f.tail.start_at_134 == 0,
+        require(f.player.animation_mode == 1 && f.tail.frame_at_130 == 0 && f.tail.start_at_134 == 0,
                 "mode/frame publication precedes allocation failure");
         if (!available) {
             require(result.failure == PlayerAnimationFailure::null_resource && result.source_boundary == 0x44a880,
@@ -361,7 +361,7 @@ void ordering() {
     }
     {
         Fixture f;
-        f.player.animation_mode_at_120 = 0;
+        f.player.animation_mode = 0;
         f.resources.actions[0].object.reset();
         auto result = f.update();
         require(f.tail.buffer_at_148 && *f.tail.buffer_at_148, "action published before source object read");
@@ -385,7 +385,7 @@ void ordering() {
             observed = true;
             return false;
         });
-        f.player.animation_mode_at_120 = 0;
+        f.player.animation_mode = 0;
         auto result = f.update();
         require(observed && result.failure == PlayerAnimationFailure::work_failed && result.source_boundary == 0x44a8b5,
                 "rejected data initialization boundary");
@@ -445,14 +445,14 @@ void ordering() {
         PlayerAnimationTail tail;
         PlayerAnimationAllocatedAction action;
         PlayerAnimationAllocatedMotion motion;
-        require(!generic.animation_mode_at_120 && !generic.requested_animation_at_124 &&
+        require(!generic.animation_mode && !generic.requested_animation_at_124 &&
                 !tail.table_at_140 && !tail.timer_at_12c && !tail.frame_at_130 &&
                 !action.object && !action.motion && !motion.data && !motion.type && !motion.frame_count,
                 "arbitrary fixtures and malloc headers do not acquire native calloc defaults");
     }
     {
         Fixture f;
-        f.player.animation_mode_at_120 = 14;
+        f.player.animation_mode = 14;
         f.table->records[0].object_count = 0;
         auto data = *f.motion->data;
         unsigned observed = 0;

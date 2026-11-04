@@ -64,7 +64,7 @@ struct ReferenceAccess {
             decltype((v.player.current_animation_at_126)) current;
             decltype((v.player.requested_animation_at_124)) requested;
             decltype((v.player.previous_animation_at_128)) previous;
-            decltype((v.player.animation_mode_at_120)) mode;
+            decltype((v.player.animation_mode)) mode;
             decltype((v.tail.start_at_134)) start;
             decltype((v.tail.frame_at_130)) frame;
             decltype((v.tail.buffer_at_148)) buffer;
@@ -75,7 +75,7 @@ struct ReferenceAccess {
         return Fields{v.player.current_animation_at_126,
                       v.player.requested_animation_at_124,
                       v.player.previous_animation_at_128,
-                      v.player.animation_mode_at_120,
+                      v.player.animation_mode,
                       v.tail.start_at_134,
                       v.tail.frame_at_130,
                       v.tail.buffer_at_148,

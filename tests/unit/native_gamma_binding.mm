@@ -253,7 +253,7 @@ void check_binding(const std::filesystem::path &directory, bool with_setup = fal
         pose.position.x == 13 && pose.position.y == 27 && pose.rotation[2] == 333 &&
         motion_owner->target_yaw == 16384, "constructor preserves real preview pose and ID");
     require(player->parameters.height == assets.parameters[6].height &&
-        *player->physics->equipment_at_4 == (1024 | 2048),
+        *player->physics->equipment == (1024 | 2048),
         "typed parameters and actual event flags feed PInitialize");
     require(*player->physics->animation_tail.table_at_140 == assets.animation_table &&
         *player->physics->requested_animation_at_124 == 0,

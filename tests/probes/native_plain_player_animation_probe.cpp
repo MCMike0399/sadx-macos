@@ -20,7 +20,7 @@ extern "C" int sadx_native_player_animation(const float *constants, const std::u
     if (!constants || !in || !out)
         return 1;
     sadx::PlayerPhysicsState player{};
-    player.animation_mode_at_120 = static_cast<std::int16_t>(in[0]);
+    player.animation_mode = static_cast<std::int16_t>(in[0]);
     player.requested_animation_at_124 = static_cast<std::uint16_t>(in[1]);
     player.current_animation_at_126 = static_cast<std::uint16_t>(in[2]);
     player.previous_animation_at_128 = static_cast<std::uint16_t>(in[3]);
@@ -77,7 +77,7 @@ extern "C" int sadx_native_player_animation(const float *constants, const std::u
         result = sadx::animation::reset_frame(view, runtime, fp);
     else
         result = sadx::animation::next(view, runtime, static_cast<std::uint16_t>(in[1]), fp);
-    out[0] = static_cast<std::uint16_t>(*player.animation_mode_at_120);
+    out[0] = static_cast<std::uint16_t>(*player.animation_mode);
     out[1] = *player.requested_animation_at_124;
     out[2] = *player.current_animation_at_126;
     out[3] = *player.previous_animation_at_128;

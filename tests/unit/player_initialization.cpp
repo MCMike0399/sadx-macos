@@ -93,7 +93,7 @@ void native_initialization_boundary() {
     require(registry.tasks[0] == task && registry.primary[0] == task->primary_state &&
                 registry.motion[0] == motion && registry.players[0] == record,
             "four plain actual registration owners");
-    require(record->physics->equipment_at_4 == 2 && record->parameters.rad == 7 &&
+    require(record->physics->equipment == 2 && record->parameters.rad == 7 &&
                 record->physics->shadow_scale_at_1fc == 1.4f,
             "typed content/save facts preserved");
     require(motion->motion.speed.x == 4 && record->physics->motion.speed.x == 0 &&

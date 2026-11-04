@@ -304,7 +304,7 @@ struct Context {
         if (!v.name)                                                                               \
             stop(SonicPlayerFailure::unknown_field, site);                                         \
         return static_cast<std::uint16_t>(*v.name)
-            U(Equipment, equipment_at_4);
+            U(Equipment, equipment);
             U(Flags, source_flags_at_6);
             U(JumpTimer, jump_timer_at_8);
             U(IdleTimer, idle_timer_at_e);
@@ -329,7 +329,7 @@ struct Context {
     case Word::field:                                                                              \
         v.name = static_cast<std::int16_t>(value);                                                 \
         return
-            U(Equipment, equipment_at_4);
+            U(Equipment, equipment);
             U(Flags, source_flags_at_6);
             I(JumpTimer, jump_timer_at_8);
             U(IdleTimer, idle_timer_at_e);

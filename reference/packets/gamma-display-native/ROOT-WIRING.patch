@@ -1,0 +1,79 @@
+--- a/src/runtime/native_display.hpp
++++ b/src/runtime/native_display.hpp
+@@ -25,6 +25,9 @@
+ #include "engine/polybuff_initialization.hpp"
+ #include "game/game_library_init.hpp"
+ #include <memory>
++#include "engine/render_state_snapshot.hpp"
++
++namespace sadx::gamma_display { struct Context; }
+ 
+ namespace sadx::native {
+ // NOTSA: native presentation owners initialized by the recovered camera/device operations.
+@@ -109,6 +112,7 @@
+     friend struct DisplayObjectProbe;
+     friend struct DisplayModelProbe;
+     friend struct object_draw::Context;
++    friend struct gamma_display::Context;
+     friend struct polybuff::Context;
+     friend struct basic_model::Context;
+     friend struct material_correction::Context;
+@@ -122,6 +126,7 @@
+     graphics::Draw device_state_;
+     ModelVertexStream model_vertex_stream_;
+     basic_model::State model_state_;
++    render_snapshot::State render_snapshot_;
+     // NOTSA: graphics startup owns the configured count state and canonical polygon resources.
+     library::State graphics_library_{};
+     struct PolygonResources {
+--- a/src/runtime/native_player_system.hpp
++++ b/src/runtime/native_player_system.hpp
+@@ -71,5 +71,7 @@
+     const editor::View *editor_state = nullptr;
+     std::array<NativeAnalogInput, 8> *normalized_input = nullptr;
+     model_matrices::State *model_matrices = nullptr;
++    // NOTSA: borrowed palette operation uses Session lighting/time owners.
++    std::function<void(std::int32_t)> display_palette = {};
+ };
+ } // namespace sadx::gamma_selection
+--- a/src/runtime/native_selection_preview.cpp
++++ b/src/runtime/native_selection_preview.cpp
+@@ -240,11 +240,28 @@
+     context.editor_state = &editor_state;
+     context.normalized_input = scene.input_.normalized_input;
+     context.model_matrices = &scene.session_.model_matrices_;
++    context.display_palette = [&scene](std::int32_t value) {
++        PreviewServices(scene).select_palette(value);
++    };
+     gamma_selection::run(context, task);
+ }
+ // NOTSA: native boundary for E102Display; source seam declared in the Gamma core.
+-void TitleScene::display_selection_gamma(TaskScheduler &, const TaskHandle &) {
+-    throw flow::UnrecoveredGameFlowCall("native_gamma_E102Display");
++void TitleScene::display_selection_gamma(TaskScheduler &scheduler, const TaskHandle &task) {
++    auto &scene = callback_scene(scheduler, display_selection_gamma);
++    CharacterTextureViews texture_views(scene.session_.character_resources_.assets(),
++                                       scene.session_.character_resources_.lists());
++    auto texture_services = scene.session_.regular_texture_services();
++    gamma_selection::Context context{scene.session_.players_, scheduler,
++        scene.session_.bootstrap_, scene.display_, task,
++        scene.session_.stage_, scene.session_.act_,
++        display_selection_gamma, destroy_selection_gamma, initialize_player_auxiliary,
++        texture_views.catalog(scene.session_.character_resources_.loaded()),
++        scene.session_.regular_resources_.state(), &texture_services, scene.session_.sprites_,
++        scene.session_.character_scene_};
++    context.display_palette = [&scene](std::int32_t value) {
++        PreviewServices(scene).select_palette(value);
++    };
++    gamma_selection::display(context, task);
+ }
+ // NOTSA: native boundary for E102Destruct; source seam declared in the Gamma core.
+ void TitleScene::destroy_selection_gamma(TaskScheduler &, const TaskHandle &) {
+--- a/native-sources.txt
++++ b/native-sources.txt
+@@ -162,3 +162,5 @@
+ src/player/model_motion_matrices.cpp
+ src/player/model_motion_source.cpp
+ src/player/gamma_fan.cpp
++src/engine/render_state_snapshot.cpp
++src/player/gamma_display.cpp

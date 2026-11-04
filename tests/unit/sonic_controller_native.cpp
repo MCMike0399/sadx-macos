@@ -147,7 +147,7 @@ void upgraded_charge_mutates_the_same_parameters_before_a_missing_sound() {
     Fixture f;
     auto record = f.initialize();
     record->physics->timer_at_7e = 120;
-    record->physics->equipment_at_4 = 3;
+    record->physics->equipment = 3;
     record->parameters.max_x_spd = 9.25f;
     f.context.release_effect = auxiliary;
     f.context.release_destructor = auxiliary;

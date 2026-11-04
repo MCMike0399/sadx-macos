@@ -52,7 +52,7 @@ void checked_prefix(const PlayerStartupParameterTable& table) {
         check(result.failure==PlayerStartupFailure::missing_auxiliary_effect_callback && result.source_boundary==0x44297b && result.callee_boundary==0x4a2b60);
         const auto player=result.partial;check(player && player->stage==PlayerStartupStage::task_scale);
         check(player->player_work && player->contact_work && player->auxiliary_work && !player->auxiliary_task);
-        check(player->player->equipment_at_4==expected[row] && player->player->island_number_at_12==0);
+        check(player->player->equipment==expected[row] && player->player->island_number_at_12==0);
         check(task->primary_state->task_id_at_2==(row==0?1:6) && task->primary_state->scale_at_2c->z==1);
         check(task->primary_state->position->x==3 && motion->motion.speed.x==9 && motion->friction_scale==1);
         check(player->player->floor_normal->x==0 && player->player->contact_work->radius_at_0==0);
@@ -102,7 +102,7 @@ void unknown_and_null(const PlayerStartupParameterTable& table) {
     auto task=make_task(scheduler,0);auto motion=std::make_shared<PlayerMotionState>();
     auto events=initialize_player_startup(0,task,motion,scheduler,registry,missing,fp);
     check(events.failure==PlayerStartupFailure::missing_events && events.source_boundary==0x44281a);
-    check(events.partial->player->shadow_scale_at_1fc && events.partial->player->equipment_at_4==0);
+    check(events.partial->player->shadow_scale_at_1fc && events.partial->player->equipment==0);
     check(registry.lookup_player_work(events.partial->player_work)==events.partial && registry.player_work[0]);
     auto eggman=make_task(scheduler,1);auto no_events=initialize_player_startup(1,eggman,motion,scheduler,registry,missing,fp);
     check(no_events.failure==PlayerStartupFailure::missing_auxiliary_effect_callback); // no source event reads

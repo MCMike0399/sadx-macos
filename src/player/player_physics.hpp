@@ -24,9 +24,10 @@ struct PlayerPhysicsState {
     std::optional<std::uint32_t> prior_attributes = {}; // +0x60, copied before current attrs clear
     std::optional<float> path_distance = {}; // source playerwk+0x18
     std::optional<TaskHandle> held_task_at_68 = {}; // unknown outer, observed-null handle
-    std::optional<std::uint16_t> equipment_at_4 = {};
+    std::optional<std::uint16_t> equipment = {}; // playerwk +0x4
     std::optional<std::uint16_t> island_number_at_12 = {};
-    std::optional<std::int16_t> animation_mode_at_120 = {},join_vertex_mode_at_122 = {};
+    std::optional<std::int16_t> animation_mode = {}, // playerwk +0x120
+        join_vertex_mode_at_122 = {};
     std::optional<float> shadow_scale_at_1fc = {};
     std::optional<std::uint16_t> flags_at_10 = {};
     std::optional<std::int16_t> no_control_time_at_a = {};

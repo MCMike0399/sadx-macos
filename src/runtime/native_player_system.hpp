@@ -71,5 +71,7 @@ struct Context {
     const editor::View *editor_state = nullptr;
     std::array<NativeAnalogInput, 8> *normalized_input = nullptr;
     model_matrices::State *model_matrices = nullptr;
+    // NOTSA: borrowed palette operation uses the Session lighting/time owners.
+    std::function<void(std::int32_t)> display_palette = {};
 };
 } // namespace sadx::gamma_selection

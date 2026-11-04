@@ -3,11 +3,41 @@
 #include "runtime/character_selection_assets.hpp"
 
 namespace sadx::native::app {
+namespace {
+// The canonical combined graph. An append-only display import may only follow
+// these records; its provenance must prove the prefix count and digest so no
+// existing resource identity can shift.
+constexpr std::size_t kCanonicalSelectionRecords = 3328;
+constexpr const char *kCanonicalSelectionPrefix =
+    "c414e173bf4bf9f803f24d61642e233ff9650fe9276d70da2ac3939fee2b5d7f";
+// NOTSA: rejects partial graphs and unproven appends before any consumer binds.
+inline void require_selection_graph(const std::filesystem::path &directory,
+                                    const character_pack::CharacterPack &pack) {
+    const auto count = pack.record_count();
+    if (count == 3302 || count == kCanonicalSelectionRecords)
+        return;
+    const auto path = directory / "characters/sonic-selection.provenance.json";
+    if (!std::filesystem::exists(path))
+        throw std::runtime_error("CharacterSelect requires the complete Sonic/selection resource graph");
+    const auto proof = read_metadata(path);
+    const auto append = dictionary(proof[@"display_append"], "display append provenance");
+    const auto prefix = static_cast<std::size_t>(integer(
+        append[@"prefix_records"], kCanonicalSelectionRecords, kCanonicalSelectionRecords,
+        "display append prefix records"));
+    const auto added = static_cast<std::size_t>(integer(
+        append[@"new_records"], 1, static_cast<std::int32_t>(count), "display append records"));
+    if (prefix + added != count)
+        throw std::runtime_error("imported display append count mismatch");
+    if (string(append[@"prefix_sha256"], "display append prefix digest") !=
+        kCanonicalSelectionPrefix)
+        throw std::runtime_error("imported display append changed the canonical selection prefix");
+    (void)array(append[@"declarations"], 8, "display append declarations");
+}
+} // namespace
 // NOTSA: declarations bind to the one validated combined pack owned by the app.
 inline CharacterSelectionAssets load_character_selection_assets(
     const std::filesystem::path &directory, const character_pack::CharacterPack &pack) {
-    if (pack.record_count() != 3302 && pack.record_count() != 3328)
-        throw std::runtime_error("CharacterSelect requires the complete Sonic/selection resource graph");
+    require_selection_graph(directory, pack);
     CharacterSelectionAssets result{};
     const auto preview = read_metadata(directory / "characters/selection-preview.json");
     if (string(preview[@"pack_schema"], "selection pack schema") != "SDXACT03")

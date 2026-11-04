@@ -109,7 +109,7 @@ int main(int argc, char **argv) {
                                        : std::array<std::int32_t, 3>{-321, 4321, -12345};
         physics.current_animation_at_126 = 0;
         physics.requested_animation_at_124 = 43;
-        physics.animation_mode_at_120 = 1;
+        physics.animation_mode = 1;
         tail.timer_at_12c = 0;
         tail.frame_at_130 = 4.5f;
         assert(animation::update(view, runtime, fp));

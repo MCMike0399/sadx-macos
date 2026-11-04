@@ -24,7 +24,10 @@
 #include "engine/material_correction.hpp"
 #include "engine/polybuff_initialization.hpp"
 #include "game/game_library_init.hpp"
+#include "engine/render_state_snapshot.hpp"
 #include <memory>
+
+namespace sadx::gamma_display { struct Context; }
 
 namespace sadx::native {
 // NOTSA: native presentation owners initialized by the recovered camera/device operations.
@@ -109,6 +112,7 @@ class Display {
     friend struct DisplayObjectProbe;
     friend struct DisplayModelProbe;
     friend struct object_draw::Context;
+    friend struct gamma_display::Context;
     friend struct polybuff::Context;
     friend struct basic_model::Context;
     friend struct material_correction::Context;
@@ -163,6 +167,8 @@ class Display {
     float horizontal_scale_ = 1, vertical_scale_ = 1, queued_depth_ = 0;
     std::uint8_t reset_pending_ = 0;
     std::int32_t animation_queue_state_ = 0;
+    // NOTSA: saved Ninja control/material state consumed by the Gamma display body.
+    render_snapshot::State render_snapshot_;
     GameViewInitialScreen screen_descriptor_;
     float projection_center_x_ = 0, projection_center_y_ = 0;
     std::int32_t perspective_copy_ = 0;

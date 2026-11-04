@@ -17,7 +17,7 @@ extern "C" const char* final_consumer(const std::uint8_t* constants,std::size_t 
     for(unsigned i=0;i<2;++i) table->records[i]={AnimationResourceReference{i},0,3,static_cast<std::uint16_t>(in[3]+i),0,0};
     PlayerAnimationResources resources;for(unsigned i=0;i<2;++i){resources.actions[i].motion=AnimationResourceReference{i};resources.motions[i].frame_count=10;}
     PlayerAnimationConstants c{0,1,4294967296.0F};PlayerAnimationRuntime animation{&arena,resources,c};
-    p.animation_mode_at_120=3;p.requested_animation_at_124=0;p.current_animation_at_126=0;
+    p.animation_mode=3;p.requested_animation_at_124=0;p.current_animation_at_126=0;
     p.animation_tail.table_at_140=table;p.animation_tail.frame_at_130=0;p.animation_tail.start_at_134=0;p.animation_tail.timer_at_12c=static_cast<std::uint16_t>(in[2]);p.animation_tail.flags_at_12e=0;
     p.timer_at_80=0;p.source_flags_at_6=0;p.held_task_at_68=TaskHandle{};p.animation_tail.join_table=static_cast<PlayerJoinTable*>(nullptr);
     // This is the exact initialized view used by the Gamma table binding. Sharing

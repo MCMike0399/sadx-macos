@@ -140,7 +140,7 @@ void get_model_matrix(Context &, unsigned node, NinjaMatrix &);
 void rotate_z(Context &, NinjaMatrix &, std::int32_t angle);
 // NOTSA: binds gamma_fan::update to the passed player and existing extra work.
 void update_fan(Context &, Primary, const Player &, const TaskWorkHandle &);
-// STUB: SONIC 0x47fd50 E102Display
+// NOTSA: native/reference transport to the canonical Gamma display prefix.
 void display(Context &, const TaskHandle &);
 // STUB: SONIC 0x47eed0 E102Destruct
 void destroy(Context &, const TaskHandle &);

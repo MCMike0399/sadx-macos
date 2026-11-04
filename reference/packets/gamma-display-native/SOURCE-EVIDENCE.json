@@ -1,0 +1,154 @@
+{
+  "base": "bdb61450",
+  "new_main": "ba88c5cc",
+  "dossiers": [
+    {
+      "path": "reference/inventory-raw/gamma-display-native/gamma-display.json",
+      "sha256": "24211f34dcbae238fbe2b098c60cce7611537560dde92e985765b4ac2cb98dd4",
+      "evidence_id": "ev_886cbdc0982d0868e0aa1061ce5fa633bcacabc13af806bb637d37faae2dfa9c",
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x47fd50",
+            "end": "0x480722"
+          }
+        ],
+        "total_bytes": 2515,
+        "span_bytes": 2515,
+        "non_contiguous": false,
+        "contains_entry": true
+      }
+    },
+    {
+      "path": "reference/inventory-raw/gamma-display-native/gamma-display-model.json",
+      "sha256": "542b41f86b4952502ac911aa9b4edbec80d85e47042b23a1196d7ab9ef2399ad",
+      "evidence_id": "ev_1283e15dc7dc02eb80d0b37273610bc204eabf991fc5eaced14ecceb7b49fc97",
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x47ef40",
+            "end": "0x47f090"
+          }
+        ],
+        "total_bytes": 337,
+        "span_bytes": 337,
+        "non_contiguous": false,
+        "contains_entry": true
+      }
+    },
+    {
+      "path": "reference/inventory-raw/gamma-display-native/display-callers.json",
+      "sha256": "de7f61907951cf931f9fa90177066b12e400d30ed67ee1eaa4bce15db8fdd391",
+      "evidence_id": "ev_972e4d1736cc8717e3aa8b7466d7ab3f4c7e17af061d1080adf1dfb59df58c9b",
+      "body": null
+    },
+    {
+      "path": "reference/inventory-raw/gamma-display-native/display-leaves.json",
+      "sha256": "416fcb83e3a4a014231ba17692116740fab4e9f64c1eaf90c9d7b09052d502b7",
+      "evidence_id": "ev_82a915b7bd9281565665514ef8b0c5512ea0b78997b7d034e9419437c6e0078c",
+      "body": null
+    }
+  ],
+  "full_display_body": "0x47fd50-0x480723",
+  "implemented_prefix": "entry through callback setter, before first action draw; unqualified draft",
+  "alias": "object+48 is sibling; object+44 is child. 0x3c5455c is existing GammaWeldInfo[0].source_object, not a new global.",
+  "player": "read task.motion player; preserve captured current-player publication including null",
+  "ghidra": {
+    "heap": "2G",
+    "closed": true
+  },
+  "qualification": "heavy hold requested before any new source compilation/oracle/app run; only admitted fan prerequisite was compiled/executed",
+  "asset_append": {
+    "records": 3497,
+    "bytes": 783448,
+    "sha256": "382e3e53b613c42890c9e48afa3fae3e4d9398e6520019a1a2150451422688dc",
+    "append": {
+      "prefix_records": 3328,
+      "prefix_bytes": 766112,
+      "prefix_sha256": "c414e173bf4bf9f803f24d61642e233ff9650fe9276d70da2ac3939fee2b5d7f",
+      "preserved_record_bytes_sha256": "e27c806f8f1e12bd83f54ff8cfcad3745d129b042c17e159520642ededfcb741",
+      "new_records": 169,
+      "source_table": "0x10007488",
+      "source_rows": [
+        {
+          "index": 2,
+          "address": "0x10007490",
+          "bytes": "9cb12010"
+        },
+        {
+          "index": 13,
+          "address": "0x100074bc",
+          "bytes": "e4cd2010"
+        },
+        {
+          "index": 14,
+          "address": "0x100074c0",
+          "bytes": "9c892010"
+        },
+        {
+          "index": 16,
+          "address": "0x100074c8",
+          "bytes": "9c962010"
+        },
+        {
+          "index": 18,
+          "address": "0x100074d0",
+          "bytes": "fc9e2010"
+        },
+        {
+          "index": 20,
+          "address": "0x100074d8",
+          "bytes": "bcab2010"
+        },
+        {
+          "index": 22,
+          "address": "0x100074e0",
+          "bytes": "20382010"
+        },
+        {
+          "index": 23,
+          "address": "0x100074e4",
+          "bytes": "68802010"
+        }
+      ],
+      "declarations": [
+        {
+          "index": 2,
+          "object": 3329
+        },
+        {
+          "index": 13,
+          "object": 3349
+        },
+        {
+          "index": 14,
+          "object": 3357
+        },
+        {
+          "index": 16,
+          "object": 3383
+        },
+        {
+          "index": 18,
+          "object": 3414
+        },
+        {
+          "index": 20,
+          "object": 3440
+        },
+        {
+          "index": 22,
+          "object": 2611
+        },
+        {
+          "index": 23,
+          "object": 3471
+        }
+      ]
+    }
+  }
+}

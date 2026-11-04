@@ -42,7 +42,7 @@ const std::uint32_t* in,std::uint32_t* out)  {
     player->parameters=sadx::PlayerParameters{};
     auto& p=*player->player;
     p.source_flags_at_6=static_cast<std::uint16_t>(in[6]);
-    p.equipment_at_4=static_cast<std::uint16_t>(in[7]);
+    p.equipment=static_cast<std::uint16_t>(in[7]);
     p.timer_at_7e=static_cast<std::uint16_t>(in[8]);
     p.attributes=in[9];
     p.prior_attributes=in[10];

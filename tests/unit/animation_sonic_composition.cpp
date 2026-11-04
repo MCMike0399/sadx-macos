@@ -47,7 +47,7 @@ void run(const SonicPlayerConstants &constants, unsigned binding, bool missing_t
     resources.motions[0].frame_count = 10;
     auto &state = *player->player;
     state.current_animation_at_126 = 0; state.requested_animation_at_124 = 0;
-    state.previous_animation_at_128 = 0; state.animation_mode_at_120 = 3;
+    state.previous_animation_at_128 = 0; state.animation_mode = 3;
     state.animation_tail.frame_at_130 = 2.25f;
     state.animation_tail.flags_at_12e = 0;
     if (!missing_timer) state.animation_tail.timer_at_12c = 17;

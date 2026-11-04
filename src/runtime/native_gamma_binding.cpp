@@ -389,10 +389,6 @@ void update_fan(Context &context, Primary, const Player &player, const TaskWorkH
     } access(context, player, work);
     gamma_fan::update(access, context.rendering.arithmetic());
 }
-// NOTSA: native boundary for E102Display; source seam declared in the Gamma core.
-void display(Context &, const TaskHandle &) {
-    missing("native_gamma_display");
-}
 // NOTSA: native boundary for E102Destruct; source seam declared in the Gamma core.
 void destroy(Context &, const TaskHandle &) {
     missing("native_gamma_destroy");

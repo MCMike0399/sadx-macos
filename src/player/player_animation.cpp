@@ -86,7 +86,7 @@ float read_live_multiplier(const View &view, TaskWorkArena *arena, Multiplier ki
 }
 NativeAccess::StateFields NativeAccess::state(const View &v) {
     return StateFields{v.player.current_animation_at_126,     v.player.requested_animation_at_124,
-                       v.player.previous_animation_at_128,    v.player.animation_mode_at_120,
+                       v.player.previous_animation_at_128,    v.player.animation_mode,
                        v.player.animation_tail.start_at_134,  v.player.animation_tail.frame_at_130,
                        v.player.animation_tail.buffer_at_148, v.player.animation_tail.flags_at_12e,
                        v.player.animation_tail.timer_at_12c,  v.player.animation_tail.next_at_12a};

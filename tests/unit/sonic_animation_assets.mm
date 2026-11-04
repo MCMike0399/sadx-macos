@@ -117,7 +117,7 @@ std::array<player_initialization::PlayerHandle, 2> composition(const std::filesy
     animation::View view{player, records[0]->allocation};
     player.current_animation_at_126 = 0;
     player.requested_animation_at_124 = 0;
-    player.animation_mode_at_120 = 3;
+    player.animation_mode = 3;
     player.animation_tail.frame_at_130 = 2.25f;
     const auto result = animation::update(view, runtime, fp);
     require(bool(result) && player.animation_tail.frame_at_130 == 2.75f,

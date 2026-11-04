@@ -15,7 +15,7 @@ void snapshot(std::ostream& out,Fixture& f,const PlayerAnimationResult& r) {
     if(r.work_failure)out<<static_cast<unsigned>(*r.work_failure);else out<<"null";
     out<<"],\"fp\":["<<f.fp.control_word()<<','<<f.fp.exception_flags()<<','<<(f.fp.exception_flags() & ~f.fp.control_word() & 63)<<"],\"state\":[";
     auto value=[&](const auto& x){if(x)out<<+*x;else out<<"null";out<<',';};
-    value(f.player.animation_mode_at_120);value(f.player.requested_animation_at_124);value(f.player.current_animation_at_126);value(f.player.previous_animation_at_128);
+    value(f.player.animation_mode);value(f.player.requested_animation_at_124);value(f.player.current_animation_at_126);value(f.player.previous_animation_at_128);
     value(f.tail.next_at_12a);value(f.tail.timer_at_12c);value(f.tail.flags_at_12e);
     if(f.tail.frame_at_130)out<<bits(*f.tail.frame_at_130);else out<<"null";
     out<<',';if(f.tail.start_at_134)out<<bits(*f.tail.start_at_134);else out<<"null";
@@ -41,7 +41,7 @@ void snapshot(std::ostream& out,Fixture& f,const PlayerAnimationResult& r) {
 extern "C" const char* final_interface(const std::uint32_t* in) {
     static std::string result;
     Fixture f; f.fp.set_control_word(static_cast<std::uint16_t>(in[1]));
-    f.player.animation_mode_at_120=static_cast<std::int16_t>(in[3]);
+    f.player.animation_mode=static_cast<std::int16_t>(in[3]);
     f.player.requested_animation_at_124=static_cast<std::uint16_t>(in[4]);f.player.current_animation_at_126=static_cast<std::uint16_t>(in[5]);f.player.previous_animation_at_128=static_cast<std::uint16_t>(in[6]);
     f.tail.next_at_12a=static_cast<std::uint16_t>(in[7]);f.tail.frame_at_130=real(in[8]);f.tail.start_at_134=real(in[9]);f.tail.timer_at_12c=static_cast<std::uint16_t>(in[10]);f.tail.flags_at_12e=static_cast<std::uint16_t>(in[11]);
     f.player.motion.speed.x=real(in[15]);f.player.source_charge_at_0=real(in[16]);
@@ -65,7 +65,7 @@ extern "C" const char* final_interface(const std::uint32_t* in) {
     switch(fault) {
     case 1:f.player.current_animation_at_126.reset();break;
     case 2:f.player.requested_animation_at_124.reset();break;
-    case 3:f.player.animation_mode_at_120.reset();break;
+    case 3:f.player.animation_mode.reset();break;
     case 4:f.tail.timer_at_12c.reset();break;
     case 5:f.tail.table_at_140.reset();break;
     case 6:f.tail.table_at_140=std::shared_ptr<const PlayerAnimationTable>{};break;
@@ -94,11 +94,11 @@ extern "C" const char* final_interface(const std::uint32_t* in) {
     case 29:f.table->records[0].object_count.reset();break;
     case 30:f.resources.motions[1].data=AnimationResourceReference{};break;
     case 31:f.runtime.arena=nullptr;break;
-    case 32:f.player.animation_mode_at_120=0;f.tail.buffer_at_148.reset();{
+    case 32:f.player.animation_mode=0;f.tail.buffer_at_148.reset();{
         auto head=*f.arena.free_head();auto blocks=f.arena.blocks();auto block=std::find_if(blocks.begin(),blocks.end(),[&](const auto& b){return b.offset==head;});
         require(block!=blocks.end()&&block->physical_next.has_value(),"pressure block");require(bool(f.arena.allocate(*block->physical_next-head-in[20]-32)),"pressure");}break;
-    case 33:f.player.animation_mode_at_120=0;f.resources.actions[0].object.reset();break;
-    case 34:f.player.animation_mode_at_120=0;f.arena.set_payload_transport({},[](auto,const auto*,auto n){return n!=111*24;});break;
+    case 33:f.player.animation_mode=0;f.resources.actions[0].object.reset();break;
+    case 34:f.player.animation_mode=0;f.arena.set_payload_transport({},[](auto,const auto*,auto n){return n!=111*24;});break;
     default:break;
     }
     auto invoke=[&](){switch(in[2]){case 1:return reset_player_animation_frame(f.view,f.runtime,f.fp);case 2:return next_player_animation(f.view,f.runtime,static_cast<std::uint16_t>(in[4]),f.fp);case 3:return blend_player_animation(f.view,f.runtime,f.fp);case 4:return release_animation_keys(f.view,f.runtime);case 5:return build_player_animation_transition(f.view,f.runtime,f.fp);default:return f.update();}};

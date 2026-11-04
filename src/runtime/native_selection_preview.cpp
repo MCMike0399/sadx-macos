@@ -248,11 +248,29 @@ void TitleScene::exec_selection_gamma(TaskScheduler &scheduler, const TaskHandle
     context.editor_state = &editor_state;
     context.normalized_input = scene.input_.normalized_input;
     context.model_matrices = &scene.session_.model_matrices_;
+    // The source common tail calls E102Display inside this invocation.
+    context.display_palette = [&scene](std::int32_t value) {
+        PreviewServices(scene).select_palette(value);
+    };
     gamma_selection::run(context, task);
 }
 // NOTSA: native boundary for E102Display; source seam declared in the Gamma core.
-void TitleScene::display_selection_gamma(TaskScheduler &, const TaskHandle &) {
-    throw flow::UnrecoveredGameFlowCall("native_gamma_E102Display");
+void TitleScene::display_selection_gamma(TaskScheduler &scheduler, const TaskHandle &task) {
+    auto &scene = callback_scene(scheduler, display_selection_gamma);
+    CharacterTextureViews texture_views(scene.session_.character_resources_.assets(),
+                                        scene.session_.character_resources_.lists());
+    auto texture_services = scene.session_.regular_texture_services();
+    gamma_selection::Context context{scene.session_.players_, scheduler,
+        scene.session_.bootstrap_, scene.display_, task,
+        scene.session_.stage_, scene.session_.act_,
+        display_selection_gamma, destroy_selection_gamma, initialize_player_auxiliary,
+        texture_views.catalog(scene.session_.character_resources_.loaded()),
+        scene.session_.regular_resources_.state(), &texture_services, scene.session_.sprites_,
+        scene.session_.character_scene_};
+    context.display_palette = [&scene](std::int32_t value) {
+        PreviewServices(scene).select_palette(value);
+    };
+    gamma_selection::display(context, task);
 }
 // NOTSA: native boundary for E102Destruct; source seam declared in the Gamma core.
 void TitleScene::destroy_selection_gamma(TaskScheduler &, const TaskHandle &) {

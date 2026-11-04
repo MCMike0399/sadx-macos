@@ -41,7 +41,7 @@ namespace   {
         forced_3b29d08=0;globals.forced_at_3b29d08=&forced_3b29d08;
         globals.stage_at_3b22dcc=0;
         player->player->source_flags_at_6=0;
-        player->player->equipment_at_4=0;
+        player->player->equipment=0;
         player->player->timer_at_7e=0;
         player->player->prior_attributes=0;
     }
@@ -275,7 +275,7 @@ int main(int argc,char** argv)  {
         animation_resources.motions[0].frame_count=10;
         auto& physics=*f.player->player;
         physics.current_animation_at_126=0;physics.requested_animation_at_124=0;
-        physics.animation_mode_at_120=3;physics.animation_tail.table_at_140=animation_table;
+        physics.animation_mode=3;physics.animation_tail.table_at_140=animation_table;
         physics.animation_tail.frame_at_130=0;
         auto unavailable=dispatch_sonic_player_action(frame,rt,fp);
         stopped(unavailable,SonicPlayerFailure::animation_failed,0x49be0b);

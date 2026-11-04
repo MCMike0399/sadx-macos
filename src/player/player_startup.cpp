@@ -41,7 +41,7 @@ std::optional<std::int16_t> &join_mode_field(PlayerPhysicsState &player) {
 }
 // NOTSA: the source calloc and explicit shadow stores share these live fields.
 void store_animation_shadow(PlayerPhysicsState &player, float shadow) {
-    player.animation_mode_at_120 = 0;
+    player.animation_mode = 0;
     player.shadow_scale_at_1fc = shadow;
     join_mode_field(player) = 0;
 }
@@ -91,7 +91,7 @@ void initialize_physics(PlayerPhysicsState &player) {
     player.animation_tail.buffer_at_148 = std::shared_ptr<PlayerAnimationAllocatedAction>{};
     player.moving_task_at_6c = TaskHandle{};
     player.cached_land_object_at_74 = SceneResourceReference{};
-    player.equipment_at_4 = 0;
+    player.equipment = 0;
     player.island_number_at_12 = 0;
     store_animation_shadow(player, 0);
 }
@@ -247,8 +247,8 @@ void initialize_equipment(Player &record, PlayerPhysicsState &player, std::uint8
     record.stage = Stage::EventFlags;
     for (std::size_t i = 0; i < event_count; ++i) {
         if (access.event_flag(events[i].index))
-            player.equipment_at_4 =
-                static_cast<std::uint16_t>(*player.equipment_at_4 | events[i].mask);
+            player.equipment =
+                static_cast<std::uint16_t>(*player.equipment | events[i].mask);
     }
 }
 

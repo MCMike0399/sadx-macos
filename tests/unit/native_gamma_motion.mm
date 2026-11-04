@@ -29,7 +29,7 @@ void observe(const char *label, std::ostream &out,
     const auto &tail = state.animation_tail;
     out << label << " state " << *state.current_animation_at_126 << ' '
         << *state.requested_animation_at_124 << ' ' << *state.previous_animation_at_128 << ' '
-        << *state.animation_mode_at_120 << ' ' << *tail.next_at_12a << ' ' << *tail.timer_at_12c
+        << *state.animation_mode << ' ' << *tail.next_at_12a << ' ' << *tail.timer_at_12c
         << ' ' << *tail.flags_at_12e << ' ' << word(*tail.frame_at_130) << ' ' << fp.control_word()
         << ' ' << fp.exception_flags() << '\n';
     const auto generated = *(*tail.buffer_at_148)->motion;
@@ -71,12 +71,12 @@ void verify_transition(const character_pack::CharacterPack &pack, character_pack
                                     : std::array<std::int32_t, 3>{-321, 4321, -12345};
         state.current_animation_at_126 = 0;
         state.requested_animation_at_124 = 43;
-        state.animation_mode_at_120 = 1;
+        state.animation_mode = 1;
         tail.timer_at_12c = 0;
         tail.frame_at_130 = 4.5f;
         fp.clear_exceptions();
         assert(native::update_gamma_motion(view, arena, assets, scene.objects, fp));
-        assert(tail.frame_at_130 == 1.0f / 6.0f && state.animation_mode_at_120 == 2);
+        assert(tail.frame_at_130 == 1.0f / 6.0f && state.animation_mode == 2);
         const auto generated = *(*tail.buffer_at_148)->motion;
         const auto output = arena.reference(*generated->data, 16 + 4);
         assert(output && output.work);
@@ -96,7 +96,7 @@ void verify_playback(const player_initialization::PlayerHandle &player,
     animation::Runtime runtime{&arena, assets.resources(), &scene.objects};
     assert(animation::release_keys(view, runtime));
     state.current_animation_at_126 = state.requested_animation_at_124 = 0;
-    state.animation_mode_at_120 = 3;
+    state.animation_mode = 3;
     tail.frame_at_130 = 2.25f;
     assert(native::update_gamma_motion(view, arena, assets, scene.objects, fp));
     assert(word(*tail.frame_at_130) == word(2.55f));
@@ -120,7 +120,7 @@ void verify_playback(const player_initialization::PlayerHandle &player,
     table->records.at(0).mode = animation::Mode::SpeedLoop;
     tail.table_at_140 = table;
     state.current_animation_at_126 = state.requested_animation_at_124 = 0;
-    state.animation_mode_at_120 = 9;
+    state.animation_mode = 9;
     state.motion.speed.x = 2;
     tail.frame_at_130 = 0;
     assert(native::update_gamma_motion(view, arena, assets, scene.objects, fp));
@@ -128,7 +128,7 @@ void verify_playback(const player_initialization::PlayerHandle &player,
     state.motion.speed.x = 3;
     assert(native::update_gamma_motion(view, arena, assets, scene.objects, fp));
     assert(word(*tail.frame_at_130) == word(1.5f));
-    state.animation_mode_at_120 = 10;
+    state.animation_mode = 10;
     state.source_charge_at_0 = 2;
     tail.frame_at_130 = 0;
     assert(native::update_gamma_motion(view, arena, assets, scene.objects, fp));
@@ -278,7 +278,7 @@ int main(int argc, char **argv) {
     auto table = players.gamma_assets->animation_table;
     assert(tail.table_at_140 == table && table->records.size() == 91);
     assert(state.current_animation_at_126 == 0 && state.requested_animation_at_124 == 0 &&
-           state.previous_animation_at_128 == 0 && state.animation_mode_at_120 == 1);
+           state.previous_animation_at_128 == 0 && state.animation_mode == 1);
     assert(tail.frame_at_130 == 0 && tail.start_at_134 == 0 && tail.timer_at_12c == 1 &&
            tail.flags_at_12e == 0);
     const auto buffer = *tail.buffer_at_148;
@@ -300,7 +300,7 @@ int main(int argc, char **argv) {
     // against the same mutable scene, not a private pose map.
     display.arithmetic().clear_exceptions();
     gamma_selection::set_motion(context, player);
-    assert(state.animation_mode_at_120 == 2 && tail.frame_at_130 == 0.0625f);
+    assert(state.animation_mode == 2 && tail.frame_at_130 == 0.0625f);
     assert(*tail.buffer_at_148 == buffer && *buffer->motion == generated &&
            *generated->data == data);
     assert(tail.table_at_140 == table);

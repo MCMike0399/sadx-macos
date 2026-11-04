@@ -1,0 +1,51 @@
+{
+  "base_manifest_entries": 1441,
+  "read_only_main_head": "709f274447895b9e53a377d9b158bf8a87830a45",
+  "main_manifest_entries": 1460,
+  "preserve_union_entries": 1460,
+  "inherited_hash_conflicts": {
+    "reference/packets/sonic-model-native/verify_pair_observer.py": {
+      "base": "782ae5f5fa70f13bcb686734d42934e77b4f50e1ecb2d6d78e0bce0e115a38f8",
+      "main": "71f62a0ed78c6cc3c36211e40db2c909712d69ddcaeb2d83d35cb89c6ab36947"
+    },
+    "tests/unit/player_vertex_weld.cpp": {
+      "base": "404efb90aa2d8f7b3c413ba7cf35a4db877276b39b274d000722a3a044ec8278",
+      "main": "00f1469dd6aae117b780d6046a3f200600e82a4e3a22fea886f10ad9060bc213"
+    },
+    "tests/unit/sonic_animation_integration.mm": {
+      "base": "351ad0e29b602ae28b2961ae4a7ac8c632666b5e8d515688049fb1995a484de1",
+      "main": "da9f8ea23873587a792d7fac843a01f70d3d23489d0e72979439e228a038d386"
+    },
+    "reference/packets/sonic-model-native/prepare_wiring.py": {
+      "base": "8ef957067f1756a829a242fd5d0a2505dbb0efea6853c50ccf69cafb190e68de",
+      "main": "00355cd33466e49b8829e06bbe5070ea9d157ef7093078657d89f0e438c700ea"
+    },
+    "tests/unit/native_editor_binding.mm": {
+      "base": "3a7440c34ede6a46b12018784a75c08e8c7f9036d753b4c609e3ee77b2c6586d",
+      "main": "a06b3bb7b4368adbbf6c3daa76aa3a85ef277a7ac19dffeeb14bd60525138d4f"
+    },
+    "tests/unit/sonic_model_native.mm": {
+      "base": "3fb615742530fafc9d69254de6e026886748c853659868db2430532e97fadf62",
+      "main": "98ef73fa692941cb1e2352197598e55a193c1d55182c5aeefc0ad2e2292084ac"
+    },
+    "tests/unit/manifest.tsv": {
+      "base": "d02c284e3e2ed21b115501620d1178a5722ec05301342cd4d7b4f052efb80c92",
+      "main": "afe5e0f85960bda2cdcbbd6dd7420c41e6f7b797cd95bf49dacf02efeb944c7d"
+    },
+    "Makefile": {
+      "base": "72728bad45f14930134e4fa64b4e1dd6b4d1bd2e204d61ec94a7186d0ea4f92a",
+      "main": "0cba1c584165d92128634efc522fdc882b06fba797f385b3d7e1315c4c9c9773"
+    }
+  },
+  "additions": {
+    "tests/probes/native_gamma_display_probe.cpp": "0d95a033968617f7622eaba9830b9663ccd92451be81ec0866f321ffac3825d1",
+    "tests/probes/native_render_state_snapshot_probe.cpp": "67b7bb34a3bd95437ee9f65d860882431ca87cd634433d7a7d30a89b836ba4f5",
+    "tests/unit/native_gamma_display.mm": "0f6fa1e11ed7d7244b5d2e408d0361241a43bdbb1da74dc964b484a25500fe9a",
+    "tools/oracles/verify_original_gamma_display.py": "2679a92ad4056e02f7068caf3fb8c131c564ffda3703917048a13a8a34a33ab0",
+    "tools/oracles/verify_original_render_state_snapshot.py": "3496ab18c02d0e91f432966edf574026ad34a60b0afcaeb431bcdb7c3e7d927b",
+    "reference/packets/gamma-display-native/verify_packet.py": "4343d611a43efe025ba446e0f84180526db0337a92207aed9ba6bf23e806e88d"
+  },
+  "manifest_mutated": false,
+  "qualification": "draft tests authored during heavy hold, not executed",
+  "note": "Root must union any newer protected paths too; this is not a whole-manifest refresh."
+}

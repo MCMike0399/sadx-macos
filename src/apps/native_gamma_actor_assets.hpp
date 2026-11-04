@@ -308,6 +308,21 @@ inline GammaActorAssets load_gamma_actor_assets(const std::filesystem::path &dir
     result.joins = gamma_joins(metadata, pack);
     result.cursors = gamma_cursors(metadata, pack);
     result.materials = gamma_materials(metadata, pack);
+    if (metadata[@"display_objects"]) {
+        const auto objects = array(metadata[@"display_objects"], 8, "Gamma display objects");
+        for (id value in objects) {
+            const auto row = dictionary(value, "Gamma display object");
+            const auto index = static_cast<unsigned>(integer(row[@"index"], 0, 27, "Gamma object row"));
+            const auto object = static_cast<character_pack::ResourceId>(
+                integer(row[@"object"], 1, UINT32_MAX, "Gamma object identity"));
+            (void)pack.object(object);
+            if (!result.display_objects.emplace(index, object).second)
+                throw std::runtime_error("duplicate Gamma display object row");
+        }
+        for (unsigned index : {2U, 13U, 14U, 16U, 18U, 20U, 22U, 23U})
+            if (!result.display_objects.count(index))
+                throw std::runtime_error("incomplete Gamma display object declarations");
+    }
     return result;
 }
 } // namespace sadx::native::app

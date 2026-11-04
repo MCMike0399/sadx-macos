@@ -6,6 +6,7 @@
 #include "player/player_initialization.hpp"
 #include "player/animation/animation_content.hpp"
 #include <string>
+#include <map>
 
 namespace sadx::native {
 // NOTSA: imported content keeps genuine NULL distinct from an unavailable payload.
@@ -48,6 +49,9 @@ struct GammaActorAssets {
     std::array<GammaAnimationRecipe, 91> recipes{};
     std::shared_ptr<const animation::Table> animation_table;
     ActionHandle stand;
+    // NOTSA: immutable table declarations borrow the scene objects by resource identity.
+    // A missing row is unavailable imported content, never a known NULL object.
+    std::map<unsigned, character_pack::ResourceId> display_objects;
     std::array<GammaMaterialDeclaration, 5> materials{};
     std::vector<collision_component::Info> collision_info;
     std::array<std::uint32_t, 2> line_colors{};

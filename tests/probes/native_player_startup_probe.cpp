@@ -58,7 +58,7 @@ extern "C" int sadx_native_player_startup(const std::uint8_t* parameters,std::si
         }
         if(record.motion){put_vector(snapshot,68,record.motion->motion.speed);put_vector(snapshot,80,record.motion->motion.acceleration);
             put(snapshot,96,static_cast<std::uint32_t>(record.motion->target_yaw));put_float(snapshot,116,record.motion->source_field_34);put_float(snapshot,120,record.motion->source_field_38);put_float(snapshot,124,record.motion->friction_scale);}
-        if(record.player){const auto& p=*record.player;if(p.equipment_at_4){snapshot[132]=static_cast<std::uint8_t>(*p.equipment_at_4);snapshot[133]=static_cast<std::uint8_t>(*p.equipment_at_4>>8);}
+        if(record.player){const auto& p=*record.player;if(p.equipment){snapshot[132]=static_cast<std::uint8_t>(*p.equipment);snapshot[133]=static_cast<std::uint8_t>(*p.equipment>>8);}
             if(p.island_number_at_12){snapshot[146]=static_cast<std::uint8_t>(*p.island_number_at_12);snapshot[147]=static_cast<std::uint8_t>(*p.island_number_at_12>>8);}
             put_vector(snapshot,128+0x2c,p.motion.acceleration);put_vector(snapshot,128+0x38,p.motion.speed);
             if(p.shadow_scale_at_1fc)put_float(snapshot,128+0x1fc,*p.shadow_scale_at_1fc);
