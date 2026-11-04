@@ -1,0 +1,426 @@
+{
+  "base": "fbc1eec94284e848170f99d94202ec328a59f208",
+  "branch": "packet/cs-journey",
+  "fresh_drawn_checkpoint_qualified": false,
+  "asset_tree": {
+    "command": [
+      "python3",
+      "tools/testing/private_native_assets.py",
+      "--source",
+      "/Users/burbujamc/Developer/sadx-macos/game/imported",
+      "--output",
+      "build/cs-private-assets",
+      "--append",
+      "/Users/burbujamc/.local/state/sadx-macintosh-reception.oUTxv5/extracted/gamma-display/build/gamma-display-native/assets/characters/sonic-selection.actions"
+    ],
+    "exit": 0,
+    "proof": {
+      "source": "/Users/burbujamc/Developer/sadx-macos/game/imported",
+      "output": "/Users/burbujamc/Developer/sadx-worktrees/cs-journey/build/cs-private-assets",
+      "symlinks": 0,
+      "canonical_before_sha256": "c414e173bf4bf9f803f24d61642e233ff9650fe9276d70da2ac3939fee2b5d7f",
+      "canonical_after_sha256": "c414e173bf4bf9f803f24d61642e233ff9650fe9276d70da2ac3939fee2b5d7f",
+      "private_prefix_sha256": "c414e173bf4bf9f803f24d61642e233ff9650fe9276d70da2ac3939fee2b5d7f",
+      "pack_sha256": "382e3e53b613c42890c9e48afa3fae3e4d9398e6520019a1a2150451422688dc",
+      "append_metadata_validated": true
+    }
+  },
+  "commands": [
+    {
+      "argv": [
+        "make",
+        "-j2",
+        "-o",
+        "build/native-controller-deps/include/SDL3/SDL.h",
+        "build/sadx-native"
+      ],
+      "exit": 0,
+      "log_sha256": "f8b6f6d6d13504993f588e3b356ef6a836c866b80839b7732278b1ae83078e37"
+    },
+    {
+      "argv": [
+        "python3",
+        "tests/python/test_private_native_assets.py"
+      ],
+      "exit": 0,
+      "tests": 14,
+      "log_sha256": "007fbec11c2fc03e916a0549ee9e707b492bae31751b33ca68fee5fd4c9e72ea"
+    },
+    {
+      "argv": [
+        "make",
+        "-j2",
+        "-o",
+        "Makefile",
+        "-o",
+        "build/native-controller-deps/include/SDL3/SDL.h",
+        "build/private-native-assets-test",
+        "build/native-gamma-display-test"
+      ],
+      "exit": 0,
+      "log_sha256": "ad65ff306487604090ddc5f91791bc646226b042245d43970fc5e45af86de5b9",
+      "limit": "Makefile timestamp excluded after appending unrelated testing recipes; existing Gamma unit compiled, not run."
+    },
+    {
+      "argv": [
+        "./build/private-native-assets-test"
+      ],
+      "exit": 0,
+      "tests": 14,
+      "log_sha256": "551f61623db6caeca16bbc7f93d78aaab1b42e7a4268f2181e4eee18f74c0bf7"
+    },
+    {
+      "argv": [
+        "python3",
+        "tools/testing/check_native_character_select_display.py",
+        "--assets",
+        "build/cs-private-assets",
+        "--save-source",
+        "/Users/burbujamc/.local/state/sadx-macintosh-reception.oUTxv5/extracted/gamma-display/build/gamma-display-native/baseline-save",
+        "--output",
+        "build/cs-observe",
+        "--expected-boundary",
+        "native_gamma_display_action_clip_no_scale",
+        "--expected-exit",
+        "1"
+      ],
+      "exit": 1,
+      "result": {
+        "command": [
+          "/Users/burbujamc/Developer/sadx-worktrees/cs-journey/build/sadx-native",
+          "--assets",
+          "/Users/burbujamc/Developer/sadx-worktrees/cs-journey/build/cs-private-assets",
+          "--offscreen",
+          "--paced",
+          "--exit-after",
+          "1550",
+          "--save-directory",
+          "/Users/burbujamc/Developer/sadx-worktrees/cs-journey/build/cs-observe/savedata",
+          "--controller-library",
+          "/Users/burbujamc/Developer/sadx-worktrees/cs-journey/build/native-controller-deps/lib/libSDL3.0.dylib",
+          "--key-events",
+          "500:13:down,501:13:up,750:13:down,751:13:up,950:13:down,951:13:up,1050:13:down,1051:13:up,1300:13:down,1301:13:up",
+          "--screenshot",
+          "/Users/burbujamc/Developer/sadx-worktrees/cs-journey/build/cs-observe/frontier.ppm"
+        ],
+        "exit": 1,
+        "state": null,
+        "stop": "native session stopped: Metal device unavailable",
+        "screenshot_sha256": null,
+        "mode": "boundary-only",
+        "drawn_goal_passed": false,
+        "passed": false,
+        "error": "native final state missing"
+      }
+    },
+    {
+      "argv": [
+        "python3",
+        "tools/testing/check_native_character_select_display.py",
+        "--assets",
+        "build/cs-private-assets",
+        "--save-source",
+        "/Users/burbujamc/.local/state/sadx-macintosh-reception.oUTxv5/extracted/gamma-display/build/gamma-display-native/baseline-save",
+        "--output",
+        "build/cs-goal"
+      ],
+      "exit": 1,
+      "result": {
+        "command": [
+          "/Users/burbujamc/Developer/sadx-worktrees/cs-journey/build/sadx-native",
+          "--assets",
+          "/Users/burbujamc/Developer/sadx-worktrees/cs-journey/build/cs-private-assets",
+          "--offscreen",
+          "--paced",
+          "--exit-after",
+          "1550",
+          "--save-directory",
+          "/Users/burbujamc/Developer/sadx-worktrees/cs-journey/build/cs-goal/savedata",
+          "--controller-library",
+          "/Users/burbujamc/Developer/sadx-worktrees/cs-journey/build/native-controller-deps/lib/libSDL3.0.dylib",
+          "--key-events",
+          "500:13:down,501:13:up,750:13:down,751:13:up,950:13:down,951:13:up,1050:13:down,1051:13:up,1300:13:down,1301:13:up",
+          "--screenshot",
+          "/Users/burbujamc/Developer/sadx-worktrees/cs-journey/build/cs-goal/frontier.ppm"
+        ],
+        "exit": 1,
+        "state": null,
+        "frame": null,
+        "stop": "native session stopped: Metal device unavailable",
+        "screenshot_sha256": null,
+        "mode": "drawn-goal",
+        "drawn_goal_passed": false,
+        "passed": false,
+        "error": "native final state missing"
+      }
+    },
+    {
+      "argv": [
+        "python3",
+        "tools/testing/character_select_draw_fault.py",
+        "--output",
+        "build/cs-draw-fault-final",
+        "--",
+        "--assets",
+        "build/cs-private-assets",
+        "--save-source",
+        "/Users/burbujamc/.local/state/sadx-macintosh-reception.oUTxv5/extracted/gamma-display/build/gamma-display-native/baseline-save",
+        "--expected-boundary",
+        "native_gamma_display_action_clip_no_scale",
+        "--expected-exit",
+        "1"
+      ],
+      "exit": 2,
+      "result": {
+        "build_command": [
+          "make",
+          "-j2",
+          "-o",
+          "build/native-controller-deps/include/SDL3/SDL.h",
+          "-f",
+          "Makefile",
+          "-f",
+          "/Users/burbujamc/Developer/sadx-worktrees/cs-journey/build/cs-draw-fault-final/fault.mk",
+          "/Users/burbujamc/Developer/sadx-worktrees/cs-journey/build/cs-draw-fault-final/sadx-native"
+        ],
+        "build_exit": 0,
+        "source_sha256": "5f535b2c905496bb123f3a53e560d23ae1ab7a050a2f8cdef35d992eb4be3837",
+        "mutant_source_sha256": "a2f20a09f8fe697c131493e0e9a3f0e8ab30c4c63ddcf5dbab08280cc7ea9617",
+        "mutant": "skip every graphics::Draw; preserve clear commands and semantic execution",
+        "qualified_image_rejection": false,
+        "checker_command": [
+          "/opt/homebrew/opt/python@3.14/bin/python3.14",
+          "/Users/burbujamc/Developer/sadx-worktrees/cs-journey/tools/testing/check_native_character_select_display.py",
+          "--app",
+          "/Users/burbujamc/Developer/sadx-worktrees/cs-journey/build/cs-draw-fault-final/sadx-native",
+          "--output",
+          "/Users/burbujamc/Developer/sadx-worktrees/cs-journey/build/cs-draw-fault-final/run",
+          "--assets",
+          "build/cs-private-assets",
+          "--save-source",
+          "/Users/burbujamc/.local/state/sadx-macintosh-reception.oUTxv5/extracted/gamma-display/build/gamma-display-native/baseline-save",
+          "--expected-boundary",
+          "native_gamma_display_action_clip_no_scale",
+          "--expected-exit",
+          "1"
+        ],
+        "checker_exit": 1,
+        "checker_result": {
+          "command": [
+            "/Users/burbujamc/Developer/sadx-worktrees/cs-journey/build/cs-draw-fault-final/sadx-native",
+            "--assets",
+            "/Users/burbujamc/Developer/sadx-worktrees/cs-journey/build/cs-private-assets",
+            "--offscreen",
+            "--paced",
+            "--exit-after",
+            "1550",
+            "--save-directory",
+            "/Users/burbujamc/Developer/sadx-worktrees/cs-journey/build/cs-draw-fault-final/run/savedata",
+            "--controller-library",
+            "/Users/burbujamc/Developer/sadx-worktrees/cs-journey/build/native-controller-deps/lib/libSDL3.0.dylib",
+            "--key-events",
+            "500:13:down,501:13:up,750:13:down,751:13:up,950:13:down,951:13:up,1050:13:down,1051:13:up,1300:13:down,1301:13:up",
+            "--screenshot",
+            "/Users/burbujamc/Developer/sadx-worktrees/cs-journey/build/cs-draw-fault-final/run/frontier.ppm"
+          ],
+          "exit": 1,
+          "state": null,
+          "frame": null,
+          "stop": "native session stopped: Metal device unavailable",
+          "screenshot_sha256": null,
+          "mode": "boundary-only",
+          "drawn_goal_passed": false,
+          "passed": false,
+          "error": "native final state missing"
+        }
+      }
+    },
+    {
+      "argv": [
+        "make",
+        "-j2",
+        "-o",
+        "build/native-controller-deps/include/SDL3/SDL.h",
+        "check"
+      ],
+      "exit": 2,
+      "log_sha256": "7185ff135d77170bbca670cd2665cade4618af519a8d69f89a94ca5c62a60f74",
+      "violation_count": 29,
+      "violations": [
+        {
+          "path": "Makefile",
+          "in_base": true,
+          "base_already_differs": true
+        },
+        {
+          "path": "reference/packets/gamma-display-native/verify_packet.py",
+          "in_base": true,
+          "base_already_differs": true
+        },
+        {
+          "path": "tests/probes/native_gamma_display_probe.cpp",
+          "in_base": true,
+          "base_already_differs": true
+        },
+        {
+          "path": "tests/probes/native_plain_player_animation_probe.cpp",
+          "in_base": true,
+          "base_already_differs": true
+        },
+        {
+          "path": "tests/probes/native_player_animation_probe.cpp",
+          "in_base": true,
+          "base_already_differs": true
+        },
+        {
+          "path": "tests/probes/native_player_startup_probe.cpp",
+          "in_base": true,
+          "base_already_differs": true
+        },
+        {
+          "path": "tests/probes/native_render_state_snapshot_probe.cpp",
+          "in_base": true,
+          "base_already_differs": true
+        },
+        {
+          "path": "tests/probes/native_sonic_action_probe.cpp",
+          "in_base": true,
+          "base_already_differs": true
+        },
+        {
+          "path": "tests/probes/native_sonic_player_probe.cpp",
+          "in_base": true,
+          "base_already_differs": true
+        },
+        {
+          "path": "tests/python/test_private_native_assets.py",
+          "in_base": false,
+          "base_already_differs": false
+        },
+        {
+          "path": "tests/unit/animation_characterization.cpp",
+          "in_base": true,
+          "base_already_differs": true
+        },
+        {
+          "path": "tests/unit/animation_sonic_composition.cpp",
+          "in_base": true,
+          "base_already_differs": true
+        },
+        {
+          "path": "tests/unit/manifest.tsv",
+          "in_base": true,
+          "base_already_differs": true
+        },
+        {
+          "path": "tests/unit/model_motion_matrices.mm",
+          "in_base": true,
+          "base_already_differs": true
+        },
+        {
+          "path": "tests/unit/native_gamma_binding.mm",
+          "in_base": true,
+          "base_already_differs": true
+        },
+        {
+          "path": "tests/unit/native_gamma_display.mm",
+          "in_base": true,
+          "base_already_differs": true
+        },
+        {
+          "path": "tests/unit/native_gamma_motion.mm",
+          "in_base": true,
+          "base_already_differs": true
+        },
+        {
+          "path": "tests/unit/player_animation.cpp",
+          "in_base": true,
+          "base_already_differs": true
+        },
+        {
+          "path": "tests/unit/player_initialization.cpp",
+          "in_base": true,
+          "base_already_differs": true
+        },
+        {
+          "path": "tests/unit/player_startup.cpp",
+          "in_base": true,
+          "base_already_differs": true
+        },
+        {
+          "path": "tests/unit/private_native_assets.cpp",
+          "in_base": false,
+          "base_already_differs": false
+        },
+        {
+          "path": "tests/unit/sonic_actions.cpp",
+          "in_base": true,
+          "base_already_differs": true
+        },
+        {
+          "path": "tests/unit/sonic_animation_assets.mm",
+          "in_base": true,
+          "base_already_differs": true
+        },
+        {
+          "path": "tests/unit/sonic_controller_native.cpp",
+          "in_base": true,
+          "base_already_differs": true
+        },
+        {
+          "path": "tests/unit/sonic_player.cpp",
+          "in_base": true,
+          "base_already_differs": true
+        },
+        {
+          "path": "tools/oracles/animation_final_cohorts/consumer.cpp",
+          "in_base": true,
+          "base_already_differs": true
+        },
+        {
+          "path": "tools/oracles/animation_final_cohorts/interface.cpp",
+          "in_base": true,
+          "base_already_differs": true
+        },
+        {
+          "path": "tools/oracles/verify_original_gamma_display.py",
+          "in_base": true,
+          "base_already_differs": true
+        },
+        {
+          "path": "tools/oracles/verify_original_render_state_snapshot.py",
+          "in_base": true,
+          "base_already_differs": true
+        }
+      ],
+      "limit": "27 violations already exist in base; two added test sources await orchestrator registration. No manifest changes authorized for Worker B."
+    }
+  ],
+  "reused_observation": {
+    "source": "/Users/burbujamc/Developer/sadx-worktrees/admission/build/gamma-display-native/normal-input.log",
+    "source_log_sha256": "c081e0c72ae08fe31740cd10e9b810671ff791734a84363d94d419b6818cfc65",
+    "frame": 1332,
+    "stop": "native_gamma_display_action_clip_no_scale",
+    "app_exit_per_worker_brief": 1,
+    "screenshot_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427",
+    "semantic_assertions_pass": true,
+    "drawn_goal_pass": false,
+    "drawn_goal_error": "outgoing title image is not a CharacterSelect display frame",
+    "image_inspected": true,
+    "limit": "Retained orchestrator log/image, not a fresh Worker B runtime run."
+  },
+  "fault_evidence": {
+    "unit_blank_capture_rejected": true,
+    "unit_wrong_nonblank_capture_rejected": true,
+    "retained_title_rejected": true,
+    "compiled_suppression_image_rejection_qualified": false,
+    "reason": "Both application and private mutant stop at Metal device unavailable before any state/frame/image; runner explicitly exits 2, never counts this as a caught draw fault."
+  },
+  "limits": [
+    "No full gate or judge manifest update.",
+    "Existing numerical partials/failures unchanged; no port code changed.",
+    "No fresh rendered actor frame; no N3b, source-only or complete-game claim.",
+    "Committed R3 signature is screen-level; first-Gamma pose alignment requires separate reference evidence before promotion.",
+    "External worktree hydration changes were not made or staged by Worker B."
+  ]
+}

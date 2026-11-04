@@ -1069,3 +1069,12 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * The handover now gives five destination reception gates, exact pins/package checks, six manifest verification, safe regular-file extraction, missing-protected-input staging and unique save-copy/run evidence.
 * Root validates shell/Python command syntax, private extraction and all six manifests, three save-copy hashes, the existing pinned venv and all 1,460 protections. Fan commits 2ad7a4e9/1cb3885f are explicitly excluded; display history starts at 114a9db3.
 * docs/handover-macintosh-20261104-review.json records findings, corrections and limits. No SADX runtime/build/service was restarted; actual Macintosh reception and baseline remain destination-side requirements.
+
+### 2026-11-04 — Worker B private CharacterSelect checkpoint tooling
+
+* N3b now has a private asset-tree builder, semantic/content checker and compiled draw-suppression runner on packet/cs-journey. Worker A owners are unchanged.
+* Canonical and reconstructed-prefix hashes remain c414e173; appended pack remains 382e3e53. Fourteen fixture checks pass; the registered unit runner and existing Gamma display unit compile.
+* Fresh app and compiled mutant runs exit 1 at Metal device unavailable before any state or image. Suppression qualification remains open, explicitly not counted as caught.
+* Reused orchestrator Display1332 evidence passes semantic assertions and fails the drawn goal on the inspected outgoing title c7d02f64. No actor frame or N3b claim.
+* make -j2 check exits 2 at protected-manifest validation: 27 inherited violations and two new unregistered test files. No manifest or gate tool changed; no full gate run.
+* reference/packets/cs-journey/PACKET.md and VERIFICATION.json retain commands, asset proof, real exits and the required Metal runtime, aligned draw and fault reruns before promotion.

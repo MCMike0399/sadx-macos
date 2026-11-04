@@ -683,3 +683,16 @@ build/sonic-initialization-native-test: tests/unit/sonic_initialization_native.m
 -include build/native-sonic-initialization-probe.d build/sonic-initialization-native-test.d
 build/sonic-model-selection-preview.cpp: reference/packets/sonic-initialization-native/prepare_wiring.py
 build/sonic-model-native-test: src/apps/native_regular_texture_assets.hpp
+
+# Open N3b checkpoint: intentionally outside gate/native-journeys until an actor frame is qualified.
+CS_DISPLAY_ASSETS ?= build/cs-private-assets
+CS_DISPLAY_OUTPUT ?= build/cs-display-check
+CS_DISPLAY_ARGS ?=
+.PHONY: native-character-select-display private-native-assets
+private-native-assets:
+	python3 tools/testing/private_native_assets.py --source "$(NATIVE_ASSETS)" --output "$(CS_DISPLAY_ASSETS)" $(CS_ASSET_ARGS)
+native-character-select-display: build/sadx-native
+	python3 tools/testing/check_native_character_select_display.py --assets "$(CS_DISPLAY_ASSETS)" --output "$(CS_DISPLAY_OUTPUT)" $(CS_DISPLAY_ARGS)
+
+build/private-native-assets-test: tests/unit/private_native_assets.cpp
+	$(CXX) $(CXXFLAGS) $< -o $@
