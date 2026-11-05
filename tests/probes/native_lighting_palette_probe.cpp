@@ -10,9 +10,9 @@ float number(std::uint32_t word) {float x;std::memcpy(&x,&word,4);return x;}
 std::uint32_t bits(float x) {std::uint32_t w;std::memcpy(&w,&x,4);return w;}
 }
 namespace sadx::lighting {
-std::array<float,3> normalize_stage_direction(const std::array<float,3>& input) {
+void normalize_stage_direction(std::array<float,3>& output, const std::array<float,3>& input, SseContext &) {
  normalization_trace->insert(normalization_trace->end(),{6,bits(input[0]),bits(input[1]),bits(input[2])});
- return {number(normalization_input[43]),number(normalization_input[44]),number(normalization_input[45])};
+ output = {number(normalization_input[43]),number(normalization_input[44]),number(normalization_input[45])};
 }
 }
 extern "C" int sadx_native_lighting_palette(const std::uint32_t *in,const std::uint8_t *data,
@@ -30,7 +30,8 @@ extern "C" int sadx_native_lighting_palette(const std::uint32_t *in,const std::u
  NinjaMatrixPrimitives matrices(table,identity,stack);
  auto stage=static_cast<std::int16_t>(in[4]),act=static_cast<std::int16_t>(in[5]);auto loop=static_cast<std::int32_t>(in[6]);auto palette=static_cast<std::int32_t>(in[2]);auto copy=static_cast<std::uint8_t>(in[3]);
  lighting::DeviceState scratch;std::memcpy(&scratch.light,in+17,104);scratch.stage_direction={number(in[14]),number(in[15]),number(in[16])};
- lighting::PaletteView view{scene,{stage,act},loop,palette,copy,scratch,matrices};
+ SseContext sse(0x1f80);
+ lighting::PaletteView view{scene,{stage,act},loop,palette,copy,scratch,matrices,sse};
  X87Context fp(static_cast<std::uint16_t>(in[13]));std::vector<std::uint32_t> trace;
  normalization_input=in;normalization_trace=&trace;
  graphics::Draw device;device_lights::State device_state;

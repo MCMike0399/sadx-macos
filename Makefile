@@ -725,3 +725,9 @@ build/normal-primitives-test: tests/unit/normal_primitives.cpp tests/probes/nati
 
 build/native-gamma-tail-probe.dylib: tests/probes/native_gamma_tail_probe.cpp src/player/gamma_display_tail.cpp build/libsadx-native.a
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -dynamiclib $^ -o $@
+
+# Focused SSE vector judge; no guest or unrelated runtime dependencies.
+build/native-normalize-probe.dylib: tests/probes/native_normalize_probe.cpp src/engine/vector_normalize.cpp src/engine/vector_normalize.hpp src/cpu/sse_estimate.cpp src/cpu/sse_math.cpp src/cpu/sse_estimate.hpp src/cpu/sse_math.hpp build/softfloat_sse/softfloat-sse.a build/softfloat/softfloat.a
+	$(CXX) $(CXXFLAGS) -dynamiclib $(INCLUDES) tests/probes/native_normalize_probe.cpp src/engine/vector_normalize.cpp src/cpu/sse_estimate.cpp src/cpu/sse_math.cpp build/softfloat_sse/softfloat-sse.a build/softfloat/softfloat.a -o $@
+build/vector-normalize-test: tests/unit/vector_normalize.cpp src/engine/vector_normalize.cpp src/engine/vector_normalize.hpp src/cpu/sse_estimate.cpp src/cpu/sse_math.cpp src/cpu/sse_estimate.hpp src/cpu/sse_math.hpp build/softfloat_sse/softfloat-sse.a build/softfloat/softfloat.a
+	$(CXX) $(CXXFLAGS) $(INCLUDES) tests/unit/vector_normalize.cpp src/engine/vector_normalize.cpp src/cpu/sse_estimate.cpp src/cpu/sse_math.cpp build/softfloat_sse/softfloat-sse.a build/softfloat/softfloat.a -o $@

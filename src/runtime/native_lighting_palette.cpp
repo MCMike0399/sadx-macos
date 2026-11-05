@@ -1,10 +1,9 @@
 #include "runtime/native_display.hpp"
+#include "engine/vector_normalize.hpp"
 
 namespace sadx::lighting {
-std::array<float, 3> normalize_stage_direction(const std::array<float, 3> &) {
-    // Source mode0's SSE D3DX callee remains explicit. The recovered preview
-    // initializer requests mode2 and does not enter this seam.
-    throw DirectionNormalizationUnavailable();
+void normalize_stage_direction(std::array<float, 3> &output, const std::array<float, 3> &input, SseContext &fp) {
+    normalize_vector(output, input, fp);
 }
 } // namespace sadx::lighting
 
@@ -27,7 +26,7 @@ void Display::set_lighting_palette(std::int32_t selection, lighting::State &scen
                                    lighting::StageView stage, lighting::TimeServices &time) {
     lighting::PaletteView view{scene, stage, frame_mode_.pending_logic_ticks,
         queue_state_.values.lighting_palette,
-        queue_state_.values.lighting_copy, lighting_device_, *coordinates_};
+        queue_state_.values.lighting_copy, lighting_device_, *coordinates_, sse_};
     lighting::set_palette(selection, view, time, lighting_services(), arithmetic_);
 }
 } // namespace sadx::native

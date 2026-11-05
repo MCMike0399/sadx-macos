@@ -66,7 +66,7 @@ void apply_stage(PaletteView view, const DeviceServices &device, X87Context &fp,
         if (view.stage.stage == 9 && view.stage.act == 0)
             rotate_stage_direction(environment.direction, view, fp);
         else
-            light.direction = normalize_stage_direction(environment.direction);
+            normalize_stage_direction(light.direction, environment.direction, view.sse);
         device.set_light(index, light);
         device.enable_light(index, true);
         enable_rendering(device, selected_stage == 19);

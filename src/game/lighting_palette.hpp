@@ -1,4 +1,5 @@
 #pragma once
+#include "cpu/sse_math.hpp"
 #include "engine/graphics_frame.hpp"
 #include "engine/ninja_matrix.hpp"
 #include "game/stage_lighting.hpp"
@@ -27,14 +28,10 @@ struct PaletteView {
     std::uint8_t &palette_copy;
     DeviceState &device;
     NinjaMatrixPrimitives &matrices;
+    SseContext &sse;
 };
-class DirectionNormalizationUnavailable : public std::runtime_error {
-  public:
-    DirectionNormalizationUnavailable()
-        : std::runtime_error("D3DX stage light direction normalization is not recovered") {}
-};
-// STUB: SONIC 0x775630 D3DXVec3Normalize_SSE source stage-direction normalization
-std::array<float, 3> normalize_stage_direction(const std::array<float, 3> &);
+// NOTSA: adapt the stage-light value to the recovered vector operation.
+void normalize_stage_direction(std::array<float, 3> &, const std::array<float, 3> &, SseContext &);
 // FUNCTION: SONIC 0x401440 SetCurrentLightType_Copy
 void copy_palette_type(std::int32_t, std::uint8_t &);
 // FUNCTION: SONIC 0x40a630 ApplyLSPalette
