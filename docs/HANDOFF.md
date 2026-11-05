@@ -1087,8 +1087,6 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Fresh original execution traps in Unicorn initialization after a denied hardware query. Fresh normal input exits 1 before its first frame because Metal is unavailable, with no screenshot.
 * make -j2 check passes source checks and fails protected judge registration. No full gate, full oracles, source-only build, differential body holdout or fresh render-state oracle ran.
 * reference/packets/gamma-display-draw/PACKET.md and VERIFICATION.json retain exact commands, digests, review correction and limits. The caller still stops at native_gamma_display_action_clip_no_scale; N3b remains open.
-<<<<<<< HEAD
-
 ### 2026-11-04 — Gamma first animated body submitted
 
 * packet/draw-path-2 source f814c96 completes the first ordinary body action through the shared renderer: 77 motion nodes, 98 draws and 2,862 vertices, then the explicit missing arm export 50 boundary.
@@ -1099,8 +1097,6 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Fresh-save normal Metal run reaches frame 1332, completed 1330, exit 1 at arm export 50. Inspected image c7d02f64 remains the title because the stop precedes presentation; no completed actor frame or N3b claim.
 * Source checks pass. make -j2 check exits 2 with 53 pending judge registrations; the separate profile check still reports the one unregistered loader angle hook, tested only while interpolation is disabled.
 * reference/packets/gamma-display-draw-2/PACKET.md and VERIFICATION.json retain exact commands, counts, hashes, review and limits. Full gate, full suites, cold source-only build and Windows parity were not run.
-=======
->>>>>>> 6fc88b1 (test(player): propose Gamma display placement and fault cohorts)
 
 ### 2026-11-04 — Gamma arm and inactive display tail, still no presented frame
 
@@ -1132,3 +1128,11 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Judges: 1,126 topology and 1,024 body cases, 1,253 animated-model and 1,222 transform cases, 1,024 tail/callback/ordinary cases, 4,096 normalization cases, all value-exact with explicit FP partials; compiled faults are caught. The appended pack is provenance-checked byte for byte.
 * Full gate at ff5bb89 exits0: 340 native programs, 658 Python tests, R1-R4 and three native journeys. Independent review findings were fixed; one remaining limit is the presenter boundary.
 * No actor frame is presented yet and the drawn CharacterSelect checker stays outside the gate. Next: complete the Gamma per-frame update so the frame presents, then enable the checker with its reference signature.
+
+### 2026-11-04 — Gamma display admission review adjustments (no gate)
+
+* Outcome: the journal no longer contains merge markers, and the fan caller pins the stop its fixture actually reaches.
+* Changed: the complete display pack stops the fan fixture at native_gamma_draw_model_environment, because that fixture has no model environment. SetObjectDrawFunctions is labeled as the recovered selector for layouts 2 and 3. The reception record names gate source ff5bb89 and no longer points at a commit that is not on the branch.
+* Verified: native-gamma-fan-test passes on game/imported and on the private display pack. animated_model.cpp compiles. Display values are unchanged; the unrecovered-layout failure name is the only engine change.
+* Not run: full gate. The recorded admission gate remains ff5bb89.
+* Next: implement the reached Gamma per-frame update tail, present the frame, then enable the drawn checker.

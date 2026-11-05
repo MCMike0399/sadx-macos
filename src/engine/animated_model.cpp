@@ -124,7 +124,7 @@ void setup_motion(Motion *motion, float frame, State &state, fidelity::Context &
 }
 void select_transforms(ObjectId root, State &state, object_draw::Context &context) {
     if (state.interpolation != 2 && state.interpolation != 3)
-        throw std::runtime_error("animated_model_non_mdata2_layout");
+        throw std::runtime_error("animated_model_unrecovered_layout");
     state.rotation_order = (object_draw::object(context, root).evaluation_flags & 32U) != 0
                                ? object_draw::RotationOrder::Alternate
                                : object_draw::RotationOrder::Default;

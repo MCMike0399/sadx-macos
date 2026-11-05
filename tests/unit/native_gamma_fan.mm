@@ -118,16 +118,13 @@ int main(int argc, char **argv) {
     try {
         gamma_selection::run(context, task);
     } catch (const flow::UnrecoveredGameFlowCall &error) {
-        // The canonical imported pack has no Gamma display object rows, so the
-        // display stops at the first tagged missing row. The append-only
-        // development pack continues to the first animated draw seam.
         const auto message = std::string(error.what());
         const bool complete_pack = !players.gamma_assets->display_objects.empty();
-        // A complete pack continues into the draw chain; the reached draw boundary
-        // is named and may move as more of the body is recovered.
-        const bool draw_boundary = message.rfind("native_gamma_display_", 0) == 0 &&
-                                   message != "native_gamma_display_object_row_14";
-        assert(complete_pack ? draw_boundary : message == "native_gamma_display_object_row_14");
+        // This fixture supplies no model environment, so a pack with display
+        // rows stops at that missing owner after palette selection.
+        const char *expected = complete_pack ? "native_gamma_draw_model_environment"
+                                             : "native_gamma_display_object_row_14";
+        assert(message == expected);
         stopped = true;
     }
     const bool complete_pack = !players.gamma_assets->display_objects.empty();
