@@ -1,0 +1,37 @@
+Evidence: ev_1a51023c9ecf855a058cf17179eb55eb56de7c36689b2a295164c6acdb4033b2
+Original: 6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74
+
+
+undefined4 FUN_007946c0(uint param_1)
+
+{
+  uint uVar1;
+  undefined4 *in_ECX;
+  uint in_EDX;
+  uint uVar2;
+  uint *puVar3;
+  undefined4 unaff_EDI;
+  uint uVar4;
+  undefined4 local_8;
+  uint local_4;
+
+  local_4 = in_ECX[3];
+  uVar4 = local_4 * in_EDX;
+  if (uVar4 < (uint)in_ECX[2]) {
+    local_8 = 0x1000;
+    uVar1 = in_ECX[2];
+  }
+  else {
+    local_8 = 0x2000;
+    uVar1 = in_ECX[1];
+  }
+  uVar2 = in_ECX[1] - uVar1;
+  in_ECX[2] = uVar1 - uVar4;
+  puVar3 = (uint *)(in_ECX[6] * 0x10 + in_ECX[5]);
+  *puVar3 = uVar2 / local_4;
+  puVar3[2] = param_1;
+  puVar3[1] = in_EDX / 3;
+  in_ECX[6] = in_ECX[6] + 1;
+  (**(code **)(*(int *)*in_ECX + 0x2c))((int *)*in_ECX,uVar2,uVar4,&local_4,local_8);
+  return unaff_EDI;
+}

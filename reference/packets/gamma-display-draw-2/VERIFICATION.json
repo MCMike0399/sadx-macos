@@ -1,0 +1,965 @@
+{
+  "status": "first animated body submitted; arm asset boundary remains; no completed actor frame",
+  "base_commit": "6fc88b1",
+  "branch": "packet/draw-path-2",
+  "body": {
+    "actual_constructor_exit": 0,
+    "motion_nodes_consumed": 77,
+    "submitted_draws": 98,
+    "submitted_vertices": 2862,
+    "stop": "native_gamma_display_missing_arm_action_export_50_after_body",
+    "log": "build/draw-path-2/native-binding-final.log",
+    "generated_key_cases": "known-null fallback, unbound reference tagged failure before channel increment, loop guard before unavailable headers/resources, unrelated held-task optional not consumed"
+  },
+  "cohorts": {
+    "draw_development": {
+      "cases": 1253,
+      "positive_cases": 1024,
+      "negative_cases": 208,
+      "leaf_stop_cases": 21,
+      "seed": 4215760,
+      "value_failures": 0,
+      "values_match": true,
+      "FP_flags_compared": false,
+      "FP_partials": null,
+      "source_observations_sha256": "65b8d995e42acca14438d32350918477de02a0c4aae2420cf35f4e66384c6a59",
+      "probe_sha256": "853eda40bfdb155caafe1a7de59fa3e3518d67afc9f73e3650068f37ea9c7b62",
+      "source_ranges": {
+        "0x407020-0x40703b": "b4eb3cc1bc29eb585892bcf24562c2ab2258675356ae2eb8649d1cec7c7334dc",
+        "0x4053d0-0x40544f": "308154e63919321e474e2c7ebe59616b759bf0eebf2d538350f37eb5564d7796",
+        "0x404b20-0x4052e6": "4ee1f4ed813eedb5b347dc2026d9d466d183e075108bb2f2addc4382597d89f5"
+      },
+      "limits": [
+        "Matrix numeric leaves and model/texture backend are common observational seams.",
+        "Animation angle sampler is original-profile interpolation disabled path.",
+        "No raster, numeric matrix or FP exception flag comparison."
+      ]
+    },
+    "draw_holdout": {
+      "cases": 4325,
+      "positive_cases": 4096,
+      "negative_cases": 208,
+      "leaf_stop_cases": 21,
+      "seed": 2655015889,
+      "value_failures": 0,
+      "values_match": true,
+      "FP_flags_compared": false,
+      "FP_partials": null,
+      "source_observations_sha256": "3925c3bf01102303dd69a069df4ec5ec6e5731e8e133aff63ada872e3995257b",
+      "probe_sha256": "853eda40bfdb155caafe1a7de59fa3e3518d67afc9f73e3650068f37ea9c7b62",
+      "source_ranges": {
+        "0x407020-0x40703b": "b4eb3cc1bc29eb585892bcf24562c2ab2258675356ae2eb8649d1cec7c7334dc",
+        "0x4053d0-0x40544f": "308154e63919321e474e2c7ebe59616b759bf0eebf2d538350f37eb5564d7796",
+        "0x404b20-0x4052e6": "4ee1f4ed813eedb5b347dc2026d9d466d183e075108bb2f2addc4382597d89f5"
+      },
+      "limits": [
+        "Matrix numeric leaves and model/texture backend are common observational seams.",
+        "Animation angle sampler is original-profile interpolation disabled path.",
+        "No raster, numeric matrix or FP exception flag comparison."
+      ]
+    },
+    "numeric_development": {
+      "cases": 1222,
+      "seed": 7870912,
+      "value_failures": 0,
+      "values_match": true,
+      "passed": false,
+      "FP_partials": 1072,
+      "flag_mismatches": 1072,
+      "probe_sha256": "ca888d691178d80f07f5b065f0feb70692c2ea5cc10a33958bfdfcefe2c6750a",
+      "source_ranges": {
+        "0x781770-0x7819c0": "afe2b14700f284fb5c9ada8dbb51493ef47f662067a28a6c9706946c8a3e88da",
+        "0x7819c0-0x781c10": "2eee82323d83f4fe07afcf10204593ac783eff8a302556278c900b7d0d3607a8",
+        "0x784be0-0x784c70": "950c2032834032e036da5afffa805f22833ff288f052001c212a68624914111f"
+      },
+      "limits": [
+        "Focused actual numeric original wrappers and their leaves; no call substitution.",
+        "Only nearest/single post-device control word127 compared.",
+        "Finite input matrix/vector words; actual source sine and unit bytes.",
+        "FP flag differences reported separately; no hardware exception delivery claim."
+      ]
+    },
+    "numeric_holdout": {
+      "cases": 2246,
+      "seed": 2658671040,
+      "value_failures": 0,
+      "values_match": true,
+      "passed": false,
+      "FP_partials": 2096,
+      "flag_mismatches": 2096,
+      "probe_sha256": "ca888d691178d80f07f5b065f0feb70692c2ea5cc10a33958bfdfcefe2c6750a",
+      "source_ranges": {
+        "0x781770-0x7819c0": "afe2b14700f284fb5c9ada8dbb51493ef47f662067a28a6c9706946c8a3e88da",
+        "0x7819c0-0x781c10": "2eee82323d83f4fe07afcf10204593ac783eff8a302556278c900b7d0d3607a8",
+        "0x784be0-0x784c70": "950c2032834032e036da5afffa805f22833ff288f052001c212a68624914111f"
+      },
+      "limits": [
+        "Focused actual numeric original wrappers and their leaves; no call substitution.",
+        "Only nearest/single post-device control word127 compared.",
+        "Finite input matrix/vector words; actual source sine and unit bytes.",
+        "FP flag differences reported separately; no hardware exception delivery claim."
+      ]
+    },
+    "gamma_callback_development": {
+      "cases": 1024,
+      "seed": 4716944,
+      "value_failures": 0,
+      "values_match": true,
+      "passed": false,
+      "fp_partials": 13,
+      "flag_mismatches": 13,
+      "observations_sha256": "3f90463fc8764749807a74a4dbce96df8dc7b3b59cb63095216856a5ff9726b7",
+      "source_ranges": {
+        "0x47f990-0x47f9da": "1ce2eef04a79b0b5f117a925a174ba519f3eededd6b944acd6e734361cea1bf9"
+      },
+      "scope": "original row/aim dispatch and recoil arithmetic; numeric matrix leaves common argument receipts"
+    },
+    "gamma_callback_holdout": {
+      "cases": 2048,
+      "seed": 2655517072,
+      "value_failures": 0,
+      "values_match": true,
+      "passed": false,
+      "fp_partials": 13,
+      "flag_mismatches": 13,
+      "observations_sha256": "220dd374a7a401fc58f9950cc54c9c3a84da9e0f23ccf91bb03538d2074cec31",
+      "source_ranges": {
+        "0x47f990-0x47f9da": "1ce2eef04a79b0b5f117a925a174ba519f3eededd6b944acd6e734361cea1bf9"
+      },
+      "scope": "original row/aim dispatch and recoil arithmetic; numeric matrix leaves common argument receipts"
+    },
+    "ordinary_selection_tail_development": {
+      "cases": 1024,
+      "seed": 4718772,
+      "value_failures": 0,
+      "values_match": true,
+      "passed": false,
+      "fp_partials": 90,
+      "flag_mismatches": 90,
+      "observations_sha256": "e9573a9cfe431779dcfd94e163aa5f4f2ed2f7d2e46d8f7934d1c3ccaf2e20d1",
+      "source_ranges": {
+        "0x4800b4-0x480135": "5b144f74baaa45cda92e3f56edd0d83fe23744a5bd4c6478d774c0bd3330f43c"
+      },
+      "scope": "ordinary source action selection through arm-frame boundary; body draw and numeric matrix leaves common receipts"
+    },
+    "ordinary_selection_tail_holdout": {
+      "cases": 2048,
+      "seed": 2655518900,
+      "value_failures": 0,
+      "values_match": true,
+      "passed": false,
+      "fp_partials": 90,
+      "flag_mismatches": 90,
+      "observations_sha256": "71aa5281035a3ddd0e514aff467b9f71b5b5be6e1fb1f7e960fa887f130f6bce",
+      "source_ranges": {
+        "0x4800b4-0x480135": "5b144f74baaa45cda92e3f56edd0d83fe23744a5bd4c6478d774c0bd3330f43c"
+      },
+      "scope": "ordinary source action selection through arm-frame boundary; body draw and numeric matrix leaves common receipts"
+    },
+    "preserved_topology": {
+      "cases": 1126,
+      "seed": 4717904,
+      "value_failures": 0,
+      "failure_prefixes": 1026,
+      "observations_sha256": "85f83fbbc0beb9cfd263530fa7003da887089358ac1800dd7105991972820c9d",
+      "scope": "integer topology prefix only; stops before first palette call; no placement or rendering claim"
+    },
+    "preserved_body": {
+      "cases": 1024,
+      "seed": 4716524,
+      "value_failures": 0,
+      "status": "pass",
+      "failures": [],
+      "observations_sha256": "265ed465884e5d5338298694cdb5a5463f247d36c00716fe7f822f476986a4e7",
+      "scope": "original display through ordinary-draw boundary at 0x4800b4, before frame/action selection; palette/queue-material backends and Ninja numeric leaves are common seams; actual integer render leaves and material scratch stores execute"
+    }
+  },
+  "additional_renderer_cohorts": "CONSTANT-MATERIAL-VERIFICATION.json",
+  "commands": [
+    {
+      "command": [
+        "make",
+        "-j2",
+        "-o",
+        "build/native-controller-deps/include/SDL3/SDL.h",
+        "build/sadx-native",
+        "build/native-gamma-display-test"
+      ],
+      "exit": 0,
+      "log": "build/draw-path-2/build-binding-final.log"
+    },
+    {
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_gamma_display.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/native-gamma-display-probe.dylib",
+        "--body",
+        "--output",
+        "build/draw-path-2/gamma-display-body.json"
+      ],
+      "exit": 0,
+      "log": "build/draw-path-2/display-body.log"
+    },
+    {
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_animated_model.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/native-animated-model-probe.dylib",
+        "--output",
+        "build/draw-path-2/animated-dev.json"
+      ],
+      "exit": 0,
+      "report": "build/draw-path-2/animated-dev.json"
+    },
+    {
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_animated_model.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/native-animated-model-probe.dylib",
+        "--output",
+        "build/draw-path-2/animated-holdout.json",
+        "--cases",
+        "4096",
+        "--seed",
+        "0x9e4053d1"
+      ],
+      "exit": 0,
+      "report": "build/draw-path-2/animated-holdout.json"
+    },
+    {
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_draw_transform.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/native-draw-transform-probe.dylib",
+        "--output",
+        "build/draw-path-2/draw-transform-dev.json"
+      ],
+      "exit": 2,
+      "report": "build/draw-path-2/draw-transform-dev.json"
+    },
+    {
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_draw_transform.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/native-draw-transform-probe.dylib",
+        "--output",
+        "build/draw-path-2/draw-transform-holdout.json",
+        "--cases",
+        "2048",
+        "--seed",
+        "0x9e7819c0"
+      ],
+      "exit": 2,
+      "report": "build/draw-path-2/draw-transform-holdout.json"
+    },
+    {
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_gamma_object_callback.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/draw-path-2/gamma-object-callback-probe.dylib",
+        "--output",
+        "build/draw-path-2/gamma-object-callback-dev.json"
+      ],
+      "exit": 2,
+      "report": "build/draw-path-2/gamma-object-callback-dev.json"
+    },
+    {
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_gamma_object_callback.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/draw-path-2/gamma-object-callback-probe.dylib",
+        "--output",
+        "build/draw-path-2/gamma-object-callback-holdout.json",
+        "--cases",
+        "2048",
+        "--seed",
+        "0x9e47f990"
+      ],
+      "exit": 2,
+      "report": "build/draw-path-2/gamma-object-callback-holdout.json"
+    },
+    {
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_gamma_ordinary_body.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/native-gamma-ordinary-body-probe.dylib",
+        "--output",
+        "build/draw-path-2/gamma-ordinary-body-dev.json"
+      ],
+      "exit": 2,
+      "report": "build/draw-path-2/gamma-ordinary-body-dev.json"
+    },
+    {
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_gamma_ordinary_body.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/native-gamma-ordinary-body-probe.dylib",
+        "--output",
+        "build/draw-path-2/gamma-ordinary-body-holdout.json",
+        "--cases",
+        "2048",
+        "--seed",
+        "0x9e4800b4"
+      ],
+      "exit": 2,
+      "report": "build/draw-path-2/gamma-ordinary-body-holdout.json"
+    },
+    {
+      "command": [
+        "build/object-draw-test"
+      ],
+      "exit": 0,
+      "log": "build/draw-path-2/unit-object-draw-test.log"
+    },
+    {
+      "command": [
+        "build/basic-model-test"
+      ],
+      "exit": 0,
+      "log": "build/draw-path-2/unit-basic-model-test.log"
+    },
+    {
+      "command": [
+        "build/model-device-test",
+        "build/gamma-display-native/assets/system"
+      ],
+      "exit": 0,
+      "log": "build/draw-path-2/unit-model-device-test.log"
+    },
+    {
+      "command": [
+        "build/model-binding-test",
+        "build/gamma-display-native/assets/characters/sonic-selection.actions",
+        "build/gamma-display-native/assets/system"
+      ],
+      "exit": 0,
+      "log": "build/draw-path-2/unit-model-binding-test.log"
+    },
+    {
+      "command": [
+        "build/normal-uv-strip-test"
+      ],
+      "exit": 0,
+      "log": "build/draw-path-2/unit-normal-uv-strip-test.log"
+    },
+    {
+      "command": [
+        "build/animated-model-test"
+      ],
+      "exit": 0,
+      "log": "build/draw-path-2/unit-animated-model-test.log"
+    },
+    {
+      "command": [
+        "build/normal-uv-quad-test"
+      ],
+      "exit": 0,
+      "log": "build/draw-path-2/unit-normal-uv-quad-test.log"
+    },
+    {
+      "command": [
+        "build/normal-primitives-test"
+      ],
+      "exit": 0,
+      "log": "build/draw-path-2/unit-normal-primitives-test.log"
+    },
+    {
+      "command": [
+        "build/native-gamma-display-test",
+        "build/gamma-display-native/assets"
+      ],
+      "exit": 0,
+      "log": "build/draw-path-2/unit-native-gamma-display-test.log"
+    },
+    {
+      "command": [
+        "make",
+        "-j2",
+        "check"
+      ],
+      "exit": 2,
+      "log": "build/draw-path-2/check-qualified.log"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/gate/check_profile_patches.py",
+        "--build-dir",
+        "build/draw-path-2",
+        "--json"
+      ],
+      "exit": 1,
+      "report": "build/draw-path-2/profile-final.json"
+    },
+    {
+      "command": [
+        "reference/python/bin/python",
+        "reference/packets/gamma-display-draw-2/caller_faults.py"
+      ],
+      "exit": 0,
+      "report": "build/draw-path-2/caller-suppressed.json"
+    },
+    {
+      "command": [
+        "reference/python/bin/python",
+        "reference/packets/gamma-display-draw-2/observe_app_stop.py"
+      ],
+      "exit": 0,
+      "report": "build/draw-path-2/stop-observer-qualified/result.json"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/oracles/verdict.py",
+        "build/draw-path-2/animated-dev.json",
+        "build/draw-path-2/animated-holdout.json",
+        "build/draw-path-2/draw-transform-dev.json",
+        "build/draw-path-2/draw-transform-holdout.json",
+        "build/draw-path-2/gamma-object-callback-dev.json",
+        "build/draw-path-2/gamma-object-callback-holdout.json",
+        "build/draw-path-2/gamma-ordinary-body-dev.json",
+        "build/draw-path-2/gamma-ordinary-body-holdout.json",
+        "build/draw-path-2/alternate/dev.json",
+        "build/draw-path-2/alternate/holdout.json",
+        "build/draw-path-2/alternate/quad-dev.json",
+        "build/draw-path-2/alternate/quad-holdout.json",
+        "build/draw-path-2/alternate/normal-dev.json",
+        "build/draw-path-2/alternate/normal-holdout.json"
+      ],
+      "exit": 0,
+      "log": "build/draw-path-2/verdict-qualified.log"
+    },
+    {
+      "command": [
+        "make",
+        "-j2",
+        "-o",
+        "build/native-controller-deps/include/SDL3/SDL.h",
+        "build/native-animated-model-probe.dylib",
+        "build/native-draw-transform-probe.dylib",
+        "build/native-dynamic-model-probe.dylib",
+        "build/native-gamma-object-callback-probe.dylib",
+        "build/native-normal-primitives-probe.dylib",
+        "build/native-normal-uv-quad-probe.dylib"
+      ],
+      "exit": 0,
+      "log": "build/draw-path-2/default-probes-build.log"
+    }
+  ],
+  "draw_faults": [
+    {
+      "name": "wrong-model-callback-identity",
+      "build_command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-arch",
+        "arm64",
+        "-mmacosx-version-min=14.0",
+        "-Isrc",
+        "-dynamiclib",
+        "tests/probes/native_animated_model_probe.cpp",
+        "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/faults/wrong-model-callback-identity.cpp",
+        "src/engine/object_draw.cpp",
+        "build/libsadx-native.a",
+        "-o",
+        "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/faults/wrong-model-callback-identity.dylib"
+      ],
+      "build_exit": 0,
+      "judge_command": [
+        "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+        "tools/oracles/verify_original_animated_model.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/faults/wrong-model-callback-identity.dylib",
+        "--cases",
+        "1024",
+        "--output",
+        "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/faults/wrong-model-callback-identity.json"
+      ],
+      "judge_exit": 1,
+      "caught": true,
+      "cases": 1253,
+      "value_failures": 1249
+    },
+    {
+      "name": "wrong-transform-order",
+      "build_command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-arch",
+        "arm64",
+        "-mmacosx-version-min=14.0",
+        "-Isrc",
+        "-dynamiclib",
+        "tests/probes/native_animated_model_probe.cpp",
+        "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/faults/wrong-transform-order.cpp",
+        "src/engine/object_draw.cpp",
+        "build/libsadx-native.a",
+        "-o",
+        "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/faults/wrong-transform-order.dylib"
+      ],
+      "build_exit": 0,
+      "judge_command": [
+        "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+        "tools/oracles/verify_original_animated_model.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/faults/wrong-transform-order.dylib",
+        "--cases",
+        "1024",
+        "--output",
+        "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/faults/wrong-transform-order.json"
+      ],
+      "judge_exit": 1,
+      "caught": true,
+      "cases": 1253,
+      "value_failures": 1176
+    },
+    {
+      "name": "missing-child-traversal",
+      "build_command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-arch",
+        "arm64",
+        "-mmacosx-version-min=14.0",
+        "-Isrc",
+        "-dynamiclib",
+        "tests/probes/native_animated_model_probe.cpp",
+        "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/faults/missing-child-traversal.cpp",
+        "src/engine/object_draw.cpp",
+        "build/libsadx-native.a",
+        "-o",
+        "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/faults/missing-child-traversal.dylib"
+      ],
+      "build_exit": 0,
+      "judge_command": [
+        "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+        "tools/oracles/verify_original_animated_model.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/faults/missing-child-traversal.dylib",
+        "--cases",
+        "1024",
+        "--output",
+        "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/faults/missing-child-traversal.json"
+      ],
+      "judge_exit": 1,
+      "caught": true,
+      "cases": 1253,
+      "value_failures": 1228
+    },
+    {
+      "name": "missing-final-clip-clear",
+      "build_command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-arch",
+        "arm64",
+        "-mmacosx-version-min=14.0",
+        "-Isrc",
+        "-dynamiclib",
+        "tests/probes/native_animated_model_probe.cpp",
+        "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/faults/missing-final-clip-clear.cpp",
+        "src/engine/object_draw.cpp",
+        "build/libsadx-native.a",
+        "-o",
+        "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/faults/missing-final-clip-clear.dylib"
+      ],
+      "build_exit": 0,
+      "judge_command": [
+        "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+        "tools/oracles/verify_original_animated_model.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/faults/missing-final-clip-clear.dylib",
+        "--cases",
+        "1024",
+        "--output",
+        "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/faults/missing-final-clip-clear.json"
+      ],
+      "judge_exit": 1,
+      "caught": true,
+      "cases": 1253,
+      "value_failures": 154
+    }
+  ],
+  "gamma_row_fault": {
+    "name": "wrong-gamma-row-selection",
+    "build_command": [
+      "xcrun",
+      "clang++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-arch",
+      "arm64",
+      "-mmacosx-version-min=14.0",
+      "-Isrc",
+      "-dynamiclib",
+      "tests/probes/native_gamma_object_callback_probe.cpp",
+      "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/gamma-callback-faults/wrong-row-selection.cpp",
+      "build/libsadx-native.a",
+      "-o",
+      "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/gamma-callback-faults/wrong-row-selection.dylib"
+    ],
+    "build_exit": 0,
+    "build_stderr": "",
+    "judge_command": [
+      "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/reference/python/bin/python",
+      "tools/oracles/verify_original_gamma_object_callback.py",
+      "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe",
+      "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/gamma-callback-faults/wrong-row-selection.dylib",
+      "--output",
+      "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/gamma-callback-faults/wrong-row-selection.json"
+    ],
+    "judge_exit": 1,
+    "cases": 1024,
+    "value_failures": 402,
+    "fp_partials": 13,
+    "caught": true
+  },
+  "actual_constructor_draw_suppression": {
+    "compile_command": [
+      "xcrun",
+      "clang++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-arch",
+      "arm64",
+      "-mmacosx-version-min=14.0",
+      "-fobjc-arc",
+      "-Isrc",
+      "-Itests/fixtures",
+      "tests/unit/native_gamma_display.mm",
+      "build/draw-path-2/caller-suppressed-model.cpp",
+      "build/obj/platform/mac/mac_clock.o",
+      "build/obj/platform/mac/mac_audio.o",
+      "build/obj/platform/mac/hid_switch_controller.o",
+      "build/obj/platform/mac/mac_movie.o",
+      "build/obj/platform/mac/metal_device_frame.o",
+      "build/obj/platform/mac/mac_audio_playback.o",
+      "build/obj/platform/mac/mac_sound_bank.o",
+      "build/obj/platform/mac/mac_sound_effects.o",
+      "build/obj/platform/mac/mac_save_files.o",
+      "build/obj/platform/mac/mac_save_writer.o",
+      "build/libsadx-native.a",
+      "-framework",
+      "Foundation",
+      "-framework",
+      "AppKit",
+      "-framework",
+      "Metal",
+      "-framework",
+      "MetalKit",
+      "-framework",
+      "QuartzCore",
+      "-framework",
+      "CoreGraphics",
+      "-framework",
+      "ImageIO",
+      "-framework",
+      "GameController",
+      "-framework",
+      "AudioToolbox",
+      "-framework",
+      "AVFoundation",
+      "-framework",
+      "CoreMedia",
+      "-framework",
+      "CoreVideo",
+      "-o",
+      "build/draw-path-2/native-gamma-display-suppressed-test"
+    ],
+    "compile_exit": 0,
+    "command": [
+      "build/draw-path-2/native-gamma-display-suppressed-test",
+      "build/gamma-display-native/assets"
+    ],
+    "exit": -6,
+    "stdout": "Body frame commands: 0\n",
+    "stderr": "Actual display stop: native_gamma_display_missing_arm_action_export_50_after_body\nAssertion failed: (body_draws > 0 && body_vertices > 0), function main, file native_gamma_display.mm, line 151.\n",
+    "caught": true
+  },
+  "isolated_traversal_draw_suppression": {
+    "command": [
+      "build/draw-path-2/animated-model-suppressed-test"
+    ],
+    "exit": -6,
+    "stdout": "",
+    "stderr": "Assertion failed: ((consumed == std::vector<std::uint32_t>{model, model + 64, model + 128, model + 192})), function main, file animated_model.cpp, line 64.\n",
+    "caught": true
+  },
+  "app": {
+    "command": [
+      "./build/sadx-native",
+      "--assets",
+      "build/gamma-display-native/assets",
+      "--controller-library",
+      "build/native-controller-deps/lib/libSDL3.0.dylib",
+      "--offscreen",
+      "--paced",
+      "--exit-after",
+      "1550",
+      "--save-directory",
+      "build/draw-path-2/normal-input-qualified/save",
+      "--key-events",
+      "500:13:down,501:13:up,750:13:down,751:13:up,950:13:down,951:13:up,1050:13:down,1051:13:up,1300:13:down,1301:13:up",
+      "--screenshot",
+      "build/draw-path-2/normal-input-qualified/final.ppm"
+    ],
+    "exit": 1,
+    "frame": 1332,
+    "completed_frames": 1330,
+    "pending_logic_ticks": 0,
+    "stop": "native_gamma_display_missing_arm_action_export_50_after_body",
+    "screenshot": "build/draw-path-2/normal-input-qualified/final.ppm",
+    "screenshot_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427",
+    "source_save_hashes_before": {
+      "SONICADVENTURE_DX_CHAOGARDEN.snc": "53b585755ada51c7ed07d2f69ad3ddb195b5a6e48a838fc98533910205dae3e3",
+      "SonicDX01.snc": "15ac61323e0508d72a279f0f648f4b5007793cc0c8fb42bce9d893f00c265cf6",
+      "SonicDX02.snc": "3249b31891872b96be539348c005abf812c76af5e3e7c5f198ee65de008943e4"
+    },
+    "source_save_hashes_after": {
+      "SONICADVENTURE_DX_CHAOGARDEN.snc": "53b585755ada51c7ed07d2f69ad3ddb195b5a6e48a838fc98533910205dae3e3",
+      "SonicDX01.snc": "15ac61323e0508d72a279f0f648f4b5007793cc0c8fb42bce9d893f00c265cf6",
+      "SonicDX02.snc": "3249b31891872b96be539348c005abf812c76af5e3e7c5f198ee65de008943e4"
+    },
+    "copied_save_hashes_before_run": {
+      "SONICADVENTURE_DX_CHAOGARDEN.snc": "53b585755ada51c7ed07d2f69ad3ddb195b5a6e48a838fc98533910205dae3e3",
+      "SonicDX01.snc": "15ac61323e0508d72a279f0f648f4b5007793cc0c8fb42bce9d893f00c265cf6",
+      "SonicDX02.snc": "3249b31891872b96be539348c005abf812c76af5e3e7c5f198ee65de008943e4"
+    },
+    "copied_save_hashes_after_run": {
+      "SONICADVENTURE_DX_CHAOGARDEN.snc": "53b585755ada51c7ed07d2f69ad3ddb195b5a6e48a838fc98533910205dae3e3",
+      "SonicDX01.snc": "15ac61323e0508d72a279f0f648f4b5007793cc0c8fb42bce9d893f00c265cf6",
+      "SonicDX02.snc": "3249b31891872b96be539348c005abf812c76af5e3e7c5f198ee65de008943e4"
+    },
+    "asset_pack_sha256": "382e3e53b613c42890c9e48afa3fae3e4d9398e6520019a1a2150451422688dc",
+    "screenshot_png_sha256": "b78d4b188c2eb5e1a022c0da78335e22219e72b9c7c5ee085356043021336eb1"
+  },
+  "image_inspection": {
+    "inspected": true,
+    "image": "build/draw-path-2/normal-input-qualified/final.png",
+    "description": "640x480 outgoing Sonic Adventure DX title; no actor visible",
+    "why": "App::advance throws inside Session::advance before end_game_frame, complete_frame_counters and present_target. Offscreen catch saves the last already-rendered texture. See src/apps/sadx_native.mm:430 and :905.",
+    "normal_run_submission": "98 body draws and2862vertices; whole pending frame99normal draws/3702vertices, so one other840vertex draw precedes the measured body call."
+  },
+  "source_checks": {
+    "layers": 0,
+    "global_ownership": 0,
+    "provenance": 0,
+    "readability": 0,
+    "constexpr_tables": 0,
+    "make_check_exit": 2,
+    "judge_registration_violations": 53,
+    "judge_manifest_edited": false,
+    "tools_gate_edited": false
+  },
+  "profile_check": {
+    "exit": 1,
+    "unique_active_patch": "0x404c10 LinearMotionA_r",
+    "report_overlap_count": 2,
+    "interpretation": "same one loader hook appears in development and holdout range reports; manifest handled_by remains null. This packet tests original branch with interpolation disabled; enabled interpolation not implemented or measured on Windows. Root owns inventory/registry updates."
+  },
+  "review": {
+    "agent": "/root/review_animated_path",
+    "criteria": "docs/STYLE.md section12 and actual source assembly/differential evidence",
+    "corrected": [
+      "source channel store must follow numeric leaf",
+      "generated reference success differs from null pointer",
+      "loop guard before payload/header reads",
+      "table accessor must not consume unrelated initialized player fields",
+      "duplicate local vertex count name"
+    ],
+    "conclusion": "No remaining concrete source findings; source polygon no-op is proven RET."
+  },
+  "source_fingerprints": {
+    "Makefile": "f8797a947906cf9140714127466cc123342edb86b539a150ac4515d1480a32fe",
+    "native-sources.txt": "781efb8ae9bd15d9a27b5c9d0171aa6599ebcbf0ed198a8f7fce1e8779ef8f50",
+    "reference/symbols/overrides.tsv": "3cf459bcb133a752d97b5fb4e72f05cceb1ff1d5142939695c551e83391eacd0",
+    "src/engine/animated_model.cpp": "f10df97523b39671f91b329a8feb4afeb9dc69f5a5890eecd7a6b759ad238877",
+    "src/engine/animated_model.hpp": "1b8fa907fbfdef2250db4816e8beeb4976980686bf64b9b3c23047fed3982d16",
+    "src/engine/basic_model.hpp": "13d1cea7e79d559974cc17caff782d88426713a80d8fc140badd583b45c2f56c",
+    "src/engine/dynamic_model.cpp": "4c541dcf8f43a808f691b9eb141c9fac2a00d7bd19f5433d53ccf2395740f82c",
+    "src/engine/dynamic_model.hpp": "51658fd2e12f7f92b786c9d6c64398836cf0fb5556b5cf2e60268df6cfb2ca9d",
+    "src/engine/ninja_matrix_composition.cpp": "d2bf7b4c59189759d6d00027bfc367d1d1e3e1484f04f89e1a41511890c9335a",
+    "src/engine/ninja_matrix_composition.hpp": "3ac05dd83f75687bc3c8fd2dd84961bb479454fa8e92113b9363d4a38c625917",
+    "src/engine/normal_primitives.cpp": "8e74844eb04d87668672c3e4129b77ef95a643c559a33b793af835871303bee0",
+    "src/engine/normal_primitives.hpp": "524ca0fc987c3db0150aa5a36be6f522b3df2594846cd66198a5ac9c1bf1e196",
+    "src/engine/normal_uv_quad.cpp": "21dc479b7edf71c671133487772014f972c6ddc9e1333c627019d73a2a4d4837",
+    "src/engine/normal_uv_quad.hpp": "3143acf7fc4b83f397ad0263b30a567cd3cc4240f1da4aa9b8160f49bbfd576f",
+    "src/player/gamma_display.hpp": "b4bf021f8d9db5a2255e548a8e56e4bc77695c10279db8f02eba75973d232058",
+    "src/player/gamma_display_action.cpp": "f9e579302efab634a2803b6d452b6add39bfae9bc7583da747dd9673ef3e7276",
+    "src/runtime/model_buffer_seam.cpp": "dd71472dbb4b03f22fdae30cc563f3eb219f4c3ffda074c62114b2bbaa15f497",
+    "src/runtime/model_device.cpp": "2f40ba3be4247638de29d2117868df0c881903937e7e43eb3a85cb64d73f7dec",
+    "src/runtime/model_draw.cpp": "ab8dd8f9b4a717ddb1453ee48173b402b97e0082d6b777d36eeb42248bfb5f29",
+    "src/runtime/model_draw_environment.hpp": "cb371ef79c592ffb03f1cdc6be3f62c16ce2d8c6d51eca9695f7854665f1d141",
+    "src/runtime/native_display.hpp": "b5c4963e7a541aacfc42bc819213464ae7f10530dc3986f05be6ef05b25972c7",
+    "src/runtime/native_gamma_display_binding.cpp": "73f4e3c3d6e7e718a1c3f1241a0cefd8fa77dcf17caa5836033a56f0cc738567",
+    "src/runtime/native_gamma_display_context.hpp": "053c378aff19f4301eaba18af46425686b99a6b953cd1cdbbf18efa484ce420b",
+    "src/runtime/native_object_draw.cpp": "067a78dc0dd482bf102ee5103e8efa452f0fc6b8f3bf94b783440304871dcc05",
+    "src/runtime/native_player_system.hpp": "df9daf83c8dcfeecc2be5a1847c0af556af0b22f67a20b5f164718efeb7a115d",
+    "src/runtime/native_selection_preview.cpp": "2a98028badc0fa70cce364c6eabf404ad00f9de95c9abe2d65aa56da8b362ab2",
+    "src/runtime/object_draw_context.hpp": "33448160e03c89186a8faeb074eea2472e7d16b3f52f754f7749ce2633ab6236"
+  },
+  "not_run": [
+    "full gate (explicitly excluded)",
+    "full unit suite (nine affected programs run)",
+    "full oracle suite (focused cohorts only)",
+    "cold source-only archive build",
+    "Windows raster parity",
+    "enabled loader angle-interpolation branch",
+    "completed CharacterSelect actor frame, repeated full display, cancellation/reentry and N3b journey"
+  ],
+  "remaining_boundaries": [
+    "E102_ACTIONS export50 unavailable after first body and postbody arm placement prefix",
+    "arm draw, later matrices, attachments, equipment/effects and cleanup tail",
+    "event animation blend, walking sway and hidden-display tail",
+    "non-MDATA2 DrawAction layouts and alternate model callbacks",
+    "nonzero clip-scale view-test boundary",
+    "vertex layouts other than PositionNormal and PositionNormalUv",
+    "Gamma object rows12/28 absent from supplied append; separate animated callback slot is zero on current native route, no invented bridge from Ninja callback",
+    "enabled loader interpolation/profile registry admission",
+    "active welding and later gameplay scope inherited from Root; no new acceptance claim"
+  ],
+  "source_commit": "f814c96ad4a420a2e1070d585a7db079f8032e8d",
+  "inflight_app_observer": {
+    "compile_command": [
+      "xcrun",
+      "clang++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-arch",
+      "arm64",
+      "-mmacosx-version-min=14.0",
+      "-fobjc-arc",
+      "-Isrc",
+      "-Itests/fixtures",
+      "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/stop-observer-qualified/sadx-native-observer.mm",
+      "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/stop-observer-qualified/native-gamma-display-observer.cpp",
+      "build/obj/platform/mac/mac_clock.o",
+      "build/obj/platform/mac/mac_audio.o",
+      "build/obj/platform/mac/hid_switch_controller.o",
+      "build/obj/platform/mac/mac_movie.o",
+      "build/obj/platform/mac/metal_device_frame.o",
+      "build/obj/platform/mac/mac_audio_playback.o",
+      "build/obj/platform/mac/mac_sound_bank.o",
+      "build/obj/platform/mac/mac_sound_effects.o",
+      "build/obj/platform/mac/mac_save_files.o",
+      "build/obj/platform/mac/mac_save_writer.o",
+      "build/libsadx-native.a",
+      "-framework",
+      "Foundation",
+      "-framework",
+      "AppKit",
+      "-framework",
+      "Metal",
+      "-framework",
+      "MetalKit",
+      "-framework",
+      "QuartzCore",
+      "-framework",
+      "CoreGraphics",
+      "-framework",
+      "ImageIO",
+      "-framework",
+      "GameController",
+      "-framework",
+      "AudioToolbox",
+      "-framework",
+      "AVFoundation",
+      "-framework",
+      "CoreMedia",
+      "-framework",
+      "CoreVideo",
+      "-o",
+      "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/stop-observer-qualified/sadx-native-observer"
+    ],
+    "compile_exit": 0,
+    "command": [
+      "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/stop-observer-qualified/sadx-native-observer",
+      "--assets",
+      "build/gamma-display-native/assets",
+      "--controller-library",
+      "build/native-controller-deps/lib/libSDL3.0.dylib",
+      "--offscreen",
+      "--paced",
+      "--exit-after",
+      "1550",
+      "--save-directory",
+      "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/stop-observer-qualified/save",
+      "--key-events",
+      "500:13:down,501:13:up,750:13:down,751:13:up,950:13:down,951:13:up,1050:13:down,1051:13:up,1300:13:down,1301:13:up",
+      "--screenshot",
+      "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/stop-observer-qualified/final.ppm"
+    ],
+    "exit": 1,
+    "source_app_sha256": "18e31200b07a7dc400c4b597e67c2f3c51dfd61ca2522da384bb8160a6556752",
+    "observer_source_sha256": "98181d17c07fdcb3286cc7bce729ad4f7bfde556f81941ed5c551888ea352c0f",
+    "inflight_object_draws": 99,
+    "inflight_normal_draws": 99,
+    "inflight_vertices": 3702,
+    "body_draws": 98,
+    "body_vertices": 2862,
+    "equipment": 0,
+    "source_binding_sha256": "73f4e3c3d6e7e718a1c3f1241a0cefd8fa77dcf17caa5836033a56f0cc738567",
+    "observer_binding_sha256": "20e2830299733bc606beb7490cc1dc1f4d0124fa967d35cf64324c707db58a3b",
+    "screenshot_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427",
+    "observation": "read-only Frame.commands scans at report() and exact body submit boundary; presentation unchanged"
+  },
+  "caller_test_source_sha256": "0c44933b2238c306f75d1a31b02e7fdfd06db07795bf2974cd43d8eedab205ff",
+  "diagnostic_limits": [
+    "All fresh Unicorn and offscreen Metal runs worked; no sandbox limitation remained.",
+    "The first unrestricted full-seed REA query timed out; a distinct minimal seed profile completed. Stored evidence includes its profile and IDs.",
+    "Some owned REA closes reported a sysctl_errno_22 ownership-token failure after Java exited. Final process check found no Java/Ghidra processes.",
+    "Validation report schemas were corrected in the new, unadmitted oracle proposals to expose genuine values_match/flag_mismatches counters; comparison logic and existing judges were unchanged. The same fixed holdouts were rerun only for report serialization."
+  ]
+}

@@ -1,0 +1,225 @@
+{
+  "original_exe_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "source_entry": "0x78c5a0",
+  "exact_body_hex": "c3",
+  "following_padding_hex": "cccccccccccccccccccccccccccccc",
+  "body_bytes": 1,
+  "original_run": "build/draw-path-2/alternate/return-only.json",
+  "original_run_sha256": "e12ae8acfe332b0d428996d939399fbd8c783d149465bfdad7ed852ead412906",
+  "polygon_tables": [
+    {
+      "table": "0x389d710",
+      "layout": 0,
+      "row": "0x389d690",
+      "targets": [
+        "0x782170",
+        "0x782200",
+        "0x78c5a0",
+        "0x782030"
+      ]
+    },
+    {
+      "table": "0x389d710",
+      "layout": 1,
+      "row": "0x389d6a0",
+      "targets": [
+        "0x7824f0",
+        "0x7825c0",
+        "0x78c5a0",
+        "0x782310"
+      ]
+    },
+    {
+      "table": "0x389d710",
+      "layout": 2,
+      "row": "0x389d6b0",
+      "targets": [
+        "0x782940",
+        "0x782a10",
+        "0x78c5a0",
+        "0x782730"
+      ]
+    },
+    {
+      "table": "0x389d710",
+      "layout": 3,
+      "row": "0x389d6c0",
+      "targets": [
+        "0x782ef0",
+        "0x783060",
+        "0x78c5a0",
+        "0x782b80"
+      ]
+    },
+    {
+      "table": "0x389d710",
+      "layout": 4,
+      "row": "0x389d6d0",
+      "targets": [
+        "0x783410",
+        "0x7834c0",
+        "0x78c5a0",
+        "0x783270"
+      ]
+    },
+    {
+      "table": "0x389d710",
+      "layout": 5,
+      "row": "0x389d6e0",
+      "targets": [
+        "0x783830",
+        "0x783920",
+        "0x78c5a0",
+        "0x7835f0"
+      ]
+    },
+    {
+      "table": "0x389d710",
+      "layout": 6,
+      "row": "0x389d6f0",
+      "targets": [
+        "0x783d90",
+        "0x783ec0",
+        "0x78c5a0",
+        "0x783ac0"
+      ]
+    },
+    {
+      "table": "0x389d710",
+      "layout": 7,
+      "row": "0x389d700",
+      "targets": [
+        "0x784480",
+        "0x784620",
+        "0x78c5a0",
+        "0x784060"
+      ]
+    },
+    {
+      "table": "0x389d730",
+      "layout": 0,
+      "row": "0x389d690",
+      "targets": [
+        "0x782170",
+        "0x782200",
+        "0x78c5a0",
+        "0x782030"
+      ]
+    },
+    {
+      "table": "0x389d730",
+      "layout": 1,
+      "row": "0x389d6a0",
+      "targets": [
+        "0x7824f0",
+        "0x7825c0",
+        "0x78c5a0",
+        "0x782310"
+      ]
+    },
+    {
+      "table": "0x389d730",
+      "layout": 2,
+      "row": "0x389d690",
+      "targets": [
+        "0x782170",
+        "0x782200",
+        "0x78c5a0",
+        "0x782030"
+      ]
+    },
+    {
+      "table": "0x389d730",
+      "layout": 3,
+      "row": "0x389d6a0",
+      "targets": [
+        "0x7824f0",
+        "0x7825c0",
+        "0x78c5a0",
+        "0x782310"
+      ]
+    },
+    {
+      "table": "0x389d730",
+      "layout": 4,
+      "row": "0x389d6d0",
+      "targets": [
+        "0x783410",
+        "0x7834c0",
+        "0x78c5a0",
+        "0x783270"
+      ]
+    },
+    {
+      "table": "0x389d730",
+      "layout": 5,
+      "row": "0x389d6e0",
+      "targets": [
+        "0x783830",
+        "0x783920",
+        "0x78c5a0",
+        "0x7835f0"
+      ]
+    },
+    {
+      "table": "0x389d730",
+      "layout": 6,
+      "row": "0x389d6d0",
+      "targets": [
+        "0x783410",
+        "0x7834c0",
+        "0x78c5a0",
+        "0x783270"
+      ]
+    },
+    {
+      "table": "0x389d730",
+      "layout": 7,
+      "row": "0x389d6e0",
+      "targets": [
+        "0x783830",
+        "0x783920",
+        "0x78c5a0",
+        "0x7835f0"
+      ]
+    }
+  ],
+  "all_polygon_targets_return_only": true,
+  "scope": "Every color/no-color layout has the same RET polygon slot; material parser runs before the no-op.",
+  "instruction_evidence_id": "ev_b3c89c9fdf70fd7f411f2eef360df23ad825827419cb7e6a1f87270797631c67",
+  "decoded_instruction": {
+    "address": "0x78c5a0",
+    "status": "decoded",
+    "procedure": "0x78c5a0",
+    "architecture": "x86:LE:32:default",
+    "mode": "default",
+    "bytes": "c3",
+    "length": 1,
+    "mnemonic": "RET",
+    "raw_disassembly": "RET",
+    "operands": [],
+    "flow": {
+      "kind": "return",
+      "conditional": false,
+      "computed": false,
+      "direct_destinations": [],
+      "classification_evidence": [
+        {
+          "source": "ghidra-listing-flow-type",
+          "value": "TERMINATOR"
+        },
+        {
+          "source": "ghidra-instruction-pcode",
+          "value": "RETURN"
+        }
+      ]
+    },
+    "references": [],
+    "limitations": [
+      "Operand components are Ghidra Listing decoder tokens; effective memory base/index/displacement roles and per-instruction context mode are unavailable. The mode field is the program language variant."
+    ]
+  },
+  "instruction_dossier_sha256": "72d0f9aa86e5b5a1db04e4b015e127df239b716689550f8f9a9642e45ceb334c",
+  "proof_command": "reference/python/bin/python reference/packets/gamma-display-draw-2/return_only_proof.py 'game/Sonic Adventure DX/sonic.exe' --output build/draw-path-2/alternate/return-only.json",
+  "proof_exit": 0
+}

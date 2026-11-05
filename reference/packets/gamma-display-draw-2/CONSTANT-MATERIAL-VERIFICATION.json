@@ -1,0 +1,542 @@
+{
+  "scope": "Additional reached constant-material dispatcher and canonical buffer6/buffer8 primitive dependency; app evidence lives in parent VERIFICATION.json",
+  "cohorts": [
+    {
+      "report": "build/draw-path-2/alternate/dev.json",
+      "cases": 1024,
+      "value_failures": 0,
+      "fp_partials": 373,
+      "exit": 2,
+      "observations_sha256": "9437e593d91065ccbaaf99d8d3ef1347ea0de891d88fbf22d44bba564db01a45"
+    },
+    {
+      "report": "build/draw-path-2/alternate/holdout.json",
+      "cases": 2048,
+      "value_failures": 0,
+      "fp_partials": 783,
+      "exit": 2,
+      "observations_sha256": "5b7e7808b271b0018ab6ca8de555e082a1cf22e7df15ade292db6cc20700c4e5"
+    },
+    {
+      "report": "build/draw-path-2/alternate/quad-dev.json",
+      "cases": 1024,
+      "value_failures": 0,
+      "fp_partials": 812,
+      "exit": 2,
+      "observations_sha256": "013c5786a2a4c909c6e705542a19b0cc75ada70ec5d3d57646e3d631f1b97037"
+    },
+    {
+      "report": "build/draw-path-2/alternate/quad-holdout.json",
+      "cases": 2048,
+      "value_failures": 0,
+      "fp_partials": 1620,
+      "exit": 2,
+      "observations_sha256": "51428b895a1d6fa4b4c10027dd371de10bf5eaf058f6254315b32db841c7134c"
+    },
+    {
+      "report": "build/draw-path-2/alternate/normal-dev.json",
+      "cases": 1536,
+      "value_failures": 0,
+      "fp_partials": 0,
+      "exit": 0,
+      "observations_sha256": "f3a4122d413b1e34bddf9af32d7733df6c2fe9a03b6c4cd4bdd9a92023e39d39"
+    },
+    {
+      "report": "build/draw-path-2/alternate/normal-holdout.json",
+      "cases": 3072,
+      "value_failures": 0,
+      "fp_partials": 0,
+      "exit": 0,
+      "observations_sha256": "8e873b29a2dfe99fe90f7beabb4f4e9054e53eebb6b479d9092fa3a14aecddcd"
+    }
+  ],
+  "faults": {
+    "faults": [
+      {
+        "name": "missing-material-transition",
+        "compile_command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-Isrc",
+          "-Itests/probes",
+          "-dynamiclib",
+          "tests/probes/native_dynamic_model_probe.cpp",
+          "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/alternate/faults/missing-material-transition.cpp",
+          "build/libsadx-native.a",
+          "-o",
+          "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/alternate/faults/missing-material-transition.dylib"
+        ],
+        "compile_exit": 0,
+        "judge_command": [
+          "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+          "tools/oracles/verify_original_dynamic_model.py",
+          "game/Sonic Adventure DX/sonic.exe",
+          "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/alternate/faults/missing-material-transition.dylib",
+          "--output",
+          "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/alternate/faults/missing-material-transition.json"
+        ],
+        "judge_exit": 1,
+        "value_failures": 522
+      },
+      {
+        "name": "live-material-callback",
+        "compile_command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-Isrc",
+          "-Itests/probes",
+          "-dynamiclib",
+          "tests/probes/native_dynamic_model_probe.cpp",
+          "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/alternate/faults/live-material-callback.cpp",
+          "build/libsadx-native.a",
+          "-o",
+          "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/alternate/faults/live-material-callback.dylib"
+        ],
+        "compile_exit": 0,
+        "judge_command": [
+          "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+          "tools/oracles/verify_original_dynamic_model.py",
+          "game/Sonic Adventure DX/sonic.exe",
+          "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/alternate/faults/live-material-callback.dylib",
+          "--output",
+          "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/alternate/faults/live-material-callback.json"
+        ],
+        "judge_exit": 1,
+        "value_failures": 345
+      },
+      {
+        "name": "wrong-color-table",
+        "compile_command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-Isrc",
+          "-Itests/probes",
+          "-dynamiclib",
+          "tests/probes/native_dynamic_model_probe.cpp",
+          "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/alternate/faults/wrong-color-table.cpp",
+          "build/libsadx-native.a",
+          "-o",
+          "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/alternate/faults/wrong-color-table.dylib"
+        ],
+        "compile_exit": 0,
+        "judge_command": [
+          "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+          "tools/oracles/verify_original_dynamic_model.py",
+          "game/Sonic Adventure DX/sonic.exe",
+          "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/alternate/faults/wrong-color-table.dylib",
+          "--output",
+          "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/alternate/faults/wrong-color-table.json"
+        ],
+        "judge_exit": 1,
+        "value_failures": 187
+      }
+    ],
+    "quad-faults": [
+      {
+        "name": "wrong-quad-second-triangle",
+        "compile_command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-Isrc",
+          "-Itests/probes",
+          "-dynamiclib",
+          "tests/probes/native_normal_uv_quad_probe.cpp",
+          "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/alternate/quad-faults/wrong-quad-second-triangle.cpp",
+          "build/libsadx-native.a",
+          "-o",
+          "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/alternate/quad-faults/wrong-quad-second-triangle.dylib"
+        ],
+        "compile_exit": 0,
+        "judge_command": [
+          "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+          "tools/oracles/verify_original_normal_uv_quad.py",
+          "game/Sonic Adventure DX/sonic.exe",
+          "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/alternate/quad-faults/wrong-quad-second-triangle.dylib",
+          "--output",
+          "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/alternate/quad-faults/wrong-quad-second-triangle.json"
+        ],
+        "judge_exit": 1,
+        "value_failures": 406
+      },
+      {
+        "name": "wrong-list-primitive-count",
+        "compile_command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-Isrc",
+          "-Itests/probes",
+          "-dynamiclib",
+          "tests/probes/native_normal_uv_quad_probe.cpp",
+          "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/alternate/quad-faults/wrong-list-primitive-count.cpp",
+          "build/libsadx-native.a",
+          "-o",
+          "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/alternate/quad-faults/wrong-list-primitive-count.dylib"
+        ],
+        "compile_exit": 0,
+        "judge_command": [
+          "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+          "tools/oracles/verify_original_normal_uv_quad.py",
+          "game/Sonic Adventure DX/sonic.exe",
+          "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/alternate/quad-faults/wrong-list-primitive-count.dylib",
+          "--output",
+          "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/alternate/quad-faults/wrong-list-primitive-count.json"
+        ],
+        "judge_exit": 1,
+        "value_failures": 814
+      },
+      {
+        "name": "wrong-list-draw-kind",
+        "compile_command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-Isrc",
+          "-Itests/probes",
+          "-dynamiclib",
+          "tests/probes/native_normal_uv_quad_probe.cpp",
+          "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/alternate/quad-faults/wrong-list-draw-kind.cpp",
+          "build/libsadx-native.a",
+          "-o",
+          "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/alternate/quad-faults/wrong-list-draw-kind.dylib"
+        ],
+        "compile_exit": 0,
+        "judge_command": [
+          "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+          "tools/oracles/verify_original_normal_uv_quad.py",
+          "game/Sonic Adventure DX/sonic.exe",
+          "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/alternate/quad-faults/wrong-list-draw-kind.dylib",
+          "--output",
+          "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/alternate/quad-faults/wrong-list-draw-kind.json"
+        ],
+        "judge_exit": 1,
+        "value_failures": 911
+      }
+    ],
+    "normal-faults": [
+      {
+        "name": "missing-strip-body",
+        "compile_command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-Isrc",
+          "-Itests/probes",
+          "-dynamiclib",
+          "tests/probes/native_normal_primitives_probe.cpp",
+          "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/alternate/normal-faults/missing-strip-body.cpp",
+          "src/engine/normal_uv_quad.cpp",
+          "build/libsadx-native.a",
+          "-o",
+          "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/alternate/normal-faults/missing-strip-body.dylib"
+        ],
+        "compile_exit": 0,
+        "judge_command": [
+          "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+          "tools/oracles/verify_original_normal_primitives.py",
+          "game/Sonic Adventure DX/sonic.exe",
+          "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/alternate/normal-faults/missing-strip-body.dylib",
+          "--output",
+          "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/alternate/normal-faults/missing-strip-body.json"
+        ],
+        "judge_exit": 1,
+        "value_failures": 266
+      },
+      {
+        "name": "wrong-triangle-index",
+        "compile_command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-Isrc",
+          "-Itests/probes",
+          "-dynamiclib",
+          "tests/probes/native_normal_primitives_probe.cpp",
+          "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/alternate/normal-faults/wrong-triangle-index.cpp",
+          "src/engine/normal_uv_quad.cpp",
+          "build/libsadx-native.a",
+          "-o",
+          "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/alternate/normal-faults/wrong-triangle-index.dylib"
+        ],
+        "compile_exit": 0,
+        "judge_command": [
+          "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+          "tools/oracles/verify_original_normal_primitives.py",
+          "game/Sonic Adventure DX/sonic.exe",
+          "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/alternate/normal-faults/wrong-triangle-index.dylib",
+          "--output",
+          "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/alternate/normal-faults/wrong-triangle-index.json"
+        ],
+        "judge_exit": 1,
+        "value_failures": 267
+      },
+      {
+        "name": "wrong-quad-second-triangle",
+        "compile_command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-Isrc",
+          "-Itests/probes",
+          "-dynamiclib",
+          "tests/probes/native_normal_primitives_probe.cpp",
+          "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/alternate/normal-faults/wrong-quad-second-triangle.cpp",
+          "src/engine/normal_uv_quad.cpp",
+          "build/libsadx-native.a",
+          "-o",
+          "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/alternate/normal-faults/wrong-quad-second-triangle.dylib"
+        ],
+        "compile_exit": 0,
+        "judge_command": [
+          "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+          "tools/oracles/verify_original_normal_primitives.py",
+          "game/Sonic Adventure DX/sonic.exe",
+          "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/alternate/normal-faults/wrong-quad-second-triangle.dylib",
+          "--output",
+          "/Users/burbujamc/Developer/sadx-worktrees/draw-path2/build/draw-path-2/alternate/normal-faults/wrong-quad-second-triangle.json"
+        ],
+        "judge_exit": 1,
+        "value_failures": 267
+      }
+    ]
+  },
+  "return_only": {
+    "cases": 1024,
+    "passed": true,
+    "values_match": true,
+    "value_failures": 0,
+    "flag_mismatches": 0,
+    "failures": [],
+    "entry": "0x78c5a0",
+    "original_byte": "c3",
+    "source_body_bytes": 1,
+    "original_exe_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+    "exact_body_sha256": "ae3f4619b0413d70d3004b9131c3752153074e45725be13b9a148978895e359e",
+    "scope": "bare RET; GPRs/flags/FPcontrol/status and stack bytes preserved; ESP advances4"
+  },
+  "commands": [
+    {
+      "argv": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_dynamic_model.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/draw-path-2/alternate/native-dynamic-model.dylib",
+        "--cases",
+        "1024",
+        "--output",
+        "build/draw-path-2/alternate/dev.json"
+      ],
+      "exit": 2
+    },
+    {
+      "argv": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_dynamic_model.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/draw-path-2/alternate/native-dynamic-model.dylib",
+        "--cases",
+        "2048",
+        "--output",
+        "build/draw-path-2/alternate/holdout.json",
+        "--seed",
+        "0x9e784ae0"
+      ],
+      "exit": 2
+    },
+    {
+      "argv": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_normal_uv_quad.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/draw-path-2/alternate/native-normal-uv-quad.dylib",
+        "--cases",
+        "1024",
+        "--output",
+        "build/draw-path-2/alternate/quad-dev.json"
+      ],
+      "exit": 2
+    },
+    {
+      "argv": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_normal_uv_quad.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/draw-path-2/alternate/native-normal-uv-quad.dylib",
+        "--cases",
+        "2048",
+        "--output",
+        "build/draw-path-2/alternate/quad-holdout.json",
+        "--seed",
+        "0x9e783920"
+      ],
+      "exit": 2
+    },
+    {
+      "argv": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_normal_primitives.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/draw-path-2/alternate/native-normal-primitives.dylib",
+        "--cases",
+        "1536",
+        "--output",
+        "build/draw-path-2/alternate/normal-dev.json"
+      ],
+      "exit": 0
+    },
+    {
+      "argv": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_normal_primitives.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/draw-path-2/alternate/native-normal-primitives.dylib",
+        "--cases",
+        "3072",
+        "--output",
+        "build/draw-path-2/alternate/normal-holdout.json",
+        "--seed",
+        "0x9e783410"
+      ],
+      "exit": 0
+    },
+    {
+      "argv": [
+        "reference/python/bin/python",
+        "reference/packets/gamma-display-draw-2/dynamic_faults.py",
+        "game/Sonic Adventure DX/sonic.exe"
+      ],
+      "exit": 0
+    },
+    {
+      "argv": [
+        "reference/python/bin/python",
+        "reference/packets/gamma-display-draw-2/quad_faults.py",
+        "game/Sonic Adventure DX/sonic.exe"
+      ],
+      "exit": 0
+    },
+    {
+      "argv": [
+        "reference/python/bin/python",
+        "reference/packets/gamma-display-draw-2/normal_faults.py",
+        "game/Sonic Adventure DX/sonic.exe"
+      ],
+      "exit": 0
+    },
+    {
+      "argv": [
+        "reference/python/bin/python",
+        "reference/packets/gamma-display-draw-2/return_only_proof.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "--output",
+        "build/draw-path-2/alternate/return-only.json"
+      ],
+      "exit": 0
+    }
+  ],
+  "unit_commands": [
+    {
+      "command": "./build/draw-path-2/alternate/normal-uv-quad-test",
+      "exit": 0
+    },
+    {
+      "command": "./build/draw-path-2/alternate/normal-primitives-test",
+      "exit": 0
+    }
+  ],
+  "source_evidence": "CONSTANT-MATERIAL-EVIDENCE.json",
+  "return_only_evidence": "NINJA-RETURN-ONLY-EVIDENCE.json",
+  "limits": [
+    "D3DX, COM and primitive dispatch receipts are explicit in the dispatcher cohort; it does not compare GPU raster output.",
+    "UV and normal primitive cohorts execute the original buffer helpers and compare all observed buffer stores, vertex words, arguments and COM calls.",
+    "The FP partials retain exact compared values and differ in the low six x87 exception flags; full hardware FP state is not certified.",
+    "Buffer6 source stores are observed through a reference-only typed buffer view; native code borrows the canonical PolygonBuffers[6].",
+    "All owned REA requests completed; some close calls reported sysctl_errno_22 ownership-token errors after process exit. No Java/Ghidra process remained in the final process check.",
+    "No full gate, source-only export or separate Metal raster comparison was run by this cluster."
+  ]
+}

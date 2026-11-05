@@ -1,0 +1,70 @@
+Evidence: ev_11818611d0d2cab20785d9131fa40e15702c32bb8de1f66297b8e7f5706f830e
+Original: 6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74
+
+
+void drawEvidence404cc0(int param_1)
+
+{
+  int iVar1;
+  undefined4 uVar2;
+  undefined4 local_c;
+  undefined4 local_8;
+  undefined4 local_4;
+
+  iVar1 = *(int *)(DAT_03ab9914 + DAT_03ab9924 * 4);
+  if (iVar1 == 0) {
+    local_4 = *(undefined4 *)(param_1 + 0x10);
+    local_8 = *(undefined4 *)(param_1 + 0xc);
+    local_c = *(undefined4 *)(param_1 + 8);
+  }
+  else {
+    uVar2 = FUN_00404b20(DAT_03ab991c,*(undefined4 *)(DAT_03ab9918 + DAT_03ab9924 * 4),&local_c);
+    FUN_00404b60(iVar1,uVar2);
+  }
+  FUN_00784be0(local_c,local_8,local_4);
+  DAT_03ab9924 = DAT_03ab9924 + 1;
+  return;
+}
+
+
+
+0x404cc0: MOV EAX, [0x03ab9924]
+0x404cc5: MOV ECX, dword ptr [0x03ab9914]
+0x404ccb: SUB ESP, 0xc
+0x404cce: PUSH EBX
+0x404ccf: MOV EBX, dword ptr [ECX + EAX*0x4]
+0x404cd2: TEST EBX, EBX
+0x404cd4: JZ 0x00404d0f
+0x404cd6: MOV EDX, dword ptr [0x03ab9918]
+0x404cdc: MOV EAX, dword ptr [EDX + EAX*0x4]
+0x404cdf: MOV EDX, dword ptr [0x03ab991c]
+0x404ce5: LEA ECX, [ESP + 0x4]
+0x404ce9: PUSH ECX
+0x404cea: PUSH EAX
+0x404ceb: PUSH EDX
+0x404cec: CALL 0x00404b20
+0x404cf1: ADD ESP, 0x4
+0x404cf4: PUSH EAX
+0x404cf5: PUSH EBX
+0x404cf6: CALL 0x00404b60
+0x404cfb: MOV EAX, dword ptr [ESP + 0x1c]
+0x404cff: MOV ECX, dword ptr [ESP + 0x18]
+0x404d03: MOV EDX, dword ptr [ESP + 0x14]
+0x404d07: ADD ESP, 0x10
+0x404d0a: PUSH EAX
+0x404d0b: PUSH ECX
+0x404d0c: PUSH EDX
+0x404d0d: JMP 0x00404d1f
+0x404d0f: MOV EAX, dword ptr [ESP + 0x14]
+0x404d13: MOV ECX, dword ptr [EAX + 0x10]
+0x404d16: MOV EDX, dword ptr [EAX + 0xc]
+0x404d19: MOV EAX, dword ptr [EAX + 0x8]
+0x404d1c: PUSH ECX
+0x404d1d: PUSH EDX
+0x404d1e: PUSH EAX
+0x404d1f: XOR ECX, ECX
+0x404d21: CALL 0x00784be0
+0x404d26: INC dword ptr [0x03ab9924]
+0x404d2c: POP EBX
+0x404d2d: ADD ESP, 0xc
+0x404d30: RET

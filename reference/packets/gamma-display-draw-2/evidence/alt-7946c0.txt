@@ -1,0 +1,93 @@
+Evidence: ev_1a51023c9ecf855a058cf17179eb55eb56de7c36689b2a295164c6acdb4033b2
+Original: 6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74
+
+
+undefined4 FUN_007946c0(uint param_1)
+
+{
+  uint uVar1;
+  undefined4 *in_ECX;
+  uint in_EDX;
+  uint uVar2;
+  uint *puVar3;
+  undefined4 unaff_EDI;
+  uint uVar4;
+  undefined4 local_8;
+  uint local_4;
+
+  local_4 = in_ECX[3];
+  uVar4 = local_4 * in_EDX;
+  if (uVar4 < (uint)in_ECX[2]) {
+    local_8 = 0x1000;
+    uVar1 = in_ECX[2];
+  }
+  else {
+    local_8 = 0x2000;
+    uVar1 = in_ECX[1];
+  }
+  uVar2 = in_ECX[1] - uVar1;
+  in_ECX[2] = uVar1 - uVar4;
+  puVar3 = (uint *)(in_ECX[6] * 0x10 + in_ECX[5]);
+  *puVar3 = uVar2 / local_4;
+  puVar3[2] = param_1;
+  puVar3[1] = in_EDX / 3;
+  in_ECX[6] = in_ECX[6] + 1;
+  (**(code **)(*(int *)*in_ECX + 0x2c))((int *)*in_ECX,uVar2,uVar4,&local_4,local_8);
+  return unaff_EDI;
+}
+
+
+
+0x7946c0: SUB ESP, 0x8
+0x7946c3: MOV EAX, dword ptr [ECX + 0x8]
+0x7946c6: PUSH EBX
+0x7946c7: PUSH EBP
+0x7946c8: PUSH ESI
+0x7946c9: PUSH EDI
+0x7946ca: MOV EDI, dword ptr [ECX + 0xc]
+0x7946cd: MOV EBP, EDX
+0x7946cf: MOV EDX, dword ptr [ECX + 0x4]
+0x7946d2: MOV dword ptr [ESP + 0x14], EDI
+0x7946d6: IMUL EDI, EBP
+0x7946d9: CMP EDI, EAX
+0x7946db: JNC 0x007946e7
+0x7946dd: MOV dword ptr [ESP + 0x10], 0x1000
+0x7946e5: JMP 0x007946f1
+0x7946e7: MOV EAX, EDX
+0x7946e9: MOV dword ptr [ESP + 0x10], 0x2000
+0x7946f1: MOV ESI, dword ptr [ECX + 0x18]
+0x7946f4: SUB EDX, EAX
+0x7946f6: SUB EAX, EDI
+0x7946f8: MOV dword ptr [ECX + 0x8], EAX
+0x7946fb: MOV EAX, dword ptr [ECX + 0x14]
+0x7946fe: MOV EBX, EDX
+0x794700: SHL ESI, 0x4
+0x794703: ADD ESI, EAX
+0x794705: XOR EDX, EDX
+0x794707: MOV EAX, EBX
+0x794709: DIV dword ptr [ESP + 0x14]
+0x79470d: MOV dword ptr [ESI], EAX
+0x79470f: MOV EAX, 0xaaaaaaab
+0x794714: MUL EBP
+0x794716: MOV EAX, dword ptr [ESP + 0x1c]
+0x79471a: MOV dword ptr [ESI + 0x8], EAX
+0x79471d: SHR EDX, 0x1
+0x79471f: MOV dword ptr [ESI + 0x4], EDX
+0x794722: INC dword ptr [ECX + 0x18]
+0x794725: MOV EAX, dword ptr [ESP + 0x10]
+0x794729: MOV ECX, dword ptr [ECX]
+0x79472b: MOV EDX, dword ptr [ECX]
+0x79472d: PUSH EAX
+0x79472e: LEA EAX, [ESP + 0x18]
+0x794732: PUSH EAX
+0x794733: PUSH EDI
+0x794734: PUSH EBX
+0x794735: PUSH ECX
+0x794736: CALL dword ptr [EDX + 0x2c]
+0x794739: MOV EAX, dword ptr [ESP + 0x14]
+0x79473d: POP EDI
+0x79473e: POP ESI
+0x79473f: POP EBP
+0x794740: POP EBX
+0x794741: ADD ESP, 0x8
+0x794744: RET 0x4

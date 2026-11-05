@@ -1,0 +1,64 @@
+Evidence: ev_e94f72cd910371ae28c5c4da75f5e641e7638298866dda313d75a1500e700dac
+Original: 6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74
+
+
+/* WARNING: Removing unreachable block (ram,0x00784aa9) */
+
+void FUN_00784850(void)
+
+{
+  undefined4 uVar1;
+  uint uVar2;
+  undefined4 uVar3;
+  undefined4 *in_ECX;
+  uint uVar4;
+
+  uVar2 = DAT_03d0f9c8;
+  uVar3 = DAT_03d08488;
+  if ((DAT_03d08498 & 2) == 0) {
+    if ((DAT_03d08498 & 4) == 0) {
+      uVar3 = *in_ECX;
+    }
+    else {
+      uVar3 = FUN_00781ec0();
+    }
+  }
+  DAT_03d08494 = *in_ECX;
+  DAT_03d0848c = uVar3;
+  (**(code **)(*DAT_03d128b0 + 0xa8))(DAT_03d128b0);
+  uVar4 = in_ECX[4];
+  if ((uVar2 & 4) != 0) {
+    uVar4 = uVar4 & DAT_03d0f840 | DAT_03d0f9c4;
+  }
+  if ((uVar4 & 0x200000) == 0) {
+    FUN_0078bba0();
+  }
+  else {
+    uVar3 = *(undefined4 *)(&DAT_0088ae0c + ((uVar4 >> 1 & 0x10000 | uVar4 & 0x8000) >> 0xf) * 4);
+    uVar1 = *(undefined4 *)(&DAT_0088ae1c + (uVar4 >> 0x1d) * 4);
+    (**(code **)(*DAT_03d128b0 + 0xfc))
+              (DAT_03d128b0,0,0xd,
+               *(undefined4 *)
+                (&DAT_0088ae0c + ((uVar4 >> 1 & 0x20000 | uVar4 & 0x10000) >> 0x10) * 4));
+    (**(code **)(*DAT_03d128b0 + 0xfc))(DAT_03d128b0,0,0xe,uVar3);
+    (**(code **)(*DAT_03d128b0 + 200))(DAT_03d128b0,0x13,uVar1);
+    (**(code **)(*DAT_03d128b0 + 200))(DAT_03d128b0,0x14,uVar3);
+    FUN_0078d140();
+  }
+  if ((uVar4 & 0x2000000) == 0) {
+    (**(code **)(*DAT_03d128b0 + 200))(DAT_03d128b0,0x89,1);
+  }
+  else {
+    (**(code **)(*DAT_03d128b0 + 200))(DAT_03d128b0,0x89,0);
+  }
+  if ((uVar4 & 0x400000) != 0) {
+    FUN_007944b0();
+    DAT_03d08498 = DAT_03d08498 | 1;
+  }
+  if ((uVar4 & 0x100000) != 0) {
+    FUN_00791990();
+    return;
+  }
+  FUN_00791990();
+  return;
+}

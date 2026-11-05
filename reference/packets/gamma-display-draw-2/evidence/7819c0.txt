@@ -1,0 +1,276 @@
+Evidence: ev_45a6615a12af55a8779ebcae15a9b5bd4b8c0f8a6e2bba55984ba6299231ce9d
+Original: 6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74
+
+
+void drawEvidence7819c0(int param_1,int param_2)
+
+{
+  float fVar1;
+  float fVar2;
+  float fVar3;
+  float fVar4;
+  float fVar5;
+  float *in_ECX;
+  int in_EDX;
+  float *pfVar6;
+  float10 fVar7;
+
+  pfVar6 = DAT_03d0f818;
+  if (in_ECX != (float *)0x0) {
+    pfVar6 = in_ECX;
+  }
+  if (param_1 != 0) {
+    fVar7 = (float10)FUN_00788290();
+    fVar1 = (float)fVar7;
+    fVar7 = (float10)FUN_007883c0();
+    fVar2 = *pfVar6;
+    fVar3 = pfVar6[1];
+    fVar4 = pfVar6[2];
+    fVar5 = pfVar6[3];
+    *pfVar6 = (float)((float10)fVar2 * fVar7 - (float10)fVar1 * (float10)pfVar6[8]);
+    pfVar6[1] = (float)((float10)fVar3 * fVar7 - (float10)fVar1 * (float10)pfVar6[9]);
+    pfVar6[2] = (float)((float10)fVar4 * fVar7 - (float10)fVar1 * (float10)pfVar6[10]);
+    pfVar6[3] = (float)((float10)fVar5 * fVar7 - (float10)fVar1 * (float10)pfVar6[0xb]);
+    pfVar6[8] = (float)((float10)fVar2 * (float10)fVar1 + fVar7 * (float10)pfVar6[8]);
+    pfVar6[9] = (float)(fVar7 * (float10)pfVar6[9] + (float10)fVar3 * (float10)fVar1);
+    pfVar6[10] = (float)((float10)fVar4 * (float10)fVar1 + fVar7 * (float10)pfVar6[10]);
+    pfVar6[0xb] = (float)(fVar7 * (float10)pfVar6[0xb] + (float10)fVar5 * (float10)fVar1);
+  }
+  if (in_EDX != 0) {
+    fVar7 = (float10)FUN_00788290();
+    fVar1 = (float)fVar7;
+    fVar7 = (float10)FUN_007883c0();
+    fVar2 = pfVar6[4];
+    fVar3 = pfVar6[5];
+    fVar4 = pfVar6[6];
+    fVar5 = pfVar6[7];
+    pfVar6[4] = (float)((float10)fVar2 * fVar7 + (float10)fVar1 * (float10)pfVar6[8]);
+    pfVar6[5] = (float)((float10)fVar1 * (float10)pfVar6[9] + (float10)fVar3 * fVar7);
+    pfVar6[6] = (float)((float10)fVar4 * fVar7 + (float10)fVar1 * (float10)pfVar6[10]);
+    pfVar6[7] = (float)((float10)fVar1 * (float10)pfVar6[0xb] + (float10)fVar5 * fVar7);
+    pfVar6[8] = (float)(fVar7 * (float10)pfVar6[8] - (float10)fVar2 * (float10)fVar1);
+    pfVar6[9] = (float)(fVar7 * (float10)pfVar6[9] - (float10)fVar3 * (float10)fVar1);
+    pfVar6[10] = (float)(fVar7 * (float10)pfVar6[10] - (float10)fVar4 * (float10)fVar1);
+    pfVar6[0xb] = (float)(fVar7 * (float10)pfVar6[0xb] - (float10)fVar5 * (float10)fVar1);
+  }
+  if (param_2 != 0) {
+    fVar7 = (float10)FUN_00788290();
+    fVar1 = (float)fVar7;
+    fVar7 = (float10)FUN_007883c0();
+    fVar2 = *pfVar6;
+    fVar3 = pfVar6[1];
+    fVar4 = pfVar6[2];
+    fVar5 = pfVar6[3];
+    *pfVar6 = (float)((float10)fVar2 * fVar7 + (float10)fVar1 * (float10)pfVar6[4]);
+    pfVar6[1] = (float)((float10)fVar3 * fVar7 + (float10)fVar1 * (float10)pfVar6[5]);
+    pfVar6[2] = (float)((float10)fVar1 * (float10)pfVar6[6] + (float10)fVar4 * fVar7);
+    pfVar6[3] = (float)((float10)fVar5 * fVar7 + (float10)fVar1 * (float10)pfVar6[7]);
+    pfVar6[4] = (float)(fVar7 * (float10)pfVar6[4] - (float10)fVar2 * (float10)fVar1);
+    pfVar6[5] = (float)(fVar7 * (float10)pfVar6[5] - (float10)fVar3 * (float10)fVar1);
+    pfVar6[6] = (float)(fVar7 * (float10)pfVar6[6] - (float10)fVar4 * (float10)fVar1);
+    pfVar6[7] = (float)(fVar7 * (float10)pfVar6[7] - (float10)fVar5 * (float10)fVar1);
+  }
+  return;
+}
+
+
+
+0x7819c0: SUB ESP, 0x10
+0x7819c3: TEST ECX, ECX
+0x7819c5: PUSH EBX
+0x7819c6: PUSH ESI
+0x7819c7: MOV ESI, dword ptr [0x03d0f818]
+0x7819cd: PUSH EDI
+0x7819ce: MOV EBX, EDX
+0x7819d0: JZ 0x007819d4
+0x7819d2: MOV ESI, ECX
+0x7819d4: MOV EDI, dword ptr [ESP + 0x20]
+0x7819d8: TEST EDI, EDI
+0x7819da: JZ 0x00781a8c
+0x7819e0: MOV ECX, EDI
+0x7819e2: CALL 0x00788290
+0x7819e7: FSTP float ptr [ESP + 0x20]
+0x7819eb: MOV ECX, EDI
+0x7819ed: CALL 0x007883c0
+0x7819f2: FLD float ptr [ESI]
+0x7819f4: FLD float ptr [ESI + 0x4]
+0x7819f7: MOV EAX, dword ptr [ESI + 0x8]
+0x7819fa: FLD ST1
+0x7819fc: MOV ECX, dword ptr [ESI + 0xc]
+0x7819ff: FMUL ST3
+0x781a01: MOV dword ptr [ESP + 0xc], EAX
+0x781a05: FLD float ptr [ESP + 0x20]
+0x781a09: MOV dword ptr [ESP + 0x10], ECX
+0x781a0d: FMUL float ptr [ESI + 0x20]
+0x781a10: FSUBP
+0x781a12: FSTP float ptr [ESI]
+0x781a14: FLD ST0
+0x781a16: FMUL ST3
+0x781a18: FLD float ptr [ESP + 0x20]
+0x781a1c: FMUL float ptr [ESI + 0x24]
+0x781a1f: FSUBP
+0x781a21: FSTP float ptr [ESI + 0x4]
+0x781a24: FLD float ptr [ESP + 0xc]
+0x781a28: FMUL ST3
+0x781a2a: FLD float ptr [ESP + 0x20]
+0x781a2e: FMUL float ptr [ESI + 0x28]
+0x781a31: FSUBP
+0x781a33: FSTP float ptr [ESI + 0x8]
+0x781a36: FLD float ptr [ESP + 0x10]
+0x781a3a: FMUL ST3
+0x781a3c: FLD float ptr [ESP + 0x20]
+0x781a40: FMUL float ptr [ESI + 0x2c]
+0x781a43: FSUBP
+0x781a45: FSTP float ptr [ESI + 0xc]
+0x781a48: FLD ST2
+0x781a4a: FMUL float ptr [ESI + 0x20]
+0x781a4d: FXCH ST2
+0x781a4f: FMUL float ptr [ESP + 0x20]
+0x781a53: FADDP ST2, ST0
+0x781a55: FXCH
+0x781a57: FSTP float ptr [ESI + 0x20]
+0x781a5a: FMUL float ptr [ESP + 0x20]
+0x781a5e: FLD ST1
+0x781a60: FMUL float ptr [ESI + 0x24]
+0x781a63: FADDP
+0x781a65: FSTP float ptr [ESI + 0x24]
+0x781a68: FLD ST0
+0x781a6a: FMUL float ptr [ESI + 0x28]
+0x781a6d: FLD float ptr [ESP + 0xc]
+0x781a71: FMUL float ptr [ESP + 0x20]
+0x781a75: FADDP
+0x781a77: FSTP float ptr [ESI + 0x28]
+0x781a7a: FLD float ptr [ESP + 0x10]
+0x781a7e: FMUL float ptr [ESP + 0x20]
+0x781a82: FXCH
+0x781a84: FMUL float ptr [ESI + 0x2c]
+0x781a87: FADDP
+0x781a89: FSTP float ptr [ESI + 0x2c]
+0x781a8c: TEST EBX, EBX
+0x781a8e: JZ 0x00781b42
+0x781a94: MOV ECX, EBX
+0x781a96: CALL 0x00788290
+0x781a9b: FSTP float ptr [ESP + 0x20]
+0x781a9f: MOV ECX, EBX
+0x781aa1: CALL 0x007883c0
+0x781aa6: FLD float ptr [ESI + 0x10]
+0x781aa9: FLD float ptr [ESI + 0x14]
+0x781aac: MOV EDX, dword ptr [ESI + 0x18]
+0x781aaf: FLD float ptr [ESP + 0x20]
+0x781ab3: MOV EAX, dword ptr [ESI + 0x1c]
+0x781ab6: FMUL float ptr [ESI + 0x20]
+0x781ab9: MOV dword ptr [ESP + 0x14], EDX
+0x781abd: FLD ST2
+0x781abf: MOV dword ptr [ESP + 0x18], EAX
+0x781ac3: FMUL ST4
+0x781ac5: FADDP
+0x781ac7: FSTP float ptr [ESI + 0x10]
+0x781aca: FLD ST0
+0x781acc: FMUL ST3
+0x781ace: FLD float ptr [ESP + 0x20]
+0x781ad2: FMUL float ptr [ESI + 0x24]
+0x781ad5: FADDP
+0x781ad7: FSTP float ptr [ESI + 0x14]
+0x781ada: FLD float ptr [ESP + 0x20]
+0x781ade: FMUL float ptr [ESI + 0x28]
+0x781ae1: FLD float ptr [ESP + 0x14]
+0x781ae5: FMUL ST4
+0x781ae7: FADDP
+0x781ae9: FSTP float ptr [ESI + 0x18]
+0x781aec: FLD float ptr [ESP + 0x18]
+0x781af0: FMUL ST3
+0x781af2: FLD float ptr [ESP + 0x20]
+0x781af6: FMUL float ptr [ESI + 0x2c]
+0x781af9: FADDP
+0x781afb: FSTP float ptr [ESI + 0x1c]
+0x781afe: FLD ST2
+0x781b00: FMUL float ptr [ESI + 0x20]
+0x781b03: FXCH ST2
+0x781b05: FMUL float ptr [ESP + 0x20]
+0x781b09: FSUBP ST2, ST0
+0x781b0b: FXCH
+0x781b0d: FSTP float ptr [ESI + 0x20]
+0x781b10: FLD ST1
+0x781b12: FMUL float ptr [ESI + 0x24]
+0x781b15: FXCH
+0x781b17: FMUL float ptr [ESP + 0x20]
+0x781b1b: FSUBP
+0x781b1d: FSTP float ptr [ESI + 0x24]
+0x781b20: FLD ST0
+0x781b22: FMUL float ptr [ESI + 0x28]
+0x781b25: FLD float ptr [ESP + 0x14]
+0x781b29: FMUL float ptr [ESP + 0x20]
+0x781b2d: FSUBP
+0x781b2f: FSTP float ptr [ESI + 0x28]
+0x781b32: FMUL float ptr [ESI + 0x2c]
+0x781b35: FLD float ptr [ESP + 0x18]
+0x781b39: FMUL float ptr [ESP + 0x20]
+0x781b3d: FSUBP
+0x781b3f: FSTP float ptr [ESI + 0x2c]
+0x781b42: MOV EDI, dword ptr [ESP + 0x24]
+0x781b46: TEST EDI, EDI
+0x781b48: JZ 0x00781bfa
+0x781b4e: MOV ECX, EDI
+0x781b50: CALL 0x00788290
+0x781b55: FSTP float ptr [ESP + 0x20]
+0x781b59: MOV ECX, EDI
+0x781b5b: CALL 0x007883c0
+0x781b60: FLD float ptr [ESI]
+0x781b62: FLD float ptr [ESI + 0x4]
+0x781b65: MOV ECX, dword ptr [ESI + 0x8]
+0x781b68: FLD float ptr [ESP + 0x20]
+0x781b6c: MOV EDX, dword ptr [ESI + 0xc]
+0x781b6f: FMUL float ptr [ESI + 0x10]
+0x781b72: MOV dword ptr [ESP + 0xc], ECX
+0x781b76: FLD ST2
+0x781b78: MOV dword ptr [ESP + 0x10], EDX
+0x781b7c: FMUL ST4
+0x781b7e: FADDP
+0x781b80: FSTP float ptr [ESI]
+0x781b82: FLD float ptr [ESP + 0x20]
+0x781b86: FMUL float ptr [ESI + 0x14]
+0x781b89: FLD ST1
+0x781b8b: FMUL ST4
+0x781b8d: FADDP
+0x781b8f: FSTP float ptr [ESI + 0x4]
+0x781b92: FLD float ptr [ESP + 0xc]
+0x781b96: FMUL ST3
+0x781b98: FLD float ptr [ESP + 0x20]
+0x781b9c: FMUL float ptr [ESI + 0x18]
+0x781b9f: FADDP
+0x781ba1: FSTP float ptr [ESI + 0x8]
+0x781ba4: FLD float ptr [ESP + 0x20]
+0x781ba8: FMUL float ptr [ESI + 0x1c]
+0x781bab: FLD float ptr [ESP + 0x10]
+0x781baf: FMUL ST4
+0x781bb1: FADDP
+0x781bb3: FSTP float ptr [ESI + 0xc]
+0x781bb6: FLD ST2
+0x781bb8: FMUL float ptr [ESI + 0x10]
+0x781bbb: FXCH ST2
+0x781bbd: FMUL float ptr [ESP + 0x20]
+0x781bc1: FSUBP ST2, ST0
+0x781bc3: FXCH
+0x781bc5: FSTP float ptr [ESI + 0x10]
+0x781bc8: FLD ST1
+0x781bca: FMUL float ptr [ESI + 0x14]
+0x781bcd: FXCH
+0x781bcf: FMUL float ptr [ESP + 0x20]
+0x781bd3: FSUBP
+0x781bd5: FSTP float ptr [ESI + 0x14]
+0x781bd8: FLD ST0
+0x781bda: FMUL float ptr [ESI + 0x18]
+0x781bdd: FLD float ptr [ESP + 0xc]
+0x781be1: FMUL float ptr [ESP + 0x20]
+0x781be5: FSUBP
+0x781be7: FSTP float ptr [ESI + 0x18]
+0x781bea: FMUL float ptr [ESI + 0x1c]
+0x781bed: FLD float ptr [ESP + 0x10]
+0x781bf1: FMUL float ptr [ESP + 0x20]
+0x781bf5: FSUBP
+0x781bf7: FSTP float ptr [ESI + 0x1c]
+0x781bfa: POP EDI
+0x781bfb: POP ESI
+0x781bfc: POP EBX
+0x781bfd: ADD ESP, 0x10
+0x781c00: RET 0x8

@@ -1,0 +1,22 @@
+[
+  {
+    "name": "wrong-model-callback-identity",
+    "old": "state.model_callback = ModelCallback::DrawModel;",
+    "new": "state.model_callback = ModelCallback::None;"
+  },
+  {
+    "name": "wrong-transform-order",
+    "old": "transform_channel(id, 0, motion, state, context);\n    transform_channel(id, 1, motion, state, context);",
+    "new": "transform_channel(id, 1, motion, state, context);\n    transform_channel(id, 0, motion, state, context);"
+  },
+  {
+    "name": "missing-child-traversal",
+    "old": "if (node.child != 0)\n            process_nodes(node.child, motion, state, rendering, context);",
+    "new": "if (node.child != 0 && node.child == root)\n            process_nodes(node.child, motion, state, rendering, context);"
+  },
+  {
+    "name": "missing-final-clip-clear",
+    "old": "process_nodes(root, *motion, state, rendering, context);\n    state.clip_scale = 0;",
+    "new": "process_nodes(root, *motion, state, rendering, context);\n    state.clip_scale += 0;"
+  }
+]

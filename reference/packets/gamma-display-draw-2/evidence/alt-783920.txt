@@ -1,0 +1,208 @@
+Evidence: ev_0074423e77f35af43c90264d7cb841f9bd557377fff86f5ae54305eb75d9b2e8
+Original: 6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74
+
+
+/* WARNING: Function: __security_check_cookie replaced with injection: security_check_cookie */
+
+void FUN_00783920(int param_1,int param_2,int param_3)
+
+{
+  short sVar1;
+  short *psVar2;
+  undefined4 uVar3;
+  undefined4 uVar4;
+  undefined4 *puVar5;
+  undefined4 *puVar6;
+  int iVar7;
+  short *psVar8;
+  short *psVar9;
+  undefined4 *puVar10;
+  int iVar11;
+  int *piVar12;
+  int *piVar13;
+  int iVar14;
+  int local_38;
+  int local_1c [4];
+  undefined4 local_c;
+  undefined4 local_8;
+  undefined4 local_4;
+
+  uVar4 = DAT_03d08490;
+  uVar3 = DAT_03d0848c;
+  local_4 = DAT_02bcbddc;
+  puVar10 = *(undefined4 **)(param_1 + 4);
+  iVar14 = *(int *)(param_1 + 0x14);
+  iVar11 = (uint)*(ushort *)(param_1 + 2) * 6;
+  FUN_00794600();
+  puVar5 = (undefined4 *)FUN_007946c0(uVar4);
+  if (puVar5 != (undefined4 *)0x0) {
+    for (; iVar11 != 0; iVar11 = iVar11 + -6) {
+      local_c = *puVar10;
+      puVar6 = puVar10 + 1;
+      iVar7 = 0;
+      puVar10 = puVar10 + 2;
+      local_8 = *puVar6;
+      do {
+        local_1c[iVar7] = iVar14;
+        iVar14 = iVar14 + 4;
+        iVar7 = iVar7 + 1;
+      } while (iVar7 != 4);
+      psVar8 = (short *)&local_c;
+      piVar12 = local_1c;
+      local_38 = 2;
+      do {
+        param_1 = 3;
+        puVar6 = puVar5;
+        psVar9 = psVar8;
+        piVar13 = piVar12;
+        do {
+          sVar1 = *psVar9;
+          puVar5 = (undefined4 *)(param_2 + sVar1 * 0xc);
+          *puVar6 = *puVar5;
+          puVar6[1] = puVar5[1];
+          puVar6[2] = puVar5[2];
+          puVar5 = (undefined4 *)(sVar1 * 0xc + param_3);
+          puVar6[3] = *puVar5;
+          puVar6[4] = puVar5[1];
+          puVar6[5] = puVar5[2];
+          puVar6[6] = uVar3;
+          psVar2 = (short *)*piVar13;
+          puVar5 = puVar6 + 9;
+          psVar9 = psVar9 + 1;
+          piVar13 = piVar13 + 1;
+          puVar6[7] = (float)(int)*psVar2 * 0.003921569;
+          param_1 = param_1 + -1;
+          puVar6[8] = (float)(int)psVar2[1] * 0.003921569;
+          puVar6 = puVar5;
+        } while (param_1 != 0);
+        piVar12 = piVar12 + 1;
+        psVar8 = psVar8 + 1;
+        local_38 = local_38 + -1;
+      } while (local_38 != 0);
+    }
+  }
+  FUN_00794750();
+  FUN_007947b0();
+  return;
+}
+
+
+
+0x783920: SUB ESP, 0x3c
+0x783923: MOV EAX, [0x02bcbddc]
+0x783928: PUSH EBX
+0x783929: MOV EBX, dword ptr [0x03d08490]
+0x78392f: MOV dword ptr [ESP + 0x3c], EAX
+0x783933: MOV EAX, [0x03d0848c]
+0x783938: PUSH EBP
+0x783939: PUSH ESI
+0x78393a: MOV dword ptr [ESP + 0x28], EAX
+0x78393e: MOV EAX, dword ptr [ESP + 0x4c]
+0x783942: MOV EBP, dword ptr [EAX + 0x4]
+0x783945: PUSH EDI
+0x783946: MOV EDI, dword ptr [EAX + 0x14]
+0x783949: MOVZX EAX, word ptr [EAX + 0x2]
+0x78394d: LEA ESI, [EAX + EAX*0x2]
+0x783950: MOV ECX, 0x3d0ff20
+0x783955: SHL ESI, 0x1
+0x783957: CALL 0x00794600
+0x78395c: PUSH EBX
+0x78395d: MOV EDX, ESI
+0x78395f: MOV ECX, 0x3d0ff20
+0x783964: CALL 0x007946c0
+0x783969: TEST EAX, EAX
+0x78396b: JZ 0x00783a90
+0x783971: TEST ESI, ESI
+0x783973: MOV dword ptr [ESP + 0x18], ESI
+0x783977: JZ 0x00783a90
+0x78397d: JMP 0x00783987
+0x78397f: MOV EBP, dword ptr [ESP + 0x24]
+0x783983: MOV EDI, dword ptr [ESP + 0x28]
+0x783987: MOV EDX, EBP
+0x783989: MOV ESI, dword ptr [EDX]
+0x78398b: MOV EDX, dword ptr [EDX + 0x4]
+0x78398e: XOR ECX, ECX
+0x783990: ADD EBP, 0x8
+0x783993: MOV dword ptr [ESP + 0x40], ESI
+0x783997: MOV dword ptr [ESP + 0x44], EDX
+0x78399b: MOV dword ptr [ESP + 0x24], EBP
+0x78399f: NOP
+0x7839a0: MOV dword ptr [ESP + ECX*0x4 + 0x30], EDI
+0x7839a4: ADD EDI, 0x4
+0x7839a7: INC ECX
+0x7839a8: CMP ECX, 0x4
+0x7839ab: JNZ 0x007839a0
+0x7839ad: LEA EDX, [ESP + 0x40]
+0x7839b1: LEA ESI, [ESP + 0x30]
+0x7839b5: MOV dword ptr [ESP + 0x28], EDI
+0x7839b9: MOV dword ptr [ESP + 0x1c], EDX
+0x7839bd: MOV dword ptr [ESP + 0x20], ESI
+0x7839c1: MOV dword ptr [ESP + 0x14], 0x2
+0x7839c9: LEA ESP, [ESP]
+0x7839d0: MOV dword ptr [ESP + 0x50], 0x3
+0x7839d8: JMP 0x007839e0
+0x7839e0: MOVSX ECX, word ptr [EDX]
+0x7839e3: MOV EDI, dword ptr [ESP + 0x54]
+0x7839e7: LEA ECX, [ECX + ECX*0x2]
+0x7839ea: SHL ECX, 0x2
+0x7839ed: ADD EDI, ECX
+0x7839ef: MOV EBP, dword ptr [EDI]
+0x7839f1: MOV EBX, EAX
+0x7839f3: MOV dword ptr [EBX], EBP
+0x7839f5: MOV EBP, dword ptr [EDI + 0x4]
+0x7839f8: MOV dword ptr [EBX + 0x4], EBP
+0x7839fb: MOV EDI, dword ptr [EDI + 0x8]
+0x7839fe: MOV dword ptr [EBX + 0x8], EDI
+0x783a01: MOV EDI, dword ptr [ESP + 0x58]
+0x783a05: ADD ECX, EDI
+0x783a07: MOV EBX, dword ptr [ECX]
+0x783a09: LEA EDI, [EAX + 0xc]
+0x783a0c: MOV dword ptr [EDI], EBX
+0x783a0e: MOV EBX, dword ptr [ECX + 0x4]
+0x783a11: MOV dword ptr [EDI + 0x4], EBX
+0x783a14: MOV ECX, dword ptr [ECX + 0x8]
+0x783a17: MOV dword ptr [EDI + 0x8], ECX
+0x783a1a: MOV ECX, dword ptr [ESP + 0x2c]
+0x783a1e: MOV dword ptr [EAX + 0x18], ECX
+0x783a21: MOV ECX, dword ptr [ESI]
+0x783a23: MOVSX EDI, word ptr [ECX]
+0x783a26: MOV dword ptr [ESP + 0x10], EDI
+0x783a2a: ADD EAX, 0x24
+0x783a2d: ADD EDX, 0x2
+0x783a30: FILD dword ptr [ESP + 0x10]
+0x783a34: ADD ESI, 0x4
+0x783a37: FMUL float ptr [0x007db2c4]
+0x783a3d: FSTP float ptr [EAX + -0x8]
+0x783a40: MOVSX ECX, word ptr [ECX + 0x2]
+0x783a44: MOV dword ptr [ESP + 0x10], ECX
+0x783a48: MOV ECX, dword ptr [ESP + 0x50]
+0x783a4c: DEC ECX
+0x783a4d: FILD dword ptr [ESP + 0x10]
+0x783a51: MOV dword ptr [ESP + 0x50], ECX
+0x783a55: FMUL float ptr [0x007db2c4]
+0x783a5b: FSTP float ptr [EAX + -0x4]
+0x783a5e: JNZ 0x007839e0
+0x783a60: MOV ESI, dword ptr [ESP + 0x20]
+0x783a64: MOV EDX, dword ptr [ESP + 0x1c]
+0x783a68: MOV ECX, dword ptr [ESP + 0x14]
+0x783a6c: ADD ESI, 0x4
+0x783a6f: ADD EDX, 0x2
+0x783a72: DEC ECX
+0x783a73: MOV dword ptr [ESP + 0x20], ESI
+0x783a77: MOV dword ptr [ESP + 0x1c], EDX
+0x783a7b: MOV dword ptr [ESP + 0x14], ECX
+0x783a7f: JNZ 0x007839d0
+0x783a85: SUB dword ptr [ESP + 0x18], 0x6
+0x783a8a: JNZ 0x0078397f
+0x783a90: MOV ECX, 0x3d0ff20
+0x783a95: CALL 0x00794750
+0x783a9a: MOV ECX, 0x3d0ff20
+0x783a9f: CALL 0x007947b0
+0x783aa4: MOV ECX, dword ptr [ESP + 0x48]
+0x783aa8: POP EDI
+0x783aa9: POP ESI
+0x783aaa: POP EBP
+0x783aab: POP EBX
+0x783aac: CALL 0x00643ea7
+0x783ab1: ADD ESP, 0x3c
+0x783ab4: RET

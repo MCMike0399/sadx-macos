@@ -1,0 +1,122 @@
+Evidence: ev_5935d5ea3f8012e9270d1499b16888fc62d403b5bd9490f7e00ef25a546edfbe
+Original: 6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74
+
+
+void FUN_00783830(int param_1,int param_2,int param_3)
+
+{
+  short sVar1;
+  short *psVar2;
+  undefined4 uVar3;
+  undefined4 uVar4;
+  undefined4 *puVar5;
+  int iVar6;
+  undefined4 *puVar7;
+  short *psVar8;
+
+  uVar4 = DAT_03d08490;
+  uVar3 = DAT_03d0848c;
+  psVar2 = *(short **)(param_1 + 0x14);
+  psVar8 = *(short **)(param_1 + 4);
+  iVar6 = (uint)*(ushort *)(param_1 + 2) * 3;
+  FUN_00794600();
+  puVar5 = (undefined4 *)FUN_007946c0(uVar4);
+  if (puVar5 != (undefined4 *)0x0) {
+    for (; iVar6 != 0; iVar6 = iVar6 + -1) {
+      sVar1 = *psVar8;
+      puVar7 = (undefined4 *)(param_2 + sVar1 * 0xc);
+      *puVar5 = *puVar7;
+      puVar5[1] = puVar7[1];
+      puVar5[2] = puVar7[2];
+      puVar7 = (undefined4 *)(sVar1 * 0xc + param_3);
+      puVar5[3] = *puVar7;
+      puVar5[4] = puVar7[1];
+      puVar5[5] = puVar7[2];
+      puVar5[6] = uVar3;
+      psVar8 = psVar8 + 1;
+      puVar5[7] = (float)(int)*psVar2 * 0.003921569;
+      puVar5[8] = (float)(int)psVar2[1] * 0.003921569;
+      psVar2 = psVar2 + 2;
+      puVar5 = puVar5 + 9;
+    }
+  }
+  FUN_00794750();
+  FUN_007947b0();
+  return;
+}
+
+
+
+0x783830: SUB ESP, 0x8
+0x783833: MOV EAX, [0x03d0848c]
+0x783838: PUSH EBX
+0x783839: PUSH EBP
+0x78383a: MOV EBP, dword ptr [0x03d08490]
+0x783840: PUSH ESI
+0x783841: MOV dword ptr [ESP + 0xc], EAX
+0x783845: MOV EAX, dword ptr [ESP + 0x18]
+0x783849: MOV ESI, dword ptr [EAX + 0x14]
+0x78384c: PUSH EDI
+0x78384d: MOV EDI, dword ptr [EAX + 0x4]
+0x783850: MOVZX EAX, word ptr [EAX + 0x2]
+0x783854: MOV ECX, 0x3d0ff20
+0x783859: LEA EBX, [EAX + EAX*0x2]
+0x78385c: CALL 0x00794600
+0x783861: PUSH EBP
+0x783862: MOV EDX, EBX
+0x783864: MOV ECX, 0x3d0ff20
+0x783869: CALL 0x007946c0
+0x78386e: TEST EAX, EAX
+0x783870: JZ 0x00783900
+0x783876: TEST EBX, EBX
+0x783878: JZ 0x00783900
+0x78387e: MOV dword ptr [ESP + 0x1c], EBX
+0x783882: MOVSX ECX, word ptr [EDI]
+0x783885: MOV EDX, dword ptr [ESP + 0x20]
+0x783889: LEA ECX, [ECX + ECX*0x2]
+0x78388c: SHL ECX, 0x2
+0x78388f: ADD EDX, ECX
+0x783891: MOV EBP, dword ptr [EDX]
+0x783893: MOV EBX, EAX
+0x783895: MOV dword ptr [EBX], EBP
+0x783897: MOV EBP, dword ptr [EDX + 0x4]
+0x78389a: MOV dword ptr [EBX + 0x4], EBP
+0x78389d: MOV EDX, dword ptr [EDX + 0x8]
+0x7838a0: MOV dword ptr [EBX + 0x8], EDX
+0x7838a3: MOV EDX, dword ptr [ESP + 0x24]
+0x7838a7: ADD ECX, EDX
+0x7838a9: MOV EBX, dword ptr [ECX]
+0x7838ab: LEA EDX, [EAX + 0xc]
+0x7838ae: MOV dword ptr [EDX], EBX
+0x7838b0: MOV EBX, dword ptr [ECX + 0x4]
+0x7838b3: MOV dword ptr [EDX + 0x4], EBX
+0x7838b6: MOV ECX, dword ptr [ECX + 0x8]
+0x7838b9: MOV dword ptr [EDX + 0x8], ECX
+0x7838bc: MOV EDX, dword ptr [ESP + 0x10]
+0x7838c0: MOV dword ptr [EAX + 0x18], EDX
+0x7838c3: MOVSX ECX, word ptr [ESI]
+0x7838c6: MOV dword ptr [ESP + 0x14], ECX
+0x7838ca: MOV ECX, dword ptr [ESP + 0x1c]
+0x7838ce: ADD EAX, 0x24
+0x7838d1: FILD dword ptr [ESP + 0x14]
+0x7838d5: ADD EDI, 0x2
+0x7838d8: ADD ESI, 0x4
+0x7838db: DEC ECX
+0x7838dc: FMUL float ptr [0x007db2c4]
+0x7838e2: MOV dword ptr [ESP + 0x1c], ECX
+0x7838e6: FSTP float ptr [EAX + -0x8]
+0x7838e9: MOVSX EDX, word ptr [ESI + -0x2]
+0x7838ed: MOV dword ptr [ESP + 0x14], EDX
+0x7838f1: FILD dword ptr [ESP + 0x14]
+0x7838f5: FMUL float ptr [0x007db2c4]
+0x7838fb: FSTP float ptr [EAX + -0x4]
+0x7838fe: JNZ 0x00783882
+0x783900: MOV ECX, 0x3d0ff20
+0x783905: CALL 0x00794750
+0x78390a: POP EDI
+0x78390b: POP ESI
+0x78390c: POP EBP
+0x78390d: MOV ECX, 0x3d0ff20
+0x783912: POP EBX
+0x783913: ADD ESP, 0x8
+0x783916: JMP 0x007947b0

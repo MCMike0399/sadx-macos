@@ -1,0 +1,691 @@
+{
+  "original_exe_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "prior_evidence": "reference/packets/gamma-display-draw/SOURCE-EVIDENCE.json",
+  "evidence": [
+    {
+      "label": "404cc0",
+      "evidence_id": "ev_11818611d0d2cab20785d9131fa40e15702c32bb8de1f66297b8e7f5706f830e",
+      "procedure": {
+        "address": "0x404cc0",
+        "name": "drawEvidence404cc0",
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x404cc0",
+              "end": "0x404d30"
+            }
+          ],
+          "total_bytes": 113,
+          "span_bytes": 113,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "signature": "undefined drawEvidence404cc0()",
+        "locals": [
+          {
+            "description": "undefined4 local_4 @ Stack[-0x4]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_8 @ Stack[-0x8]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_c @ Stack[-0xc]:4",
+            "provenance": "ghidra-function-database"
+          }
+        ]
+      },
+      "raw_dossier_sha256": "62f9aa0b5da0f3d2dab0e725ed42a3f92bccb3c9a85a2ce7b0bd34b122e6cc5a",
+      "retained_extract": "reference/packets/gamma-display-draw-2/evidence/404cc0.txt",
+      "extract_sha256": "19571290d802869042c8fe983c1166db8bb70721fedd239e64ce86ae5cbcd1c1",
+      "extract_format": "Pseudocode/instructions with trailing whitespace normalized; raw dossier hash unchanged."
+    },
+    {
+      "label": "404d40",
+      "evidence_id": "ev_3428951dc7f743426463a1b35edb511c06cf87f3394dfa3e9a1b0ab9f85bdbac",
+      "procedure": {
+        "address": "0x404d40",
+        "name": "drawEvidence404d40",
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x404d40",
+              "end": "0x404db0"
+            }
+          ],
+          "total_bytes": 113,
+          "span_bytes": 113,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "signature": "undefined drawEvidence404d40()",
+        "locals": [
+          {
+            "description": "undefined4 local_4 @ Stack[-0x4]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_8 @ Stack[-0x8]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_c @ Stack[-0xc]:4",
+            "provenance": "ghidra-function-database"
+          }
+        ]
+      },
+      "raw_dossier_sha256": "d3c387a115bc1d9b76fc034e8300d70a67bfc7bd871b17d3987c66b05ab88cb8",
+      "retained_extract": "reference/packets/gamma-display-draw-2/evidence/404d40.txt",
+      "extract_sha256": "aa9e2c85d22f9212938d683f49ec08a46b23a89c1017ab6105d45c987b650889",
+      "extract_format": "Pseudocode/instructions with trailing whitespace normalized; raw dossier hash unchanged."
+    },
+    {
+      "label": "404dc0",
+      "evidence_id": "ev_5ad174c6ce78f24eed232a2076a85c2131dff7583d336c903533bbf8f629f7f1",
+      "procedure": {
+        "address": "0x404dc0",
+        "name": "drawEvidence404dc0",
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x404dc0",
+              "end": "0x404e46"
+            }
+          ],
+          "total_bytes": 135,
+          "span_bytes": 135,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "signature": "undefined drawEvidence404dc0()",
+        "locals": [
+          {
+            "description": "undefined4 local_4 @ Stack[-0x4]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_8 @ Stack[-0x8]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_c @ Stack[-0xc]:4",
+            "provenance": "ghidra-function-database"
+          }
+        ]
+      },
+      "raw_dossier_sha256": "56d23100157d9a9ed0f7e0c9b3c563cfb3de5cf0c8a02bc823362397aee854a5",
+      "retained_extract": "reference/packets/gamma-display-draw-2/evidence/404dc0.txt",
+      "extract_sha256": "0536e8d47cbe28e8f422452cefbd44d69df7a7feab257106b3ada3698780db43",
+      "extract_format": "Pseudocode/instructions with trailing whitespace normalized; raw dossier hash unchanged."
+    },
+    {
+      "label": "404e50",
+      "evidence_id": "ev_144bfa7db6fa4deed84ef23973c0fc76ce59cc844d16ee07313f5f875b730fa2",
+      "procedure": {
+        "address": "0x404e50",
+        "name": "drawEvidence404e50",
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x404e50",
+              "end": "0x404ed6"
+            }
+          ],
+          "total_bytes": 135,
+          "span_bytes": 135,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "signature": "undefined drawEvidence404e50()",
+        "locals": [
+          {
+            "description": "undefined4 local_4 @ Stack[-0x4]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_8 @ Stack[-0x8]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_c @ Stack[-0xc]:4",
+            "provenance": "ghidra-function-database"
+          }
+        ]
+      },
+      "raw_dossier_sha256": "7bf63b09b3b68de779aba21897941577e57907b5e472e53dfb253bb449c09a2a",
+      "retained_extract": "reference/packets/gamma-display-draw-2/evidence/404e50.txt",
+      "extract_sha256": "f2f95a1e7a6d6d0470c0ef2386c3efd01469a7590d8c68ce179c33152ad29d67",
+      "extract_format": "Pseudocode/instructions with trailing whitespace normalized; raw dossier hash unchanged."
+    },
+    {
+      "label": "404ee0",
+      "evidence_id": "ev_8f53d5d2b451ecb9ce050e1b7e79ac3a58d3c7eb5daaa3c68e3c497c7b64c4b7",
+      "procedure": {
+        "address": "0x404ee0",
+        "name": "drawEvidence404ee0",
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x404ee0",
+              "end": "0x404ef7"
+            }
+          ],
+          "total_bytes": 24,
+          "span_bytes": 24,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "signature": "undefined drawEvidence404ee0()",
+        "locals": []
+      },
+      "raw_dossier_sha256": "dd8c299ba4212b99a5e55afa7398f971e21593281ba11560dcb000054595d42e",
+      "retained_extract": "reference/packets/gamma-display-draw-2/evidence/404ee0.txt",
+      "extract_sha256": "b12dec6f86087f741fa88643fdb9a97bc76180f1640002b790fd8f0b940810ac",
+      "extract_format": "Pseudocode/instructions with trailing whitespace normalized; raw dossier hash unchanged."
+    },
+    {
+      "label": "404f00",
+      "evidence_id": "ev_25a413290d38b82755bfe66da355cbadb34ce33edebd8dc551bdec7f0cd1c75d",
+      "procedure": {
+        "address": "0x404f00",
+        "name": "drawEvidence404f00",
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x404f00",
+              "end": "0x404f16"
+            }
+          ],
+          "total_bytes": 23,
+          "span_bytes": 23,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "signature": "undefined drawEvidence404f00()",
+        "locals": []
+      },
+      "raw_dossier_sha256": "5894bbd50b6d3e16bef604a8130d5c43ec449da2e7d59fde28780db51a1c6bf2",
+      "retained_extract": "reference/packets/gamma-display-draw-2/evidence/404f00.txt",
+      "extract_sha256": "b987e81ef14b642dab233042a600aa626b3a06a2635ff8443e8b6589b1fef0da",
+      "extract_format": "Pseudocode/instructions with trailing whitespace normalized; raw dossier hash unchanged."
+    },
+    {
+      "label": "404f20",
+      "evidence_id": "ev_64df0304f037a33cffdbe1a9f93ea8fe2417515aca432665058731cad484ed33",
+      "procedure": {
+        "address": "0x404f20",
+        "name": "drawEvidence404f20",
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x404f20",
+              "end": "0x404f36"
+            }
+          ],
+          "total_bytes": 23,
+          "span_bytes": 23,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "signature": "undefined drawEvidence404f20()",
+        "locals": []
+      },
+      "raw_dossier_sha256": "4b026d6e0379e87f8d04543dc21ef201ccb22543c4a99f6fbc7a7244ca65d21d",
+      "retained_extract": "reference/packets/gamma-display-draw-2/evidence/404f20.txt",
+      "extract_sha256": "fed5588dedff3b46ca894ea85aae61559c14a6a269b4087e42faf9ca514844f7",
+      "extract_format": "Pseudocode/instructions with trailing whitespace normalized; raw dossier hash unchanged."
+    },
+    {
+      "label": "404f40",
+      "evidence_id": "ev_5e0b439fdfce48ae0eb4ca5a0a59b3640715d8c5717f21e728db86f923bf6de1",
+      "procedure": {
+        "address": "0x404f40",
+        "name": "drawEvidence404f40",
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x404f40",
+              "end": "0x404f57"
+            }
+          ],
+          "total_bytes": 24,
+          "span_bytes": 24,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "signature": "undefined drawEvidence404f40()",
+        "locals": []
+      },
+      "raw_dossier_sha256": "eb9374ed03523d6c9953cbe6f641a5340522189c1c5bd73c2f1fda170aa8cbd7",
+      "retained_extract": "reference/packets/gamma-display-draw-2/evidence/404f40.txt",
+      "extract_sha256": "c64d68d89a19ffe6a0aa75f33b02a863805149794bbb22a83922226cfc396e24",
+      "extract_format": "Pseudocode/instructions with trailing whitespace normalized; raw dossier hash unchanged."
+    },
+    {
+      "label": "7819c0",
+      "evidence_id": "ev_45a6615a12af55a8779ebcae15a9b5bd4b8c0f8a6e2bba55984ba6299231ce9d",
+      "procedure": {
+        "address": "0x7819c0",
+        "name": "drawEvidence7819c0",
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x7819c0",
+              "end": "0x781c02"
+            }
+          ],
+          "total_bytes": 579,
+          "span_bytes": 579,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "signature": "undefined drawEvidence7819c0()",
+        "locals": [
+          {
+            "description": "undefined4 local_10 @ Stack[-0x10]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_4 @ Stack[-0x4]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_8 @ Stack[-0x8]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_c @ Stack[-0xc]:4",
+            "provenance": "ghidra-function-database"
+          }
+        ]
+      },
+      "raw_dossier_sha256": "1e4d1f72d64ca17dea021b1b891ee9e4a04a4d69a332a9541a3d251d5603e1ce",
+      "retained_extract": "reference/packets/gamma-display-draw-2/evidence/7819c0.txt",
+      "extract_sha256": "331c4bd8c88b7c8ac908c70bf5d92e44c298096fc24bf8ab1025ca3d14425778",
+      "extract_format": "Pseudocode/instructions with trailing whitespace normalized; raw dossier hash unchanged."
+    },
+    {
+      "label": "784ae0",
+      "evidence_id": "ev_0fda3164ba342e6a6c6a028dae53e75daff1c948135e209778ea2abde8300691",
+      "procedure": {
+        "address": "0x784ae0",
+        "name": "drawEvidence784ae0",
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x784ae0",
+              "end": "0x784b39"
+            },
+            {
+              "start": "0x784b40",
+              "end": "0x784bb7"
+            }
+          ],
+          "total_bytes": 210,
+          "span_bytes": 216,
+          "non_contiguous": true,
+          "contains_entry": true
+        },
+        "signature": "undefined drawEvidence784ae0()",
+        "locals": [
+          {
+            "description": "undefined4 local_4 @ Stack[-0x4]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_8 @ Stack[-0x8]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_c @ Stack[-0xc]:4",
+            "provenance": "ghidra-function-database"
+          }
+        ]
+      },
+      "raw_dossier_sha256": "3e745fe2a551bf0f4034d18dd16423934b03d4248e6190f695bcb3f6d48d86e6",
+      "retained_extract": "reference/packets/gamma-display-draw-2/evidence/784ae0.txt",
+      "extract_sha256": "f015a5f6eb1c8afcea44a58f949f4d47299d5017375b226b07c4d38920a79af2",
+      "extract_format": "Pseudocode/instructions with trailing whitespace normalized; raw dossier hash unchanged."
+    },
+    {
+      "label": "4800b4",
+      "evidence_id": "ev_8ced0626db3bd0573d5f0dbf62195c5aaf2a90b7d1b36c43b0a568af248243a3",
+      "procedure": {
+        "address": "0x4800b4",
+        "name": "drawEvidence4800b4",
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x4800b4",
+              "end": "0x480722"
+            }
+          ],
+          "total_bytes": 1647,
+          "span_bytes": 1647,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "signature": "undefined drawEvidence4800b4()",
+        "locals": [
+          {
+            "description": "undefined4 local_4 @ Stack[-0x4]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_8 @ Stack[-0x8]:4",
+            "provenance": "ghidra-function-database"
+          }
+        ]
+      },
+      "raw_dossier_sha256": "92c0c243bbf764d512dc6aba130e973aa7101bcb3d219a4726b5b1149802c08f",
+      "retained_extract": "reference/packets/gamma-display-draw-2/evidence/4800b4.txt",
+      "extract_sha256": "3d897d0d8d82ac646d031000fb4775bef6517233dc5aec0f96c6a693fc7cfb1c",
+      "extract_format": "Pseudocode/instructions with trailing whitespace normalized; raw dossier hash unchanged."
+    },
+    {
+      "label": "alt-783830",
+      "evidence_id": "ev_5935d5ea3f8012e9270d1499b16888fc62d403b5bd9490f7e00ef25a546edfbe",
+      "procedure": {
+        "address": "0x783830",
+        "name": "FUN_00783830",
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x783830",
+              "end": "0x78391a"
+            }
+          ],
+          "total_bytes": 235,
+          "span_bytes": 235,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "signature": "undefined FUN_00783830()",
+        "locals": [
+          {
+            "description": "undefined4 local_4 @ Stack[-0x4]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_8 @ Stack[-0x8]:4",
+            "provenance": "ghidra-function-database"
+          }
+        ]
+      },
+      "raw_dossier_sha256": "bc3d784c9f22f944909336aef1331f06992c6cb6904153730bfd84392b65b662",
+      "retained_extract": "reference/packets/gamma-display-draw-2/evidence/alt-783830.txt",
+      "extract_sha256": "e63a7ff45bd629dcc73ff1302ee3216ee249c89f2e6a16a2c9d61e8622b86d91",
+      "extract_format": "Pseudocode/instructions with trailing whitespace normalized; raw dossier hash unchanged."
+    },
+    {
+      "label": "alt-783920",
+      "evidence_id": "ev_0074423e77f35af43c90264d7cb841f9bd557377fff86f5ae54305eb75d9b2e8",
+      "procedure": {
+        "address": "0x783920",
+        "name": "FUN_00783920",
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x783920",
+              "end": "0x7839d9"
+            },
+            {
+              "start": "0x7839e0",
+              "end": "0x783ab4"
+            }
+          ],
+          "total_bytes": 399,
+          "span_bytes": 405,
+          "non_contiguous": true,
+          "contains_entry": true
+        },
+        "signature": "undefined FUN_00783920()",
+        "locals": [
+          {
+            "description": "undefined4 local_18 @ Stack[-0x18]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_1c @ Stack[-0x1c]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_20 @ Stack[-0x20]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_24 @ Stack[-0x24]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_28 @ Stack[-0x28]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_2c @ Stack[-0x2c]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_30 @ Stack[-0x30]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_34 @ Stack[-0x34]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_38 @ Stack[-0x38]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_3c @ Stack[-0x3c]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_4 @ Stack[-0x4]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined local_4c @ Stack[-0x4c]:1",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_8 @ Stack[-0x8]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_c @ Stack[-0xc]:4",
+            "provenance": "ghidra-function-database"
+          }
+        ]
+      },
+      "raw_dossier_sha256": "74e34309b9119740c6ed853994fbfff1daeaff752a30a45e4c04c2c3f93623ff",
+      "retained_extract": "reference/packets/gamma-display-draw-2/evidence/alt-783920.txt",
+      "extract_sha256": "7bb113165b5574014c3796f7e74d8998b428104565f4747496f43d990ce1bbd6",
+      "extract_format": "Pseudocode/instructions with trailing whitespace normalized; raw dossier hash unchanged."
+    },
+    {
+      "label": "alt-7946c0",
+      "evidence_id": "ev_1a51023c9ecf855a058cf17179eb55eb56de7c36689b2a295164c6acdb4033b2",
+      "procedure": {
+        "address": "0x7946c0",
+        "name": "FUN_007946c0",
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x7946c0",
+              "end": "0x794746"
+            }
+          ],
+          "total_bytes": 135,
+          "span_bytes": 135,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "signature": "undefined FUN_007946c0()",
+        "locals": [
+          {
+            "description": "undefined4 local_4 @ Stack[-0x4]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_8 @ Stack[-0x8]:4",
+            "provenance": "ghidra-function-database"
+          }
+        ]
+      },
+      "raw_dossier_sha256": "f88da7d3676cef0920bacdb58e026552295c58289566047a2953d54bd05cb663",
+      "retained_extract": "reference/packets/gamma-display-draw-2/evidence/alt-7946c0.txt",
+      "extract_sha256": "a7ea2cc40a92ccad91e9d4564c8b51c35412ed0b237933def26172c837454d3f",
+      "extract_format": "Pseudocode/instructions with trailing whitespace normalized; raw dossier hash unchanged."
+    },
+    {
+      "label": "alt-7947b0",
+      "evidence_id": "ev_181d480d40273eaef8e6349148660698d73caf2e9166a8838462ce6ff535b485",
+      "procedure": {
+        "address": "0x7947b0",
+        "name": "FUN_007947b0",
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x7947b0",
+              "end": "0x7947fb"
+            }
+          ],
+          "total_bytes": 76,
+          "span_bytes": 76,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "signature": "undefined FUN_007947b0()",
+        "locals": []
+      },
+      "raw_dossier_sha256": "cd69f25a41d80b57b20510ff08c13e5e49f4c3177bf2bbeed150dfff8cffdf21",
+      "retained_extract": "reference/packets/gamma-display-draw-2/evidence/alt-7947b0.txt",
+      "extract_sha256": "6256e0f476260de69b5063246f83c3e89676031a650dc724533bba3c78f68890",
+      "extract_format": "Pseudocode/instructions with trailing whitespace normalized; raw dossier hash unchanged."
+    }
+  ],
+  "profile_limit": "Angle sampler0x404c10 has active loader LinearMotionA_r. This packet qualifies original branch (enabled=false initial state); enabled angle interpolation is unimplemented and unmeasured on Windows. Source-profile registration belongs to Root. Other recovered new ranges have no active intersections per prior packet and current inventory."
+}

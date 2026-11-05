@@ -1,0 +1,41 @@
+Evidence: ev_6ecf702f84a2e1d439387c98367110591099b32e6d9ab0b9649c9c135497ec15
+Original: 6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74
+
+
+void polybuff_normal_tri(int param_1,int param_2,int param_3)
+
+{
+  short sVar1;
+  undefined4 uVar2;
+  undefined4 uVar3;
+  undefined4 *puVar4;
+  int iVar5;
+  undefined4 *puVar6;
+  short *psVar7;
+
+  uVar3 = DAT_03d08490;
+  uVar2 = DAT_03d0848c;
+  psVar7 = *(short **)(param_1 + 4);
+  iVar5 = (uint)*(ushort *)(param_1 + 2) * 3;
+  FUN_00794600();
+  puVar4 = (undefined4 *)FUN_007946c0(uVar3);
+  if (puVar4 != (undefined4 *)0x0) {
+    for (; iVar5 != 0; iVar5 = iVar5 + -1) {
+      sVar1 = *psVar7;
+      puVar6 = (undefined4 *)(param_2 + sVar1 * 0xc);
+      *puVar4 = *puVar6;
+      puVar4[1] = puVar6[1];
+      puVar4[2] = puVar6[2];
+      puVar6 = (undefined4 *)(sVar1 * 0xc + param_3);
+      puVar4[3] = *puVar6;
+      puVar4[4] = puVar6[1];
+      puVar4[5] = puVar6[2];
+      puVar4[6] = uVar2;
+      puVar4 = puVar4 + 7;
+      psVar7 = psVar7 + 1;
+    }
+  }
+  FUN_00794750();
+  FUN_007947b0();
+  return;
+}

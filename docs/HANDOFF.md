@@ -1078,3 +1078,21 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Reused orchestrator Display1332 evidence passes semantic assertions and fails the drawn goal on the inspected outgoing title c7d02f64. No actor frame or N3b claim.
 * make -j2 check exits 2 at protected-manifest validation: 27 inherited violations and two new unregistered test files. No manifest or gate tool changed; no full gate run.
 * reference/packets/cs-journey/PACKET.md and VERIFICATION.json retain commands, asset proof, real exits and the required Metal runtime, aligned draw and fault reruns before promotion.
+
+* Source 7ad3c08 shares recovered __DrawModel dispatch in object_draw. Existing object and actual Gamma constructor/display tests pass; no animated Gamma body is submitted.
+* packet/draw-path preserves draw, traversal, sampler and callback evidence. The two callback slots differ; the angle sampler has an active loader hook.
+* All 1,126 native topology observations match the retained original digest. New placement observations stop before frame/action selection. Five faults compile and change native output, without original-body qualification.
+* Fresh original execution traps in Unicorn initialization after a denied hardware query. Fresh normal input exits 1 before its first frame because Metal is unavailable, with no screenshot.
+* make -j2 check passes source checks and fails protected judge registration. No full gate, full oracles, source-only build, differential body holdout or fresh render-state oracle ran.
+* reference/packets/gamma-display-draw/PACKET.md and VERIFICATION.json retain exact commands, digests, review correction and limits. The caller still stops at native_gamma_display_action_clip_no_scale; N3b remains open.
+
+### 2026-11-04 — Gamma first animated body submitted
+
+* packet/draw-path-2 source f814c96 completes the first ordinary body action through the shared renderer: 77 motion nodes, 98 draws and 2,862 vertices, then the explicit missing arm export 50 boundary.
+* Recovered MDATA2 traversal and sampling, Gamma callback, numeric ZYX quirk and actually reached constant-material, normal and normal/UV primitive dependencies reuse canonical owners.
+* Preserved topology 1,126 and placement 1,024 cases remain exact. New draw development 1,253 and holdout 4,325 cases have zero value failures; five requested compiled faults are caught.
+* Numeric, callback, ordinary-tail, dispatcher and UV cohorts retain their reported FP partials. Normal-only primitives pass 1,536 development and 3,072 holdout cases strictly; nine extra renderer faults are caught.
+* Nine affected units pass, including real constructor submission, generated reference and loop-guard cases. Suppressing the real model handoff fails the constructor vertex assertion.
+* Fresh-save normal Metal run reaches frame 1332, completed 1330, exit 1 at arm export 50. Inspected image c7d02f64 remains the title because the stop precedes presentation; no completed actor frame or N3b claim.
+* Source checks pass. make -j2 check exits 2 with 53 pending judge registrations; the separate profile check still reports the one unregistered loader angle hook, tested only while interpolation is disabled.
+* reference/packets/gamma-display-draw-2/PACKET.md and VERIFICATION.json retain exact commands, counts, hashes, review and limits. Full gate, full suites, cold source-only build and Windows parity were not run.

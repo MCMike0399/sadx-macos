@@ -1,0 +1,71 @@
+Evidence: ev_9913d46026e5d1e136131b128730acdcfc508b9ef7b3f8a67b8a0f90e37a7d25
+Original: 6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74
+
+
+void FUN_00783270(uint param_1,int param_2,int param_3)
+
+{
+  ushort uVar1;
+  ushort uVar2;
+  undefined4 uVar3;
+  undefined4 uVar4;
+  uint uVar5;
+  undefined4 *puVar6;
+  ushort *puVar7;
+  undefined4 *puVar8;
+
+  uVar4 = DAT_03d08490;
+  uVar3 = DAT_03d0848c;
+  puVar7 = *(ushort **)(param_1 + 4);
+  for (uVar5 = (uint)*(ushort *)(param_1 + 2); uVar5 != 0; uVar5 = uVar5 - 1) {
+  }
+  FUN_00794600();
+  puVar6 = (undefined4 *)FUN_00794630(uVar4);
+  for (uVar5 = (uint)*(ushort *)(param_1 + 2); uVar5 != 0; uVar5 = uVar5 - 1) {
+    uVar1 = puVar7[1];
+    uVar2 = *puVar7;
+    puVar7 = puVar7 + 1;
+    puVar8 = (undefined4 *)(param_2 + (short)uVar1 * 0xc);
+    *puVar6 = *puVar8;
+    puVar6[1] = puVar8[1];
+    puVar6[2] = puVar8[2];
+    puVar8 = (undefined4 *)((short)uVar1 * 0xc + param_3);
+    puVar6[3] = *puVar8;
+    puVar6[4] = puVar8[1];
+    puVar6[5] = puVar8[2];
+    puVar6[6] = uVar3;
+    puVar6 = puVar6 + 7;
+    if ((uVar2 & 0x3fff) != 0) {
+      param_1 = (uint)(uVar2 & 0x3fff);
+      do {
+        uVar1 = *puVar7;
+        puVar8 = (undefined4 *)((short)uVar1 * 0xc + param_2);
+        *puVar6 = *puVar8;
+        puVar6[1] = puVar8[1];
+        puVar6[2] = puVar8[2];
+        puVar8 = (undefined4 *)((short)uVar1 * 0xc + param_3);
+        puVar6[3] = *puVar8;
+        puVar6[4] = puVar8[1];
+        puVar6[5] = puVar8[2];
+        puVar6[6] = uVar3;
+        puVar6 = puVar6 + 7;
+        puVar7 = puVar7 + 1;
+        param_1 = param_1 - 1;
+      } while (param_1 != 0);
+    }
+    uVar1 = puVar7[-1];
+    puVar8 = (undefined4 *)((short)uVar1 * 0xc + param_2);
+    *puVar6 = *puVar8;
+    puVar6[1] = puVar8[1];
+    puVar6[2] = puVar8[2];
+    puVar8 = (undefined4 *)((short)uVar1 * 0xc + param_3);
+    puVar6[3] = *puVar8;
+    puVar6[4] = puVar8[1];
+    puVar6[5] = puVar8[2];
+    puVar6[6] = uVar3;
+    puVar6 = puVar6 + 7;
+  }
+  FUN_00794750();
+  FUN_00794760();
+  return;
+}

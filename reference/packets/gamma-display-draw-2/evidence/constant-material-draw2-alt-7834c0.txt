@@ -1,0 +1,66 @@
+Evidence: ev_bac10d24b8c901c8c6d89366bea160ccaf0623f8149c8c15cb9be9edce62d14e
+Original: 6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74
+
+
+/* WARNING: Function: __security_check_cookie replaced with injection: security_check_cookie */
+
+void FUN_007834c0(int param_1,int param_2,int param_3)
+
+{
+  short sVar1;
+  undefined4 uVar2;
+  undefined4 uVar3;
+  undefined4 *puVar4;
+  short *psVar5;
+  short *psVar6;
+  int iVar7;
+  int iVar8;
+  undefined4 *puVar9;
+  undefined4 *puVar10;
+  int local_1c;
+  undefined4 local_c;
+  undefined4 local_8;
+  undefined4 local_4;
+
+  uVar3 = DAT_03d08490;
+  uVar2 = DAT_03d0848c;
+  local_4 = DAT_02bcbddc;
+  puVar9 = *(undefined4 **)(param_1 + 4);
+  iVar7 = (uint)*(ushort *)(param_1 + 2) * 6;
+  FUN_00794600();
+  puVar4 = (undefined4 *)FUN_007946c0(uVar3);
+  if (puVar4 != (undefined4 *)0x0) {
+    for (; iVar7 != 0; iVar7 = iVar7 + -6) {
+      puVar10 = puVar9 + 1;
+      local_c = *puVar9;
+      puVar9 = puVar9 + 2;
+      psVar5 = (short *)&local_c;
+      local_8 = *puVar10;
+      local_1c = 2;
+      do {
+        iVar8 = 3;
+        psVar6 = psVar5;
+        do {
+          sVar1 = *psVar6;
+          puVar10 = (undefined4 *)(param_2 + sVar1 * 0xc);
+          *puVar4 = *puVar10;
+          puVar4[1] = puVar10[1];
+          puVar4[2] = puVar10[2];
+          puVar10 = (undefined4 *)(sVar1 * 0xc + param_3);
+          puVar4[3] = *puVar10;
+          puVar4[4] = puVar10[1];
+          puVar4[5] = puVar10[2];
+          puVar4[6] = uVar2;
+          puVar4 = puVar4 + 7;
+          psVar6 = psVar6 + 1;
+          iVar8 = iVar8 + -1;
+        } while (iVar8 != 0);
+        psVar5 = psVar5 + 1;
+        local_1c = local_1c + -1;
+      } while (local_1c != 0);
+    }
+  }
+  FUN_00794750();
+  FUN_007947b0();
+  return;
+}

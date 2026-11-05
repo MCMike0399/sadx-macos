@@ -1,0 +1,24 @@
+Evidence: ev_5e0b439fdfce48ae0eb4ca5a0a59b3640715d8c5717f21e728db86f923bf6de1
+Original: 6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74
+
+
+void drawEvidence404f40(int param_1)
+
+{
+  FUN_00784c70(*(undefined4 *)(param_1 + 0x20),*(undefined4 *)(param_1 + 0x24),
+               *(undefined4 *)(param_1 + 0x28));
+  return;
+}
+
+
+
+0x404f40: MOV EAX, dword ptr [ESP + 0x4]
+0x404f44: MOV ECX, dword ptr [EAX + 0x28]
+0x404f47: MOV EDX, dword ptr [EAX + 0x24]
+0x404f4a: MOV EAX, dword ptr [EAX + 0x20]
+0x404f4d: PUSH ECX
+0x404f4e: PUSH EDX
+0x404f4f: PUSH EAX
+0x404f50: XOR ECX, ECX
+0x404f52: CALL 0x00784c70
+0x404f57: RET
