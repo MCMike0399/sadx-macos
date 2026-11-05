@@ -1112,3 +1112,14 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Final normal input requests frame 1550 but exits 1 at frame 1332, completed 1330, in palette 0 D3DX stage-direction normalization. The inspected image remains title c7d02f64; no actor frame, signature distance or N3b claim.
 * Source checks pass. make -j2 check exits 2 at 66 pending judge registrations; the range check retains one distinct unhandled angle hook across four reports. No full gate or source-only build ran.
 * reference/packets/gamma-display-draw-3 retains exact commands, proofs, reviews, limits and the next normalization and common-tail boundaries. Masked-exception tail scope does not certify partial stores under unmasked faults.
+
+### 2026-11-04 — Stage direction normalization reaches Gamma target-effects boundary
+
+* packet/draw-path-4 source 6acd31d recovers D3DXVec3Normalize_SSE in the engine and borrows native Display SSE state through palette cleanup.
+* Fresh PE/Ghidra evidence confirms threshold, unordered branch, arithmetic and destination-store order. Each cohort has 32,176 exact isolated Unicorn RSQRT fixtures; physical Intel estimates remain unverified.
+* Whole-body development 4,096 and holdout 12,096 cases have zero value/control failures; 2,008 and 6,046 flag differences remain strict exit 2 partials. Three compiled faults are caught with 48, 621 and 3,740 value failures.
+* The alias/unmasked-invalid native unit passes. Existing lighting receipt regression retains 1,597 exact values and 11 inherited flag partials. Independent review and fresh recheck found no blockers.
+* Final normal input requests frame 1550 but exits 1 at frame 1332, completed 1330: source 0x48410d calls unrecovered GammaUpdateTargetEffects 0x4c4da0 after Display. No store or cleanup was skipped.
+* Inspected screenshot remains the blue title c7d02f64. Drawn checker exits 1 at its outgoing-title guard, before signature distance; neither frame 1450 nor a CharacterSelect present is claimed.
+* Source checks pass; make -j2 check exits 2 at 71 pending judge registrations. New range has zero unhandled profile intersections. Judge manifest and gate tools are unchanged; no full gate ran.
+* reference/packets/gamma-display-draw-4/PACKET.md and VERIFICATION.json preserve commands, exits, proof and limits. Target/gun/held/ground/collision continuation and N3b remain open.

@@ -1,0 +1,350 @@
+{
+  "exe_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "range": "0x775630-0x7756f6",
+  "bytes": "538bdc83ec0883e4f083c408eb03538bdc8b530c8b430883ec18f30f1002f30f107204f30f106a08f30f100d8031d1030f28d0f30f59d20f28def30f59dbf30f58d30f28ddf30f59db0f28e30f28daf30f58dc0f2fcb76170f57c0f30f1100f30f114004f30f1140088be35bc20800f30f100d8831d103f30f10158431d1030f28e3f30f52dbf30f59e3f30f59d3f30f59e3f30f5ccc0f28d80f28c2f30f59c10f28c8f30f59cbf30f11080f28c8f30f59cef30f114804f30f59c5f30f1140088be35bc20800",
+  "instructions": [
+    {
+      "address": "0x775630",
+      "bytes": "53",
+      "instruction": "push ebx"
+    },
+    {
+      "address": "0x775631",
+      "bytes": "8bdc",
+      "instruction": "mov ebx, esp"
+    },
+    {
+      "address": "0x775633",
+      "bytes": "83ec08",
+      "instruction": "sub esp, 8"
+    },
+    {
+      "address": "0x775636",
+      "bytes": "83e4f0",
+      "instruction": "and esp, 0xfffffff0"
+    },
+    {
+      "address": "0x775639",
+      "bytes": "83c408",
+      "instruction": "add esp, 8"
+    },
+    {
+      "address": "0x77563c",
+      "bytes": "eb03",
+      "instruction": "jmp 0x775641"
+    },
+    {
+      "address": "0x77563e",
+      "bytes": "53",
+      "instruction": "push ebx"
+    },
+    {
+      "address": "0x77563f",
+      "bytes": "8bdc",
+      "instruction": "mov ebx, esp"
+    },
+    {
+      "address": "0x775641",
+      "bytes": "8b530c",
+      "instruction": "mov edx, dword ptr [ebx + 0xc]"
+    },
+    {
+      "address": "0x775644",
+      "bytes": "8b4308",
+      "instruction": "mov eax, dword ptr [ebx + 8]"
+    },
+    {
+      "address": "0x775647",
+      "bytes": "83ec18",
+      "instruction": "sub esp, 0x18"
+    },
+    {
+      "address": "0x77564a",
+      "bytes": "f30f1002",
+      "instruction": "movss xmm0, dword ptr [edx]"
+    },
+    {
+      "address": "0x77564e",
+      "bytes": "f30f107204",
+      "instruction": "movss xmm6, dword ptr [edx + 4]"
+    },
+    {
+      "address": "0x775653",
+      "bytes": "f30f106a08",
+      "instruction": "movss xmm5, dword ptr [edx + 8]"
+    },
+    {
+      "address": "0x775658",
+      "bytes": "f30f100d8031d103",
+      "instruction": "movss xmm1, dword ptr [0x3d13180]"
+    },
+    {
+      "address": "0x775660",
+      "bytes": "0f28d0",
+      "instruction": "movaps xmm2, xmm0"
+    },
+    {
+      "address": "0x775663",
+      "bytes": "f30f59d2",
+      "instruction": "mulss xmm2, xmm2"
+    },
+    {
+      "address": "0x775667",
+      "bytes": "0f28de",
+      "instruction": "movaps xmm3, xmm6"
+    },
+    {
+      "address": "0x77566a",
+      "bytes": "f30f59db",
+      "instruction": "mulss xmm3, xmm3"
+    },
+    {
+      "address": "0x77566e",
+      "bytes": "f30f58d3",
+      "instruction": "addss xmm2, xmm3"
+    },
+    {
+      "address": "0x775672",
+      "bytes": "0f28dd",
+      "instruction": "movaps xmm3, xmm5"
+    },
+    {
+      "address": "0x775675",
+      "bytes": "f30f59db",
+      "instruction": "mulss xmm3, xmm3"
+    },
+    {
+      "address": "0x775679",
+      "bytes": "0f28e3",
+      "instruction": "movaps xmm4, xmm3"
+    },
+    {
+      "address": "0x77567c",
+      "bytes": "0f28da",
+      "instruction": "movaps xmm3, xmm2"
+    },
+    {
+      "address": "0x77567f",
+      "bytes": "f30f58dc",
+      "instruction": "addss xmm3, xmm4"
+    },
+    {
+      "address": "0x775683",
+      "bytes": "0f2fcb",
+      "instruction": "comiss xmm1, xmm3"
+    },
+    {
+      "address": "0x775686",
+      "bytes": "7617",
+      "instruction": "jbe 0x77569f"
+    },
+    {
+      "address": "0x775688",
+      "bytes": "0f57c0",
+      "instruction": "xorps xmm0, xmm0"
+    },
+    {
+      "address": "0x77568b",
+      "bytes": "f30f1100",
+      "instruction": "movss dword ptr [eax], xmm0"
+    },
+    {
+      "address": "0x77568f",
+      "bytes": "f30f114004",
+      "instruction": "movss dword ptr [eax + 4], xmm0"
+    },
+    {
+      "address": "0x775694",
+      "bytes": "f30f114008",
+      "instruction": "movss dword ptr [eax + 8], xmm0"
+    },
+    {
+      "address": "0x775699",
+      "bytes": "8be3",
+      "instruction": "mov esp, ebx"
+    },
+    {
+      "address": "0x77569b",
+      "bytes": "5b",
+      "instruction": "pop ebx"
+    },
+    {
+      "address": "0x77569c",
+      "bytes": "c20800",
+      "instruction": "ret 8"
+    },
+    {
+      "address": "0x77569f",
+      "bytes": "f30f100d8831d103",
+      "instruction": "movss xmm1, dword ptr [0x3d13188]"
+    },
+    {
+      "address": "0x7756a7",
+      "bytes": "f30f10158431d103",
+      "instruction": "movss xmm2, dword ptr [0x3d13184]"
+    },
+    {
+      "address": "0x7756af",
+      "bytes": "0f28e3",
+      "instruction": "movaps xmm4, xmm3"
+    },
+    {
+      "address": "0x7756b2",
+      "bytes": "f30f52db",
+      "instruction": "rsqrtss xmm3, xmm3"
+    },
+    {
+      "address": "0x7756b6",
+      "bytes": "f30f59e3",
+      "instruction": "mulss xmm4, xmm3"
+    },
+    {
+      "address": "0x7756ba",
+      "bytes": "f30f59d3",
+      "instruction": "mulss xmm2, xmm3"
+    },
+    {
+      "address": "0x7756be",
+      "bytes": "f30f59e3",
+      "instruction": "mulss xmm4, xmm3"
+    },
+    {
+      "address": "0x7756c2",
+      "bytes": "f30f5ccc",
+      "instruction": "subss xmm1, xmm4"
+    },
+    {
+      "address": "0x7756c6",
+      "bytes": "0f28d8",
+      "instruction": "movaps xmm3, xmm0"
+    },
+    {
+      "address": "0x7756c9",
+      "bytes": "0f28c2",
+      "instruction": "movaps xmm0, xmm2"
+    },
+    {
+      "address": "0x7756cc",
+      "bytes": "f30f59c1",
+      "instruction": "mulss xmm0, xmm1"
+    },
+    {
+      "address": "0x7756d0",
+      "bytes": "0f28c8",
+      "instruction": "movaps xmm1, xmm0"
+    },
+    {
+      "address": "0x7756d3",
+      "bytes": "f30f59cb",
+      "instruction": "mulss xmm1, xmm3"
+    },
+    {
+      "address": "0x7756d7",
+      "bytes": "f30f1108",
+      "instruction": "movss dword ptr [eax], xmm1"
+    },
+    {
+      "address": "0x7756db",
+      "bytes": "0f28c8",
+      "instruction": "movaps xmm1, xmm0"
+    },
+    {
+      "address": "0x7756de",
+      "bytes": "f30f59ce",
+      "instruction": "mulss xmm1, xmm6"
+    },
+    {
+      "address": "0x7756e2",
+      "bytes": "f30f114804",
+      "instruction": "movss dword ptr [eax + 4], xmm1"
+    },
+    {
+      "address": "0x7756e7",
+      "bytes": "f30f59c5",
+      "instruction": "mulss xmm0, xmm5"
+    },
+    {
+      "address": "0x7756eb",
+      "bytes": "f30f114008",
+      "instruction": "movss dword ptr [eax + 8], xmm0"
+    },
+    {
+      "address": "0x7756f0",
+      "bytes": "8be3",
+      "instruction": "mov esp, ebx"
+    },
+    {
+      "address": "0x7756f2",
+      "bytes": "5b",
+      "instruction": "pop ebx"
+    },
+    {
+      "address": "0x7756f3",
+      "bytes": "c20800",
+      "instruction": "ret 8"
+    }
+  ],
+  "constants": {
+    "0x3d13180": "00008028",
+    "0x3d13184": "0000003f",
+    "0x3d13188": "00004040"
+  },
+  "next_source_call": {
+    "address": "0x48410d",
+    "bytes": "e88e0c0400",
+    "callee": "0x4c4da0 GammaUpdateTargetEffects",
+    "preceding_display_call": "0x484102 -> 0x47fd50",
+    "missing_fact": "Unrecovered Gamma target-effects behavior; explicit native_gamma_update_target_effects seam. No value or store skipped."
+  },
+  "ghidra": {
+    "evidence_id": "ev_5fbdb37c43bdf5ca10ee640de4d0a5c75b359793d116fe44bd3bd9999ce15bf7",
+    "subject": {
+      "name": "sonic.exe",
+      "digest": {
+        "sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74"
+      },
+      "format": "pe",
+      "architecture": "x86",
+      "local_path": "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe"
+    },
+    "provider": {
+      "id": "ghidra",
+      "name": "Ghidra",
+      "version": "12.1.4"
+    },
+    "limitations": [
+      "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+      "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+      "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+      "References cover the complete Ghidra function-body AddressSet and exact entry. Dossier incoming edges omit sources owned by that function; procedure_references also retains those internal edges.",
+      "The dossier combines Ghidra FunctionManager, Listing, ReferenceManager, BasicBlockModel, and decompiler observations; provider-specific pseudocode and assembly are not cross-provider text invariants.",
+      "Resolved reference metadata identifies computed, indirect, external, call, jump, and data edges; unresolved targetless flows remain unknown, and function classifications distinguish thunks and externals.",
+      "Synthetic Ghidra entry-point references without actionable memory sources are omitted.",
+      "The Java bridge serializes one function request per Program and lets each decompilation run until it completes or the caller cancels.",
+      "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state.",
+      "Ghidra analysis was seeded before auto-analysis from /Users/burbujamc/Developer/sadx-worktrees/draw-path4/build/symbols/rea-seeds.tsv (sha256 a950182acb6468896364515f2905b1b9bb89cf65c7ba0b0d19112985ad69421b: 3919 function, 0 code, 249064 label entries). Seeded functions, code and names are caller assertions, not Ghidra discoveries.",
+      "Seed outcome: 3891 functions created, 28 already present, 0 failed; 0 code seeds decoded, 0 failed; 249062 labels applied, 0 failed; 2 seeds outside initialized memory."
+    ],
+    "body": {
+      "available": true,
+      "provenance": "ghidra-function-body-address-set",
+      "ranges": [
+        {
+          "start": "0x775630",
+          "end": "0x77563d"
+        },
+        {
+          "start": "0x775641",
+          "end": "0x7756f5"
+        }
+      ],
+      "total_bytes": 195,
+      "span_bytes": 198,
+      "non_contiguous": true,
+      "contains_entry": true
+    },
+    "pseudocode": "\nvoid D3DXVec3Normalize_SSE(float *param_1,float *param_2)\n\n{\n  float fVar1;\n  float fVar2;\n  float fVar3;\n  float fVar4;\n  float fVar5;\n  undefined1 auVar6 [16];\n  \n  fVar1 = *param_2;\n  fVar2 = param_2[1];\n  fVar3 = param_2[2];\n  fVar4 = fVar1 * fVar1 + fVar2 * fVar2 + fVar3 * fVar3;\n  if (fVar4 < DAT_03d13180) {\n    *param_1 = 0.0;\n    param_1[1] = 0.0;\n    param_1[2] = 0.0;\n    return;\n  }\n  auVar6 = rsqrtss(ZEXT416((uint)fVar4),ZEXT416((uint)fVar4));\n  fVar5 = auVar6._0_4_;\n  fVar4 = DAT_03d13184 * fVar5 * (DAT_03d13188 - fVar4 * fVar5 * fVar5);\n  *param_1 = fVar4 * fVar1;\n  param_1[1] = fVar4 * fVar2;\n  param_1[2] = fVar4 * fVar3;\n  return;\n}\n\n",
+    "raw_dossier_sha256": "ea7f25db5533f4f8ad837300cd25583f78e6af17600abca8cc687102073c6349"
+  }
+}

@@ -1,0 +1,158 @@
+{
+ "cases": 4096,
+ "value_mismatches": 0,
+ "control_mismatches": 0,
+ "flag_mismatches": 2008,
+ "examples": [],
+ "flag_examples": [
+  {
+   "vector": [
+    "0x3f800000",
+    "0x40000000",
+    "0x40400000"
+   ],
+   "original": "0x9fc3",
+   "native": "0x9fe3"
+  },
+  {
+   "vector": [
+    "0x3f800000",
+    "0x40000000",
+    "0x40400000"
+   ],
+   "original": "0xbfc3",
+   "native": "0xbfe3"
+  },
+  {
+   "vector": [
+    "0x3f800000",
+    "0x40000000",
+    "0x40400000"
+   ],
+   "original": "0xdfc3",
+   "native": "0xdfe3"
+  },
+  {
+   "vector": [
+    "0x3f800000",
+    "0x40000000",
+    "0x40400000"
+   ],
+   "original": "0xffc3",
+   "native": "0xffe3"
+  },
+  {
+   "vector": [
+    "0x33ffffff",
+    "0x0",
+    "0x0"
+   ],
+   "original": "0x1fc5",
+   "native": "0x1fe5"
+  }
+ ],
+ "rsqrt_measurement": {
+  "cases": 32176,
+  "value_mismatches": 0,
+  "flag_mismatches": 0,
+  "examples": [
+   {
+    "input": "0x0",
+    "mxcsr": "0x1f80",
+    "original": "0x7f800000",
+    "native": "0x7f800000"
+   },
+   {
+    "input": "0x0",
+    "mxcsr": "0x3f80",
+    "original": "0x7f800000",
+    "native": "0x7f800000"
+   },
+   {
+    "input": "0x0",
+    "mxcsr": "0x5f80",
+    "original": "0x7f800000",
+    "native": "0x7f800000"
+   },
+   {
+    "input": "0x0",
+    "mxcsr": "0x7f80",
+    "original": "0x7f800000",
+    "native": "0x7f800000"
+   },
+   {
+    "input": "0x0",
+    "mxcsr": "0x1fc0",
+    "original": "0x7f800000",
+    "native": "0x7f800000"
+   },
+   {
+    "input": "0x0",
+    "mxcsr": "0x3fc0",
+    "original": "0x7f800000",
+    "native": "0x7f800000"
+   },
+   {
+    "input": "0x0",
+    "mxcsr": "0x5fc0",
+    "original": "0x7f800000",
+    "native": "0x7f800000"
+   },
+   {
+    "input": "0x0",
+    "mxcsr": "0x7fc0",
+    "original": "0x7f800000",
+    "native": "0x7f800000"
+   },
+   {
+    "input": "0x0",
+    "mxcsr": "0x9f80",
+    "original": "0x7f800000",
+    "native": "0x7f800000"
+   },
+   {
+    "input": "0x0",
+    "mxcsr": "0xbf80",
+    "original": "0x7f800000",
+    "native": "0x7f800000"
+   }
+  ]
+ },
+ "cohort": "development",
+ "observation_sha256": "bbc2c1cc6ab032a375b2ba5f2baf07764594782c919e3200f106897ddc33d2f2",
+ "native_probe_sha256": "ac7712b991c667f1329c26323b39882700886ecd889712348cdac2cb44cfbb82",
+ "original_ranges_sha256": {
+  "0x775630-0x7756f6": "b683a4b108b49e3524a4aee30b1a02b45e25503a34355bab9415ccc717aec9b7"
+ },
+ "source_constants": {
+  "0x3d13180": "00008028",
+  "0x3d13184": "0000003f",
+  "0x3d13188": "00004040"
+ },
+ "values_match": true,
+ "limits": [
+  "Masked exceptions only; no unmasked trap/partial-store qualification.",
+  "Unicorn 2.1.4 reference estimate: binary32 sqrt then binary32 division, not physical Intel RSQRTSS.",
+  "Unicorn does not publish SSE exception flags; all flag differences remain strict partials.",
+  "No Windows CPU or raster parity claim."
+ ],
+ "source_files": {
+  "src/cpu/sse_estimate.cpp": "678e3a3f98e9ed1187b4b0b1d501cc3a8eb885e316527ff80596664ad767a032",
+  "src/cpu/sse_estimate.hpp": "cd4ae96cf54f3fadc550667b0ca20e7c1a025b2200d42b492e20ec7c07ba3a31",
+  "src/cpu/sse_math.cpp": "70e342f254628faa44a8aaf151eaa75a6ca7148aaeea178c590ed0dc3cf5911b",
+  "src/cpu/sse_math.hpp": "b0bed7f83c4b3ceec2070dee8a64de8045f2cc3bde412483690b8d4e6a7ef213",
+  "src/engine/vector_normalize.cpp": "abad757d7dcd779c7e9c063906e8eabd46d88d104d7dc98daf74333f5f5517f9",
+  "src/engine/vector_normalize.hpp": "31afefbc828c1a6d95d96344e0ce201f3d3fdfe420eca995f434b992aec40a39",
+  "tests/probes/native_normalize_probe.cpp": "c11b7e12bc9760ff918ad7220101721cd51f32082724a0cb92fe0cf3e3154a6e",
+  "tools/oracles/verify_original_normalize.py": "56ad9e293f43e57cee3297bfb8ee90fd539baa6527f60c43c0bd5199289c7c90"
+ },
+ "passed": false,
+ "tracked_summary": {
+  "full_sha256": "e2ea4b36e19dd9dec4c114b838f5760bca396dc23222bbb5f76d970a76a37abe",
+  "full_bytes": 4346,
+  "lists_cut_to": 10,
+  "cut_lists": {
+   "rsqrt_measurement.examples": 12
+  }
+ }
+}

@@ -1,0 +1,480 @@
+{
+  "base": "6491596",
+  "branch": "packet/draw-path-4",
+  "source_commit": "6acd31d",
+  "commands": [
+    {
+      "name": "build",
+      "command": [
+        "make",
+        "-j2",
+        "-o",
+        "Makefile",
+        "-o",
+        "build/native-controller-deps/include/SDL3/SDL.h",
+        "build/sadx-native",
+        "build/native-normalize-probe.dylib",
+        "build/vector-normalize-test",
+        "build/cs-private-assets/.private-native-assets.json"
+      ],
+      "exit": 0,
+      "log": "build/draw-path-4/qualification/build.log"
+    },
+    {
+      "name": "unit",
+      "command": [
+        "./build/vector-normalize-test"
+      ],
+      "exit": 0,
+      "log": "build/draw-path-4/qualification/unit.log"
+    },
+    {
+      "name": "development",
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_normalize.py",
+        "reference/updated-pc-reference/game/sonic.exe",
+        "build/native-normalize-probe.dylib",
+        "--output",
+        "build/draw-path-4/qualification/development.json"
+      ],
+      "exit": 2,
+      "log": "build/draw-path-4/qualification/development.log"
+    },
+    {
+      "name": "holdout",
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_normalize.py",
+        "reference/updated-pc-reference/game/sonic.exe",
+        "build/native-normalize-probe.dylib",
+        "--output",
+        "build/draw-path-4/qualification/holdout.json",
+        "--holdout"
+      ],
+      "exit": 2,
+      "log": "build/draw-path-4/qualification/holdout.log"
+    },
+    {
+      "name": "threshold-build",
+      "command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-dynamiclib",
+        "-Isrc",
+        "tests/probes/native_normalize_probe.cpp",
+        "build/draw-path-4/qualification/threshold.cpp",
+        "src/cpu/sse_estimate.cpp",
+        "src/cpu/sse_math.cpp",
+        "build/softfloat_sse/softfloat-sse.a",
+        "build/softfloat/softfloat.a",
+        "-o",
+        "build/draw-path-4/qualification/threshold.dylib"
+      ],
+      "exit": 0,
+      "log": "build/draw-path-4/qualification/threshold-build.log"
+    },
+    {
+      "name": "threshold",
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_normalize.py",
+        "reference/updated-pc-reference/game/sonic.exe",
+        "build/draw-path-4/qualification/threshold.dylib",
+        "--output",
+        "build/draw-path-4/qualification/threshold.json"
+      ],
+      "exit": 1,
+      "log": "build/draw-path-4/qualification/threshold.log"
+    },
+    {
+      "name": "missing-refinement-build",
+      "command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-dynamiclib",
+        "-Isrc",
+        "tests/probes/native_normalize_probe.cpp",
+        "build/draw-path-4/qualification/missing-refinement.cpp",
+        "src/cpu/sse_estimate.cpp",
+        "src/cpu/sse_math.cpp",
+        "build/softfloat_sse/softfloat-sse.a",
+        "build/softfloat/softfloat.a",
+        "-o",
+        "build/draw-path-4/qualification/missing-refinement.dylib"
+      ],
+      "exit": 0,
+      "log": "build/draw-path-4/qualification/missing-refinement-build.log"
+    },
+    {
+      "name": "missing-refinement",
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_normalize.py",
+        "reference/updated-pc-reference/game/sonic.exe",
+        "build/draw-path-4/qualification/missing-refinement.dylib",
+        "--output",
+        "build/draw-path-4/qualification/missing-refinement.json"
+      ],
+      "exit": 1,
+      "log": "build/draw-path-4/qualification/missing-refinement.log"
+    },
+    {
+      "name": "missing-z-store-build",
+      "command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-dynamiclib",
+        "-Isrc",
+        "tests/probes/native_normalize_probe.cpp",
+        "build/draw-path-4/qualification/missing-z-store.cpp",
+        "src/cpu/sse_estimate.cpp",
+        "src/cpu/sse_math.cpp",
+        "build/softfloat_sse/softfloat-sse.a",
+        "build/softfloat/softfloat.a",
+        "-o",
+        "build/draw-path-4/qualification/missing-z-store.dylib"
+      ],
+      "exit": 0,
+      "log": "build/draw-path-4/qualification/missing-z-store-build.log"
+    },
+    {
+      "name": "missing-z-store",
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_normalize.py",
+        "reference/updated-pc-reference/game/sonic.exe",
+        "build/draw-path-4/qualification/missing-z-store.dylib",
+        "--output",
+        "build/draw-path-4/qualification/missing-z-store.json"
+      ],
+      "exit": 1,
+      "log": "build/draw-path-4/qualification/missing-z-store.log"
+    },
+    {
+      "name": "verdict",
+      "command": [
+        "python3",
+        "tools/oracles/verdict.py",
+        "build/draw-path-4/qualification/development.json",
+        "build/draw-path-4/qualification/holdout.json"
+      ],
+      "exit": 0,
+      "log": "build/draw-path-4/qualification/verdict.log"
+    },
+    {
+      "name": "profile",
+      "command": [
+        "python3",
+        "tools/gate/check_profile_patches.py",
+        "--build-dir",
+        "build/draw-path-4/qualification",
+        "--json"
+      ],
+      "exit": 0,
+      "log": "build/draw-path-4/qualification/profile.log"
+    },
+    {
+      "name": "check",
+      "command": [
+        "make",
+        "-j2",
+        "check"
+      ],
+      "exit": 2,
+      "log": "build/draw-path-4/qualification/check.log"
+    }
+  ],
+  "reports": {
+    "development": {
+      "cases": 4096,
+      "value_mismatches": 0,
+      "control_mismatches": 0,
+      "flag_mismatches": 2008,
+      "passed": false,
+      "values_match": true,
+      "observation_sha256": "bbc2c1cc6ab032a375b2ba5f2baf07764594782c919e3200f106897ddc33d2f2",
+      "native_probe_sha256": "ac7712b991c667f1329c26323b39882700886ecd889712348cdac2cb44cfbb82",
+      "rsqrt_measurement": {
+        "cases": 32176,
+        "value_mismatches": 0,
+        "flag_mismatches": 0
+      },
+      "report_sha256": "e2ea4b36e19dd9dec4c114b838f5760bca396dc23222bbb5f76d970a76a37abe"
+    },
+    "holdout": {
+      "cases": 12096,
+      "value_mismatches": 0,
+      "control_mismatches": 0,
+      "flag_mismatches": 6046,
+      "passed": false,
+      "values_match": true,
+      "observation_sha256": "42df4eb9d020555106eebbe46f56191b60d0898768dfe546b17607bf9086ecde",
+      "native_probe_sha256": "ac7712b991c667f1329c26323b39882700886ecd889712348cdac2cb44cfbb82",
+      "rsqrt_measurement": {
+        "cases": 32176,
+        "value_mismatches": 0,
+        "flag_mismatches": 0
+      },
+      "report_sha256": "f073c078124458a3d5228019861edadac18663b78856c5d2ea0b20e2652188e4"
+    },
+    "threshold": {
+      "cases": 4096,
+      "value_mismatches": 48,
+      "control_mismatches": 0,
+      "flag_mismatches": 2008,
+      "passed": false,
+      "values_match": false,
+      "observation_sha256": "bbc2c1cc6ab032a375b2ba5f2baf07764594782c919e3200f106897ddc33d2f2",
+      "native_probe_sha256": "9d6c666392d5517b6c1344cfd41e26df71b1047ea9f60480ccee0d1cc389ed88",
+      "rsqrt_measurement": {
+        "cases": 32176,
+        "value_mismatches": 0,
+        "flag_mismatches": 0
+      },
+      "report_sha256": "081bece6d20b1e7a5543e5c188d076984f7f475f092195fd9089ac35dd1901ee"
+    },
+    "missing-refinement": {
+      "cases": 4096,
+      "value_mismatches": 621,
+      "control_mismatches": 0,
+      "flag_mismatches": 2008,
+      "passed": false,
+      "values_match": false,
+      "observation_sha256": "bbc2c1cc6ab032a375b2ba5f2baf07764594782c919e3200f106897ddc33d2f2",
+      "native_probe_sha256": "f187eba6960546c1b0ab90b466dba2f905de955195fa78a2dd1b7d4fcd419308",
+      "rsqrt_measurement": {
+        "cases": 32176,
+        "value_mismatches": 0,
+        "flag_mismatches": 0
+      },
+      "report_sha256": "1b800ddf5f193cedace094a252bab4cb4a907d53ddea448a190d85b1a4b39e76"
+    },
+    "missing-z-store": {
+      "cases": 4096,
+      "value_mismatches": 3740,
+      "control_mismatches": 0,
+      "flag_mismatches": 2008,
+      "passed": false,
+      "values_match": false,
+      "observation_sha256": "bbc2c1cc6ab032a375b2ba5f2baf07764594782c919e3200f106897ddc33d2f2",
+      "native_probe_sha256": "c80a017bdc2098210a21d389e10f048516c9e62ccc0a6217ea0296f4d703a69e",
+      "rsqrt_measurement": {
+        "cases": 32176,
+        "value_mismatches": 0,
+        "flag_mismatches": 0
+      },
+      "report_sha256": "5354c68537d8ec21d746ce578afa787927a9863e974c18ad12881439e02d739f"
+    }
+  },
+  "capture": {
+    "command": [
+      "python3",
+      "tools/testing/check_native_character_select_display.py",
+      "--assets",
+      "build/cs-private-assets",
+      "--save-source",
+      "reference/updated-pc-reference/game/savedata",
+      "--output",
+      "build/draw-path-4/present-final",
+      "--frame",
+      "1550"
+    ],
+    "exit": 1,
+    "source_saves_before": {
+      "SONICADVENTURE_DX_CHAOGARDEN.snc": "53b585755ada51c7ed07d2f69ad3ddb195b5a6e48a838fc98533910205dae3e3",
+      "SonicDX02.snc": "3249b31891872b96be539348c005abf812c76af5e3e7c5f198ee65de008943e4",
+      "SonicDX01.snc": "15ac61323e0508d72a279f0f648f4b5007793cc0c8fb42bce9d893f00c265cf6"
+    },
+    "source_saves_after": {
+      "SONICADVENTURE_DX_CHAOGARDEN.snc": "53b585755ada51c7ed07d2f69ad3ddb195b5a6e48a838fc98533910205dae3e3",
+      "SonicDX02.snc": "3249b31891872b96be539348c005abf812c76af5e3e7c5f198ee65de008943e4",
+      "SonicDX01.snc": "15ac61323e0508d72a279f0f648f4b5007793cc0c8fb42bce9d893f00c265cf6"
+    },
+    "app_sha256": "3dfa1b00810879b1fe31a192e5d2d42b9774725a6ce9c3c715185f587861e885",
+    "source_saves_unchanged": true,
+    "result": {
+      "command": [
+        "/Users/burbujamc/Developer/sadx-worktrees/draw-path4/build/sadx-native",
+        "--assets",
+        "/Users/burbujamc/Developer/sadx-worktrees/draw-path4/build/cs-private-assets",
+        "--offscreen",
+        "--paced",
+        "--exit-after",
+        "1550",
+        "--save-directory",
+        "/Users/burbujamc/Developer/sadx-worktrees/draw-path4/build/draw-path-4/present-final/savedata",
+        "--controller-library",
+        "/Users/burbujamc/Developer/sadx-worktrees/draw-path4/build/native-controller-deps/lib/libSDL3.0.dylib",
+        "--key-events",
+        "500:13:down,501:13:up,750:13:down,751:13:up,950:13:down,951:13:up,1050:13:down,1051:13:up,1300:13:down,1301:13:up",
+        "--screenshot",
+        "/Users/burbujamc/Developer/sadx-worktrees/draw-path4/build/draw-path-4/present-final/frontier.ppm"
+      ],
+      "exit": 1,
+      "frame": 1332,
+      "stop": "native session stopped: native_gamma_update_target_effects",
+      "screenshot_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427",
+      "mode": "drawn-goal",
+      "drawn_goal_passed": false,
+      "passed": false,
+      "semantic_state_passed": true,
+      "drawn_goal_error": "outgoing title image is not a CharacterSelect display frame",
+      "error": "outgoing title image is not a CharacterSelect display frame",
+      "completed_frames": 1330,
+      "game_mode": 12,
+      "game_state": 21,
+      "signature_distance": null,
+      "signature_distance_reason": "Outgoing-title guard rejects the frame before reference-signature comparison."
+    }
+  },
+  "screenshot_inspection": "640x480 blue Sonic Adventure DX title with yellow SONIC DX logo, Adventure text and Director\u2019s Cut subtitle; no CharacterSelect scene or actor visible.",
+  "source_evidence": "SOURCE.json",
+  "next_boundary": {
+    "source_call": "0x48410d",
+    "callee": "0x4c4da0 GammaUpdateTargetEffects",
+    "native_stop": "native_gamma_update_target_effects",
+    "missing_fact": "Unrecovered target-effects behavior after Display; no stores or cleanup skipped."
+  },
+  "reviews": [
+    {
+      "review": "Standards",
+      "findings": "Direct include and RSQRT flag verdict fixed; borrowed destination replaces detached temporary."
+    },
+    {
+      "review": "Spec",
+      "findings": "Arithmetic/NaN/alias/store order corroborated; DAZ/FTZ fixtures added."
+    },
+    {
+      "review": "Fresh final recheck",
+      "findings": "No blockers; all preceding fixes confirmed."
+    }
+  ],
+  "extra_commands": [
+    {
+      "command": [
+        "make",
+        "-j2",
+        "-o",
+        "Makefile",
+        "oracle-normalize"
+      ],
+      "exit": 2,
+      "log": "build/draw-path-4/make-oracle.log"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/oracles/verdict.py",
+        "build/oracles/normalize.json"
+      ],
+      "exit": 0,
+      "classification": "partial"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/gate/track_reports.py",
+        "normalize"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-dynamiclib",
+        "-Isrc",
+        "tests/probes/native_lighting_palette_probe.cpp",
+        "build/libsadx-native.a",
+        "-o",
+        "build/draw-path-4/lighting-palette-probe.dylib"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_lighting_palette.py",
+        "reference/updated-pc-reference/game/sonic.exe",
+        "/Users/burbujamc/Developer/sadx-worktrees/draw-path4/build/draw-path-4/lighting-palette-probe.dylib",
+        "--output",
+        "build/draw-path-4/lighting-regression.json"
+      ],
+      "exit": 1,
+      "classification": "values exact, inherited flag partial; judge returns 1 for its partial",
+      "cases": 1597,
+      "flag_mismatches": 11
+    }
+  ],
+  "limits": [
+    "No full gate, full suites, source-only clean build or Windows CPU/raster parity run.",
+    "Whole-body oracle: masked exceptions only; no differential unmasked-trap qualification. Native unit checks pre-store invalid trap.",
+    "RSQRTSS is the measured Unicorn 2.1.4 model, not a captured physical Intel approximation.",
+    "Normalization values/control exact; sticky flag comparisons are partial, never pass.",
+    "Requested frame 1550; stop at frame 1332 completed 1330, so neither 1450 nor 1550 reached. No actor-frame or N3b claim.",
+    "Drawn checker exits 1 before signature distance is computed.",
+    "make check source checks pass; exit 2 at 71 pending protected judge registrations. Manifest and tools/gate unchanged.",
+    "Existing lighting probe changed only to transport context and destination through its same receipt seam; inputs, cases and assertions unchanged.",
+    "Makefile marked old during focused builds because only new explicit recipes changed; verified existing SDL header also marked old to avoid rebuilding reused dependencies.",
+    "REA rejected copied stale snapshot; fresh owned-runner analysis succeeded. Raw snapshot/dossier live under build/draw-path-4 and are not committed."
+  ],
+  "ghidra_command": {
+    "command": "SADX_REA_MODULES=/Users/burbujamc/Developer/sadx-macos/reference/tools/rea/node_modules node reference/ghidra-live.mjs build/draw-path-4/ghidra-config.json",
+    "config": {
+      "directory": "draw-path-4-ghidra",
+      "snapshot_file": "draw-path-4-snapshot.json",
+      "seed_file": "build/symbols/rea-seeds.tsv",
+      "environment_file": "tools/ghidra-game-loop-environment.json",
+      "binary_path": "game/Sonic Adventure DX/sonic.exe"
+    },
+    "stdin": [
+      {
+        "tool": "analyze_function",
+        "args": {
+          "procedure": "0x775630"
+        },
+        "label": "normalize"
+      },
+      {
+        "tool": "close"
+      }
+    ],
+    "exit": 0,
+    "evidence_id": "ev_5fbdb37c43bdf5ca10ee640de4d0a5c75b359793d116fe44bd3bd9999ce15bf7",
+    "raw_dossier": "build/draw-path-4/ghidra/normalize.json",
+    "snapshot": "build/draw-path-4/ghidra-snapshot.json",
+    "first_snapshot_attempt": {
+      "exit": 1,
+      "error": "evidence_integrity_mismatch / analysis snapshot profile_mismatch; rerun fresh without snapshot"
+    }
+  }
+}
