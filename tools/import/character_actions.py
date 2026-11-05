@@ -23,7 +23,7 @@ SOURCE_SHA = "76bbaa1b6aa23872648e6f1f39642e4262403e372b4c4b32f20f0ec89780c2a5"
 KINDS = {"action": 1, "object": 2, "model": 3, "meshsets": 4,
          "materials": 5, "vectors": 6, "colors": 7, "uv": 8, "indices": 9,
          "attributes": 10, "motion": 11, "tracks": 12, "position_keys": 13,
-         "rotation_keys": 14}
+         "rotation_keys": 14, "tracks3": 15}
 
 
 def export(image, name):
@@ -167,9 +167,9 @@ class Importer:
     def motion(self, address, parts):
         def build():
             data, frames, channels, interpolation = self.image.unpack("<IIHH", address)
-            if channels != 3 or interpolation & 15 != 2:
+            if (channels, interpolation & 15) not in ((3, 2), (7, 3)):
                 raise ValueError("startup motion must contain position/rotation MDATA2")
-            tracks = self.tracks(data, parts)
+            tracks = self.tracks(data, parts) if interpolation & 15 == 2 else self.tracks3(data, parts)
             return struct.pack("<IIHHI", tracks, frames, channels, interpolation, parts)
         return self.record("motion", address, parts, build)
 
@@ -186,6 +186,20 @@ class Importer:
                     self.array("rotation_keys", rotation, rotations, 16), positions, rotations))
             return bytes(result)
         return self.record("tracks", address, count, build)
+
+    def tracks3(self, address, count):
+        def build():
+            result = bytearray(struct.pack("<I", count))
+            for index in range(count):
+                pointers = self.image.unpack("<3I", address + index * 24)
+                counts = self.image.unpack("<3I", address + index * 24 + 12)
+                if any(n and not p for p, n in zip(pointers, counts)):
+                    raise ValueError("missing MDATA3 key array")
+                identities = [self.array(kind, pointer, size, 16) for kind, pointer, size in
+                              zip(("position_keys", "rotation_keys", "position_keys"), pointers, counts)]
+                result.extend(struct.pack("<6I", *identities, *counts))
+            return bytes(result)
+        return self.record("tracks3", address, count, build)
 
     def action(self, address):
         def build():
@@ -224,6 +238,9 @@ class Importer:
                 if kind == "meshsets":
                     offsets = tuple(index * 28 + field for index in range(row["count"])
                                     for field in (4, 8, 12, 16, 20))
+                elif kind == "tracks3":
+                    offsets = tuple(index * 24 + field for index in range(row["count"])
+                                    for field in (0, 4, 8))
                 elif kind == "tracks":
                     offsets = tuple(index * 16 + field for index in range(row["count"])
                                     for field in (0, 4))

@@ -49,6 +49,7 @@ struct Context {
         put(address, value);
     }
 };
+void display_tail(Context &, const NinjaVector &) { throw Stop{}; }
 void capture(Context &context, const TaskHandle &) {
     context.primary = context.get(context.input[0] + 32);
     const auto motion = context.get(context.input[0] + 36);
@@ -137,7 +138,7 @@ void set_object_callback(Context &c) { c.output[1036] = 0x47f990; c.trace(18, 0x
 [[noreturn]] void walking_sway(Context &c) { c.trace(19); throw Stop{}; }
 [[noreturn]] void event_model(Context &c) { c.trace(20); throw Stop{}; }
 [[noreturn]] void hidden_tail(Context &c) { c.trace(21); throw Stop{}; }
-[[noreturn]] void draw_player_action(Context &c, std::uint16_t animation) {
+void draw_player_action(Context &c, std::uint16_t animation) {
     c.trace(22, animation); throw Stop{};
 }
 

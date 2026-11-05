@@ -111,6 +111,49 @@ class PrivateAssets(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'canonical bytes'):
             self.build(self.append)
 
+    def arm_fixture(self):
+        old = self.appended
+        self.appended = old[:8] + struct.pack('<I', 11) + old[12:] + b'arm action payload'
+        self.proof['display_append']['new_records'] = 2
+        self.proof['pack_sha256'] = assets.digest(self.appended)
+        self.proof['arm_append'] = {
+            'declaration': 50, 'action': 11, 'round_trip_exact': True,
+            'prefix_records': 10, 'prefix_bytes': len(old), 'prefix_sha256': assets.digest(old),
+            'preserved_record_bytes_sha256': assets.digest(old[12:]), 'new_records': 1,
+            'bytes': len(self.appended), 'sha256': assets.digest(self.appended)}
+        self.actor['declarations'] = [None] * 50 + [
+            {'index': 50, 'status': 'loaded', 'action': 11, 'resource_boundary': None}]
+        self.actor['recipes'] = [{'declaration': 50, 'status': 'loaded', 'action': 11,
+                                 'resource_boundary': None}]
+        self.actor['display_flag_objects'] = [10] * 9
+        self.proof['flag_initializer'] = {'objects': [10] * 9}
+        self.write_append()
+
+    def test_arm_append_preserves_display_prefix(self):
+        self.arm_fixture()
+        self.assertTrue(self.build(self.append)['append_metadata_validated'])
+
+    def test_loaded_arm_requires_proof(self):
+        self.arm_fixture()
+        del self.proof['arm_append']
+        self.write_append()
+        with self.assertRaisesRegex(ValueError, 'requires append proof'):
+            self.build(self.append)
+
+    def test_arm_append_rejects_wrong_loaded_action(self):
+        self.arm_fixture()
+        self.actor['declarations'][50]['action'] = 10
+        self.write_append()
+        with self.assertRaisesRegex(ValueError, 'arm declaration'):
+            self.build(self.append)
+
+    def test_arm_append_rejects_changed_display_proof(self):
+        self.arm_fixture()
+        self.proof['arm_append']['prefix_sha256'] = 'wrong'
+        self.write_append()
+        with self.assertRaisesRegex(ValueError, 'arm append prefix'):
+            self.build(self.append)
+
     def test_append_symlink_refused(self):
         self.append.unlink()
         self.append.symlink_to(self.source / assets.PACK)

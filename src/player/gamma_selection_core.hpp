@@ -2,6 +2,7 @@
 
 #include "cpu/fidelity_float.hpp"
 #include "engine/ninja_matrix.hpp"
+#include "engine/character_pack.hpp"
 #include "player/player_initialization.hpp"
 #include "player/player_scene_resources.hpp"
 
@@ -13,6 +14,7 @@ using MaterialPointer = SceneMaterial *;
 using PointPointer = NinjaVector *;
 using ColorPointer = std::uint32_t *;
 using TextureCoordinatesPointer = const void *;
+using DisplayObjectPointer = character_pack::ObjectResource *;
 
 // NOTSA: borrowed Sonic/Gamma publications, never a second current-player owner.
 struct CurrentView {
@@ -55,6 +57,12 @@ struct State {
     std::array<NinjaVector, 2> line_vertices = {};
     // GLOBAL: SONIC 0x3c53ad8 GammaModelNode54Matrix size=64
     NinjaMatrix node54_matrix = {};
+    // GLOBAL: SONIC 0x3c53bb8 GammaArmMatrix size=64
+    NinjaMatrix arm_matrix = {};
+    // GLOBAL: SONIC 0x3c545fc GammaDisplayVector size=12
+    NinjaVector display_vector = {};
+    // GLOBAL: SONIC 0x3c53f80 GammaDisplayFlagObjects size=40
+    std::array<DisplayObjectPointer, 10> display_flag_objects = {};
     // GLOBAL: SONIC 0x3c53c48 GammaModelNode30Matrix size=64
     NinjaMatrix node30_matrix = {};
     // GLOBAL: SONIC 0x3c53b78 GammaModelNode39Matrix size=64

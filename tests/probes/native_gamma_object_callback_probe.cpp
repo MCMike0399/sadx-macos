@@ -74,7 +74,10 @@ std::int32_t arm_rotation(Context &context) {
     return value<std::int32_t>(context.input[6]);
 }
 struct ArmStop {};
-[[noreturn]] void draw_arm_action(Context &context) {
+void complete_arm(Context &c) { draw_arm_action(c); }
+void calculate_arm_matrix(Context &) { throw ArmStop{}; }
+void pop(Context &) { throw ArmStop{}; }
+void draw_arm_action(Context &context) {
     context.event(18);
     throw ArmStop{};
 }

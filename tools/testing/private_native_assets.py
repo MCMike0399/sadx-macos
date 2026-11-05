@@ -48,6 +48,31 @@ def validate_append(canonical, appended, proof, actor):
                 for row in declarations)):
         raise ValueError('Gamma append metadata differs')
 
+    if (len(actor.get('declarations', [])) > 50 and
+            actor['declarations'][50]['status'] == 'loaded' and 'arm_append' not in proof):
+        raise ValueError('loaded Gamma arm requires append proof')
+    if 'arm_append' in proof:
+        arm = proof['arm_append']
+        end = arm['prefix_bytes']
+        restored = appended[:8] + struct.pack('<I', arm['prefix_records']) + appended[12:end]
+        arm_end = arm['bytes']
+        arm_pack = (appended[:8] + struct.pack('<I', arm['prefix_records'] + arm['new_records']) +
+                    appended[12:arm_end])
+        if (digest(restored) != arm['prefix_sha256'] or
+                digest(appended[12:end]) != arm['preserved_record_bytes_sha256'] or
+                digest(arm_pack) != arm['sha256'] or arm['declaration'] != 50 or
+                arm['round_trip_exact'] is not True or
+                not count < arm['action'] <= added_count):
+            raise ValueError('Gamma arm append prefix proof differs')
+        declaration = actor['declarations'][50]
+        if (declaration != {'index': 50, 'status': 'loaded', 'action': arm['action'],
+                           'resource_boundary': None} or
+                any(row['status'] != 'loaded' or row['action'] != arm['action'] or
+                    row['resource_boundary'] is not None for row in actor['recipes']
+                    if row['declaration'] == 50) or
+                actor['display_flag_objects'] != proof['flag_initializer']['objects']):
+            raise ValueError('Gamma arm declaration metadata differs')
+
 
 def clone_or_copy(source, target):
     # clonefile gives independent copy-on-write files, never hard links or symlinks.

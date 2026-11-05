@@ -39,7 +39,8 @@ enum class ResourceKind : std::uint32_t {
     Motion,
     Tracks,
     PositionKeys,
-    RotationKeys
+    RotationKeys,
+    Tracks3
 };
 struct ActionResource {
     ResourceId object;

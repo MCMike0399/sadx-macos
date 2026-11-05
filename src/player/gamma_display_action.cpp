@@ -1,7 +1,7 @@
 #include "player/gamma_display.hpp"
 
 namespace sadx::gamma_display {
-[[noreturn]] void ordinary_body(Context &context, std::uint16_t animation) {
+void ordinary_body(Context &context, std::uint16_t animation) {
     // Source loads the frame before re-reading the mode and selecting the action.
     const auto frame = animation_frame(context);
     if (animation_mode(context) == 2)
@@ -16,7 +16,7 @@ namespace sadx::gamma_display {
     const auto angle = arm_rotation(context);
     if (angle != 0)
         rotate(context, Axis::Y, static_cast<std::uint16_t>(angle));
-    draw_arm_action(context);
+    complete_arm(context);
 }
 
 void gamma_object_callback(Context &context, ObjectId node) {

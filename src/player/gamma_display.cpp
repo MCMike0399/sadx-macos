@@ -93,8 +93,6 @@ void display(Context &context, const TaskHandle &task) {
     clear_attributes(context, 0, kIgnoreAmbient);
     push_current(context);
     const auto offset = place_body(context);
-    // Later attachment placement consumes this exact local, after the body draw.
-    (void)offset;
     const auto request = requested_animation(context);
     if (request == 46 || request == 52)
         walking_sway(context);
@@ -103,5 +101,6 @@ void display(Context &context, const TaskHandle &task) {
         event_model(context);
     set_object_callback(context);
     draw_player_action(context, animation);
+    display_tail(context, offset);
 }
 } // namespace sadx::gamma_display

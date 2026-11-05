@@ -55,6 +55,8 @@ void setup_motion(Motion *, float, State &, fidelity::Context &);
 void select_transforms(ObjectId, State &, object_draw::Context &);
 // FUNCTION: SONIC 0x404fd0 TransformAnimatedObjectMdata2
 void transform_mdata2(ObjectId, Motion &, State &, object_draw::Context &);
+// FUNCTION: SONIC 0x405020 TransformAnimatedObjectMdata3
+void transform_mdata3(ObjectId, Motion &, State &, object_draw::Context &);
 // FUNCTION: SONIC 0x4050c0 ProcessAnimatedModelNode__
 void process_nodes(ObjectId, Motion &, State &, object_draw::State, object_draw::Context &);
 // FUNCTION: SONIC 0x4053d0 DrawAction

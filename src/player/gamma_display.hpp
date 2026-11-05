@@ -50,7 +50,7 @@ bool has_event_action(Context &);
 [[noreturn]] void event_model(Context &);
 [[noreturn]] void hidden_tail(Context &);
 void set_object_callback(Context &);
-[[noreturn]] void draw_player_action(Context &, std::uint16_t animation);
+void draw_player_action(Context &, std::uint16_t animation);
 
 // NOTSA: ordinary source action selection, with renderer transport in the binding.
 float animation_frame(Context &);
@@ -59,14 +59,44 @@ void draw_generated_action(Context &, float);
 void clear_object_callback(Context &);
 void multiply_arm_matrix(Context &);
 std::int32_t arm_rotation(Context &);
-[[noreturn]] void draw_arm_action(Context &);
-[[noreturn]] void ordinary_body(Context &, std::uint16_t);
+void draw_arm_action(Context &);
+void complete_arm(Context &);
+void calculate_arm_matrix(Context &);
+enum class Attachment { Hip, Arm, Gun };
+enum class ExtraVector { HipLeft, HipRight, LaserPosition, LaserDirection, GunPosition, GunDirection };
+void display_tail(Context &, const NinjaVector &offset);
+[[noreturn]] void attachment_effect(Context &);
+[[noreturn]] void gun_action(Context &);
+[[noreturn]] void laser_target(Context &);
+[[noreturn]] void headlight_fade(Context &);
+[[noreturn]] void paused_shadow(Context &);
+std::int8_t laser_mode(Context &);
+std::int8_t gun_mode(Context &);
+std::int16_t laser_lock_timer(Context &);
+void clear_display_flags(Context &);
+void multiply_attachment(Context &, Attachment);
+void push_arm_matrix(Context &);
+NinjaVector &display_vector(Context &);
+NinjaVector calculate_point(Context &, const NinjaVector &);
+void store_extra_vector(Context &, ExtraVector, const NinjaVector &);
+void store_arm_rotation(Context &, std::int32_t);
+bool paused(Context &);
+void normalize(Context &, NinjaVector &);
+void store_eye_height(Context &, float);
+std::uint32_t headlight_timer(Context &);
+void store_headlight_timer(Context &, std::uint32_t);
+fidelity::ExactFloat sine(Context &, std::int32_t);
+void store_headlight_alpha(Context &, std::uint8_t);
+void restore_attributes(Context &);
+void reset_material(Context &);
+void restore_control(Context &);
+void ordinary_body(Context &, std::uint16_t);
 std::int32_t aim_rotation(Context &);
 float aim_translation(Context &);
 void translate_numeric(Context &, const NinjaVector &);
 // FUNCTION: SONIC 0x47f990 E102ObjectCallback
 void gamma_object_callback(Context &, ObjectId);
 
-// STUB: SONIC 0x47fd50 E102Display prefix through first action draw; later attachments and tail unresolved
+// STUB: SONIC 0x47fd50 E102Display ordinary body, arm and inactive tail; active effects and hidden paths unresolved
 void display(Context &, const TaskHandle &);
 } // namespace sadx::gamma_display

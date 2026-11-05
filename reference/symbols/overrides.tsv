@@ -277,3 +277,7 @@ SONIC	0x3ab992c	global	AnimatedMotionAuxiliaryIndex			4	ev_80216f23e76c1b0118cc2
 SONIC	0x7946c0	function	PolyBuff_LockTriangleList				ev_1a51023c9ecf855a058cf17179eb55eb56de7c36689b2a295164c6acdb4033b2	Triangle-list counterpart of recovered strip lock; vertices/3 count and same strict capacity guard.
 SONIC	0x7947b0	function	PolyBuff_DrawTriangleList				ev_181d480d40273eaef8e6349148660698d73caf2e9166a8838462ce6ff535b485	Iterates canonical lock arguments and emits D3D triangle list4.
 SONIC	0x78c5a0	function	NinjaReturnOnly			1	ev_b3c89c9fdf70fd7f411f2eef360df23ad825827419cb7e6a1f87270797631c67	Inferred role: shared polygon table entry is RET followed by INT3 padding; original1024register/statecases preserveallstateexceptreturnESP.
+SONIC	0x3c53bb8	global	GammaArmMatrix			64	ev_8ced0626db3bd0573d5f0dbf62195c5aaf2a90b7d1b36c43b0a568af248243a3	CalcMMMatrix node2 output used by E102Display ordinary arm tail.
+SONIC	0x3c545fc	global	GammaDisplayVector			12	ev_8ced0626db3bd0573d5f0dbf62195c5aaf2a90b7d1b36c43b0a568af248243a3	Shared BSS vector; source writes X/Z, preserves Y.
+SONIC	0x3c53f80	global	GammaDisplayFlagObjects			40	ev_8ced0626db3bd0573d5f0dbf62195c5aaf2a90b7d1b36c43b0a568af248243a3	Nine object pointers and terminating NULL; initializer7cb670, consumer480360.
+SONIC	0x405020	function	TransformAnimatedObjectMdata3				draw-path-3-mdata3	Source instruction extent405020-405067; three pointer/count rows, stride24.

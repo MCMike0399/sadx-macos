@@ -135,10 +135,10 @@ int main(int argc, char **argv) {
         throw;
     } catch (const flow::UnrecoveredGameFlowCall &error) {
         std::cerr << "Actual display stop: " << error.what() << std::endl;
-        assert(std::string(error.what()) == "native_gamma_display_missing_arm_action_export_50_after_body");
+        assert(std::string(error.what()) == "native_gamma_update_target_effects");
         stopped = true;
     }
-    assert(stopped && selected_palette == 4);
+    assert(stopped && selected_palette == 0);
     const auto &draws = display.output().frame().commands;
     std::cout << "Body frame commands: " << draws.size() << std::endl;
     std::size_t body_draws = 0, body_vertices = 0;
@@ -148,7 +148,7 @@ int main(int argc, char **argv) {
             body_vertices += draw->vertices.size();
         }
     }
-    assert(body_draws > 0 && body_vertices > 0);
+    assert(body_draws > 98 && body_vertices > 2862);
     assert(players.current.primary == task->primary_work && !players.current.player);
     const auto player = players.registry.players[5];
     assert(player && task->primary_state == primary_owner && task->motion_state == motion_owner);
@@ -172,11 +172,11 @@ int main(int argc, char **argv) {
     assert(collision->info[1].center.z == pose.position.z);
     gamma_display::Context inspection(context);
     const auto render = inspection.render_state();
-    assert(render.control == 16 &&
+    assert(render.control == render.saved.control &&
            render.saved.object_callback == render_snapshot::ObjectCallback::None);
-    std::cout << "Animated body nodes: " << inspection.animation_state().node
+    std::cout << "Final arm nodes: " << inspection.animation_state().node
               << ", draws: " << body_draws << ", vertices: " << body_vertices << std::endl;
-    assert(inspection.animation_state().node == 77);
+    assert(inspection.animation_state().node == 3 && inspection.animation_state().motion_type == 7);
     assert(inspection.animation_state().model_callback == animated_model::ModelCallback::DrawModel);
     assert(inspection.animation_state().clip_scale == 0);
     const auto allocation = gamma_selection::extra_work(context, player);
@@ -208,6 +208,24 @@ int main(int argc, char **argv) {
     animation_fields.buffer = generated;
     gamma_display::draw_generated_action(inspection, 0.5f);
     assert(inspection.animation_state().node == 1 && inspection.animation_state().channel == 2);
+    const auto scaled_data = arena->allocate(24).work;
+    assert(scaled_data && arena->fill(scaled_data, 0, 0, 24));
+    for (unsigned offset : {0U, 4U, 8U})
+        assert(arena->set_reference(scaled_data, offset, {}));
+    const auto scale_keys = arena->allocate(16).work;
+    const std::array<float, 4> scale_key = {0, 1.25f, 2.5f, 3.75f};
+    const std::uint32_t one_key = 1;
+    assert(scale_keys && arena->write(scale_keys, 0, scale_key.data(), sizeof(scale_key)));
+    assert(arena->set_reference(scaled_data, 8, scale_keys));
+    assert(arena->write(scaled_data, 20, &one_key, sizeof(one_key)));
+    motion->data = scaled_data;
+    motion->type = 7;
+    motion->input_function = 3;
+    gamma_display::draw_generated_action(inspection, 0.5f);
+    assert(inspection.animation_state().node == 1 && inspection.animation_state().channel == 3);
+    motion->data = data;
+    motion->type = 3;
+    motion->input_function = 2;
     const std::uint32_t unbound_pointer = 123456;
     assert(arena->write(data, 0, &unbound_pointer, 4));
     bool unbound_stopped = false;

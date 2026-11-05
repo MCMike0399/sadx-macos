@@ -29,6 +29,9 @@ void bind_gamma_resources(PlayerSystem &players, character_pack::SceneState &sce
         cursor.line_count = source.line_count;
         cursor.padding = source.padding;
     }
+    for (std::size_t index = 0; index < assets.display_flag_objects.size(); ++index)
+        players.gamma.display_flag_objects.at(index) =
+            &scene.objects.object(assets.display_flag_objects[index]);
     players.gamma_weld = std::move(weld);
     players.gamma_cursor_templates = std::move(templates);
 }

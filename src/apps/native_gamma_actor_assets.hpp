@@ -323,6 +323,14 @@ inline GammaActorAssets load_gamma_actor_assets(const std::filesystem::path &dir
             if (!result.display_objects.count(index))
                 throw std::runtime_error("incomplete Gamma display object declarations");
     }
+    if (metadata[@"display_flag_objects"]) {
+        for (id identity : array(metadata[@"display_flag_objects"], 9, "Gamma display flag objects")) {
+            const auto object = static_cast<character_pack::ResourceId>(
+                integer(identity, 1, pack.record_count(), "Gamma display flag object"));
+            (void)pack.object(object);
+            result.display_flag_objects.push_back(object);
+        }
+    }
     return result;
 }
 } // namespace sadx::native::app

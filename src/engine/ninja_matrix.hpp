@@ -78,9 +78,13 @@ public:
     // Collision callers use njPushMatrix(unit)/njPopMatrixEx. They have
     // different capacity/underflow semantics from the transform helpers above.
     bool push_unit_frame();
+    // NOTSA: expose the maintained supplied-matrix push to native callers.
+    bool push_supplied_frame(const NinjaMatrix &matrix) { return stack_.push_matrix(matrix); }
     bool push_current_frame(); // 0x7850f0 with explicit observed-null matrix argument
     void set_current_unit_matrix(); // source0x7875f0: no push or pop
     void end_ex_frame();
+    // NOTSA: borrow the existing source unit matrix without another owner.
+    const NinjaMatrix &unit_matrix() const { return unit_; }
     NinjaMatrix& current_matrix();
 
     // Recovered primitives exposed for independent instruction comparisons.

@@ -2,6 +2,7 @@
 #include "game/game_mode.hpp"
 #include "player/animation/animation_native_access.hpp"
 #include "player/event_actions.hpp"
+#include "player/model_motion_source.hpp"
 #include "runtime/native_gamma_display_context.hpp"
 #include "runtime/object_draw_context.hpp"
 #include <cstring>
@@ -200,7 +201,7 @@ bool has_event_action(Context &context) {
 [[noreturn]] void event_model(Context &) { missing("native_gamma_display_event_animation"); }
 [[noreturn]] void hidden_tail(Context &) { missing("native_gamma_display_hidden_tail"); }
 void set_object_callback(Context &context) { context.callback(); }
-[[noreturn]] void draw_player_action(Context &context, std::uint16_t animation) {
+void draw_player_action(Context &context, std::uint16_t animation) {
     ordinary_body(context, animation);
 }
 float animation_frame(Context &context) {
@@ -251,7 +252,7 @@ class MotionView final : public animated_model::Motion {
     bool has_keys(unsigned node, unsigned channel) override {
         if (imported_)
             return nodes().at(node).keys.at(channel).id.has_value();
-        const auto reference = arena_->reference(data(), node * 16 + channel * 4);
+        const auto reference = arena_->reference(data(), node * stride() + channel * 4);
         if (!reference)
             missing("native_gamma_draw_generated_key_reference");
         return bool(reference.work);
@@ -260,7 +261,7 @@ class MotionView final : public animated_model::Motion {
         if (imported_)
             return nodes().at(node).counts.at(channel);
         std::uint32_t result;
-        if (!arena_->read(data(), node * 16 + 8 + channel * 4, &result, 4))
+        if (!arena_->read(data(), node * stride() + stride() / 2 + channel * 4, &result, 4))
             missing("native_gamma_draw_motion_count");
         return result;
     }
@@ -277,7 +278,7 @@ class MotionView final : public animated_model::Motion {
                 missing("native_gamma_draw_motion_key_extent");
             std::memcpy(&result, keys.bytes->data() + keys.offset + offset, 4);
         } else {
-            const auto keys = arena_->reference(data(), node * 16 + channel * 4);
+            const auto keys = arena_->reference(data(), node * stride() + channel * 4);
             if (!keys || !arena_->read(keys.work, offset, &result, 4))
                 missing("native_gamma_draw_generated_keys");
         }
@@ -294,6 +295,7 @@ class MotionView final : public animated_model::Motion {
             missing("native_gamma_draw_motion_data");
         return resources_->node_arrays.at(*imported_->data.id);
     }
+    unsigned stride() { return (interpolation() & 15U) == 3 ? 24 : 16; }
     TaskWorkHandle data() {
         if (!generated_->data || !*generated_->data)
             missing("native_gamma_draw_generated_data");
@@ -372,17 +374,130 @@ void multiply_arm_matrix(Context &context) {
 std::int32_t arm_rotation(Context &context) {
     return read<std::int32_t>(context, context.extra, 140);
 }
-[[noreturn]] void draw_arm_action(Context &context) {
-    // Source loads the saved E102WK arm frame before reading export 50.
-    const auto frame = read<float>(context, context.extra, 132);
-    (void)frame;
-    if (!context.owner.players.gamma_assets)
+namespace {
+const animation::Action &arm_action(Context &context) {
+    if (!context.owner.players.gamma_assets || !context.owner.players.gamma_motion_assets)
         missing("native_gamma_display_arm_asset_table");
     const auto &action = context.owner.players.gamma_assets->declarations.at(50);
     if (action.status == animation::ResourceStatus::Unavailable)
         missing("native_gamma_display_missing_arm_action_export_50_after_body");
-    missing("native_gamma_display_arm_action_and_matrix_tail");
+    if (action.status != animation::ResourceStatus::Loaded)
+        missing("native_gamma_display_arm_action_null");
+    return context.owner.players.gamma_motion_assets->resources().actions.at(action.action.identity);
 }
+}
+void draw_arm_action(Context &context) {
+    const auto frame = read<float>(context, context.extra, 132);
+    const auto &action = arm_action(context);
+    const auto &resources = context.owner.players.gamma_motion_assets->resources();
+    if (!action.object.id || !action.motion.id)
+        missing("native_gamma_display_arm_action_header");
+    MotionView motion(resources.motions.at(*action.motion.id), resources);
+    submit(context, static_cast<ObjectId>(*action.object.id), &motion, frame);
+}
+void calculate_arm_matrix(Context &context) {
+    const auto frame = read<float>(context, context.extra, 132);
+    const auto &action = arm_action(context);
+    const auto &resources = context.owner.players.gamma_motion_assets->resources();
+    model_matrices::NativeMotionSource source(action, resources, context.owner.scene.objects);
+    if (!context.owner.model_matrices)
+        missing("native_gamma_display_arm_matrix_owner");
+    (void)model_matrices::calculate(*context.owner.model_matrices, context.matrices(), source,
+                                  &context.matrices().unit_matrix(), frame, 2,
+                                  &context.owner.players.gamma.arm_matrix, context.arithmetic());
+}
+[[noreturn]] void attachment_effect(Context &) { missing("native_gamma_display_hover_attachment"); }
+[[noreturn]] void gun_action(Context &) { missing("native_gamma_display_active_gun_action"); }
+[[noreturn]] void laser_target(Context &) { missing("native_gamma_display_active_laser_target"); }
+[[noreturn]] void headlight_fade(Context &) { missing("native_gamma_display_death_headlight_fade"); }
+[[noreturn]] void paused_shadow(Context &) { missing("native_gamma_display_paused_shadow"); }
+std::int8_t laser_mode(Context &context) {
+    return static_cast<std::int8_t>(gamma_selection::extra(context.owner, context.extra).laser_mode);
+}
+std::int8_t gun_mode(Context &context) { return read<std::int8_t>(context, context.extra, 1); }
+std::int16_t laser_lock_timer(Context &context) { return read<std::int16_t>(context, context.extra, 18); }
+void clear_display_flags(Context &context) {
+    if (!context.owner.players.gamma_assets ||
+        context.owner.players.gamma_assets->display_flag_objects.size() != 9)
+        missing("native_gamma_display_flag_object_declarations");
+    for (auto *object : context.owner.players.gamma.display_flag_objects) {
+        if (!object)
+            break;
+        object->evaluation_flags &= ~8U;
+    }
+}
+void multiply_attachment(Context &context, Attachment attachment) {
+    auto &gamma = context.owner.players.gamma;
+    const auto &matrix = attachment == Attachment::Hip ? gamma.node2_matrix
+                        : attachment == Attachment::Arm ? gamma.arm_matrix : gamma.node37_matrix;
+    multiply_ninja_matrix(context.matrices().current_matrix(), matrix, context.arithmetic());
+}
+void push_arm_matrix(Context &context) {
+    context.matrices().push_supplied_frame(context.owner.players.gamma.node54_matrix);
+}
+NinjaVector &display_vector(Context &context) { return context.owner.players.gamma.display_vector; }
+NinjaVector calculate_point(Context &context, const NinjaVector &point) {
+    NinjaVector result;
+    context.matrices().calculate_point(context.matrices().current_matrix(), point, result,
+                                       context.arithmetic());
+    return result;
+}
+void store_extra_vector(Context &context, ExtraVector field, const NinjaVector &value) {
+    unsigned offset = 0;
+    switch (field) {
+    case ExtraVector::HipLeft:
+        offset = 148;
+        break;
+    case ExtraVector::HipRight:
+        offset = 160;
+        break;
+    case ExtraVector::LaserPosition:
+        offset = 52;
+        break;
+    case ExtraVector::LaserDirection:
+        offset = 64;
+        break;
+    case ExtraVector::GunPosition:
+        offset = 84;
+        break;
+    case ExtraVector::GunDirection:
+        offset = 96;
+        break;
+    }
+    if (!arena(context).write(context.extra, offset, &value, sizeof(value)))
+        missing("native_gamma_display_extra_vector_store");
+}
+void store_arm_rotation(Context &context, std::int32_t value) {
+    if (!arena(context).write(context.extra, 140, &value, sizeof(value)))
+        missing("native_gamma_display_arm_rotation_store");
+}
+bool paused(Context &context) {
+    const auto mode = context.owner.bootstrap.game_mode;
+    return mode == 16 || mode == 25;
+}
+void normalize(Context &context, NinjaVector &value) {
+    (void)normalize_vector_extended(value, {0, 1}, context.arithmetic());
+}
+void store_eye_height(Context &context, float value) {
+    gamma_selection::eyes_height(context.owner, context.player) = value;
+}
+std::uint32_t headlight_timer(Context &context) { return read<std::uint32_t>(context, context.extra, 136); }
+void store_headlight_timer(Context &context, std::uint32_t value) {
+    if (!arena(context).write(context.extra, 136, &value, sizeof(value)))
+        missing("native_gamma_display_headlight_timer_store");
+}
+fidelity::ExactFloat sine(Context &context, std::int32_t angle) {
+    return fidelity::ExactFloat::retained(context.arithmetic(), context.owner.rendering.sine(angle));
+}
+void store_headlight_alpha(Context &context, std::uint8_t value) {
+    constexpr std::uint32_t kRgbMask = 0x00ffffffU;
+    auto &color = gamma_selection::material(context.owner, 1, 6).diffuse();
+    color = (color & kRgbMask) | (std::uint32_t(value) << 24);
+}
+void restore_attributes(Context &context) { render_snapshot::load_attributes(context.render_state()); }
+void reset_material(Context &context) { context.owner.rendering.reset_material(); }
+void restore_control(Context &context) { render_snapshot::load_control(context.render_state()); }
+
 } // namespace sadx::gamma_display
 namespace sadx::gamma_selection {
 void display(Context &owner, const TaskHandle &task) {

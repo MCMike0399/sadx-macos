@@ -26,12 +26,13 @@ void import_animation_action(const character_pack::CharacterPack &pack, ActionHa
                                                                motion.interpolation,
                                                                {{motion.tracks}}});
     const auto &tracks = pack.record(motion.tracks).payload;
+    const unsigned channels = (motion.interpolation & 15) == 3 ? 3 : 2;
     std::vector<animation::Node> nodes;
     for (std::uint32_t index = 0; index < word(tracks, 0); ++index) {
         animation::Node node{};
-        for (unsigned channel = 0; channel < 2; ++channel) {
-            const auto key = word(tracks, 4 + index * 16 + channel * 4);
-            node.counts[channel] = word(tracks, 12 + index * 16 + channel * 4);
+        for (unsigned channel = 0; channel < channels; ++channel) {
+            const auto key = word(tracks, 4 + index * channels * 8 + channel * 4);
+            node.counts[channel] = word(tracks, 4 + index * channels * 8 + channels * 4 + channel * 4);
             if (!key)
                 continue;
             node.keys[channel].id = key;

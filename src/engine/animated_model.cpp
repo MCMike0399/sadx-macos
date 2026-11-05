@@ -123,7 +123,7 @@ void setup_motion(Motion *motion, float frame, State &state, fidelity::Context &
     state.motion_auxiliary_index = 0;
 }
 void select_transforms(ObjectId root, State &state, object_draw::Context &context) {
-    if (state.interpolation != 2)
+    if (state.interpolation != 2 && state.interpolation != 3)
         throw std::runtime_error("animated_model_non_mdata2_layout");
     state.rotation_order = (object_draw::object(context, root).evaluation_flags & 32U) != 0
                                ? object_draw::RotationOrder::Alternate
@@ -136,13 +136,20 @@ void transform_mdata2(ObjectId id, Motion &motion, State &state, object_draw::Co
     transform_channel(id, 2, motion, state, context);
     ++state.node;
 }
+void transform_mdata3(ObjectId id, Motion &motion, State &state, object_draw::Context &context) {
+    // NOTSA: identical channel operations; Motion resolves the three-pointer/count layout.
+    transform_mdata2(id, motion, state, context);
+}
 void process_nodes(ObjectId root, Motion &motion, State &state, object_draw::State rendering,
                    object_draw::Context &context) {
     do {
         object_draw::push_matrix_ex(context);
         const auto &node = object_draw::object(context, root);
         if ((node.evaluation_flags & 64U) == 0) {
-            transform_mdata2(root, motion, state, context);
+            if (state.interpolation == 3)
+                transform_mdata3(root, motion, state, context);
+            else
+                transform_mdata2(root, motion, state, context);
         } else {
             object_draw::translate_current(context, node.position);
             object_draw::rotate_current(context,

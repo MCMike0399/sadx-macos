@@ -1,4 +1,4 @@
-"""Append the Gamma display object declarations without changing existing resource IDs."""
+"""Append Gamma display objects and arm action without changing existing resource IDs."""
 import argparse
 import copy
 import json
@@ -46,6 +46,41 @@ def import_display(model_dll, game_exe, output):
     importer, actions, *_ = build_sonic_actor_resources(dll, exe)
     metadata, proof = append_gamma(dll, exe, importer, actions)
     proof['display_append'] = append_display(dll, importer, actions, metadata)
+    display_bytes = pack_bytes(importer, actions)
+    old_records, old_actions = list(importer.records), list(actions)
+    table = export(dll, '___E102_ACTIONS')
+    address = dll.unpack('<I', table + 50 * 4)[0]
+    identity = importer.action(address)
+    importer.verify_round_trip()
+    after = pack_bytes(importer, actions)
+    if (importer.records[:len(old_records)] != old_records or actions != old_actions or
+            after[:8] != display_bytes[:8] or after[12:len(display_bytes)] != display_bytes[12:]):
+        raise ValueError('Gamma arm append changed existing display resources')
+    declaration = metadata['declarations'][50]
+    declaration.update(status='loaded', action=identity, resource_boundary=None)
+    for row in metadata['recipes']:
+        if row['declaration'] == 50:
+            row.update(status='loaded', action=identity, resource_boundary=None)
+    proof['arm_append'] = {
+        'declaration': 50, 'action': identity, 'round_trip_exact': True,
+        'prefix_records': len(old_records), 'prefix_bytes': len(display_bytes),
+        'prefix_sha256': digest(display_bytes),
+        'preserved_record_bytes_sha256': digest(display_bytes[12:]),
+        'new_records': len(importer.records) - len(old_records),
+        'bytes': len(after), 'sha256': digest(after),
+        'source_table_row': hex(table + 50 * 4),
+        'source_table_bytes': dll.read(table + 50 * 4, 4).hex(),
+        'source_action': hex(address), 'source_action_bytes': dll.read(address, 8).hex()}
+    # display_append continues to describe the complete append over the canonical prefix.
+    proof['display_append']['new_records'] = len(importer.records) - proof['display_append']['prefix_records']
+    # Static initializer 7cb670 copies these nine rows and a terminating NULL.
+    metadata['display_flag_objects'] = [
+        importer.object(dll.unpack('<I', export(dll, '___E102_OBJECTS') + index * 4)[0])
+        for index in (7, 8, 9, 10, 11, 14, 15, 16, 17)]
+    importer.verify_round_trip()
+    proof['display_append']['new_records'] = len(importer.records) - proof['display_append']['prefix_records']
+    proof['flag_initializer'] = {'address': '0x7cb670', 'bytes': exe.read(0x7cb670, 96).hex(),
+                                 'objects': metadata['display_flag_objects']}
     proof['records'] = importer.evidence
     proof['pack_sha256'] = atomic_pack(importer, actions, output)
     atomic_json(output.with_suffix('.provenance.json'), proof)

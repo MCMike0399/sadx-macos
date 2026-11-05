@@ -692,7 +692,7 @@ CS_SAVE_SOURCE ?= $(REFERENCE_GAME_DIR)/savedata
 .PHONY: native-character-select-display private-native-assets build/cs-display-assets
 # The append-only Gamma display records are imported from the pinned original
 # character archive. They stay a private build fixture; the canonical pack is unchanged.
-build/display-append/sonic-selection.actions: tools/import/gamma_display_resources.py tools/import/gamma_actor_resources.py | build
+build/display-append/sonic-selection.actions: tools/import/gamma_display_resources.py tools/import/gamma_actor_resources.py tools/import/character_actions.py | build
 	mkdir -p build/display-append
 	$(REFERENCE_PYTHON) tools/import/gamma_display_resources.py "$(GAME_SYSTEM)/CHRMODELS_orig.dll" "$(GAME_EXE)" $@ > build/display-append/import.json
 private-native-assets:
@@ -722,3 +722,6 @@ build/normal-uv-quad-test: tests/unit/normal_uv_quad.cpp tests/probes/native_nor
 
 build/normal-primitives-test: tests/unit/normal_primitives.cpp tests/probes/native_normal_primitives_probe.cpp src/engine/normal_primitives.cpp src/engine/normal_uv_quad.cpp build/libsadx-native.a
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -Itests/probes $^ -o $@
+
+build/native-gamma-tail-probe.dylib: tests/probes/native_gamma_tail_probe.cpp src/player/gamma_display_tail.cpp build/libsadx-native.a
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -dynamiclib $^ -o $@

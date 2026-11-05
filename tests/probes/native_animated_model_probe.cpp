@@ -26,10 +26,10 @@ struct Motion final : sadx::animated_model::Motion {
     std::uint16_t type() override { return input[5]; }
     std::uint16_t interpolation() override { return input[6]; }
     std::uint32_t key_count(unsigned node, unsigned channel) override {
-        return input[68 + (node * 2 + channel) * 17];
+        return input[68 + (node * (input[6] == 3 ? 3 : 2) + channel) * 17];
     }
     std::uint32_t key_word(unsigned node, unsigned channel, unsigned key, unsigned field) override {
-        return input[69 + (node * 2 + channel) * 17 + key * 4 + field];
+        return input[69 + (node * (input[6] == 3 ? 3 : 2) + channel) * 17 + key * 4 + field];
     }
 };
 } // namespace

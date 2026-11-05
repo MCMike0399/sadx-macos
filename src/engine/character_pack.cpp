@@ -66,6 +66,8 @@ std::uint32_t array_stride(ResourceKind kind) {
         return 28;
     case ResourceKind::Tracks:
         return 16;
+    case ResourceKind::Tracks3:
+        return 24;
     default:
         return 0;
     }
@@ -103,6 +105,7 @@ class Validator {
                 validate_meshsets(id);
                 break;
             case ResourceKind::Tracks:
+            case ResourceKind::Tracks3:
                 validate_tracks(id);
                 break;
             default:
@@ -300,20 +303,24 @@ class Validator {
     }
     void validate_motion(ResourceId id) {
         const auto value = pack_.motion(id);
-        if (value.channels != 3 || (value.interpolation & 15) != 2) {
+        if (!((value.channels == 3 && (value.interpolation & 15) == 2) ||
+              (value.channels == 7 && (value.interpolation & 15) == 3))) {
             invalid("motion is not position/rotation MDATA2");
         }
-        array_reference(id, value.tracks, ResourceKind::Tracks, value.part_count, true);
+        array_reference(id, value.tracks, (value.interpolation & 15) == 3 ? ResourceKind::Tracks3
+                                                                       : ResourceKind::Tracks,
+                        value.part_count, true);
     }
     void validate_tracks(ResourceId id) {
         const auto& bytes = pack_.record(id).payload;
         const auto count = integer(bytes, 0);
+        const unsigned channels = pack_.record(id).kind == ResourceKind::Tracks3 ? 3 : 2;
         for (std::uint32_t index = 0; index < count; ++index) {
-            const auto offset = 4 + index * 16;
-            array_reference(id, integer(bytes, offset), ResourceKind::PositionKeys,
-                            integer(bytes, offset + 8), true);
-            array_reference(id, integer(bytes, offset + 4), ResourceKind::RotationKeys,
-                            integer(bytes, offset + 12), true);
+            const auto offset = 4 + index * channels * 8;
+            for (unsigned channel = 0; channel < channels; ++channel)
+                array_reference(id, integer(bytes, offset + channel * 4),
+                                channel == 1 ? ResourceKind::RotationKeys : ResourceKind::PositionKeys,
+                                integer(bytes, offset + channels * 4 + channel * 4), true);
         }
     }
     const CharacterPack& pack_;
@@ -375,7 +382,9 @@ CharacterPack CharacterPack::decode(const std::vector<std::uint8_t>& bytes) {
         const auto kind = integer(bytes, cursor);
         const auto length = integer(bytes, cursor + 4);
         cursor += 8;
-        if (kind < 1 || kind > 14 || length > bytes.size() - cursor) {
+        if (kind < 1 || kind > 15 ||
+            (kind == 15 && pack.schema_ != Schema::Selection) ||
+            length > bytes.size() - cursor) {
             invalid("record " + std::to_string(index + 1) + " has invalid kind or truncated payload");
         }
         pack.records_.push_back({static_cast<ResourceKind>(kind),
