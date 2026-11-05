@@ -1,0 +1,508 @@
+{
+ "kind": "Evidenced judge refresh for the Gamma display admission",
+ "date": "2026-11-04",
+ "base_commit": "d2de538832a5b1c0602808bdfad20e74281cf69b",
+ "reason": "Register the recovered Gamma display/draw verification (new probes, unit tests, oracles and packet qualification scripts) and rebind existing protected inputs that changed only by the ADR-0006 identifier migration of playerwk equipment / animation mode, by the recovered draw/arm/tail sources in shared test fixtures, by the Makefile rules and test registrations, by the profile-patch registry entry for the reached 0x404c10 hook, and by the constexpr declaration fingerprint of character_pack.cpp after the MDATA3 record support. No tolerance, expected value, case, mutant or fixture semantic was weakened.",
+ "changed_existing_inputs": {
+  "Makefile": {
+   "manifest": "0cba1c584165d92128634efc522fdc882b06fba797f385b3d7e1315c4c9c9773",
+   "current": "a505fa1dd1085332426d5b57dd6c179e67957e5d1983152d0489600fe6da0ab9"
+  },
+  "reference/constexpr-table-review.json": {
+   "manifest": "274702cfc7a4e0dd9ebf4692c247a2b5e21f599dfb41d7a7ea60fe1e35804099",
+   "current": "abb419aa865a6e3b4252cffdd2b8cef2f0e63be290bba38366995160aeb170de"
+  },
+  "tests/probes/native_lighting_palette_probe.cpp": {
+   "manifest": "59ffc32f6a2921bf9e8bed572f956d09a706f22aafb64a94e87a8a55c78ce26f",
+   "current": "60d7da852d117bea2ec5a278ea95074a432d91938bcddeb140d58ac9e43c9af0"
+  },
+  "tests/probes/native_plain_player_animation_probe.cpp": {
+   "manifest": "4c86299981b26700bc616b0de569fd2ff9b4b6ccb2d6934b7ca8b5939ff6e833",
+   "current": "37c3ccb4d9ac6febcd1bfb9f45affcf29f9f618277ef396ca86788a050adc95a"
+  },
+  "tests/probes/native_player_animation_probe.cpp": {
+   "manifest": "9dd13ebcf928a54f9fd4736b1e62ce710573caba4795032a9b2b968a5d89ccdc",
+   "current": "f45c6a4942c96806f617a18de53efabd7d148dc93deb1f4fc625838dd96975a7"
+  },
+  "tests/probes/native_player_startup_probe.cpp": {
+   "manifest": "db49d03f8f04eb88e0297381090ae651e3fb1df0afc777c73755aa029dfa3a4c",
+   "current": "2e37e8d0a21faedda85e8c97d9ecdbbde017b444c83584a98637c0c00c1cbd23"
+  },
+  "tests/probes/native_sonic_action_probe.cpp": {
+   "manifest": "72e304de2ccc2fac3ba012921c3c4c1bcda85b27012c6050e548135cdb197a01",
+   "current": "b7af4b00167142ce9bb561d5cdaf8a9abcb7e0aaf9effbb86cd14b1c7f36d860"
+  },
+  "tests/probes/native_sonic_player_probe.cpp": {
+   "manifest": "d66392012a7b45086ff30b7a7da0422fc9b64c02a3028effbc0fcfd398a21a53",
+   "current": "9b6bf018c021a6a4fc699bbfa8d0efbf29f58a8f3822a5ef5cb89b9978bbf351"
+  },
+  "tests/unit/animation_characterization.cpp": {
+   "manifest": "fa590806cc3c90a7c48c9d9c4d36391b1f01dbd8eb6721106f7bc4c95f9b204c",
+   "current": "375523096f866f845e5110f8201b651ac35e21bb8b2931cd03e97fca0930ee7c"
+  },
+  "tests/unit/animation_sonic_composition.cpp": {
+   "manifest": "634107e8d785df69d646c3b0e66089220b1a403be2465b0942dd9eef87bf810d",
+   "current": "90f507225fbcf516698bf37da8663a384e46f842633709291f1580d2c9d5be18"
+  },
+  "tests/unit/manifest.tsv": {
+   "manifest": "afe5e0f85960bda2cdcbbd6dd7420c41e6f7b797cd95bf49dacf02efeb944c7d",
+   "current": "09bc4e2676d9c6a1410b35e2fbe2e4b64c538fed6505562c87ea235bb266d4b1"
+  },
+  "tests/unit/model_motion_matrices.mm": {
+   "manifest": "3d869d114af59a7ff2ace1e3bc49dafaf4cb8f0bd97c29fa7e40cd152a2a3ed7",
+   "current": "7feb267069537c4cb0ea8c21556420135c170276a18c626efe3489b4dc922be8"
+  },
+  "tests/unit/native_gamma_binding.mm": {
+   "manifest": "00f5e3aee86641cda3b6c6c348b6a4f800f8f7b1d781cf8b35c11253784c386e",
+   "current": "ed2965d0b2c6d5666f584b1355d19dabbc9b470726396ecabb42f60f78ac0794"
+  },
+  "tests/unit/native_gamma_fan.mm": {
+   "manifest": "2dbf5ceecba809ee6b60846614a640f85ad5f83bb864c4e36df966ba45a5fbb4",
+   "current": "2800105d2c5ca3438dd52d2abdb4b536ec0775173454c2406a44e3abd8daff28"
+  },
+  "tests/unit/native_gamma_motion.mm": {
+   "manifest": "4545f331c7116fb3f6073792d4e0a58f37c53ad21a4b5008cde446ed0b7014bd",
+   "current": "dd1c48c69841e5b48b8789103ff77e69e024cdcdfb46df2a0b0feb6e661e0692"
+  },
+  "tests/unit/player_animation.cpp": {
+   "manifest": "9b77b459bb0212787aa9b0e4ba9ba5fabb0b2d02fca4ab2ec25b9fb5080977d1",
+   "current": "308285df3c4ebdc5e12c12fd148e83986402d33014b00d194c4f8d5f14c46efa"
+  },
+  "tests/unit/player_initialization.cpp": {
+   "manifest": "c05c93b7c6f4ae625b8ad290799ab6a15953573051afb8ab9cd3beacc1074368",
+   "current": "8727c31c973c8946628b05ec8cb8167d33f30f31d36849919948ce3f9128c9e4"
+  },
+  "tests/unit/player_startup.cpp": {
+   "manifest": "f41dd2644a69316a5ff1ce32ddd89a55377e13aefe3a6ae12ac5228d0090a86d",
+   "current": "feddfeca920cfde3d47655429bf550b74429b00a45b44ca17a440990bc1ff04c"
+  },
+  "tests/unit/sonic_actions.cpp": {
+   "manifest": "525098c7af81f9fea16c67f227b8352c702238a82894d1276e28659ab35f40fc",
+   "current": "c43344ef1105ce4d8efb1dd05b883de8fd054b0420eec52ed757b38a2c86c0cc"
+  },
+  "tests/unit/sonic_animation_assets.mm": {
+   "manifest": "12f1449f9ab2bc956128fe9efb4386f78f2ef1f28f3b7b96d9fda2002d778a94",
+   "current": "4d27631f86c2f39f4ef252445cc612c459a6589b09aed168b0a47dcd81091fe7"
+  },
+  "tests/unit/sonic_controller_native.cpp": {
+   "manifest": "871d4edcfd17d038ae5c1bc640892ca84dc453c3453a33912b4d30d7fb34b888",
+   "current": "135c0a66ec10065ac72a3c86e90262559c1a85c47a05e3077a8d3e0f7a2b3257"
+  },
+  "tests/unit/sonic_player.cpp": {
+   "manifest": "70e67fe68d4d2a04fb003affbfe1dcad8a8e386ebdf86db9bed2ed067fb5a9c2",
+   "current": "02c2004bbe6aa633ac3c0681c90f4506bad1edd6f136f446a069c71e03df4cd5"
+  },
+  "tools/gate/profile_patches.json": {
+   "manifest": "926395f83d0c5d92455ef93df91c950718057ae77b99622fb8e1e19cbf0f0e1e",
+   "current": "937c8de2768e7b3f25de67f9669480fc077d4cbbf292968df600eb2dc6f31025"
+  },
+  "tools/oracles/animation_final_cohorts/consumer.cpp": {
+   "manifest": "7c399dec7e637bfb3eb6dc42838b2d371bd896044a80dccbdbcb245e77615ddb",
+   "current": "6a87458b9089723cae4821adceff66393bbb01b7d10af99fa642302c519b74f9"
+  },
+  "tools/oracles/animation_final_cohorts/interface.cpp": {
+   "manifest": "bc4c0fb1078a3f88f87e3709470daa317b8eb667412514b67ebcc8d2765bd21e",
+   "current": "6f06dead5bbf7e2160d3bcd3eb92b0ac75874f20c3f44fedd7ac70b79b73da68"
+  }
+ },
+ "new_inputs": [
+  "unmanifested judge input: reference/oracle-reports/normalize.json",
+  "unmanifested judge input: reference/packets/gamma-display-draw-2/callback_faults.py",
+  "unmanifested judge input: reference/packets/gamma-display-draw-2/caller_faults.py",
+  "unmanifested judge input: reference/packets/gamma-display-draw-2/dynamic_faults.py",
+  "unmanifested judge input: reference/packets/gamma-display-draw-2/normal_faults.py",
+  "unmanifested judge input: reference/packets/gamma-display-draw-2/observe_app_stop.py",
+  "unmanifested judge input: reference/packets/gamma-display-draw-2/quad_faults.py",
+  "unmanifested judge input: reference/packets/gamma-display-draw-2/return_only_proof.py",
+  "unmanifested judge input: reference/packets/gamma-display-draw-2/verify_faults.py",
+  "unmanifested judge input: reference/packets/gamma-display-draw-3/caller_faults.py",
+  "unmanifested judge input: reference/packets/gamma-display-draw-3/final_checks.py",
+  "unmanifested judge input: reference/packets/gamma-display-draw-3/qualify.py",
+  "unmanifested judge input: reference/packets/gamma-display-draw-3/rerun_inherited_faults.py",
+  "unmanifested judge input: reference/packets/gamma-display-draw-3/verify_faults.py",
+  "unmanifested judge input: reference/packets/gamma-display-draw-4/capture.py",
+  "unmanifested judge input: reference/packets/gamma-display-draw-4/qualify.py",
+  "unmanifested judge input: reference/packets/gamma-display-draw/native_sensitivity.py",
+  "unmanifested judge input: reference/packets/gamma-display-draw/replay_retained.py",
+  "unmanifested judge input: reference/packets/gamma-display-draw/verify_faults.py",
+  "unmanifested judge input: reference/packets/gamma-display-native/verify_packet.py",
+  "unmanifested judge input: tests/probes/native_animated_model_probe.cpp",
+  "unmanifested judge input: tests/probes/native_draw_transform_probe.cpp",
+  "unmanifested judge input: tests/probes/native_dynamic_model_probe.cpp",
+  "unmanifested judge input: tests/probes/native_gamma_display_probe.cpp",
+  "unmanifested judge input: tests/probes/native_gamma_object_callback_probe.cpp",
+  "unmanifested judge input: tests/probes/native_gamma_tail_probe.cpp",
+  "unmanifested judge input: tests/probes/native_normal_primitives_probe.cpp",
+  "unmanifested judge input: tests/probes/native_normal_uv_quad_probe.cpp",
+  "unmanifested judge input: tests/probes/native_normalize_probe.cpp",
+  "unmanifested judge input: tests/probes/native_render_state_snapshot_probe.cpp",
+  "unmanifested judge input: tests/python/test_private_native_assets.py",
+  "unmanifested judge input: tests/unit/animated_model.cpp",
+  "unmanifested judge input: tests/unit/native_gamma_display.mm",
+  "unmanifested judge input: tests/unit/normal_primitives.cpp",
+  "unmanifested judge input: tests/unit/normal_uv_quad.cpp",
+  "unmanifested judge input: tests/unit/private_native_assets.cpp",
+  "unmanifested judge input: tests/unit/selection_pack_append.mm",
+  "unmanifested judge input: tests/unit/vector_normalize.cpp",
+  "unmanifested judge input: tools/oracles/gamma_display_body_judge.py",
+  "unmanifested judge input: tools/oracles/verify_original_animated_model.py",
+  "unmanifested judge input: tools/oracles/verify_original_draw_transform.py",
+  "unmanifested judge input: tools/oracles/verify_original_dynamic_model.py",
+  "unmanifested judge input: tools/oracles/verify_original_gamma_display.py",
+  "unmanifested judge input: tools/oracles/verify_original_gamma_object_callback.py",
+  "unmanifested judge input: tools/oracles/verify_original_gamma_ordinary_body.py",
+  "unmanifested judge input: tools/oracles/verify_original_gamma_tail.py",
+  "unmanifested judge input: tools/oracles/verify_original_normal_primitives.py",
+  "unmanifested judge input: tools/oracles/verify_original_normal_uv_quad.py",
+  "unmanifested judge input: tools/oracles/verify_original_normalize.py",
+  "unmanifested judge input: tools/oracles/verify_original_render_state_snapshot.py"
+ ],
+ "removed_inputs": [],
+ "unrestored_manifest_paths": [],
+ "semantic_preservation": {
+  "note": "Oracle case counts and observation digests are unchanged for the migrated player fields and for the pre-existing display prefix; the draw-chain oracles are new comparisons, not replacements. Flag-only partials remain partial.",
+  "oracles": {
+   "animated_model": {
+    "cases": 1253,
+    "value_failures": 0,
+    "values_match": true,
+    "source_observations_sha256": "65b8d995e42acca14438d32350918477de02a0c4aae2420cf35f4e66384c6a59",
+    "limits": [
+     "Matrix numeric leaves and model/texture backend are common observational seams.",
+     "Animation angle sampler is original-profile interpolation disabled path.",
+     "No raster, numeric matrix or FP exception flag comparison."
+    ]
+   },
+   "collision_shapes": {
+    "scope": "4real shape primitives, real41bc00+41bed0, 3real matrix primitives; no arithmetic/normal replies or geometry replacements. Native live-task views seeded explicitly; hardware/runtime unknown.",
+    "limits": [
+     "Flag difference: the native x87 model sets the precision bit (PE 0x20) of the status word on inexact results; Unicorn 2.1.4 does not raise x87 exception bits for these instructions (source 0x0). All compared values match; the hardware flags need the Intel capture (M4)."
+    ]
+   },
+   "controller_init": {
+    "cases": 300,
+    "limits": "Vanilla InitControllers 40f3a0 against original instructions.\n\nThe source runs on a pseudo-random 3b0e000 page; the comparison covers the\nfour ControllersRaw records (incl. the overlapping forward replication),\nControllerPointers[0..3] targets and every other byte the function writes or\nmust leave untouched on that page. The Input mod's RET hook at 40f451 is not\napplied here; its repoint is input_mod_init_raw_controllers.\n"
+   },
+   "d3dx_matrix_inverse": {
+    "cases": 8000,
+    "values_match": true,
+    "limits": [
+     "D3DX8 7757e0 (D3DXMatrixInverse, the SSE cofactor inverse) against its original instructions.\n\nThe call goes through the thunk 770d10 (JMP [389b7c0]) with dispatch slot 18 (389b7c0) written as\n77350c leaves it on an SSE CPU without 3DNow!: both SSE tables (7735f0, 773700) put 7757e0 there.\n77350c itself is not executed. Arguments: out, pDeterminant (NULL or not), pM; RET 0xc. The source\nmatrix sits at a 16-byte aligned or misaligned (+8) address (7757e0 loads it with movlps/movhps only,\nso alignment must not matter). Compared: the return (out or NULL), the 16 stored floats, the stored\ndeterminant, untouched sentinels on the NULL path, and MXCSR without its six exception flags.\n\nRCPSS is Unicorn's (QEMU's IEEE single division), not a real CPU's estimate; the native probe uses the\nsame division model (sse_reciprocal_by_division), so this proves the transcription, not the estimate.\nMXCSR control profiles vary the rounding mode only: Unicorn 2.1.4 ignores FZ and DAZ (see the sse_math\nreport), so they are not exercised here. Cases keep at most one NaN source: Unicorn applies QEMU's x87\nNaN rule to SSE operands where hardware returns the first operand's NaN.",
+     "flag_mismatches: MXCSR exception flags; Unicorn 2.1.4 raises no SSE exception flags, the native SoftFloat SSE model does. Hardware flags need the Intel capture (roadmap M4)"
+    ]
+   },
+   "d3dx_perspective": {
+    "limits": [
+     "D3DX8 7716df (D3DXMatrixPerspectiveFovLH as linked into sonic.exe, stdcall, x87 throughout)\nagainst its original instructions.\n\n7716df is called directly (it is not dispatched through the 389b778 table): out, fovy, aspect, near,\nfar on the stack, RET 0x14. Every case runs the whole body. Compared: the 16 stored floats and the\nx87 control word; the six x87 exception flags are compared separately (flag class).\n\nTwo profiles:\n  primary  Unicorn executes every instruction, including FSINCOS at 0x771706, which QEMU computes\n           with the host's double sin/cos (53-bit), not an x87 64-bit-significand reduction. The\n           native side uses the Bochs P5/P6 FSINCOS model (third_party/bochs_fpatan, fsincos.cc).\n  seeded   the same, but right after 0x771706 ST(0)/ST(1) are overwritten with the native Bochs\n           cosine/sine (exported by the probe), so the rest of the body is compared exactly with no\n           FSINCOS model difference. Seeding validates the suffix only; it proves nothing about\n           Intel FSINCOS.\n|fovy * 0.5| >= 2^63 makes FSINCOS set C2 and leave ST(0); the native port returns an explicit unknown\n(nullopt) for it, and those cases are counted as native_unknown_cases, not compared.",
+     "primary value mismatches are FSINCOS model differences, classified in profiles.primary.mismatch_classes: unicorn_fsincos_infinity_as_out_of_range = QEMU treats FSINCOS(+-inf) as |x| >= 2^63 (C2, ST(0) kept) where the SDM gives #IA with the indefinite NaN (the Bochs model); finite operands use host double sin/cos in Unicorn. The Bochs model is not changed to match Unicorn; settling FSINCOS needs the Intel capture (roadmap M4). This report stays fail while primary mismatches exist",
+     "flag_mismatches: x87 exception flags; Unicorn 2.1.4 does not raise PE/UE for most x87 arithmetic, the native SoftFloat/Bochs models do",
+     "native_unknown_cases are |fovy/2| >= 2^63 (FSINCOS C2 path); the native port reports them as unknown instead of modelling the stack-underflow stores"
+    ]
+   },
+   "d3dx_project": {
+    "cases": 4000,
+    "limits": "D3DX8 772615 (Vec3Project) against its original instructions, with the\nSSE-path 774310 (MatrixMultiply) and 774150 (Vec3TransformCoord).\n\nThe dispatch slots are written as 77350c leaves them on an SSE CPU without\n3DNow! (389b784 = 774310, 389b7a0 = 774150); 77350c is not executed. Each case\ncalls 772615 (stdcall) with any of the projection, view, world and viewport\npointers NULL, and the matrices at 16-byte aligned or misaligned (+8)\naddresses, which selects 774150's movaps or movlps path. RCPPS is Unicorn's\n(QEMU's float division), not a real CPU's estimate; the native probe uses the\nsame division model. Cases keep at most one NaN source: Unicorn applies QEMU's\nx87 NaN rule (larger significand) to SSE operands, where hardware SSE returns\nthe first operand's NaN. MXCSR is compared without its six exception flags,\nwhich Unicorn 2.1.4 does not raise. Compared: the three output floats.\nThe case words (the probe's 61-word input) go to d3dx_project.cases.bin for the\nguest override-equivalence test.\n"
+   },
+   "draw_transform": {
+    "cases": 1222,
+    "value_failures": 0,
+    "values_match": true,
+    "limits": [
+     "Focused actual numeric original wrappers and their leaves; no call substitution.",
+     "Only nearest/single post-device control word127 compared.",
+     "Finite input matrix/vector words; actual source sine and unit bytes.",
+     "FP flag differences reported separately; no hardware exception delivery claim."
+    ]
+   },
+   "dynamic_model": {
+    "cases": 1024,
+    "value_failures": 0,
+    "fp_partials": 373,
+    "status": "partial",
+    "values_match": true,
+    "observations_sha256": "9437e593d91065ccbaaf99d8d3ef1347ea0de891d88fbf22d44bba564db01a45",
+    "scope": "original dynamic-model loop and material parser; primitive and D3DX receipts"
+   },
+   "engine_code_tables": {
+    "cases": 1,
+    "limits": "Compare every immutable engine code-table word with pinned source data.\n\nThis checks initialized table/constant encodings, not all behavior of their consumers.\nThe independent native probe builds without an executable, asset pack or reference runtime.\n"
+   },
+   "fog": {
+    "cases": 4700,
+    "limits": "Ninja fog owners against original instructions: device fog init 794ec0 (with\n795930, CRT pow 6447a0 on both its x87 and SSE2 paths, 794db0, 7949f0), fog\ncolour 7949b0, njGenerateFogTable3 787260 (CRT frexp 7b5eef, _ftol2 644340,\n794db0, 7949f0), fog-table edges 794e40 (7949f0) and the switches 411af0/411b40\nwith 4119b0, 411a20, 787220/787230 and 794950/794980.\n\nThe whole PE image (including .data and its zero tail) is mapped; the D3D8\ndevice's SetRenderState is a fixture (recorded site, state, value) and one\ncall can fail. Compared: completion, every fog global, the three 128-entry\ntables, the 411af0 cache/flag words and the render trace; x87 status flags are\nreported separately. FYL2X at 794afc runs the Bochs model, as in the production guest FPU shims.\nNative explicit boundaries (frexp of Inf/NaN 78728e, 787260 reference past the table 78753a) are counted,\nnot compared: the source continues past them.\n"
+   },
+   "fov": {
+    "cases": 10260,
+    "limits": "Field-of-view setter 7815c0 (787e30, 788290, 7883c0 real code, source sine table) against original instructions.\n\nCompares the stored projection scale 3d0f9e0 bitwise across angles, widths and\nx87 control words; status flags are reported separately.\n"
+   },
+   "game_frame_control": {
+    "cases": 2672,
+    "limits": "Actual411e30/7899a0/40f010/411e20 control instructions vs native owners.\n\nCounter words and input bytes are explicit fixtures; no live host clock or\nphysical keys are inferred. Missing facts stop before their actual source read\nas a declared availability fixture. The unused EAX return of the input callback\nis excluded: its actual780074 caller immediately overwrites that register.\n"
+   },
+   "game_startup": {
+    "cases": 400,
+    "limits": "InitGameLoop 40c030 against original instructions, over six randomized source pages.\n\nReal source code runs for 40c030, 420810, 40f350, 424c20 (local part), 40f3a0,\n40a8a0 and 781000->789930. Fixtures: 408630 (queue arena alloc/reset), 411e30,\n410510 (audio init), 40bf40 (state reset), 4253c0->40d0d0 (audio objects) and the\n78c5a0 RET, recorded as owner calls; one call can fail. Pages 3abd000, 3b0e000,\n3b29000, 900000, 903000 and 3d08000 are compared byte for byte, so source writes\noutside the native model also count as mismatches. Vanilla InitControllers only;\nthe Input mod's 40f451 hook is covered by input_mod_init_raw_controllers tests.\n"
+   },
+   "game_view_initial_state": {
+    "cases": 1,
+    "limits": "Verify view load-time values against pinned file bytes and PE virtual zero fill.\n\nOnly the selected numeric game-view and shared queue-color initial values are\ncovered. Resources, frame controls and uninitialized projection fields stay separate.\nThis does not establish complete native view/session behavior or physical graphics.\n"
+   },
+   "gamma_display": {
+    "cases": 1126,
+    "value_failures": 0,
+    "status": "pass",
+    "observations_sha256": "85f83fbbc0beb9cfd263530fa7003da887089358ac1800dd7105991972820c9d",
+    "scope": "integer topology prefix only; stops before first palette call; no placement or rendering claim"
+   },
+   "gamma_display.observations": {},
+   "gamma_object_callback": {
+    "cases": 1024,
+    "value_failures": 0,
+    "fp_partials": 13,
+    "status": "partial",
+    "values_match": true,
+    "observations_sha256": "3f90463fc8764749807a74a4dbce96df8dc7b3b59cb63095216856a5ff9726b7",
+    "scope": "original row/aim dispatch and recoil arithmetic; numeric matrix leaves common argument receipts"
+   },
+   "gamma_ordinary_body": {
+    "cases": 1024,
+    "value_failures": 0,
+    "fp_partials": 90,
+    "status": "partial",
+    "values_match": true,
+    "observations_sha256": "e9573a9cfe431779dcfd94e163aa5f4f2ed2f7d2e46d8f7934d1c3ccaf2e20d1",
+    "scope": "ordinary source action selection through arm-frame boundary; body draw and numeric matrix leaves common receipts"
+   },
+   "input_initial_state": {
+    "cases": 1,
+    "limits": "Verify load-time input values against both pinned images, before startup/polling.\n\nResource-pointer fields are excluded. No full native input/session independence claim.\n"
+   },
+   "input_mod_constants": {
+    "cases": 1,
+    "limits": "Compare seven native Input 2.6.1 arithmetic coefficients with pinned DLL bytes.\n\nReader fixtures are synthetic PE mappings, never executed. Only coefficients are\nmade native; mutable controller data, resources and other DLL dependencies remain.\n"
+   },
+   "library_initial_state": {
+    "cases": 1,
+    "limits": "Verify library initial values against pinned file bytes and mapped zero fill.\n\nSelected numeric initialization only; text/path resources and shared frame\ncontrol owners stay separate. This does not establish complete native library behavior.\n"
+   },
+   "ninja_fog_initial_state": {
+    "cases": 1,
+    "limits": "Verify fog load-time values against pinned file bytes and PE virtual zero fill.\n\nOnly the listed fog facts are covered. Resources, capabilities and remaining\ninitialization families are outside this oracle; no complete native-session claim.\n"
+   },
+   "ninja_memory": {
+    "cases": 3000,
+    "limits": "780f60/780fb0 against original instructions with recording Win32 heap fixtures.\n\nHeapCreate/HeapAlloc/HeapFree return each case's DWORD, including zero and\nnoncanonical BOOL receipts. Compares EAX, heap global, call order and arguments.\nAllocator internals and actual Windows handles/contents are platform facts, not\ncovered by these fixtures. Bridge tests separately use the live HLE allocator.\n"
+   },
+   "ninja_projected_depth": {
+    "cases": 4000,
+    "limits": "Projected depth 78dbe0 (stdcall, float w) against original instructions.\n\n78dbe0 compares w with 7e9b40 (FCOMP; below it, or unordered, z = 65535.0, else\nz = 1.0f / w through FDIV and FSTP m32), then D3DXVec3Project((0, 0, z),\nviewport 3d12780, projection 3d129c0, view = world = 389d318) through thunk\n770295 and returns FLD out.z in ST(0) (ret 4). The original runs 770295, 772615,\n774310 and 774150 as real code with dispatch slots 3/10/14 written as 77350c\nleaves them on an SSE CPU without 3DNow! (774310, 774150, 772615); 77350c is not\nexecuted. Cases: w at the 7e9b40 edge and its neighbours, signed zeros,\nnegatives, infinities, denormals, NaNs, and typical depths; integer viewports\nincluding zero/negative extents; perspective-like and random projections; the\nimage's 389d318 or random words; four masked x87 control words and the MXCSR\nrounding modes. Compared: the returned ext80 (bitwise), that exactly one value\nwas pushed (TOP and tag), EAX (772615's pOut, entry ESP - 0xc). RCPPS is\nUnicorn's QEMU division, the same model the native port uses; cases keep at\nmost one NaN source (Unicorn applies the x87 NaN rule to SSE operands). x87\nexception flags are compared separately: Unicorn 2.1.4 raises no PE for an\ninexact FDIV/FSTP (1/w for most w) nor IE/DE for NaN/denormal operands, which\nthe native model raises as the SDM documents, so nearly every case differs in\nflags only (verdict partial); MXCSR flags are not compared. ECX/EDX (772615's\nleftovers) and the x87 condition bits C0/C2/C3 (undefined after the trailing\nFLD/FDIV) are not compared. The case words go to ninja_projected_depth.cases.bin.\n"
+   },
+   "ninja_queue_color": {
+    "cases": 4000,
+    "limits": "Render-queue colour 402f40 (with its 77ff90 tail jump) against original instructions.\n\n402f40 (cdecl, pointer to four floats) copies the colour into 3ab9864 word by\nword, clamps each component to [-1, 1] with FLD/FCOMP against 7dcb10 (1.0) and\n7dcb0c (-1.0), then jumps to 77ff90(&3ab9864), which copies the four words into\n3d0f7f0. Cases: finite values around the clamp edges, signed zeros, infinities,\ndenormals, quiet and signalling NaNs (any number per case: nothing is computed,\nso no NaN-propagation rule applies), under the four masked x87 control words\nthe game uses. Compared: the eight stored words (bitwise), and EAX/ECX/EDX and\nthe x87 condition bits after the call against the values the source leaves\n(EAX = 3ab9864, ECX/EDX = the last two copied words, C3/C2/C0 = the last FCOMP).\nx87 exception flags are compared separately: Unicorn 2.1.4 raises neither IE\nfor a NaN FCOMP operand / SNaN FLD nor DE for a denormal FLD m32, which the\nnative model raises as the Intel SDM documents, so those cases differ in flags\nonly (verdict partial). Unmasked-exception control words are not exercised.\nThe corpus (CW, the input words, the prior 3ab9864 words) goes to\nninja_queue_color.cases.bin for the guest override-equivalence test.\n"
+   },
+   "ninja_queue_initial_state": {
+    "cases": 1,
+    "limits": "Verify render-queue initial values against pinned file bytes and mapped zero fill.\n\nSelected numeric initialization only; queue allocation/device resources and live\ncontrol owners stay separate. This does not establish complete native queue behavior.\n"
+   },
+   "ninja_queue_lifecycle": {
+    "cases": 600,
+    "limits": "Render-queue lifecycle 408630 -> 407ab0 -> (4128f0/402f40, 407330) against original instructions.\n\nReal source code runs for 408630, 407ab0, 4128f0, 402f40, 407330, 401420, 77ed00,\n77ed20, 77ece0, 412400, 401440 and 77ff90. Fixtures: 780f60 (HeapAlloc) returns\nthe case's heap address, 780fb0 (HeapFree) is a no-op, and the D3D8 device's\nSetRenderState (vtable +0xc8) records (site, state, value) and may fail at call N.\nCompared: buffer cursor offset and zeroing, overflow flag, colours, captured\nwords, mode/count stores, bucket sentinels and the render-state trace. FP status\nflags are reported separately (Unicorn's x87 flag behaviour is not hardware).\n"
+   },
+   "ninja_render": {
+    "cases": 8209,
+    "limits": [
+     "Actual game state wrappers only; COMSetRenderState uses a declared test backend, not an originalGPU observation",
+     "Source failed HRESULT ignored as actual instructions; native APIs can omit originalHRESULT while preserving availability",
+     "Unsupported constant-table domains/unknown facts stop at source boundaries; no source validation invented",
+     "No FP arithmetic in this owner; GPU, texture lifetime and full sprite/game execution remain unverified"
+    ]
+   },
+   "ninja_screen_initial_state": {
+    "cases": 1,
+    "limits": "Verify screen load-time values against pinned file bytes and PE virtual zero fill.\n\nOnly the listed screen facts are covered. Resources, capabilities and remaining\ninitialization families are outside this oracle; no complete native-session claim.\n"
+   },
+   "ninja_sine_table": {
+    "cases": 1,
+    "limits": "Verify maintained Ninja coefficients exactly against the pinned inline table.\n\nThis covers code data only. Original trig execution remains in the unchanged math\noracle; it does not establish complete native runtime or physical FP equivalence.\n"
+   },
+   "ninja_view": {
+    "limits": [
+     "781570 / 781250 / 791170 (the camera block, view matrix and projection WinMain sets at 402d4f..402d5e)\nagainst their original instructions.\n\nEvery instruction of 781570, 781250 and 791170 runs, with all their callees from the original bytes:\n788290/7883c0 (the 88af78 sine table), 7871f0, 787e30, 7716df, 770804 -> 774310 and 770d10 -> 7757e0\n(dispatch slots 389b784 / 389b7c0 written as 77350c leaves them on an SSE CPU without 3DNow!; 77350c is\nnot executed). The D3D8 device is a fixture: [3d128b0] -> object -> vtable whose +0x94 (SetTransform)\nand +0x9c (MultiplyTransform) are `ret 0xc` stubs that record (state, the 16 words passed). The matrix\nstack is a fixture block of 1..4 slots at [3d0fa1c] with a random current depth. Mode 0 runs 781570\n(thiscall, ECX = 3aad0a0) and then 781250; mode 1 runs 781250 on a random block.\n\nCompared: 3d0f760 (view), matrix-stack slot 0, 3d0f818 (current = base) and 3d0fa2c (depth),\n3d0f980, 3d0f9e0, 3d0f808, 3d0f968, 3d12960, 3d129c0, 389d398, 389d358 (sentinel when 7757e0\nreturns NULL), the block after 781570, the three device calls and the x87 control word.\n\nTwo profiles:\n  primary  Unicorn executes FPTAN (791240), FPATAN (79124a) and FSINCOS (771706) itself: QEMU computes\n           them with host doubles, the native side with the Bochs P5/P6 models.\n  seeded   right after each of those instructions the result registers are overwritten with the native\n           Bochs results (exported by the probe), so every other instruction is compared exactly.\n           Seeding proves the transcription, not Intel FPTAN/FPATAN/FSINCOS (roadmap M4).\nRCPSS/RCPPS are Unicorn's IEEE division in both the source and the native probe (not a real CPU's\nestimate). MXCSR profiles vary the rounding mode only (Unicorn ignores FZ/DAZ). At most one NaN source per\ncase (Unicorn applies the x87 NaN rule to SSE operands). VIEW_SMOKE=1 in the environment stops each profile\nafter 300 cases (for mutant runs); the recorded report never uses it.",
+     "primary value mismatches come from FPTAN/FPATAN/FSINCOS: Unicorn uses host doubles, the native Bochs models are not changed to match; settling them needs the Intel capture (roadmap M4). The report stays fail while they exist; the seeded profile is the transcription check",
+     "x87 and MXCSR exception flags are not compared (Unicorn 2.1.4 raises few x87 and no SSE flags)"
+    ]
+   },
+   "normal_primitives": {
+    "cases": 1024,
+    "value_failures": 0,
+    "fp_partials": 0,
+    "status": "pass",
+    "values_match": true,
+    "observations_sha256": "a2f6f7fceeec9ae7a24ff79b640c4e6303bf306f65e5c1e2d284f1178b58d74f",
+    "scope": "original normal-only strip/triangle/quad and buffer state; COM receipts"
+   },
+   "normal_uv_quad": {
+    "cases": 1024,
+    "value_failures": 0,
+    "fp_partials": 812,
+    "status": "partial",
+    "values_match": true,
+    "observations_sha256": "013c5786a2a4c909c6e705542a19b0cc75ada70ec5d3d57646e3d631f1b97037",
+    "scope": "original quad and triangle-list buffers; COM receipts"
+   },
+   "player_animation": {
+    "cases": 16440,
+    "stored_mismatches": 0,
+    "status_mismatches": 4140,
+    "boundary_mismatches": 0,
+    "limits": [
+     "Typed four-record action/motion fixture is not the real initialized147-record Sonic table",
+     "Source numeric paths execute real43f9f0 with object_count0; nonzero key buffers/allocation lifecycle are not proved by this experiment",
+     "Original43f2a0 blend CALL stops before execution; the separate producer verifier covers its body and the native path retains synthetic resource unavailability",
+     "An emulator is the instruction oracle, not physical Windows hardware or game/mod execution",
+     "Flag difference (status_mismatches): the native x87 status exception bits (IE 0x01 in the examples, comparisons with NaN operands) are set where Unicorn 2.1.4 does not raise them (source 0). All compared values match; the hardware flags need the Intel capture (M4)."
+    ]
+   },
+   "player_animation_blend": {
+    "cases": 7944,
+    "stored_mismatches": 0,
+    "status_mismatches": 1668,
+    "limits": [
+     "Synthetic single-object graph and two MDATA2/3 motion descriptors; not actual model DLL resource execution",
+     "Fixture allocator supplies32-byte buffers at40b220; original allocator policy is not compared here",
+     "Integer/float stored keys and metadata compared; full x87 status/stack/tags are outside native context",
+     "Unicorn2.1.4 is an instruction oracle, not physical Windows execution"
+    ]
+   },
+   "player_startup": {
+    "limits": [
+     "Actual source prefix only: stop before44297b because native4a2b60 owner remains missing; no original return or running game claim",
+     "Heap/task-pool initialization is an explicit fixture after unlifted CRT/Win32 acquisition",
+     "No source task/work/object/event callees are replaced",
+     "Canonical probe snapshot reads authoritative typed task/player/motion views; allocated bytes are initialization provenance",
+     "Caller-selected parameter/save/FP/resource fixtures, not actual initialized mods or hardware captures",
+     "Source crash/corrupt-registration/unknown-owner cases stop before the unsafe instruction and retain native partial failures",
+     "Flag difference: the native x87 model sets the precision bit (PE 0x20) of the status word on inexact results; Unicorn 2.1.4 does not raise x87 exception bits for these instructions (source 0x0). All compared values match; the hardware flags need the Intel capture (M4)."
+    ]
+   },
+   "projection_range": {
+    "cases": 3000,
+    "limits": "Projection range 403180 + 7815e0 against original instructions.\n\nThe D3D8 device is a COM fixture: GetTransform (+0x98) writes the case matrix,\nSetTransform (+0x94) records the written matrix. Each case runs with a random\ncache and again with the cache equal to the first run's stored values (the\nunchanged path). x87 status flags are reported separately.\n"
+   },
+   "render_state_snapshot": {
+    "cases": 1066,
+    "value_failures": 0,
+    "status": "pass",
+    "observations_sha256": "3ea385a5d5df3d13b40cdfd40b49ee1892ad5e24c6eac0f89fd64e8f508eab8b",
+    "scope": "seven integer leaves; native object callback domain is None/Gamma; SetMaterial excluded"
+   },
+   "render_state_snapshot.observations": {},
+   "screen_init": {
+    "cases": 3000,
+    "limits": "780c30 (screen setup, 781070's 78113f) against its original instructions,\nwith the real 7899a0, 7912e0, 77ec60, 77ff70 and 780090 code.\n\nThe whole PE is mapped. The device is a COM fixture recording SetViewport\n(+0xa0, its six words), SetTransform (+0x94) and MultiplyTransform (+0x9c)\n(state and the sixteen matrix words) and SetRenderState (+0xc8). 3d0fd1c is\nseeded per case (1 runs 7912e0's body; the loader's reset_device is its only\nwriter). Seeded first: 3ce712c = 5, 3d0f840 = 0x1234, 3d0f9c4 = 0x5678,\n3ce71b0 = 0x11, 3ce71a4 = 0x22 and the 3ce7174 colours 1..4, so their stores\nare visible. A null device faults at the vtable load (page 0 is unmapped), as\nthe native owner stops (null_device). Compared: completion, every global the\nsource writes, 7899a0's words and the device-method trace with its arguments.\n"
+   },
+   "screen_polygon": {
+    "cases": 3000,
+    "limits": "77dfc0 (BeginScene's 78b922 polygon) against its original instructions, with\nthe real 791940, 78bba0, 78b780, 78ea10, 78b800, 78dbe0 and the D3DX8 math\n772615 (Vec3Project), 774310 (MatrixMultiply) and 774150 (Vec3TransformCoord).\n\nThe whole PE is mapped. The D3DX dispatch slots are written as 77350c leaves\nthem on an SSE CPU without 3DNow! (389b784 = 774310, 389b7a0 = 774150) and\n389b7b0 = 772615 (the default every path keeps); 77350c's CPU and registry\nprobes are not executed. RCPPS is Unicorn's (QEMU's float division), which is\nnot a real CPU's estimate: the native probe uses the same division model, so\nthis checks everything around RCPPS, not the reference CPU's table. MXCSR\nchoices keep FTZ/DAZ clear. Cases keep at most one NaN source (the argument or one matrix word): Unicorn\napplies QEMU's x87 NaN rule (larger significand) to SSE operands, where hardware\nSSE returns the first operand's NaN. MXCSR is compared without its six exception flags:\nUnicorn 2.1.4 raises none, which hardware and the native SseContext do. The device is a COM fixture recording\nSetRenderState (+0xc8), SetTextureStageState (+0xfc), SetTexture (+0xf4),\nSetVertexShader (+0x130) and DrawPrimitiveUP (+0x120, with the vertex bytes it\nis given). A null device faults at the vtable load (page 0 is unmapped), as the\nnative owner stops (null_device). Compared: completion, 3d0fdf4, whether\n3d129a0 was cleared, the device trace, the drawn vertices and MXCSR.\n"
+   },
+   "session_control_defaults": {
+    "cases": 1,
+    "limits": "Verify scalar load-time controls against pinned file bytes and PE virtual zero fill.\n\nOnly the listed control facts are covered. Resources, callbacks and remaining\ninitialization families are outside this oracle; no complete native-session claim.\n"
+   },
+   "sonic_actions": {
+    "cases": 30192,
+    "stored_mismatches": 0,
+    "status_mismatches": 2172,
+    "boundary_mismatches": 0,
+    "limits": [
+     "Actual original bytes with private fixture memory, not full game/mod startup or a physical gameplay trace",
+     "Unbound sound/effect/native task/animation/normal owners stop at actual source CALL before execution; none returns synthetic success",
+     "Fully known source masks/pad/event fields are explicit fixture facts, not defaults",
+     "All12 masked CW profiles include hardware candidate007f and worker027f but are not hardware measurements",
+     "Source FPATAN/scratch-dependent wall query remains a mandatory owner boundary in these fixtures",
+     "Flag difference (status_mismatches): the native x87 status exception bits (PE 0x20 in the examples) are set where Unicorn 2.1.4 does not raise them (source 0). All compared values match; the hardware flags need the Intel capture (M4)."
+    ]
+   },
+   "sonic_player": {
+    "cases": 28800,
+    "stored_mismatches": 0,
+    "status_mismatches": 2840,
+    "limits": [
+     "No full Sonic action, animation, model, sound, collision or task initialization is executed as a game",
+     "Control comparisons stop before mandatory callbacks or at the remaining predicate jump; those paths are incomplete",
+     "Ground-input cases execute actual GetAnalog and stop at mandatory rotation/raw-input owners; their matrix resources are not consumed",
+     "Local-speed cases seed the transformed stack vector at43eecc; they do not establish the producer43ed20/43ec00 equivalence",
+     "Unicorn is an instruction oracle; physical Windows control/status and hardware equivalence remain unverified",
+     "Native full-angle unavailable low16 stops before the high16 source write; known fixtures cover fully captured angles"
+    ]
+   },
+   "sound_initial_state": {
+    "cases": 1,
+    "limits": "Verify sound load-time values against pinned file bytes and PE virtual zero fill.\n\nOnly the selected numeric load-time sound facts are covered. Opaque queue IDs,\ntasks, listener and sound resources remain separate; no physical audio claim.\n"
+   },
+   "startup_initial_state": {
+    "cases": 1,
+    "limits": "Verify startup initial values against pinned file bytes and mapped zero fill.\n\nSelected numeric initialization only; media/message resources and shared frame\ncontrol owners stay separate. This does not establish complete native startup behavior.\n"
+   },
+   "task_lifecycle": {
+    "limits": [
+     "Heap acquisition and51a740 initializer excluded; explicit runtimefield30 owner supplied",
+     "Known51f680 RET callback only; arbitrary game callbacks/mods not captured",
+     "One sourcecleanup fixture seeds owned collision/object chains explicitly; initialization producers not claimed",
+     "Pool native graph is encoded only by the probe canonical test identity scheme; functional native code never casts guest pointers",
+     "Inactive membership diagnostic401000/CRT formatting and corruption/hang paths excluded from originalgoldens, retained as native failures",
+     "Original hardware/fullgame startup remain unverified"
+    ]
+   },
+   "task_work": {
+    "limits": [
+     "StartsafterCRTandWin32heapacquisitionwithanexplicitzerofilledheapfixture",
+     "Onlyvalidownedallocation/free sequences; sourcehang/corruption failures have native unit coverage",
+     "Original hardware/fullgame startup and mod runtime remain unverified"
+    ]
+   }
+  },
+  "migrated_field_checks": {
+   "player_animation": {
+    "cases": 16440,
+    "stored_mismatches": 0,
+    "status_mismatches": 4140
+   },
+   "player_animation_blend": {
+    "cases": 7944,
+    "stored_mismatches": 0,
+    "status_mismatches": 1668
+   },
+   "sonic_actions": {
+    "cases": 30192,
+    "stored_mismatches": 0,
+    "status_mismatches": 2172
+   },
+   "sonic_player": {
+    "cases": 28800,
+    "stored_mismatches": 0,
+    "status_mismatches": 2840
+   },
+   "gamma_display_topology": {
+    "cases": 1126,
+    "value_failures": 0,
+    "observations_sha256": "85f83fbbc0beb9cfd263530fa7003da887089358ac1800dd7105991972820c9d"
+   },
+   "gamma_display_body": {
+    "cases": 1024,
+    "value_failures": 0
+   }
+  }
+ },
+ "judge_edits": {
+  "profile_patches.json": "0x404c10 LinearMotionA_r handled_by text added; no inventory, owner or condition changed",
+  "constexpr-table-review.json": "character_pack.cpp declaration fingerprints refreshed for the MDATA3 schema; classifications unchanged"
+ },
+ "limits": [
+  "A completed native actor frame is not yet presented: the per-frame Gamma update still stops at native_gamma_update_target_effects.",
+  "The drawn CharacterSelect checker is not in the gate until a frame presents; the boundary-mode run is honest and titled.",
+  "FP flag partials in the new normalization/draw oracles are inherited Unicorn limits, reported separately from values.",
+  "No full gate had run at the time this evidence was produced."
+ ]
+}
