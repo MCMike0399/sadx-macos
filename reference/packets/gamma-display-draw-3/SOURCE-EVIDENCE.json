@@ -1,0 +1,42 @@
+{
+  "exe_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "prior_display": "reference/packets/gamma-display-draw-2/evidence/4800b4.txt",
+  "supplemental": [
+    {
+      "name": "mdata3-transform",
+      "address": "0x405020",
+      "bytes": 72,
+      "source_bytes_sha256": "cf50626a31a21cfb48bac61ba5896ca50de9ce2526f822cbea4fde6e172bdb41",
+      "retained_extract": "reference/packets/gamma-display-draw-3/evidence/mdata3-transform.txt",
+      "extract_sha256": "734b62c2d745d9c45c39557eaf02cb788f6705a0942135a50a1ee62c2fe42097",
+      "method": "Capstone decoding of pinned PE bytes; fresh original oracle executes the recovered paths"
+    },
+    {
+      "name": "flag-object-initializer",
+      "address": "0x7cb670",
+      "bytes": 96,
+      "source_bytes_sha256": "2168337fd8c1ada50b4dbb8b1b98a6b1f6972fcc706773d91b9a22c6f74cfd62",
+      "retained_extract": "reference/packets/gamma-display-draw-3/evidence/flag-object-initializer.txt",
+      "extract_sha256": "6ced889505a316b370d04b97d322565098675eebe79ef42ff8893aec557789b6",
+      "method": "Capstone decoding of pinned PE bytes; fresh original oracle executes the recovered paths"
+    },
+    {
+      "name": "pause-test",
+      "address": "0x414d70",
+      "bytes": 27,
+      "source_bytes_sha256": "038dafde5e35d40a6cbb0cfed154f78ce527fc1ddf93ebdd1ac3322d651bbc27",
+      "retained_extract": "reference/packets/gamma-display-draw-3/evidence/pause-test.txt",
+      "extract_sha256": "4a4ad33f0afbf6ddceb83c942984ed3ba9156073c0c53f1908f83c221d09f56e",
+      "method": "Capstone decoding of pinned PE bytes; fresh original oracle executes the recovered paths"
+    },
+    {
+      "name": "sub-angle",
+      "address": "0x4383a0",
+      "bytes": 12,
+      "source_bytes_sha256": "e57e93e20110e2620aa31b341a614a607ed41e77a39eab761fe6ab5b79427c09",
+      "retained_extract": "reference/packets/gamma-display-draw-3/evidence/sub-angle.txt",
+      "extract_sha256": "a17cd3b67aaf5c9f3be96c221e37ff55f21e661fdeab448c5cdb4cf4c49677cc",
+      "method": "Capstone decoding of pinned PE bytes; fresh original oracle executes the recovered paths"
+    }
+  ]
+}

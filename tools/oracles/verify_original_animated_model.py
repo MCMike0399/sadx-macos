@@ -160,13 +160,14 @@ class Source:
             self.write(MODELS[node], [0] * 10) # zero radius avoids clip-test backend
             row = []
             counts = []
-            for channel in range(2):
-                at = 68 + (node * 2 + channel) * 17
-                key = KEYS + (node * 2 + channel) * 64
+            for channel in range(3 if case[6] == 3 else 2):
+                channels = 3 if case[6] == 3 else 2
+                at = 68 + (node * channels + channel) * 17
+                key = KEYS + (node * channels + channel) * 64
                 row.append(key if case[at] else 0)
                 counts.append(case[at])
                 self.write(key, case[at + 1:at + 17])
-            self.write(TRACKS + node * 16, row + counts)
+            self.write(TRACKS + node * (24 if case[6] == 3 else 16), row + counts)
         for address, words in ((0x3b1117c, [case[0]]), (0x3ab9908, [CALLBACK if case[7] else 0]),
                                (0x3abd95c, [0]), (0x3abd9a4, [91]),
                                (0x3ab9930, [case[9]]), (0x3ab991c, [bits(-17)]),
@@ -189,7 +190,7 @@ class Source:
         assert self.failed or m.reg_read(UC_X86_REG_EIP) == STOP
         state = [self.read(0x3abd95c)[0], self.read(0x3abd9a4)[0],
                  self.read(0x3ab9930)[0], self.read(0x3ab991c)[0],
-                 (self.read(0x3ab9910)[0] - TRACKS) // 16,
+                 (self.read(0x3ab9910)[0] - TRACKS) // (24 if case[6] == 3 else 16),
                  self.read(0x3ab9924)[0], self.read(0x3ab9894)[0] & 65535,
                  self.read(0x3ab9904)[0] & 65535, self.read(0x3ab992c)[0]]
         objects = sum((self.read(obj, 13) for obj in OBJECTS), [])
@@ -214,12 +215,27 @@ def main():
     p.add_argument('exe'); p.add_argument('probe')
     p.add_argument('--cases', type=int, default=1024)
     p.add_argument('--seed', type=lambda x: int(x, 0), default=0x4053d0)
+    p.add_argument('--mdata3', action='store_true')
     p.add_argument('--output', default='build/oracles/animated_model.json')
     a = p.parse_args()
     image = PEImage(a.exe)
     original, native = Source(image), Native(a.probe)
     failures, observations = [], []
     cases = fixtures(a.cases, a.seed)
+    if a.mdata3:
+        rng = random.Random(a.seed ^ 0x405020)
+        for case in cases:
+            old = case.copy()
+            case[5], case[6] = 7, 3
+            for node in range(4):
+                for channel in range(3):
+                    at = 68 + (node * 3 + channel) * 17
+                    if channel < 2:
+                        case[at:at+17] = old[68+(node*2+channel)*17:85+(node*2+channel)*17]
+                    else:
+                        case[at] = rng.choice([0, 1, 2, 3, 4])
+                        for key, frame in enumerate((0, 3, 7, 11)):
+                            case[at+1+key*4:at+5+key*4] = [frame] + [bits(rng.uniform(0.5, 2)) for _ in range(3)]
     for index, case in enumerate(cases):
         expected, actual = original.run(case), native.run(case)
         observations.append(expected)

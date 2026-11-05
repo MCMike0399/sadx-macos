@@ -1101,3 +1101,14 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * reference/packets/gamma-display-draw-2/PACKET.md and VERIFICATION.json retain exact commands, counts, hashes, review and limits. Full gate, full suites, cold source-only build and Windows parity were not run.
 =======
 >>>>>>> 6fc88b1 (test(player): propose Gamma display placement and fault cohorts)
+
+### 2026-11-04 — Gamma arm and inactive display tail, still no presented frame
+
+* packet/draw-path-3 implementation 987e176 imports export 50 with inverse proof and preserves the canonical and display prefixes. Private pack 2929e8a6 has 3,537 records; canonical assets are unchanged.
+* The actual caller submits 106 draws and 3,060 vertices, including eight arm draws and 198 arm vertices. Both independent body and arm suppression abort its geometry assertion.
+* Preserved topology 1,126 and placement 1,024 cases retain their digests. MDATA2 and new MDATA3 each match 1,253 development and 4,325 holdout observations; FP flags are not compared there.
+* The arm and inactive tail match 1,024 development and 2,048 holdout values, with 680 and 1,364 FP partials. Preserved callback and ordinary-prefix partials remain; four new and five inherited faults are caught.
+* Five focused native programs and 18 Python tests pass. Independent review corrected the typed laser owner, supplied matrix push and generated MDATA3 layout; keyed scale coverage detects the old count offset.
+* Final normal input requests frame 1550 but exits 1 at frame 1332, completed 1330, in palette 0 D3DX stage-direction normalization. The inspected image remains title c7d02f64; no actor frame, signature distance or N3b claim.
+* Source checks pass. make -j2 check exits 2 at 66 pending judge registrations; the range check retains one distinct unhandled angle hook across four reports. No full gate or source-only build ran.
+* reference/packets/gamma-display-draw-3 retains exact commands, proofs, reviews, limits and the next normalization and common-tail boundaries. Masked-exception tail scope does not certify partial stores under unmasked faults.
