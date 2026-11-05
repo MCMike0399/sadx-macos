@@ -1123,3 +1123,12 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Inspected screenshot remains the blue title c7d02f64. Drawn checker exits 1 at its outgoing-title guard, before signature distance; neither frame 1450 nor a CharacterSelect present is claimed.
 * Source checks pass; make -j2 check exits 2 at 71 pending judge registrations. New range has zero unhandled profile intersections. Judge manifest and gate tools are unchanged; no full gate ran.
 * reference/packets/gamma-display-draw-4/PACKET.md and VERIFICATION.json preserve commands, exits, proof and limits. Target/gun/held/ground/collision continuation and N3b remain open.
+
+### 2026-11-04 — Macintosh reception and Gamma display admission
+
+* Reception on Macintosh passes: published Main d2de538 and draft 1aa9134 verified, private supplement and six manifests checked, pinned tools and 1,460 protections verified, and Main's Display1332 baseline reproduced with the title hash.
+* Two draft failures were diagnosed, not masked: playerwk+0x11c is the character center_height (Gamma14), and the private asset tree used symlinks that the sound-bank containment guard rejects. The canonical pack lacked the three standalone-imported display resources; they regenerate byte-identically.
+* The display work is admitted without the two fan commits: topology, body, render leaves, arm export50, inactive tail and D3DX normalization. The caller submits 106 draws/3,060 vertices; normal input completes the display and stops at native_gamma_update_target_effects.
+* Judges: 1,126 topology and 1,024 body cases, 1,253 animated-model and 1,222 transform cases, 1,024 tail/callback/ordinary cases, 4,096 normalization cases, all value-exact with explicit FP partials; compiled faults are caught. The appended pack is provenance-checked byte for byte.
+* Full gate at ff5bb89 exits0: 340 native programs, 658 Python tests, R1-R4 and three native journeys. Independent review findings were fixed; one remaining limit is the presenter boundary.
+* No actor frame is presented yet and the drawn CharacterSelect checker stays outside the gate. Next: complete the Gamma per-frame update so the frame presents, then enable the checker with its reference signature.
