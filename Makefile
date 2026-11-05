@@ -667,7 +667,7 @@ build/native-gamma-display-probe.dylib: tests/probes/native_gamma_display_probe.
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -dynamiclib $< src/player/gamma_display.cpp build/libsadx-native.a -o $@
 build/native-render-state-snapshot-probe.dylib: tests/probes/native_render_state_snapshot_probe.cpp src/engine/render_state_snapshot.cpp src/engine/render_state_snapshot.hpp build/libsadx-native.a
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -dynamiclib $< src/engine/render_state_snapshot.cpp build/libsadx-native.a -o $@
-build/native-gamma-display-test: tests/unit/native_gamma_display.mm src/apps/native_gamma_actor_assets.hpp src/runtime/native_player_system.hpp src/runtime/native_display.hpp src/runtime/native_gamma_display_context.hpp src/engine/render_state_snapshot.hpp build/libsadx-native.a $(NATIVE_PLATFORM_OBJECTS)
+build/native-gamma-display-test: tests/unit/native_gamma_display.mm src/apps/native_gamma_actor_assets.hpp src/runtime/native_player_system.hpp src/runtime/native_display.hpp src/runtime/native_gamma_display_context.hpp src/engine/render_state_snapshot.hpp build/cs-private-assets/.private-native-assets.json build/libsadx-native.a $(NATIVE_PLATFORM_OBJECTS)
 	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) $< $(NATIVE_PLATFORM_OBJECTS) build/libsadx-native.a $(MAC_FRAMEWORKS) -o $@
 # Sonic mode-zero continuation and exact build-only Root callback wiring.
 build/native-sonic-initialization-probe.dylib: tests/probes/native_sonic_initialization_probe.cpp src/player/sonic_model.hpp build/libsadx-native.a Makefile
