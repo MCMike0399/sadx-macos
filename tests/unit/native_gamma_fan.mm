@@ -110,14 +110,26 @@ int main(int argc, char **argv) {
     model_matrices::State matrices;
     context.model_matrices = &matrices;
     const auto arithmetic_control = display.arithmetic().control_word();
+    // The source common tail now reaches the admitted display prefix; palette
+    // selection is the caller's borrowed lighting operation.
+    std::int32_t selected_palette = -1;
+    context.display_palette = [&](std::int32_t value) { selected_palette = value; };
     bool stopped = false;
     try {
         gamma_selection::run(context, task);
     } catch (const flow::UnrecoveredGameFlowCall &error) {
-        assert(std::string(error.what()) == "native_gamma_display");
+        // The canonical imported pack has no Gamma display object rows, so the
+        // display stops at the first tagged missing row. The append-only
+        // development pack continues to the first animated draw seam.
+        const auto message = std::string(error.what());
+        const bool complete_pack = !players.gamma_assets->display_objects.empty();
+        assert(message == (complete_pack ? "native_gamma_display_action_clip_no_scale"
+                                         : "native_gamma_display_object_row_14"));
         stopped = true;
     }
-    assert(stopped && players.gamma_effects.burst_task && pose.status == 1);
+    const bool complete_pack = !players.gamma_assets->display_objects.empty();
+    assert(stopped && selected_palette == (complete_pack ? 4 : -1) &&
+           players.gamma_effects.burst_task && pose.status == 1);
     assert(display.arithmetic().control_word() == arithmetic_control);
     const auto pool_task = players.gamma_effects.burst_task;
     assert(scheduler.list_head(4) == pool_task);

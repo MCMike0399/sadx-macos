@@ -688,11 +688,23 @@ build/sonic-model-native-test: src/apps/native_regular_texture_assets.hpp
 CS_DISPLAY_ASSETS ?= build/cs-private-assets
 CS_DISPLAY_OUTPUT ?= build/cs-display-check
 CS_DISPLAY_ARGS ?=
-.PHONY: native-character-select-display private-native-assets
+CS_SAVE_SOURCE ?= $(REFERENCE_GAME_DIR)/savedata
+.PHONY: native-character-select-display private-native-assets build/cs-display-assets
+# The append-only Gamma display records are imported from the pinned original
+# character archive. They stay a private build fixture; the canonical pack is unchanged.
+build/display-append/sonic-selection.actions: tools/import/gamma_display_resources.py tools/import/gamma_actor_resources.py | build
+	mkdir -p build/display-append
+	$(REFERENCE_PYTHON) tools/import/gamma_display_resources.py "$(GAME_SYSTEM)/CHRMODELS_orig.dll" "$(GAME_EXE)" $@ > build/display-append/import.json
 private-native-assets:
 	python3 tools/testing/private_native_assets.py --source "$(NATIVE_ASSETS)" --output "$(CS_DISPLAY_ASSETS)" $(CS_ASSET_ARGS)
-native-character-select-display: build/sadx-native
-	python3 tools/testing/check_native_character_select_display.py --assets "$(CS_DISPLAY_ASSETS)" --output "$(CS_DISPLAY_OUTPUT)" $(CS_DISPLAY_ARGS)
+build/cs-private-assets/.private-native-assets.json: tools/testing/private_native_assets.py build/display-append/sonic-selection.actions $(NATIVE_ASSETS)/characters/sonic-selection.actions
+	rm -rf "$(CS_DISPLAY_ASSETS).new"
+	python3 tools/testing/private_native_assets.py --source "$(NATIVE_ASSETS)" --output "$(CS_DISPLAY_ASSETS).new" --append build/display-append/sonic-selection.actions
+	rm -rf "$(CS_DISPLAY_ASSETS)"
+	mv "$(CS_DISPLAY_ASSETS).new" "$(CS_DISPLAY_ASSETS)"
+build/cs-display-assets: build/cs-private-assets/.private-native-assets.json
+native-character-select-display: build/sadx-native build/cs-private-assets/.private-native-assets.json
+	python3 tools/testing/check_native_character_select_display.py --assets "$(CS_DISPLAY_ASSETS)" --save-source "$(CS_SAVE_SOURCE)" --output "$(CS_DISPLAY_OUTPUT)" $(CS_DISPLAY_ARGS)
 
 build/private-native-assets-test: tests/unit/private_native_assets.cpp
 	$(CXX) $(CXXFLAGS) $< -o $@

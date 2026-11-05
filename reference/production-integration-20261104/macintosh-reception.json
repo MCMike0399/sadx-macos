@@ -1,0 +1,57 @@
+{
+  "kind": "Macintosh takeover reception record",
+  "date": "2026-11-04",
+  "host": "macintosh",
+  "fetched_heads": {
+    "origin/main": "d2de538832a5b1c0602808bdfad20e74281cf69b",
+    "origin/packet/gamma-display-native": "1aa91341d3d2c26b821c09b0701ed1c2709a0d18",
+    "origin/packet/gamma-setup-sprite": "da73181",
+    "origin/packet/review-gamma-setup-sprite": "1938ef3",
+    "origin/packet/reset-owner-source": "present"
+  },
+  "ancestry": {
+    "709f274447895b9e53a377d9b158bf8a87830a45": "ancestor-of-main",
+    "05ff1c5efb8e40a609371a26b498ac080da87322": "ancestor-of-main",
+    "499ff5161ed7405ae85bf92bdff688dc8eecc288": "ancestor-of-main",
+    "cherry_excluded": ["2ad7a4e95cd5df306941089521335a0eea5562d6",
+                        "1cb3885feb818544651941ac217c2560025293d1"]
+  },
+  "private_supplement": {
+    "bundle_sha256": "b9582ee82d1164b888e68400d7d7d955f18ca331a46d16d4ab2fe6255b27a0b7",
+    "manifests_verified": 6,
+    "symlinks_preserved_in_ledger": 66,
+    "destination": "private reception directory (outside Git)"
+  },
+  "environment": {
+    "python": "3.14.7 arm64",
+    "unicorn": "2.1.4",
+    "capstone": "5.0.9",
+    "clang-format": "18.1.8",
+    "sa_tools": "b72d52f37c21a2f7215711e3516360a63aea12da",
+    "mod_loader": "eb4cdcca9637d611a98b910fcfed6ce18580451c",
+    "clang": "Apple clang 21.0.0",
+    "sdl3_product": "copied from DiveMac, sha256 98d32eb9ac4c8784c418f70fa33f7f58c1360417b749800bc599d84857b76d6a",
+    "cmake": "absent; reused qualified product per handover"
+  },
+  "protected_files": {"expected": 1460, "present_matching": 1460, "missing": 0, "mismatch": 0},
+  "baseline_reproduction": {
+    "exit_status": 1,
+    "frames": 1332,
+    "stop": "native session stopped: native_gamma_display",
+    "screenshot_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427",
+    "save_inputs_verified": 3,
+    "note": "First attempt stopped at native_gamma_actor_assets because the imported pack lacked the three standalone-imported display resources. Regenerated gamma-setup.bin, gamma-effects.bin, characters/sonic-animation.json (+provenance) from the pinned install; all six hashes equal DiveMac's qualified pack. A naive native_assets.py rerun against reference/updated-pc-reference/game rewrote 185 audio files with host-decoder-dependent bytes; restored the qualified bytes from DiveMac and verified every hash."
+  },
+  "draft_reproduction": {
+    "worktree": "~/Developer/sadx-worktrees/gamma-display",
+    "app_build": "exit 0",
+    "probes_and_caller_build": "exit 0",
+    "caller": "abort -6 assert collision->info[0].center.x == pose.position.x (native_gamma_display.mm:142)",
+    "normal_input_symlink_overlay": "exit 1 imported sample resolves outside asset directory",
+    "diagnosis": {
+      "caller": "playerwk+0x11c is the character center_height (Gamma 14.0, read from the PE parameter table at 0x9154e8+6*132+128). The fixture has real parameters, so the rotated local offset is nonzero; the test expectation assumed a zero offset. Implementation matches the source instruction 0047fe33.",
+      "normal_input": "the private asset tree was a directory of symlinks into game/imported; canonical path resolution leaves the asset root and the intentional sound-bank containment guard rejects it. Rebuilt with APFS clones; the next blocker is the selection asset loader, which accepts only 3302/3328-record packs and rejects the private 3497-record append."
+    }
+  },
+  "limits": ["No full gate yet.", "No actor frame drawn.", "Draft remains unqualified."]
+}
