@@ -1,0 +1,89 @@
+{
+ "scope": "all recovered source lighting entries",
+ "passed": false,
+ "values_match": true,
+ "cases": 1597,
+ "tested": 1597,
+ "operations": {
+  "0": 781,
+  "1": 487,
+  "2": 329
+ },
+ "seed": 412420,
+ "mismatches": [],
+ "fp_flag_mismatches": 11,
+ "flag_examples": [
+  {
+   "case": 138,
+   "operation": 0,
+   "selection": 0,
+   "cw": 127,
+   "source": 0,
+   "native": 32
+  },
+  {
+   "case": 144,
+   "operation": 0,
+   "selection": 0,
+   "cw": 127,
+   "source": 0,
+   "native": 32
+  },
+  {
+   "case": 159,
+   "operation": 0,
+   "selection": 0,
+   "cw": 127,
+   "source": 0,
+   "native": 32
+  },
+  {
+   "case": 877,
+   "operation": 0,
+   "selection": 0,
+   "cw": 639,
+   "source": 0,
+   "native": 32
+  },
+  {
+   "case": 884,
+   "operation": 0,
+   "selection": 0,
+   "cw": 895,
+   "source": 0,
+   "native": 32
+  },
+  {
+   "case": 1024,
+   "operation": 0,
+   "selection": 0,
+   "cw": 127,
+   "source": 0,
+   "native": 32
+  }
+ ],
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "source_ranges": {
+  "0x412420-0x412719": "8a4ce61874388d256b87066142e6b47e5253e157807fc00c54254c371641d7a1",
+  "0x40a630-0x40a893": "f0aa921886bed4e56e58abfe3c8f9fd5f85e09cd51ad5054d9dd0c6e5d89639d",
+  "0x401440-0x40144a": "85cabefd08d8d3143ab1bd7e89a060fd28f3bb7df0b42d901e7536c09382a167"
+ },
+ "native_sources": {
+  "src/game/lighting_palette.hpp": "78bc8271207826062a75e8b24f72e13a692e5cebae98f531c198999a6f059e72",
+  "src/game/lighting_palette.cpp": "a726b7cc8008626ab8458746bb89bbd1011dd65d3541b2fc4b94809f5e4ff6a3",
+  "src/engine/device_lights.hpp": "9d8148c82294a307b3a8c241791110eb5d64d649fae301a2177adc4b0d1a5ef7",
+  "src/engine/device_lights.cpp": "1c5775ca4e492fb16fd911b950ca5ad363f92c9bd61ac92ea982372102c84f11",
+  "tests/probes/native_lighting_palette_probe.cpp": "60d7da852d117bea2ec5a278ea95074a432d91938bcddeb140d58ac9e43c9af0"
+ },
+ "limits": [
+  "Full original lighting entries plus stage/palette selection and real matrix primitives execute. Sequence/hotel queries, COM device methods, and mode0 D3DX direction normalization are ordered receipts; all104 light bytes, canonical palette number/copy, active environments, imported tables, shared direction and matrix storage are compared.",
+  "Preview mode2 never calls the unrecovered mode0 normalization seam; native mode0 stops there until recovered. Native device adapter also receives commands; its renderer snapshots/GPU output have separate tests. No full CharacterSelect actor/image or gameplay claim.",
+  "FP status differences remain visible as partial; value equality does not imply hardware flag fidelity."
+ ],
+ "tracked_summary": {
+  "full_sha256": "4de4db40f60e6982d0e6cbd06d6c9f21791031d6bf46d21f709cd0382e4f5ee0",
+  "full_bytes": 2780,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

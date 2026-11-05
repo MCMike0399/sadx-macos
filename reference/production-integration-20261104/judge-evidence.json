@@ -504,5 +504,54 @@
   "The drawn CharacterSelect checker is not in the gate until a frame presents; the boundary-mode run is honest and titled.",
   "FP flag partials in the new normalization/draw oracles are inherited Unicorn limits, reported separately from values.",
   "No full gate had run at the time this evidence was produced."
- ]
+ ],
+ "tracked_oracle_summaries": {
+  "note": "Tracked size-bounded summaries for the oracles rerun after the display recovery and the identifier migration. Only full-report digests/sizes and the same verdict fields change; no case, tolerance or expected value changed.",
+  "oracles": [
+   "gamma_display",
+   "render_state_snapshot",
+   "animated_model",
+   "draw_transform",
+   "dynamic_model",
+   "gamma_object_callback",
+   "gamma_ordinary_body",
+   "gamma_tail",
+   "normal_primitives",
+   "normal_uv_quad",
+   "normalize",
+   "lighting_palette",
+   "object_draw",
+   "basic_model",
+   "player_animation",
+   "player_animation_blend",
+   "player_startup",
+   "sonic_actions",
+   "sonic_player"
+  ],
+  "verdicts": {
+   "pass": [
+    "gamma_display",
+    "render_state_snapshot",
+    "animated_model",
+    "normal_primitives",
+    "object_draw"
+   ],
+   "partial_values_match": [
+    "draw_transform",
+    "dynamic_model",
+    "gamma_object_callback",
+    "gamma_ordinary_body",
+    "gamma_tail",
+    "normal_uv_quad",
+    "normalize",
+    "lighting_palette",
+    "player_animation",
+    "player_animation_blend",
+    "player_startup",
+    "sonic_actions",
+    "sonic_player"
+   ],
+   "fail": []
+  }
+ }
 }

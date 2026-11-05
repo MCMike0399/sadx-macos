@@ -143,5 +143,8 @@ def main():
         from gamma_display_body_judge import judge
         report['body'] = judge(image, library, args.cases, args.seed ^ 0xabc, path)
         if report['body']['value_failures']: report['status'] = 'fail'
+    # Normalised verdict fields: values exact and no failure means pass.
+    report['values_match'] = report['status'] != 'fail'
+    report['passed'] = report['values_match']
     path.write_text(json.dumps(report,indent=2)+'\n');print(json.dumps(report));return int(report['status'] == 'fail')
 if __name__=='__main__':raise SystemExit(main())

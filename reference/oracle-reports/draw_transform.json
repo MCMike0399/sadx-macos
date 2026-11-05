@@ -1,0 +1,296 @@
+{
+ "cases": 1222,
+ "random_cases": 1024,
+ "edge_cases": 198,
+ "seed": 7870912,
+ "value_failures": 0,
+ "FP_partials": 1072,
+ "values_match": true,
+ "flag_mismatches": 1072,
+ "passed": false,
+ "examples": [
+  {
+   "case": 3,
+   "mode": 0,
+   "status": 0,
+   "expected": [
+    1065353216,
+    0,
+    0,
+    0,
+    0,
+    1065353215,
+    952701056,
+    0,
+    0,
+    3100184704
+   ],
+   "actual": [
+    1065353216,
+    0,
+    0,
+    0,
+    0,
+    1065353215,
+    952701056,
+    0,
+    0,
+    3100184704
+   ]
+  },
+  {
+   "case": 4,
+   "mode": 0,
+   "status": 0,
+   "expected": [
+    1065353215,
+    0,
+    3100184704,
+    0,
+    0,
+    1065353216,
+    0,
+    0,
+    952701056,
+    0
+   ],
+   "actual": [
+    1065353215,
+    0,
+    3100184704,
+    0,
+    0,
+    1065353216,
+    0,
+    0,
+    952701056,
+    0
+   ]
+  },
+  {
+   "case": 5,
+   "mode": 0,
+   "status": 0,
+   "expected": [
+    1065353215,
+    952701056,
+    0,
+    0,
+    3100184704,
+    1065353215,
+    0,
+    0,
+    0,
+    0
+   ],
+   "actual": [
+    1065353215,
+    952701056,
+    0,
+    0,
+    3100184704,
+    1065353215,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "case": 21,
+   "mode": 0,
+   "status": 0,
+   "expected": [
+    1065353216,
+    0,
+    0,
+    0,
+    0,
+    1065353215,
+    3100184704,
+    0,
+    0,
+    952701056
+   ],
+   "actual": [
+    1065353216,
+    0,
+    0,
+    0,
+    0,
+    1065353215,
+    3100184704,
+    0,
+    0,
+    952701056
+   ]
+  },
+  {
+   "case": 22,
+   "mode": 0,
+   "status": 0,
+   "expected": [
+    1065353215,
+    0,
+    952701056,
+    0,
+    0,
+    1065353216,
+    0,
+    0,
+    3100184704,
+    0
+   ],
+   "actual": [
+    1065353215,
+    0,
+    952701056,
+    0,
+    0,
+    1065353216,
+    0,
+    0,
+    3100184704,
+    0
+   ]
+  },
+  {
+   "case": 23,
+   "mode": 0,
+   "status": 0,
+   "expected": [
+    1065353215,
+    3100184704,
+    0,
+    0,
+    952701056,
+    1065353215,
+    0,
+    0,
+    0,
+    0
+   ],
+   "actual": [
+    1065353215,
+    3100184704,
+    0,
+    0,
+    952701056,
+    1065353215,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "case": 24,
+   "mode": 0,
+   "status": 0,
+   "expected": [
+    1065353216,
+    0,
+    0,
+    0,
+    0,
+    1065353215,
+    3100184704,
+    0,
+    0,
+    952701056
+   ],
+   "actual": [
+    1065353216,
+    0,
+    0,
+    0,
+    0,
+    1065353215,
+    3100184704,
+    0,
+    0,
+    952701056
+   ]
+  },
+  {
+   "case": 25,
+   "mode": 0,
+   "status": 0,
+   "expected": [
+    1065353215,
+    0,
+    952701056,
+    0,
+    0,
+    1065353216,
+    0,
+    0,
+    3100184704,
+    0
+   ],
+   "actual": [
+    1065353215,
+    0,
+    952701056,
+    0,
+    0,
+    1065353216,
+    0,
+    0,
+    3100184704,
+    0
+   ]
+  }
+ ],
+ "source_ranges": {
+  "0x781770-0x7819c0": "afe2b14700f284fb5c9ada8dbb51493ef47f662067a28a6c9706946c8a3e88da",
+  "0x7819c0-0x781c10": "2eee82323d83f4fe07afcf10204593ac783eff8a302556278c900b7d0d3607a8",
+  "0x784be0-0x784c70": "950c2032834032e036da5afffa805f22833ff288f052001c212a68624914111f"
+ },
+ "original_exe_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "probe_sha256": "fdb0e5f6919bbb9c8e7eb053b8d1176a36753906b41bbceb0f7a99d0e16a346d",
+ "control_word": "0x007f",
+ "zyx_source_observation": {
+  "source_entry": "0x7819c0",
+  "angles_xyz": [
+   4660,
+   9029,
+   13398
+  ],
+  "sin_entry": "0x788290",
+  "sin_angle_order": [
+   9029,
+   4660,
+   13398
+  ]
+ },
+ "limits": [
+  "Focused actual numeric original wrappers and their leaves; no call substitution.",
+  "Only nearest/single post-device control word127 compared.",
+  "Finite input matrix/vector words; actual source sine and unit bytes.",
+  "FP flag differences reported separately; no hardware exception delivery claim."
+ ],
+ "tracked_summary": {
+  "full_sha256": "fef3b3b4d2c9a247f2f5cd2540ac23824e8d89716b19c3b86c1cb61ada686a6b",
+  "full_bytes": 6095,
+  "lists_cut_to": 10,
+  "cut_lists": {
+   "examples[0].expected": 17,
+   "examples[0].actual": 17,
+   "examples[1].expected": 17,
+   "examples[1].actual": 17,
+   "examples[2].expected": 17,
+   "examples[2].actual": 17,
+   "examples[3].expected": 17,
+   "examples[3].actual": 17,
+   "examples[4].expected": 17,
+   "examples[4].actual": 17,
+   "examples[5].expected": 17,
+   "examples[5].actual": 17,
+   "examples[6].expected": 17,
+   "examples[6].actual": 17,
+   "examples[7].expected": 17,
+   "examples[7].actual": 17
+  }
+ }
+}

@@ -1,6 +1,6 @@
 {
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
- "native_library_sha256": "02670ed6a0c8a1bdfb98a936eaa61da5604886c3a820a89520302bb8ec096f8b",
+ "native_library_sha256": "004c5c9c8c494eea2c211e33ab85620b2e060ed74a07bb4c48c621493b34a895",
  "profile": "actual Sonic control prefix plus explicitly seeded post-transform43eecc suffix",
  "cases": 28800,
  "by_entry": [
@@ -263,13 +263,13 @@
  "native_sources": {
   "src/player/sonic_player.hpp": "32bda755d727c02422709d00b92b8bbf98bd02e5103603611b8767b794e1bd46",
   "src/player/sonic_player.cpp": "c2b9cd7bd4772fc5e3411ec06c160f890201fff682162ae7e177717de8945fbf",
-  "src/player/sonic_player_internal.hpp": "35c11bd7ddf67aa84f9ec22b8cf11dbea38889c801cfbdf436b8c0c7451fa006",
+  "src/player/sonic_player_internal.hpp": "4960d3c64eb6d5e11ae5ed74f93ff1302709ca21a10d96d780a869e28bdfa827",
   "src/player/sonic_player_sites.hpp": "1d6f4f979f3e0b0769ee91e14b773c5f305b7f258c89be7fa3396a26dedee8aa",
   "src/player/sonic_player_seams.hpp": "7c26d94ffbef26442b7d375785aa07ab08a6ece5d5881fb90bd7d6a39117445d",
-  "src/guest/sonic_player_reference.cpp": "a7311aa1ebbff20a598becbd3ceb98bd4659b5c28307733795933655b8ead7e8",
+  "src/guest/sonic_player_reference.cpp": "63585c21436bae3e8877aeb9a88daeec54c237389737e35cf188f698247272c3",
   "src/guest/sonic_player_reference.hpp": "37a969e44625b4d031916bfe3ee8c020702cfc38f54514517afde8b541e8a4f4",
   "src/guest/sonic_player_sites.hpp": "33b652ae868523e93bd722f3a6bd43cf33fa79ef6c0d42ab7a18db13bb1c8d4f",
-  "tests/probes/native_sonic_player_probe.cpp": "d66392012a7b45086ff30b7a7da0422fc9b64c02a3028effbc0fcfd398a21a53",
+  "tests/probes/native_sonic_player_probe.cpp": "9b6bf018c021a6a4fc699bbfa8d0efbf29f58a8f3822a5ef5cb89b9978bbf351",
   "tools/oracles/verify_original_sonic_player.py": "36587afe4b988da56d1d3779538f31146d88377230096062ce10abf65cc899fc",
   "src/player/ground_acceleration.hpp": "35bde538be42156764534857ec3458a443932ab20a6f77832f87a649119f288f",
   "src/player/ground_acceleration.cpp": "c79890f79d3d092eb5bf45c73223467bc6bc20105199830f32a5fba44b4cecf0",
@@ -288,11 +288,11 @@
  "ground_prefix_stored_mismatches": 0,
  "ground_prefix_status_mismatches": 1632,
  "case_sha256": "2acd398b460a3c6691a178fcb7b0862219ac1e11818909ad41cb8fb14e6f34fe",
- "seconds": 17.736067540943623,
+ "seconds": 11.700774042001285,
  "stored_state_matches": true,
  "passed": false,
  "tracked_summary": {
-  "full_sha256": "2b6bc24bf19a3751586c10f011af4a17fa9467c89ed3930cef8dc20754bbb3a2",
+  "full_sha256": "a9ad9b945b62dc42db0c239757c60eafb76b5e06004447f3f4af9c41a4eec655",
   "full_bytes": 25775,
   "lists_cut_to": 10,
   "cut_lists": {

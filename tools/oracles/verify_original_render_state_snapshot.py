@@ -62,6 +62,7 @@ def main():
         'failures':failures[:20],'seed':args.seed,
         'source_ranges':{f'{a:#x}-{b:#x}':hashlib.sha256(image.read(a,b-a)).hexdigest() for a,b in zip(ENTRIES,ENDS)},
         'observations_sha256':hashlib.sha256(rows.read_bytes()).hexdigest(),
-        'scope':'seven integer leaves; native object callback domain is None/Gamma; SetMaterial excluded'}
+        'scope':'seven integer leaves; native object callback domain is None/Gamma; SetMaterial excluded',
+        'values_match':not failures,'passed':not failures}
     output.write_text(json.dumps(report,indent=2)+'\n');print(json.dumps(report));return int(bool(failures))
 if __name__=='__main__':raise SystemExit(main())

@@ -1,0 +1,74 @@
+{
+ "cases": 1024,
+ "seed": 4716944,
+ "value_failures": 0,
+ "fp_partials": 13,
+ "values_match": true,
+ "flag_mismatches": 13,
+ "passed": false,
+ "failures": [],
+ "partials": [
+  {
+   "index": 12,
+   "expected_flags": 0,
+   "actual_flags": 2
+  },
+  {
+   "index": 17,
+   "expected_flags": 0,
+   "actual_flags": 2
+  },
+  {
+   "index": 37,
+   "expected_flags": 0,
+   "actual_flags": 1
+  },
+  {
+   "index": 42,
+   "expected_flags": 0,
+   "actual_flags": 40
+  },
+  {
+   "index": 47,
+   "expected_flags": 0,
+   "actual_flags": 40
+  },
+  {
+   "index": 62,
+   "expected_flags": 0,
+   "actual_flags": 2
+  },
+  {
+   "index": 67,
+   "expected_flags": 0,
+   "actual_flags": 2
+  },
+  {
+   "index": 87,
+   "expected_flags": 0,
+   "actual_flags": 1
+  },
+  {
+   "index": 92,
+   "expected_flags": 0,
+   "actual_flags": 40
+  },
+  {
+   "index": 97,
+   "expected_flags": 0,
+   "actual_flags": 40
+  }
+ ],
+ "observations_sha256": "3f90463fc8764749807a74a4dbce96df8dc7b3b59cb63095216856a5ff9726b7",
+ "source_ranges": {
+  "0x47f990-0x47f9da": "1ce2eef04a79b0b5f117a925a174ba519f3eededd6b944acd6e734361cea1bf9"
+ },
+ "scope": "original row/aim dispatch and recoil arithmetic; numeric matrix leaves common argument receipts",
+ "status": "partial",
+ "tracked_summary": {
+  "full_sha256": "834bedaab0e696946229583c21348c6cfd2134941b53a1d2184bd5bc2714e2b3",
+  "full_bytes": 1367,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

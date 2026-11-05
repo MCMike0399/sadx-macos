@@ -1,0 +1,31 @@
+{
+ "original_exe_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "source_ranges": {
+  "0x407020-0x40703b": "b4eb3cc1bc29eb585892bcf24562c2ab2258675356ae2eb8649d1cec7c7334dc",
+  "0x4053d0-0x40544f": "308154e63919321e474e2c7ebe59616b759bf0eebf2d538350f37eb5564d7796",
+  "0x404b20-0x4052e6": "4ee1f4ed813eedb5b347dc2026d9d466d183e075108bb2f2addc4382597d89f5"
+ },
+ "probe_sha256": "70c6b101c8d199e1778df8130d1fd9ad220d16e733f749ef99d6e063ef456432",
+ "cases": 1253,
+ "positive_cases": 1024,
+ "negative_cases": 208,
+ "leaf_stop_cases": 21,
+ "seed": 4215760,
+ "value_failures": 0,
+ "values_match": true,
+ "first_failures": [],
+ "FP_flags_compared": false,
+ "FP_partials": null,
+ "source_observations_sha256": "65b8d995e42acca14438d32350918477de02a0c4aae2420cf35f4e66384c6a59",
+ "limits": [
+  "Matrix numeric leaves and model/texture backend are common observational seams.",
+  "Animation angle sampler is original-profile interpolation disabled path.",
+  "No raster, numeric matrix or FP exception flag comparison."
+ ],
+ "tracked_summary": {
+  "full_sha256": "91056f5b500063c77f55d0023d8002a7dac3b9000d332d69709e21c1ce9add04",
+  "full_bytes": 1073,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

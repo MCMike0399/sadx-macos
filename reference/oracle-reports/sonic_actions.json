@@ -1,6 +1,6 @@
 {
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
- "native_library_sha256": "53f98cf505d4135cf1128822c32bd2e9dd0adf3b9ed61239386f08bdef96e085",
+ "native_library_sha256": "b6e0e60ca1cb131aa4fd3156f6b22bbeb193b51263a57b0370e2f2ac5cc6c9fd",
  "cases": 30192,
  "stored_mismatches": 0,
  "boundary_mismatches": 0,
@@ -262,16 +262,16 @@
  "native_sources": {
   "src/player/sonic_player.hpp": "32bda755d727c02422709d00b92b8bbf98bd02e5103603611b8767b794e1bd46",
   "src/player/sonic_player.cpp": "c2b9cd7bd4772fc5e3411ec06c160f890201fff682162ae7e177717de8945fbf",
-  "src/player/sonic_player_internal.hpp": "35c11bd7ddf67aa84f9ec22b8cf11dbea38889c801cfbdf436b8c0c7451fa006",
+  "src/player/sonic_player_internal.hpp": "4960d3c64eb6d5e11ae5ed74f93ff1302709ca21a10d96d780a869e28bdfa827",
   "src/player/sonic_player_sites.hpp": "1d6f4f979f3e0b0769ee91e14b773c5f305b7f258c89be7fa3396a26dedee8aa",
   "src/player/sonic_player_seams.hpp": "7c26d94ffbef26442b7d375785aa07ab08a6ece5d5881fb90bd7d6a39117445d",
-  "src/guest/sonic_player_reference.cpp": "a7311aa1ebbff20a598becbd3ceb98bd4659b5c28307733795933655b8ead7e8",
+  "src/guest/sonic_player_reference.cpp": "63585c21436bae3e8877aeb9a88daeec54c237389737e35cf188f698247272c3",
   "src/guest/sonic_player_reference.hpp": "37a969e44625b4d031916bfe3ee8c020702cfc38f54514517afde8b541e8a4f4",
   "src/guest/sonic_player_sites.hpp": "33b652ae868523e93bd722f3a6bd43cf33fa79ef6c0d42ab7a18db13bb1c8d4f",
-  "tests/probes/native_sonic_action_probe.cpp": "72e304de2ccc2fac3ba012921c3c4c1bcda85b27012c6050e548135cdb197a01",
+  "tests/probes/native_sonic_action_probe.cpp": "b7af4b00167142ce9bb561d5cdaf8a9abcb7e0aaf9effbb86cd14b1c7f36d860",
   "tools/oracles/verify_original_sonic_actions.py": "7d3cc3ecfe401db91fad15d515f0d1bc70634ccd01e1bd788843e8268517a278",
   "src/player/player_task.hpp": "00c04da45b7641f1d1421eab366e173e742449ae828b883d2617f422c01d7ebd",
-  "src/player/player_physics.hpp": "08bf9f1949cdb7fd1605429c9b9663265e61d62352b9f5d018e7244a74738530",
+  "src/player/player_physics.hpp": "d5397b10bca3150b36631cc6e726b8e316c0c4d52b8f55bfb9d8d01339accb65",
   "src/player/player_position.hpp": "4a9343e6107b2cad271dfe2c369084a282f32b5c088f90c4bbd73fb40e3165de",
   "src/player/ground_acceleration.hpp": "35bde538be42156764534857ec3458a443932ab20a6f77832f87a649119f288f",
   "src/player/ground_acceleration.cpp": "c79890f79d3d092eb5bf45c73223467bc6bc20105199830f32a5fba44b4cecf0",
@@ -287,11 +287,11 @@
   "src/cpu/fidelity_float.hpp": "c96aadce5ca6caa699fb3e9a0b44f791e1ac0420b31ceed31b5fca48118afb98"
  },
  "case_sha256": "011512a72d2c21b1ea2362ba8cf86393b52f13601b89055fa8137cd3d505053b",
- "seconds": 21.78026062436402,
+ "seconds": 13.77508525000303,
  "stored_state_matches": true,
  "passed": false,
  "tracked_summary": {
-  "full_sha256": "e733d01eb404d14946d1bddbcb14f193196c2f509b8cf311df48df08ce22ea7f",
+  "full_sha256": "f97f095611bd488bac0200d1fd1c459a674e2e49cab5eca039161e4733a0da39",
   "full_bytes": 38148,
   "lists_cut_to": 10,
   "cut_lists": {

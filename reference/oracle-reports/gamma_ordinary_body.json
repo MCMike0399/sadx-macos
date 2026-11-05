@@ -1,0 +1,74 @@
+{
+ "cases": 1024,
+ "seed": 4718772,
+ "value_failures": 0,
+ "fp_partials": 90,
+ "values_match": true,
+ "flag_mismatches": 90,
+ "passed": false,
+ "failures": [],
+ "partials": [
+  {
+   "index": 12,
+   "expected_flags": 0,
+   "actual_flags": 2
+  },
+  {
+   "index": 13,
+   "expected_flags": 0,
+   "actual_flags": 2
+  },
+  {
+   "index": 14,
+   "expected_flags": 0,
+   "actual_flags": 2
+  },
+  {
+   "index": 15,
+   "expected_flags": 0,
+   "actual_flags": 2
+  },
+  {
+   "index": 16,
+   "expected_flags": 0,
+   "actual_flags": 2
+  },
+  {
+   "index": 17,
+   "expected_flags": 0,
+   "actual_flags": 2
+  },
+  {
+   "index": 18,
+   "expected_flags": 0,
+   "actual_flags": 2
+  },
+  {
+   "index": 19,
+   "expected_flags": 0,
+   "actual_flags": 2
+  },
+  {
+   "index": 20,
+   "expected_flags": 0,
+   "actual_flags": 2
+  },
+  {
+   "index": 21,
+   "expected_flags": 0,
+   "actual_flags": 2
+  }
+ ],
+ "observations_sha256": "e9573a9cfe431779dcfd94e163aa5f4f2ed2f7d2e46d8f7934d1c3ccaf2e20d1",
+ "source_ranges": {
+  "0x4800b4-0x480135": "5b144f74baaa45cda92e3f56edd0d83fe23744a5bd4c6478d774c0bd3330f43c"
+ },
+ "scope": "ordinary source action selection through arm-frame boundary; body draw and numeric matrix leaves common receipts",
+ "status": "partial",
+ "tracked_summary": {
+  "full_sha256": "98e3777f18386caeebf027ac8dfd95cb3da6dc6a83724a3bdf90da0af1d97209",
+  "full_bytes": 1380,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}
