@@ -52,6 +52,21 @@ bool has_event_action(Context &);
 void set_object_callback(Context &);
 [[noreturn]] void draw_player_action(Context &, std::uint16_t animation);
 
+// NOTSA: ordinary source action selection, with renderer transport in the binding.
+float animation_frame(Context &);
+void draw_table_action(Context &, std::uint16_t, float);
+void draw_generated_action(Context &, float);
+void clear_object_callback(Context &);
+void multiply_arm_matrix(Context &);
+std::int32_t arm_rotation(Context &);
+[[noreturn]] void draw_arm_action(Context &);
+[[noreturn]] void ordinary_body(Context &, std::uint16_t);
+std::int32_t aim_rotation(Context &);
+float aim_translation(Context &);
+void translate_numeric(Context &, const NinjaVector &);
+// FUNCTION: SONIC 0x47f990 E102ObjectCallback
+void gamma_object_callback(Context &, ObjectId);
+
 // STUB: SONIC 0x47fd50 E102Display prefix through first action draw; later attachments and tail unresolved
 void display(Context &, const TaskHandle &);
 } // namespace sadx::gamma_display

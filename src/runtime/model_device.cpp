@@ -1,4 +1,5 @@
 #include "runtime/model_device.hpp"
+#include "engine/normal_uv_quad.hpp"
 #include <cstring>
 #include <new>
 
@@ -55,13 +56,15 @@ void set_render_state(Context &context, std::uint32_t state, std::uint32_t value
 // [platform:d3d8] DrawPrimitive snapshots all state and only the selected vertex range.
 void draw_primitive(Context &context, std::uint32_t type, std::uint32_t start,
                     std::uint32_t count) {
-    if (type != kTriangleStripPrimitive)
+    if (type != kTriangleStripPrimitive && type != kTriangleListPrimitive)
         throw DataFault(DataKind::DeviceResource, type);
     const auto &stream = context.stream();
     if (!stream.resource || stream.stride == 0)
         throw DataFault(DataKind::DeviceResource, 0);
     const auto offset = std::uint64_t(start) * stream.stride;
-    const auto bytes = (std::uint64_t(count) + 2) * stream.stride;
+    const auto vertex_count =
+        type == kTriangleListPrimitive ? std::uint64_t(count) * 3 : std::uint64_t(count) + 2;
+    const auto bytes = vertex_count * stream.stride;
     const auto &memory = stream.resource->memory;
     if (!available(memory, offset, bytes))
         throw DataFault(DataKind::VertexBytes, static_cast<std::int64_t>(offset));

@@ -708,3 +708,15 @@ native-character-select-display: build/sadx-native build/cs-private-assets/.priv
 
 build/private-native-assets-test: tests/unit/private_native_assets.cpp
 	$(CXX) $(CXXFLAGS) $< -o $@
+
+build/animated-model-test: tests/unit/animated_model.cpp tests/probes/native_animated_model_probe.cpp src/engine/animated_model.cpp src/engine/object_draw.cpp build/libsadx-native.a
+	$(CXX) $(CXXFLAGS) $(INCLUDES) $^ -o $@
+
+build/native-gamma-ordinary-body-probe.dylib: tests/probes/native_gamma_object_callback_probe.cpp src/player/gamma_display_action.cpp build/libsadx-native.a
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -dynamiclib $^ -o $@
+
+build/normal-uv-quad-test: tests/unit/normal_uv_quad.cpp tests/probes/native_normal_uv_quad_probe.cpp src/engine/normal_uv_quad.cpp build/libsadx-native.a
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -Itests/probes $^ -o $@
+
+build/normal-primitives-test: tests/unit/normal_primitives.cpp tests/probes/native_normal_primitives_probe.cpp src/engine/normal_primitives.cpp src/engine/normal_uv_quad.cpp build/libsadx-native.a
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -Itests/probes $^ -o $@

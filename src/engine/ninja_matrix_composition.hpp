@@ -13,4 +13,7 @@ void multiply_ninja_matrix(NinjaMatrix &destination, const NinjaMatrix &source, 
 // FUNCTION: SONIC 0x781770 njRotateXYZ
 void rotate_ninja_xyz(NinjaMatrixPrimitives &, NinjaMatrix &, const std::array<std::int32_t, 3> &,
                       fidelity::Context &);
+// FUNCTION: SONIC 0x7819c0 njRotateZYX
+void rotate_ninja_zyx(NinjaMatrixPrimitives &, NinjaMatrix &, const std::array<std::int32_t, 3> &,
+                      fidelity::Context &);
 } // namespace sadx

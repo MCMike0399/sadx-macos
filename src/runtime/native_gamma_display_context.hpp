@@ -1,8 +1,8 @@
 #pragma once
-#include "runtime/native_player_system.hpp"
-#include "runtime/native_display.hpp"
-#include "player/gamma_display.hpp"
 #include "engine/render_state_snapshot.hpp"
+#include "player/gamma_display.hpp"
+#include "runtime/native_display.hpp"
+#include "runtime/native_player_system.hpp"
 
 namespace sadx::gamma_display {
 // NOTSA: one invocation borrows the captured task identities and canonical owners.
@@ -24,14 +24,20 @@ struct Context {
     auto &arithmetic() { return owner.rendering.arithmetic_; }
     void material() {
         auto &display = owner.rendering;
-        render_snapshot::set_material(display.render_snapshot_, {1, 1, 1, 1},
-            display.queue_state_, display.queue_services(), display.arithmetic_);
+        render_snapshot::set_material(display.render_snapshot_, {1, 1, 1, 1}, display.queue_state_,
+                                      display.queue_services(), display.arithmetic_);
     }
     void callback() {
         render_snapshot::set_object_callback(owner.rendering.render_snapshot_,
-                                            render_snapshot::ObjectCallback::Gamma);
+                                             render_snapshot::ObjectCallback::Gamma);
     }
+    object_draw::State draw_state() {
+        auto &display = owner.rendering;
+        return {display.fog_.special_flags,    display.fog_.active,
+                display.queued_depth_,         display.frame_mode_.pending_logic_ticks,
+                display.simple_model_enabled_, display.queue_state_.values.lighting_palette};
+    }
+    auto &animation_state() { return owner.rendering.animated_state_; }
     void textures();
-
 };
 } // namespace sadx::gamma_display

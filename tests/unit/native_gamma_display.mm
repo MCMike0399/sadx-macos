@@ -1,4 +1,7 @@
 #include "apps/native_gamma_actor_assets.hpp"
+#include "apps/native_lighting_assets.hpp"
+#include "runtime/model_draw_environment.hpp"
+#include "player/animation/animation_native_access.hpp"
 #include "game/game_mode.hpp"
 #include "player/player_vertex_weld.hpp"
 #include "runtime/native_display.hpp"
@@ -115,6 +118,9 @@ int main(int argc, char **argv) {
     const auto arithmetic_control = display.arithmetic().control_word();
     std::int32_t selected_palette = -1;
     context.display_palette = [&](std::int32_t value) { selected_palette = value; };
+    lighting::State lighting(native::app::load_lighting_assets(directory));
+    native::ModelDrawEnvironment environment{pack, scene, bootstrap.material_callback, lighting};
+    context.model_environment = &environment;
     // Compose a real event allocation before the constructor. The source display
     // dereferences eventwk even when its action list is empty.
     event_actions::State event_state;
@@ -124,11 +130,25 @@ int main(int argc, char **argv) {
     bool stopped = false;
     try {
         gamma_selection::run(context, task);
+    } catch (const basic_model::Unavailable &error) {
+        std::cerr << "Model boundary " << unsigned(error.boundary) << std::endl;
+        throw;
     } catch (const flow::UnrecoveredGameFlowCall &error) {
-        assert(std::string(error.what()) == "native_gamma_display_action_clip_no_scale");
+        std::cerr << "Actual display stop: " << error.what() << std::endl;
+        assert(std::string(error.what()) == "native_gamma_display_missing_arm_action_export_50_after_body");
         stopped = true;
     }
     assert(stopped && selected_palette == 4);
+    const auto &draws = display.output().frame().commands;
+    std::cout << "Body frame commands: " << draws.size() << std::endl;
+    std::size_t body_draws = 0, body_vertices = 0;
+    for (const auto &command : draws) {
+        if (const auto *draw = std::get_if<graphics::Draw>(&command)) {
+            ++body_draws;
+            body_vertices += draw->vertices.size();
+        }
+    }
+    assert(body_draws > 0 && body_vertices > 0);
     assert(players.current.primary == task->primary_work && !players.current.player);
     const auto player = players.registry.players[5];
     assert(player && task->primary_state == primary_owner && task->motion_state == motion_owner);
@@ -153,11 +173,64 @@ int main(int argc, char **argv) {
     gamma_display::Context inspection(context);
     const auto render = inspection.render_state();
     assert(render.control == 16 &&
-           render.saved.object_callback == render_snapshot::ObjectCallback::Gamma);
+           render.saved.object_callback == render_snapshot::ObjectCallback::None);
+    std::cout << "Animated body nodes: " << inspection.animation_state().node
+              << ", draws: " << body_draws << ", vertices: " << body_vertices << std::endl;
+    assert(inspection.animation_state().node == 77);
+    assert(inspection.animation_state().model_callback == animated_model::ModelCallback::DrawModel);
+    assert(inspection.animation_state().clip_scale == 0);
     const auto allocation = gamma_selection::extra_work(context, player);
     assert(players.gamma.current_extra == allocation);
     std::uint32_t phase = 999;
     assert(arena->read(allocation, 44, &phase, 4) && phase == 0);
+    // A generated MDATA2 node with known-null key references uses its live pose.
+    gamma_display::capture(inspection, task);
+    gamma_display::capture_extra(inspection);
+    animation::View animation_view{*player->physics, player->allocation};
+    auto animation_fields = animation::detail::NativeAccess{}.state(animation_view);
+    const auto saved_buffer = animation_fields.buffer;
+    const auto stand_root = pack.resolve(assets.stand).object;
+    auto &live_root = objects.object(stand_root);
+    const auto saved_root = live_root;
+    live_root.model = live_root.child = live_root.sibling = 0;
+    live_root.evaluation_flags &= ~64U;
+    const auto data = arena->allocate(16).work;
+    assert(data && arena->fill(data, 0, 0, 16));
+    assert(arena->set_reference(data, 0, {}) && arena->set_reference(data, 4, {}));
+    auto motion = std::make_shared<PlayerAnimationAllocatedMotion>();
+    motion->data = data;
+    motion->frame_count = 2;
+    motion->type = 3;
+    motion->input_function = 2;
+    auto generated = std::make_shared<PlayerAnimationAllocatedAction>();
+    generated->object = SceneResourceReference{stand_root};
+    generated->motion = motion;
+    animation_fields.buffer = generated;
+    gamma_display::draw_generated_action(inspection, 0.5f);
+    assert(inspection.animation_state().node == 1 && inspection.animation_state().channel == 2);
+    const std::uint32_t unbound_pointer = 123456;
+    assert(arena->write(data, 0, &unbound_pointer, 4));
+    bool unbound_stopped = false;
+    try {
+        gamma_display::draw_generated_action(inspection, 0.5f);
+    } catch (const flow::UnrecoveredGameFlowCall &error) {
+        unbound_stopped = std::string(error.what()) == "native_gamma_draw_generated_key_reference";
+    }
+    assert(unbound_stopped && inspection.animation_state().channel == 0);
+    // The source loop guard precedes dereferencing an incomplete generated header.
+    generated->object.reset();
+    generated->motion.reset();
+    timing.pending_logic_ticks = 1;
+    gamma_display::draw_generated_action(inspection, 0.5f);
+    const auto saved_held_task = player->physics->held_task_at_68;
+    player->physics->held_task_at_68.reset();
+    auto saved_resources = std::move(players.gamma_motion_assets);
+    gamma_display::draw_table_action(inspection, 0, 0.5f);
+    players.gamma_motion_assets = std::move(saved_resources);
+    player->physics->held_task_at_68 = saved_held_task;
+    timing.pending_logic_ticks = 0;
+    animation_fields.buffer = saved_buffer;
+    live_root = saved_root;
     // Reached display remains independent of current-player publications.
     const auto foreign = arena->allocate(8).work;
     players.current.player = foreign;

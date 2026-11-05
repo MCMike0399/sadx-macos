@@ -1,3 +1,6 @@
+#include "engine/dynamic_model.hpp"
+#include "engine/normal_primitives.hpp"
+#include "engine/normal_uv_quad.hpp"
 #include "game/game_mode.hpp"
 #include "runtime/model_device.hpp"
 #include "runtime/model_draw_context.hpp"
@@ -110,10 +113,65 @@ void draw_normal_uv_strip(Context &context, const Meshset &mesh, character_pack:
     pb::normal_uv_strip(device, native::normal_uv_buffer(context.display), source, point_view,
                         normal_view, color, cull);
 }
-void draw_alternate_model(Context &, character_pack::ResourceId,
-                          const character_pack::CharacterPack &, Owners) {
-    throw Unavailable(Boundary::AlternateModel);
+void draw_alternate_model(Context &context, character_pack::ResourceId id,
+                          const character_pack::CharacterPack &pack, Owners owners) {
+    draw_dynamic_model(id, pack, context.environment.scene.materials, owners, context);
 }
+void draw_dynamic_mesh(Context &context, VertexLayout layout, Primitive primitive,
+                       const Meshset &mesh, character_pack::ResourceId points,
+                       character_pack::ResourceId normals) {
+    if ((layout == VertexLayout::PositionNormalUv || layout == VertexLayout::PositionNormal) &&
+        (primitive == Primitive::Quads || primitive == Primitive::Triangles ||
+         primitive == Primitive::Strip)) {
+        const auto &geometry = context.environment.scene.geometry;
+        const auto &indices = geometry.indices(mesh_integer(mesh, 4, 4));
+        const auto &positions = geometry.vector_words(points);
+        const auto &directions = geometry.vector_words(normals);
+        polybuff::Mesh source{static_cast<std::uint16_t>(mesh_integer(mesh, 2, 2)),
+                              {indices.data(), indices.size(), 0, polybuff::DataKind::Mesh},
+                              {nullptr, 0, 0, polybuff::DataKind::TextureCoordinates}};
+        const polybuff::Vectors point_view{
+            {positions.data(), positions.size(), 0, polybuff::DataKind::Points}};
+        const polybuff::Vectors normal_view{
+            {directions.data(), directions.size(), 0, polybuff::DataKind::Normals}};
+        polybuff::Context device{context.display};
+        const auto color = context.state().vertex_color;
+        const auto cull = context.state().cull_mode;
+        if (layout == VertexLayout::PositionNormalUv) {
+            const auto &uv = geometry.texture_coordinates(mesh_integer(mesh, 20, 4));
+            source.texture_coordinates = {uv.data(), uv.size(), 0,
+                                          polybuff::DataKind::TextureCoordinates};
+            auto &buffer = native::normal_uv_buffer(context.display);
+            if (primitive == Primitive::Quads)
+                polybuff::normal_uv_quad(device, buffer, source, point_view, normal_view, color,
+                                         cull);
+            else if (primitive == Primitive::Triangles)
+                polybuff::normal_uv_triangles(device, buffer, source, point_view, normal_view,
+                                              color, cull);
+            else
+                polybuff::normal_uv_strip(device, buffer, source, point_view, normal_view, color,
+                                          cull);
+        } else {
+            auto &buffer = native::normal_buffer(context.display);
+            if (primitive == Primitive::Quads)
+                polybuff::normal_quads(device, buffer, source, point_view, normal_view, color,
+                                       cull);
+            else if (primitive == Primitive::Triangles)
+                polybuff::normal_triangles(device, buffer, source, point_view, normal_view, color,
+                                           cull);
+            else
+                polybuff::normal_strip(device, buffer, source, point_view, normal_view, color,
+                                       cull);
+        }
+    } else {
+        const auto boundary =
+            "native_dynamic_model_layout_" + std::to_string(static_cast<std::uint32_t>(layout)) +
+            "_primitive_" + std::to_string(static_cast<std::uint32_t>(primitive)) + "_mesh_" +
+            std::to_string(mesh.resource) + "_row_" + std::to_string(mesh.ordinal);
+        throw flow::UnrecoveredGameFlowCall(boundary.c_str());
+    }
+}
+
 void unsupported_primitive(Context &, VertexLayout, Primitive, const Meshset &,
                            character_pack::ResourceId, character_pack::ResourceId) {
     throw Unavailable(Boundary::Primitive);

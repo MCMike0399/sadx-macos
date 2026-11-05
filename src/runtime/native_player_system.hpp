@@ -16,6 +16,7 @@
 
 namespace sadx::native {
 class Display;
+struct ModelDrawEnvironment;
 // NOTSA: typed fields share the identity of the actual zero-filled E102WK block.
 struct GammaExtraWork {
     TaskWorkHandle allocation;
@@ -73,5 +74,6 @@ struct Context {
     model_matrices::State *model_matrices = nullptr;
     // NOTSA: borrowed palette operation uses the Session lighting/time owners.
     std::function<void(std::int32_t)> display_palette = {};
+    const native::ModelDrawEnvironment *model_environment = nullptr;
 };
 } // namespace sadx::gamma_selection

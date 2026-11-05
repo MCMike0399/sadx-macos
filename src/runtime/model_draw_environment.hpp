@@ -15,4 +15,6 @@ struct ModelDrawEnvironment {
 class Display;
 // NOTSA: the canonical buffer owner is required at the resource boundary.
 polybuff::BufferState &normal_uv_buffer(Display &display);
+// NOTSA: the normal-only source entries use the canonical FVF82/stride28 slot.
+polybuff::BufferState &normal_buffer(Display &display);
 } // namespace sadx::native

@@ -249,6 +249,12 @@ void TitleScene::exec_selection_gamma(TaskScheduler &scheduler, const TaskHandle
     context.normalized_input = scene.input_.normalized_input;
     context.model_matrices = &scene.session_.model_matrices_;
     // The source common tail calls E102Display inside this invocation.
+    if (!scene.session_.lighting_)
+        throw flow::UnrecoveredGameFlowCall("native_stage_lighting_tables");
+    const ModelDrawEnvironment environment{*scene.session_.character_pack_,
+        scene.session_.character_scene_, scene.session_.bootstrap_.material_callback,
+        *scene.session_.lighting_};
+    context.model_environment = &environment;
     context.display_palette = [&scene](std::int32_t value) {
         PreviewServices(scene).select_palette(value);
     };
@@ -267,6 +273,12 @@ void TitleScene::display_selection_gamma(TaskScheduler &scheduler, const TaskHan
         texture_views.catalog(scene.session_.character_resources_.loaded()),
         scene.session_.regular_resources_.state(), &texture_services, scene.session_.sprites_,
         scene.session_.character_scene_};
+    if (!scene.session_.lighting_)
+        throw flow::UnrecoveredGameFlowCall("native_stage_lighting_tables");
+    const ModelDrawEnvironment environment{*scene.session_.character_pack_,
+        scene.session_.character_scene_, scene.session_.bootstrap_.material_callback,
+        *scene.session_.lighting_};
+    context.model_environment = &environment;
     context.display_palette = [&scene](std::int32_t value) {
         PreviewServices(scene).select_palette(value);
     };

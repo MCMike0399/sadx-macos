@@ -261,3 +261,19 @@ SONIC	0x495860	function	CollisionCrashThing_Load	bool	(object identities[3], uin
 SONIC	0x493730	function	SonicInitializationEffect	void	(task*)		ev_ba234573e6c1cb6b8bfca460cf97a528b7eeb9d3603e124fb4fcfaca6f8082a6	Inferred role only: normal Sonic initialization creates2/3 task; algorithm remains an explicit stub. No executed body or precise effect behavior claimed.
 SONIC	0x7802d0	function	njSetObjectCallback	void	(native callable)	7	ev_82a915b7bd9281565665514ef8b0c5512ea0b78997b7d034e9419437c6e0078c	Inferred setter role: stores ECX to the Ninja object-callback global; display supplies callback47f990 and later null.
 SONIC	0x3d08844	global	NinjaObjectCallback	native callable		4	ev_82a915b7bd9281565665514ef8b0c5512ea0b78997b7d034e9419437c6e0078c	Borrowed callable identity set by njSetObjectCallback; callback implementation remains an explicit dependency.
+SONIC	0x4053d0	function	DrawAction				ev_cca3bf341601116c060c2de9cae1742604b05ee864b61f262908d8e2c659ea8b	SDK New.h usercall name; guarded animated draw dispatcher.
+SONIC	0x4051d0	function	SetupAnimatedMotion				ev_80216f23e76c1b0118cc2c97670dbc28ead3974df9c4b0356271770db15e2065	Inferred role: frame wrapping, motion data and interpolation selection.
+SONIC	0x404fd0	function	TransformAnimatedObjectMdata2				ev_23c326df78bdc59c520ca2f407cfce64f59f48f7aefa22cc8b6e87fcee6f1f02	Inferred role: translation then rotation then scale, 16-byte per-node cursor.
+SONIC	0x404b60	function	LinearMotionVector				ev_0c77a1ad39091c26062c54d515fc6a5aefdff7e852268a39106624a6e94429b4	Inferred linear vector sampler role.
+SONIC	0x404c10	function	LinearMotionAngles				ev_64576db1e9e706d2af41cae567b9309e4d5f342bb9554230f658c2a6cde7ae69	Original linear angle branch of loader hook; interpolation enable false.
+SONIC	0x47f990	function	E102ObjectCallback				ev_edbf9732d5557cdd1172cbf4a698660c6538af53ded99bddaa9e88e04f219e81	Gamma rows 12 and 28; E102WK head angle and recoil.
+SONIC	0x3abd95c	global	AnimatedModelCallback			4	ev_cca3bf341601116c060c2de9cae1742604b05ee864b61f262908d8e2c659ea8b	DrawAction model callback, separate from object callback.
+SONIC	0x3abd9a4	global	AnimatedDrawFlags			4	ev_cca3bf341601116c060c2de9cae1742604b05ee864b61f262908d8e2c659ea8b	DrawAction draw flags.
+SONIC	0x3ab991c	global	AnimatedMotionFrame			4	ev_80216f23e76c1b0118cc2c97670dbc28ead3974df9c4b0356271770db15e2065	Wrapped source animation frame.
+SONIC	0x3ab9924	global	AnimatedMotionChannel			4	ev_e1566752eca0c88bc62e7c621b7d11a5dc259edee6ddf075393df17821a8dc55	Per-object compact key channel cursor.
+SONIC	0x3ab9894	global	AnimatedMotionType			2	ev_80216f23e76c1b0118cc2c97670dbc28ead3974df9c4b0356271770db15e2065	motion_type canonical short; display renderer owns it.
+SONIC	0x3ab9908	global	AnimatedObjectCallback			4	ev_2e57b29b50ec81d5c4272e2cc6c48544b2aebb8135f33ff40c3466c6ce8c2806	Distinct D3D traversal callback slot, not NinjaObjectCallback.
+SONIC	0x3ab992c	global	AnimatedMotionAuxiliaryIndex			4	ev_80216f23e76c1b0118cc2c97670dbc28ead3974df9c4b0356271770db15e2065	Unknown auxiliary index role; setup clears it after the frame store.
+SONIC	0x7946c0	function	PolyBuff_LockTriangleList				ev_1a51023c9ecf855a058cf17179eb55eb56de7c36689b2a295164c6acdb4033b2	Triangle-list counterpart of recovered strip lock; vertices/3 count and same strict capacity guard.
+SONIC	0x7947b0	function	PolyBuff_DrawTriangleList				ev_181d480d40273eaef8e6349148660698d73caf2e9166a8838462ce6ff535b485	Iterates canonical lock arguments and emits D3D triangle list4.
+SONIC	0x78c5a0	function	NinjaReturnOnly			1	ev_b3c89c9fdf70fd7f411f2eef360df23ad825827419cb7e6a1f87270797631c67	Inferred role: shared polygon table entry is RET followed by INT3 padding; original1024register/statecases preserveallstateexceptreturnESP.

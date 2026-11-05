@@ -47,4 +47,16 @@ void rotate_ninja_xyz(NinjaMatrixPrimitives &coordinates, NinjaMatrix &matrix,
     if (angles[0] != 0)
         coordinates.rotate_x(matrix, angles[0], fp);
 }
+void rotate_ninja_zyx(NinjaMatrixPrimitives &coordinates, NinjaMatrix &matrix,
+                      const std::array<std::int32_t, 3> &angles, fidelity::Context &fp) {
+    // Original quirk: this wrapper applies Y, then X, then Z. The name does not
+    // describe its arithmetic order; the original-instruction transform judge
+    // distinguishes it from the ordinary X/Y/Z composition.
+    if (angles[1] != 0)
+        coordinates.rotate_y(matrix, angles[1], fp);
+    if (angles[0] != 0)
+        coordinates.rotate_x(matrix, angles[0], fp);
+    if (angles[2] != 0)
+        coordinates.rotate_z(matrix, angles[2], fp);
+}
 } // namespace sadx

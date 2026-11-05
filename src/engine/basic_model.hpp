@@ -156,7 +156,7 @@ std::uint32_t offset_material_color(const Material &, Owners, Context &);
 void environment_map(Context &);
 // FUNCTION: SONIC 0x794500 Direct3D_ResetTextureTransform
 void reset_texture_transform(Context &);
-// STUB: SONIC 0x784ae0 njDrawModel_ alternate material renderer
+// NOTSA: runtime transport to the recovered dynamic model renderer.
 void draw_alternate_model(Context &, character_pack::ResourceId,
                           const character_pack::CharacterPack &, Owners);
 // NOTSA: link-time handoff to the independently recovered polybuff::normal_uv_strip.

@@ -8,4 +8,9 @@ polybuff::BufferState &normal_uv_buffer(Display &display) {
     polybuff::Context context{display};
     return context.buffer(kNormalUvBufferIndex);
 }
+polybuff::BufferState &normal_buffer(Display &display) {
+    constexpr std::size_t kNormalBufferIndex = 6;
+    polybuff::Context context{display};
+    return context.buffer(kNormalBufferIndex);
+}
 } // namespace sadx::native

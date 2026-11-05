@@ -13,6 +13,7 @@
 #include "game/selection_question.hpp"
 #include "engine/device_lights.hpp"
 #include "engine/object_draw.hpp"
+#include "engine/animated_model.hpp"
 #include "engine/native_message_texture.hpp"
 #include "engine/queue_consumer_native.hpp"
 #include "engine/message_sprite_queue.hpp"
@@ -126,6 +127,7 @@ class Display {
     graphics::Draw device_state_;
     ModelVertexStream model_vertex_stream_;
     basic_model::State model_state_;
+    animated_model::State animated_state_;
     // NOTSA: graphics startup owns the configured count state and canonical polygon resources.
     library::State graphics_library_{};
     struct PolygonResources {

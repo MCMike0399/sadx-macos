@@ -6,6 +6,8 @@ namespace sadx::object_draw {
 struct Context {
     native::Display &display;
     const native::ModelDrawEnvironment &environment;
+    std::function<void(ObjectId)> animated_callback = {};
+    auto &animated() { return display.animated_state_; }
     auto &matrices() { return *display.coordinates_; }
     auto &arithmetic() { return display.arithmetic_; }
     const auto *queued_list() const { return display.queued_texture_list_; }
