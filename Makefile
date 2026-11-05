@@ -708,6 +708,8 @@ native-character-select-display: build/sadx-native build/cs-private-assets/.priv
 
 build/private-native-assets-test: tests/unit/private_native_assets.cpp
 	$(CXX) $(CXXFLAGS) $< -o $@
+build/selection-pack-append-test: tests/unit/selection_pack_append.mm src/apps/native_character_selection_assets.hpp
+	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) $< -framework Foundation -o $@
 
 build/animated-model-test: tests/unit/animated_model.cpp tests/probes/native_animated_model_probe.cpp src/engine/animated_model.cpp src/engine/object_draw.cpp build/libsadx-native.a
 	$(CXX) $(CXXFLAGS) $(INCLUDES) $^ -o $@

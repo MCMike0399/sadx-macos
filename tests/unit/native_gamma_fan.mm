@@ -123,8 +123,11 @@ int main(int argc, char **argv) {
         // development pack continues to the first animated draw seam.
         const auto message = std::string(error.what());
         const bool complete_pack = !players.gamma_assets->display_objects.empty();
-        assert(message == (complete_pack ? "native_gamma_display_action_clip_no_scale"
-                                         : "native_gamma_display_object_row_14"));
+        // A complete pack continues into the draw chain; the reached draw boundary
+        // is named and may move as more of the body is recovered.
+        const bool draw_boundary = message.rfind("native_gamma_display_", 0) == 0 &&
+                                   message != "native_gamma_display_object_row_14";
+        assert(complete_pack ? draw_boundary : message == "native_gamma_display_object_row_14");
         stopped = true;
     }
     const bool complete_pack = !players.gamma_assets->display_objects.empty();

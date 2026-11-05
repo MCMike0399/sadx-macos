@@ -1,6 +1,10 @@
 #pragma once
 #include "apps/native_menu_dialog_assets.hpp"
 #include "runtime/character_selection_assets.hpp"
+#include <CommonCrypto/CommonDigest.h>
+#include <fstream>
+#include <iterator>
+#include <vector>
 
 namespace sadx::native::app {
 namespace {
@@ -8,8 +12,34 @@ namespace {
 // these records; its provenance must prove the prefix count and digest so no
 // existing resource identity can shift.
 constexpr std::size_t kCanonicalSelectionRecords = 3328;
+constexpr std::size_t kCanonicalSelectionBytes = 766112;
 constexpr const char *kCanonicalSelectionPrefix =
     "c414e173bf4bf9f803f24d61642e233ff9650fe9276d70da2ac3939fee2b5d7f";
+// NOTSA: digest text at the imported-content boundary (same helper shape as save seeds).
+inline std::string sha256_text(const unsigned char *data, std::size_t size) {
+    if (size > UINT32_MAX)
+        throw std::runtime_error("selection pack exceeds supported digest input size");
+    unsigned char digest[CC_SHA256_DIGEST_LENGTH];
+    CC_SHA256(data, static_cast<CC_LONG>(size), digest);
+    constexpr char digits[] = "0123456789abcdef";
+    std::string text;
+    for (const auto byte : digest) {
+        text += digits[byte >> 4];
+        text += digits[byte & 15];
+    }
+    return text;
+}
+// NOTSA: the append changes only the record-count word; rebuild the canonical
+// prefix from the loaded bytes instead of trusting the imported declaration.
+inline bool selection_prefix_matches(std::vector<unsigned char> bytes) {
+    if (bytes.size() < kCanonicalSelectionBytes)
+        return false;
+    bytes[8] = kCanonicalSelectionRecords & 0xff;
+    bytes[9] = (kCanonicalSelectionRecords >> 8) & 0xff;
+    bytes[10] = (kCanonicalSelectionRecords >> 16) & 0xff;
+    bytes[11] = (kCanonicalSelectionRecords >> 24) & 0xff;
+    return sha256_text(bytes.data(), kCanonicalSelectionBytes) == kCanonicalSelectionPrefix;
+}
 // NOTSA: rejects partial graphs and unproven appends before any consumer binds.
 inline void require_selection_graph(const std::filesystem::path &directory,
                                     const character_pack::CharacterPack &pack) {
@@ -32,6 +62,19 @@ inline void require_selection_graph(const std::filesystem::path &directory,
         kCanonicalSelectionPrefix)
         throw std::runtime_error("imported display append changed the canonical selection prefix");
     (void)array(append[@"declarations"], 8, "display append declarations");
+    if (static_cast<std::size_t>(integer(append[@"prefix_bytes"], 1, INT32_MAX,
+                                           "display append prefix bytes")) !=
+        kCanonicalSelectionBytes)
+        throw std::runtime_error("imported display append prefix length differs");
+    std::ifstream file(directory / "characters/sonic-selection.actions", std::ios::binary);
+    std::vector<unsigned char> bytes{std::istreambuf_iterator<char>(file), {}};
+    if (!file || bytes.empty())
+        throw std::runtime_error("cannot read the imported selection pack");
+    if (sha256_text(bytes.data(), bytes.size()) !=
+        string(proof[@"pack_sha256"], "selection pack digest"))
+        throw std::runtime_error("imported selection pack bytes differ from provenance");
+    if (!selection_prefix_matches(std::move(bytes)))
+        throw std::runtime_error("imported display append changed the canonical prefix bytes");
 }
 } // namespace
 // NOTSA: declarations bind to the one validated combined pack owned by the app.

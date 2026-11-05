@@ -265,7 +265,7 @@
    "condition": "unconditional: interpolation::init() from InitMods (routes to original while interpolation::enabled=false)",
    "active": true,
    "source_ref": "InterpolationFixes.cpp:141",
-   "handled_by": null,
+   "handled_by": "src/engine/animated_model.cpp LinearMotionAngles reproduces the original 0x404c10 body through the pinned interpolation::enabled=false route (the loader jump runs the original prologue); enabled interpolation and its push/pop helpers are not implemented and stop explicitly. Judged by verify_original_animated_model.py; native sampling is compared against the original bytes, not the loader trampoline.",
    "original_bytes": "83ec08568b"
   },
   {
