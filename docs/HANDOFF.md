@@ -1211,3 +1211,24 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Not run: the oracle suite. The previous suite remains 147 pass, 99 partial, 11 fail. The eleventh fail is the `sonic_initialization-helpers` sidecar, which is not its own tracked slug. `gamma_effects` is still 559 FP partials and zero value failures. The two new oracles passed 48 cases before the gate and are now tracked. Independent review was not available. The frontier was not rerun.
 * Stock `game/imported` still stops at display object row 14 because that pack has no `display_objects` key. The admitted pack `2929e8a6` has the eight rows.
 * Next: `RunUnderwaterStuff`, including the position buffer at `0x43b960`, then draw the queued shadow mesh so a CharacterSelect frame can present.
+
+### 2026-11-09 — Frontier on 8674f74b, recovery stopped for the merge
+
+* Outcome: the normal-input frontier on this revision exits 1 at frame 1332, completed 1330. The stop is `native_gamma_underwater`. The screenshot is still the title hash `c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427`. No CharacterSelect frame is presented.
+* Pose: gamma mode 1, id 2, player index 5, character 6, status 1, position `[400, 0, -20]`, rotation `[0, 16384, 0]`. Timer 146167, two saves, selected save 1, pending logic ticks 0, stage 0.
+* Changed: nothing. `RunUnderwaterStuff` stays the named stub `native_gamma_underwater`. The shadow mesh is still not drawn. No new recovery was opened.
+* Verified: isolated copy of the admitted saves, private pack `2929e8a6`, the character-select key schedule, `--exit-after 1550`. The process status was `FRONTIER_EXIT:1`. Log `build/frontier-8674f74b/stderr.log`.
+* Not this slice: the oracle suite. It remains 147 pass, 99 partial, 11 fail. `gamma_effects` is still 559 FP partials and zero value failures. The 11 fails are colored polygon, crt asin/atan2/fabs/floor, d3dx perspective, floor angles, player reaction, sonic initialization helpers, sse math, and x87 memory. Independent review was not available.
+* Stock `game/imported` still stops at display object row 14 because that pack has no `display_objects` key. The admitted pack has the eight rows.
+* Next: `RunUnderwaterStuff` (`0x446f10`) on the bit-clear path, including the position buffer at `0x43b960`. The bit-set path stays a named failure until a frame reaches it. Then the type-1 shadow mesh, then a presented CharacterSelect frame.
+
+### 2026-11-09 — Wrap-up gate after the oracle summaries (J, exit 0)
+
+* Outcome: the rerun of `make -j10 gate` exited 0. 345 native programs, 658 Python tests, R1–R4 pass, and the three native menu journeys pass. Startup comparison passed 16 checkpoints. No CharacterSelect frame is presented.
+* The first wrap-up run exited 2. `build/gate-8674f74b-wrap.log` failed only because `late_model_queue.json` and `collision_entry.json` were unmanifested. The rerun is `build/gate-8674f74b-reregister.log`, `GATE_EXIT:0`, recorded as `oracle-summary-gate.json`.
+* Changed: the judge manifest hashes those two already-passing summaries. No product code changed. `RunUnderwaterStuff` stays the named stub `native_gamma_underwater`. The type-1 shadow mesh stays undrawn.
+* Frontier, from the entry above: exit 1 at frame 1332, completed 1330, stop `native_gamma_underwater`, title hash `c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427`.
+* Not run: the oracle suite. It remains 147 pass, 99 partial, 11 fail. Tracked census is 141 pass, 94 partial, 10 fail, 14 missing. The eleventh suite fail is the `sonic_initialization-helpers` sidecar. `gamma_effects` is still 559 FP partials and zero value failures. Independent review was not available.
+* The 11 suite fails are colored polygon, crt asin, atan2, fabs, floor, d3dx perspective, floor angles, player reaction, sonic initialization helpers, sse math, and x87 memory.
+* Stock `game/imported` still stops at display object row 14 because that pack has no `display_objects` key. The admitted pack `2929e8a6` has the eight rows.
+* Next: `RunUnderwaterStuff` (`0x446f10`) on the bit-clear path, including the position buffer at `0x43b960`. The bit-set path stays a named failure until a frame reaches it. Then the type-1 shadow mesh, then a presented CharacterSelect frame.
