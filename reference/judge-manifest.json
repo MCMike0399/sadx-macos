@@ -1,9 +1,9 @@
 {
   "change": {
-    "base_commit": "88e28e7e34cbd32cb15ab6fe7e959c3a3bbb2900",
-    "evidence": "reference/production-integration-20261109/judge-evidence.json",
-    "evidence_sha256": "00087218b7a6b9a5bce81c398bec009ae41a4974ad0f9e6654b6cf749ec1b81e",
-    "reason": "Register the late-model and collision-entry oracles and rebind the Gamma display stop to underwater. Thresholds were not loosened."
+    "base_commit": "8674f74b2716072835b1cdc9094c125dac832887",
+    "evidence": "reference/production-integration-20261109/oracle-summary-judge-evidence.json",
+    "evidence_sha256": "d43b39dfab2ddb5d21ef996480834195f39165085144117fe645f79e4a3882e7",
+    "reason": "Register the late-model and collision-entry oracle summaries that were tracked after the previous manifest refresh. Thresholds were not loosened."
   },
   "files": {
     "Makefile": "65769a94719339345b7cf5ac90308da6a7d8a76d5bf95b0eafdadba917103b88",
@@ -39,6 +39,7 @@
     "reference/oracle-reports/character_select_menu.json": "0be5b4fb4f89b82b6db6ebb552e04c45c6666ba0af95762795b03d6fdfaec278",
     "reference/oracle-reports/character_textures.json": "5e297b6e0d4167222b95344169d8a68c38e6de5c50a09529681dfaac38c500c6",
     "reference/oracle-reports/collision_component.json": "d9a6758b4ac0214580e591760af2b0f80bc7f46df2df9bc5c2a8fabda4a85cb2",
+    "reference/oracle-reports/collision_entry.json": "721542f7cd8c12092892f46491d1d0303321514d671ae34fcbe812e6b818483b",
     "reference/oracle-reports/collision_shapes.cases.bin": "81d7208e62617beff07dfbd74eebd2dc625119f9351681851d696233c24ec956",
     "reference/oracle-reports/collision_shapes.json": "0b9d0c6ef25cdca102894663ed494842e8a1e7f9ef23e86af7b3e0508f4dbda6",
     "reference/oracle-reports/colored_polygon.json": "4c882f3b8add6ff57d0d7ab7bb4139d8cd24f1b7936127f8fbf07cc15a3b568a",
@@ -113,6 +114,7 @@
     "reference/oracle-reports/input_mod_constants.json": "099791edfb29be91de4b4dc37e3d6d6b1bab9e59ea6c85a1fc40b3997be8966f",
     "reference/oracle-reports/input_mod_pad.json": "bdbefb5e117790c4e76c2de6568aba034d0211355ca413b96ab7509260143992",
     "reference/oracle-reports/keyboard.json": "ac045e8cfbb4a2cd0229b2d030999950f2e53eed66b64ddb042a581d72c34d29",
+    "reference/oracle-reports/late_model_queue.json": "51cd76b9e6d330bcdb3fbee19dab47700148c6d5dcfe6933c3bd3cec0c79558f",
     "reference/oracle-reports/late_sprite.json": "db304a84373d6e84b94bce8eb4dac9cb991bd87673834aa15ca445bb8230ae17",
     "reference/oracle-reports/level_sounds.json": "209b84861c6464e20a8beb6c7be4e20107932a1afb4807c839317ad313af51be",
     "reference/oracle-reports/library_init.json": "4a2ec8997cf23a592ce9cfc205aeec016dd80d8db52f55ca749b4441497e620a",
