@@ -1,4 +1,5 @@
 #include "engine/queue_consumer_native.hpp"
+#include "engine/late_model_queue.hpp"
 #include "engine/ninja_sprite_queue.hpp"
 namespace sadx::queue {
 void skip_execution(State &state) { state.values.execution_mode = 1; }
@@ -40,8 +41,18 @@ ConsumerResult consume(ConsumerView view, const ConsumerServices &services, X87C
             const auto front = owners.storage.records().bucket_front(bucket);
             if (!front)
                 return {ConsumerBoundary::Bucket, {}, bucket, false};
-            if (front.record)
-                return {ConsumerBoundary::QueuedRecord, front.record, bucket, false};
+            if (front.record) {
+                if (!services.draw_queued_model)
+                    return {ConsumerBoundary::QueuedRecord, front.record, bucket, false};
+                const auto chain = owners.storage.records().bucket_records(bucket);
+                if (!chain)
+                    return {ConsumerBoundary::Bucket, {}, bucket, false};
+                for (const auto &record : chain.records) {
+                    if (!dispatch_queued_model(record, services.simple_models, services.lighting_palette,
+                                               services.draw_queued_model))
+                        return {ConsumerBoundary::QueuedRecord, record, bucket, false};
+                }
+            }
         }
     if (!services.restore_matrix)
         return {ConsumerBoundary::Matrix, {}, 0, false};

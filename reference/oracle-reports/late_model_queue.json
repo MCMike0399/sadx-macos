@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "values_match": true,
+  "cases": 48,
+  "completed": 48,
+  "mismatches": 0,
+  "faults": 0,
+  "holdout_index": 24,
+  "source_range_sha256": "99bc838f22bedcecea9854e7ea16cc6c4cd1472b8e156990643c970428a8f40d",
+  "source": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "entry": "0x4048e0",
+  "samples": [],
+  "limits": [
+    "njGetMatrix is replaced by the fixture matrix.",
+    "The immediate draw calls are skipped and only the queued-versus-immediate route is compared.",
+    "The node type is 1. Type 6 reads past this 0x70 node and is not the shadow blob.",
+    "Guest link pointers are compared as bucket indexes, not as addresses."
+  ]
+}

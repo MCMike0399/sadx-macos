@@ -1,0 +1,8 @@
+[
+  ["the node is filed as type 6", "constexpr std::uint8_t kRecordType = 1;", "constexpr std::uint8_t kRecordType = 6;"],
+  ["depth keeps the translation sign", ".negated()", ""],
+  ["only a nearer node is queued", "comparison == X87Comparison::greater", "comparison == X87Comparison::less"],
+  ["the low flag queues instead of drawing now", "(late_flags & 1) == 0", "(late_flags & 1) != 0"],
+  ["the model word lands four bytes late", "write_bytes(record, kModelOffset, &model_word, sizeof(model_word), kModelOffset, result)", "write_bytes(record, kModelOffset + 4, &model_word, sizeof(model_word), kModelOffset, result)"],
+  ["an overflowing node uses the far bucket", "constexpr std::uint32_t kQueuePolicy = 0;", "constexpr std::uint32_t kQueuePolicy = 1;"]
+]

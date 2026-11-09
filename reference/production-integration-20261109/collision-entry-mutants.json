@@ -1,0 +1,8 @@
+[
+  ["id 9 is no longer a list", "kHighestList = 9", "kHighestList = 8"],
+  ["stage byte 0x27 clears", "kSpecialStageLow = 0x27", "kSpecialStageLow = 0x28"],
+  ["the ordinary stage skips the clear", "work->id != 0 || state.special_stage == 0", "work->id == 0 && state.special_stage == 0"],
+  ["a full list still accepts", "list.count >= kListLimit[work->id]", "list.count > kListLimit[work->id]"],
+  ["id 3 drops the work", "work->id == 2 || work->id == 3", "work->id == 2"],
+  ["DestroyTask still enters the list", "owner->exec == &TaskScheduler::destroy_callback", "owner->exec == nullptr"]
+]

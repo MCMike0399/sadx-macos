@@ -1,0 +1,8 @@
+[
+  ["scope advances by two", "scope + 1.0f", "scope + 2.0f"],
+  ["clear keeps the search id", "target.search = 0;", "target.search = target.search;"],
+  ["yaw uses the positive turn", ".multiply_double(kNegativeTurn)", ".multiply_double(kPositiveTurn)"],
+  ["scope clamps at 18", "compare(19.0f)", "compare(18.0f)"],
+  ["a zero timer still reads the lock table", "target.laser_timer > 0", "target.laser_timer >= 0"],
+  ["a linked search stays in acquisition", "target.mode = kLocked;", "target.mode = static_cast<std::int8_t>(kLocked - 1);"]
+]

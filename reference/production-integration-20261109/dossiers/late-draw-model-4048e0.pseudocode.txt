@@ -1,0 +1,31 @@
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+void lateDrawModel(undefined4 param_1,uint param_2)
+
+{
+  int iVar1;
+  
+  iVar1 = FUN_00403f60(0x70,1,param_2);
+  if (iVar1 == 0) {
+    SetSpriteColorAndZFuncThing(param_2);
+    dsDrawModel(param_1);
+    npSetZCompare();
+    njSetZUpdateMode(1);
+    ResetMaterial();
+    return;
+  }
+  *(undefined4 *)(iVar1 + 0x2c) = param_1;
+  njGetMatrix();
+  if ((-*(float *)(iVar1 + 0x68) <= _DAT_03ab9898) && ((param_2 & 1) != 0)) {
+    SetSpriteColorAndZFuncThing(param_2);
+    dsDrawModel(param_1);
+    npSetZCompare();
+    njSetZUpdateMode(1);
+    ResetMaterial();
+    return;
+  }
+  FUN_00403e80(-*(float *)(iVar1 + 0x68),0);
+  return;
+}
+

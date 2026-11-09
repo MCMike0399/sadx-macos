@@ -15,6 +15,7 @@
 #include "engine/object_draw.hpp"
 #include "engine/animated_model.hpp"
 #include "engine/native_message_texture.hpp"
+#include "engine/late_model_queue.hpp"
 #include "engine/queue_consumer_native.hpp"
 #include "engine/message_sprite_queue.hpp"
 #include "engine/screen_sprite.hpp"
@@ -46,6 +47,16 @@ class Display {
     void rotate_matrix_z(NinjaMatrix &matrix, std::int32_t angle) {
         coordinates_->rotate_z(matrix, angle, arithmetic_);
     }
+    // The shadow blob uses the same current-matrix stack as the body draw.
+    bool push_current_matrix();
+    void pop_current_matrix();
+    void translate_current_matrix(float x, float y, float z);
+    void rotate_current_x(std::int32_t angle);
+    void rotate_current_y(std::int32_t angle);
+    void rotate_current_z(std::int32_t angle);
+    void scale_current_matrix(float x, float y, float z);
+    // True when the current queued texture list would make the late blob return.
+    bool late_texture_list_not_ready() const;
     // NOTSA: the fan borrows the existing display sine coefficients and arithmetic.
     X87Value sine(std::int32_t angle) {
         return NinjaMath(sine_, arithmetic_).sin_extended(angle);
@@ -82,6 +93,9 @@ class Display {
     std::int32_t load_message_texture(texture_lifetime::List &, const message_texture::Image &);
     void reload_message_texture(std::uint32_t, const std::uint16_t *, std::uint32_t, std::uint32_t);
     void consume_draw_queue();
+    LateModelResult queue_late_model(std::uint32_t model_word, std::uint8_t late_flags, float sort_bias,
+                                     std::function<void()> draw);
+    bool has_queued_model() const;
     menu_caption::BitmapView message_bitmap_from_end(std::uint32_t);
     queue::AnimationAllocation allocate_message_animation(std::uint32_t);
     void set_message_material(const std::array<float, 4> &);
@@ -102,6 +116,7 @@ class Display {
     void apply_fog_emulation_setting(std::int32_t value);
     void disable_fog();
     void reset_material();
+    std::int32_t pending_logic_ticks() const { return frame_mode_.pending_logic_ticks; }
     void set_alpha_test_enabled(bool enabled);
     menu_caption::DeferredRelease &message_texture_releases() { return message_texture_releases_; }
     const menu_caption::DeferredRelease &message_texture_releases() const {
@@ -148,6 +163,7 @@ class Display {
     std::unique_ptr<NinjaMatrixPrimitives> coordinates_;
     D3dxMatrix screen_transform_;
     std::array<float, 4> material_argb_{};
+    std::array<float, 4> late_material_{};
     std::array<sprite::ScreenVertex, 4> sprite_vertices_{};
     std::vector<texture_lifetime::Memory> texture_pool_ =
         std::vector<texture_lifetime::Memory>(2048);

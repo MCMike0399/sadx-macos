@@ -5,6 +5,9 @@
 #include "player/player_vertex_weld.hpp"
 #include "player/gamma_input_buffer.hpp"
 #include "player/gamma_fan.hpp"
+#include "player/gamma_target_effects.hpp"
+#include "player/gamma_gun_effects.hpp"
+#include "player/gamma_shadow.hpp"
 #include "game/game_mode.hpp"
 #include <cstring>
 #include <stdexcept>
@@ -395,25 +398,306 @@ void update_fan(Context &context, Primary, const Player &player, const TaskWorkH
 void destroy(Context &, const TaskHandle &) {
     missing("native_gamma_destroy");
 }
+void unrecovered_search_task(TaskScheduler &, const TaskHandle &) {
+    throw flow::UnrecoveredGameFlowCall("native_gamma_search_task");
+}
+void unrecovered_aim_task(TaskScheduler &, const TaskHandle &) {
+    throw flow::UnrecoveredGameFlowCall("native_gamma_aim_task");
+}
+template <class T> T load_work(TaskWorkArena &memory, const TaskWorkHandle &work, std::uint32_t at) {
+    T value{};
+    if (!memory.read(work, at, &value, sizeof(value)))
+        missing("native_gamma_target_effects_read");
+    return value;
+}
+template <class T>
+void store_work(TaskWorkArena &memory, const TaskWorkHandle &work, std::uint32_t at, T value) {
+    if (!memory.write(work, at, &value, sizeof(value)))
+        missing("native_gamma_target_effects_store");
+}
+constexpr std::uint32_t kLockCombo = 0x0a;
+constexpr std::uint32_t kShotCombo = 0x0c;
+constexpr std::uint32_t kLaserTimer = 0x10;
+constexpr std::uint32_t kLockTimer = 0x12;
+constexpr std::uint32_t kPositionX = 0x34;
+constexpr std::uint32_t kPositionY = 0x38;
+constexpr std::uint32_t kPositionZ = 0x3c;
+constexpr std::uint32_t kAimX = 0x40;
+constexpr std::uint32_t kAimY = 0x44;
+constexpr std::uint32_t kAimZ = 0x48;
+constexpr std::uint32_t kDistance = 0x4c;
+constexpr std::uint32_t kScope = 0x84;
+constexpr std::uint32_t kAimPoseX = 0x20;
+constexpr std::uint32_t kAimPoseY = 0x24;
+constexpr std::uint32_t kAimPoseZ = 0x28;
+constexpr std::uint32_t kAimYaw = 0x18;
+constexpr std::uint32_t kAimPitch = 0x1c;
+constexpr std::uint32_t kAimExtra = 0x10;
+constexpr std::uint32_t kCharge = 0x70;
+constexpr std::uint32_t kVariantWord = 0x80;
+constexpr std::uint32_t kFade = 0x90;
+constexpr std::int32_t kLockTone = 0x343;
+constexpr std::uint32_t kEmptyGroundBits = 0xc9742400u;
+constexpr std::uint32_t kShadowModelWord = 0x8bf374u;
+constexpr std::uint8_t kLateShadowFlags = 6;
+constexpr float kShadowSortBias = -27952.0f;
 // NOTSA: native boundary for GammaUpdateTargetEffects; source seam declared in the Gamma core.
-void update_target_effects(Context &, Primary, const Player &, const TaskWorkHandle &) {
-    missing("native_gamma_update_target_effects");
+void update_target_effects(Context &context, Primary task, const Player &,
+                           const TaskWorkHandle &allocation) {
+    native::GammaExtraWork *owned = nullptr;
+    for (auto &candidate : context.players.gamma_work)
+        if (candidate.allocation == allocation)
+            owned = &candidate;
+    if (!owned)
+        missing("native_gamma_E102WK_allocation_identity");
+    auto &memory = arena(context);
+    gamma_target_effects::LaserTarget target;
+    target.mode = static_cast<std::int8_t>(owned->laser_mode);
+    target.gun_mode = static_cast<std::int8_t>(load_work<std::uint8_t>(memory, allocation, 1));
+    target.lock_count = static_cast<std::int8_t>(load_work<std::uint8_t>(memory, allocation, 4));
+    target.lock_combo = load_work<std::int16_t>(memory, allocation, kLockCombo);
+    target.shot_combo = load_work<std::int16_t>(memory, allocation, kShotCombo);
+    target.laser_timer = load_work<std::int16_t>(memory, allocation, kLaserTimer);
+    target.lock_timer = load_work<std::int16_t>(memory, allocation, kLockTimer);
+    target.position_x = load_work<float>(memory, allocation, kPositionX);
+    target.position_y = load_work<float>(memory, allocation, kPositionY);
+    target.position_z = load_work<float>(memory, allocation, kPositionZ);
+    target.aim_x = load_work<float>(memory, allocation, kAimX);
+    target.aim_y = load_work<float>(memory, allocation, kAimY);
+    target.aim_z = load_work<float>(memory, allocation, kAimZ);
+    target.distance = load_work<float>(memory, allocation, kDistance);
+    target.scope = load_work<float>(memory, allocation, kScope);
+    target.search = owned->search_task ? reinterpret_cast<std::uintptr_t>(owned->search_task.get()) : 0;
+    struct Product final : gamma_target_effects::Services {
+        Context &context;
+        native::GammaExtraWork &owned;
+        TaskWorkHandle block;
+        Product(Context &context, native::GammaExtraWork &owned) : context(context), owned(owned) {}
+        std::uint8_t controller_slot() override { return 0; }
+        std::uint32_t button_mask() override { return 0; }
+        std::uint32_t held(std::uint8_t) override { return 0; }
+        std::uint32_t pressed(std::uint8_t) override { return 0; }
+        bool event_sounds_enabled() override { return state(context).event_enabled != 0; }
+        std::uintptr_t create_search_task() override {
+            const auto created = context.scheduler.create_element(0, 6, unrecovered_search_task);
+            if (!created) {
+                owned.search_task.reset();
+                return 0;
+            }
+            owned.search_task = created.task;
+            return reinterpret_cast<std::uintptr_t>(created.task.get());
+        }
+        std::uintptr_t allocate_search_block() override {
+            block = allocate_zero(context, 1, 16);
+            return block ? reinterpret_cast<std::uintptr_t>(block.get()) : 0;
+        }
+        void attach_search_block(std::uintptr_t, std::uintptr_t) override {
+            if (!owned.search_task || !block)
+                missing("native_gamma_target_effects_search_link");
+            owned.search_task->auxiliary_work = block;
+            if (!context.task || !context.task->primary_work)
+                missing("native_gamma_target_effects_task_work");
+            if (!arena(context).set_reference(block, 4, context.task->primary_work) ||
+                !arena(context).set_reference(block, 8, owned.allocation))
+                missing("native_gamma_target_effects_search_link");
+        }
+        void destroy_task(std::uintptr_t id) override {
+            const auto task = id == reinterpret_cast<std::uintptr_t>(owned.search_task.get())
+                                  ? owned.search_task
+                              : id == reinterpret_cast<std::uintptr_t>(owned.aim_task.get())
+                                  ? owned.aim_task
+                                  : TaskHandle{};
+            (void)context.scheduler.destroy_task(task);
+        }
+        void play_lock_sound() override {
+            if (!context.play_effect)
+                missing("native_gamma_target_effects_lock_sound");
+            context.play_effect(kLockTone);
+        }
+        void stop_lock_sound() override { missing("native_gamma_stop_lock_sound"); }
+        std::uintptr_t create_aim_task() override {
+            const auto created = context.scheduler.create_element(2, 2, unrecovered_aim_task);
+            if (!created || !created.task->primary_work) {
+                owned.aim_task.reset();
+                return 0;
+            }
+            owned.aim_task = created.task;
+            return reinterpret_cast<std::uintptr_t>(created.task.get());
+        }
+        void store_aim(std::uintptr_t, const gamma_target_effects::AimPose &pose) override {
+            if (!owned.aim_task || !owned.aim_task->primary_work)
+                missing("native_gamma_target_effects_aim");
+            const auto work = owned.aim_task->primary_work;
+            auto &memory = arena(context);
+            store_work(memory, work, kAimPoseX, pose.x);
+            store_work(memory, work, kAimPoseY, pose.y);
+            store_work(memory, work, kAimPoseZ, pose.z);
+            store_work(memory, work, kAimYaw, pose.yaw);
+            store_work(memory, work, kAimPitch, pose.pitch);
+            if (!memory.set_reference(work, kAimExtra, owned.allocation))
+                missing("native_gamma_target_effects_aim");
+        }
+        std::int32_t read_lock_table(std::int8_t) override {
+            missing("native_gamma_target_lock_input");
+        }
+        std::uintptr_t locked_subject(int) override { missing("native_gamma_target_release_lock"); }
+        void release_locked_target(std::uintptr_t) override { missing("native_gamma_target_release_lock"); }
+    } services(context, *owned);
+    // The slot and button words are filled below; the overrides above are replaced
+    // once the controller sample is known. A missing controller is the live boundary.
+    struct Connected final : gamma_target_effects::Services {
+        Product &product;
+        Context &context;
+        explicit Connected(Product &product, Context &context) : product(product), context(context) {}
+        Context::ControllerSample sample(std::uint8_t slot) {
+            if (!context.controller)
+                missing("native_gamma_target_effects_controller");
+            return context.controller(slot);
+        }
+        std::uint8_t controller_slot() override { return task_slot; }
+        std::uint32_t button_mask() override { return sample(task_slot).mask; }
+        std::uint32_t held(std::uint8_t slot) override { return sample(slot).held; }
+        std::uint32_t pressed(std::uint8_t slot) override { return sample(slot).pressed; }
+        bool event_sounds_enabled() override { return product.event_sounds_enabled(); }
+        std::uintptr_t create_search_task() override { return product.create_search_task(); }
+        std::uintptr_t allocate_search_block() override { return product.allocate_search_block(); }
+        void attach_search_block(std::uintptr_t task, std::uintptr_t block) override {
+            product.attach_search_block(task, block);
+        }
+        void destroy_task(std::uintptr_t task) override { product.destroy_task(task); }
+        void play_lock_sound() override { product.play_lock_sound(); }
+        void stop_lock_sound() override { product.stop_lock_sound(); }
+        std::uintptr_t create_aim_task() override { return product.create_aim_task(); }
+        void store_aim(std::uintptr_t task, const gamma_target_effects::AimPose &pose) override {
+            product.store_aim(task, pose);
+        }
+        std::int32_t read_lock_table(std::int8_t mode) override { return product.read_lock_table(mode); }
+        std::uintptr_t locked_subject(int index) override { return product.locked_subject(index); }
+        void release_locked_target(std::uintptr_t subject) override {
+            product.release_locked_target(subject);
+        }
+        std::uint8_t task_slot = 0;
+    } connected(services, context);
+    connected.task_slot = task.player_index;
+    gamma_target_effects::update(target, static_cast<std::int8_t>(task.mode), connected,
+                                 context.rendering.arithmetic());
+    owned->laser_mode = static_cast<std::uint8_t>(target.mode);
+    store_work(memory, allocation, 0, static_cast<std::uint8_t>(target.mode));
+    store_work(memory, allocation, 1, static_cast<std::uint8_t>(target.gun_mode));
+    store_work(memory, allocation, 4, static_cast<std::uint8_t>(target.lock_count));
+    store_work(memory, allocation, kLockCombo, target.lock_combo);
+    store_work(memory, allocation, kShotCombo, target.shot_combo);
+    store_work(memory, allocation, kLaserTimer, target.laser_timer);
+    store_work(memory, allocation, kLockTimer, target.lock_timer);
+    store_work(memory, allocation, kPositionX, target.position_x);
+    store_work(memory, allocation, kPositionY, target.position_y);
+    store_work(memory, allocation, kPositionZ, target.position_z);
+    store_work(memory, allocation, kAimX, target.aim_x);
+    store_work(memory, allocation, kAimY, target.aim_y);
+    store_work(memory, allocation, kAimZ, target.aim_z);
+    store_work(memory, allocation, kDistance, target.distance);
+    store_work(memory, allocation, kScope, target.scope);
+    if (target.search == 0)
+        owned->search_task.reset();
 }
 // NOTSA: native boundary for GammaUpdateGunEffects; source seam declared in the Gamma core.
-void update_gun_effects(Context &, const TaskHandle &, const Player &, const TaskWorkHandle &) {
-    missing("native_gamma_update_gun_effects");
+void update_gun_effects(Context &context, const TaskHandle &, const Player &,
+                        const TaskWorkHandle &allocation) {
+    auto &memory = arena(context);
+    gamma_gun_effects::GunState state;
+    state.laser_mode = static_cast<std::int8_t>(load_work<std::uint8_t>(memory, allocation, 0));
+    state.mode = static_cast<std::int8_t>(load_work<std::uint8_t>(memory, allocation, 1));
+    state.marker = static_cast<std::int8_t>(load_work<std::uint8_t>(memory, allocation, 2));
+    state.lock_count = static_cast<std::int8_t>(load_work<std::uint8_t>(memory, allocation, 4));
+    state.armed = static_cast<std::int8_t>(load_work<std::uint8_t>(memory, allocation, 5));
+    state.variant = static_cast<std::int8_t>(load_work<std::uint8_t>(memory, allocation, 6));
+    state.charge = load_work<float>(memory, allocation, kCharge);
+    state.variant_value = load_work<std::uint32_t>(memory, allocation, kVariantWord);
+    state.fade = load_work<float>(memory, allocation, kFade);
+    struct Product final : gamma_gun_effects::Services {
+        std::uintptr_t select_lock(int) override { missing("native_gamma_gun_lock_select"); }
+        std::uint8_t read_variant(std::uintptr_t) override { missing("native_gamma_gun_variant"); }
+        // The image leaves the variant table zero, and this frame only reads index 0.
+        std::uint32_t variant_word(std::uint8_t) override { return 0; }
+        void open_volley(gamma_gun_effects::GunState &, std::uintptr_t) override {
+            missing("native_gamma_gun_volley");
+        }
+    } services;
+    gamma_gun_effects::update(state, services, context.rendering.arithmetic());
+    store_work(memory, allocation, 1, static_cast<std::uint8_t>(state.mode));
+    store_work(memory, allocation, 2, static_cast<std::uint8_t>(state.marker));
+    store_work(memory, allocation, 4, static_cast<std::uint8_t>(state.lock_count));
+    store_work(memory, allocation, 5, static_cast<std::uint8_t>(state.armed));
+    store_work(memory, allocation, 6, static_cast<std::uint8_t>(state.variant));
+    store_work(memory, allocation, kCharge, state.charge);
+    store_work(memory, allocation, kVariantWord, state.variant_value);
+    store_work(memory, allocation, kFade, state.fade);
 }
 // NOTSA: native boundary for GammaUpdateHeldTask; source seam declared in the Gamma core.
 void update_held_task(Context &, Primary, const TaskWorkHandle &, const Player &) {
     missing("native_gamma_update_held_task");
 }
 // NOTSA: native boundary for Shadow; source seam declared in the Gamma core.
-fidelity::ExactFloat shadow(Context &, Primary, float) {
-    missing("native_gamma_shadow");
+fidelity::ExactFloat shadow(Context &context, Primary task, float scale) {
+    gamma_shadow::Body body{task.position.x, task.position.y, task.position.z, task.rotation[1]};
+    struct Product final : gamma_shadow::Services {
+        Context &context;
+        explicit Product(Context &context) : context(context) {}
+        // No land table is loaded on this route, so the height is the image's
+        // empty-table constant. A loaded table is still the unrecovered walk.
+        gamma_shadow::Ground sample_ground(float, float, float) override {
+            return {image_height(), 0, 0};
+        }
+        bool missed_frames() override { return context.rendering.pending_logic_ticks() != 0; }
+        // A null common-texture list returns without selecting. A present list
+        // selects through the existing texture owner.
+        void prepare() override {
+            if (!context.texture_state || !context.texture_state->common)
+                return;
+            context.rendering.output().select_texture_list(*context.texture_state->common);
+        }
+        void push_matrix() override {
+            if (!context.rendering.push_current_matrix())
+                missing("native_gamma_shadow_matrix_capacity");
+        }
+        void translate(float x, float y, float z) override {
+            context.rendering.translate_current_matrix(x, y, z);
+        }
+        void rotate_z(std::uint16_t angle) override { context.rendering.rotate_current_z(angle); }
+        void rotate_x(std::uint16_t angle) override { context.rendering.rotate_current_x(angle); }
+        void rotate_y(std::uint16_t angle) override { context.rendering.rotate_current_y(angle); }
+        void scale(float x, float y, float z) override {
+            context.rendering.scale_current_matrix(x, y, z);
+        }
+        // A missing queued texture list returns and the caller pops. A ready
+        // list allocates the type-1 late model node. The mesh is drawn when the
+        // frame consumes the queue.
+        void draw(float) override {
+            if (context.rendering.late_texture_list_not_ready())
+                return;
+            const auto queued = context.rendering.queue_late_model(
+                kShadowModelWord, kLateShadowFlags, kShadowSortBias,
+                [] { missing("native_gamma_shadow_mesh"); });
+            if (!queued)
+                missing("native_gamma_shadow_model_queue");
+            if (queued.route != LateModelRoute::queued)
+                missing("native_late_model_immediate");
+        }
+        void pop_matrix() override { context.rendering.pop_current_matrix(); }
+        static float image_height() {
+            constexpr std::uint32_t bits = kEmptyGroundBits;
+            float value;
+            std::memcpy(&value, &bits, sizeof(value));
+            return value;
+        }
+    } services(context);
+    return gamma_shadow::update(body, scale, services, context.rendering.arithmetic());
 }
 // NOTSA: native boundary for GammaGroundAttributes; source seam declared in the Gamma core.
-std::uint32_t ground_attributes(Context &, Primary) {
-    missing("native_gamma_ground_attributes");
+std::uint32_t ground_attributes(Context &context, Primary) {
+    if (context.land_candidate_count > 0)
+        missing("native_gamma_ground_attribute_walk");
+    return 0;
 }
 // NOTSA: native boundary for GammaRunningEffects; source seam declared in the Gamma core.
 void running_effects(Context &, Primary, const TaskWorkHandle &, const Player &) {
@@ -426,9 +710,13 @@ void calculate_collision_range(Context &context, Primary) {
     auto work = collision(context, context.task->primary_work);
     collision_component::calculate_range(work.get(), context.rendering.arithmetic());
 }
-// NOTSA: native boundary for EntryColliList; source seam declared in the Gamma core.
-void enter_collision_list(Context &, Primary) {
-    missing("native_gamma_enter_collision_list");
+// NOTSA: native boundary for EntryColliList. The source argument is the taskwk;
+// the list keeps the task that owns it.
+void enter_collision_list(Context &context, Primary primary) {
+    if (!context.task)
+        missing("native_gamma_null_collision_task");
+    auto work = collision(context, context.task->primary_work);
+    collision_component::enter_list(context.collision_entries, work, primary.status, context.stage);
 }
 // NOTSA: native boundary for RunUnderwaterStuff; source seam declared in the Gamma core.
 void underwater(Context &, Primary, const TaskWorkHandle &, const Player &) {

@@ -76,41 +76,65 @@ NinjaSpriteQueue::NinjaSpriteQueue(std::shared_ptr<NinjaRenderQueueArena> arena)
 void NinjaSpriteQueue::forget_records_after_arena_reset(){records_.clear();}
 void NinjaSpriteQueue::rebind_arena(std::shared_ptr<NinjaRenderQueueArena> arena){records_.clear();arena_=std::move(arena);} // buckets keep stale links until 407330
 void NinjaSpriteQueue::initialize_sort_buckets(){for(auto& bucket:buckets_){bucket.initialized=true;bucket.head.reset();bucket.tail.reset();}for(auto& record:records_)record->linked=false;}
+void adopt_frame_queue(NinjaSpriteQueueRuntime& runtime, NinjaRenderState* render, const FrameQueueFacts& facts) {
+    if (render) render->packed_blend_at_3ab9890 = facts.blend;
+    runtime.render_state = render;
+    runtime.mode_at_3ab98ac = facts.mode;
+    runtime.flag_at_3abdcfe = facts.fog;
+    runtime.flag_at_3b12208 = facts.lighting;
+    runtime.captured_word_at_3d0f9c8 = facts.control;
+    runtime.captured_word_at_3d0f840 = facts.attribute_mask;
+    runtime.captured_word_at_3d0f9c4 = facts.attributes;
+    runtime.color_at_3abd9a8 = facts.late_color;
+    runtime.color_at_3ab9864 = facts.material;
+    runtime.sort_bias_at_3abd9c0 = facts.sort_bias;
+    runtime.bucket_bias_at_7dcb60 = facts.bucket_bias;
+    runtime.captured_word_at_3abd950 = facts.list_word;
+    runtime.captured_texture_list_at_3abd950 = facts.list;
+}
 NinjaQueueResult NinjaSpriteQueue::allocate_record(std::uint32_t size,std::uint8_t type,std::uint8_t flags,std::uint32_t eax,NinjaSpriteQueueRuntime& runtime){
-    if(!runtime.mode_at_3ab98ac)return failed(NinjaQueueFailure::unknown_queue_mode,0x403f68);
-    if(*runtime.mode_at_3ab98ac!=0||(flags&8))return {};
+    const auto& mode=runtime.mode_at_3ab98ac;
+    if(!mode)return failed(NinjaQueueFailure::unknown_queue_mode,0x403f68);
+    if(*mode!=0||(flags&8))return {};
     if(!arena_)return failed(NinjaQueueFailure::missing_arena,0x403f7b);
     const auto allocated=arena_->allocate(size,runtime.logger);
     if(!allocated)return failed(allocated.failure,allocated.source_boundary);
     if(!allocated.block)return {};
     auto record=std::make_shared<NinjaQueueRecord>();record->block=*allocated.block;record->arena=arena_;records_.push_back(record);
     auto store=[&](std::uint32_t offset,const void* data,std::uint32_t count,std::uint32_t site){const auto f=arena_->write(record->block,offset,data,count);return f==NinjaQueueFailure::none?NinjaQueueResult{}:failed(f,site,record);};
-    if(!runtime.flag_at_3abdcfe)return failed(NinjaQueueFailure::unknown_header_fact,0x403f8c,record);
-    auto byte=static_cast<std::uint8_t>(((flags&1)<<4)|(*runtime.flag_at_3abdcfe<<5)|type);
+    const auto& fog=runtime.flag_at_3abdcfe;
+    if(!fog)return failed(NinjaQueueFailure::unknown_header_fact,0x403f8c,record);
+    auto byte=static_cast<std::uint8_t>(((flags&1)<<4)|(*fog<<5)|type);
     if(!runtime.render_state||!runtime.render_state->packed_blend_at_3ab9890)return failed(NinjaQueueFailure::unknown_header_fact,0x403fa6,record);
-    const auto packed=*runtime.render_state->packed_blend_at_3ab9890;
+    const auto& blend=runtime.render_state->packed_blend_at_3ab9890;
+    const auto packed=*blend;
     auto written=store(8,&byte,1,0x403fac);if(!written)return written;
-    if(!runtime.captured_word_at_3abd950)return failed(NinjaQueueFailure::unknown_header_fact,0x403faf,record);
-    written=store(12,&*runtime.captured_word_at_3abd950,4,0x403fb5);if(!written)return written;
+    const auto& list_word=runtime.captured_word_at_3abd950;
+    if(!list_word)return failed(NinjaQueueFailure::unknown_header_fact,0x403faf,record);
+    written=store(12,&*list_word,4,0x403fb5);if(!written)return written;
     const auto& captured=runtime.captured_texture_list_at_3abd950;
-    if(captured && ((*runtime.captured_word_at_3abd950==0)!=!*captured))return failed(NinjaQueueFailure::texture_reference_conflict,0x403fb5,record);
-    if(*runtime.captured_word_at_3abd950==0)record->texture_list_at_c=std::shared_ptr<NinjaTextureListOwner>{};
+    if(captured && ((*list_word==0)!=!*captured))return failed(NinjaQueueFailure::texture_reference_conflict,0x403fb5,record);
+    if(*list_word==0)record->texture_list_at_c=std::shared_ptr<NinjaTextureListOwner>{};
     else record->texture_list_at_c=captured; // nonnull raw/unmapped stays unknown
     std::uint16_t half=static_cast<std::uint16_t>(eax);written=store(10,&half,2,0x403fb8);if(!written)return written;
     written=store(9,&packed,1,0x403fbc);if(!written)return written;
-    if(!runtime.captured_word_at_3d0f9c8)return failed(NinjaQueueFailure::unknown_header_fact,0x403fbf,record);
-    written=store(0x20,&*runtime.captured_word_at_3d0f9c8,4,0x403fc5);if(!written)return written;
-    if(!runtime.captured_word_at_3d0f840)return failed(NinjaQueueFailure::unknown_header_fact,0x403fc8,record);
-    written=store(0x24,&*runtime.captured_word_at_3d0f840,4,0x403fce);if(!written)return written;
-    if(!runtime.captured_word_at_3d0f9c4)return failed(NinjaQueueFailure::unknown_header_fact,0x403fd1,record);
-    written=store(0x28,&*runtime.captured_word_at_3d0f9c4,4,0x403fd7);if(!written)return written;
+    const auto& control=runtime.captured_word_at_3d0f9c8;
+    if(!control)return failed(NinjaQueueFailure::unknown_header_fact,0x403fbf,record);
+    written=store(0x20,&*control,4,0x403fc5);if(!written)return written;
+    const auto& mask=runtime.captured_word_at_3d0f840;
+    if(!mask)return failed(NinjaQueueFailure::unknown_header_fact,0x403fc8,record);
+    written=store(0x24,&*mask,4,0x403fce);if(!written)return written;
+    const auto& attributes=runtime.captured_word_at_3d0f9c4;
+    if(!attributes)return failed(NinjaQueueFailure::unknown_header_fact,0x403fd1,record);
+    written=store(0x28,&*attributes,4,0x403fd7);if(!written)return written;
     const auto& color=(flags&2)?runtime.color_at_3abd9a8:runtime.color_at_3ab9864;
     if(!color)return failed(NinjaQueueFailure::unknown_header_fact,0x403fea,record);
     const std::uint32_t color_sites[]={0x403fef,0x403ff4,0x403ffa,0x404000};
     for(unsigned i=0;i<4;++i){written=store(16+i*4,&(*color)[i],4,color_sites[i]);if(!written)return written;}
-    if(!runtime.flag_at_3b12208)return failed(NinjaQueueFailure::unknown_header_fact,0x404003,record);
+    const auto& lighting=runtime.flag_at_3b12208;
+    if(!lighting)return failed(NinjaQueueFailure::unknown_header_fact,0x404003,record);
     if(flags&4){half=static_cast<std::uint16_t>(eax|0x8000);written=store(10,&half,2,0x404012);if(!written)return written;}
-    byte=static_cast<std::uint8_t>(byte|(*runtime.flag_at_3b12208<<6));written=store(8,&byte,1,0x40401f);if(!written)return written;
+    byte=static_cast<std::uint8_t>(byte|(*lighting<<6));written=store(8,&byte,1,0x40401f);if(!written)return written;
     NinjaQueueResult result;result.record=record;return result;
 }
 NinjaQueueResult NinjaSpriteQueue::insert(const NinjaQueueRecordHandle& record,float depth,std::uint32_t policy,NinjaSpriteQueueRuntime& runtime,X87Context& fp){
@@ -120,12 +144,14 @@ NinjaQueueResult NinjaSpriteQueue::insert(const NinjaQueueRecordHandle& record,f
     if(record->linked)return failed(NinjaQueueFailure::already_linked,0x403e84,record);
     auto write_depth=[&](float value,std::uint32_t site){const auto f=arena_->write(record->block,4,&value,4);return f==NinjaQueueFailure::none?NinjaQueueResult{}:failed(f,site,record);};
     auto written=write_depth(depth,0x403e84);if(!written)return written;
-    if(!runtime.sort_bias_at_3abd9c0)return failed(NinjaQueueFailure::missing_sort_bias,0x403e87,record);
+    const auto& bias=runtime.sort_bias_at_3abd9c0;
+    if(!bias)return failed(NinjaQueueFailure::missing_sort_bias,0x403e87,record);
     std::uint32_t at=0x403e87;
     try {
-        auto retained=fp.from_float(*runtime.sort_bias_at_3abd9c0);at=0x403e8d;retained=fp.add_float_memory(retained,depth);
-        if(!runtime.bucket_bias_at_7dcb60)return failed(NinjaQueueFailure::missing_constants,0x403e91,record);
-        at=0x403e91;auto conversion=fp.from_float(*runtime.bucket_bias_at_7dcb60);at=0x403e97;conversion=fp.add(conversion,retained);
+        auto retained=fp.from_float(*bias);at=0x403e8d;retained=fp.add_float_memory(retained,depth);
+        const auto& bucket_bias=runtime.bucket_bias_at_7dcb60;
+        if(!bucket_bias)return failed(NinjaQueueFailure::missing_constants,0x403e91,record);
+        at=0x403e91;auto conversion=fp.from_float(*bucket_bias);at=0x403e97;conversion=fp.add(conversion,retained);
         at=0x403e99;auto index=crt_ftol_low32(conversion,fp);
         std::uint8_t flags;const auto read=arena_->read(record->block,8,&flags,1);if(read!=NinjaQueueFailure::none)return failed(read,0x403e9e,record);
         if(!(flags&16))index+=8;
@@ -159,8 +185,9 @@ NinjaQueueResult NinjaSpriteQueue::insert(const NinjaQueueRecordHandle& record,f
 NinjaSpriteSubmissionResult NinjaSpriteQueue::submit(const std::optional<std::shared_ptr<const NinjaQueuedSpriteInput>>& input,std::optional<bool> domain,std::int32_t frame,std::uint32_t flags,std::uint32_t queue_flags,NinjaSpriteQueueRuntime& runtime,NinjaMatrixPrimitives* coordinates,X87Context& fp){
     NinjaSpriteSubmissionResult result;
     auto stop=[&](NinjaQueueFailure failure,std::uint32_t site,NinjaQueueRecordHandle record={}){result.queue=failed(failure,site,std::move(record));return result;};
-    if(!runtime.display_switch_at_3b1117c||!*runtime.display_switch_at_3b1117c)return stop(NinjaQueueFailure::unknown_display_switch,0x404760);
-    if(**runtime.display_switch_at_3b1117c!=0)return result;
+    const auto& display_switch=runtime.display_switch_at_3b1117c;
+    if(!display_switch||!*display_switch)return stop(NinjaQueueFailure::unknown_display_switch,0x404760);
+    if(**display_switch!=0)return result;
     if(!input)return stop(NinjaQueueFailure::unknown_input,0x40476f);
     if(!*input)return result;
     if(!domain)return stop(NinjaQueueFailure::unknown_pointer_domain,0x404773);

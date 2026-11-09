@@ -1,0 +1,8 @@
+[
+  ["idle fade stays at 4", "state.fade = 0.0f;", "state.fade = state.fade;"],
+  ["idle mode stays at 0", "state.mode = 1;", "state.mode = 0;"],
+  ["ready charge opens at 16", "kReadyCharge = 15.0f", "kReadyCharge = 16.0f"],
+  ["hot charge returns at 24", "kHotCharge = 30.0f", "kHotCharge = 24.0f"],
+  ["fade adds the step", "1.0f) - weight", "1.0f) + weight"],
+  ["finish keeps the lock count", "state.lock_count = 0;", "state.lock_count = state.lock_count;"]
+]

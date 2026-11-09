@@ -1,0 +1,14 @@
+{
+  "kind": "Evidenced judge refresh for the late model node and the collision entry list",
+  "date": "2026-11-09",
+  "base_commit": "88e28e7e",
+  "follow_up": "1c8ff6c5 defaults the type-1 draw callback so existing queue brace initializers still compile. e9938969 reviews the ten collision-list capacities. 88e28e7e rebinds the save-warning title-scene fingerprint after a comment lost its addresses. No expected value changed.",
+  "reason": "Register the late-model and collision-entry probes, oracles, mutants and unit tests, and rebind the Gamma display composition. Its expected stop moved from native_gamma_shadow_model_queue to native_gamma_underwater because lateDrawModel now queues a type-1 node, empty land returns 0, and EntryColliList files the task. The test also requires a queued model and list 0 holding that task. Body-draw thresholds stay above 98 draws and 2862 vertices. No tolerance was raised and no expected value was loosened.",
+  "verification": {
+    "late_model_oracle": {"passed": true, "cases": 48, "mismatches": 0, "mutants_caught": "6 of 6"},
+    "collision_entry_oracle": {"passed": true, "cases": 48, "mismatches": 0, "mutants_caught": "6 of 6"},
+    "display_test": "build/native-gamma-display-test build/cs-private-assets exited 0; stop native_gamma_underwater; 106 draws; 3060 vertices",
+    "sprite_queue_unit": "exited 0 after the allocator aliases",
+    "common_tail_binding": "exited 0, including the new entry-list cases"
+  }
+}

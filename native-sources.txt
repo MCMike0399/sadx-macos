@@ -10,6 +10,7 @@ src/engine/game_frame_control_native.cpp
 src/engine/graphics_frame.cpp
 src/engine/graphics_frame_fog.cpp
 src/engine/graphics_frame_lighting.cpp
+src/engine/late_model_queue.cpp
 src/engine/menu_draw_primitives.cpp
 src/engine/menu_square.cpp
 src/engine/message_sprite_profile.cpp
@@ -162,6 +163,9 @@ src/engine/ninja_matrix_composition.cpp
 src/player/model_motion_matrices.cpp
 src/player/model_motion_source.cpp
 src/player/gamma_fan.cpp
+src/player/gamma_target_effects.cpp
+src/player/gamma_gun_effects.cpp
+src/player/gamma_shadow.cpp
 src/engine/render_state_snapshot.cpp
 src/player/gamma_display.cpp
 src/player/gamma_display_tail.cpp

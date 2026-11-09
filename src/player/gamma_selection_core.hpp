@@ -152,13 +152,13 @@ void update_fan(Context &, Primary, const Player &, const TaskWorkHandle &);
 void display(Context &, const TaskHandle &);
 // STUB: SONIC 0x47eed0 E102Destruct
 void destroy(Context &, const TaskHandle &);
-// STUB: SONIC 0x4c4da0 GammaUpdateTargetEffects
+// NOTSA: native binding calls gamma_target_effects::update.
 void update_target_effects(Context &, Primary, const Player &, const TaskWorkHandle &);
-// STUB: SONIC 0x4c44a0 GammaUpdateGunEffects
+// NOTSA: native binding calls gamma_gun_effects::update.
 void update_gun_effects(Context &, const TaskHandle &, const Player &, const TaskWorkHandle &);
 // STUB: SONIC 0x481180 GammaUpdateHeldTask
 void update_held_task(Context &, Primary, const TaskWorkHandle &, const Player &);
-// STUB: SONIC 0x49ee30 Shadow
+// NOTSA: native binding calls gamma_shadow::update.
 fidelity::ExactFloat shadow(Context &, Primary, float scale);
 // STUB: SONIC 0x4c2f50 GammaGroundAttributes
 std::uint32_t ground_attributes(Context &, Primary);
@@ -166,7 +166,7 @@ std::uint32_t ground_attributes(Context &, Primary);
 void running_effects(Context &, Primary, const TaskWorkHandle &, const Player &);
 // NOTSA: native binding calls collision_component::calculate_range.
 void calculate_collision_range(Context &, Primary);
-// STUB: SONIC 0x41c280 EntryColliList
+// NOTSA: native binding calls collision_component::enter_list.
 void enter_collision_list(Context &, Primary);
 // STUB: SONIC 0x446f10 RunUnderwaterStuff
 void underwater(Context &, Primary, const TaskWorkHandle &, const Player &);

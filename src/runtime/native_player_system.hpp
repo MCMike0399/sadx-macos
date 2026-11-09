@@ -5,6 +5,7 @@
 #include "runtime/sonic_animation_assets.hpp"
 #include "runtime/character_texture_assets.hpp"
 #include "engine/character_geometry.hpp"
+#include "engine/collision_component.hpp"
 #include "player/actor_current.hpp"
 #include "player/gamma_selection_core.hpp"
 #include "player/gamma_setup_resource.hpp"
@@ -26,6 +27,7 @@ struct GammaExtraWork {
     std::uint32_t ground_attributes = 0;
     float walk_distance = 0;
     gamma_cursors::WireModel cursor1, cursor2;
+    TaskHandle search_task = {}, aim_task = {};
 };
 // NOTSA: one PLAYER system owner for Sonic and Gamma, not one session field per actor.
 struct PlayerSystem {
@@ -70,10 +72,21 @@ struct Context {
     sprite_registry::State &sprites;
     character_pack::SceneState &scene;
     const editor::View *editor_state = nullptr;
+    struct ControllerSample {
+        std::uint32_t mask = 0;
+        std::uint32_t held = 0;
+        std::uint32_t pressed = 0;
+    };
+    std::function<ControllerSample(std::uint8_t slot)> controller = {};
+    std::function<void(std::int32_t tone)> play_effect = {};
     std::array<NativeAnalogInput, 8> *normalized_input = nullptr;
     model_matrices::State *model_matrices = nullptr;
     // NOTSA: borrowed palette operation uses the Session lighting/time owners.
     std::function<void(std::int32_t)> display_palette = {};
     const native::ModelDrawEnvironment *model_environment = nullptr;
+    // Source land-candidate count. Zero is the empty table; a positive count
+    // still takes the unrecovered attribute walk.
+    std::int16_t land_candidate_count = 0;
+    collision_component::EntryState collision_entries{};
 };
 } // namespace sadx::gamma_selection

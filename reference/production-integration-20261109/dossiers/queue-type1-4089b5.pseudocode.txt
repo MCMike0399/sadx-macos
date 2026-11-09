@@ -1,0 +1,405 @@
+
+void late_exec(void)
+
+{
+  undefined4 *puVar1;
+  byte bVar2;
+  undefined4 *puVar3;
+  bool bVar4;
+  byte bVar5;
+  int iVar6;
+  char cVar7;
+  uint uVar8;
+  undefined4 uVar9;
+  uint uVar10;
+  undefined4 uVar11;
+  byte bVar12;
+  byte bVar13;
+  uint uVar14;
+  int *piVar15;
+  int *piVar16;
+  int iVar17;
+  ushort uVar18;
+  uint uVar19;
+  undefined4 uVar20;
+  int local_88;
+  int local_7c;
+  int local_78;
+  int local_74;
+  float local_70;
+  float local_6c;
+  float local_68;
+  
+  uVar11 = nj_control_3d_flag_;
+  uVar10 = _nj_constant_attr_or_;
+  uVar9 = _nj_constant_attr_and_;
+  uVar8 = lig_curGjPaletteNo___;
+  cVar7 = gu8FogEnbale;
+  iVar6 = ds_perspective_value;
+  bVar5 = gFogEmu;
+  local_78 = -1;
+  local_88 = ds_perspective_value;
+  ResetMaterial();
+  if ((loop_count != 0) || (late_execMode != 0)) {
+    if (late_execMode == 2) {
+      njSetZCompare(7);
+      ds_DrawBoxFill2D(0,0,ScreenRaitoX * 640.0,ScreenRaitoY * 480.0,0xbf800000,0xff000000);
+      npSetZCompare();
+    }
+    late_execMode = 1;
+    return;
+  }
+  late_execMode = 1;
+  if (DAT_03abd9d8 < DAT_03abd9d4) {
+    DAT_03abd9d8 = DAT_03abd9d4;
+  }
+  if (DAT_03abd9e0 < DAT_03abd9dc) {
+    DAT_03abd9e0 = DAT_03abd9dc;
+  }
+  if (lig_curGjPaletteNo___ != 0) {
+    lig_setGjPaletteNo___(0);
+  }
+  njGetMatrix();
+  iVar17 = iVar6;
+  bVar13 = gFogEmu;
+  if (((gFogEmu & 2) == 0) || (local_7c = 1, (gFogEmu & 1) == 0)) {
+    local_7c = 0;
+  }
+  do {
+    local_74 = 0;
+    do {
+      puVar1 = (undefined4 *)(DrawQueuePtr + local_74 * 8);
+      for (puVar3 = *(undefined4 **)(DrawQueuePtr + local_74 * 8); puVar3 != puVar1;
+          puVar3 = (undefined4 *)*puVar3) {
+        bVar2 = *(byte *)(puVar3 + 2);
+        nj_control_3d_flag_ = puVar3[8];
+        _nj_constant_attr_and_ = puVar3[9];
+        _nj_constant_attr_or_ = puVar3[10] | 0x800000;
+        uVar18 = *(ushort *)((int)puVar3 + 10);
+        uVar19 = (uint)(*(byte *)(puVar3 + 2) >> 6);
+        bVar12 = gFogEmu;
+        if (((bVar2 & 0x20) == 0) || ((short)uVar18 < 0)) {
+          if (((bVar13 & 2) == 0) || (((bVar13 & 1) == 0 || (local_7c != 1)))) {
+            if (local_78 != 0) {
+              ___njFogDisable();
+            }
+            local_78 = 0;
+            goto LAB_00408893;
+          }
+        }
+        else if ((((bVar13 & 2) == 0) || ((bVar13 & 1) == 0)) || (local_7c == 1)) {
+          if (local_78 == 0) {
+            ___njFogEnable();
+          }
+          local_78 = 1;
+LAB_00408893:
+          if (uVar19 != 0xffffffff) {
+            if ((short)uVar18 < 0) {
+              _nj_constant_attr_or_ = _nj_constant_attr_or_ | 0x2080000;
+              uVar19 = 0;
+            }
+            if (uVar19 != lig_curGjPaletteNo___) {
+              lig_setGjPaletteNo___(uVar19);
+            }
+            ScaleVectorThing_Restore(uVar19);
+          }
+          piVar16 = (int *)puVar3[3];
+          uVar18 = uVar18 & 0x7fff;
+          bVar4 = true;
+          njds_texList = piVar16;
+          if (piVar16 != (int *)0x0) {
+            uVar19 = piVar16[1];
+            iVar17 = local_88;
+            if (uVar19 != 0) {
+              uVar14 = 0;
+              if (uVar19 != 0) {
+                piVar15 = (int *)*piVar16 + 2;
+                do {
+                  if (*piVar15 == 0) goto LAB_00408913;
+                  uVar14 = uVar14 + 1;
+                  piVar15 = piVar15 + 3;
+                } while (uVar14 < uVar19);
+              }
+              if (*(int *)*piVar16 != -1) {
+                Direct3D_SetTexList();
+                goto LAB_00408928;
+              }
+            }
+LAB_00408913:
+            bVar4 = false;
+            piVar16 = (int *)0x0;
+          }
+LAB_00408928:
+          if (local_74 == 0x7ff) {
+            njSetZCompare(7);
+            uVar20 = 0;
+          }
+          else if ((bVar2 & 0x10) == 0) {
+            njSetZCompare(3);
+            uVar20 = 0;
+          }
+          else {
+            njSetZCompare(3);
+            uVar20 = 1;
+          }
+          njSetZUpdateMode(uVar20);
+          njSetConstantMaterial(puVar3 + 4);
+          njColorBlendingMode_(0,*(byte *)((int)puVar3 + 9) & 0xf);
+          njColorBlendingMode_(1,*(byte *)((int)puVar3 + 9) >> 4);
+          if (((gFogEmu & 2) != 0) && ((gFogEmu & 1) != 0)) {
+            gFogEmu = gFogEmu & 0xfd;
+          }
+          bVar13 = bVar5;
+          bVar12 = bVar5;
+          switch(bVar2 & 0xf) {
+          case 1:
+            if (piVar16 != (int *)0x0) {
+              uVar19 = puVar3[0xb];
+              if (iVar6 != iVar17) {
+                local_88 = iVar6;
+                njSetScreenDist(iVar6);
+                iVar17 = iVar6;
+              }
+              njSetMatrix();
+              if (0xfffff < uVar19) {
+                if ((SimpleModelDrawingEnabled == '\0') || (0 < (int)lig_curGjPaletteNo___)) {
+                  njDrawModel(uVar19);
+                }
+                else {
+                  dsSimpleDrawModel(uVar19);
+                }
+              }
+            }
+            break;
+          case 2:
+            local_70 = (float)puVar3[0x15];
+            piVar16 = (int *)puVar3[0x12];
+            if (piVar16 != (int *)0x0) {
+              uVar19 = piVar16[1];
+              if (uVar19 != 0) {
+                uVar14 = 0;
+                if (uVar19 != 0) {
+                  piVar15 = (int *)*piVar16 + 2;
+                  do {
+                    if (*piVar15 == 0) goto switchD_004089ae_default;
+                    uVar14 = uVar14 + 1;
+                    piVar15 = piVar15 + 3;
+                  } while (uVar14 < uVar19);
+                }
+                if (*(int *)*piVar16 != -1) {
+                  if (iVar17 != 0x31c7) {
+                    iVar17 = 0x31c7;
+                    local_88 = 0x31c7;
+                    njSetScreenDist(0x31c7);
+                  }
+                  njSetMatrix();
+                  if (-1.0 < local_70) {
+                    local_70 = -1.0;
+                  }
+                  njDrawSprite2D(puVar3 + 0xc,uVar18,local_70,puVar3[0x14]);
+                }
+              }
+            }
+            break;
+          case 3:
+            piVar16 = (int *)puVar3[0x12];
+            if (piVar16 != (int *)0x0) {
+              uVar19 = piVar16[1];
+              if (uVar19 != 0) {
+                uVar14 = 0;
+                if (uVar19 != 0) {
+                  piVar15 = (int *)*piVar16 + 2;
+                  do {
+                    if (*piVar15 == 0) goto switchD_004089ae_default;
+                    uVar14 = uVar14 + 1;
+                    piVar15 = piVar15 + 3;
+                  } while (uVar14 < uVar19);
+                }
+                if (*(int *)*piVar16 != -1) {
+                  if (iVar6 != iVar17) {
+                    local_88 = iVar6;
+                    njSetScreenDist(iVar6);
+                    iVar17 = iVar6;
+                  }
+                  njSetMatrix();
+                  njDrawSprite3D(puVar3 + 0xc,uVar18,puVar3[0x14]);
+                }
+              }
+            }
+            break;
+          case 4:
+            if (iVar6 != iVar17) {
+              local_88 = iVar6;
+              njSetScreenDist(iVar6);
+              iVar17 = iVar6;
+            }
+            if (((int)puVar3[0x20] < 0) && (puVar3[3] != 0)) {
+              njSetTextureNum_();
+            }
+            njSetMatrix();
+            njDrawLine3D(puVar3 + 0xc,uVar18,puVar3[0x20]);
+            break;
+          case 5:
+            if (iVar6 != iVar17) {
+              local_88 = iVar6;
+              njSetScreenDist(iVar6);
+              iVar17 = iVar6;
+            }
+            if (((int)puVar3[0x20] < 0) && (puVar3[3] != 0)) {
+              njSetTextureNum_();
+            }
+            njSetMatrix();
+            njDrawTriangle3D(puVar3 + 0xc,uVar18,puVar3[0x20]);
+            break;
+          case 6:
+            local_68 = (float)puVar3[0x22];
+            if (((int)puVar3[0x20] < 0) && (puVar3[3] != 0)) {
+              njSetTextureNum_();
+            }
+            if (iVar17 != 0x31c7) {
+              iVar17 = 0x31c7;
+              local_88 = 0x31c7;
+              njSetScreenDist(0x31c7);
+            }
+            njSetMatrix();
+            if (-1.0 < local_68) {
+              local_68 = -1.0;
+            }
+            ___SAnjDrawPolygon2D(puVar3 + 0xc,uVar18,local_68,puVar3[0x20]);
+            break;
+          case 7:
+            if (iVar6 != iVar17) {
+              local_88 = iVar6;
+              njSetScreenDist(iVar6);
+              iVar17 = iVar6;
+            }
+            if (((int)puVar3[0x20] < 0) && (puVar3[3] != 0)) {
+              njSetTextureNum_();
+            }
+            njSetMatrix();
+            njDrawPolygon3D(puVar3 + 0xc,uVar18,puVar3[0x20]);
+            break;
+          case 8:
+            if (piVar16 != (int *)0x0) {
+              if (iVar6 != iVar17) {
+                local_88 = iVar6;
+                njSetScreenDist(iVar6);
+                iVar17 = iVar6;
+              }
+              njSetMatrix();
+              DrawAction(puVar3[0x1d],0,0,__DrawModel);
+            }
+            break;
+          case 9:
+            if (bVar4) {
+              if (iVar17 != 0x31c7) {
+                iVar17 = 0x31c7;
+                local_88 = 0x31c7;
+                njSetScreenDist(0x31c7);
+              }
+              ds_DrawBoxFill2D(puVar3[0xc],puVar3[0xd],puVar3[0xe],puVar3[0xf],puVar3[0x10],
+                               puVar3[0x11]);
+            }
+            break;
+          case 10:
+            if (piVar16 != (int *)0x0) {
+              if (iVar6 != iVar17) {
+                local_88 = iVar6;
+                njSetScreenDist(iVar6);
+                iVar17 = iVar6;
+              }
+              njSetMatrix();
+              dsDrawObject(puVar3[0xb]);
+            }
+            break;
+          case 0xb:
+            if (piVar16 != (int *)0x0) {
+              if (iVar6 != iVar17) {
+                local_88 = iVar6;
+                njSetScreenDist(iVar6);
+                iVar17 = iVar6;
+              }
+              njSetMatrix();
+              FUN_00406c40(puVar3[0x1c],0,0,__DrawModel);
+            }
+            break;
+          case 0xc:
+            if (puVar3[0x1c] != 0) {
+              njSetMatrix();
+              if (iVar6 != iVar17) {
+                local_88 = iVar6;
+                njSetScreenDist(iVar6);
+                iVar17 = iVar6;
+              }
+              njSetZCompare(1);
+              njSetZUpdateMode(1);
+              (*(code *)puVar3[0x1c])(puVar3[0x1d]);
+            }
+            break;
+          case 0xd:
+            if (iVar17 != 0x31c7) {
+              iVar17 = 0x31c7;
+              local_88 = 0x31c7;
+              njSetScreenDist(0x31c7);
+            }
+            njSetMatrix();
+            njDrawTexture(puVar3[0x1c],puVar3[0x1d],puVar3[0x1e],puVar3[0x1f]);
+            break;
+          case 0xe:
+            local_6c = (float)puVar3[0x22];
+            if (((int)puVar3[0x20] < 0) && (puVar3[3] != 0)) {
+              njSetTextureNum_();
+            }
+            if (iVar17 != 0x31c7) {
+              iVar17 = 0x31c7;
+              local_88 = 0x31c7;
+              njSetScreenDist(0x31c7);
+            }
+            njSetMatrix();
+            if (-1.0 < local_6c) {
+              local_6c = -1.0;
+            }
+            njDrawLine2D(puVar3 + 0xc,uVar18,local_6c,puVar3[0x20]);
+            break;
+          case 0xf:
+            if (piVar16 != (int *)0x0) {
+              if (iVar6 != iVar17) {
+                local_88 = iVar6;
+                njSetScreenDist(iVar6);
+                iVar17 = iVar6;
+              }
+              njSetMatrix();
+              FUN_00405ef0(puVar3[0x1d],puVar3[0x1c],puVar3[0x20],puVar3[0x21],puVar3[0x22]);
+            }
+          }
+        }
+switchD_004089ae_default:
+        gFogEmu = bVar12;
+      }
+      local_74 = local_74 + 1;
+    } while (local_74 < 0x800);
+    local_7c = local_7c + -1;
+    if (local_7c < 0) {
+      njSetMatrix();
+      njds_texList = (int *)0x0;
+      ___njSetConstantMaterial(&cur_argb);
+      lig_resetGjPaletteNo___(uVar8);
+      ScaleVectorThing_Restore(uVar8);
+      njSetZCompare(1);
+      njSetZUpdateMode(1);
+      _nj_constant_attr_and_ = uVar9;
+      _nj_constant_attr_or_ = uVar10;
+      nj_control_3d_flag_ = uVar11;
+      if (iVar17 != iVar6) {
+        njSetScreenDist(iVar6);
+      }
+      if (cVar7 != '\0') {
+        ___njFogEnable();
+        return;
+      }
+      ___njFogDisable();
+      return;
+    }
+  } while( true );
+}
+

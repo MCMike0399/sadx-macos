@@ -1,0 +1,18 @@
+{
+  "kind": "Evidenced judge refresh for two already-passing tracked oracle summaries",
+  "date": "2026-11-09",
+  "base_commit": "8674f74b",
+  "reason": "Register reference/oracle-reports/late_model_queue.json and reference/oracle-reports/collision_entry.json. Both were committed in 8674f74b after the manifest refresh at 844c7b35, so check_judge reported them as unmanifested. No tolerance, fixture, expected value, mutant, harness, or recorded digest changed.",
+  "prior_gate": {
+    "log": "build/gate-8674f74b-wrap.log",
+    "exit_status": 2,
+    "only_failures": [
+      "JUDGE: unmanifested judge input: reference/oracle-reports/collision_entry.json",
+      "JUDGE: unmanifested judge input: reference/oracle-reports/late_model_queue.json"
+    ]
+  },
+  "reports": {
+    "late_model_queue": {"passed": true, "cases": 48, "mismatches": 0, "holdout_index": 24, "entry": "0x4048e0"},
+    "collision_entry": {"passed": true, "cases": 48, "mismatches": 0, "holdout_index": 24, "entry": "0x41c280"}
+  }
+}

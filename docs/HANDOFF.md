@@ -1152,3 +1152,83 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Verified: `gamma-common-tail-binding` checks the 25 floor, the sphere range, two child updates, and a null-child failure. It is on `make portable-units`.
 * Not run: full gate, oracles, native journeys and a source-only Mac build. `sonic.exe` is still absent, so `0x4c4da0` stays a stub. Metal, audio, controllers and 63 FPS remain uncertified.
 * Next: recover `GammaUpdateTargetEffects` from the pinned executable, then present one CharacterSelect frame. Commands stay in `reference/packets/linux-host-20261109/MAC-VALIDATION.md`.
+
+### 2026-11-09 — Mac gate is green at the same Gamma stop (J)
+
+* Outcome: DiveMac reproduces the admitted stop and `make -j10 gate` exits 0. The native game still stops at `native_gamma_update_target_effects` on the private display pack. The picture is still the title. No actor frame is presented.
+* Changed: the judge manifest records the host Makefile, the inherited fan fixture, and the common-tail binding test. Darwin compile flags stay xcrun, arm64, and macOS 14. No tolerance or expected value changed.
+* Verified: gate exit 0, 341 native programs, 658 Python tests, R1–R4, and the three native menu journeys. Startup comparison exit 0, 16 checkpoints. The private-asset frontier exits 1 at frame 1332 with the title hash.
+* Not run: the oracle suite. Stock `game/imported` still stops earlier at display object row 14 because that pack has no display objects. Ghidra kept no procedure at `0x4c4da0` after two imports. Independent review was not available.
+* Next: recover `GammaUpdateTargetEffects` from the disassembly and the two callee dossiers, then rerun the private-asset frontier.
+
+### 2026-11-09 — Gamma target effects, still on the title (J, no gate)
+
+* Outcome: the private-asset frontier exits 1 at frame 1332 on the admitted save and now stops at `native_gamma_update_gun_effects`. The picture is still the title hash. No actor frame is presented.
+* Changed: `gamma_target_effects::update` owns `GammaUpdateTargetEffects`. Mode 0 clears the scope, the lock timer and the distance, then the epilogue moves the scope from the task slot. Later modes keep the source order, including a cleared search id and the pressed reacquire.
+* Verified: `gamma-target-effects` unit test exits 0. The Unicorn oracle exits 0, verdict pass, 83 cases, 6 of 6 mutants caught. The same-save frontier matches the admitted title hash, gamma pose, timer and save count.
+* Not run: full gate, so `check_judge` and STATUS are not refreshed. The oracle suite was not run. Ghidra still has no procedure at `0x4c4da0`. Independent review was not available. Stock `game/imported` still stops at display object row 14.
+* Next: recover `GammaUpdateGunEffects` at `0x4c44a0`, then present one CharacterSelect frame.
+
+### 2026-11-09 — Gamma gun effects and the shadow blob seam (J, no gate)
+
+* Outcome: the private-asset frontier exits 1 at frame 1332 and now stops at `native_gamma_shadow_draw`. The picture is still the title hash. No actor frame is presented. Stock `game/imported` is a different, earlier stop and is not this route.
+* Changed: `gamma_gun_effects::update` owns `GammaUpdateGunEffects`. Mode 0 enters the idle frame, an empty lock list clears the marker, and the return clears the lock count. `gamma_shadow::update` owns `Shadow`: it asks for ground four units up, skips the blob when a logic tick was missed, and otherwise builds the flattened blob. The product has no land table, so the height is the image empty result. The blob itself stops at the unrecovered late draw.
+* Verified: gun unit test and oracle exit 0, 76 cases, 6 of 6 mutants. Shadow unit test and oracle exit 0, 72 cases, 6 of 6 mutants. The display composition test, given an idle pad, now stops at `native_gamma_shadow_draw` with 106 draws. The same-save frontier keeps the title hash, gamma pose, timer 146167 and two saves.
+* Not run: full gate, so `check_judge` and STATUS are not refreshed. The oracle suite was not run. Ghidra has no dossier for `0x4c44a0` or `0x49ee30`. Independent review was not available. The land walk and `late_DrawShadowObject` are outside the shadow oracle.
+* Stock `game/imported` has no `display_objects` key, so Gamma display asks for row 14 and the map is empty. The admitted pack `2929e8a6` carries the eight rows from `tools/import/gamma_display_resources.py`. That append is the route. Rebuilding the stock import is not required to present the private-asset frame.
+* Next: queue the shadow blob through the existing late-draw owner, then ground attributes, running effects, EntryColliList and underwater. A green gate and the additions-only judge refresh come after that checkpoint.
+
+### 2026-11-09 — Shadow blob stops at the late model queue (gate exit 2)
+
+* Outcome: the private-asset frontier still exits 1 at frame 1332. The stop is now `native_gamma_shadow_model_queue`. The picture is still the title hash. No actor frame is presented.
+* Changed: the shadow binding pushes, translates, rotates and scales the live matrix stack. A null common-texture list does not select one. A missing queued texture list returns and the caller pops. This frame has already selected a ready list, so the blob stops where `lateDrawModel` would allocate its node.
+* Verified: readability and provenance exit 0. The display composition test exits 0 with 106 draws and that stop. The same-save frontier keeps the title hash, gamma pose, timer 146167 and two saves. `make -j10 gate` on `52618b6c` exited 2. Provenance, readability and the unit tests that ran passed. `check_judge` was the failure: 14 inputs, the new gamma tests, probes, oracles and mutants, plus changed `manifest.tsv` and `native_gamma_display.mm`.
+* Not run: the additions-only judge refresh. The gate was not green, and that refresh refuses the changed display test. STATUS was not regenerated. Journeys did not run. The oracle suite is separate from this gate. Independent review was not available. No Ghidra dossier for the gun or shadow entries.
+* Stock `game/imported` still stops at display object row 14 because that pack has no `display_objects` key. The admitted pack `2929e8a6` has the eight rows. That remains a different route.
+* Next: recover the late model node and the type-6 queue body, then the empty-land ground attributes, EntryColliList and underwater.
+
+### 2026-11-09 — Oracle suite after the shadow-queue stop
+
+* Outcome: `make -k -j8 oracles` exited 2, then `verdict.py` on the 257 reports exited 1. Counts: 147 pass, 99 partial, 11 fail, none missing.
+* The gun, shadow and target-effects reports pass. `gamma_effects` is partial (559 FP partials, no value failures) and its exit 2 is why a plain `make oracles` stops.
+* Fails, none of them this slice's Gamma files: colored polygon, crt asin/atan2/fabs/floor, d3dx perspective, floor angles, player reaction, sonic initialization helpers, sse math, x87 memory.
+* Judge and STATUS remain unrefreshed. The gate on `52618b6c` is still exit 2.
+
+### 2026-11-09 — Late model node and the collision entry list (J, no gate)
+
+* Outcome: the Gamma display composition now stops at `native_gamma_underwater`. The shadow blob is a queued type-1 model node. No CharacterSelect frame is presented, because the frame still throws before consume.
+* Changed: `late_draw_model` owns `lateDrawModel`. The native queue consumer draws a type-1 record and still stops on every other type. Empty land returns 0 from ground attributes. `collision_component::enter_list` owns `EntryColliList` and files the task on the existing list for its id.
+* Verified: late-model oracle 48 cases, 6 of 6 mutants. Collision-entry oracle 48 cases, 6 of 6 mutants. Sprite-queue unit test still passes. Display test exits 0 with 106 draws, 3060 vertices, one queued model, and list 0 holding the task.
+* Not run: the frontier, the full gate, and the oracle suite. STATUS is not refreshed. The shadow mesh is not drawn yet; consume would stop at `native_gamma_shadow_mesh`. Independent review was not available.
+* Stock `game/imported` still stops at display object row 14 because that pack has no `display_objects` key. The admitted pack `2929e8a6` has the eight rows.
+* Next: `RunUnderwaterStuff`, then a presented CharacterSelect frame. The changed display test needs the evidenced judge refresh before the gate can be green.
+
+### 2026-11-09 — Green gate after the late model node (exit 0)
+
+* Outcome: `make -j10 gate` exited 0. 345 native programs, 658 Python tests, R1–R4 pass, and the three native menu journeys pass. Startup comparison passed 16 checkpoints. No CharacterSelect frame is presented. The display composition still stops at `native_gamma_underwater`.
+* Changed: the type-1 draw callback defaults so existing queue callers compile. The ten collision-list capacities are a reviewed numeric table. The save-warning review rebinds the title-scene header after a comment lost its addresses. The judge manifest records the late-model and collision inputs. Thresholds were not loosened.
+* Verified: `build/gate-88e28e7e.log` ends `GATE_EXIT:0`. The record is `reference/production-integration-20261109/late-model-collision-gate.json`. STATUS was regenerated from that record.
+* Not run: the oracle suite. The previous suite remains 147 pass, 99 partial, 11 fail. The eleventh fail is the `sonic_initialization-helpers` sidecar, which is not its own tracked slug. `gamma_effects` is still 559 FP partials and zero value failures. The two new oracles passed 48 cases before the gate and are now tracked. Independent review was not available. The frontier was not rerun.
+* Stock `game/imported` still stops at display object row 14 because that pack has no `display_objects` key. The admitted pack `2929e8a6` has the eight rows.
+* Next: `RunUnderwaterStuff`, including the position buffer at `0x43b960`, then draw the queued shadow mesh so a CharacterSelect frame can present.
+
+### 2026-11-09 — Frontier on 8674f74b, recovery stopped for the merge
+
+* Outcome: the normal-input frontier on this revision exits 1 at frame 1332, completed 1330. The stop is `native_gamma_underwater`. The screenshot is still the title hash `c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427`. No CharacterSelect frame is presented.
+* Pose: gamma mode 1, id 2, player index 5, character 6, status 1, position `[400, 0, -20]`, rotation `[0, 16384, 0]`. Timer 146167, two saves, selected save 1, pending logic ticks 0, stage 0.
+* Changed: nothing. `RunUnderwaterStuff` stays the named stub `native_gamma_underwater`. The shadow mesh is still not drawn. No new recovery was opened.
+* Verified: isolated copy of the admitted saves, private pack `2929e8a6`, the character-select key schedule, `--exit-after 1550`. The process status was `FRONTIER_EXIT:1`. Log `build/frontier-8674f74b/stderr.log`.
+* Not this slice: the oracle suite. It remains 147 pass, 99 partial, 11 fail. `gamma_effects` is still 559 FP partials and zero value failures. The 11 fails are colored polygon, crt asin/atan2/fabs/floor, d3dx perspective, floor angles, player reaction, sonic initialization helpers, sse math, and x87 memory. Independent review was not available.
+* Stock `game/imported` still stops at display object row 14 because that pack has no `display_objects` key. The admitted pack has the eight rows.
+* Next: `RunUnderwaterStuff` (`0x446f10`) on the bit-clear path, including the position buffer at `0x43b960`. The bit-set path stays a named failure until a frame reaches it. Then the type-1 shadow mesh, then a presented CharacterSelect frame.
+
+### 2026-11-09 — Wrap-up gate after the oracle summaries (J, exit 0)
+
+* Outcome: the rerun of `make -j10 gate` exited 0. 345 native programs, 658 Python tests, R1–R4 pass, and the three native menu journeys pass. Startup comparison passed 16 checkpoints. No CharacterSelect frame is presented.
+* The first wrap-up run exited 2. `build/gate-8674f74b-wrap.log` failed only because `late_model_queue.json` and `collision_entry.json` were unmanifested. The rerun is `build/gate-8674f74b-reregister.log`, `GATE_EXIT:0`, recorded as `oracle-summary-gate.json`.
+* Changed: the judge manifest hashes those two already-passing summaries. No product code changed. `RunUnderwaterStuff` stays the named stub `native_gamma_underwater`. The type-1 shadow mesh stays undrawn.
+* Frontier, from the entry above: exit 1 at frame 1332, completed 1330, stop `native_gamma_underwater`, title hash `c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427`.
+* Not run: the oracle suite. It remains 147 pass, 99 partial, 11 fail. Tracked census is 141 pass, 94 partial, 10 fail, 14 missing. The eleventh suite fail is the `sonic_initialization-helpers` sidecar. `gamma_effects` is still 559 FP partials and zero value failures. Independent review was not available.
+* The 11 suite fails are colored polygon, crt asin, atan2, fabs, floor, d3dx perspective, floor angles, player reaction, sonic initialization helpers, sse math, and x87 memory.
+* Stock `game/imported` still stops at display object row 14 because that pack has no `display_objects` key. The admitted pack `2929e8a6` has the eight rows.
+* Next: `RunUnderwaterStuff` (`0x446f10`) on the bit-clear path, including the position buffer at `0x43b960`. The bit-set path stays a named failure until a frame reaches it. Then the type-1 shadow mesh, then a presented CharacterSelect frame.
