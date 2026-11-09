@@ -1,12 +1,12 @@
 {
   "change": {
-    "base_commit": "3bf1675edf319b34f5e5f33f96386ecf8cb5017f",
-    "evidence": "reference/production-integration-20261104/judge-evidence.json",
-    "evidence_sha256": "a209a34b3c3939c5929a316a3fcb1af9fecdf797078aa7aebf54fb66c129654c",
-    "reason": "Track the rerun oracle summaries for the display recovery and the identifier migration"
+    "base_commit": "05d5e090d675ca06d0d5e7ad2a31119a438730ca",
+    "evidence": "reference/production-integration-20261109/mac-gate-before-judge.json",
+    "evidence_sha256": "013c177038960c9a939801685743635405b1e6200f31367d4f9af2dd50e72a41",
+    "reason": "Record the host-selectable Makefile, the inherited Gamma fan fixture stop, and the Gamma common-tail binding test after the Mac gate body passed. Darwin flags stay arm64/macOS 14. The 53 case bins are present and unchanged. No tolerance or expected value changed."
   },
   "files": {
-    "Makefile": "a505fa1dd1085332426d5b57dd6c179e67957e5d1983152d0489600fe6da0ab9",
+    "Makefile": "65769a94719339345b7cf5ac90308da6a7d8a76d5bf95b0eafdadba917103b88",
     "reference/address-dispatch-baseline-v1.json": "a55df9d554f6fc3e37a8916a3795c590f3b0daa5a7e4daed81156f7ae8fc7a64",
     "reference/constexpr-table-review.json": "abb419aa865a6e3b4252cffdd2b8cef2f0e63be290bba38366995160aeb170de",
     "reference/fp-control-census.json": "6e3c48227461edbcdc6a9c807a1596b8870178df7511981ee779c71dee09a505",
@@ -864,6 +864,7 @@
     "tests/unit/game_view_initial_state.cpp": "594b0ac38166af8fefcc48b50be0aaac0f73bb8311f27d841586e5f9bb76f629",
     "tests/unit/game_window.cpp": "7ff80ab6f632752ab5cde31fa87e19205fa69c80545eb5a43b59768ff12687d0",
     "tests/unit/game_winmain.cpp": "df9c8be23bfc3ddd5b076708029aee755e83c31a24c03a31d6da65cbc9a6e03c",
+    "tests/unit/gamma_common_tail_binding.cpp": "d33585e0d8e1698abe8e48dfa0623c128c9957df9379aa5a853afc00855f21c1",
     "tests/unit/gamma_cursors.cpp": "b314771f7ca2a836c672bfcfb8aeacbcca04d0e12d42bcfed028b3ded16205fa",
     "tests/unit/gamma_effects.cpp": "73fd33f578023934420598ff160439eb18bc71db886b866c6ba96014ed6c990d",
     "tests/unit/gamma_selection_core.cpp": "d6aadb3b53e94fed35b696822e1271b7eb2e23d5e908a5e0bf8b8ce4ea144db1",
@@ -938,7 +939,7 @@
     "tests/unit/main_menu_content.cpp": "9ae62d33ab3981c4050da8fd8ede955a08c2ecbcfd91d865de895e5d39c49145",
     "tests/unit/main_menu_eligibility.cpp": "0769bb1cd5d58da859399c2dc7082ca05d3ed8bd3704838e1c528b49ef9896cc",
     "tests/unit/main_menu_profile.cpp": "5c9e473de4a1fecaf1e1cbd9e14072919973cb8719c724de52cc95900ba9dace",
-    "tests/unit/manifest.tsv": "09bc4e2676d9c6a1410b35e2fbe2e4b64c538fed6505562c87ea235bb266d4b1",
+    "tests/unit/manifest.tsv": "4b67e002fbd91988b638ee4b42cd640f7c63d491c13d43470486b7a51afb9b93",
     "tests/unit/material_correction.cpp": "e866358fc8165d70c48a71b77ee5479198900842c3cfcd4de4ce65701d1f1a3a",
     "tests/unit/menu_dialog_control.cpp": "dcf53f00372f20ade1fcb0714f1fd184052077a5ac9709afd91840a0ffe6cb1a",
     "tests/unit/menu_draw_primitives.cpp": "e11ef8ad54979d33773aaecb47e1d1bbf115bd8e2b7f5115582a8718ed85543f",
@@ -977,7 +978,7 @@
     "tests/unit/native_gamma_binding.mm": "ed2965d0b2c6d5666f584b1355d19dabbc9b470726396ecabb42f60f78ac0794",
     "tests/unit/native_gamma_display.mm": "e1326308ed0073c3cf069844b493e1ac98b60cf5d4a0d4f645c301e09971c692",
     "tests/unit/native_gamma_effects.mm": "3c70e8acc9d6f2df35c7f72a0f5664c8e27f57ba1bbc389b6676e8f4eac6e394",
-    "tests/unit/native_gamma_fan.mm": "2800105d2c5ca3438dd52d2abdb4b536ec0775173454c2406a44e3abd8daff28",
+    "tests/unit/native_gamma_fan.mm": "46132544b408be04ba0a8563576b6a02762412c10a76ea58f3a59496d8fa188d",
     "tests/unit/native_gamma_input_buffer.mm": "da8d6563f0123923c20abcbe463d00efef3654c600447cec5702488a0d4282ad",
     "tests/unit/native_gamma_motion.mm": "dd1c48c69841e5b48b8789103ff77e69e024cdcdfb46df2a0b0feb6e661e0692",
     "tests/unit/native_gamma_vertex_weld.mm": "da60ecd814e7573e87e534593bcb1627c1357daadc6f0bb9af891ac527edd32f",

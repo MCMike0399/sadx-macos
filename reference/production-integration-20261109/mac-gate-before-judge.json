@@ -1,0 +1,56 @@
+{
+  "kind": "Mac gate evidence before judge refresh",
+  "date": "2026-11-09",
+  "host": "DiveMac",
+  "revision": "05d5e090d675ca06d0d5e7ad2a31119a438730ca",
+  "darwin_contract": {
+    "command": "make HOST_OS=Darwin -n build/obj/cpu/crt_integer.o",
+    "compile_line": "xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -MMD -MP -Isrc -Itests/fixtures -c src/cpu/crt_integer.cpp -o build/obj/cpu/crt_integer.o",
+    "contains_xcrun_clangpp": true,
+    "contains_arch_arm64": true,
+    "contains_macosx_version_min_14": true,
+    "contains_funsigned_char": false,
+    "archive_helper": "tools/build/static_archive.sh calls xcrun libtool -static on Darwin"
+  },
+  "frontier": {
+    "assets": "private tree from game/imported plus display/arm append",
+    "pack_sha256": "2929e8a6a9da83b5f2f7f533d21b4d87036e017d36da3773e81ffef9a7881b5e",
+    "canonical_prefix_sha256": "c414e173bf4bf9f803f24d61642e233ff9650fe9276d70da2ac3939fee2b5d7f",
+    "exit_status": 1,
+    "frames": 1332,
+    "stop": "native_gamma_update_target_effects",
+    "screenshot_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427",
+    "stock_imported_stop": "native_gamma_display_object_row_14",
+    "note": "Stock game/imported has no display_objects. The admitted stop requires the byte-identical append produced by tools/import/gamma_display_resources.py."
+  },
+  "make_gate": {
+    "command": "make -j10 gate",
+    "exit_status": 2,
+    "sole_recipe_failure": "check",
+    "check_judge_message": "make: *** [check] Error 1",
+    "violations": [
+      "changed judge input: Makefile",
+      "unmanifested judge input: tests/unit/gamma_common_tail_binding.cpp",
+      "changed judge input: tests/unit/manifest.tsv",
+      "changed judge input: tests/unit/native_gamma_fan.mm"
+    ],
+    "violation_count": 4,
+    "case_bins": "The 53 previously absent oracle bins are present in this checkout and were not violations."
+  },
+  "gate_recipe_run_after_check_failure": {
+    "journeys_exit": 0,
+    "journeys": "R1-R4 pass",
+    "native_journeys_exit": 0,
+    "native_journeys": [
+      "native-file-select",
+      "native-main-menu",
+      "native-fresh-save"
+    ],
+    "native_startup_diff_exit": 0,
+    "native_startup_checkpoints": 16
+  },
+  "not_changed": [
+    "No tolerance, expected value, fixture, or oracle case was edited to pass.",
+    "STATUS was not regenerated because make gate did not exit 0."
+  ]
+}

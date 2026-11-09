@@ -1152,3 +1152,11 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Verified: `gamma-common-tail-binding` checks the 25 floor, the sphere range, two child updates, and a null-child failure. It is on `make portable-units`.
 * Not run: full gate, oracles, native journeys and a source-only Mac build. `sonic.exe` is still absent, so `0x4c4da0` stays a stub. Metal, audio, controllers and 63 FPS remain uncertified.
 * Next: recover `GammaUpdateTargetEffects` from the pinned executable, then present one CharacterSelect frame. Commands stay in `reference/packets/linux-host-20261109/MAC-VALIDATION.md`.
+
+### 2026-11-09 — Mac gate is green at the same Gamma stop (J)
+
+* Outcome: DiveMac reproduces the admitted stop and `make -j10 gate` exits 0. The native game still stops at `native_gamma_update_target_effects` on the private display pack. The picture is still the title. No actor frame is presented.
+* Changed: the judge manifest records the host Makefile, the inherited fan fixture, and the common-tail binding test. Darwin compile flags stay xcrun, arm64, and macOS 14. No tolerance or expected value changed.
+* Verified: gate exit 0, 341 native programs, 658 Python tests, R1–R4, and the three native menu journeys. Startup comparison exit 0, 16 checkpoints. The private-asset frontier exits 1 at frame 1332 with the title hash.
+* Not run: the oracle suite. Stock `game/imported` still stops earlier at display object row 14 because that pack has no display objects. Ghidra kept no procedure at `0x4c4da0` after two imports. Independent review was not available.
+* Next: recover `GammaUpdateTargetEffects` from the disassembly and the two callee dossiers, then rerun the private-asset frontier.
