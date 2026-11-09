@@ -1160,3 +1160,11 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Verified: gate exit 0, 341 native programs, 658 Python tests, R1–R4, and the three native menu journeys. Startup comparison exit 0, 16 checkpoints. The private-asset frontier exits 1 at frame 1332 with the title hash.
 * Not run: the oracle suite. Stock `game/imported` still stops earlier at display object row 14 because that pack has no display objects. Ghidra kept no procedure at `0x4c4da0` after two imports. Independent review was not available.
 * Next: recover `GammaUpdateTargetEffects` from the disassembly and the two callee dossiers, then rerun the private-asset frontier.
+
+### 2026-11-09 — Gamma target effects, still on the title (J, no gate)
+
+* Outcome: the private-asset frontier exits 1 at frame 1332 on the admitted save and now stops at `native_gamma_update_gun_effects`. The picture is still the title hash. No actor frame is presented.
+* Changed: `gamma_target_effects::update` owns `GammaUpdateTargetEffects`. Mode 0 clears the scope, the lock timer and the distance, then the epilogue moves the scope from the task slot. Later modes keep the source order, including a cleared search id and the pressed reacquire.
+* Verified: `gamma-target-effects` unit test exits 0. The Unicorn oracle exits 0, verdict pass, 83 cases, 6 of 6 mutants caught. The same-save frontier matches the admitted title hash, gamma pose, timer and save count.
+* Not run: full gate, so `check_judge` and STATUS are not refreshed. The oracle suite was not run. Ghidra still has no procedure at `0x4c4da0`. Independent review was not available. Stock `game/imported` still stops at display object row 14.
+* Next: recover `GammaUpdateGunEffects` at `0x4c44a0`, then present one CharacterSelect frame.

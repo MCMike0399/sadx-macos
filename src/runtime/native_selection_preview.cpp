@@ -4,6 +4,7 @@
 #include "player/player_initialization.hpp"
 #include "runtime/native_event_actions_context.hpp"
 #include "runtime/native_sonic_context.hpp"
+#include "game/sound_effects.hpp"
 
 namespace sadx::native {
 // NOTSA: adapts the source preview to the actual scheduler, primary/motion owners
@@ -247,6 +248,17 @@ void TitleScene::exec_selection_gamma(TaskScheduler &scheduler, const TaskHandle
                                     scene.session_.mission_editor_status_};
     context.editor_state = &editor_state;
     context.normalized_input = scene.input_.normalized_input;
+    context.controller = [&scene](std::uint8_t slot) {
+        if (slot >= 8 || !scene.input_.action_mask || !scene.input_.pad_held || !scene.input_.pad_pressed)
+            throw flow::UnrecoveredGameFlowCall("native_gamma_target_effects_controller_slot");
+        return gamma_selection::Context::ControllerSample{scene.input_.action_mask(),
+                                                          scene.input_.pad_held(slot),
+                                                          scene.input_.pad_pressed(slot)};
+    };
+    context.play_effect = [&scene](std::int32_t tone) {
+        auto queue = scene.session_.sound_queue();
+        sound_effects::play_one_shot(tone, nullptr, 0, 0, queue);
+    };
     context.model_matrices = &scene.session_.model_matrices_;
     // The source common tail calls E102Display inside this invocation.
     if (!scene.session_.lighting_)

@@ -264,7 +264,10 @@ class Application {
                 return static_cast<std::int32_t>(input->key_state(index).pressed);
             },
             [this] { return input->pressed(0); },
-            &input->normalized_analogs()
+            &input->normalized_analogs(),
+            [this] { return input->button_masks()[0]; },
+            [this](std::uint8_t slot) { return input->engine_snapshot(slot).held; },
+            [this](std::uint8_t slot) { return input->engine_snapshot(slot).pressed; }
         });
         configure_movie();
     }

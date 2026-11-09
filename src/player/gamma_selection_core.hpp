@@ -152,7 +152,7 @@ void update_fan(Context &, Primary, const Player &, const TaskWorkHandle &);
 void display(Context &, const TaskHandle &);
 // STUB: SONIC 0x47eed0 E102Destruct
 void destroy(Context &, const TaskHandle &);
-// STUB: SONIC 0x4c4da0 GammaUpdateTargetEffects
+// NOTSA: native binding calls gamma_target_effects::update.
 void update_target_effects(Context &, Primary, const Player &, const TaskWorkHandle &);
 // STUB: SONIC 0x4c44a0 GammaUpdateGunEffects
 void update_gun_effects(Context &, const TaskHandle &, const Player &, const TaskWorkHandle &);
