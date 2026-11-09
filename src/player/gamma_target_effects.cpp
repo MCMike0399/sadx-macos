@@ -22,9 +22,11 @@ double image_double(std::uint64_t bits) {
     std::memcpy(&value, &bits, sizeof(value));
     return value;
 }
-// Binary64 constants at 0x7dcce8 and 0x7dccc8: -1/(2π) and +1/(2π).
-const double kNegativeTurn = image_double(0xbfc45f306bc4e30aULL);
-const double kPositiveTurn = image_double(0x3fc45f306bc4e30aULL);
+// -1/(2π) and +1/(2π), the two turn scales copied from the image.
+constexpr std::uint64_t kNegativeTurnBits = 0xbfc45f306bc4e30aULL;
+constexpr std::uint64_t kPositiveTurnBits = 0x3fc45f306bc4e30aULL;
+const double kNegativeTurn = image_double(kNegativeTurnBits);
+const double kPositiveTurn = image_double(kPositiveTurnBits);
 
 std::int32_t low_word(std::int64_t value) {
     return static_cast<std::int32_t>(static_cast<std::uint32_t>(value));

@@ -10,10 +10,14 @@ float image_float(std::uint32_t bits) {
     std::memcpy(&value, &bits, sizeof(value));
     return value;
 }
-const float kProbeLift = image_float(0x40800000u);   // 0x7dcc74
-const float kGapScale = image_float(0x3cf5c28fu);    // 0x7e00d0
-const float kGroundLift = image_float(0x3e99999au);  // 0x7dd540
-const float kFlatten = image_float(0x3f4ccccdu);     // 0x7dce5c
+constexpr std::uint32_t kProbeLiftBits = 0x40800000u;
+constexpr std::uint32_t kGapScaleBits = 0x3cf5c28fu;
+constexpr std::uint32_t kGroundLiftBits = 0x3e99999au;
+constexpr std::uint32_t kFlattenBits = 0x3f4ccccdu;
+const float kProbeLift = image_float(kProbeLiftBits);
+const float kGapScale = image_float(kGapScaleBits);
+const float kGroundLift = image_float(kGroundLiftBits);
+const float kFlatten = image_float(kFlattenBits);
 
 std::uint16_t low_negation(std::int32_t yaw) {
     return static_cast<std::uint16_t>(-static_cast<std::uint16_t>(yaw));

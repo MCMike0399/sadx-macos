@@ -48,17 +48,17 @@ struct Services {
     virtual void stop_lock_sound() = 0;
     virtual std::uintptr_t create_aim_task() = 0;
     virtual void store_aim(std::uintptr_t task, const AimPose &pose) = 0;
-    // STUB owner: SONIC 0x47f980. Reads the task mode byte, then one table byte.
+    // The lock table is unrecovered. It reads the task mode, then one table byte.
     virtual std::int32_t read_lock_table(std::int8_t task_mode) = 0;
     // E102WK+0xf4 list. Zero means the auxiliary pointer was null and the
     // source skips the call. A null task pointer is a source fault.
     virtual std::uintptr_t locked_subject(int index) = 0;
-    // STUB owner: SONIC 0x4cf060. The resolved auxiliary+8 value.
+    // Lock release is unrecovered. It receives the resolved subject.
     virtual void release_locked_target(std::uintptr_t subject) = 0;
 };
 
-// FUNCTION: SONIC 0x4c4da0 GammaUpdateTargetEffects
 // task_mode is the gamma taskwk mode byte consumed by the lock-table read.
+// FUNCTION: SONIC 0x4c4da0 GammaUpdateTargetEffects
 void update(LaserTarget &target, std::int8_t task_mode, Services &services,
             fidelity::Context &arithmetic);
 } // namespace sadx::gamma_target_effects

@@ -415,6 +415,29 @@ void store_work(TaskWorkArena &memory, const TaskWorkHandle &work, std::uint32_t
     if (!memory.write(work, at, &value, sizeof(value)))
         missing("native_gamma_target_effects_store");
 }
+constexpr std::uint32_t kLockCombo = 0x0a;
+constexpr std::uint32_t kShotCombo = 0x0c;
+constexpr std::uint32_t kLaserTimer = 0x10;
+constexpr std::uint32_t kLockTimer = 0x12;
+constexpr std::uint32_t kPositionX = 0x34;
+constexpr std::uint32_t kPositionY = 0x38;
+constexpr std::uint32_t kPositionZ = 0x3c;
+constexpr std::uint32_t kAimX = 0x40;
+constexpr std::uint32_t kAimY = 0x44;
+constexpr std::uint32_t kAimZ = 0x48;
+constexpr std::uint32_t kDistance = 0x4c;
+constexpr std::uint32_t kScope = 0x84;
+constexpr std::uint32_t kAimPoseX = 0x20;
+constexpr std::uint32_t kAimPoseY = 0x24;
+constexpr std::uint32_t kAimPoseZ = 0x28;
+constexpr std::uint32_t kAimYaw = 0x18;
+constexpr std::uint32_t kAimPitch = 0x1c;
+constexpr std::uint32_t kAimExtra = 0x10;
+constexpr std::uint32_t kCharge = 0x70;
+constexpr std::uint32_t kVariantWord = 0x80;
+constexpr std::uint32_t kFade = 0x90;
+constexpr std::int32_t kLockTone = 0x343;
+constexpr std::uint32_t kEmptyGroundBits = 0xc9742400u;
 // NOTSA: native boundary for GammaUpdateTargetEffects; source seam declared in the Gamma core.
 void update_target_effects(Context &context, Primary task, const Player &,
                            const TaskWorkHandle &allocation) {
@@ -429,18 +452,18 @@ void update_target_effects(Context &context, Primary task, const Player &,
     target.mode = static_cast<std::int8_t>(owned->laser_mode);
     target.gun_mode = static_cast<std::int8_t>(load_work<std::uint8_t>(memory, allocation, 1));
     target.lock_count = static_cast<std::int8_t>(load_work<std::uint8_t>(memory, allocation, 4));
-    target.lock_combo = load_work<std::int16_t>(memory, allocation, 0x0a);
-    target.shot_combo = load_work<std::int16_t>(memory, allocation, 0x0c);
-    target.laser_timer = load_work<std::int16_t>(memory, allocation, 0x10);
-    target.lock_timer = load_work<std::int16_t>(memory, allocation, 0x12);
-    target.position_x = load_work<float>(memory, allocation, 0x34);
-    target.position_y = load_work<float>(memory, allocation, 0x38);
-    target.position_z = load_work<float>(memory, allocation, 0x3c);
-    target.aim_x = load_work<float>(memory, allocation, 0x40);
-    target.aim_y = load_work<float>(memory, allocation, 0x44);
-    target.aim_z = load_work<float>(memory, allocation, 0x48);
-    target.distance = load_work<float>(memory, allocation, 0x4c);
-    target.scope = load_work<float>(memory, allocation, 0x84);
+    target.lock_combo = load_work<std::int16_t>(memory, allocation, kLockCombo);
+    target.shot_combo = load_work<std::int16_t>(memory, allocation, kShotCombo);
+    target.laser_timer = load_work<std::int16_t>(memory, allocation, kLaserTimer);
+    target.lock_timer = load_work<std::int16_t>(memory, allocation, kLockTimer);
+    target.position_x = load_work<float>(memory, allocation, kPositionX);
+    target.position_y = load_work<float>(memory, allocation, kPositionY);
+    target.position_z = load_work<float>(memory, allocation, kPositionZ);
+    target.aim_x = load_work<float>(memory, allocation, kAimX);
+    target.aim_y = load_work<float>(memory, allocation, kAimY);
+    target.aim_z = load_work<float>(memory, allocation, kAimZ);
+    target.distance = load_work<float>(memory, allocation, kDistance);
+    target.scope = load_work<float>(memory, allocation, kScope);
     target.search = owned->search_task ? reinterpret_cast<std::uintptr_t>(owned->search_task.get()) : 0;
     struct Product final : gamma_target_effects::Services {
         Context &context;
@@ -486,7 +509,7 @@ void update_target_effects(Context &context, Primary task, const Player &,
         void play_lock_sound() override {
             if (!context.play_effect)
                 missing("native_gamma_target_effects_lock_sound");
-            context.play_effect(0x343);
+            context.play_effect(kLockTone);
         }
         void stop_lock_sound() override { missing("native_gamma_stop_lock_sound"); }
         std::uintptr_t create_aim_task() override {
@@ -503,12 +526,12 @@ void update_target_effects(Context &context, Primary task, const Player &,
                 missing("native_gamma_target_effects_aim");
             const auto work = owned.aim_task->primary_work;
             auto &memory = arena(context);
-            store_work(memory, work, 0x20, pose.x);
-            store_work(memory, work, 0x24, pose.y);
-            store_work(memory, work, 0x28, pose.z);
-            store_work(memory, work, 0x18, pose.yaw);
-            store_work(memory, work, 0x1c, pose.pitch);
-            if (!memory.set_reference(work, 0x10, owned.allocation))
+            store_work(memory, work, kAimPoseX, pose.x);
+            store_work(memory, work, kAimPoseY, pose.y);
+            store_work(memory, work, kAimPoseZ, pose.z);
+            store_work(memory, work, kAimYaw, pose.yaw);
+            store_work(memory, work, kAimPitch, pose.pitch);
+            if (!memory.set_reference(work, kAimExtra, owned.allocation))
                 missing("native_gamma_target_effects_aim");
         }
         std::int32_t read_lock_table(std::int8_t) override {
@@ -559,18 +582,18 @@ void update_target_effects(Context &context, Primary task, const Player &,
     store_work(memory, allocation, 0, static_cast<std::uint8_t>(target.mode));
     store_work(memory, allocation, 1, static_cast<std::uint8_t>(target.gun_mode));
     store_work(memory, allocation, 4, static_cast<std::uint8_t>(target.lock_count));
-    store_work(memory, allocation, 0x0a, target.lock_combo);
-    store_work(memory, allocation, 0x0c, target.shot_combo);
-    store_work(memory, allocation, 0x10, target.laser_timer);
-    store_work(memory, allocation, 0x12, target.lock_timer);
-    store_work(memory, allocation, 0x34, target.position_x);
-    store_work(memory, allocation, 0x38, target.position_y);
-    store_work(memory, allocation, 0x3c, target.position_z);
-    store_work(memory, allocation, 0x40, target.aim_x);
-    store_work(memory, allocation, 0x44, target.aim_y);
-    store_work(memory, allocation, 0x48, target.aim_z);
-    store_work(memory, allocation, 0x4c, target.distance);
-    store_work(memory, allocation, 0x84, target.scope);
+    store_work(memory, allocation, kLockCombo, target.lock_combo);
+    store_work(memory, allocation, kShotCombo, target.shot_combo);
+    store_work(memory, allocation, kLaserTimer, target.laser_timer);
+    store_work(memory, allocation, kLockTimer, target.lock_timer);
+    store_work(memory, allocation, kPositionX, target.position_x);
+    store_work(memory, allocation, kPositionY, target.position_y);
+    store_work(memory, allocation, kPositionZ, target.position_z);
+    store_work(memory, allocation, kAimX, target.aim_x);
+    store_work(memory, allocation, kAimY, target.aim_y);
+    store_work(memory, allocation, kAimZ, target.aim_z);
+    store_work(memory, allocation, kDistance, target.distance);
+    store_work(memory, allocation, kScope, target.scope);
     if (target.search == 0)
         owned->search_task.reset();
 }
@@ -585,13 +608,13 @@ void update_gun_effects(Context &context, const TaskHandle &, const Player &,
     state.lock_count = static_cast<std::int8_t>(load_work<std::uint8_t>(memory, allocation, 4));
     state.armed = static_cast<std::int8_t>(load_work<std::uint8_t>(memory, allocation, 5));
     state.variant = static_cast<std::int8_t>(load_work<std::uint8_t>(memory, allocation, 6));
-    state.charge = load_work<float>(memory, allocation, 0x70);
-    state.variant_value = load_work<std::uint32_t>(memory, allocation, 0x80);
-    state.fade = load_work<float>(memory, allocation, 0x90);
+    state.charge = load_work<float>(memory, allocation, kCharge);
+    state.variant_value = load_work<std::uint32_t>(memory, allocation, kVariantWord);
+    state.fade = load_work<float>(memory, allocation, kFade);
     struct Product final : gamma_gun_effects::Services {
         std::uintptr_t select_lock(int) override { missing("native_gamma_gun_lock_select"); }
         std::uint8_t read_variant(std::uintptr_t) override { missing("native_gamma_gun_variant"); }
-        // The image leaves 0x3c5b2e4 zero, and this frame only reads index 0.
+        // The image leaves the variant table zero, and this frame only reads index 0.
         std::uint32_t variant_word(std::uint8_t) override { return 0; }
         void open_volley(gamma_gun_effects::GunState &, std::uintptr_t) override {
             missing("native_gamma_gun_volley");
@@ -603,9 +626,9 @@ void update_gun_effects(Context &context, const TaskHandle &, const Player &,
     store_work(memory, allocation, 4, static_cast<std::uint8_t>(state.lock_count));
     store_work(memory, allocation, 5, static_cast<std::uint8_t>(state.armed));
     store_work(memory, allocation, 6, static_cast<std::uint8_t>(state.variant));
-    store_work(memory, allocation, 0x70, state.charge);
-    store_work(memory, allocation, 0x80, state.variant_value);
-    store_work(memory, allocation, 0x90, state.fade);
+    store_work(memory, allocation, kCharge, state.charge);
+    store_work(memory, allocation, kVariantWord, state.variant_value);
+    store_work(memory, allocation, kFade, state.fade);
 }
 // NOTSA: native boundary for GammaUpdateHeldTask; source seam declared in the Gamma core.
 void update_held_task(Context &, Primary, const TaskWorkHandle &, const Player &) {
@@ -617,8 +640,8 @@ fidelity::ExactFloat shadow(Context &context, Primary task, float scale) {
     struct Product final : gamma_shadow::Services {
         Context &context;
         explicit Product(Context &context) : context(context) {}
-        // No land table is loaded on this route. The image then returns 0xc9742400
-        // and zero normals. A loaded table is still the unrecovered walk.
+        // No land table is loaded on this route, so the height is the image's
+        // empty-table constant. A loaded table is still the unrecovered walk.
         gamma_shadow::Ground sample_ground(float, float, float) override {
             return {image_height(), 0, 0};
         }
@@ -633,7 +656,7 @@ fidelity::ExactFloat shadow(Context &context, Primary task, float scale) {
         void draw(float) override { missing("native_gamma_shadow_draw"); }
         void pop_matrix() override { missing("native_gamma_shadow_draw"); }
         static float image_height() {
-            constexpr std::uint32_t bits = 0xc9742400u;
+            constexpr std::uint32_t bits = kEmptyGroundBits;
             float value;
             std::memcpy(&value, &bits, sizeof(value));
             return value;

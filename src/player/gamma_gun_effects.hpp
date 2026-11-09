@@ -23,11 +23,11 @@ struct GunState {
 // the source helper returns null and clears the marker.
 struct Services {
     virtual ~Services() = default;
-    // STUB owner: SONIC 0x4c38d0 once the lock count is positive.
+    // The lock selector is unrecovered once the lock count is positive.
     virtual std::uintptr_t select_lock(int pass) = 0;
-    // STUB owner: SONIC 0x4c3e40.
+    // The variant reader is unrecovered.
     virtual std::uint8_t read_variant(std::uintptr_t selected) = 0;
-    // GLOBAL: SONIC 0x3c5b2e4. The file leaves this table zero.
+    // The image leaves the variant table zero.
     virtual std::uint32_t variant_word(std::uint8_t variant) = 0;
     // STUB owner: the volley that starts at the CreateElementalTask in mode 2 / 5.
     virtual void open_volley(GunState &state, std::uintptr_t selected) = 0;

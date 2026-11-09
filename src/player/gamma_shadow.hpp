@@ -23,10 +23,10 @@ struct Ground {
 // The land walk and the queued blob stay behind Services.
 struct Services {
     virtual ~Services() = default;
-    // STUB owner: SONIC 0x49e920 once a land table is loaded. An empty table
+    // The land walk is unrecovered once a table is loaded. An empty table
     // returns the image constant and zero normals.
     virtual Ground sample_ground(float x, float y, float z) = 0;
-    // GLOBAL: SONIC 0x3b1117c. Nonzero skips the blob.
+    // Nonzero pending logic ticks skip the blob.
     virtual bool missed_frames() = 0;
     virtual void prepare() = 0;
     virtual void push_matrix() = 0;
@@ -39,7 +39,8 @@ struct Services {
     virtual void pop_matrix() = 0;
 };
 
-// FUNCTION: SONIC 0x49ee30 Shadow. Returns the ground height.
+// Returns the ground height.
+// FUNCTION: SONIC 0x49ee30 Shadow
 fidelity::ExactFloat update(const Body &body, float scale, Services &services,
                             fidelity::Context &arithmetic);
 } // namespace sadx::gamma_shadow

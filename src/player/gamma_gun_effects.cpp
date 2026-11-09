@@ -15,8 +15,9 @@ float image_float(std::uint32_t bits) {
     std::memcpy(&value, &bits, sizeof(value));
     return value;
 }
-// Binary32 constant at 0x7e6c50.
-const float kFadeStep = image_float(0x3d888889u);
+// The fade step copied from the image, about one fifteenth.
+constexpr std::uint32_t kFadeStepBits = 0x3d888889u;
+const float kFadeStep = image_float(kFadeStepBits);
 
 bool below(const fidelity::ExactFloat &value, float limit) {
     const auto comparison = value.compare(limit);
@@ -29,7 +30,7 @@ void finish(GunState &state) {
 }
 
 std::uintptr_t select_lock(GunState &state, int pass, Services &services) {
-    // 0x4c38d0 returns null without walking when the signed lock count is not positive.
+    // The lock selector returns null without walking when the signed count is not positive.
     if (state.lock_count <= 0) {
         state.marker = 0;
         return 0;

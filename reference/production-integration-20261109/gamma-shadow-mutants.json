@@ -1,8 +1,8 @@
 [
-  ["the probe is five units up", "kProbeLift = image_float(0x40800000u)", "kProbeLift = image_float(0x40a00000u)"],
-  ["the gap scale is larger", "kGapScale = image_float(0x3cf5c28fu)", "kGapScale = image_float(0x3d4ccccdu)"],
-  ["the blob sits higher", "kGroundLift = image_float(0x3e99999au)", "kGroundLift = image_float(0x3ecccccdu)"],
-  ["the blob is not flattened", "kFlatten = image_float(0x3f4ccccdu)", "kFlatten = image_float(0x3f800000u)"],
+  ["the probe is five units up", "kProbeLiftBits = 0x40800000u", "kProbeLiftBits = 0x40a00000u"],
+  ["the gap scale is larger", "kGapScaleBits = 0x3cf5c28fu", "kGapScaleBits = 0x3d4ccccdu"],
+  ["the blob sits higher", "kGroundLiftBits = 0x3e99999au", "kGroundLiftBits = 0x3ecccccdu"],
+  ["the blob is not flattened", "kFlattenBits = 0x3f4ccccdu", "kFlattenBits = 0x3f800000u"],
   ["yaw is not negated", "return static_cast<std::uint16_t>(-static_cast<std::uint16_t>(yaw));", "return static_cast<std::uint16_t>(yaw);"],
   ["missed frames still draw", "if (services.missed_frames())", "if (false && services.missed_frames())"]
 ]
