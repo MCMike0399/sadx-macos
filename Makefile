@@ -5,8 +5,25 @@
 #   add an oracle     : tests/probes/native_<slug>_probe.cpp + tools/oracles/verify_original_<slug>.py
 #                       (target oracle-<slug-with-dashes> appears by itself; manifest.tsv only for non-default inputs)
 #   add a mac program : src/apps/<name>.mm + a rule next to sadx-app below
+# Darwin is the product host: Apple ARM64, macOS 14, xcrun and libtool.
+# Any other host builds the portable core for the machine running the tests.
+# Linux plain char is signed; the Apple ARM64 product ABI is unsigned.
+HOST_OS := $(shell uname -s)
+ifndef HOST_OS
+HOST_OS := $(shell uname -s)
+endif
+ifeq ($(HOST_OS),Darwin)
 CXX := xcrun clang++
-CXXFLAGS := -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0
+HOST_ARCH_FLAGS := -arch arm64 -mmacosx-version-min=14.0
+HOST_LINK_GC := -Wl,-dead_strip
+SAVE_POLICY_SDK := $(shell xcrun --sdk macosx --show-sdk-path)/SDKSettings.json
+else
+CXX := clang++
+HOST_ARCH_FLAGS := -funsigned-char
+HOST_LINK_GC :=
+SAVE_POLICY_SDK :=
+endif
+CXXFLAGS := -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math $(HOST_ARCH_FLAGS)
 MACFLAGS := -fobjc-arc
 MAC_FRAMEWORKS := -framework Foundation -framework AppKit -framework Metal -framework MetalKit -framework QuartzCore -framework CoreGraphics -framework ImageIO -framework GameController -framework AudioToolbox -framework AVFoundation -framework CoreMedia -framework CoreVideo
 NATIVE_CONTROLLER_CMAKE ?= cmake
@@ -54,9 +71,9 @@ PROBE_SOURCES := $(wildcard tests/probes/native_*_probe.cpp)
 PROBE_NAMES := $(patsubst tests/probes/native_%_probe.cpp,%,$(PROBE_SOURCES))
 PROBE_TARGETS := $(foreach n,$(PROBE_NAMES),build/native-$(subst _,-,$(n))-probe.dylib)
 
-SOFTFLOAT_FILES := $(wildcard third_party/softfloat/source/*.c third_party/softfloat/source/include/*.h third_party/softfloat/source/8086/*.c third_party/softfloat/source/8086/*.h) third_party/softfloat/platform.h third_party/softfloat/sources.txt third_party/softfloat/build.sh
-SOFTFLOAT_SSE_FILES := $(wildcard third_party/softfloat_sse/source/*.c third_party/softfloat_sse/source/8086-SSE/*) third_party/softfloat_sse/sources.txt third_party/softfloat_sse/build.sh
-BOCHS_FILES := $(wildcard third_party/bochs_fpatan/source/fpu/* third_party/bochs_fpatan/source/softfloat3e/*.cc third_party/bochs_fpatan/source/softfloat3e/include/*.h) third_party/bochs_fpatan/math.hpp third_party/bochs_fpatan/config.h third_party/bochs_fpatan/sources.txt third_party/bochs_fpatan/build.sh
+SOFTFLOAT_FILES := $(wildcard third_party/softfloat/source/*.c third_party/softfloat/source/include/*.h third_party/softfloat/source/8086/*.c third_party/softfloat/source/8086/*.h) third_party/softfloat/platform.h third_party/softfloat/sources.txt third_party/softfloat/build.sh third_party/host-toolchain.sh
+SOFTFLOAT_SSE_FILES := $(wildcard third_party/softfloat_sse/source/*.c third_party/softfloat_sse/source/8086-SSE/*) third_party/softfloat_sse/sources.txt third_party/softfloat_sse/build.sh third_party/host-toolchain.sh
+BOCHS_FILES := $(wildcard third_party/bochs_fpatan/source/fpu/* third_party/bochs_fpatan/source/softfloat3e/*.cc third_party/bochs_fpatan/source/softfloat3e/include/*.h) third_party/bochs_fpatan/math.hpp third_party/bochs_fpatan/config.h third_party/bochs_fpatan/sources.txt third_party/bochs_fpatan/build.sh third_party/host-toolchain.sh
 
 .PHONY: m1 all assets test unit-tests run-unit-tests probes oracles oracles-verdict render controllers check gate clean manifests app-smoke status
 all: build/sadx-metal build/libsadx-core.a build/libsadx-macos.a build/libsadx-guest.a build/sadx-boot build/sadx-app
@@ -86,17 +103,19 @@ build/softfloat/softfloat.a: $(SOFTFLOAT_FILES) | build
 build/softfloat_sse/softfloat-sse.a: $(SOFTFLOAT_SSE_FILES) $(SOFTFLOAT_FILES) | build
 	sh third_party/softfloat_sse/build.sh build/softfloat_sse
 build/bochs_fpatan/libbochs_fpatan.a: $(BOCHS_FILES) | build
-	CXX="$(shell xcrun --find clang++)" sh third_party/bochs_fpatan/build.sh build/bochs_fpatan
+	sh third_party/bochs_fpatan/build.sh build/bochs_fpatan
 
 # The three archives: portable core, mac platform, guest CPU (+ the hle layer above it).
-build/libsadx-core.a: $(CORE_OBJECTS) build/softfloat_sse/softfloat-sse.a build/softfloat/softfloat.a build/bochs_fpatan/libbochs_fpatan.a
-	xcrun libtool -static -o $@ $^
-build/libsadx-macos.a: $(MAC_OBJECTS)
-	xcrun libtool -static -o $@ $^
-build/libsadx-guest.a: $(GUEST_OBJECTS)
-	xcrun libtool -static -o $@ $^
-build/libsadx-native.a: $(NATIVE_OBJECTS) build/softfloat_sse/softfloat-sse.a build/softfloat/softfloat.a build/bochs_fpatan/libbochs_fpatan.a native-sources.txt
-	xcrun libtool -static -o $@ $(filter %.o %.a,$^)
+# Darwin libtool merges nested arithmetic archives. The Linux ar helper does the same
+# flatten; a nested .a member is not a linkable object.
+build/libsadx-core.a: $(CORE_OBJECTS) build/softfloat_sse/softfloat-sse.a build/softfloat/softfloat.a build/bochs_fpatan/libbochs_fpatan.a tools/build/static_archive.sh
+	sh tools/build/static_archive.sh $@ $(filter %.o %.a,$^)
+build/libsadx-macos.a: $(MAC_OBJECTS) tools/build/static_archive.sh
+	sh tools/build/static_archive.sh $@ $(filter %.o %.a,$^)
+build/libsadx-guest.a: $(GUEST_OBJECTS) tools/build/static_archive.sh
+	sh tools/build/static_archive.sh $@ $(filter %.o %.a,$^)
+build/libsadx-native.a: $(NATIVE_OBJECTS) build/softfloat_sse/softfloat-sse.a build/softfloat/softfloat.a build/bochs_fpatan/libbochs_fpatan.a native-sources.txt tools/build/static_archive.sh
+	sh tools/build/static_archive.sh $@ $(filter %.o %.a,$^)
 
 # Programs (src/apps).
 build/sadx-boot: src/apps/sadx_boot.cpp build/libsadx-macos.a build/libsadx-guest.a build/libsadx-core.a
@@ -118,6 +137,23 @@ build/sadx-native-closure: src/apps/sadx_native.mm build/libsadx-native.a $(NATI
 .PHONY: native-closure
 native-closure: build/sadx-native-closure
 	python3 tools/gate/check_native_closure.py --archive build/libsadx-native.a --platform $(NATIVE_PLATFORM_OBJECTS) --sources $(NATIVE_SOURCES) --linked build/sadx-native-closure
+# Development host only. Builds the portable archives and unit tests that do not
+# need Apple frameworks, Unicorn, the original executable, or a presented frame.
+# It does not certify Metal, AppKit, audio, controllers, or the 63 FPS cadence.
+.PHONY: portable portable-units
+PORTABLE_UNITS := build/editor-state-test build/executable-image-test build/executable-image-edges-test \
+	build/gamma-cursors-test build/gamma-setup-resource-test build/sprite-registry-test \
+	build/selection-player-queries-test build/task-scheduler-contract-test build/vector-normalize-test \
+	build/native-frame-control-test build/native-game-mode-test build/game-mode-forwarding-test \
+	build/private-native-assets-test
+portable: build/libsadx-core.a build/libsadx-native.a
+portable-units: $(PORTABLE_UNITS)
+	@fail=0; \
+	for unit in $(PORTABLE_UNITS); do \
+		printf 'RUN %s\n' "$$unit"; \
+		if ! "./$$unit"; then printf 'FAIL %s\n' "$$unit"; fail=1; fi; \
+	done; \
+	exit $$fail
 NATIVE_ASSETS ?= game/imported
 .PHONY: voice-playback-fixture
 voice-playback-fixture:
@@ -533,11 +569,11 @@ $(TASK_REFERENCE_TARGETS): src/guest/task_reference.hpp src/player/player_auxili
 
 # Before-source save owner characterization; explicit transitive headers.
 build/save-io-characterization-test: src/cpu/crt_integer.hpp src/cpu/fidelity_float.hpp src/cpu/x87_math.hpp src/cpu/x87_transcendental.hpp src/engine/character_resources.hpp src/engine/graphics_frame.hpp src/engine/native_texture_lifetime.hpp src/engine/ninja_texture.hpp src/engine/sprite_immediate.hpp src/engine/task.hpp src/engine/task_work.hpp src/game/file_select.cpp src/game/file_select.hpp src/game/game_bootstrap.hpp src/game/game_cleanup.hpp src/game/music_state.hpp src/game/save_data.cpp src/game/save_data.hpp src/game/save_file_list.cpp src/game/save_file_list.hpp src/game/save_file_name.hpp src/game/save_write.cpp src/game/save_write.hpp src/game/sound_initial_state.hpp src/game/title_menu.hpp src/math/ninja_math.hpp tests/unit/save_io_characterization.cpp
-	$(CXX) $(CXXFLAGS) $(INCLUDES) -Wl,-dead_strip tests/unit/save_io_characterization.cpp src/game/save_write.cpp src/game/save_file_list.cpp src/game/save_data.cpp src/game/file_select.cpp -o $@
+	$(CXX) $(CXXFLAGS) $(INCLUDES) $(HOST_LINK_GC) tests/unit/save_io_characterization.cpp src/game/save_write.cpp src/game/save_file_list.cpp src/game/save_data.cpp src/game/file_select.cpp -o $@
 
 # Before-source save owner characterization; explicit transitive headers.
 build/save-frame-characterization-test: src/cpu/x87_math.hpp src/engine/character_resources.hpp src/engine/controller_values.hpp src/engine/frame_control_fwd.hpp src/engine/game_controller.hpp src/engine/game_frame_control.hpp src/engine/game_logic.hpp src/engine/game_logic_support.hpp src/engine/graphics_frame.hpp src/engine/native_texture_lifetime.hpp src/engine/ninja_texture.hpp src/engine/speedrun.hpp src/engine/sprite_immediate.hpp src/engine/task.hpp src/engine/task_work.hpp src/game/game_bootstrap.hpp src/game/game_cleanup.hpp src/game/game_loop.hpp src/game/menu_caption.hpp src/game/music_state.hpp src/game/save_data.hpp src/game/save_frame.cpp src/game/save_frame.hpp src/game/sound_initial_state.hpp src/guest/frame_control_reference.hpp src/guest/game_loop.cpp tests/unit/save_frame_characterization.cpp
-	$(CXX) $(CXXFLAGS) $(INCLUDES) -Wl,-dead_strip tests/unit/save_frame_characterization.cpp src/game/save_frame.cpp src/guest/game_loop.cpp -o $@
+	$(CXX) $(CXXFLAGS) $(INCLUDES) $(HOST_LINK_GC) tests/unit/save_frame_characterization.cpp src/game/save_frame.cpp src/guest/game_loop.cpp -o $@
 
 # Finite native mode forwarding and complete tagged reference diagnostics.
 build/game-mode-forwarding-test: tests/unit/game_mode_forwarding.cpp src/game/game_mode.cpp src/game/game_mode_native.cpp src/game/game_mode.hpp src/game/game_mode_internal.hpp src/game/game_mode_services.hpp | build
@@ -553,8 +589,8 @@ build/sse-math-contract-test: tests/unit/sse_math_contract.cpp src/cpu/sse_math.
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -I. tests/unit/sse_math_contract.cpp src/cpu/sse_math.cpp src/cpu/x87_math.cpp build/softfloat_sse/softfloat-sse.a build/softfloat/softfloat.a -o $@
 
 # Explicit sentinel identity and reentrant save scheduling; no guest linkage.
-build/save-policy-boundaries-test: $(shell xcrun --sdk macosx --show-sdk-path)/SDKSettings.json src/cpu/crt_integer.hpp src/cpu/fidelity_float.hpp src/cpu/x87_math.hpp src/cpu/x87_transcendental.hpp src/engine/character_resources.hpp src/engine/graphics_frame.hpp src/engine/native_texture_lifetime.hpp src/engine/ninja_texture.hpp src/engine/sprite_immediate.hpp src/engine/task.hpp src/engine/task_work.hpp src/game/file_select.cpp src/game/file_select.hpp src/game/game_bootstrap.hpp src/game/game_cleanup.hpp src/game/menu_caption.hpp src/game/music_state.hpp src/game/save_data.cpp src/game/save_data.hpp src/game/save_file_list.cpp src/game/save_file_list.hpp src/game/save_frame.cpp src/game/save_frame.hpp src/game/sound_initial_state.hpp src/game/title_menu.hpp src/math/ninja_math.hpp tests/unit/save_policy_boundaries.cpp
-	$(CXX) $(CXXFLAGS) $(INCLUDES) -Wl,-dead_strip tests/unit/save_policy_boundaries.cpp src/game/save_file_list.cpp src/game/save_frame.cpp src/game/save_data.cpp src/game/file_select.cpp -o $@
+build/save-policy-boundaries-test: $(SAVE_POLICY_SDK) src/cpu/crt_integer.hpp src/cpu/fidelity_float.hpp src/cpu/x87_math.hpp src/cpu/x87_transcendental.hpp src/engine/character_resources.hpp src/engine/graphics_frame.hpp src/engine/native_texture_lifetime.hpp src/engine/ninja_texture.hpp src/engine/sprite_immediate.hpp src/engine/task.hpp src/engine/task_work.hpp src/game/file_select.cpp src/game/file_select.hpp src/game/game_bootstrap.hpp src/game/game_cleanup.hpp src/game/menu_caption.hpp src/game/music_state.hpp src/game/save_data.cpp src/game/save_data.hpp src/game/save_file_list.cpp src/game/save_file_list.hpp src/game/save_frame.cpp src/game/save_frame.hpp src/game/sound_initial_state.hpp src/game/title_menu.hpp src/math/ninja_math.hpp tests/unit/save_policy_boundaries.cpp
+	$(CXX) $(CXXFLAGS) $(INCLUDES) $(HOST_LINK_GC) tests/unit/save_policy_boundaries.cpp src/game/save_file_list.cpp src/game/save_frame.cpp src/game/save_data.cpp src/game/file_select.cpp -o $@
 
 # Gamma setup witnesses keep their reentrant allocator seam separate from production CAlloc.
 build/sprite-registry-test: tests/unit/sprite_registry.cpp src/engine/sprite_registry.cpp src/engine/task_work.cpp src/engine/sprite_registry.hpp src/engine/task_work.hpp
