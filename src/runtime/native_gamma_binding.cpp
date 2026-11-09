@@ -6,6 +6,8 @@
 #include "player/gamma_input_buffer.hpp"
 #include "player/gamma_fan.hpp"
 #include "player/gamma_target_effects.hpp"
+#include "player/gamma_gun_effects.hpp"
+#include "player/gamma_shadow.hpp"
 #include "game/game_mode.hpp"
 #include <cstring>
 #include <stdexcept>
@@ -573,16 +575,71 @@ void update_target_effects(Context &context, Primary task, const Player &,
         owned->search_task.reset();
 }
 // NOTSA: native boundary for GammaUpdateGunEffects; source seam declared in the Gamma core.
-void update_gun_effects(Context &, const TaskHandle &, const Player &, const TaskWorkHandle &) {
-    missing("native_gamma_update_gun_effects");
+void update_gun_effects(Context &context, const TaskHandle &, const Player &,
+                        const TaskWorkHandle &allocation) {
+    auto &memory = arena(context);
+    gamma_gun_effects::GunState state;
+    state.laser_mode = static_cast<std::int8_t>(load_work<std::uint8_t>(memory, allocation, 0));
+    state.mode = static_cast<std::int8_t>(load_work<std::uint8_t>(memory, allocation, 1));
+    state.marker = static_cast<std::int8_t>(load_work<std::uint8_t>(memory, allocation, 2));
+    state.lock_count = static_cast<std::int8_t>(load_work<std::uint8_t>(memory, allocation, 4));
+    state.armed = static_cast<std::int8_t>(load_work<std::uint8_t>(memory, allocation, 5));
+    state.variant = static_cast<std::int8_t>(load_work<std::uint8_t>(memory, allocation, 6));
+    state.charge = load_work<float>(memory, allocation, 0x70);
+    state.variant_value = load_work<std::uint32_t>(memory, allocation, 0x80);
+    state.fade = load_work<float>(memory, allocation, 0x90);
+    struct Product final : gamma_gun_effects::Services {
+        std::uintptr_t select_lock(int) override { missing("native_gamma_gun_lock_select"); }
+        std::uint8_t read_variant(std::uintptr_t) override { missing("native_gamma_gun_variant"); }
+        // The image leaves 0x3c5b2e4 zero, and this frame only reads index 0.
+        std::uint32_t variant_word(std::uint8_t) override { return 0; }
+        void open_volley(gamma_gun_effects::GunState &, std::uintptr_t) override {
+            missing("native_gamma_gun_volley");
+        }
+    } services;
+    gamma_gun_effects::update(state, services, context.rendering.arithmetic());
+    store_work(memory, allocation, 1, static_cast<std::uint8_t>(state.mode));
+    store_work(memory, allocation, 2, static_cast<std::uint8_t>(state.marker));
+    store_work(memory, allocation, 4, static_cast<std::uint8_t>(state.lock_count));
+    store_work(memory, allocation, 5, static_cast<std::uint8_t>(state.armed));
+    store_work(memory, allocation, 6, static_cast<std::uint8_t>(state.variant));
+    store_work(memory, allocation, 0x70, state.charge);
+    store_work(memory, allocation, 0x80, state.variant_value);
+    store_work(memory, allocation, 0x90, state.fade);
 }
 // NOTSA: native boundary for GammaUpdateHeldTask; source seam declared in the Gamma core.
 void update_held_task(Context &, Primary, const TaskWorkHandle &, const Player &) {
     missing("native_gamma_update_held_task");
 }
 // NOTSA: native boundary for Shadow; source seam declared in the Gamma core.
-fidelity::ExactFloat shadow(Context &, Primary, float) {
-    missing("native_gamma_shadow");
+fidelity::ExactFloat shadow(Context &context, Primary task, float scale) {
+    gamma_shadow::Body body{task.position.x, task.position.y, task.position.z, task.rotation[1]};
+    struct Product final : gamma_shadow::Services {
+        Context &context;
+        explicit Product(Context &context) : context(context) {}
+        // No land table is loaded on this route. The image then returns 0xc9742400
+        // and zero normals. A loaded table is still the unrecovered walk.
+        gamma_shadow::Ground sample_ground(float, float, float) override {
+            return {image_height(), 0, 0};
+        }
+        bool missed_frames() override { return context.rendering.pending_logic_ticks() != 0; }
+        void prepare() override { missing("native_gamma_shadow_draw"); }
+        void push_matrix() override { missing("native_gamma_shadow_draw"); }
+        void translate(float, float, float) override { missing("native_gamma_shadow_draw"); }
+        void rotate_z(std::uint16_t) override { missing("native_gamma_shadow_draw"); }
+        void rotate_x(std::uint16_t) override { missing("native_gamma_shadow_draw"); }
+        void rotate_y(std::uint16_t) override { missing("native_gamma_shadow_draw"); }
+        void scale(float, float, float) override { missing("native_gamma_shadow_draw"); }
+        void draw(float) override { missing("native_gamma_shadow_draw"); }
+        void pop_matrix() override { missing("native_gamma_shadow_draw"); }
+        static float image_height() {
+            constexpr std::uint32_t bits = 0xc9742400u;
+            float value;
+            std::memcpy(&value, &bits, sizeof(value));
+            return value;
+        }
+    } services(context);
+    return gamma_shadow::update(body, scale, services, context.rendering.arithmetic());
 }
 // NOTSA: native boundary for GammaGroundAttributes; source seam declared in the Gamma core.
 std::uint32_t ground_attributes(Context &, Primary) {

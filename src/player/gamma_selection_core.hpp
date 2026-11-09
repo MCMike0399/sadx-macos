@@ -154,11 +154,11 @@ void display(Context &, const TaskHandle &);
 void destroy(Context &, const TaskHandle &);
 // NOTSA: native binding calls gamma_target_effects::update.
 void update_target_effects(Context &, Primary, const Player &, const TaskWorkHandle &);
-// STUB: SONIC 0x4c44a0 GammaUpdateGunEffects
+// NOTSA: native binding calls gamma_gun_effects::update.
 void update_gun_effects(Context &, const TaskHandle &, const Player &, const TaskWorkHandle &);
 // STUB: SONIC 0x481180 GammaUpdateHeldTask
 void update_held_task(Context &, Primary, const TaskWorkHandle &, const Player &);
-// STUB: SONIC 0x49ee30 Shadow
+// NOTSA: native binding calls gamma_shadow::update.
 fidelity::ExactFloat shadow(Context &, Primary, float scale);
 // STUB: SONIC 0x4c2f50 GammaGroundAttributes
 std::uint32_t ground_attributes(Context &, Primary);

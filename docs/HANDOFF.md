@@ -1168,3 +1168,12 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Verified: `gamma-target-effects` unit test exits 0. The Unicorn oracle exits 0, verdict pass, 83 cases, 6 of 6 mutants caught. The same-save frontier matches the admitted title hash, gamma pose, timer and save count.
 * Not run: full gate, so `check_judge` and STATUS are not refreshed. The oracle suite was not run. Ghidra still has no procedure at `0x4c4da0`. Independent review was not available. Stock `game/imported` still stops at display object row 14.
 * Next: recover `GammaUpdateGunEffects` at `0x4c44a0`, then present one CharacterSelect frame.
+
+### 2026-11-09 — Gamma gun effects and the shadow blob seam (J, no gate)
+
+* Outcome: the private-asset frontier exits 1 at frame 1332 and now stops at `native_gamma_shadow_draw`. The picture is still the title hash. No actor frame is presented. Stock `game/imported` is a different, earlier stop and is not this route.
+* Changed: `gamma_gun_effects::update` owns `GammaUpdateGunEffects`. Mode 0 enters the idle frame, an empty lock list clears the marker, and the return clears the lock count. `gamma_shadow::update` owns `Shadow`: it asks for ground four units up, skips the blob when a logic tick was missed, and otherwise builds the flattened blob. The product has no land table, so the height is the image empty result. The blob itself stops at the unrecovered late draw.
+* Verified: gun unit test and oracle exit 0, 76 cases, 6 of 6 mutants. Shadow unit test and oracle exit 0, 72 cases, 6 of 6 mutants. The same-save frontier keeps the title hash, gamma pose, timer 146167 and two saves. After gun effects the stop was `native_gamma_shadow`; after the shadow body it is `native_gamma_shadow_draw`.
+* Not run: full gate, so `check_judge` and STATUS are not refreshed. The oracle suite was not run. Ghidra has no dossier for `0x4c44a0` or `0x49ee30`. Independent review was not available. The land walk and `late_DrawShadowObject` are outside the shadow oracle.
+* Stock `game/imported` has no `display_objects` key, so Gamma display asks for row 14 and the map is empty. The admitted pack `2929e8a6` carries the eight rows from `tools/import/gamma_display_resources.py`. That append is the route. Rebuilding the stock import is not required to present the private-asset frame.
+* Next: queue the shadow blob through the existing late-draw owner, then ground attributes, running effects, EntryColliList and underwater. A green gate and the additions-only judge refresh come after that checkpoint.

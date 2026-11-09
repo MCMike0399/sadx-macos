@@ -102,6 +102,7 @@ class Display {
     void apply_fog_emulation_setting(std::int32_t value);
     void disable_fog();
     void reset_material();
+    std::int32_t pending_logic_ticks() const { return frame_mode_.pending_logic_ticks; }
     void set_alpha_test_enabled(bool enabled);
     menu_caption::DeferredRelease &message_texture_releases() { return message_texture_releases_; }
     const menu_caption::DeferredRelease &message_texture_releases() const {
