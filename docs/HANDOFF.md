@@ -1202,3 +1202,12 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Not run: the frontier, the full gate, and the oracle suite. STATUS is not refreshed. The shadow mesh is not drawn yet; consume would stop at `native_gamma_shadow_mesh`. Independent review was not available.
 * Stock `game/imported` still stops at display object row 14 because that pack has no `display_objects` key. The admitted pack `2929e8a6` has the eight rows.
 * Next: `RunUnderwaterStuff`, then a presented CharacterSelect frame. The changed display test needs the evidenced judge refresh before the gate can be green.
+
+### 2026-11-09 — Green gate after the late model node (exit 0)
+
+* Outcome: `make -j10 gate` exited 0. 345 native programs, 658 Python tests, R1–R4 pass, and the three native menu journeys pass. Startup comparison passed 16 checkpoints. No CharacterSelect frame is presented. The display composition still stops at `native_gamma_underwater`.
+* Changed: the type-1 draw callback defaults so existing queue callers compile. The ten collision-list capacities are a reviewed numeric table. The save-warning review rebinds the title-scene header after a comment lost its addresses. The judge manifest records the late-model and collision inputs. Thresholds were not loosened.
+* Verified: `build/gate-88e28e7e.log` ends `GATE_EXIT:0`. The record is `reference/production-integration-20261109/late-model-collision-gate.json`. STATUS was regenerated from that record.
+* Not run: the oracle suite. The previous suite remains 147 pass, 99 partial, 11 fail. The eleventh fail is the `sonic_initialization-helpers` sidecar, which is not its own tracked slug. `gamma_effects` is still 559 FP partials and zero value failures. The two new oracles passed 48 cases before the gate and are now tracked. Independent review was not available. The frontier was not rerun.
+* Stock `game/imported` still stops at display object row 14 because that pack has no `display_objects` key. The admitted pack `2929e8a6` has the eight rows.
+* Next: `RunUnderwaterStuff`, including the position buffer at `0x43b960`, then draw the queued shadow mesh so a CharacterSelect frame can present.

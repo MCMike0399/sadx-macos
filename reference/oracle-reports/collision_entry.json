@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "values_match": true,
+  "cases": 48,
+  "mismatches": 0,
+  "faults": 0,
+  "holdout_index": 24,
+  "source_range_sha256": "f3ccadcee4adc25094e5104f7bdd2af7b589af9f2d7f4dd480f38d39a491aef4",
+  "source": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "entry": "0x41c280",
+  "samples": [],
+  "limits": [
+    "CCL_ClearInfo runs. The info walk is held at count 0 so only the status byte and hit count are compared.",
+    "The source stores the taskwk. The native slot stores the task that owns that primary, so the pointer word itself is not compared.",
+    "Ids 2 and 3 also store the collision work. The other ids do not.",
+    "A DestroyTask exec returns before the special-stage word is written."
+  ]
+}
