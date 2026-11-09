@@ -164,13 +164,13 @@ fidelity::ExactFloat shadow(Context &, Primary, float scale);
 std::uint32_t ground_attributes(Context &, Primary);
 // STUB: SONIC 0x4c33c0 GammaRunningEffects
 void running_effects(Context &, Primary, const TaskWorkHandle &, const Player &);
-// NOTSA: pending native seam; the source entry belongs to collision_component::calculate_range.
+// NOTSA: native binding calls collision_component::calculate_range.
 void calculate_collision_range(Context &, Primary);
 // STUB: SONIC 0x41c280 EntryColliList
 void enter_collision_list(Context &, Primary);
 // STUB: SONIC 0x446f10 RunUnderwaterStuff
 void underwater(Context &, Primary, const TaskWorkHandle &, const Player &);
-// NOTSA: Gamma child-dispatch binding remains unimplemented; behavior belongs to TaskScheduler::run_children.
+// NOTSA: native binding calls TaskScheduler::run_children.
 void run_children(Context &, const TaskHandle &);
 // NOTSA: source stage and act are borrowed signed/unsigned 16-bit owners.
 std::int16_t stage(Context &);

@@ -51,8 +51,8 @@ bool check_view(object_draw::Context &, object_draw::ModelId, float);
 bool drawing_enabled(object_draw::State);
 // FUNCTION: SONIC 0x4051d0 SetupAnimatedMotion
 void setup_motion(Motion *, float, State &, fidelity::Context &);
-// FUNCTION: SONIC 0x405260 SetObjectDrawFunctions
 // Layout indices other than MDATA2 (2) and MDATA3 (3) stay unrecovered.
+// FUNCTION: SONIC 0x405260 SetObjectDrawFunctions
 void select_transforms(ObjectId, State &, object_draw::Context &);
 // FUNCTION: SONIC 0x404fd0 TransformAnimatedObjectMdata2
 void transform_mdata2(ObjectId, Motion &, State &, object_draw::Context &);
