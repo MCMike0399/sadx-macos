@@ -1186,3 +1186,10 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Not run: the additions-only judge refresh. The gate was not green, and that refresh refuses the changed display test. STATUS was not regenerated. Journeys did not run. The oracle suite is separate from this gate. Independent review was not available. No Ghidra dossier for the gun or shadow entries.
 * Stock `game/imported` still stops at display object row 14 because that pack has no `display_objects` key. The admitted pack `2929e8a6` has the eight rows. That remains a different route.
 * Next: recover the late model node and the type-6 queue body, then the empty-land ground attributes, EntryColliList and underwater.
+
+### 2026-11-09 — Oracle suite after the shadow-queue stop
+
+* Outcome: `make -k -j8 oracles` exited 2, then `verdict.py` on the 257 reports exited 1. Counts: 147 pass, 99 partial, 11 fail, none missing.
+* The gun, shadow and target-effects reports pass. `gamma_effects` is partial (559 FP partials, no value failures) and its exit 2 is why a plain `make oracles` stops.
+* Fails, none of them this slice's Gamma files: colored polygon, crt asin/atan2/fabs/floor, d3dx perspective, floor angles, player reaction, sonic initialization helpers, sse math, x87 memory.
+* Judge and STATUS remain unrefreshed. The gate on `52618b6c` is still exit 2.
