@@ -122,6 +122,23 @@
       ],
       "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
     },
+    "src/engine/collision_component.cpp::kListLimit": {
+      "sha256": "4b40d797d8126621ad6927f421408f9f1d9b1730a5c0739dede3416c1c21ccaa",
+      "classification": "numeric_encoding",
+      "purpose": "The ten EntryColliList capacities, in list-id order: 16, 128, 128, 128, 256, 128, 128, 128, 256, 16. A list at its capacity returns without inserting.",
+      "evidence": [
+        {
+          "path": "src/engine/collision_component.cpp",
+          "line": 176,
+          "sha256": "7f020c4a01a68217f9596d76e14e36115b549733ffcabc16b0a5bdd4343b778f"
+        }
+      ],
+      "verification": [
+        "tests/unit/gamma_common_tail_binding.cpp",
+        "tools/oracles/verify_original_collision_entry.py"
+      ],
+      "verification_limit": "The collision-entry oracle and the common-tail binding cover capacity, the full-list rejection and the id-0 insert. They do not claim the other nine lists are exercised by character select."
+    },
     "src/engine/character_pack.cpp::kTitleActionDescriptors": {
       "sha256": "b20f70b969a359c1621c736ca0b9ff66630295cb01768b53f9d02aad98a0c9e6",
       "classification": "named_structure",
