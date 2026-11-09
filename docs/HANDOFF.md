@@ -1193,3 +1193,12 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * The gun, shadow and target-effects reports pass. `gamma_effects` is partial (559 FP partials, no value failures) and its exit 2 is why a plain `make oracles` stops.
 * Fails, none of them this slice's Gamma files: colored polygon, crt asin/atan2/fabs/floor, d3dx perspective, floor angles, player reaction, sonic initialization helpers, sse math, x87 memory.
 * Judge and STATUS remain unrefreshed. The gate on `52618b6c` is still exit 2.
+
+### 2026-11-09 — Late model node and the collision entry list (J, no gate)
+
+* Outcome: the Gamma display composition now stops at `native_gamma_underwater`. The shadow blob is a queued type-1 model node. No CharacterSelect frame is presented, because the frame still throws before consume.
+* Changed: `late_draw_model` owns `lateDrawModel`. The native queue consumer draws a type-1 record and still stops on every other type. Empty land returns 0 from ground attributes. `collision_component::enter_list` owns `EntryColliList` and files the task on the existing list for its id.
+* Verified: late-model oracle 48 cases, 6 of 6 mutants. Collision-entry oracle 48 cases, 6 of 6 mutants. Sprite-queue unit test still passes. Display test exits 0 with 106 draws, 3060 vertices, one queued model, and list 0 holding the task.
+* Not run: the frontier, the full gate, and the oracle suite. STATUS is not refreshed. The shadow mesh is not drawn yet; consume would stop at `native_gamma_shadow_mesh`. Independent review was not available.
+* Stock `game/imported` still stops at display object row 14 because that pack has no `display_objects` key. The admitted pack `2929e8a6` has the eight rows.
+* Next: `RunUnderwaterStuff`, then a presented CharacterSelect frame. The changed display test needs the evidenced judge refresh before the gate can be green.

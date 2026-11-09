@@ -1,0 +1,35 @@
+
+float10 Shadow(int param_1,float param_2)
+
+{
+  float fVar1;
+  float10 fVar2;
+  int local_c [2];
+  int iStack_4;
+  
+  fVar2 = (float10)GetShadowPos(*(undefined4 *)(param_1 + 0x20),*(float *)(param_1 + 0x24) + 4.0,
+                                *(undefined4 *)(param_1 + 0x28),local_c);
+  if (loop_count == 0) {
+    fVar1 = (float)((float10)param_2 /
+                   (ABS((float10)*(float *)(param_1 + 0x24) - fVar2) * (float10)0.03 + (float10)1.0)
+                   );
+    SetRegularTexture();
+    njPushMatrix();
+    njTranslate(*(undefined4 *)(param_1 + 0x20),(float)fVar2 + 0.3,*(undefined4 *)(param_1 + 0x28));
+    if (iStack_4 != 0) {
+      njRotateZ();
+    }
+    if (local_c[0] != 0) {
+      njRotateX();
+    }
+    if (*(int *)(param_1 + 0x18) != 0) {
+      njRotateY();
+    }
+    njScale(fVar1,fVar1,fVar1 * 0.8);
+    late_DrawShadowObject(&object_shadow_8bf3a0,fVar1);
+    njPopMatrix();
+    fVar2 = (float10)(float)fVar2;
+  }
+  return fVar2;
+}
+

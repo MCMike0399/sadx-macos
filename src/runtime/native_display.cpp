@@ -30,6 +30,42 @@ void Display::scale_current_matrix(float x, float y, float z) {
 bool Display::late_texture_list_not_ready() const {
     return texture_selection::list_not_ready(queued_texture_list_);
 }
+LateModelResult Display::queue_late_model(std::uint32_t model_word, std::uint8_t late_flags, float sort_bias,
+                                          std::function<void()> draw) {
+    constexpr float kBucketBias = 2048.0f;
+    NinjaRenderState render;
+    FrameQueueFacts facts;
+    facts.blend = static_cast<std::uint8_t>(queue_state_.values.packed_blend);
+    facts.mode = static_cast<std::uint32_t>(queue_state_.values.execution_mode);
+    facts.fog = fog_.active;
+    facts.lighting = static_cast<std::uint32_t>(queue_state_.values.lighting_palette);
+    facts.control = control_3d_;
+    facts.attribute_mask = constant_attribute_mask_;
+    facts.attributes = constant_attributes_;
+    facts.late_color = late_material_;
+    facts.material = material_argb_;
+    facts.sort_bias = sort_bias;
+    facts.bucket_bias = kBucketBias;
+    facts.list_word = queued_texture_list_ ? 1u : 0u;
+    facts.list = queued_texture_list_ ? std::make_shared<NinjaTextureListOwner>()
+                                      : std::shared_ptr<NinjaTextureListOwner>{};
+    NinjaSpriteQueueRuntime runtime;
+    adopt_frame_queue(runtime, &render, facts);
+    return late_draw_model(queue_storage_.records(), coordinates_->current_matrix(), model_word, late_flags,
+                           queue_state_.values.reset_capture[0], std::move(draw), runtime, arithmetic_);
+}
+bool Display::has_queued_model() const {
+    constexpr std::size_t kSortBuckets = 2048;
+    for (std::size_t bucket = 0; bucket < kSortBuckets; ++bucket) {
+        const auto chain = queue_storage_.records().bucket_records(bucket);
+        if (!chain)
+            continue;
+        for (const auto &record : chain.records)
+            if (record && record->draw_model)
+                return true;
+    }
+    return false;
+}
 namespace {
 // NOTSA: lossless word conversion at the maintained D3DX implementation boundary.
 D3dxMatrix words(const graphics::Matrix &matrix) {

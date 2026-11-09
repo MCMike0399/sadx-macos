@@ -100,6 +100,9 @@ struct NinjaQueueRecord {
     // Source header+c capture is separate from the sprite packet's +48 list.
     // Raw bytes remain provenance; this is the live retained native resource.
     std::optional<std::shared_ptr<NinjaTextureListOwner>> texture_list_at_c;
+    // The type-1 body draws this after installing the stored matrix. The source
+    // pointer word stays in the node; this is the native mesh owner.
+    std::function<void()> draw_model;
 };
 using NinjaQueueRecordHandle=std::shared_ptr<NinjaQueueRecord>;
 struct NinjaQueueBucketResult {
@@ -126,6 +129,24 @@ struct NinjaSpriteQueueRuntime {
     NinjaQueueLogger logger;
     std::optional<std::shared_ptr<NinjaTextureListOwner>> captured_texture_list_at_3abd950;
 };
+// Plain facts for one frame. The address-named runtime fields stay inside the
+// queue owner that already speaks them.
+struct FrameQueueFacts {
+    std::uint8_t blend = 0;
+    std::uint32_t mode = 0;
+    std::uint8_t fog = 0;
+    std::uint32_t lighting = 0;
+    std::uint32_t control = 0;
+    std::uint32_t attribute_mask = 0;
+    std::uint32_t attributes = 0;
+    std::array<float, 4> late_color{};
+    std::array<float, 4> material{};
+    float sort_bias = 0;
+    float bucket_bias = 0;
+    std::uint32_t list_word = 0;
+    std::shared_ptr<NinjaTextureListOwner> list;
+};
+void adopt_frame_queue(NinjaSpriteQueueRuntime &, NinjaRenderState *, const FrameQueueFacts &);
 struct NinjaQueueResult {
     NinjaQueueFailure failure=NinjaQueueFailure::none;
     std::uint32_t source_boundary=0;

@@ -15,6 +15,7 @@
 #include "engine/object_draw.hpp"
 #include "engine/animated_model.hpp"
 #include "engine/native_message_texture.hpp"
+#include "engine/late_model_queue.hpp"
 #include "engine/queue_consumer_native.hpp"
 #include "engine/message_sprite_queue.hpp"
 #include "engine/screen_sprite.hpp"
@@ -92,6 +93,9 @@ class Display {
     std::int32_t load_message_texture(texture_lifetime::List &, const message_texture::Image &);
     void reload_message_texture(std::uint32_t, const std::uint16_t *, std::uint32_t, std::uint32_t);
     void consume_draw_queue();
+    LateModelResult queue_late_model(std::uint32_t model_word, std::uint8_t late_flags, float sort_bias,
+                                     std::function<void()> draw);
+    bool has_queued_model() const;
     menu_caption::BitmapView message_bitmap_from_end(std::uint32_t);
     queue::AnimationAllocation allocate_message_animation(std::uint32_t);
     void set_message_material(const std::array<float, 4> &);
@@ -159,6 +163,7 @@ class Display {
     std::unique_ptr<NinjaMatrixPrimitives> coordinates_;
     D3dxMatrix screen_transform_;
     std::array<float, 4> material_argb_{};
+    std::array<float, 4> late_material_{};
     std::array<sprite::ScreenVertex, 4> sprite_vertices_{};
     std::vector<texture_lifetime::Memory> texture_pool_ =
         std::vector<texture_lifetime::Memory>(2048);

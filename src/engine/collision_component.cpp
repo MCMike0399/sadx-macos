@@ -170,4 +170,36 @@ InitResult initialize(TaskWorkArena &arena, const TaskHandle &task, std::uint16_
     calculate_range(&work, context);
     return InitResult::Initialized;
 }
+
+EntryResult enter_list(EntryState &state, const std::shared_ptr<Work> &work, std::uint16_t &status,
+                       std::int16_t stage) {
+    constexpr std::uint16_t kListLimit[] = {16, 128, 128, 128, 256, 128, 128, 128, 256, 16};
+    constexpr std::uint8_t kSpecialStageLow = 0x27;
+    constexpr std::uint8_t kSpecialStageHigh = 0x2a;
+    constexpr std::uint16_t kHighestList = 9;
+    if (!work)
+        return {};
+    const auto owner = work->task.lock();
+    if (!owner)
+        throw Error(Boundary::Task);
+    if (owner->exec == &TaskScheduler::destroy_callback)
+        return {EntryRoute::destroying};
+    const auto stage_byte = static_cast<std::uint8_t>(stage);
+    state.special_stage =
+        stage_byte >= kSpecialStageLow && stage_byte <= kSpecialStageHigh ? 1u : 0u;
+    if (work->id != 0 || state.special_stage == 0)
+        clear_info(*work, status);
+    if (work->id > kHighestList)
+        return {EntryRoute::rejected};
+    auto &list = state.lists[work->id];
+    if (list.count >= kListLimit[work->id])
+        return {EntryRoute::rejected};
+    EntrySlot slot;
+    slot.task = owner;
+    if (work->id == 2 || work->id == 3)
+        slot.work = work;
+    list.slots.push_back(std::move(slot));
+    ++list.count;
+    return {EntryRoute::entered};
+}
 } // namespace sadx::collision_component

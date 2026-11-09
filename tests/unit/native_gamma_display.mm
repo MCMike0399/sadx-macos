@@ -138,10 +138,14 @@ int main(int argc, char **argv) {
         throw;
     } catch (const flow::UnrecoveredGameFlowCall &error) {
         std::cerr << "Actual display stop: " << error.what() << std::endl;
-        assert(std::string(error.what()) == "native_gamma_shadow_model_queue");
+        assert(std::string(error.what()) == "native_gamma_underwater");
         stopped = true;
     }
     assert(stopped && selected_palette == 0);
+    assert(display.has_queued_model());
+    assert(context.collision_entries.lists[0].count == 1);
+    assert(context.collision_entries.lists[0].slots[0].task == task);
+    assert(context.collision_entries.special_stage == 0);
     const auto &draws = display.output().frame().commands;
     std::cout << "Body frame commands: " << draws.size() << std::endl;
     std::size_t body_draws = 0, body_vertices = 0;

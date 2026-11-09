@@ -438,6 +438,9 @@ constexpr std::uint32_t kVariantWord = 0x80;
 constexpr std::uint32_t kFade = 0x90;
 constexpr std::int32_t kLockTone = 0x343;
 constexpr std::uint32_t kEmptyGroundBits = 0xc9742400u;
+constexpr std::uint32_t kShadowModelWord = 0x8bf374u;
+constexpr std::uint8_t kLateShadowFlags = 6;
+constexpr float kShadowSortBias = -27952.0f;
 // NOTSA: native boundary for GammaUpdateTargetEffects; source seam declared in the Gamma core.
 void update_target_effects(Context &context, Primary task, const Player &,
                            const TaskWorkHandle &allocation) {
@@ -667,11 +670,18 @@ fidelity::ExactFloat shadow(Context &context, Primary task, float scale) {
             context.rendering.scale_current_matrix(x, y, z);
         }
         // A missing queued texture list returns and the caller pops. A ready
-        // list would allocate the late model node; that queue is unrecovered.
+        // list allocates the type-1 late model node. The mesh is drawn when the
+        // frame consumes the queue.
         void draw(float) override {
             if (context.rendering.late_texture_list_not_ready())
                 return;
-            missing("native_gamma_shadow_model_queue");
+            const auto queued = context.rendering.queue_late_model(
+                kShadowModelWord, kLateShadowFlags, kShadowSortBias,
+                [] { missing("native_gamma_shadow_mesh"); });
+            if (!queued)
+                missing("native_gamma_shadow_model_queue");
+            if (queued.route != LateModelRoute::queued)
+                missing("native_late_model_immediate");
         }
         void pop_matrix() override { context.rendering.pop_current_matrix(); }
         static float image_height() {
@@ -684,8 +694,10 @@ fidelity::ExactFloat shadow(Context &context, Primary task, float scale) {
     return gamma_shadow::update(body, scale, services, context.rendering.arithmetic());
 }
 // NOTSA: native boundary for GammaGroundAttributes; source seam declared in the Gamma core.
-std::uint32_t ground_attributes(Context &, Primary) {
-    missing("native_gamma_ground_attributes");
+std::uint32_t ground_attributes(Context &context, Primary) {
+    if (context.land_candidate_count > 0)
+        missing("native_gamma_ground_attribute_walk");
+    return 0;
 }
 // NOTSA: native boundary for GammaRunningEffects; source seam declared in the Gamma core.
 void running_effects(Context &, Primary, const TaskWorkHandle &, const Player &) {
@@ -698,9 +710,13 @@ void calculate_collision_range(Context &context, Primary) {
     auto work = collision(context, context.task->primary_work);
     collision_component::calculate_range(work.get(), context.rendering.arithmetic());
 }
-// NOTSA: native boundary for EntryColliList; source seam declared in the Gamma core.
-void enter_collision_list(Context &, Primary) {
-    missing("native_gamma_enter_collision_list");
+// NOTSA: native boundary for EntryColliList. The source argument is the taskwk;
+// the list keeps the task that owns it.
+void enter_collision_list(Context &context, Primary primary) {
+    if (!context.task)
+        missing("native_gamma_null_collision_task");
+    auto work = collision(context, context.task->primary_work);
+    collision_component::enter_list(context.collision_entries, work, primary.status, context.stage);
 }
 // NOTSA: native boundary for RunUnderwaterStuff; source seam declared in the Gamma core.
 void underwater(Context &, Primary, const TaskWorkHandle &, const Player &) {

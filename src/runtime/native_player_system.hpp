@@ -5,6 +5,7 @@
 #include "runtime/sonic_animation_assets.hpp"
 #include "runtime/character_texture_assets.hpp"
 #include "engine/character_geometry.hpp"
+#include "engine/collision_component.hpp"
 #include "player/actor_current.hpp"
 #include "player/gamma_selection_core.hpp"
 #include "player/gamma_setup_resource.hpp"
@@ -83,5 +84,9 @@ struct Context {
     // NOTSA: borrowed palette operation uses the Session lighting/time owners.
     std::function<void(std::int32_t)> display_palette = {};
     const native::ModelDrawEnvironment *model_environment = nullptr;
+    // Source land-candidate count. Zero is the empty table; a positive count
+    // still takes the unrecovered attribute walk.
+    std::int16_t land_candidate_count = 0;
+    collision_component::EntryState collision_entries{};
 };
 } // namespace sadx::gamma_selection

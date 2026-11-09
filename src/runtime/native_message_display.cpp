@@ -35,7 +35,14 @@ void Display::consume_draw_queue() {
             queue::draw_blank_frame({horizontal_scale_, vertical_scale_, frame_mode_.pending_logic_ticks,
                 fog_.special_flags, fog_.active, queued_depth_}, *output_,
                 [this] { restore_depth_comparison(); }, arithmetic_);
-        }};
+        },
+        [this](const NinjaQueueRecordHandle &record, const NinjaMatrix &matrix, std::uint32_t, bool) {
+            coordinates_->current_matrix() = matrix;
+            if (!record || !record->draw_model)
+                throw flow::UnrecoveredGameFlowCall("native_queued_model_mesh");
+            record->draw_model();
+        },
+        simple_model_enabled_ != 0, queue_state_.values.lighting_palette};
     const auto result = queue::consume(view, services, arithmetic_);
     if (!result.completed)
         throw flow::UnrecoveredGameFlowCall("native_draw_queue_record_or_mode");

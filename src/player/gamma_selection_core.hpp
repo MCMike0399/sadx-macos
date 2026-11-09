@@ -166,7 +166,7 @@ std::uint32_t ground_attributes(Context &, Primary);
 void running_effects(Context &, Primary, const TaskWorkHandle &, const Player &);
 // NOTSA: native binding calls collision_component::calculate_range.
 void calculate_collision_range(Context &, Primary);
-// STUB: SONIC 0x41c280 EntryColliList
+// NOTSA: native binding calls collision_component::enter_list.
 void enter_collision_list(Context &, Primary);
 // STUB: SONIC 0x446f10 RunUnderwaterStuff
 void underwater(Context &, Primary, const TaskWorkHandle &, const Player &);

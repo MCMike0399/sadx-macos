@@ -76,4 +76,28 @@ void free_collision(TaskWorkArena &, const TaskHandle &);
 void clear_info(Work &, std::uint16_t &status_flags);
 // FUNCTION: SONIC 0x41bac0 CCL_CalcRange
 void calculate_range(Work *, Context &);
+
+// One frame's collision-entry lists. The source stores the taskwk; the native
+// slot keeps the task that owns that primary.
+struct EntrySlot {
+    TaskHandle task;
+    std::shared_ptr<Work> work;
+};
+struct EntryList {
+    std::uint16_t count = 0;
+    std::vector<EntrySlot> slots;
+};
+struct EntryState {
+    std::uint32_t special_stage = 0;
+    std::array<EntryList, 10> lists{};
+};
+enum class EntryRoute { absent, destroying, rejected, entered };
+struct EntryResult {
+    EntryRoute route = EntryRoute::absent;
+    explicit operator bool() const noexcept { return route == EntryRoute::entered; }
+};
+
+// FUNCTION: SONIC 0x41c280 EntryColliList
+EntryResult enter_list(EntryState &, const std::shared_ptr<Work> &, std::uint16_t &status,
+                       std::int16_t stage);
 } // namespace sadx::collision_component

@@ -30,7 +30,7 @@ const lines=createInterface({input:process.stdin,crlfDelay:Infinity});
 const commands=lines[Symbol.asyncIterator]();
 const allowed=new Set(['analyze_function','inspect_native_instruction','resolve_native_call_targets',
   'trace_native_values','xrefs','binary_session','list_procedures','procedure_callers','procedure_callees',
-  'procedure_references','procedure_info','batch_decompile']);
+  'procedure_references','procedure_info','batch_decompile','resolve_containing_procedure','search_procedures']);
 let opened=false,ordinal=0;
 class RejectedAnalysis extends Error {}
 await mkdir(root,{recursive:true});
