@@ -127,6 +127,9 @@ int main(int argc, char **argv) {
     const auto fields = native::event_primary_fields();
     native::EventActionsContext event(*arena, event_state, players.registry, pack, fields);
     event_actions::initialize(event.core, task->primary_work);
+    context.controller = [](std::uint8_t) {
+        return gamma_selection::Context::ControllerSample{};
+    };
     bool stopped = false;
     try {
         gamma_selection::run(context, task);
@@ -135,7 +138,7 @@ int main(int argc, char **argv) {
         throw;
     } catch (const flow::UnrecoveredGameFlowCall &error) {
         std::cerr << "Actual display stop: " << error.what() << std::endl;
-        assert(std::string(error.what()) == "native_gamma_update_target_effects");
+        assert(std::string(error.what()) == "native_gamma_shadow_draw");
         stopped = true;
     }
     assert(stopped && selected_palette == 0);
