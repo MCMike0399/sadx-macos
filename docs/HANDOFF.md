@@ -1136,3 +1136,11 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Verified: native-gamma-fan-test passes on game/imported and on the private display pack. animated_model.cpp compiles. Display values are unchanged; the unrecovered-layout failure name is the only engine change.
 * Not run: full gate. The recorded admission gate remains ff5bb89.
 * Next: implement the reached Gamma per-frame update tail, present the frame, then enable the drawn checker.
+
+### 2026-11-09 — Linux portable lane at the Gamma target-effects stop (J, no gate)
+
+* Outcome: Linux builds the portable core and native archives. Thirteen asset-free unit programs pass. The native game still stops at Gamma target effects. No actor frame is presented. No Mac worker is connected, so Metal, audio, controllers and 63 FPS are not certified.
+* Changed: the Makefile and vendored arithmetic scripts select the host. A Darwin dry-run still uses xcrun, arm64 and macOS 14. Linux uses clang++ and flattens nested static archives. The SetObjectDrawFunctions annotation again sits on its declaration.
+* Verified: `make -j4 portable` exit 0 and `make -j4 portable-units` exit 0. Isolated startup, library, input, sine, fog, screen, queue, view, sound, session, engine-table, input-mod constant and frame-control checks exit 0. Layers, provenance, readability, profile patches, owners and hygiene exit 0.
+* Not run: full gate, oracles, native journeys and a source-only Mac build. `check_judge` exits 1. The Makefile hash changed, `9e279b4` already drifted `native_gamma_fan.mm`, and 53 case bins are absent. `sonic.exe` and imported assets are absent. `GammaUpdateTargetEffects` `0x4c4da0` remains a stub.
+* Next: with the pinned executable on a Mac, recover `0x4c4da0`, then present one CharacterSelect frame. Commands are in `reference/packets/linux-host-20261109/MAC-VALIDATION.md`.

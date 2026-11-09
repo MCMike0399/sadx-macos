@@ -187,7 +187,7 @@ EXE/DLL, no prebuilt game objects) runs it from imported assets.
 | N1 | SEGA/Sonic Team logos | done (16 states + images vs reference) |
 | N2 | Intro movie (play and Skipma), title, audible Start | done |
 | N3a | FileSelect, dialog, MainMenu, fresh save/load/restart, empty profile | done (`native-file-select`, `native-main-menu`, `native-fresh-save`) |
-| N3b | **CharacterSelect**: all preview actors initialised, updated and drawn; cursor/cancel/reentry; music/voice; Sonic confirmed → story entry | **in progress**: fan integration `08884f1d` reaches `native_gamma_display`, frame 1332, exit 1. Image remains outgoing title. Combined full gate and cold-source qualification pass at `709f2744`; CharacterSelect remains incomplete. |
+| N3b | **CharacterSelect**: all preview actors initialised, updated and drawn; cursor/cancel/reentry; music/voice; Sonic confirmed → story entry | **in progress**: display admitted at `ff5bb89` (106 draws, 3,060 vertices). Normal input still stops at `native_gamma_update_target_effects`, frame 1332, exit 1, outgoing title. No presented actor frame. |
 | N4 | Story entry: the opening event (played or skipped as the profile does) → Station Square drawn from the imported pack with the real camera | open |
 | N5 | Sonic controllable at Chaos 0: run, jump, spin/homing attack, hurt, rings, with the boss active; first frames match the reference trace | open |
 | N6 | Chaos 0 defeated → natural story return → save progression | open |
@@ -391,34 +391,35 @@ are in STATUS; the current assessment and retained frontier are in section 6.1.
 
 ## 6. What is next, in order
 
-### 6.1 Current execution plan (updated 2026-11-02)
+### 6.1 Current execution plan (updated 2026-11-09)
 
-Main `709f2744` combines the accepted Sonic initialization continuation with
-Gamma fan, motion, matrices, weld initialization, effects, shared materials and
-setup resources. Both integration reviews accept it within their bounded scope.
-A fresh combined native run reaches `native_gamma_display` at frame 1332, exit 1,
-with the unchanged outgoing-title image. This is not a completed actor frame.
-The original first-Gamma witness runs at frame 1334; retain that timing difference.
-Focused evidence is in
-`reference/production-integration-20261102/sonic-initialization-root-integration.json`.
-The full gate and fresh source-only build pass at `709f2744`: 333 native programs,
-622 Python tests, reference R1–R4, three native menu/save journeys and sixteen
-startup comparisons. Six offline raster checks pass separately; the inherited
-volume case-alias capability remains skipped. The source-only app retains the
-same display boundary and image. Receipts are
-`sonic-initialization-fan-{gate,qualified-rasters,source-only}.json` under
-`reference/production-integration-20261102`; STATUS records the actual gate.
-Earlier setup/material/effects frontiers are historical receipts in HANDOFF and
-`reference/production-integration-*`, not pending work to recover again.
+The last full gate is `ff5bb89`: 340 native programs, 658 Python tests, reference
+R1–R4 and three native menu/save journeys. Gamma display (body, arm, inactive
+tail and stage-direction normalization) is admitted. The caller submits 106 draws
+and 3,060 vertices, then normal input stops at `native_gamma_update_target_effects`
+(`GammaUpdateTargetEffects`, `0x4c4da0`) at frame 1332, exit 1, with the outgoing
+title image. No CharacterSelect actor frame has been presented. Do not reopen the
+display packet. The `709f2744` fan/display receipts are historical.
+
+Linux can build `make portable` and `make portable-units`. It cannot certify
+Metal, AppKit, arm64 Apple binaries, audio, controllers or 63 FPS. No Mac worker
+is connected. The Mac commands and the missing disc inputs are in
+`reference/packets/linux-host-20261109/MAC-VALIDATION.md`.
 
 First delivery target: a complete native CharacterSelect frame with real scheduled
 actors, then repeated updates, cursor/motion, cancel/reentry and Sonic confirmation.
-Advancing one missing call is dependency progress only.
+Advancing one missing call is dependency progress only. The next call is the
+752-byte target-effects body. Its direct callees are `CAlloc`, `DestroyTask`,
+`CreateElementalTask`, `dsPlay_oneshot`, `dsStop_num`, `njSqrt`, and the still
+unnamed `0x47f980`, `0x4cf060` and `0x644340`. Two `FPATAN` sites are inside the
+body. Recovery needs `sonic.exe` (`docs/SOURCES.md`) and a Ghidra dossier; a
+no-op is not acceptable.
 
 | Caller | Canonical owner | Current work | Acceptance still required |
 |---|---|---|---|
 | Gamma mode zero and common tail before display | Session registry/matrices, PlayerSystem, arena, mutable scene and imported resources | Integrated; setup, materials, effects, motion, weld initialization, input restore, matrix getters and fan reach display | Preserve source order/aliases and all inherited partials while completing later consumers |
-| Gamma display and scheduled display callback | Existing Display/SceneState, task player/extra work and weld table | `packet/gamma-display-native` has an unqualified draft and append-only asset proposal; finish source comparisons and real renderer composition | Actual actor drawing and repeated update/display/destruction, with live shared materials and geometry |
+| Gamma display and scheduled display callback | Existing Display/SceneState, task player/extra work and weld table | Admitted at `ff5bb89`. The caller completes display and stops at target effects | Preserve the 106 draws / 3,060 vertices and the explicit partials |
+| `GammaUpdateTargetEffects` `0x4c4da0` after display | Gamma common tail, task arena, sound and sqrt | Stub. Body is 752 bytes with two `FPATAN` sites. Needs the pinned executable and REA | Source-backed oracle, mutants, holdout, then the real caller advances past this seam |
 | Scheduler → Sonic initialization/common tail | PlayerSystem registry/current-player, task arena, existing animation/model/texture owners | Integrated source initializes real player/resources and reaches missing object slot 20; Metal/changed-sibling paths reach active matrix composition | Required model exports, active welding argument selection/deformation/attachments, remaining common tail and real display |
 | Preview actions and selection motion | Canonical event queue, preview tails, character resources and task owners | Action core and native event/caller bindings are integrated | Full-menu cursor, cancellation/reentry and confirmation with all actual actors |
 | Scheduler → Miles/Knuckles/Amy/Big | Shared player contracts and each actor's source state | Native callbacks remain open; assign independent caller clusters once their shared prerequisites are stable | All scheduled actors initialize, update, draw and destroy together |
