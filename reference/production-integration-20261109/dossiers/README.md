@@ -11,4 +11,4 @@ Ghidra 12.1.4 decompiled these from the pinned sonic.exe. The pseudocode is evid
 
 `Shadow` (`0x49ee30`) ends in `late_DrawShadowObject` on `object_shadow`.
 
-`analyze_function` rejected `0x4c44a0` and `0x4c2f50` because Ghidra has no procedure at either address. Those rejection records are the two json files beside this note. Gun effects and the empty-land ground-attribute return were recovered from the executable with Unicorn, not from a decompiler body.
+`analyze_function` rejected `0x4c44a0` and `0x4c2f50` because Ghidra has no procedure at either address. A later name search returned no procedures, and `resolve_containing_procedure` returned null. The bytes are still code: `0x4c44a0` is `sub esp, 8` and `0x4c2f50` is `sub esp, 0x3c`. The empty land-candidate path is the `jle` to `mov eax, ebx` with ebx cleared, so a count at or below zero returns 0. Gun effects and that empty return were recovered from the executable with Unicorn, not from a decompiler body.

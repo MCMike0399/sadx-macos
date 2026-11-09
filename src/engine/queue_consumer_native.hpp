@@ -22,7 +22,7 @@ struct ConsumerServices {
     std::function<void()> draw_skipped_frame;
     // Type-1 model nodes. Empty leaves every queued record on the old boundary.
     std::function<void(const NinjaQueueRecordHandle &, const NinjaMatrix &, std::uint32_t, bool)>
-        draw_queued_model;
+        draw_queued_model = {};
     bool simple_models = false;
     std::int32_t lighting_palette = 0;
 };
@@ -33,9 +33,9 @@ struct ConsumerResult {
     std::size_t bucket = 0;
     bool completed = false;
 };
-// NOTSA: native4086f0 dispatcher prefix/empty-bucket/tail. Actual canonical
-// bucket records are inspected; nonempty dispatch remains an explicit boundary
-// until its typed native record is recovered. No synthetic empty queue/fallback.
+// NOTSA: native 4086f0 dispatcher prefix, empty buckets and tail. A type-1
+// model node is drawn when the caller supplies that callback. Every other
+// nonempty record stays an explicit boundary. No synthetic empty queue.
 ConsumerResult consume(ConsumerView, const ConsumerServices &, X87Context &);
 // FUNCTION: SONIC 0x403e70 FUN_00403e70
 void skip_execution(State &);
