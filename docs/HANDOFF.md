@@ -1177,3 +1177,12 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Not run: full gate, so `check_judge` and STATUS are not refreshed. The oracle suite was not run. Ghidra has no dossier for `0x4c44a0` or `0x49ee30`. Independent review was not available. The land walk and `late_DrawShadowObject` are outside the shadow oracle.
 * Stock `game/imported` has no `display_objects` key, so Gamma display asks for row 14 and the map is empty. The admitted pack `2929e8a6` carries the eight rows from `tools/import/gamma_display_resources.py`. That append is the route. Rebuilding the stock import is not required to present the private-asset frame.
 * Next: queue the shadow blob through the existing late-draw owner, then ground attributes, running effects, EntryColliList and underwater. A green gate and the additions-only judge refresh come after that checkpoint.
+
+### 2026-11-09 — Shadow blob stops at the late model queue (gate exit 2)
+
+* Outcome: the private-asset frontier still exits 1 at frame 1332. The stop is now `native_gamma_shadow_model_queue`. The picture is still the title hash. No actor frame is presented.
+* Changed: the shadow binding pushes, translates, rotates and scales the live matrix stack. A null common-texture list does not select one. A missing queued texture list returns and the caller pops. This frame has already selected a ready list, so the blob stops where `lateDrawModel` would allocate its node.
+* Verified: readability and provenance exit 0. The display composition test exits 0 with 106 draws and that stop. The same-save frontier keeps the title hash, gamma pose, timer 146167 and two saves. `make -j10 gate` on `52618b6c` exited 2. Provenance, readability and the unit tests that ran passed. `check_judge` was the failure: 14 inputs, the new gamma tests, probes, oracles and mutants, plus changed `manifest.tsv` and `native_gamma_display.mm`.
+* Not run: the additions-only judge refresh. The gate was not green, and that refresh refuses the changed display test. STATUS was not regenerated. Journeys did not run. The oracle suite is separate from this gate. Independent review was not available. No Ghidra dossier for the gun or shadow entries.
+* Stock `game/imported` still stops at display object row 14 because that pack has no `display_objects` key. The admitted pack `2929e8a6` has the eight rows. That remains a different route.
+* Next: recover the late model node and the type-6 queue body, then the empty-land ground attributes, EntryColliList and underwater.

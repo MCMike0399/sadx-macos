@@ -1,4 +1,6 @@
 #include "engine/ninja_depth_internal.hpp"
+#include "engine/ninja_matrix_composition.hpp"
+#include "engine/texture_list_gate.hpp"
 #include "runtime/native_display.hpp"
 #include "math/ninja_sine_table.hpp"
 #include "runtime/engine_code_tables.hpp"
@@ -8,6 +10,26 @@
 #include <stdexcept>
 
 namespace sadx::native {
+bool Display::push_current_matrix() { return coordinates_->push_current_frame(); }
+void Display::pop_current_matrix() { coordinates_->end_ex_frame(); }
+void Display::translate_current_matrix(float x, float y, float z) {
+    translate_ninja_matrix(coordinates_->current_matrix(), x, y, z, arithmetic_);
+}
+void Display::rotate_current_x(std::int32_t angle) {
+    coordinates_->rotate_x(coordinates_->current_matrix(), angle, arithmetic_);
+}
+void Display::rotate_current_y(std::int32_t angle) {
+    coordinates_->rotate_y(coordinates_->current_matrix(), angle, arithmetic_);
+}
+void Display::rotate_current_z(std::int32_t angle) {
+    coordinates_->rotate_z(coordinates_->current_matrix(), angle, arithmetic_);
+}
+void Display::scale_current_matrix(float x, float y, float z) {
+    coordinates_->scale_matrix(coordinates_->current_matrix(), x, y, z, arithmetic_);
+}
+bool Display::late_texture_list_not_ready() const {
+    return texture_selection::list_not_ready(queued_texture_list_);
+}
 namespace {
 // NOTSA: lossless word conversion at the maintained D3DX implementation boundary.
 D3dxMatrix words(const graphics::Matrix &matrix) {

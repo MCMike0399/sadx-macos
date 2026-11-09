@@ -646,15 +646,34 @@ fidelity::ExactFloat shadow(Context &context, Primary task, float scale) {
             return {image_height(), 0, 0};
         }
         bool missed_frames() override { return context.rendering.pending_logic_ticks() != 0; }
-        void prepare() override { missing("native_gamma_shadow_draw"); }
-        void push_matrix() override { missing("native_gamma_shadow_draw"); }
-        void translate(float, float, float) override { missing("native_gamma_shadow_draw"); }
-        void rotate_z(std::uint16_t) override { missing("native_gamma_shadow_draw"); }
-        void rotate_x(std::uint16_t) override { missing("native_gamma_shadow_draw"); }
-        void rotate_y(std::uint16_t) override { missing("native_gamma_shadow_draw"); }
-        void scale(float, float, float) override { missing("native_gamma_shadow_draw"); }
-        void draw(float) override { missing("native_gamma_shadow_draw"); }
-        void pop_matrix() override { missing("native_gamma_shadow_draw"); }
+        // A null common-texture list returns without selecting. A present list
+        // selects through the existing texture owner.
+        void prepare() override {
+            if (!context.texture_state || !context.texture_state->common)
+                return;
+            context.rendering.output().select_texture_list(*context.texture_state->common);
+        }
+        void push_matrix() override {
+            if (!context.rendering.push_current_matrix())
+                missing("native_gamma_shadow_matrix_capacity");
+        }
+        void translate(float x, float y, float z) override {
+            context.rendering.translate_current_matrix(x, y, z);
+        }
+        void rotate_z(std::uint16_t angle) override { context.rendering.rotate_current_z(angle); }
+        void rotate_x(std::uint16_t angle) override { context.rendering.rotate_current_x(angle); }
+        void rotate_y(std::uint16_t angle) override { context.rendering.rotate_current_y(angle); }
+        void scale(float x, float y, float z) override {
+            context.rendering.scale_current_matrix(x, y, z);
+        }
+        // A missing queued texture list returns and the caller pops. A ready
+        // list would allocate the late model node; that queue is unrecovered.
+        void draw(float) override {
+            if (context.rendering.late_texture_list_not_ready())
+                return;
+            missing("native_gamma_shadow_model_queue");
+        }
+        void pop_matrix() override { context.rendering.pop_current_matrix(); }
         static float image_height() {
             constexpr std::uint32_t bits = kEmptyGroundBits;
             float value;

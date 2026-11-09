@@ -46,6 +46,16 @@ class Display {
     void rotate_matrix_z(NinjaMatrix &matrix, std::int32_t angle) {
         coordinates_->rotate_z(matrix, angle, arithmetic_);
     }
+    // The shadow blob uses the same current-matrix stack as the body draw.
+    bool push_current_matrix();
+    void pop_current_matrix();
+    void translate_current_matrix(float x, float y, float z);
+    void rotate_current_x(std::int32_t angle);
+    void rotate_current_y(std::int32_t angle);
+    void rotate_current_z(std::int32_t angle);
+    void scale_current_matrix(float x, float y, float z);
+    // True when the current queued texture list would make the late blob return.
+    bool late_texture_list_not_ready() const;
     // NOTSA: the fan borrows the existing display sine coefficients and arithmetic.
     X87Value sine(std::int32_t angle) {
         return NinjaMath(sine_, arithmetic_).sin_extended(angle);

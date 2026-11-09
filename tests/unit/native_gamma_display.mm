@@ -138,7 +138,7 @@ int main(int argc, char **argv) {
         throw;
     } catch (const flow::UnrecoveredGameFlowCall &error) {
         std::cerr << "Actual display stop: " << error.what() << std::endl;
-        assert(std::string(error.what()) == "native_gamma_shadow_draw");
+        assert(std::string(error.what()) == "native_gamma_shadow_model_queue");
         stopped = true;
     }
     assert(stopped && selected_palette == 0);
