@@ -105,6 +105,12 @@ vertices. A different stop means the tree is not the admitted frontier.
 | `0x644340` | unnamed, 117 bytes | not established |
 | `0x7871f0` | `njSqrt` | not established |
 
+The native binding now calls the existing `CCL_CalcRange` and `LoopTaskC`
+owners. `make portable-units` includes `gamma-common-tail-binding`, which checks
+that range store and a repeated child dispatch. The live caller still throws at
+target effects before either call. Gun effects, the held task, shadow, ground
+attributes, running effects, `EntryColliList` and underwater remain stubs.
+
 Two `FPATAN` instructions are at `0x4c4ed4` and `0x4c4ef0`. Profile intersection
 for `0x4c4da0`–`0x4c508f` reported no active patch overlap from the symbol
 bundle. That is not a runtime trace.

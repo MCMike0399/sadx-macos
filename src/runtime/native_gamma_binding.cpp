@@ -1,11 +1,13 @@
 #include "runtime/native_player_system.hpp"
 #include "runtime/native_display.hpp"
+#include "engine/collision_component.hpp"
 #include "player/selection_player_queries.hpp"
 #include "player/player_vertex_weld.hpp"
 #include "player/gamma_input_buffer.hpp"
 #include "player/gamma_fan.hpp"
 #include "game/game_mode.hpp"
 #include <cstring>
+#include <stdexcept>
 
 namespace sadx::gamma_selection {
 namespace {
@@ -417,9 +419,12 @@ std::uint32_t ground_attributes(Context &, Primary) {
 void running_effects(Context &, Primary, const TaskWorkHandle &, const Player &) {
     missing("native_gamma_running_effects");
 }
-// NOTSA: native boundary for CCL_CalcRange; source seam declared in the Gamma core.
-void calculate_collision_range(Context &, Primary) {
-    missing("native_gamma_calculate_collision_range");
+// NOTSA: native boundary for CCL_CalcRange; the owner is collision_component::calculate_range.
+void calculate_collision_range(Context &context, Primary) {
+    if (!context.task)
+        missing("native_gamma_calculate_collision_range");
+    auto work = collision(context, context.task->primary_work);
+    collision_component::calculate_range(work.get(), context.rendering.arithmetic());
 }
 // NOTSA: native boundary for EntryColliList; source seam declared in the Gamma core.
 void enter_collision_list(Context &, Primary) {
@@ -429,9 +434,14 @@ void enter_collision_list(Context &, Primary) {
 void underwater(Context &, Primary, const TaskWorkHandle &, const Player &) {
     missing("native_gamma_underwater");
 }
-// NOTSA: native boundary for LoopTaskC; source seam declared in the Gamma core.
-void run_children(Context &, const TaskHandle &) {
-    missing("native_gamma_run_children");
+// NOTSA: native boundary for LoopTaskC; the owner is TaskScheduler::run_children.
+void run_children(Context &context, const TaskHandle &parent) {
+    const auto result = context.scheduler.run_children(parent);
+    if (result)
+        return;
+    // A child that throws keeps its own failure. A tagged dispatch failure is
+    // recovered task behavior, not the old unrecovered seam.
+    throw std::runtime_error("native gamma child dispatch failed");
 }
 } // namespace sadx::gamma_selection
 

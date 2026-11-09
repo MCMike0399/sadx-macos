@@ -1144,3 +1144,11 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Verified: `make -j4 portable` exit 0 and `make -j4 portable-units` exit 0. Isolated startup, library, input, sine, fog, screen, queue, view, sound, session, engine-table, input-mod constant and frame-control checks exit 0. Layers, provenance, readability, profile patches, owners and hygiene exit 0.
 * Not run: full gate, oracles, native journeys and a source-only Mac build. `check_judge` exits 1. The Makefile hash changed, `9e279b4` already drifted `native_gamma_fan.mm`, and 53 case bins are absent. `sonic.exe` and imported assets are absent. `GammaUpdateTargetEffects` `0x4c4da0` remains a stub.
 * Next: with the pinned executable on a Mac, recover `0x4c4da0`, then present one CharacterSelect frame. Commands are in `reference/packets/linux-host-20261109/MAC-VALIDATION.md`.
+
+### 2026-11-09 — Gamma tail binds collision range and child dispatch (J, no gate)
+
+* Outcome: the native Gamma binding calls the existing collision-range and child-dispatch owners. The live caller still stops at target effects, so no new frame is presented. No Mac worker is connected.
+* Changed: `calculate_collision_range` stores `collision_component::calculate_range`. `run_children` calls `TaskScheduler::run_children` and reports a failed dispatch instead of the old unrecovered seam.
+* Verified: `gamma-common-tail-binding` checks the 25 floor, the sphere range, two child updates, and a null-child failure. It is on `make portable-units`.
+* Not run: full gate, oracles, native journeys and a source-only Mac build. `sonic.exe` is still absent, so `0x4c4da0` stays a stub. Metal, audio, controllers and 63 FPS remain uncertified.
+* Next: recover `GammaUpdateTargetEffects` from the pinned executable, then present one CharacterSelect frame. Commands stay in `reference/packets/linux-host-20261109/MAC-VALIDATION.md`.

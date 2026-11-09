@@ -145,7 +145,7 @@ PORTABLE_UNITS := build/editor-state-test build/executable-image-test build/exec
 	build/gamma-cursors-test build/gamma-setup-resource-test build/sprite-registry-test \
 	build/selection-player-queries-test build/task-scheduler-contract-test build/vector-normalize-test \
 	build/native-frame-control-test build/native-game-mode-test build/game-mode-forwarding-test \
-	build/private-native-assets-test
+	build/private-native-assets-test build/gamma-common-tail-binding-test
 portable: build/libsadx-core.a build/libsadx-native.a
 portable-units: $(PORTABLE_UNITS)
 	@fail=0; \
