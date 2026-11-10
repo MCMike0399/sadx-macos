@@ -114,8 +114,8 @@ NinjaQueueResult NinjaSpriteQueue::allocate_record(std::uint32_t size,std::uint8
     written=store(12,&*list_word,4,0x403fb5);if(!written)return written;
     const auto& captured=runtime.captured_texture_list_at_3abd950;
     if(captured && ((*list_word==0)!=!*captured))return failed(NinjaQueueFailure::texture_reference_conflict,0x403fb5,record);
-    if(*list_word==0)record->texture_list_at_c=std::shared_ptr<NinjaTextureListOwner>{};
-    else record->texture_list_at_c=captured; // nonnull raw/unmapped stays unknown
+    if(*list_word==0)record->texture_list=std::shared_ptr<NinjaTextureListOwner>{};
+    else record->texture_list=captured; // nonnull raw/unmapped stays unknown
     std::uint16_t half=static_cast<std::uint16_t>(eax);written=store(10,&half,2,0x403fb8);if(!written)return written;
     written=store(9,&packed,1,0x403fbc);if(!written)return written;
     const auto& control=runtime.captured_word_at_3d0f9c8;

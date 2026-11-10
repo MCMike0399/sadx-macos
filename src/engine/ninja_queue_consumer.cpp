@@ -56,8 +56,8 @@ struct Operation {
                     auto next_mode=std::uint32_t(flags>>6);if(attribute&0x8000){q.captured_word_at_3d0f9c4=*q.captured_word_at_3d0f9c4|0x2080000U;next_mode=0;}
                     if(next_mode!=need(q.flag_at_3b12208,0x4088a8,0x3b12208))mode(next_mode);
                     //411f30's argument is ignored and its actual51f680 is RET.
-                    q.captured_word_at_3abd950=read<std::uint32_t>(current,12,0x4088c6);q.captured_texture_list_at_3abd950=current->texture_list_at_c;
-                    const auto header=need(current->texture_list_at_c,0x4088e7,0x3abd950);
+                    q.captured_word_at_3abd950=read<std::uint32_t>(current,12,0x4088c6);q.captured_texture_list_at_3abd950=current->texture_list;
+                    const auto header=need(current->texture_list,0x4088e7,0x3abd950);
                     bool usable_header=static_cast<bool>(header),texture_valid=true;
                     if(header){row.header_texture_gate=ninja_texture_list_gate(header);if(!*row.header_texture_gate){result.queue_failure=row.header_texture_gate->failure;stop(NinjaQueueConsumerFailure::queue_failed,row.header_texture_gate->source_boundary);}
                         if(*row.header_texture_gate->source_not_ready){usable_header=false;texture_valid=false;}

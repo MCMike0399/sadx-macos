@@ -1,4 +1,5 @@
 #pragma once
+#include "engine/character_pack.hpp"
 #include "engine/ninja_render.hpp"
 #include "engine/ninja_sprite.hpp"
 #include "engine/ninja_texture.hpp"
@@ -99,10 +100,13 @@ struct NinjaQueueRecord {
     std::optional<std::size_t> bucket;
     // Source header+c capture is separate from the sprite packet's +48 list.
     // Raw bytes remain provenance; this is the live retained native resource.
-    std::optional<std::shared_ptr<NinjaTextureListOwner>> texture_list_at_c;
+    std::optional<std::shared_ptr<NinjaTextureListOwner>> texture_list;
     // The type-1 body draws this after installing the stored matrix. The source
     // pointer word stays in the node; this is the native mesh owner.
     std::function<void()> draw_model;
+    // Typed identity of the type-1 model. The word at the node offset is
+    // provenance layout for the reference tier; shipping dispatch reads this.
+    std::optional<character_pack::ResourceId> late_model;
 };
 using NinjaQueueRecordHandle=std::shared_ptr<NinjaQueueRecord>;
 struct NinjaQueueBucketResult {

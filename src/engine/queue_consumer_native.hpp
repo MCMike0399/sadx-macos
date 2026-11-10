@@ -21,7 +21,8 @@ struct ConsumerServices {
     // Source mode2: actual screen-sized4071c0 black rectangle followed401420.
     std::function<void()> draw_skipped_frame;
     // Type-1 model nodes. Empty leaves every queued record on the old boundary.
-    std::function<void(const NinjaQueueRecordHandle &, const NinjaMatrix &, std::uint32_t, bool)>
+    std::function<void(const NinjaQueueRecordHandle &, const NinjaMatrix &,
+                       character_pack::ResourceId, bool)>
         draw_queued_model = {};
     bool simple_models = false;
     std::int32_t lighting_palette = 0;

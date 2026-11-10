@@ -35,7 +35,7 @@ bool Display::convert_player_to_global(const PlayerOrientation &orientation, Nin
 bool Display::late_texture_list_not_ready() const {
     return texture_selection::list_not_ready(queued_texture_list_);
 }
-LateModelResult Display::queue_late_model(std::uint32_t model_word, std::uint8_t late_flags, float sort_bias,
+LateModelResult Display::queue_late_model(object_draw::ModelId model, std::uint8_t late_flags, float sort_bias,
                                           std::function<void()> draw) {
     constexpr float kBucketBias = 2048.0f;
     NinjaRenderState render;
@@ -56,7 +56,7 @@ LateModelResult Display::queue_late_model(std::uint32_t model_word, std::uint8_t
                                       : std::shared_ptr<NinjaTextureListOwner>{};
     NinjaSpriteQueueRuntime runtime;
     adopt_frame_queue(runtime, &render, facts);
-    return late_draw_model(queue_storage_.records(), coordinates_->current_matrix(), model_word, late_flags,
+    return late_draw_model(queue_storage_.records(), coordinates_->current_matrix(), model, late_flags,
                            queue_state_.values.reset_capture[0], std::move(draw), runtime, arithmetic_);
 }
 bool Display::has_queued_model() const {

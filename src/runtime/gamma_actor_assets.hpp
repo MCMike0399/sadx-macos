@@ -53,6 +53,8 @@ struct GammaActorAssets {
     // A missing row is unavailable imported content, never a known NULL object.
     std::map<unsigned, character_pack::ResourceId> display_objects;
     std::vector<character_pack::ResourceId> display_flag_objects;
+    // The imported shadow blob object; absent in older packs.
+    std::optional<character_pack::ResourceId> shadow_object;
     std::array<GammaMaterialDeclaration, 5> materials{};
     std::vector<collision_component::Info> collision_info;
     std::array<std::uint32_t, 2> line_colors{};

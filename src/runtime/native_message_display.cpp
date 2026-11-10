@@ -36,7 +36,8 @@ void Display::consume_draw_queue() {
                 fog_.special_flags, fog_.active, queued_depth_}, *output_,
                 [this] { restore_depth_comparison(); }, arithmetic_);
         },
-        [this](const NinjaQueueRecordHandle &record, const NinjaMatrix &matrix, std::uint32_t, bool) {
+        [this](const NinjaQueueRecordHandle &record, const NinjaMatrix &matrix,
+               character_pack::ResourceId, bool) {
             coordinates_->current_matrix() = matrix;
             if (!record || !record->draw_model)
                 throw flow::UnrecoveredGameFlowCall("native_queued_model_mesh");

@@ -47,13 +47,13 @@ void texture_gate(){
 void header_texture_ownership(){
     NinjaRenderState render;render.packed_blend_at_3ab9890=0xa8;auto r=runtime(render);
     auto arena=std::make_shared<NinjaRenderQueueArena>(std::vector<std::uint8_t>(2048,0xcd),0,2048,1);NinjaSpriteQueue queue(arena);
-    auto unmapped=queue.allocate_record(152,3,0,0,r);check(unmapped&&!unmapped.record->texture_list_at_c);
-    r.captured_word_at_3abd950=0;auto null=queue.allocate_record(152,3,0,0,r);check(null&&null.record->texture_list_at_c&&!*null.record->texture_list_at_c);
+    auto unmapped=queue.allocate_record(152,3,0,0,r);check(unmapped&&!unmapped.record->texture_list);
+    r.captured_word_at_3abd950=0;auto null=queue.allocate_record(152,3,0,0,r);check(null&&null.record->texture_list&&!*null.record->texture_list);
     auto list=std::make_shared<NinjaTextureListOwner>();std::weak_ptr<NinjaTextureListOwner> lifetime=list;
     r.captured_word_at_3abd950=0x12345678;r.captured_texture_list_at_3abd950=list;
-    auto bound=queue.allocate_record(152,3,0,0,r);check(bound&&bound.record->texture_list_at_c&&*bound.record->texture_list_at_c==list);
+    auto bound=queue.allocate_record(152,3,0,0,r);check(bound&&bound.record->texture_list&&*bound.record->texture_list==list);
     r.captured_texture_list_at_3abd950.reset();list.reset();check(!lifetime.expired());
-    r.captured_word_at_3abd950=0;r.captured_texture_list_at_3abd950=*bound.record->texture_list_at_c;
+    r.captured_word_at_3abd950=0;r.captured_texture_list_at_3abd950=*bound.record->texture_list;
     auto conflict=queue.allocate_record(152,3,0,7,r);check(conflict.failure==NinjaQueueFailure::texture_reference_conflict&&conflict.source_boundary==0x403fb5&&conflict.record);
     std::uint32_t raw;check(arena->read(conflict.record->block,12,&raw,4)==NinjaQueueFailure::none&&raw==0);
     std::uint16_t attribute;check(arena->read(conflict.record->block,10,&attribute,2)==NinjaQueueFailure::unobserved_bytes);

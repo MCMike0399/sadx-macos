@@ -81,6 +81,13 @@ def import_display(model_dll, game_exe, output):
     proof['display_append']['new_records'] = len(importer.records) - proof['display_append']['prefix_records']
     proof['flag_initializer'] = {'address': '0x7cb670', 'bytes': exe.read(0x7cb670, 96).hex(),
                                  'objects': metadata['display_flag_objects']}
+    # object_shadow (SADXModelsNew.h DataPointer at 0x8bf3a0) is the blob the
+    # Shadow tail queues through late_DrawShadowObject.
+    metadata['shadow_object'] = importer.object(0x8BF3A0)
+    importer.verify_round_trip()
+    proof['shadow_object'] = {'address': '0x8bf3a0', 'object': metadata['shadow_object'],
+                              'bytes': exe.read(0x8BF3A0, 4).hex()}
+    proof['display_append']['new_records'] = len(importer.records) - proof['display_append']['prefix_records']
     proof['records'] = importer.evidence
     proof['pack_sha256'] = atomic_pack(importer, actions, output)
     atomic_json(output.with_suffix('.provenance.json'), proof)

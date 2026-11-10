@@ -97,7 +97,7 @@ class Display {
     std::int32_t load_message_texture(texture_lifetime::List &, const message_texture::Image &);
     void reload_message_texture(std::uint32_t, const std::uint16_t *, std::uint32_t, std::uint32_t);
     void consume_draw_queue();
-    LateModelResult queue_late_model(std::uint32_t model_word, std::uint8_t late_flags, float sort_bias,
+    LateModelResult queue_late_model(object_draw::ModelId model, std::uint8_t late_flags, float sort_bias,
                                      std::function<void()> draw);
     bool has_queued_model() const;
     menu_caption::BitmapView message_bitmap_from_end(std::uint32_t);

@@ -1249,3 +1249,10 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * The first run of this gate exited 2 on that changed stub binding evidence. The rerun after the rebinds is green and recorded as underwater-collision-owner-gate.json.
 * CharacterSelect is still not presented. The frontier stops at Big with the title hash. The shadow mesh is queued and not drawn.
 * Next: the typed shadow model identity repair, then BigTheCat. Miles, Knuckles and Amy controllers remain stubs.
+
+### 2026-11-10 — Typed shadow model identity and ground premise (no gate)
+
+* Outcome: the frontier is unchanged. It exits 1 at frame 1332 and stops at native_big_player_controller on the title hash. The shadow mesh is queued and not drawn. No CharacterSelect frame is presented.
+* Changed: the late model queue carries a typed model identity on the node. Shipping dispatch reads that identity and the typed texture list instead of the model word and its pointer floor; the layout word stays as provenance for the reference tier. The Gamma binding queues the imported object_shadow model and no longer contains its executable address. The queue texture list field has a semantic name. Shadow ground sampling fails explicitly when land candidates are loaded.
+* Verified: late model queue oracle passes 48 cases and catches six of six mutants. The late model and sprite queue units pass, including new dispatch checks for a small native model id and for each missing owner. The Gamma display composition still completes at 106 draws and 3060 vertices. The private pack now imports object_shadow and its hash is 14b35914.
+* Next: draw the queued shadow mesh through the model owner, then BigTheCat. The remaining review debt is the gun and shadow holdout audit, effect mode enums and the forwarding service simplification.

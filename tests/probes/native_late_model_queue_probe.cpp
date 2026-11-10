@@ -50,6 +50,8 @@ extern "C" int sadx_native_late_model_queue(const std::uint32_t *input, std::uin
         for (unsigned index = 0; index < kMatrixWords; ++index)
             matrix[index] = float_at(input[kMatrix + index]);
         sadx::X87Context arithmetic(static_cast<std::uint16_t>(input[21]));
+        // Reference adapter: the source model pointer word is the typed
+        // identity here so the stored node layout compares byte for byte.
         const auto result = sadx::late_draw_model(queue, matrix, input[kModel],
                                                    static_cast<std::uint8_t>(input[1]), float_at(input[3]), {},
                                                    runtime, arithmetic);

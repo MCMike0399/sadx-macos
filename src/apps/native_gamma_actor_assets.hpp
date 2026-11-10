@@ -331,6 +331,12 @@ inline GammaActorAssets load_gamma_actor_assets(const std::filesystem::path &dir
             result.display_flag_objects.push_back(object);
         }
     }
+    if (metadata[@"shadow_object"]) {
+        const auto object = static_cast<character_pack::ResourceId>(
+            integer(metadata[@"shadow_object"], 1, pack.record_count(), "Gamma shadow object"));
+        (void)pack.object(object);
+        result.shadow_object = object;
+    }
     return result;
 }
 } // namespace sadx::native::app

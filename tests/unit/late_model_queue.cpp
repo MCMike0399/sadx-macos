@@ -36,6 +36,8 @@ sadx::NinjaSpriteQueueRuntime runtime(sadx::NinjaRenderState &render, std::uint3
     facts.captured_texture_list_at_3abd950 = std::make_shared<sadx::NinjaTextureListOwner>();
     return facts;
 }
+constexpr sadx::character_pack::ResourceId kModel = 7;
+
 sadx::LateModelResult draw(std::uint8_t flags, float translation_z, float limit, std::uint32_t mode) {
     auto arena = std::make_shared<sadx::NinjaRenderQueueArena>(std::vector<std::uint8_t>(65536), 0, 65536, 1);
     sadx::NinjaSpriteQueue queue(arena);
@@ -46,7 +48,7 @@ sadx::LateModelResult draw(std::uint8_t flags, float translation_z, float limit,
     sadx::NinjaMatrix matrix{};
     matrix[14] = translation_z;
     sadx::X87Context arithmetic(0x007f);
-    return sadx::late_draw_model(queue, matrix, 0x8bf374u, flags, limit, [] {}, facts, arithmetic);
+    return sadx::late_draw_model(queue, matrix, kModel, flags, limit, [] {}, facts, arithmetic);
 }
 } // namespace
 
@@ -69,6 +71,34 @@ int main() {
                 "a closed queue takes the immediate path");
     }
     require(bits(0xc6da6000u) == -27952.0f, "the shadow sort bias is the image constant");
+    {
+        // Dispatch reads the typed owners, not the layout words: a small
+        // native model id draws, and removing either typed owner skips it.
+        const auto queued = draw(6, 10.0f, -3000.0f, 0);
+        require(queued.record && queued.record->late_model == kModel,
+                "the typed model identity rides on the node");
+        sadx::character_pack::ResourceId drawn = 0;
+        sadx::NinjaMatrix drawn_matrix{};
+        bool simple_seen = false;
+        const auto capture = [&](const sadx::NinjaQueueRecordHandle &, const sadx::NinjaMatrix &matrix,
+                                 sadx::character_pack::ResourceId model, bool simple) {
+            drawn = model;
+            drawn_matrix = matrix;
+            simple_seen = simple;
+        };
+        require(sadx::dispatch_queued_model(queued.record, true, 0, capture) && drawn == kModel &&
+                    drawn_matrix[14] == 10.0f && simple_seen,
+                "a typed model with a queued list dispatches");
+        drawn = 0;
+        const auto list = queued.record->texture_list;
+        queued.record->texture_list.reset();
+        require(sadx::dispatch_queued_model(queued.record, true, 0, capture) && drawn == 0,
+                "no queued texture list skips the draw");
+        queued.record->texture_list = list;
+        queued.record->late_model.reset();
+        require(sadx::dispatch_queued_model(queued.record, true, 0, capture) && drawn == 0,
+                "a node without a typed model skips the draw");
+    }
     std::cout << "late model queue ok\n";
     return 0;
 }

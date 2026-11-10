@@ -438,7 +438,6 @@ constexpr std::uint32_t kVariantWord = 0x80;
 constexpr std::uint32_t kFade = 0x90;
 constexpr std::int32_t kLockTone = 0x343;
 constexpr std::uint32_t kEmptyGroundBits = 0xc9742400u;
-constexpr std::uint32_t kShadowModelWord = 0x8bf374u;
 constexpr std::uint8_t kLateShadowFlags = 6;
 constexpr float kShadowSortBias = -27952.0f;
 // NOTSA: native boundary for GammaUpdateTargetEffects; source seam declared in the Gamma core.
@@ -643,9 +642,12 @@ fidelity::ExactFloat shadow(Context &context, Primary task, float scale) {
     struct Product final : gamma_shadow::Services {
         Context &context;
         explicit Product(Context &context) : context(context) {}
-        // No land table is loaded on this route, so the height is the image's
-        // empty-table constant. A loaded table is still the unrecovered walk.
+        // The empty-land constant is only the source result when no land
+        // candidates are loaded. A loaded table takes the unrecovered walk
+        // and fails here instead of sampling a fabricated height.
         gamma_shadow::Ground sample_ground(float, float, float) override {
+            if (context.land_candidate_count > 0)
+                missing("native_gamma_shadow_land_walk");
             return {image_height(), 0, 0};
         }
         bool missed_frames() override { return context.rendering.pending_logic_ticks() != 0; }
@@ -670,13 +672,17 @@ fidelity::ExactFloat shadow(Context &context, Primary task, float scale) {
             context.rendering.scale_current_matrix(x, y, z);
         }
         // A missing queued texture list returns and the caller pops. A ready
-        // list allocates the type-1 late model node. The mesh is drawn when the
-        // frame consumes the queue.
+        // list allocates the type-1 late model node for the imported shadow
+        // blob. The mesh is drawn when the frame consumes the queue.
         void draw(float) override {
             if (context.rendering.late_texture_list_not_ready())
                 return;
+            const auto shadow_object = assets(context).shadow_object;
+            if (!shadow_object)
+                missing("native_gamma_shadow_object");
+            const auto model = context.scene.objects.object(*shadow_object).model;
             const auto queued = context.rendering.queue_late_model(
-                kShadowModelWord, kLateShadowFlags, kShadowSortBias,
+                model, kLateShadowFlags, kShadowSortBias,
                 [] { missing("native_gamma_shadow_mesh"); });
             if (!queued)
                 missing("native_gamma_shadow_model_queue");

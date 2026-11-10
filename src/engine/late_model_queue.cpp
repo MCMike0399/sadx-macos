@@ -6,13 +6,11 @@ namespace sadx {
 namespace {
 constexpr std::uint32_t kNodeBytes = 0x70;
 constexpr std::uint32_t kHeaderOffset = 8;
-constexpr std::uint32_t kListWordOffset = 12;
 constexpr std::uint32_t kModelOffset = 0x2c;
 constexpr std::uint32_t kMatrixOffset = 0x30;
 constexpr std::uint32_t kMatrixBytes = 64;
 constexpr std::uint8_t kRecordType = 1;
 constexpr std::uint32_t kQueuePolicy = 0;
-constexpr std::uint32_t kModelPointerFloor = 0x100000;
 constexpr unsigned kTranslationZ = 14;
 
 LateModelResult failed(NinjaQueueFailure failure, std::uint32_t site, NinjaQueueRecordHandle record = {}) {
@@ -40,9 +38,9 @@ bool read_bytes(const NinjaQueueRecordHandle &record, std::uint32_t offset, void
 } // namespace
 
 LateModelResult late_draw_model(NinjaSpriteQueue &queue, const NinjaMatrix &matrix,
-                                std::uint32_t model_word, std::uint8_t late_flags, float depth_limit,
-                                std::function<void()> draw, NinjaSpriteQueueRuntime &runtime,
-                                fidelity::Context &arithmetic) {
+                                character_pack::ResourceId model, std::uint8_t late_flags,
+                                float depth_limit, std::function<void()> draw,
+                                NinjaSpriteQueueRuntime &runtime, fidelity::Context &arithmetic) {
     auto allocated = queue.allocate_record(kNodeBytes, kRecordType, late_flags, 0, runtime);
     if (!allocated)
         return failed(allocated.failure, allocated.source_boundary, allocated.record);
@@ -53,8 +51,11 @@ LateModelResult late_draw_model(NinjaSpriteQueue &queue, const NinjaMatrix &matr
     }
     auto record = allocated.record;
     record->draw_model = std::move(draw);
+    record->late_model = model;
     LateModelResult result;
     result.record = record;
+    // The node word keeps the source layout; shipping identity is late_model.
+    const std::uint32_t model_word = model;
     if (!write_bytes(record, kModelOffset, &model_word, sizeof(model_word), kModelOffset, result))
         return result;
     if (!write_bytes(record, kMatrixOffset, matrix.data(), kMatrixBytes, kMatrixOffset, result))
@@ -79,21 +80,20 @@ LateModelResult late_draw_model(NinjaSpriteQueue &queue, const NinjaMatrix &matr
 bool dispatch_queued_model(const NinjaQueueRecordHandle &record, bool simple_models,
                            std::int32_t lighting_palette,
                            const std::function<void(const NinjaQueueRecordHandle &, const NinjaMatrix &,
-                                                    std::uint32_t, bool)> &draw) {
+                                                    character_pack::ResourceId, bool)> &draw) {
     std::uint8_t header = 0;
     if (!read_bytes(record, kHeaderOffset, &header, sizeof(header)) || (header & 15) != kRecordType)
         return false;
-    std::uint32_t list_word = 0;
-    std::uint32_t model_word = 0;
-    if (!read_bytes(record, kListWordOffset, &list_word, sizeof(list_word)) ||
-        !read_bytes(record, kModelOffset, &model_word, sizeof(model_word)))
-        return false;
-    if (list_word != 0 && model_word >= kModelPointerFloor && draw) {
+    // The source draws only with a queued texture list and a model pointer.
+    // Shipping reads the typed owners captured at insert; the layout words
+    // and the pointer-range test stay with the reference tier.
+    const bool has_list = record->texture_list && *record->texture_list;
+    if (has_list && record->late_model && draw) {
         NinjaMatrix matrix{};
         if (!read_bytes(record, kMatrixOffset, matrix.data(), kMatrixBytes))
             return false;
         const bool simple = simple_models && lighting_palette <= 0;
-        draw(record, matrix, model_word, simple);
+        draw(record, matrix, *record->late_model, simple);
     }
     return true;
 }

@@ -23,13 +23,13 @@ struct LateModelResult {
 
 // FUNCTION: SONIC 0x4048e0 lateDrawModel
 LateModelResult late_draw_model(NinjaSpriteQueue &queue, const NinjaMatrix &matrix,
-                                std::uint32_t model_word, std::uint8_t late_flags, float depth_limit,
-                                std::function<void()> draw, NinjaSpriteQueueRuntime &runtime,
-                                fidelity::Context &arithmetic);
+                                character_pack::ResourceId model, std::uint8_t late_flags,
+                                float depth_limit, std::function<void()> draw,
+                                NinjaSpriteQueueRuntime &runtime, fidelity::Context &arithmetic);
 
 // A linked type-1 node is drawn or skipped here. Any other type stays with the caller.
 bool dispatch_queued_model(const NinjaQueueRecordHandle &record, bool simple_models,
                            std::int32_t lighting_palette,
                            const std::function<void(const NinjaQueueRecordHandle &, const NinjaMatrix &,
-                                                    std::uint32_t, bool)> &draw);
+                                                    character_pack::ResourceId, bool)> &draw);
 } // namespace sadx
