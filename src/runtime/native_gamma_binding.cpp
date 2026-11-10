@@ -1,5 +1,6 @@
 #include "runtime/native_player_system.hpp"
 #include "runtime/native_display.hpp"
+#include "runtime/object_draw_context.hpp"
 #include "engine/collision_component.hpp"
 #include "player/selection_player_queries.hpp"
 #include "player/player_vertex_weld.hpp"
@@ -680,10 +681,24 @@ fidelity::ExactFloat shadow(Context &context, Primary task, float scale) {
             const auto shadow_object = assets(context).shadow_object;
             if (!shadow_object)
                 missing("native_gamma_shadow_object");
+            if (!context.model_environment)
+                missing("native_gamma_shadow_environment");
             const auto model = context.scene.objects.object(*shadow_object).model;
+            // The environment borrows session owners that outlive the frame;
+            // the queue consumes this callback before the frame resets.
+            const auto environment = *context.model_environment;
+            auto &display = context.rendering;
+            // The node captures the list selected at queue time; consuming it
+            // re-selects that list before the mesh draws.
+            const auto *list = context.texture_state ? context.texture_state->common : nullptr;
+            auto draw_mesh = [&display, environment, model, list] {
+                if (list)
+                    display.output().select_texture_list(*list);
+                object_draw::Context draw{display, environment};
+                object_draw::draw_model(draw, model);
+            };
             const auto queued = context.rendering.queue_late_model(
-                model, kLateShadowFlags, kShadowSortBias,
-                [] { missing("native_gamma_shadow_mesh"); });
+                model, kLateShadowFlags, kShadowSortBias, std::move(draw_mesh));
             if (!queued)
                 missing("native_gamma_shadow_model_queue");
             if (queued.route != LateModelRoute::queued)

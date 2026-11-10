@@ -113,6 +113,28 @@ void draw_normal_uv_strip(Context &context, const Meshset &mesh, character_pack:
     pb::normal_uv_strip(device, native::normal_uv_buffer(context.display), source, point_view,
                         normal_view, color, cull);
 }
+void draw_normal_uv_triangles(Context &context, const Meshset &mesh, character_pack::ResourceId points,
+                            character_pack::ResourceId normals) {
+    const auto cull = context.state().cull_mode;
+    const auto color = context.state().vertex_color;
+    constexpr std::size_t kStripCountField = 2, kIndexField = 4, kUvField = 20;
+    constexpr std::size_t kShortBytes = 2, kWordBytes = 4;
+    const auto &geometry = context.environment.scene.geometry;
+    const auto &indices = geometry.indices(mesh_integer(mesh, kIndexField, kWordBytes));
+    const auto &uv = geometry.texture_coordinates(mesh_integer(mesh, kUvField, kWordBytes));
+    const auto &positions = geometry.vector_words(points);
+    const auto &directions = geometry.vector_words(normals);
+    namespace pb = polybuff;
+    const pb::Mesh source{
+        static_cast<std::uint16_t>(mesh_integer(mesh, kStripCountField, kShortBytes)),
+        {indices.data(), indices.size(), 0, pb::DataKind::Mesh},
+        {uv.data(), uv.size(), 0, pb::DataKind::TextureCoordinates}};
+    const pb::Vectors point_view{{positions.data(), positions.size(), 0, pb::DataKind::Points}};
+    const pb::Vectors normal_view{{directions.data(), directions.size(), 0, pb::DataKind::Normals}};
+    pb::Context device{context.display};
+    pb::normal_uv_triangles(device, native::normal_uv_buffer(context.display), source, point_view,
+                            normal_view, color, cull);
+}
 void draw_alternate_model(Context &context, character_pack::ResourceId id,
                           const character_pack::CharacterPack &pack, Owners owners) {
     draw_dynamic_model(id, pack, context.environment.scene.materials, owners, context);

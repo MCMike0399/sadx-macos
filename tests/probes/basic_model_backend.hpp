@@ -99,6 +99,10 @@ void draw_normal_uv_strip(Context &context, const Meshset &mesh, character_pack:
                           character_pack::ResourceId normals) {
     context.event(14, {mesh.ordinal, points, normals});
 }
+void draw_normal_uv_triangles(Context &context, const Meshset &mesh, character_pack::ResourceId points,
+                              character_pack::ResourceId normals) {
+    context.event(22, {mesh.ordinal, points, normals});
+}
 void unsupported_primitive(Context &context, VertexLayout layout, Primitive primitive,
                            const Meshset &mesh, character_pack::ResourceId points,
                            character_pack::ResourceId normals) {

@@ -168,6 +168,9 @@ class Source(Original):
             if address == 0x7835f0:
                 self.event(14, ordinal, 6, 7)
                 self.ret()
+            elif address == 0x783830:
+                self.event(22, ordinal, 6, 7)
+                self.ret()
             else:
                 layout = w[25] & (~2 if self.entry_flags & 16 else 7)
                 self.event(15, layout, w[28], ordinal, 6, 7 if normals else 0)

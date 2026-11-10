@@ -162,6 +162,9 @@ void draw_alternate_model(Context &, character_pack::ResourceId,
 // NOTSA: link-time handoff to the independently recovered polybuff::normal_uv_strip.
 void draw_normal_uv_strip(Context &, const Meshset &, character_pack::ResourceId points,
                           character_pack::ResourceId normals);
+// NOTSA: link-time handoff to the independently recovered polybuff::normal_uv_triangles.
+void draw_normal_uv_triangles(Context &, const Meshset &, character_pack::ResourceId points,
+                              character_pack::ResourceId normals);
 // NOTSA: explicit boundary for other original table entries and buffered draws.
 // These bindings must report the selected source boundary, never silently skip it.
 void unsupported_primitive(Context &, VertexLayout, Primitive, const Meshset &,

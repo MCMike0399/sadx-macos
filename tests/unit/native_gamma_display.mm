@@ -9,6 +9,8 @@
 #include "runtime/native_player_system.hpp"
 #include "runtime/native_gamma_display_context.hpp"
 #include "runtime/native_event_actions_context.hpp"
+#include "runtime/native_regular_resources.hpp"
+#include "apps/native_regular_texture_assets.hpp"
 #include <cassert>
 #include <cstring>
 #include <fstream>
@@ -81,6 +83,16 @@ int main(int argc, char **argv) {
             return display.output().load_individual_textures(list);
         },
         [](std::string_view message) { throw std::runtime_error(std::string(message)); }};
+    // The product loads regular group 0 in the title flow; its common list is
+    // what the shadow tail selects before queueing the blob.
+    native::RegularResources regular_resources;
+    std::uint8_t regular_resync = 0;
+    regular_resources.attach(native::app::load_regular_texture_assets(directory), regular_resync,
+                             language);
+    regular_textures::load_regular(0, regular_resources.catalog(), *regular_resources.state(),
+                                   services);
+    common = regular_resources.state()->common;
+    assert(common);
     const auto setup = native::app::load_gamma_setup_definition(directory);
     const auto effects = native::app::load_gamma_effects_definition(directory);
     assert(setup && !effects.empty());
@@ -290,6 +302,19 @@ int main(int argc, char **argv) {
     assert(objects.object(row(23)).sibling == row(20));
     assert(players.current.player == foreign && display.arithmetic().control_word() == arithmetic_control);
     (void)saved;
+    // Consuming the queue draws the queued shadow blob through the model
+    // owner: at least one more draw with vertices must land in the frame.
+    display.consume_draw_queue();
+    std::size_t total_draws = 0, total_vertices = 0;
+    for (const auto &command : display.output().frame().commands) {
+        if (const auto *draw = std::get_if<graphics::Draw>(&command)) {
+            ++total_draws;
+            total_vertices += draw->vertices.size();
+        }
+    }
+    assert(total_draws > body_draws && total_vertices > body_vertices);
+    std::cout << "Shadow draws: " << total_draws - body_draws
+              << ", vertices: " << total_vertices - body_vertices << std::endl;
     std::cout << "Actual Gamma constructor/display composition, shared siblings/weld/collision, "
                  "passed player, event and missing-asset prefixes checked\n";
 }

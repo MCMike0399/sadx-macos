@@ -286,6 +286,8 @@ void draw_direct_model(character_pack::ResourceId id, const character_pack::Char
         const auto primitive = static_cast<Primitive>((mesh_type >> 14) & 3);
         if (vertex_layout == VertexLayout::PositionNormalUv && primitive == Primitive::Strip)
             draw_normal_uv_strip(context, mesh, model.points, model.normals);
+        else if (vertex_layout == VertexLayout::PositionNormalUv && primitive == Primitive::Triangles)
+            draw_normal_uv_triangles(context, mesh, model.points, model.normals);
         else
             unsupported_primitive(context, vertex_layout, primitive, mesh, model.points,
                                   model.normals);
