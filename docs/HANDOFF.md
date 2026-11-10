@@ -1241,3 +1241,11 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Debt: recorded names for the pose recorder and breath callback in overrides. The underwater word still has its reference tier owner until the scene position consumer is migrated whole. The shadow fields have no writer yet, so the product reaches only the bit-clear path.
 * Not run: the full gate and the full oracle suite. Source checks pass. The first Ghidra run rejected the stale snapshot profile; a fresh import is running and the capstone transcript is the retained evidence for this slice.
 * Next: BigTheCat, then the remaining Miles, Knuckles and Amy controllers. The collision entry owner and the shadow model identity repairs come before the next accepted checkpoint.
+
+### 2026-11-10 — Green gate after the underwater and collision owner slices (exit 0)
+
+* Outcome: make -j10 gate exits 0 at 4c995847. The count is 346 native programs and 658 Python tests. Reference R1 to R4 and the three native menu journeys pass. Startup comparison passes 16 checkpoints.
+* Changed: nothing in product code. The judge manifest registers the underwater oracle, probe, unit test and tracked summary. Two fingerprints rebind only: the collision capacity review after the EntryState repair, and the session header hash in the save warning review after the new session member.
+* The first run of this gate exited 2 on that changed stub binding evidence. The rerun after the rebinds is green and recorded as underwater-collision-owner-gate.json.
+* CharacterSelect is still not presented. The frontier stops at Big with the title hash. The shadow mesh is queued and not drawn.
+* Next: the typed shadow model identity repair, then BigTheCat. Miles, Knuckles and Amy controllers remain stubs.
