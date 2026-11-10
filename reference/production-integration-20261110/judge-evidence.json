@@ -1,0 +1,33 @@
+{
+  "slice": "player underwater (RunUnderwaterStuff 0x446f10, pose recorder 0x43b960)",
+  "port_commit": "5f334a4c",
+  "oracle": {
+    "slug": "player_underwater",
+    "passed": true,
+    "development_cases": 117,
+    "holdout_cases": 64,
+    "holdout_seed": "0x43b960",
+    "mismatches": 0,
+    "faults": 0,
+    "mutants_caught": "9 of 9",
+    "mutants_file": "reference/production-integration-20261110/player-underwater-mutants.json",
+    "mutant_results": "reference/production-integration-20261110/player-underwater-mutant-results.txt"
+  },
+  "changed_existing_test": {
+    "path": "tests/unit/native_gamma_display.mm",
+    "reason": "The composition no longer stops at native_gamma_underwater because that seam is now implemented. The expected-stop catch is removed (a throw now fails the test) and pose-history assertions were added. No tolerance, draw count or vertex expectation changed: 106 draws and 3060 vertices still asserted and observed."
+  },
+  "frontier": {
+    "before": "f468185c exit 1 frame 1332 stop native_gamma_underwater, title c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427",
+    "after": "5f334a4c exit 1 frame 1332 stop native_big_player_controller, same title hash, semantic state passed"
+  },
+  "source_checks": "provenance, readability, layers, global owners, profile patches and repo hygiene exit 0",
+  "limits": [
+    "Full gate result recorded separately after this refresh."
+  ],
+  "collision_ownership_repair": {
+    "commit": "4c995847",
+    "change": "Session owns collision_component::EntryState; gamma Context borrows a pointer; ResetObjectCollisionCounts 0x41b970 recovered as reset_counts with list 2/3 last counts. Source frame lifecycle: RunSceneLogic -> RunAllObjects -> RunObjectCollision consumes then saves/zeroes counts; LoadLevel resets at load. The menu loop has no collision reset, so no reset call was invented for it.",
+    "tests": "gamma-common-tail-binding adds two-actor accumulation across callbacks, reset last-count and zeroing assertions; native-gamma-display composition unchanged expectations (106 draws, 3060 vertices). collision_entry oracle pass; gamma_selection_core partial unchanged at 498 FP flag partials."
+  }
+}
