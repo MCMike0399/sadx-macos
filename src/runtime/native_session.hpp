@@ -256,6 +256,10 @@ class Session final : private flow::NativeServices {
     // Registry users are destroyed before their imported definitions, texlists and arena.
     PlayerSystem players_;
     sprite_registry::State sprites_;
+    // One persistent collision-entry owner. Actor callbacks borrow it; the
+    // counts reset inside RunObjectCollision / LoadLevel in the source, so
+    // entries accumulate across menu frames until those owners are recovered.
+    collision_component::EntryState collision_entries_;
     event_actions::State event_actions_;
     selection_preview::ActionState preview_actions_;
     RegularResources regular_resources_;

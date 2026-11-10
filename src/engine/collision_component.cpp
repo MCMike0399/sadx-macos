@@ -202,4 +202,12 @@ EntryResult enter_list(EntryState &state, const std::shared_ptr<Work> &work, std
     ++list.count;
     return {EntryRoute::entered};
 }
+
+void reset_counts(EntryState &state) {
+    state.last_special_counts = {state.lists[2].count, state.lists[3].count};
+    for (auto &list : state.lists) {
+        list.count = 0;
+        list.slots.clear();
+    }
+}
 } // namespace sadx::collision_component

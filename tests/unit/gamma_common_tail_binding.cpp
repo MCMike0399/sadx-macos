@@ -79,10 +79,12 @@ struct Fixture {
     sadx::character_pack::CharacterPack pack = sadx::character_pack::CharacterPack::decode(minimal_pack());
     sadx::character_pack::SceneState scene{pack};
     sadx::regular_textures::CharacterCatalog catalog{nullptr, nullptr, 0};
+    sadx::collision_component::EntryState collision_entries;
     sadx::gamma_selection::Context context{players, scheduler, bootstrap, display, task, stage, act,
                                            nullptr, nullptr, nullptr, catalog, nullptr, nullptr,
                                            sprites, scene, nullptr, nullptr, nullptr, {}, nullptr};
     Fixture() {
+        context.collision_entries = &collision_entries;
         require(scheduler.initialize_source_pool(arena, std::shared_ptr<void>{}), "source pool");
         const auto created = scheduler.create_element(7, 3, nullptr);
         require(created, "gamma task");
@@ -135,60 +137,100 @@ void collision_entry_uses_the_existing_lists() {
     Fixture world;
     auto &status = sadx::player_initialization::bind_primary_view(world.task).status;
     auto &component = prepared(world, 0);
-    auto entered = sadx::collision_component::enter_list(world.context.collision_entries, 
+    auto entered = sadx::collision_component::enter_list(world.collision_entries,
         sadx::collision_component::component(*world.arena, world.task->primary_work), status,
         world.stage);
-    require(entered && world.context.collision_entries.lists[0].count == 1, "id 0 enters list 0");
-    require(world.context.collision_entries.lists[0].slots[0].task == world.task &&
-                !world.context.collision_entries.lists[0].slots[0].work,
+    require(entered && world.collision_entries.lists[0].count == 1, "id 0 enters list 0");
+    require(world.collision_entries.lists[0].slots[0].task == world.task &&
+                !world.collision_entries.lists[0].slots[0].work,
             "id 0 keeps the task and not the work");
-    require(status == 0 && component.hit_count == 0 && world.context.collision_entries.special_stage == 0,
+    require(status == 0 && component.hit_count == 0 && world.collision_entries.special_stage == 0,
             "ordinary stage clears before the insert");
 
-    world.context.collision_entries.lists[0].count = 16;
-    auto full = sadx::collision_component::enter_list(world.context.collision_entries,
+    world.collision_entries.lists[0].count = 16;
+    auto full = sadx::collision_component::enter_list(world.collision_entries,
         sadx::collision_component::component(*world.arena, world.task->primary_work), status, 0);
     require(full.route == sadx::collision_component::EntryRoute::rejected &&
-                world.context.collision_entries.lists[0].slots.size() == 1,
+                world.collision_entries.lists[0].slots.size() == 1,
             "a full list of 16 rejects the task");
 
     world.stage = 0x27;
-    world.context.collision_entries.lists[0].count = 0;
-    world.context.collision_entries.lists[0].slots.clear();
+    world.collision_entries.lists[0].count = 0;
+    world.collision_entries.lists[0].slots.clear();
     status = 0x14;
     component.hit_count = 4;
-    auto special = sadx::collision_component::enter_list(world.context.collision_entries,
+    auto special = sadx::collision_component::enter_list(world.collision_entries,
         sadx::collision_component::component(*world.arena, world.task->primary_work), status,
         world.stage);
     require(special && status == 0x14 && component.hit_count == 4 &&
-                world.context.collision_entries.special_stage == 1,
+                world.collision_entries.special_stage == 1,
             "stage byte 0x27 with id 0 skips the clear");
 
     component.id = 2;
     status = 0x14;
-    auto paired = sadx::collision_component::enter_list(world.context.collision_entries,
+    auto paired = sadx::collision_component::enter_list(world.collision_entries,
         sadx::collision_component::component(*world.arena, world.task->primary_work), status,
         world.stage);
-    require(paired && world.context.collision_entries.lists[2].slots[0].work && status == 0,
+    require(paired && world.collision_entries.lists[2].slots[0].work && status == 0,
             "ids 2 and 3 keep the work and still clear");
 
     component.id = 10;
-    auto rejected = sadx::collision_component::enter_list(world.context.collision_entries,
+    auto rejected = sadx::collision_component::enter_list(world.collision_entries,
         sadx::collision_component::component(*world.arena, world.task->primary_work), status, 0);
     require(rejected.route == sadx::collision_component::EntryRoute::rejected, "id 10 is not a list");
 
     world.task->exec = &sadx::TaskScheduler::destroy_callback;
-    const auto special_before = world.context.collision_entries.special_stage;
-    auto destroying = sadx::collision_component::enter_list(world.context.collision_entries,
+    const auto special_before = world.collision_entries.special_stage;
+    auto destroying = sadx::collision_component::enter_list(world.collision_entries,
         sadx::collision_component::component(*world.arena, world.task->primary_work), status,
         world.stage);
     require(destroying.route == sadx::collision_component::EntryRoute::destroying &&
-                world.context.collision_entries.special_stage == special_before,
+                world.collision_entries.special_stage == special_before,
             "DestroyTask returns before the stage store");
 
     sadx::collision_component::EntryResult absent;
-    absent = sadx::collision_component::enter_list(world.context.collision_entries, {}, status, 0);
+    absent = sadx::collision_component::enter_list(world.collision_entries, {}, status, 0);
     require(absent.route == sadx::collision_component::EntryRoute::absent, "a null work stays out");
+}
+
+void collision_entries_persist_across_callbacks() {
+    Fixture world;
+    auto &component = prepared(world, 2);
+    auto &status = sadx::player_initialization::bind_primary_view(world.task).status;
+    status = 0x14;
+    const auto first_task = world.task;
+    sadx::gamma_selection::enter_collision_list(
+        world.context, sadx::player_initialization::bind_primary_view(world.task));
+    require(world.collision_entries.lists[2].count == 1, "first actor enters the shared list");
+
+    const auto created = world.scheduler.create_element(7, 3, nullptr);
+    require(created, "second actor task");
+    world.task = created.task;
+    sadx::player_initialization::establish_zeroed_primary(world.scheduler, world.task);
+    prepared(world, 2);
+    auto &second_status = sadx::player_initialization::bind_primary_view(world.task).status;
+    second_status = 0x14;
+    sadx::gamma_selection::enter_collision_list(
+        world.context, sadx::player_initialization::bind_primary_view(world.task));
+    require(world.collision_entries.lists[2].count == 2 &&
+                world.collision_entries.lists[2].slots[0].task == first_task &&
+                world.collision_entries.lists[2].slots[1].task == world.task,
+            "a second callback accumulates into the same owner");
+
+    sadx::collision_component::reset_counts(world.collision_entries);
+    require(world.collision_entries.last_special_counts[0] == 2 &&
+                world.collision_entries.last_special_counts[1] == 0,
+            "reset saves the list 2 and 3 counts");
+    bool empty = true;
+    for (const auto &list : world.collision_entries.lists)
+        empty = empty && list.count == 0 && list.slots.empty();
+    require(empty, "reset zeroes every count");
+
+    second_status = 0x14;
+    sadx::gamma_selection::enter_collision_list(
+        world.context, sadx::player_initialization::bind_primary_view(world.task));
+    require(world.collision_entries.lists[2].count == 1, "entry works after the reset");
+    (void)component;
 }
 
 void child_dispatch_uses_the_scheduler() {
@@ -216,6 +258,7 @@ void child_dispatch_uses_the_scheduler() {
 int main() {
     collision_range_uses_the_existing_owner();
     collision_entry_uses_the_existing_lists();
+    collision_entries_persist_across_callbacks();
     child_dispatch_uses_the_scheduler();
     std::cout << "gamma common-tail binding: collision range, entry lists and child dispatch\n";
 }

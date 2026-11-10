@@ -244,6 +244,7 @@ void TitleScene::exec_selection_gamma(TaskScheduler &scheduler, const TaskHandle
         texture_views.catalog(scene.session_.character_resources_.loaded()),
         scene.session_.regular_resources_.state(), &texture_services, scene.session_.sprites_,
         scene.session_.character_scene_};
+    context.collision_entries = &scene.session_.collision_entries_;
     const editor::View editor_state{scene.session_.editor_status_,
                                     scene.session_.mission_editor_status_};
     context.editor_state = &editor_state;
@@ -285,6 +286,7 @@ void TitleScene::display_selection_gamma(TaskScheduler &scheduler, const TaskHan
         texture_views.catalog(scene.session_.character_resources_.loaded()),
         scene.session_.regular_resources_.state(), &texture_services, scene.session_.sprites_,
         scene.session_.character_scene_};
+    context.collision_entries = &scene.session_.collision_entries_;
     if (!scene.session_.lighting_)
         throw flow::UnrecoveredGameFlowCall("native_stage_lighting_tables");
     const ModelDrawEnvironment environment{*scene.session_.character_pack_,

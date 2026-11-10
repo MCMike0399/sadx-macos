@@ -90,6 +90,7 @@ int main(int argc, char **argv) {
     assert(asset.textures == &lists[6][4] && asset.textures != &lists[6][2]);
     const std::int16_t stage = 0, act = 0;
     sprite_registry::State sprites;
+    collision_component::EntryState collision_entries;
     gamma_selection::Context context{players,
                                      scheduler,
                                      bootstrap,
@@ -127,6 +128,7 @@ int main(int argc, char **argv) {
     const auto fields = native::event_primary_fields();
     native::EventActionsContext event(*arena, event_state, players.registry, pack, fields);
     event_actions::initialize(event.core, task->primary_work);
+    context.collision_entries = &collision_entries;
     context.controller = [](std::uint8_t) {
         return gamma_selection::Context::ControllerSample{};
     };
@@ -143,9 +145,9 @@ int main(int argc, char **argv) {
     assert(players.underwater.rotations[13] == final_pose.rotation);
     assert(players.underwater.underwater_word == 0);
     assert(display.has_queued_model());
-    assert(context.collision_entries.lists[0].count == 1);
-    assert(context.collision_entries.lists[0].slots[0].task == task);
-    assert(context.collision_entries.special_stage == 0);
+    assert(collision_entries.lists[0].count == 1);
+    assert(collision_entries.lists[0].slots[0].task == task);
+    assert(collision_entries.special_stage == 0);
     const auto &draws = display.output().frame().commands;
     std::cout << "Body frame commands: " << draws.size() << std::endl;
     std::size_t body_draws = 0, body_vertices = 0;

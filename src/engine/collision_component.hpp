@@ -90,6 +90,9 @@ struct EntryList {
 struct EntryState {
     std::uint32_t special_stage = 0;
     std::array<EntryList, 10> lists{};
+    // Lists 2 and 3 keep their previous counts across a reset (the source
+    // CollisionList_2_LastCount and CollisionList_3_LastCount words).
+    std::array<std::uint16_t, 2> last_special_counts{};
 };
 enum class EntryRoute { absent, destroying, rejected, entered };
 struct EntryResult {
@@ -100,4 +103,6 @@ struct EntryResult {
 // FUNCTION: SONIC 0x41c280 EntryColliList
 EntryResult enter_list(EntryState &, const std::shared_ptr<Work> &, std::uint16_t &status,
                        std::int16_t stage);
+// FUNCTION: SONIC 0x41b970 ResetObjectCollisionCounts
+void reset_counts(EntryState &);
 } // namespace sadx::collision_component

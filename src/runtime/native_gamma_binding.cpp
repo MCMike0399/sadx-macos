@@ -715,8 +715,10 @@ void calculate_collision_range(Context &context, Primary) {
 void enter_collision_list(Context &context, Primary primary) {
     if (!context.task)
         missing("native_gamma_null_collision_task");
+    if (!context.collision_entries)
+        missing("native_gamma_collision_entries");
     auto work = collision(context, context.task->primary_work);
-    collision_component::enter_list(context.collision_entries, work, primary.status, context.stage);
+    collision_component::enter_list(*context.collision_entries, work, primary.status, context.stage);
 }
 // NOTSA: native boundary for RunUnderwaterStuff; the owner is player_underwater::run.
 void underwater(Context &context, Primary primary, const TaskWorkHandle &motion_work,
