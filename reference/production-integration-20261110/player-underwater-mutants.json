@@ -1,0 +1,47 @@
+[
+  [
+    "status bits are kept",
+    "kStatusKeepMask = 0xefc7",
+    "kStatusKeepMask = 0xffff"
+  ],
+  [
+    "breath limit is one frame early",
+    "kBreathLimit = 1080",
+    "kBreathLimit = 1079"
+  ],
+  [
+    "low water bit is ignored",
+    "kWaterAttributes = 0x400002",
+    "kWaterAttributes = 0x400000"
+  ],
+  [
+    "history stride is seven",
+    "static_cast<unsigned>(index) * 8u",
+    "static_cast<unsigned>(index) * 7u"
+  ],
+  [
+    "no-control timer goes negative",
+    "        player.no_control_timer = 0;",
+    "        --player.no_control_timer;"
+  ],
+  [
+    "surface comparison is inverted",
+    "compared == X87Comparison::less",
+    "compared == X87Comparison::greater"
+  ],
+  [
+    "history index is not incremented",
+    "    ++index;\n",
+    ""
+  ],
+  [
+    "underwater word is kept out of water",
+    "        player.breath_timer = 0;\n        state.underwater_word = 0;\n        return;\n    }\n    NinjaVector eye",
+    "        player.breath_timer = 0;\n        return;\n    }\n    NinjaVector eye"
+  ],
+  [
+    "island number is kept",
+    "    player.island_number = 0;\n",
+    ""
+  ]
+]

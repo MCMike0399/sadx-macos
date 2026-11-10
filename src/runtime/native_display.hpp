@@ -27,6 +27,7 @@
 #include "engine/polybuff_initialization.hpp"
 #include "game/game_library_init.hpp"
 #include "engine/render_state_snapshot.hpp"
+#include "player/player_motion.hpp"
 #include <memory>
 
 namespace sadx::gamma_display { struct Context; }
@@ -57,6 +58,9 @@ class Display {
     void scale_current_matrix(float x, float y, float z);
     // True when the current queued texture list would make the late blob return.
     bool late_texture_list_not_ready() const;
+    // NOTSA: PConvertVector_P2G through the recovered PlayerCoordinates owner
+    // over this display's matrix stack. False is the coordinate failure.
+    bool convert_player_to_global(const PlayerOrientation &orientation, NinjaVector &vector);
     // NOTSA: the fan borrows the existing display sine coefficients and arithmetic.
     X87Value sine(std::int32_t angle) {
         return NinjaMath(sine_, arithmetic_).sin_extended(angle);

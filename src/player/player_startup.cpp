@@ -93,6 +93,9 @@ void initialize_physics(PlayerPhysicsState &player) {
     player.cached_land_object_at_74 = SceneResourceReference{};
     player.equipment = 0;
     player.island_number_at_12 = 0;
+    player.breath_timer = 0;
+    player.shadow_top_y = 0;
+    player.shadow_prior_attributes_top = 0;
     store_animation_shadow(player, 0);
 }
 struct EventStore {
@@ -447,6 +450,16 @@ InitializedPlayerView bind_initialized_player(const PlayerHandle &record) {
             required(fields.requested_animation, boundary),
             required(fields.current_animation, boundary), required(fields.held_task, boundary),
             required(fields.animation_table, boundary), required(fields.join_table, boundary)};
+}
+UnderwaterPlayerView bind_underwater_player(const PlayerHandle &record) {
+    if (!record || !record->physics)
+        throw Error(Boundary::PlayerAllocation);
+    auto &player = *record->physics;
+    return {required(player.no_control_time_at_a, Boundary::Parameters),
+            required(player.breath_timer, Boundary::Parameters),
+            required(player.island_number_at_12, Boundary::Parameters),
+            required(player.shadow_top_y, Boundary::Parameters),
+            required(player.shadow_prior_attributes_top, Boundary::Parameters)};
 }
 std::shared_ptr<PlayerTaskState> NativeAccess::primary(const TaskHandle &task) {
     return required_primary(task);

@@ -6,6 +6,7 @@
 #include "runtime/engine_code_tables.hpp"
 #include "runtime/model_device.hpp"
 #include "game/library_initial_state.hpp"
+#include "player/player_coordinates.hpp"
 #include <cstring>
 #include <stdexcept>
 
@@ -26,6 +27,10 @@ void Display::rotate_current_z(std::int32_t angle) {
 }
 void Display::scale_current_matrix(float x, float y, float z) {
     coordinates_->scale_matrix(coordinates_->current_matrix(), x, y, z, arithmetic_);
+}
+bool Display::convert_player_to_global(const PlayerOrientation &orientation, NinjaVector &vector) {
+    PlayerCoordinates coordinates(sine_, runtime::engine_code_tables().unit_matrix, matrices_);
+    return static_cast<bool>(coordinates.task_to_world(&orientation, vector, arithmetic_));
 }
 bool Display::late_texture_list_not_ready() const {
     return texture_selection::list_not_ready(queued_texture_list_);

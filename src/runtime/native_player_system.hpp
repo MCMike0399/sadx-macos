@@ -10,6 +10,7 @@
 #include "player/gamma_selection_core.hpp"
 #include "player/gamma_setup_resource.hpp"
 #include "player/gamma_effects.hpp"
+#include "player/player_underwater.hpp"
 #include "player/scene_input_producer.hpp"
 #include "game/game_bootstrap.hpp"
 #include "game/editor_state.hpp"
@@ -45,6 +46,7 @@ struct PlayerSystem {
     gamma_setup::State gamma_setup;
     std::unique_ptr<gamma_effects::Asset> gamma_effects_asset;
     gamma_effects::State gamma_effects;
+    player_underwater::State underwater;
 };
 // NOTSA: existing session asset load binds imported declarations to its shared scene owners.
 void bind_gamma_resources(PlayerSystem &, character_pack::SceneState &, const GammaActorAssets &);

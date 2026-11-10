@@ -130,18 +130,18 @@ int main(int argc, char **argv) {
     context.controller = [](std::uint8_t) {
         return gamma_selection::Context::ControllerSample{};
     };
-    bool stopped = false;
-    try {
-        gamma_selection::run(context, task);
-    } catch (const basic_model::Unavailable &error) {
-        std::cerr << "Model boundary " << unsigned(error.boundary) << std::endl;
-        throw;
-    } catch (const flow::UnrecoveredGameFlowCall &error) {
-        std::cerr << "Actual display stop: " << error.what() << std::endl;
-        assert(std::string(error.what()) == "native_gamma_underwater");
-        stopped = true;
-    }
-    assert(stopped && selected_palette == 0);
+    // The full Gamma common tail now completes, including RunUnderwaterStuff
+    // on its bit-clear path and the child dispatch after it.
+    players.underwater.underwater_word = 9;
+    gamma_selection::run(context, task);
+    assert(selected_palette == 0);
+    assert(players.underwater.history_index[5] == 1);
+    const auto recorded = players.underwater.positions[13];
+    const auto final_pose = player_initialization::bind_primary_view(task);
+    assert(recorded.x == final_pose.position.x && recorded.y == final_pose.position.y &&
+           recorded.z == final_pose.position.z);
+    assert(players.underwater.rotations[13] == final_pose.rotation);
+    assert(players.underwater.underwater_word == 0);
     assert(display.has_queued_model());
     assert(context.collision_entries.lists[0].count == 1);
     assert(context.collision_entries.lists[0].slots[0].task == task);

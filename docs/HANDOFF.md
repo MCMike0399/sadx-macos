@@ -1232,3 +1232,12 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * The 11 suite fails are colored polygon, crt asin, atan2, fabs, floor, d3dx perspective, floor angles, player reaction, sonic initialization helpers, sse math, and x87 memory.
 * Stock `game/imported` still stops at display object row 14 because that pack has no `display_objects` key. The admitted pack `2929e8a6` has the eight rows.
 * Next: `RunUnderwaterStuff` (`0x446f10`) on the bit-clear path, including the position buffer at `0x43b960`. The bit-set path stays a named failure until a frame reaches it. Then the type-1 shadow mesh, then a presented CharacterSelect frame.
+
+### 2026-11-10 — RunUnderwaterStuff completes Gamma's tail (no gate)
+
+* Outcome: the private-asset frontier still exits 1 at frame 1332, completed 1330, on the title hash. Gamma's common tail now completes, so the scheduler reaches Big and stops at native_big_player_controller. No CharacterSelect frame is presented.
+* Changed: player_underwater::run owns RunUnderwaterStuff and record_position owns the pose recorder. Status bits clear, motion and player vectors zero, the no-control timer clamps, one pose per frame enters the history buffers, and the breath timer runs against the shadow top attributes and height. The breath countdown callback stays an explicit stub. PlayerSystem owns the history buffers.
+* Verified: oracle pass, 117 development cases and a separate 64 case holdout seed, zero mismatches. Nine of nine mutants are caught. The unit test and the Gamma display composition pass; the composition now completes the tail with 106 draws and 3060 vertices. Independent review found no P1; its holdout and oracle blind spot fixes are included.
+* Debt: recorded names for the pose recorder and breath callback in overrides. The underwater word still has its reference tier owner until the scene position consumer is migrated whole. The shadow fields have no writer yet, so the product reaches only the bit-clear path.
+* Not run: the full gate and the full oracle suite. Source checks pass. The first Ghidra run rejected the stale snapshot profile; a fresh import is running and the capstone transcript is the retained evidence for this slice.
+* Next: BigTheCat, then the remaining Miles, Knuckles and Amy controllers. The collision entry owner and the shadow model identity repairs come before the next accepted checkpoint.

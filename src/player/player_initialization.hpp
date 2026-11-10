@@ -106,6 +106,16 @@ struct InitializedPlayerView {
 };
 InitializedPlayerView bind_initialized_player(const PlayerHandle &);
 
+// NOTSA: semantic borrow of the initialized fields RunUnderwaterStuff
+// consumes; availability is rejected here, not in the Gamma binding.
+struct UnderwaterPlayerView {
+    std::int16_t &no_control_timer, &breath_timer;
+    std::uint16_t &island_number;
+    float &shadow_top_y;
+    std::uint32_t &shadow_prior_attributes_top;
+};
+UnderwaterPlayerView bind_underwater_player(const PlayerHandle &);
+
 struct Registry {
     // GLOBAL: SONIC 0x3b42e30 playertp size=32
     std::array<TaskHandle, 8> tasks = {};

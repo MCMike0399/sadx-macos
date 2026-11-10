@@ -39,6 +39,9 @@ struct PlayerPhysicsState {
     std::optional<std::int16_t> timer_at_80 = {},timer_at_82 = {},jump_timer_at_8 = {};
     std::optional<std::uint16_t> idle_timer_at_e = {};
     PlayerAnimationTail animation_tail = {}; // unknown fields until source calloc establishes availability
+    std::optional<std::int16_t> breath_timer = {}; // playerwk +0xc
+    std::optional<float> shadow_top_y = {}; // shadowwk y_top, playerwk +0x1ec
+    std::optional<std::uint32_t> shadow_prior_attributes_top = {}; // shadowwk _Attr_top, +0x1f4
 
 };
 

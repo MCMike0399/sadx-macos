@@ -1,0 +1,111 @@
+=== 0x446f10 RunUnderwaterStuff (scan to first ret, max 0x600) ===
+00446f10  mov      eax, dword ptr [esp + 8]
+00446f14  sub      esp, 0xc
+00446f17  push     ebx
+00446f18  mov      ebx, dword ptr [esp + 0x14]
+00446f1c  and      word ptr [ebx + 4], 0xefc7
+00446f22  push     esi
+00446f23  mov      esi, dword ptr [esp + 0x20]
+00446f27  push     edi
+00446f28  xor      edi, edi
+00446f2a  mov      dword ptr [eax + 0x18], edi
+00446f2d  mov      dword ptr [eax + 0x14], edi
+00446f30  mov      dword ptr [eax + 0x10], edi
+00446f33  mov      dword ptr [esi + 0x34], edi
+00446f36  mov      dword ptr [esi + 0x30], edi
+00446f39  mov      dword ptr [esi + 0x2c], edi
+00446f3c  mov      dword ptr [esi + 0x28], edi
+00446f3f  mov      dword ptr [esi + 0x24], edi
+00446f42  mov      dword ptr [esi + 0x20], edi
+00446f45  mov      dword ptr [eax + 0x38], edi
+00446f48  xor      eax, eax
+00446f4a  mov      ax, word ptr [esi + 0xa]
+00446f4e  cmp      ax, di
+00446f51  jle      0x446f5a
+00446f53  dec      eax
+00446f54  mov      word ptr [esi + 0xa], ax
+00446f58  jmp      0x446f5e
+00446f5a  mov      word ptr [esi + 0xa], di
+00446f5e  mov      al, byte ptr [ebx + 8]
+00446f61  call     0x43b960
+00446f66  test     dword ptr [esi + 0x1f4], 0x400002
+00446f70  mov      word ptr [esi + 0x12], di
+00446f74  je       0x446ff0
+00446f76  mov      eax, dword ptr [esi + 0x118]
+00446f7c  lea      ecx, [esp + 0xc]
+00446f80  push     ecx
+00446f81  push     ebx
+00446f82  mov      dword ptr [esp + 0x1c], 0
+00446f8a  mov      dword ptr [esp + 0x14], 0
+00446f92  mov      dword ptr [esp + 0x18], eax
+00446f96  call     0x43ec90
+00446f9b  add      esp, 8
+00446f9e  lea      edx, [ebx + 0x20]
+00446fa1  lea      ecx, [esp + 0xc]
+00446fa5  call     0x785170
+00446faa  fld      dword ptr [esi + 0x1ec]
+00446fb0  fcomp    dword ptr [esp + 0x10]
+00446fb4  fnstsw   ax
+00446fb6  test     ah, 1
+00446fb9  jne      0x446ff0
+00446fbb  inc      word ptr [esi + 0xc]
+00446fbf  cmp      word ptr [esi + 0xc], 0x438
+00446fc5  jne      0x446ff4
+00446fc7  push     0x446b10
+00446fcc  push     edi
+00446fcd  push     8
+00446fcf  call     0x40b860
+00446fd4  add      esp, 0xc
+00446fd7  cmp      eax, edi
+00446fd9  mov      dword ptr [0x3b42e70], edi
+00446fdf  je       0x446ffa
+00446fe1  mov      edx, dword ptr [eax + 0x2c]
+00446fe4  mov      al, byte ptr [ebx + 8]
+00446fe7  pop      edi
+00446fe8  pop      esi
+00446fe9  mov      byte ptr [edx], al
+00446feb  pop      ebx
+00446fec  add      esp, 0xc
+00446fef  ret      
+--- ret ---
+first-ret end guess: 0x446ff0
+
+=== 0x43b960 (scan to first ret, max 0x200) ===
+0043b960  movzx    eax, al
+0043b963  mov      dl, byte ptr [eax + 0x3b36d80]
+0043b969  mov      ecx, dword ptr [eax*4 + 0x3b42e10]
+0043b970  inc      dl
+0043b972  mov      byte ptr [eax + 0x3b36d80], dl
+0043b978  movzx    edx, dl
+0043b97b  lea      eax, [eax + edx*8]
+0043b97e  push     esi
+0043b97f  push     edi
+0043b980  lea      eax, [eax + eax*2]
+0043b983  shl      eax, 2
+0043b986  lea      edx, [ecx + 0x20]
+0043b989  mov      edi, dword ptr [edx]
+0043b98b  lea      esi, [eax + 0x3b3ce10]
+0043b991  mov      dword ptr [esi], edi
+0043b993  mov      edi, dword ptr [edx + 4]
+0043b996  mov      dword ptr [esi + 4], edi
+0043b999  mov      edx, dword ptr [edx + 8]
+0043b99c  mov      dword ptr [esi + 8], edx
+0043b99f  mov      edx, dword ptr [ecx + 0x14]
+0043b9a2  mov      dword ptr [eax + 0x3b36df0], edx
+0043b9a8  mov      edx, dword ptr [ecx + 0x18]
+0043b9ab  mov      dword ptr [eax + 0x3b36df4], edx
+0043b9b1  mov      ecx, dword ptr [ecx + 0x1c]
+0043b9b4  pop      edi
+0043b9b5  mov      dword ptr [eax + 0x3b36df8], ecx
+0043b9bb  pop      esi
+0043b9bc  ret      
+--- ret ---
+first-ret end guess: 0x43b9bd
+00446ff0  mov      word ptr [esi + 0xc], di
+00446ff4  mov      dword ptr [0x3b42e70], edi
+00446ffa  pop      edi
+00446ffb  pop      esi
+00446ffc  pop      ebx
+00446ffd  add      esp, 0xc
+00447000  ret      
+--- ret ---

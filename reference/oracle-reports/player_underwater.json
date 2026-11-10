@@ -1,0 +1,30 @@
+{
+ "passed": true,
+ "values_match": true,
+ "cases": 117,
+ "completed": 117,
+ "mismatches": 0,
+ "faults": 0,
+ "holdout": {
+  "cases": 64,
+  "mismatches": 0,
+  "faults": 0,
+  "seed": "0x43b960"
+ },
+ "source_range_sha256": "5f24b9c77e44f45c5b687f9d714bfd54df90459e70143200ee9873ae120dca4f",
+ "source": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "entry": "0x446f10",
+ "samples": [],
+ "limits": [
+  "PConvertVector_P2G is replaced by the fixture-converted vector; the rotation itself is owned by the player_coordinates oracle.",
+  "CreateElementalTask is replaced by the fixture result; its arguments (8, 0, 0x446b10) are checked and the slot-byte store is observed.",
+  "A null playertwp entry faults in the original after the index store and fails in the native service before it; that fault order is not exercised.",
+  "x87 status flags are not compared; the stored binary32 values and the fcomp branch are."
+ ],
+ "tracked_summary": {
+  "full_sha256": "13881df0ba6ca3a11d2632f6962dc22ebce2cf1a7a4156163bb369940cb6cedb",
+  "full_bytes": 968,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

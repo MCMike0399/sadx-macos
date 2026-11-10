@@ -31,7 +31,8 @@ inline Player player(PlayerPhysicsState &state) {
            previous_attributes, path_distance, held, equipment, island, animation_mode, join_mode,
            shadow_scale, item_flags, no_control_timer, moving, land_object, flags, timer,
            requested_animation, current_animation, previous_animation, charge, release_timer,
-           release_phase, jump_timer, idle_timer, animation] = state;
+           release_phase, jump_timer, idle_timer, animation, breath_timer, shadow_top_y,
+           shadow_prior_attributes] = state;
     return {held,
             moving,
             equipment,

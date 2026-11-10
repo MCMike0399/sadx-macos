@@ -718,9 +718,47 @@ void enter_collision_list(Context &context, Primary primary) {
     auto work = collision(context, context.task->primary_work);
     collision_component::enter_list(context.collision_entries, work, primary.status, context.stage);
 }
-// NOTSA: native boundary for RunUnderwaterStuff; source seam declared in the Gamma core.
-void underwater(Context &, Primary, const TaskWorkHandle &, const Player &) {
-    missing("native_gamma_underwater");
+// NOTSA: native boundary for RunUnderwaterStuff; the owner is player_underwater::run.
+void underwater(Context &context, Primary primary, const TaskWorkHandle &motion_work,
+                const Player &player) {
+    if (motion_work != context.task->motion_work)
+        missing("native_gamma_motion_identity");
+    auto &body = physics(player);
+    auto motion = player_initialization::bind_existing_motion(context.task);
+    auto fields = player_initialization::bind_underwater_player(player);
+    struct Product final : player_underwater::Services {
+        Context &context;
+        Primary primary;
+        Product(Context &owner, Primary task) : context(owner), primary(task) {}
+        player_underwater::Pose player_pose(std::uint8_t slot) override {
+            if (slot >= context.players.registry.primary.size())
+                missing("native_underwater_player_slot");
+            const auto &entry = context.players.registry.primary[slot];
+            if (!entry || !entry->position)
+                missing("native_underwater_player_pose");
+            return {*entry->position, entry->orientation.angles};
+        }
+        void convert_to_global(NinjaVector &vector) override {
+            const PlayerOrientation orientation{primary.status, primary.rotation};
+            if (!context.rendering.convert_player_to_global(orientation, vector))
+                missing("native_underwater_convert");
+        }
+        // The breath countdown callback is unrecovered; fail at its call.
+        std::uintptr_t create_breath_task() override {
+            missing("native_underwater_breath_task");
+        }
+        void store_breath_slot(std::uintptr_t, std::uint8_t) override {
+            missing("native_underwater_breath_task");
+        }
+    } services(context, primary);
+    player_underwater::PlayerView view{
+        primary.status,        primary.player_index, primary.position,
+        motion->motion.acceleration, motion->source_field_38,
+        body.effect,           body.motion.acceleration,
+        fields.no_control_timer, fields.breath_timer, fields.island_number,
+        player->parameters.eyes_height, fields.shadow_top_y, fields.shadow_prior_attributes_top};
+    player_underwater::run(context.players.underwater, view, services,
+                           context.rendering.arithmetic());
 }
 // NOTSA: native boundary for LoopTaskC; the owner is TaskScheduler::run_children.
 void run_children(Context &context, const TaskHandle &parent) {
