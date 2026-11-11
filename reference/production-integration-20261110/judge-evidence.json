@@ -29,5 +29,14 @@
     "commit": "4c995847",
     "change": "Session owns collision_component::EntryState; gamma Context borrows a pointer; ResetObjectCollisionCounts 0x41b970 recovered as reset_counts with list 2/3 last counts. Source frame lifecycle: RunSceneLogic -> RunAllObjects -> RunObjectCollision consumes then saves/zeroes counts; LoadLevel resets at load. The menu loop has no collision reset, so no reset call was invented for it.",
     "tests": "gamma-common-tail-binding adds two-actor accumulation across callbacks, reset last-count and zeroing assertions; native-gamma-display composition unchanged expectations (106 draws, 3060 vertices). collision_entry oracle pass; gamma_selection_core partial unchanged at 498 FP flag partials."
+  },
+  "typed_shadow": {
+    "commits": [
+      "3212b084",
+      "b22e6da7"
+    ],
+    "change": "Late model queue carries a typed ResourceId; shipping dispatch reads typed owners instead of the model word and pointer floor. Probe keeps the source word as adapter identity so stored layout compares byte for byte. Basic model oracle gains the PositionNormalUv triangles target (event 22) matching the newly wired direct dispatch; values still match on 2427 cases with the same 172 FP flag partials.",
+    "mutants": "late-model-queue 6 of 6 (existing specs); basic-model dispatch swaps 2 of 2 (reference/production-integration-20261110/basic-model-triangles-mutants.py)",
+    "composition": "native-gamma-display consumes the queue and draws 1 shadow draw / 6 vertices after the 106-draw body"
   }
 }
