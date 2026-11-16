@@ -27,6 +27,7 @@
 #include "apps/native_character_selection_assets.hpp"
 #include "apps/native_gamma_actor_assets.hpp"
 #include "apps/native_big_actor_assets.hpp"
+#include "apps/native_amy_actor_assets.hpp"
 #include "apps/native_sonic_animation_assets.hpp"
 #include "apps/native_character_select_label_assets.hpp"
 #include "apps/native_character_completion_assets.hpp"
@@ -218,6 +219,9 @@ class Application {
                 sadx::native::app::load_gamma_effects_definition(this->configuration.assets));
         if (std::filesystem::exists(this->configuration.assets / "characters/big-actor.json"))
             session.load_big_assets(sadx::native::app::load_big_actor_assets(
+                this->configuration.assets, *characters));
+        if (std::filesystem::exists(this->configuration.assets / "characters/amy-actor.json"))
+            session.load_amy_assets(sadx::native::app::load_amy_actor_assets(
                 this->configuration.assets, *characters));
         session.attach_character_labels(sadx::native::app::load_character_label_textures(
             this->configuration.assets));

@@ -223,8 +223,40 @@ void TitleScene::exec_selection_miles(TaskScheduler &, const TaskHandle &) {
 void TitleScene::exec_selection_knuckles(TaskScheduler &, const TaskHandle &) {
     throw flow::UnrecoveredGameFlowCall("native_knuckles_player_controller");
 }
-void TitleScene::exec_selection_amy(TaskScheduler &, const TaskHandle &) {
-    throw flow::UnrecoveredGameFlowCall("native_amy_player_controller");
+void TitleScene::exec_selection_amy(TaskScheduler &scheduler, const TaskHandle &task) {
+    auto &scene = callback_scene(scheduler, exec_selection_amy);
+    scene.register_callback(display_selection_amy);
+    scene.register_callback(destroy_selection_amy);
+    scene.register_callback(initialize_player_auxiliary);
+    CharacterTextureViews texture_views(scene.session_.character_resources_.assets(),
+                                        scene.session_.character_resources_.lists());
+    auto texture_services = scene.session_.regular_texture_services();
+    amy_selection::Context context{scene.session_.players_, scheduler,
+        scene.session_.bootstrap_, scene.display_, task,
+        scene.session_.stage_, scene.session_.act_,
+        display_selection_amy, destroy_selection_amy, initialize_player_auxiliary,
+        texture_views.catalog(scene.session_.character_resources_.loaded()),
+        scene.session_.regular_resources_.state(), &texture_services,
+        scene.session_.character_scene_};
+    context.collision_entries = &scene.session_.collision_entries_;
+    const editor::View editor_state{scene.session_.editor_status_,
+                                    scene.session_.mission_editor_status_};
+    context.editor_state = &editor_state;
+    if (scene.session_.lighting_ && scene.session_.character_pack_) {
+        const ModelDrawEnvironment environment{*scene.session_.character_pack_,
+            scene.session_.character_scene_, scene.session_.bootstrap_.material_callback,
+            *scene.session_.lighting_};
+        context.model_environment = &environment;
+        amy_selection::run(context, task);
+        return;
+    }
+    amy_selection::run(context, task);
+}
+void TitleScene::display_selection_amy(TaskScheduler &, const TaskHandle &) {
+    throw flow::UnrecoveredGameFlowCall("native_amy_display");
+}
+void TitleScene::destroy_selection_amy(TaskScheduler &, const TaskHandle &) {
+    throw flow::UnrecoveredGameFlowCall("native_amy_destruct");
 }
 void TitleScene::exec_selection_big(TaskScheduler &scheduler, const TaskHandle &task) {
     auto &scene = callback_scene(scheduler, exec_selection_big);

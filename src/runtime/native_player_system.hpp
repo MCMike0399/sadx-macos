@@ -14,6 +14,9 @@
 #include "player/big_selection_core.hpp"
 #include "runtime/big_actor_assets.hpp"
 #include "runtime/big_motion.hpp"
+#include "player/amy_selection_core.hpp"
+#include "runtime/amy_actor_assets.hpp"
+#include "runtime/amy_motion.hpp"
 #include "player/scene_input_producer.hpp"
 #include "game/game_bootstrap.hpp"
 #include "game/editor_state.hpp"
@@ -64,6 +67,18 @@ struct PlayerSystem {
         float morph_amount = 0;
     };
     std::deque<BigExtraWork> big_work;
+    std::unique_ptr<AmyActorAssets> amy_assets;
+    std::unique_ptr<AmyMotionAssets> amy_motion_assets;
+    PlayerJoinTable amy_weld;
+    // NOTSA: typed fields share the identity of the actual player allocation.
+    struct AmyExtraWork {
+        TaskWorkHandle allocation;
+        // The display fade pair and free bytes mode zero clears at playerwk
+        // +0x94/+0x98/+0x80/+0x81/+0x82; their consumer is AmyDisplay.
+        float display_target = 0, display_current = 0;
+        std::uint8_t byte_80 = 0, byte_81 = 0, byte_82 = 0;
+    };
+    std::deque<AmyExtraWork> amy_work;
     player_underwater::State underwater;
 };
 // NOTSA: existing session asset load binds imported declarations to its shared scene owners.
@@ -76,6 +91,8 @@ void bind_gamma_effects_resources(PlayerSystem &, const CharacterTextureAssets &
     std::array<std::vector<regular_textures::List>, 9> &, const std::vector<std::uint8_t> &);
 // NOTSA: Big weld declarations bind to the same shared scene objects.
 void bind_big_resources(PlayerSystem &, character_pack::SceneState &, const BigActorAssets &);
+// NOTSA: Amy weld and tail-object declarations bind to the same shared scene objects.
+void bind_amy_resources(PlayerSystem &, character_pack::SceneState &, const AmyActorAssets &);
 } // namespace sadx::native
 
 namespace sadx::gamma_selection {
@@ -136,3 +153,28 @@ struct Context {
     std::int16_t land_candidate_count = 0;
 };
 } // namespace sadx::big_selection
+
+namespace sadx::amy_selection {
+// NOTSA: borrowed real owners for this source callback invocation. No pose copy.
+struct Context {
+    native::PlayerSystem &players;
+    TaskScheduler &scheduler;
+    bootstrap::State &bootstrap;
+    native::Display &rendering;
+    const TaskHandle &task;
+    const std::int16_t &stage, &act;
+    TaskCallback display, destructor, auxiliary;
+    regular_textures::CharacterCatalog character_textures;
+    regular_textures::State *texture_state;
+    regular_textures::Services *texture_services;
+    character_pack::SceneState &scene;
+    const native::ModelDrawEnvironment *model_environment = nullptr;
+    // NOTSA: borrowed mission/editor words for CheckEditMode.
+    const editor::View *editor_state = nullptr;
+    // Borrowed session collision-entry owner; never a per-callback copy.
+    collision_component::EntryState *collision_entries = nullptr;
+    // Source land-candidate count. Zero is the empty table; a positive count
+    // still takes the unrecovered shadow land walk.
+    std::int16_t land_candidate_count = 0;
+};
+} // namespace sadx::amy_selection
