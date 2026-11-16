@@ -1325,3 +1325,7 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Verified: make -j10 build/sadx-native exits 0. player-underwater passes 117 development and 64 holdout cases with zero mismatches; the player-underwater and native-gamma-display units exit 0 (106 draws, 3060 vertices). Provenance, readability and layer checks exit 0.
 * Limits: Big now runs the recovered underwater product without a stop on this frame. The land walk still leaves the shadow bottom at the source default. The frontier checker's semantic state still fails at scheduled task 3/0 flags differ, as before.
 * Next: the native Amy player controller, then the land walk that produces a real shadow contact.
+
+### 2026-11-10 — Big stand checker analysis recorded (docs only)
+
+* A delegated analysis of the seven Big stand and damage checkers is recorded in docs/RESEARCH-big-stand-checkers.md. Five return zero on the CharacterSelect preview path by source-proven guards. BigCheckFall transitions to MD_BIG_FALL because no grounded bit is set, and BigCheckNextAction is live because the preview sets input 12. The next Big recovery after the remaining controllers is the fall mode and the checker chain in that order.
