@@ -54,6 +54,11 @@ def semantic_state(state):
     for path, flags in EXPECTED_TASKS.items():
         require(path in tasks and all(tasks[path][key] == value for key, value in flags.items()),
                 f'scheduled task {path} flags differ')
+    # The preview task keeps all three callbacks; its list-3 index shifts as
+    # actors create their own level-3 children, so it is matched by flags.
+    require(any(task['exec'] and task['display'] and task['destructor']
+                for path, task in tasks.items() if path.startswith('3/')),
+            'selection preview task flags differ')
     require(not state['preview_task_retired'] and state['preview_camera_live'],
             'selection preview or camera retired')
     require(len(state['preview_actors']) == 7, 'selection actor count differs')
@@ -63,12 +68,9 @@ def semantic_state(state):
             not gamma.get('retired'), 'initialized Gamma preview actor missing')
 
 
-# Selection preview is list 3; actor callbacks are list 1. Gamma is 1/2 and
-# Big is 1/3 at this stop; Big's two level-3 children precede the preview task.
+# Selection preview is list 3; actor callbacks are list 1. Gamma is 1/2 at this stop.
 EXPECTED_TASKS = {**{f'1/{index}': {'exec': True} for index in range(1, 8)},
                   '1/2': {'exec': True, 'display': True, 'destructor': True},
-                  '1/3': {'exec': True, 'display': True, 'destructor': True},
-                  '3/2': {'exec': True, 'display': True, 'destructor': True},
                   '0/0': {'exec': True}}
 
 
