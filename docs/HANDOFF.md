@@ -1335,3 +1335,10 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Outcome: the frontier still exits 1 at frame 1332 on the title hash. Amy mode zero now runs through its direct-ahead setup and stops at native_amy_initialize_auxiliary_a. No CharacterSelect frame is presented.
 * Changed: AmySetupForPlayer creates its child with the copied motion words and clears the player work-word bit in source order.
 * Verified: the app builds and the frontier stop moved with semantic state still passing.
+
+### 2026-11-10 — Amy auxiliary initializers run (no gate)
+
+* Outcome: the frontier still exits 1 at frame 1332 on the title hash. Amy mode zero now stops at native_amy_initialize_auxiliary_d. No CharacterSelect frame is presented.
+* Changed: the first three Amy mode-zero auxiliaries run with their source gates. The event task requires the current character and global mode to match, one word is cleared, and the stage-event table scan finds no CharacterSelect entry. usPlayer has a bootstrap owner.
+* Verified: the app builds and the frontier stop moved with semantic state still passing.
+* Next: the remaining Amy auxiliaries in stop order, then Knuckles. The Miles kRows table needs its constexpr review entry at the next gate.

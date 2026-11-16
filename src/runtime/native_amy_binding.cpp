@@ -399,9 +399,27 @@ void setup_for_player(Context &context, const TaskWorkHandle &motion, std::uint8
         }
     }
 }
-void initialize_auxiliary_a(Context &) { missing("native_amy_initialize_auxiliary_a"); }
-void initialize_auxiliary_b(Context &) { missing("native_amy_initialize_auxiliary_b"); }
-void initialize_auxiliary_c(Context &) { missing("native_amy_initialize_auxiliary_c"); }
+void initialize_auxiliary_a(Context &context) {
+    // Amy-only event task creation: current character, global mode and the
+    // stage word must all match before any task is created.
+    if (context.bootstrap.player_number != 5)
+        return;
+    const auto mode = static_cast<std::uint32_t>(context.bootstrap.game_mode);
+    if (mode != 4 && mode != 5 && mode != 9)
+        return;
+    missing("native_amy_event_task");
+}
+void initialize_auxiliary_b(Context &context) { context.players.amy_event_word = 0; }
+void initialize_auxiliary_c(Context &context) {
+    // Stage-event table scan: no entry matches the CharacterSelect stage word.
+    constexpr std::array<std::uint16_t, 3> kStageWords{0x0a00, 0x0a00, 0x0301};
+    const auto stage_word = static_cast<std::uint16_t>(
+        (static_cast<std::uint16_t>(context.stage) << 8) |
+        static_cast<std::uint16_t>(context.act));
+    for (const auto entry : kStageWords)
+        if (entry == stage_word)
+            missing("native_amy_stage_event");
+}
 void initialize_auxiliary_d(Context &) { missing("native_amy_initialize_auxiliary_d"); }
 void initialize_auxiliary_e(Context &) { missing("native_amy_initialize_auxiliary_e"); }
 void stand_tail(Context &, const TaskWorkHandle &) { missing("native_amy_stand_tail"); }

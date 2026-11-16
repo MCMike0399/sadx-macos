@@ -55,6 +55,8 @@ struct State {
     std::int32_t &card_result;
     const char *save_name = nullptr;
     std::uint16_t character = 0;
+    // GLOBAL: SONIC 0x3b22dc0 usPlayer size=2
+    std::uint16_t player_number = 0;
     std::int8_t lives = 0;
     SonicActions actions{};
     CharacterWork character_work;

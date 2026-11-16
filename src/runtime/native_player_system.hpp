@@ -55,6 +55,8 @@ struct PlayerSystem {
     gamma_setup::State gamma_setup;
     std::unique_ptr<gamma_effects::Asset> gamma_effects_asset;
     gamma_effects::State gamma_effects;
+    // The unnamed character-region word Amy mode zero clears; role unknown.
+    std::uint32_t amy_event_word = 0;
     std::unique_ptr<BigActorAssets> big_assets;
     std::unique_ptr<BigMotionAssets> big_motion_assets;
     PlayerJoinTable big_weld;
