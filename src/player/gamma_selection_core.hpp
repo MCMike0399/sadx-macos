@@ -168,7 +168,7 @@ void running_effects(Context &, Primary, const TaskWorkHandle &, const Player &)
 void calculate_collision_range(Context &, Primary);
 // NOTSA: native binding calls collision_component::enter_list.
 void enter_collision_list(Context &, Primary);
-// NOTSA: native binding calls player_underwater::run.
+// NOTSA: native binding calls the shared native::run_underwater product owner.
 void underwater(Context &, Primary, const TaskWorkHandle &, const Player &);
 // NOTSA: native binding calls TaskScheduler::run_children.
 void run_children(Context &, const TaskHandle &);

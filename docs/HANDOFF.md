@@ -1317,3 +1317,11 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Verified: make -j10 build/sadx-native exits 0. Provenance, readability and layer checks exit 0. character-shadow, gamma-shadow and view-check units exit 0. The checker ran against the main checkout private assets with this worktree's binary. The retained dossier is draw-character-shadow-49f0b0.disasm.txt.
 * Limits: the draw is not observed on this frame because the unrecovered land walk leaves bottom_y at the source default. No oracle covers DrawCharacterShadow; the retained assembly is the evidence.
 * Next: the Big underwater binding, then the land walk that produces a real shadow contact.
+
+### 2026-11-16 — shared underwater product services (no gate)
+
+* Outcome: the private-asset CharacterSelect frontier still exits 1 at frame 1332 on the title hash c7d02f64, but the stop moved from native_big_underwater_binding to native_amy_player_controller. No CharacterSelect frame is presented.
+* Changed: native_underwater_binding owns the RunUnderwaterStuff product services (player pose, convert-to-global and breath seams) and the PlayerView assembly once. Both bindings keep their own motion identity and physics boundaries; Gamma reports the same stops in the same order.
+* Verified: make -j10 build/sadx-native exits 0. player-underwater passes 117 development and 64 holdout cases with zero mismatches; the player-underwater and native-gamma-display units exit 0 (106 draws, 3060 vertices). Provenance, readability and layer checks exit 0.
+* Limits: Big now runs the recovered underwater product without a stop on this frame. The land walk still leaves the shadow bottom at the source default. The frontier checker's semantic state still fails at scheduled task 3/0 flags differ, as before.
+* Next: the native Amy player controller, then the land walk that produces a real shadow contact.

@@ -1,9 +1,9 @@
 #include "runtime/native_player_system.hpp"
 #include "runtime/native_display.hpp"
+#include "runtime/native_underwater_binding.hpp"
 #include "runtime/object_draw_context.hpp"
 #include "engine/collision_component.hpp"
 #include "player/player_vertex_weld.hpp"
-#include "player/player_underwater.hpp"
 #include "player/character_shadow.hpp"
 #include "engine/view_check.hpp"
 #include "game/game_mode.hpp"
@@ -247,10 +247,15 @@ void enter_collision_list(Context &context, Primary view) {
     auto work = collision(context, context.task->primary_work);
     collision_component::enter_list(*context.collision_entries, work, view.status, context.stage);
 }
-void underwater(Context &, Primary, const TaskWorkHandle &, const Player &) {
-    // player_underwater::run is recovered; its product services are still
-    // composed only by the Gamma binding.
-    missing("native_big_underwater_binding");
+// NOTSA: native boundary for RunUnderwaterStuff; the shared product owner is
+// native::run_underwater.
+void underwater(Context &context, Primary primary, const TaskWorkHandle &motion_work,
+                const Player &player) {
+    if (motion_work != context.task->motion_work)
+        missing("native_big_motion_identity");
+    auto &body = physics(player);
+    native::run_underwater(context.players, context.rendering, context.task, primary, body,
+                           player);
 }
 [[noreturn]] void unrecovered_mode(Context &, std::uint8_t) {
     missing("native_big_unrecovered_mode");

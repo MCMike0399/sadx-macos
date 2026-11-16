@@ -1,0 +1,15 @@
+{
+  "worktree_private_assets": false,
+  "assets_source": "/Users/burbujamc/Developer/sadx-macos/build/cs-private-assets",
+  "save_source": "/Users/burbujamc/Developer/sadx-macos/reference/updated-pc-reference/game/savedata",
+  "app": "build/sadx-native",
+  "before": "native_big_underwater_binding",
+  "after": "native_amy_player_controller",
+  "exit": 1,
+  "frame": 1332,
+  "screenshot_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427",
+  "mode": "drawn-goal",
+  "error": "scheduled task 3/0 flags differ",
+  "command": "python3 tools/testing/check_native_character_select_display.py --app build/sadx-native --assets /Users/burbujamc/Developer/sadx-macos/build/cs-private-assets --save-source /Users/burbujamc/Developer/sadx-macos/reference/updated-pc-reference/game/savedata --output build/cs-display-check-shared-underwater-final",
+  "note": "The isolated worktree has no build/cs-private-assets tree, so the checker ran directly against the main checkout pinned private tree with this worktree's binary. Big now runs the recovered underwater product through the shared runtime owner; the stop moved past native_big_underwater_binding to native_amy_player_controller. The run still exits on the outgoing title image, and the pre-existing semantic state error (scheduled task 3/0 flags differ) is unchanged."
+}
