@@ -1,0 +1,30 @@
+{
+ "passed": true,
+ "values_match": true,
+ "cases": 76,
+ "completed": 76,
+ "mismatches": 0,
+ "faults": 0,
+ "seed": "0x4c44a0",
+ "holdout": {
+  "cases": 64,
+  "mismatches": 0,
+  "faults": 0,
+  "seed": "0x4c38d0"
+ },
+ "source_range_sha256": "a030908976b72c0176a70286e1c2e4fb70dd3c5d85e52404c1971697131b8ef6",
+ "source": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "entry": "0x4c44a0",
+ "samples": [],
+ "limits": [
+  "Positive lock counts and the volley after a real selection are excluded.",
+  "The variant table is the image BSS word at 0x3c5b2e4, which the file leaves zero.",
+  "x87 status flags are not compared; the stored binary32 values are."
+ ],
+ "tracked_summary": {
+  "full_sha256": "96513795351a737bf55bb4190045fb1c792c4cb8b288f8bf267a8daa5cdc8eff",
+  "full_bytes": 707,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

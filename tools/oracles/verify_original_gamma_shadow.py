@@ -3,6 +3,9 @@
 Unicorn runs 0x49ee30. The land query is replaced with the fixture height and
 normals: an empty table is the image's -1000000 result, and a loaded walk is
 outside this corpus. Matrix and draw calls are hooked and compared as arguments.
+The development cohort includes the curated cases; the holdout cohort is
+generated from its own seed without them, and is meant to be run once for the
+final report (use --holdout-cases 0 while iterating).
 """
 import argparse
 import ctypes
@@ -165,7 +168,7 @@ def blank(updates=None):
     return case
 
 
-def fixtures(count, seed):
+def fixtures(count, seed, curated=True):
     cases = [
         blank(),
         blank({YAW: 16384}),
@@ -175,7 +178,7 @@ def fixtures(count, seed):
         blank({NORMAL_Z: 7, NORMAL_X: 9}),
         blank({YAW: 0x10000}),
         blank({Y: fbits(10.0), HEIGHT: fbits(-4.0), SCALE: fbits(2.0)}),
-    ]
+    ] if curated else []
     rng = random.Random(seed)
     for _ in range(count):
         cases.append(blank({
@@ -192,21 +195,7 @@ def fixtures(count, seed):
     return cases
 
 
-def main():
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('exe')
-    parser.add_argument('probe')
-    parser.add_argument('--output', default='build/oracles/gamma_shadow.json')
-    parser.add_argument('--cases', type=int, default=64)
-    parser.add_argument('--seed', type=lambda value: int(value, 0), default=0x49ee30)
-    args = parser.parse_args()
-    image = PEImage(args.exe)
-    library = ctypes.CDLL(str(Path(args.probe).resolve()))
-    library.sadx_native_gamma_shadow.argtypes = [
-        ctypes.POINTER(ctypes.c_uint32), ctypes.POINTER(ctypes.c_uint32)]
-    library.sadx_native_gamma_shadow.restype = ctypes.c_int
-    source = Source(image)
-    cases = fixtures(args.cases, args.seed)
+def run_cohort(source, library, cases, cohort):
     rows, mismatches, faults = [], 0, 0
     for index, case in enumerate(cases):
         native = (ctypes.c_uint32 * OUT_WORDS)()
@@ -216,20 +205,47 @@ def main():
         mismatches += not match
         faults += bool(fault) or not completed
         if not match and len(rows) < 8:
-            rows.append({'index': index, 'case': case, 'native': list(native),
+            rows.append({'cohort': cohort, 'index': index, 'case': case, 'native': list(native),
                          'original': original, 'fault': fault, 'completed': completed, 'ok': ok})
+    return mismatches, faults, rows
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('exe')
+    parser.add_argument('probe')
+    parser.add_argument('--output', default='build/oracles/gamma_shadow.json')
+    parser.add_argument('--cases', type=int, default=64)
+    parser.add_argument('--seed', type=lambda value: int(value, 0), default=0x49ee30)
+    parser.add_argument('--holdout-cases', type=int, default=64)
+    parser.add_argument('--holdout-seed', type=lambda value: int(value, 0), default=0x49e920)
+    args = parser.parse_args()
+    image = PEImage(args.exe)
+    library = ctypes.CDLL(str(Path(args.probe).resolve()))
+    library.sadx_native_gamma_shadow.argtypes = [
+        ctypes.POINTER(ctypes.c_uint32), ctypes.POINTER(ctypes.c_uint32)]
+    library.sadx_native_gamma_shadow.restype = ctypes.c_int
+    source = Source(image)
+    dev = fixtures(args.cases, args.seed)
+    mismatches, faults, rows = run_cohort(source, library, dev, 'dev')
+    holdout = fixtures(args.holdout_cases, args.holdout_seed, curated=False) \
+        if args.holdout_cases else []
+    h_mismatches, h_faults, h_rows = run_cohort(source, library, holdout, 'holdout') \
+        if holdout else (0, 0, [])
     report = {
-        'passed': mismatches == 0 and faults == 0,
-        'values_match': mismatches == 0,
-        'cases': len(cases),
-        'completed': len(cases) - faults,
+        'passed': mismatches == 0 and faults == 0 and h_mismatches == 0 and h_faults == 0,
+        'values_match': mismatches == 0 and h_mismatches == 0,
+        'cases': len(dev),
+        'completed': len(dev) - faults,
         'mismatches': mismatches,
         'faults': faults,
-        'holdout_index': len(cases) // 2,
+        'seed': hex(args.seed),
+        'holdout': {'cases': len(holdout), 'mismatches': h_mismatches, 'faults': h_faults,
+                    'seed': hex(args.holdout_seed)},
         'source_range_sha256': hashlib.sha256(source.image_bytes).hexdigest(),
         'source': SOURCE_SHA,
         'entry': hex(ENTRY),
-        'samples': rows,
+        'samples': rows + h_rows,
         'limits': [
             'The land walk at 0x49e920 is replaced by the fixture height and normals.',
             'Matrix and late-draw calls are compared as arguments, not executed.',
@@ -238,7 +254,8 @@ def main():
     }
     Path(args.output).parent.mkdir(parents=True, exist_ok=True)
     Path(args.output).write_text(json.dumps(report, indent=2) + '\n')
-    print(json.dumps({key: report[key] for key in ('passed', 'cases', 'mismatches', 'faults')}))
+    print(json.dumps({key: report[key] for key in
+                      ('passed', 'cases', 'mismatches', 'faults', 'holdout')}))
     return 0 if report['passed'] else 1
 
 

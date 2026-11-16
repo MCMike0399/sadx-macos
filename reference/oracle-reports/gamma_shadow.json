@@ -1,0 +1,30 @@
+{
+ "passed": true,
+ "values_match": true,
+ "cases": 72,
+ "completed": 72,
+ "mismatches": 0,
+ "faults": 0,
+ "seed": "0x49ee30",
+ "holdout": {
+  "cases": 64,
+  "mismatches": 0,
+  "faults": 0,
+  "seed": "0x49e920"
+ },
+ "source_range_sha256": "90e358e714c697ba14f174d75182f9e3ab7e05af5b12d043535314f42f9917b6",
+ "source": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "entry": "0x49ee30",
+ "samples": [],
+ "limits": [
+  "The land walk at 0x49e920 is replaced by the fixture height and normals.",
+  "Matrix and late-draw calls are compared as arguments, not executed.",
+  "x87 status flags are not compared; the stored binary32 values are."
+ ],
+ "tracked_summary": {
+  "full_sha256": "48d486bb21619c978287837d526b792356030eac75996facc029cd174932269d",
+  "full_bytes": 693,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

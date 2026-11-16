@@ -3,7 +3,10 @@
 Unicorn runs 0x4c44a0 through the empty lock list. The lock helper at
 0x4c38d0 is the image itself: a non-positive count returns null and clears
 the marker, so these cases do not hook it. A positive count, and the volley
-that follows a real selection, are outside this corpus.
+that follows a real selection, are outside this corpus. The development
+cohort includes the curated cases; the holdout cohort is generated from its
+own seed without them, and is meant to be run once for the final report (use
+--holdout-cases 0 while iterating).
 """
 import argparse
 import ctypes
@@ -119,7 +122,7 @@ def blank(updates=None):
     return case
 
 
-def fixtures(count, seed):
+def fixtures(count, seed, curated=True):
     cases = [
         blank({MODE: 0}),
         blank({MODE: 1, VARIANT: 9}),
@@ -133,7 +136,7 @@ def fixtures(count, seed):
         blank({MODE: 6, CHARGE: fbits(3.0)}),
         blank({MODE: 0xffffffff, MARKER: 0x5a}),
         blank({MODE: 1, LOCK: 0xff, MARKER: 7}),
-    ]
+    ] if curated else []
     rng = random.Random(seed)
     modes = [0, 1, 3, 4, 5, 6, 7, 0xffffffff]
     for _ in range(count):
@@ -153,22 +156,7 @@ def fixtures(count, seed):
     return cases
 
 
-def main():
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('exe')
-    parser.add_argument('probe')
-    parser.add_argument('--output', default='build/oracles/gamma_gun_effects.json')
-    parser.add_argument('--cases', type=int, default=64)
-    parser.add_argument('--seed', type=lambda value: int(value, 0), default=0x4c44a0)
-    args = parser.parse_args()
-    image = PEImage(args.exe)
-    library = ctypes.CDLL(str(Path(args.probe).resolve()))
-    library.sadx_native_gamma_gun_effects.argtypes = [
-        ctypes.POINTER(ctypes.c_uint32), ctypes.POINTER(ctypes.c_uint32)]
-    library.sadx_native_gamma_gun_effects.restype = ctypes.c_int
-    source = Source(image)
-    cases = fixtures(args.cases, args.seed)
-    holdout = cases[len(cases) // 2]
+def run_cohort(source, library, cases, cohort):
     rows, mismatches, faults = [], 0, 0
     for index, case in enumerate(cases):
         native = (ctypes.c_uint32 * OUT_WORDS)()
@@ -180,21 +168,47 @@ def main():
         faults += bool(fault) or not completed
         if not match and len(rows) < 8:
             rows.append({
-                'index': index, 'case': case, 'native': list(native),
+                'cohort': cohort, 'index': index, 'case': case, 'native': list(native),
                 'original': original, 'fault': fault, 'completed': completed, 'ok': ok})
+    return mismatches, faults, rows
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('exe')
+    parser.add_argument('probe')
+    parser.add_argument('--output', default='build/oracles/gamma_gun_effects.json')
+    parser.add_argument('--cases', type=int, default=64)
+    parser.add_argument('--seed', type=lambda value: int(value, 0), default=0x4c44a0)
+    parser.add_argument('--holdout-cases', type=int, default=64)
+    parser.add_argument('--holdout-seed', type=lambda value: int(value, 0), default=0x4c38d0)
+    args = parser.parse_args()
+    image = PEImage(args.exe)
+    library = ctypes.CDLL(str(Path(args.probe).resolve()))
+    library.sadx_native_gamma_gun_effects.argtypes = [
+        ctypes.POINTER(ctypes.c_uint32), ctypes.POINTER(ctypes.c_uint32)]
+    library.sadx_native_gamma_gun_effects.restype = ctypes.c_int
+    source = Source(image)
+    dev = fixtures(args.cases, args.seed)
+    mismatches, faults, rows = run_cohort(source, library, dev, 'dev')
+    holdout = fixtures(args.holdout_cases, args.holdout_seed, curated=False) \
+        if args.holdout_cases else []
+    h_mismatches, h_faults, h_rows = run_cohort(source, library, holdout, 'holdout') \
+        if holdout else (0, 0, [])
     report = {
-        'passed': mismatches == 0 and faults == 0,
-        'values_match': mismatches == 0,
-        'cases': len(cases),
-        'completed': len(cases) - faults,
+        'passed': mismatches == 0 and faults == 0 and h_mismatches == 0 and h_faults == 0,
+        'values_match': mismatches == 0 and h_mismatches == 0,
+        'cases': len(dev),
+        'completed': len(dev) - faults,
         'mismatches': mismatches,
         'faults': faults,
-        'holdout_index': len(cases) // 2,
-        'holdout_mode': holdout[MODE],
+        'seed': hex(args.seed),
+        'holdout': {'cases': len(holdout), 'mismatches': h_mismatches, 'faults': h_faults,
+                    'seed': hex(args.holdout_seed)},
         'source_range_sha256': hashlib.sha256(source.image_bytes).hexdigest(),
         'source': SOURCE_SHA,
         'entry': hex(ENTRY),
-        'samples': rows,
+        'samples': rows + h_rows,
         'limits': [
             'Positive lock counts and the volley after a real selection are excluded.',
             'The variant table is the image BSS word at 0x3c5b2e4, which the file leaves zero.',
@@ -203,7 +217,8 @@ def main():
     }
     Path(args.output).parent.mkdir(parents=True, exist_ok=True)
     Path(args.output).write_text(json.dumps(report, indent=2) + '\n')
-    print(json.dumps({key: report[key] for key in ('passed', 'cases', 'mismatches', 'faults')}))
+    print(json.dumps({key: report[key] for key in
+                      ('passed', 'cases', 'mismatches', 'faults', 'holdout')}))
     return 0 if report['passed'] else 1
 
 
