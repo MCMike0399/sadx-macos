@@ -408,7 +408,8 @@ void update_rod(Context &context, const TaskWorkHandle &) {
     second.z = add(second.z, first.z).rounded();
     display.pop_current_matrix();
 }
-void display(Context &, const TaskHandle &) { missing("native_big_display"); }
+bool check_view(Context &, Primary) { missing("native_big_check_view"); }
+[[noreturn]] void missing_display_submit(Context &) { missing("native_big_display_submit"); }
 void destroy(Context &, const TaskHandle &) { missing("native_big_destruct"); }
 void update_held_task(Context &, const TaskWorkHandle &) { missing("native_big_held_task"); }
 void character_shadow(Context &, Primary, const Player &) { missing("native_big_character_shadow"); }

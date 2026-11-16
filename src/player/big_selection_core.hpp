@@ -128,8 +128,12 @@ void set_motion(Context &, const Player &);
 void join_vertices(Context &, Primary, const TaskWorkHandle &, const Player &);
 // STUB: SONIC 0x48b790 BigUpdateRod
 void update_rod(Context &, const TaskWorkHandle &);
-// STUB: SONIC 0x48b8b0 BigDisplay
-void display(Context &, const TaskHandle &);
+// The reached BigDisplay prefix is recovered in the core; its view check and
+// animated submit stay seams until their bodies land.
+// NOTSA: native/reference binding to the canonical dsCheckViewV owner.
+bool check_view(Context &, Primary);
+// STUB: SONIC 0x48b8b0 BigDisplay animated submit after the view check
+[[noreturn]] void missing_display_submit(Context &);
 // STUB: SONIC 0x48b730 BigDestruct
 void destroy(Context &, const TaskHandle &);
 // STUB: SONIC 0x48e000 BigUpdateHeldTask

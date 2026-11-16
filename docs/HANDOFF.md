@@ -1284,3 +1284,10 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Changed: the Big core covers the entry prefix, mode zero, the stand checker chain as named seams, and the common tail in source order. The binding supplies the initialized player, animation and weld tables, collision entry, underwater services pending, child tasks with their source callbacks as explicit stops, and the rod tip matrix work over the live collision centers.
 * Verified: the app builds and the frontier stop moved in order through the action update, setup, set motion, equipment and weld boundaries. Source checks pass. No Big oracle yet; the checker dossiers are retained for the next recovery steps.
 * Next: BigDisplay, then CharacterShadow. The stand checkers and mode-one physics bindings stop the following frames in that order.
+
+### 2026-11-10 — Big reaches its display view check (no gate)
+
+* Outcome: the frontier still exits 1 at frame 1332 on the title hash. Big now runs through set motion, the equipment swaps, vertex weld initialize and the rod update, then stops at native_big_check_view inside BigDisplay. No CharacterSelect frame is presented.
+* Changed: the action update entry and stand checker chain are recovered in the core with each checker as a named seam. Mode zero setup creates the direct-ahead child with its motion copy. The rod update writes both collision centers through the live matrix. BigDisplay starts in the core with its view check as the next seam.
+* Verified: the app builds, source checks pass, and the frontier moved in order through the setup, set motion, equipment, weld and rod boundaries with semantic state still passing.
+* Next: recover dsCheckViewV and the animated submit, then CharacterShadow. The stand checkers and mode-one physics bindings follow in stop order.

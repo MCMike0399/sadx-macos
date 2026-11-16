@@ -217,6 +217,15 @@ void update_equipment(Context &context, const TaskWorkHandle &motion, const Play
     }
 }
 
+// NOTSA: named display step of the common tail. The view check gates the
+// whole draw; the animated submit lands with it.
+void display(Context &context, const TaskHandle &object) {
+    auto task = primary(context, object->primary_work);
+    if (!check_view(context, task))
+        return;
+    missing_display_submit(context);
+}
+
 // NOTSA: named common tail step; runs after every mode in source order.
 void common_tail(Context &context, const TaskHandle &object, Primary task,
                  const TaskWorkHandle &primary_work, const TaskWorkHandle &motion,
