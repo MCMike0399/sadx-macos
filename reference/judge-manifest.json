@@ -1,9 +1,9 @@
 {
   "change": {
-    "base_commit": "b22e6da7c76cdb47ec9b5f47107bf235cd416c2d",
+    "base_commit": "c337f75f6537917a413a1099e67fdbc2146abd92",
     "evidence": "reference/production-integration-20261110/judge-evidence.json",
-    "evidence_sha256": "5c60137bcba70990dffd94175c7a722211aae24088faa7ca6290fb66b0c3732f",
-    "reason": "Rebind basic model and queue consumer constexpr review fingerprints after the typed late-model refactor; reviewed declarations unchanged."
+    "evidence_sha256": "239f465a11120abb89ca290f2e042cb2a5dea2f2f56badb0a9832cc992e28163",
+    "reason": "Register Big asset/core verification and the dsCheckViewV oracle; no tolerance or existing expected value loosened."
   },
   "files": {
     "Makefile": "65769a94719339345b7cf5ac90308da6a7d8a76d5bf95b0eafdadba917103b88",
@@ -317,6 +317,7 @@
     "reference/oracle-reports/ui_scale_profile.json": "3b886859466e44803e1e97269128045c4325a32d81d35179b40279ef263bd067",
     "reference/oracle-reports/vibration.json": "73ad52370e086fc5d1d07f7191d619ccf1d668b7a3f87a4c100458d36ffbe53b",
     "reference/oracle-reports/vibration_stop.json": "434fbc7be9bed8552d8915c5cd9dead829646517d7a283e00e5aa619b6934959",
+    "reference/oracle-reports/view_check.json": "680572345ec57117add16e796f3b002fcb169cca949b44822000251c14e09b39",
     "reference/oracle-reports/voice_playback.json": "e5ca46fa35a2513d91501c3949fed8843cc1f41a72bb6c25aaaf3d12b61742a2",
     "reference/oracle-reports/x87_memory.cases.bin": "dfa27fbf3d01632b5e305e90d80ecfcada68df7ba313766f9a41cbefb7e37e5c",
     "reference/oracle-reports/x87_memory.json": "20c980d394546ef0deadbc49f022f8b501e59bcab94ad80954190976c5ec29b1",
@@ -459,6 +460,7 @@
     "reference/production-integration-20261109/gamma-target-effects-mutants.json": "a7db80d13c36eb68da4b48a508f8d2694653d86ff29aef64ddae45c58935bd73",
     "reference/production-integration-20261109/late-model-queue-mutants.json": "008c13a5626adfa1b8ea36cf375324f5a9c37cfae85c2c5f9d66ffb0b2886902",
     "reference/production-integration-20261110/player-underwater-mutants.json": "a26252dbec5a60d488adab84a5ea4c706a57e85cf52f57579af2af41ee3c22dd",
+    "reference/production-integration-20261110/view-check-mutants.json": "2e804682155897034135533f10395609605f62c84e279287640ccfb88463e9ac",
     "reference/symbols/native-counterparts.json": "b14628b1d4a00f13f84d72d9a8bfbbb053095d8be52f15f10b1d45b590ab656b",
     "tests/fixtures/animation_table_publications.hpp": "072315e8f29640e0da452332f9da5f7c8d81813dd57c377f2d1641e0c11c18e1",
     "tests/fixtures/character_material_consumer.hpp": "c6848852924404622e38964b21449c793e2cdb2b618f29ef3f5b6aa506b8916b",
@@ -732,6 +734,7 @@
     "tests/probes/native_ui_scale_profile_probe.cpp": "417784467908c4fb939b3af4dccdaa9af81a38ea8a7201f47085787053a1d725",
     "tests/probes/native_vibration_probe.cpp": "2045248ea7f208b1a0b17194bcacfec48a9b7d6b34d598c688b62398eac41d9e",
     "tests/probes/native_vibration_stop_probe.cpp": "ba8d0aa79a6534471fecca0920653d2a2ed52596ce1d947fcdff271b2cb40867",
+    "tests/probes/native_view_check_probe.cpp": "299ca8bdd91f7ec1a584315cf8423ad20a840162ff79af56c1baaca8f26258f8",
     "tests/probes/native_voice_playback_probe.cpp": "d6a0bcdce9dbfd969ab83f7cd517eb599fb59ac9f9f5261f2f93b5406a426539",
     "tests/probes/native_x87_memory_probe.cpp": "783c2f846a85ce29c65dd9ac02a98d1584da1e4752b090ad2d109c72b60e06e6",
     "tests/probes/native_x87_transcendental_probe.cpp": "895529f003f97f2d3a4d93ae2a7c8722e6a13a1e6a194d5d076e9d6d77790117",
@@ -958,7 +961,7 @@
     "tests/unit/main_menu_content.cpp": "9ae62d33ab3981c4050da8fd8ede955a08c2ecbcfd91d865de895e5d39c49145",
     "tests/unit/main_menu_eligibility.cpp": "0769bb1cd5d58da859399c2dc7082ca05d3ed8bd3704838e1c528b49ef9896cc",
     "tests/unit/main_menu_profile.cpp": "5c9e473de4a1fecaf1e1cbd9e14072919973cb8719c724de52cc95900ba9dace",
-    "tests/unit/manifest.tsv": "a7a3fd200e32ea26204b6c7db8c631b9cf908bdd5b95e9458720ea4cfda5e5a9",
+    "tests/unit/manifest.tsv": "763721fdd6c2d98059771d39fd7bb16cf346448288a2843f672d96e64606b82b",
     "tests/unit/material_correction.cpp": "e866358fc8165d70c48a71b77ee5479198900842c3cfcd4de4ce65701d1f1a3a",
     "tests/unit/menu_dialog_control.cpp": "dcf53f00372f20ade1fcb0714f1fd184052077a5ac9709afd91840a0ffe6cb1a",
     "tests/unit/menu_draw_primitives.cpp": "e11ef8ad54979d33773aaecb47e1d1bbf115bd8e2b7f5115582a8718ed85543f",
@@ -987,6 +990,7 @@
     "tests/unit/music.cpp": "12f2206b1594d9c095b304810af20070358bb98ab652c2864a0ff921bf15ef72",
     "tests/unit/music_scheduling_state.cpp": "fbe16fc3b193911b577bfd2199ada92e6532174a82155adabc8ab3d16ccfaf61",
     "tests/unit/music_state_reference.cpp": "e106bb9649ac16af5a3333fc095375b3e966cd73fa986a86508f2b95505e9357",
+    "tests/unit/native_big_assets.mm": "fad381be63e264eede95a652f2356dac457dd6cdc05bb98751d9682727cdc573",
     "tests/unit/native_character_resources.cpp": "116f890c166e5d7a74fe5b5c52df5d7049c0c735ec29a17d6be5d092c14c1cf5",
     "tests/unit/native_character_select_music.mm": "a072fe9308c3ddffb7ea9ccc3d9c4173e1907b740c4a5a4be0b5ae227e012647",
     "tests/unit/native_character_selection_assets.mm": "5ce1ec842a6cb3aa6e7e80f729e305b501871258c731bbf6a503daf5d5308956",
@@ -1161,6 +1165,7 @@
     "tests/unit/title_menu.cpp": "9317bc300a6e3d32afaed7dc0ab4355a8871d5b750d9ece842251c27e7232f87",
     "tests/unit/ui_scale_profile.cpp": "572636a4b17de14f84b01476cf14ab09b7c6b830bf0e61cdeff1128a92903bb4",
     "tests/unit/vector_normalize.cpp": "505a28cb4993899d1662e287986bbd9b548ef8626e078fff92238e6d929a817c",
+    "tests/unit/view_check.cpp": "e440814578c542f7ddbb9437dd67ab2cc98ec2c1762b69dc5ace6a003b87630d",
     "tests/unit/voice_playback.cpp": "16dc4e73c2bd06622204c8dd3be0d3794ad5c997b44546873cebc00fe71aa6cf",
     "tests/unit/win32_profile.cpp": "0a0977abd6818b67d4305a45363cdc1c5c4631dcaeee9d971142af780c4c28aa",
     "tests/unit/x87_math.cpp": "dd93217888e6b512266105c04728cb714869fdd85a6bf2bce2625ed7c5a74043",
@@ -1551,6 +1556,7 @@
     "tools/oracles/verify_original_ui_scale_profile.py": "5b1d9bf52646b7c100f27c3d5d6cde5030a1af805934ca087a9bb9184393c8b7",
     "tools/oracles/verify_original_vibration.py": "7caf359803ff0ff31724c65c2ba598b4c496b9f4b1ab50a3e2470b73b6a9e2ec",
     "tools/oracles/verify_original_vibration_stop.py": "557eebec0a2a4000ac8d72939631cb1e6d7ccc2efbbae6e3bd9889385be49b35",
+    "tools/oracles/verify_original_view_check.py": "1798c017bf2ce0574217c3a94170562986fb3f37e9381dbf73ee5916db2c6713",
     "tools/oracles/verify_original_voice_playback.py": "e50720a405e5b29858412ff77f8eaa832fb073ad4eec5da8157805ba7ad04b89",
     "tools/oracles/verify_original_x87_memory.py": "9ee33fb38208e23c29d58b95565112b883e8f0f9bf5842d5b008dc3e09d17cbc",
     "tools/oracles/verify_original_x87_transcendental.py": "4057bb01604b1aa0e0ef96012b251f458507d0538064fecfeddfd06e08951aa6"
