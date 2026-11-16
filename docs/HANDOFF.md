@@ -1302,3 +1302,10 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 ### 2026-11-10 — MarathonRecomp review recorded (docs only)
 
 * A delegated review of sonicnext-dev/marathonrecomp is recorded in docs/RESEARCH-marathonrecomp.md. Its static-recompilation product shape does not transfer (ADR-0005 to 0007 stand). The useful transfers are engineering discipline: a host-owned texture cache with upload-on-change (the Metal backend re-uploads per frame today), a transactional importer with a pack manifest and verify mode, and typed guest-layout headers. These are backlog packets behind N3b, not route work.
+### 2026-11-10 — CharacterShadow recovered and bound in the Big tail (no gate)
+
+* Outcome: the private-asset CharacterSelect frontier still exits 1 at frame 1332 on the title hash, but the stop moved from native_big_character_shadow to native_big_shadow_draw. CharacterShadow now runs its empty-land path; no CharacterSelect frame is presented.
+* Changed: character_shadow owns CharacterShadow with the water splash/ripple edge, prior-attribute rotation, the 200 radius land query, the complex-object distance cull and the shared polygon contacts in x87 value order. The Big binding supplies live shadowwk fields and stops by name at the unrecovered splash, ripple, distance, polygon, land-table and draw seams.
+* Verified: oracle pass with 118 development cases and a separate 64 case holdout seed, zero mismatches; nine of nine mutants are caught; character-shadow, player-startup, player-initialization, gamma-shadow, view-check and player-underwater units pass; the Gamma display composition passes 106 draws and 3060 vertices. Provenance, readability, layer, owner and profile checks pass. The frontier ran with the main checkout private assets because this worktree has none.
+* Limits: the effect, polygon, scalar and draw callees are fixture seams; the land walk is the next real recovery. Unicorn 2.1.4 misreports one NaN FCOMPP cull, so that branch is held by the unit test.
+* Next: recover DrawCharacterShadow and the land walk, then the BigDisplay animated submit and the stand checkers.

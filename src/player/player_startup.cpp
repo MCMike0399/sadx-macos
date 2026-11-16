@@ -42,7 +42,7 @@ std::optional<std::int16_t> &join_mode_field(PlayerPhysicsState &player) {
 // NOTSA: the source calloc and explicit shadow stores share these live fields.
 void store_animation_shadow(PlayerPhysicsState &player, float shadow) {
     player.animation_mode = 0;
-    player.shadow_scale_at_1fc = shadow;
+    player.shadow_scale = shadow;
     join_mode_field(player) = 0;
 }
 // NOTSA: legacy availability remains at this existing native initialization boundary.
@@ -94,8 +94,14 @@ void initialize_physics(PlayerPhysicsState &player) {
     player.equipment = 0;
     player.island_number_at_12 = 0;
     player.breath_timer = 0;
+    player.shadow_attributes_top = 0;
     player.shadow_top_y = 0;
     player.shadow_prior_attributes_top = 0;
+    player.shadow_angle_x = 0;
+    player.shadow_angle_z = 0;
+    player.shadow_attributes_bottom = 0;
+    player.shadow_bottom_y = 0;
+    player.shadow_prior_attributes_bottom = 0;
     store_animation_shadow(player, 0);
 }
 struct EventStore {

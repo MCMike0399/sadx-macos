@@ -3,6 +3,7 @@
 #include "engine/collision_component.hpp"
 #include "player/player_vertex_weld.hpp"
 #include "player/player_underwater.hpp"
+#include "player/character_shadow.hpp"
 #include "engine/view_check.hpp"
 #include "game/game_mode.hpp"
 #include "runtime/native_sonic_fields.hpp"
@@ -421,7 +422,56 @@ bool check_view(Context &context, Primary view) {
 [[noreturn]] void missing_display_submit(Context &) { missing("native_big_display_submit"); }
 void destroy(Context &, const TaskHandle &) { missing("native_big_destruct"); }
 void update_held_task(Context &, const TaskWorkHandle &) { missing("native_big_held_task"); }
-void character_shadow(Context &, Primary, const Player &) { missing("native_big_character_shadow"); }
+// NOTSA: native boundary for CharacterShadow; source seam declared in the Big core.
+void character_shadow(Context &context, Primary task, const Player &player) {
+    auto &state = physics(player);
+    const auto field = [](auto &value, const char *boundary) -> auto & {
+        if (!value)
+            missing(boundary);
+        return *value;
+    };
+    namespace shadow = sadx::character_shadow;
+    shadow::ShadowWork work{
+        field(state.shadow_angle_x, "native_big_shadow_angle_x"),
+        field(state.shadow_angle_z, "native_big_shadow_angle_z"),
+        state.shadow_attributes_top,
+        field(state.shadow_attributes_bottom, "native_big_shadow_attributes_bottom"),
+        field(state.shadow_top_y, "native_big_shadow_top_y"),
+        field(state.shadow_bottom_y, "native_big_shadow_bottom_y"),
+        field(state.shadow_prior_attributes_top, "native_big_shadow_prior_attributes_top"),
+        field(state.shadow_prior_attributes_bottom, "native_big_shadow_prior_attributes_bottom"),
+        field(state.shadow_scale, "native_big_shadow_scale")};
+    const shadow::Body body{task.position.x, task.position.y, task.position.z,
+                            task.rotation[1], task.player_index};
+    struct Product final : shadow::Services {
+        Context &context;
+        explicit Product(Context &context) : context(context) {}
+        // The source land table has no entries on the reached selection path.
+        // A loaded table takes the unrecovered walk instead of inventing land.
+        shadow::LandCandidates list_land(const NinjaVector &, float) override {
+            if (context.land_candidate_count > 0)
+                missing("native_big_shadow_land_list");
+            return {};
+        }
+        fidelity::ExactFloat horizontal_distance(const NinjaVector &) override {
+            missing("native_big_shadow_distance");
+        }
+        shadow::ShadowHit get_zx_shadow(const NinjaVector &,
+                                        const shadow::LandCandidate &) override {
+            missing("native_big_shadow_water_polygon");
+        }
+        shadow::ShadowHit polygon_test(const NinjaVector &, const shadow::LandCandidate &) override {
+            missing("native_big_shadow_polygon");
+        }
+        void splash() override { missing("native_big_shadow_splash"); }
+        void ripple(std::uint8_t, const NinjaVector &,
+                    const std::array<std::int32_t, 3> &) override {
+            missing("native_big_shadow_ripple");
+        }
+        void draw_shadow() override { missing("native_big_shadow_draw"); }
+    } services(context);
+    shadow::update(body, work, services, context.rendering.arithmetic());
+}
 void stand_tail(Context &, const TaskWorkHandle &) { missing("native_big_stand_tail"); }
 character_pack::ObjectResource &equipment_object(Context &context, unsigned table_index) {
     if (table_index < 31 || table_index >= 37)

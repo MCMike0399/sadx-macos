@@ -131,5 +131,8 @@ struct Context {
     const native::ModelDrawEnvironment *model_environment = nullptr;
     // Borrowed session collision-entry owner; never a per-callback copy.
     collision_component::EntryState *collision_entries = nullptr;
+    // Source land-candidate count. Zero is the empty table; a positive count
+    // still takes the unrecovered shadow land walk.
+    std::int16_t land_candidate_count = 0;
 };
 } // namespace sadx::big_selection

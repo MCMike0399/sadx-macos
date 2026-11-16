@@ -94,7 +94,7 @@ void native_initialization_boundary() {
                 registry.motion[0] == motion && registry.players[0] == record,
             "four plain actual registration owners");
     require(record->physics->equipment == 2 && record->parameters.rad == 7 &&
-                record->physics->shadow_scale_at_1fc == 1.4f,
+                record->physics->shadow_scale == 1.4f,
             "typed content/save facts preserved");
     require(motion->motion.speed.x == 4 && record->physics->motion.speed.x == 0 &&
                 motion->friction_scale == 1 && registry.motion[0] == task->motion_state &&

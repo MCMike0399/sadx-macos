@@ -28,7 +28,7 @@ struct PlayerPhysicsState {
     std::optional<std::uint16_t> island_number_at_12 = {};
     std::optional<std::int16_t> animation_mode = {}, // playerwk +0x120
         join_vertex_mode_at_122 = {};
-    std::optional<float> shadow_scale_at_1fc = {};
+    std::optional<float> shadow_scale = {};
     std::optional<std::uint16_t> flags_at_10 = {};
     std::optional<std::int16_t> no_control_time_at_a = {};
     std::optional<TaskHandle> moving_task_at_6c = {};
@@ -42,6 +42,11 @@ struct PlayerPhysicsState {
     std::optional<std::int16_t> breath_timer = {}; // playerwk +0xc
     std::optional<float> shadow_top_y = {}; // shadowwk y_top, playerwk +0x1ec
     std::optional<std::uint32_t> shadow_prior_attributes_top = {}; // shadowwk _Attr_top, +0x1f4
+    std::optional<std::int32_t> shadow_angle_x = {}; // shadowwk angx, playerwk +0x1dc
+    std::optional<std::int32_t> shadow_angle_z = {}; // shadowwk angz, +0x1e0
+    std::optional<std::uint32_t> shadow_attributes_bottom = {}; // shadowwk Attr_bottom, +0x1e8
+    std::optional<float> shadow_bottom_y = {}; // shadowwk y_bottom, +0x1f0
+    std::optional<std::uint32_t> shadow_prior_attributes_bottom = {}; // shadowwk _Attr_bottom, +0x1f8
 
 };
 

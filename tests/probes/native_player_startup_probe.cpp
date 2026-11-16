@@ -61,7 +61,7 @@ extern "C" int sadx_native_player_startup(const std::uint8_t* parameters,std::si
         if(record.player){const auto& p=*record.player;if(p.equipment){snapshot[132]=static_cast<std::uint8_t>(*p.equipment);snapshot[133]=static_cast<std::uint8_t>(*p.equipment>>8);}
             if(p.island_number_at_12){snapshot[146]=static_cast<std::uint8_t>(*p.island_number_at_12);snapshot[147]=static_cast<std::uint8_t>(*p.island_number_at_12>>8);}
             put_vector(snapshot,128+0x2c,p.motion.acceleration);put_vector(snapshot,128+0x38,p.motion.speed);
-            if(p.shadow_scale_at_1fc)put_float(snapshot,128+0x1fc,*p.shadow_scale_at_1fc);
+            if(p.shadow_scale)put_float(snapshot,128+0x1fc,*p.shadow_scale);
         }
         out[0]=static_cast<std::uint32_t>(result.failure);out[1]=result.source_boundary;out[2]=result.callee_boundary;out[3]=static_cast<std::uint32_t>(result.work_failure);out[4]=static_cast<std::uint32_t>(record.stage);out[5]=record.parameters.has_value();
         if(w[0]<8){out[6]=(registry.tasks[w[0]]?1:0)|(registry.task_work[w[0]]?2:0)|(registry.motion_work[w[0]]?4:0)|(registry.player_work[w[0]]?8:0);}

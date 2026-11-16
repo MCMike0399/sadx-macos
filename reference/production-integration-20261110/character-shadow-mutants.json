@@ -1,0 +1,47 @@
+[
+  [
+    "prior rotation is cleared before the copy",
+    "    work.prior_top_attributes = work.top_attributes;\n    work.prior_bottom_attributes = work.bottom_attributes;\n    work.top_attributes = 0;\n    work.bottom_attributes = 0;",
+    "    work.top_attributes = 0;\n    work.bottom_attributes = 0;\n    work.prior_top_attributes = work.top_attributes;\n    work.prior_bottom_attributes = work.bottom_attributes;"
+  ],
+  [
+    "water mask drops the low bit",
+    "constexpr std::uint32_t kWaterAttributes = 0x400002;",
+    "constexpr std::uint32_t kWaterAttributes = 0x400000;"
+  ],
+  [
+    "default top is below the world",
+    "constexpr float kTopDefault = 1000000.0f;",
+    "constexpr float kTopDefault = -1000000.0f;"
+  ],
+  [
+    "bottom comparison direction is inverted",
+    "ordered_less(fidelity::ExactFloat(arithmetic, work.bottom_y), hit.lower_position)",
+    "ordered_less(fidelity::ExactFloat(arithmetic, hit.lower_position), work.bottom_y)"
+  ],
+  [
+    "water top update uses the lower hit",
+    "            if (hit.found && hit.upper_found &&\n                ordered_less(fidelity::ExactFloat(arithmetic, point.y), hit.upper_position) &&\n                ordered_less(fidelity::ExactFloat(arithmetic, hit.upper_position), work.top_y)) {\n                work.top_y = hit.upper_position;",
+    "            if (hit.found && hit.lower_found &&\n                ordered_less(fidelity::ExactFloat(arithmetic, point.y), hit.lower_position) &&\n                ordered_less(fidelity::ExactFloat(arithmetic, hit.lower_position), work.top_y)) {\n                work.top_y = hit.lower_position;"
+  ],
+  [
+    "splash ignores the prior water bits",
+    "if ((work.prior_top_attributes & kWaterAttributes) == 0)",
+    "if ((work.prior_top_attributes & kWaterAttributes) != 0)"
+  ],
+  [
+    "distance culls on an ordered less result",
+    "culled = distance.compare(extent * candidate.radius) == X87Comparison::greater;",
+    "culled = distance.compare(extent * candidate.radius) == X87Comparison::less;"
+  ],
+  [
+    "shadow point is not raised by one",
+    "const auto raised_y = (fidelity::ExactFloat(arithmetic, body.y) + 1.0f).rounded();",
+    "const auto raised_y = (fidelity::ExactFloat(arithmetic, body.y) + 0.0f).rounded();"
+  ],
+  [
+    "cull tests the force-work offset instead of the task pointer",
+    "} else if (candidate.has_task) {",
+    "} else if (candidate.vertical_offset) {"
+  ]
+]

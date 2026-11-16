@@ -1,0 +1,32 @@
+{
+ "passed": true,
+ "values_match": true,
+ "cases": 118,
+ "completed": 118,
+ "mismatches": 0,
+ "faults": 0,
+ "holdout": {
+  "cases": 64,
+  "mismatches": 0,
+  "faults": 0,
+  "seed": "0x49f0b0"
+ },
+ "source_range_sha256": "06c79ab880cc99d357ea126a33aaf0fbc9bb3b6d443b056cd5523fdb6b7e635e",
+ "source": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "entry": "0x49f1a0",
+ "samples": [],
+ "limits": [
+  "ListGroundForCollision is replaced by the fixture land table; the table walk itself is owned by that routine, and the land entries, object positions, scales and radii are fixture words written at the real object addresses.",
+  "PSetSplashEffect and PSetRippleEffect are replaced by recorded calls; their arguments and order are checked.",
+  "GetZxShadowOnFDPolygon and TestShadowPolygon are replaced by the case script; their arguments, order and returned carry fields are checked.",
+  "njScalor is replaced by the case distance word and the x87 return value; its argument vector is checked.",
+  "FUN_0049f0b0 is replaced by a recorded draw call; x87 status flags are not compared, only the stored binary32 values and the fcomp branches.",
+  "Unicorn 2.1.4 reports an ordered greater result for FCOMPP with a NaN register operand here, so the unordered-distance cull branch is asserted by the unit test instead of the oracle."
+ ],
+ "tracked_summary": {
+  "full_sha256": "2920283cfad331ad8719826d8c3f01aef265118022d2e8a4a4a1e4484c5c778f",
+  "full_bytes": 1387,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

@@ -102,7 +102,7 @@ void unknown_and_null(const PlayerStartupParameterTable& table) {
     auto task=make_task(scheduler,0);auto motion=std::make_shared<PlayerMotionState>();
     auto events=initialize_player_startup(0,task,motion,scheduler,registry,missing,fp);
     check(events.failure==PlayerStartupFailure::missing_events && events.source_boundary==0x44281a);
-    check(events.partial->player->shadow_scale_at_1fc && events.partial->player->equipment==0);
+    check(events.partial->player->shadow_scale && events.partial->player->equipment==0);
     check(registry.lookup_player_work(events.partial->player_work)==events.partial && registry.player_work[0]);
     auto eggman=make_task(scheduler,1);auto no_events=initialize_player_startup(1,eggman,motion,scheduler,registry,missing,fp);
     check(no_events.failure==PlayerStartupFailure::missing_auxiliary_effect_callback); // no source event reads

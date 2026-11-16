@@ -1,0 +1,15 @@
+{
+  "worktree_private_assets": false,
+  "assets_source": "/Users/burbujamc/Developer/sadx-macos/build/cs-private-assets",
+  "save_source": "/Users/burbujamc/Developer/sadx-macos/reference/updated-pc-reference/game/savedata",
+  "app": "build/sadx-native",
+  "before": "native_big_character_shadow",
+  "after": "native_big_shadow_draw",
+  "exit": 1,
+  "frame": 1332,
+  "screenshot_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427",
+  "mode": "drawn-goal",
+  "error": "scheduled task 3/0 flags differ",
+  "command": "python3 tools/testing/check_native_character_select_display.py --assets /Users/burbujamc/Developer/sadx-macos/build/cs-private-assets --save-source /Users/burbujamc/Developer/sadx-macos/reference/updated-pc-reference/game/savedata --output build/cs-display-check-shadow",
+  "note": "The isolated worktree has no build/cs-private-assets tree, so the make target was not used; the same checker ran directly against the main checkout pinned private tree. The run stops on the title image before the CharacterSelect frame, so the drawn goal and its later scheduled-task flags remain open."
+}

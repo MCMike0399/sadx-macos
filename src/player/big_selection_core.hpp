@@ -138,7 +138,7 @@ bool check_view(Context &, Primary);
 void destroy(Context &, const TaskHandle &);
 // STUB: SONIC 0x48e000 BigUpdateHeldTask
 void update_held_task(Context &, const TaskWorkHandle &);
-// STUB: SONIC 0x49f1a0 CharacterShadow
+// NOTSA: native binding calls character_shadow::update.
 void character_shadow(Context &, Primary, const Player &);
 // STUB: SONIC 0x48ba80 BigStandTail
 void stand_tail(Context &, const TaskWorkHandle &);
