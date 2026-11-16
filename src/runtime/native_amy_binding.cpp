@@ -420,8 +420,21 @@ void initialize_auxiliary_c(Context &context) {
         if (entry == stage_word)
             missing("native_amy_stage_event");
 }
-void initialize_auxiliary_d(Context &) { missing("native_amy_initialize_auxiliary_d"); }
-void initialize_auxiliary_e(Context &) { missing("native_amy_initialize_auxiliary_e"); }
+void initialize_auxiliary_d(Context &context) {
+    // Amy-only stage list task creation; the character gate runs first.
+    if (context.bootstrap.player_number != 5)
+        return;
+    missing("native_amy_stage_list_task");
+}
+void initialize_auxiliary_e(Context &context) {
+    // One stage word creates its task; CharacterSelect matches none.
+    constexpr std::uint16_t kEventStageWord = 0x0c00;
+    const auto stage_word = static_cast<std::uint16_t>(
+        (static_cast<std::uint16_t>(context.stage) << 8) |
+        static_cast<std::uint16_t>(context.act));
+    if (stage_word == kEventStageWord)
+        missing("native_amy_stage_event_task");
+}
 void stand_tail(Context &, const TaskWorkHandle &) { missing("native_amy_stand_tail"); }
 void post_display(Context &, const TaskWorkHandle &) { missing("native_amy_post_display"); }
 void update_held_task(Context &, const TaskWorkHandle &) { missing("native_amy_held_task"); }
