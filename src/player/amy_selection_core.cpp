@@ -10,10 +10,24 @@ constexpr std::uint32_t kCollisionEnable = 16;
 enum class Mode : std::uint8_t { // MD_AMY, New.h names not established
     Initialize = 0,              // MD_AMY_INIT
     Stand = 1,                   // MD_AMY_STND
+    Walk = 2,                    // MD_AMY_WALK
     Slash = 47,                  // '/' source mode
     Cart = 50,                   // '2' source mode
     Edit = 53                    // '5' source mode forced by CheckEditMode
 };
+
+// The damage gate's status and item words. The 0x800 hurt-reaction test is the
+// Amy source literal; Big's equivalent gate tests 0x400.
+constexpr std::uint16_t kItemHighBit = 0x8000;
+constexpr std::uint16_t kStatusHighBit = 0x8000;
+constexpr std::uint16_t kHurtReactionStatus = 0x800;
+constexpr std::uint16_t kStatusHighClear = 0x7fff;
+constexpr std::uint16_t kHurtClear = 0xfffb;
+constexpr std::uint16_t kDamageHighByteKeep = 0xc6ff;
+constexpr std::uint16_t kItemLowBitsClear = 0xfffc;
+constexpr std::uint8_t kCandyStartMode = 0x31; // MD_AMY_CNADE_START
+constexpr std::uint16_t kCandyStartAnimation = 0x51;
+constexpr std::uint16_t kWalkAnimation = 9;
 
 // NOTSA: named entry step; captured primary/motion/player are source locals.
 void enter(Context &context, Primary task, const TaskWorkHandle &primary_work,
@@ -101,6 +115,74 @@ void common_tail(Context &context, const TaskHandle &object, Primary task,
     extra(context, player).byte_82 = 0;
 }
 } // namespace
+
+// The reached prefix of AmyUpdateActionState: the Chao branch, the damage gate
+// and MD_AMY_STND's transition chain. The chain's first nonzero result stops
+// the frame; every later mode body stays unrecovered and fails loudly.
+void update_action_state(Context &context, Primary task, const TaskWorkHandle &motion,
+                         const Player &player) {
+    const auto current_stage = stage(context);
+    if (current_stage >= 39 && current_stage <= 42)
+        chao_setup(context, motion, player, task.player_index);
+    const bool damage_item = player && (item_word(context, player) & kItemHighBit) != 0;
+    if (!damage_item) {
+        auto &wait = wait_timer(context);
+        if (wait == 0) {
+            if (!check_damage(context, task, motion, player)) {
+                task.status = static_cast<std::uint16_t>(task.status & kStatusHighClear);
+            } else {
+                task.status = static_cast<std::uint16_t>(task.status | kStatusHighBit);
+                if ((task.status & kHurtReactionStatus) != 0)
+                    hurt_reaction(context, task, player);
+                task.status = static_cast<std::uint16_t>(task.status & kDamageHighByteKeep);
+                auto &item = item_word(context, player);
+                if ((item & 3) == 0)
+                    scatter_rings(context, task.player_index);
+                else
+                    item = static_cast<std::uint16_t>(item & kItemLowBitsClear);
+            }
+        } else {
+            task.status = static_cast<std::uint16_t>(task.status & kHurtClear);
+            wait = static_cast<std::uint16_t>(wait - 1);
+        }
+    } else {
+        task.status = static_cast<std::uint16_t>(task.status | kStatusHighBit);
+        wait_timer(context) = 0;
+    }
+    switch (static_cast<Mode>(task.mode)) {
+    case Mode::Initialize:
+        // The source switch has no case 0; mode zero's work is the run switch.
+        break;
+    case Mode::Stand:
+        if (check_next_action(context, task, player, motion) ||
+            check_fall(context, task, player, motion) ||
+            check_drop_off(context, task, player) || check_drtk(context, task, player) ||
+            check_jump(context, task, player) ||
+            check_grab(context, task, player, motion) ||
+            check_handle(context, task, player, motion) ||
+            check_balance(context, task, player) || check_hat(context, task, player))
+            return;
+        if (stage_pickup(context, task, motion, player)) {
+            task.mode = kCandyStartMode;
+            requested_animation(context, player) = kCandyStartAnimation;
+        } else if (stage_action(context, task, motion, player)) {
+            return;
+        }
+        // GetAnalog is consumed before speed.x. Both gates share the walk store;
+        // the pickup store above is overwritten when either gate is nonzero.
+        if (analog_input(context, task) ||
+            exact(context, horizontal_speed(context, motion)).compare(0.0f) !=
+                X87Comparison::equal) {
+            task.mode = static_cast<std::uint8_t>(Mode::Walk);
+            requested_animation(context, player) = kWalkAnimation;
+            return;
+        }
+        // Source case 1 ends here; the idle path has no timer or animation store.
+        break;
+    default:
+        unrecovered_mode(context, task.mode);
+    }
+}
 
 void run(Context &context, const TaskHandle &object) {
     const auto motion = object->motion_work;

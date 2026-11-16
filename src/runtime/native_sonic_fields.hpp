@@ -19,7 +19,7 @@ inline Primary primary(PlayerTaskState &state) {
 }
 struct Player {
     std::optional<TaskHandle> &held, &moving;
-    std::optional<std::uint16_t> &equipment, &flags, &timer, &requested_animation,
+    std::optional<std::uint16_t> &equipment, &item, &flags, &timer, &requested_animation,
         &current_animation, &previous_animation, &idle_timer;
     std::optional<std::int16_t> &release_timer, &release_phase, &jump_timer;
     std::optional<float> &charge;
@@ -37,6 +37,7 @@ inline Player player(PlayerPhysicsState &state) {
     return {held,
             moving,
             equipment,
+            item_flags,
             flags,
             timer,
             requested_animation,

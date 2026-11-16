@@ -110,6 +110,19 @@ std::uint16_t &equipment(Context &, const Player &player) {
         missing("native_amy_equipment");
     return *value;
 }
+std::uint16_t &item_word(Context &, const Player &player) {
+    auto fields = sonic::native_fields::player(physics(player));
+    if (!fields.item)
+        missing("native_amy_item_word");
+    return *fields.item;
+}
+std::uint16_t &wait_timer(Context &context) {
+    try {
+        return player_initialization::bind_wait_timer(context.task);
+    } catch (const player_initialization::Error &) {
+        missing("native_amy_wait_timer");
+    }
+}
 bool has_held_task(Context &, const Player &player) {
     return bool(player_initialization::bind_initialized_player(player).held_task);
 }
@@ -137,6 +150,11 @@ float vertical_speed(Context &context, const TaskWorkHandle &motion) {
         missing("native_amy_motion_identity");
     return player_initialization::bind_existing_motion(context.task)->motion.speed.y;
 }
+float horizontal_speed(Context &context, const TaskWorkHandle &motion) {
+    if (motion != context.task->motion_work)
+        missing("native_amy_motion_identity");
+    return player_initialization::bind_existing_motion(context.task)->motion.speed.x;
+}
 float player_radius(Context &, const Player &player) {
     if (!player)
         missing("native_amy_player_parameters");
@@ -160,6 +178,7 @@ std::int32_t check_edit_mode(Context &context) {
         missing("native_amy_check_edit_mode");
     return editor::check_mode(*context.editor_state);
 }
+std::int16_t stage(Context &context) { return context.stage; }
 
 void initialize_player(Context &context, std::int32_t index, const TaskHandle &task) {
     if (!context.players.gamma_assets)
@@ -256,9 +275,86 @@ void update_tail_objects(Context &context, const Player &player) {
     const auto side = (equipment(context, player) & kPlayerFacingMask) != 0 ? 2u : 1u;
     root.sibling = objects[side];
 }
-void update_action_state(Context &, Primary, const TaskWorkHandle &, const Player &) {
-    missing("native_amy_action_update");
+void chao_setup(Context &, const TaskWorkHandle &, const Player &, std::uint8_t) {
+    missing("native_amy_chao_setup");
 }
+bool check_damage(Context &, Primary, const TaskWorkHandle &, const Player &player) {
+    // AmyCheckDamage tests playerwk (edi) first and returns 0 when it is
+    // absent, so the pre-initialization frame takes the source no-damage store.
+    if (!player)
+        return false;
+    missing("native_amy_check_damage");
+}
+void hurt_reaction(Context &, Primary, const Player &) {
+    missing("native_amy_hurt_reaction");
+}
+void scatter_rings(Context &, std::uint8_t) { missing("native_amy_scatter_rings"); }
+bool check_next_action(Context &, Primary, const Player &, const TaskWorkHandle &) {
+    // AmyCheckNextAction is the event/next-action state machine: its ewp
+    // move/path prefix and the kNextAction/smode table can both store a new
+    // mode, so it is not a preview-zero predicate.
+    missing("native_amy_check_next_action");
+}
+bool check_fall(Context &, Primary, const Player &, const TaskWorkHandle &) {
+    // AmyCheckFall stores MD_AMY_FALL and reqaction 0x12 whenever the status
+    // low bits are clear, which is the preview's first stand condition.
+    missing("native_amy_check_fall");
+}
+bool check_drop_off(Context &context, Primary, const Player &player) {
+    // AmyCheckDropOff's first guard is playerwk+0x80 == 1. Mode zero clears
+    // that byte; only the unrecovered DROF entry sets it.
+    if (extra(context, player).byte_80 != 1)
+        return false;
+    missing("native_amy_check_drop_off");
+}
+bool check_drtk(Context &context, Primary, const Player &player) {
+    // AmyCheckDrtk returns 0 immediately when playerwk+0x80 == 1. Below that,
+    // the unrecovered event-global read and the attack-pad gate decide.
+    if (extra(context, player).byte_80 == 1)
+        return false;
+    missing("native_amy_check_drtk");
+}
+bool check_jump(Context &, Primary, const Player &) {
+    // AmyCheckJump gates on JumpAllowed, which reads the held jump mask and the
+    // task disable-control bit. The pad owner is not part of this context.
+    missing("native_amy_check_jump");
+}
+bool check_grab(Context &, Primary, const Player &, const TaskWorkHandle &) {
+    // AmyCheckGrab starts with the held grab mask; without the pad owner the
+    // preview-zero branch cannot be proven here.
+    missing("native_amy_check_grab");
+}
+bool check_handle(Context &context, Primary, const Player &player, const TaskWorkHandle &) {
+    // AmyCheckHandle stores MD_AMY_HNDL only when the held attack mask and
+    // playerwk+0x82 bit 0 are both set. Mode zero and the common tail leave
+    // that free byte zero, so the byte conjunct alone proves the zero branch.
+    if ((extra(context, player).byte_82 & 1) == 0)
+        return false;
+    missing("native_amy_check_handle");
+}
+bool check_balance(Context &context, Primary, const Player &player) {
+    // AmyCheckBalance's first guard is playerwk+0x82 bit 1; the common tail
+    // clears that byte at the end of every frame.
+    if ((extra(context, player).byte_82 & 2) == 0)
+        return false;
+    missing("native_amy_check_balance");
+}
+bool check_hat(Context &, Primary, const Player &) {
+    // AmyCheckHat starts with the held attack mask.
+    missing("native_amy_check_hat");
+}
+bool stage_pickup(Context &context, Primary, const TaskWorkHandle &, const Player &) {
+    // The recovered owner returns zero outside the Chao stages.
+    if (context.stage < 39 || context.stage > 42)
+        return false;
+    missing("native_amy_stage_pickup");
+}
+bool stage_action(Context &context, Primary, const TaskWorkHandle &, const Player &) {
+    if (context.stage < 39 || context.stage > 42)
+        return false;
+    missing("native_amy_stage_action");
+}
+bool analog_input(Context &, Primary) { missing("native_amy_analog_input"); }
 void setup_for_player(Context &, std::uint8_t) { missing("native_amy_setup_for_player"); }
 void initialize_auxiliary_a(Context &) { missing("native_amy_initialize_auxiliary_a"); }
 void initialize_auxiliary_b(Context &) { missing("native_amy_initialize_auxiliary_b"); }

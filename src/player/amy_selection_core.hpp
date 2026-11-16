@@ -26,6 +26,10 @@ TaskWorkHandle player_allocation(Context &, const Player &);
 std::uint16_t &requested_animation(Context &, const Player &);
 std::uint16_t &current_animation(Context &, const Player &);
 std::uint16_t &equipment(Context &, const Player &);
+// NOTSA: the source item word at playerwk+6, distinct from the +0x10 status flag.
+std::uint16_t &item_word(Context &, const Player &);
+// NOTSA: the source task wait timer at taskwk+6.
+std::uint16_t &wait_timer(Context &);
 bool has_held_task(Context &, const Player &);
 bool has_collision(Context &, const TaskWorkHandle &);
 std::uint32_t &collision_attributes(Context &, const TaskWorkHandle &, unsigned record);
@@ -38,6 +42,8 @@ TaskCallback destructor_callback(Context &);
 fidelity::ExactFloat exact(Context &, float);
 // NOTSA: CheckEditMode binding borrows the native owners or calls the reference.
 std::int32_t check_edit_mode(Context &);
+// NOTSA: native stage owner consumed by the Chao branch and the stage seams.
+std::int16_t stage(Context &);
 // NOTSA: delegates to the existing canonical PInitialize; no second initializer.
 void initialize_player(Context &, std::int32_t index, const TaskHandle &);
 // NOTSA: bind imported complete table and native weld resources at source stores.
@@ -76,8 +82,44 @@ void reset_position(Context &, Primary, const TaskWorkHandle &, const Player &);
 
 // The reached entry prefix, mode zero, mode one and common tail are recovered
 // in the core; these callees stay named seams until their bodies land.
-// STUB: SONIC 0x488880 AmyUpdateActionState
+// FUNCTION: SONIC 0x488880 AmyUpdateActionState
 void update_action_state(Context &, Primary, const TaskWorkHandle &, const Player &);
+// STUB: SONIC 0x4842c0 AmyChaoSetup
+void chao_setup(Context &, const TaskWorkHandle &motion, const Player &, std::uint8_t index);
+// STUB: SONIC 0x484f40 AmyCheckDamage
+bool check_damage(Context &, Primary, const TaskWorkHandle &motion, const Player &);
+// STUB: SONIC 0x4856a0 AmyHurtReaction
+void hurt_reaction(Context &, Primary, const Player &);
+// Source seam owned by the Big core's identical DamegeRingScatter declaration.
+void scatter_rings(Context &, std::uint8_t index);
+// The stand chain stops at the first nonzero transition. Its preview-zero
+// branches are recovered where an existing native owner proves them; the
+// transition bodies stay seams.
+// STUB: SONIC 0x487810 AmyCheckNextAction
+bool check_next_action(Context &, Primary, const Player &, const TaskWorkHandle &motion);
+// STUB: SONIC 0x485730 AmyCheckFall
+bool check_fall(Context &, Primary, const Player &, const TaskWorkHandle &motion);
+// STUB: SONIC 0x4858e0 AmyCheckDropOff
+bool check_drop_off(Context &, Primary, const Player &);
+// STUB: SONIC 0x485870 AmyCheckDrtk
+bool check_drtk(Context &, Primary, const Player &);
+// STUB: SONIC 0x487640 AmyCheckJump
+bool check_jump(Context &, Primary, const Player &);
+// STUB: SONIC 0x485380 AmyCheckGrab
+bool check_grab(Context &, Primary, const Player &, const TaskWorkHandle &motion);
+// STUB: SONIC 0x485040 AmyCheckHandle
+bool check_handle(Context &, Primary, const Player &, const TaskWorkHandle &motion);
+// STUB: SONIC 0x4850c0 AmyCheckBalance
+bool check_balance(Context &, Primary, const Player &);
+// STUB: SONIC 0x485800 AmyCheckHat
+bool check_hat(Context &, Primary, const Player &);
+// NOTSA: native/reference bindings to the canonical stage pickup/action owners.
+bool stage_pickup(Context &, Primary, const TaskWorkHandle &motion, const Player &);
+bool stage_action(Context &, Primary, const TaskWorkHandle &motion, const Player &);
+// NOTSA: native/reference binding to the canonical GetAnalog input gate.
+bool analog_input(Context &, Primary);
+// NOTSA: horizontal source motion speed consumed by the stand-to-walk gate.
+float horizontal_speed(Context &, const TaskWorkHandle &motion);
 // STUB: SONIC 0x488820 AmySetupForPlayer
 void setup_for_player(Context &, std::uint8_t index);
 // STUB: SONIC 0x4c6820 FUN_004c6820
