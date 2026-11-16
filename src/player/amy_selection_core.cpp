@@ -74,7 +74,7 @@ Player initialize(Context &context, const TaskHandle &object, Primary task,
     task.mode = static_cast<std::uint8_t>(Mode::Stand);
     load_character_textures(context, kAmy);
     bind_weld_table(context, player);
-    setup_for_player(context, index);
+    setup_for_player(context, motion, index);
     (void)create_child_task(context, 0, 3, index);
     (void)create_child_task(context, 1, 3, index);
     (void)create_child_task(context, 2, 3, index);

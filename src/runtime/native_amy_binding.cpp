@@ -355,7 +355,50 @@ bool stage_action(Context &context, Primary, const TaskWorkHandle &, const Playe
     missing("native_amy_stage_action");
 }
 bool analog_input(Context &, Primary) { missing("native_amy_analog_input"); }
-void setup_for_player(Context &, std::uint8_t) { missing("native_amy_setup_for_player"); }
+void unrecovered_amy_direct(TaskScheduler &, const TaskHandle &) {
+    missing("native_amy_direct_ahead");
+}
+void setup_for_player(Context &context, const TaskWorkHandle &motion, std::uint8_t index) {
+    const auto created = context.scheduler.create_element(2, 2, unrecovered_amy_direct);
+    if (!created || !created.task)
+        return;
+    constexpr unsigned kDirectMotionBytes = 0x88;
+    constexpr unsigned kCopiedWordsOffset = 0x58;
+    auto allocation = arena(context).allocate(kDirectMotionBytes);
+    if (!allocation) {
+        (void)context.scheduler.destroy_task(created.task);
+        return;
+    }
+    created.task->motion_work = allocation.work;
+    store_child_index(context, created.task, index);
+    // The source copies the parent's first three motion words, clearing bit 1
+    // of the player work word (through the motion work's player pointer)
+    // between the first and second copies.
+    const auto player = player_for_motion(context, motion);
+    if (!player)
+        missing("native_amy_setup_player");
+    std::uint32_t work_word = 0;
+    if (!arena(context).read(player->allocation, 0, &work_word, sizeof(work_word)))
+        missing("native_amy_setup_motion_word");
+    const auto parent_motion = player_initialization::bind_existing_motion(context.task);
+    const auto word_of = [](float value) {
+        std::uint32_t word = 0;
+        std::memcpy(&word, &value, sizeof(word));
+        return word;
+    };
+    const std::array<std::uint32_t, 3> words{work_word, word_of(parent_motion->motion.speed.x),
+                                             word_of(parent_motion->motion.speed.y)};
+    for (unsigned word = 0; word < words.size(); ++word) {
+        if (!arena(context).write(allocation.work, kCopiedWordsOffset + word * 4, &words[word],
+                                  sizeof(words[word])))
+            missing("native_amy_setup_motion_copy");
+        if (word == 0) {
+            const auto cleared = work_word & ~2u;
+            if (!arena(context).write(player->allocation, 0, &cleared, sizeof(cleared)))
+                missing("native_amy_setup_motion_word_store");
+        }
+    }
+}
 void initialize_auxiliary_a(Context &) { missing("native_amy_initialize_auxiliary_a"); }
 void initialize_auxiliary_b(Context &) { missing("native_amy_initialize_auxiliary_b"); }
 void initialize_auxiliary_c(Context &) { missing("native_amy_initialize_auxiliary_c"); }

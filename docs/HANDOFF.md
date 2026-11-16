@@ -1329,3 +1329,9 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 ### 2026-11-10 — Big stand checker analysis recorded (docs only)
 
 * A delegated analysis of the seven Big stand and damage checkers is recorded in docs/RESEARCH-big-stand-checkers.md. Five return zero on the CharacterSelect preview path by source-proven guards. BigCheckFall transitions to MD_BIG_FALL because no grounded bit is set, and BigCheckNextAction is live because the preview sets input 12. The next Big recovery after the remaining controllers is the fall mode and the checker chain in that order.
+
+### 2026-11-10 — Amy setup runs; Miles packet integrated next (no gate)
+
+* Outcome: the frontier still exits 1 at frame 1332 on the title hash. Amy mode zero now runs through its direct-ahead setup and stops at native_amy_initialize_auxiliary_a. No CharacterSelect frame is presented.
+* Changed: AmySetupForPlayer creates its child with the copied motion words and clears the player work-word bit in source order.
+* Verified: the app builds and the frontier stop moved with semantic state still passing.

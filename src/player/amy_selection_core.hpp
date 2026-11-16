@@ -121,7 +121,7 @@ bool analog_input(Context &, Primary);
 // NOTSA: horizontal source motion speed consumed by the stand-to-walk gate.
 float horizontal_speed(Context &, const TaskWorkHandle &motion);
 // STUB: SONIC 0x488820 AmySetupForPlayer
-void setup_for_player(Context &, std::uint8_t index);
+void setup_for_player(Context &, const TaskWorkHandle &motion, std::uint8_t index);
 // STUB: SONIC 0x4c6820 FUN_004c6820
 void initialize_auxiliary_a(Context &);
 // STUB: SONIC 0x4b3d90 FUN_004b3d90
