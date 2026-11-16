@@ -19,6 +19,7 @@
 #include "engine/queue_consumer_native.hpp"
 #include "engine/message_sprite_queue.hpp"
 #include "engine/screen_sprite.hpp"
+#include "engine/view_check.hpp"
 #include "engine/message_sprite_profile.hpp"
 #include "runtime/model_vertex_stream.hpp"
 #include "runtime/model_draw_environment.hpp"
@@ -58,6 +59,10 @@ class Display {
     void scale_current_matrix(float x, float y, float z);
     // NOTSA: njCalcVector over the live current matrix.
     NinjaVector calculate_current_vector(const NinjaVector &input);
+    // NOTSA: njCalcPoint over the live current matrix.
+    NinjaVector calculate_current_point(const NinjaVector &input);
+    // NOTSA: live view facts for dsCheckViewV from their existing owners.
+    view_check::State view_check_state() const;
     // True when the current queued texture list would make the late blob return.
     bool late_texture_list_not_ready() const;
     // NOTSA: PConvertVector_P2G through the recovered PlayerCoordinates owner

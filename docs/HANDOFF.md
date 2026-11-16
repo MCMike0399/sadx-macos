@@ -1291,3 +1291,10 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Changed: the action update entry and stand checker chain are recovered in the core with each checker as a named seam. Mode zero setup creates the direct-ahead child with its motion copy. The rod update writes both collision centers through the live matrix. BigDisplay starts in the core with its view check as the next seam.
 * Verified: the app builds, source checks pass, and the frontier moved in order through the setup, set motion, equipment, weld and rod boundaries with semantic state still passing.
 * Next: recover dsCheckViewV and the animated submit, then CharacterShadow. The stand checkers and mode-one physics bindings follow in stop order.
+
+### 2026-11-10 — dsCheckViewV recovered and shared (no gate)
+
+* Outcome: the frontier still exits 1 at frame 1332 on the title hash. BigDisplay now passes its view check on the reached tick and the tail stops at native_big_character_shadow. No CharacterSelect frame is presented.
+* Changed: view_check owns dsCheckViewV with the exact pending-tick, depth and projected-bound comparisons, including the perspective reciprocal. The animated model clip check now delegates to it with the model center and clip-scaled radius instead of throwing for nonzero radius. Display supplies the live view facts and point transform.
+* Verified: the view check oracle passes 116 development cases plus its separate holdout seed, five of five mutants are caught, and the unit checks pass. The Gamma display composition still passes. Source checks pass.
+* Next: CharacterShadow, then the BigDisplay animated submit and the stand checkers in stop order.

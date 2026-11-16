@@ -36,6 +36,29 @@ NinjaVector Display::calculate_current_vector(const NinjaVector &input) {
         throw std::runtime_error("native current vector transformation failed");
     return output;
 }
+NinjaVector Display::calculate_current_point(const NinjaVector &input) {
+    NinjaVector output{};
+    coordinates_->calculate_point(coordinates_->current_matrix(), input, output, arithmetic_);
+    return output;
+}
+view_check::State Display::view_check_state() const {
+    // The aspect multipliers keep their file-initialized values until the
+    // aspect writers are bound; every other fact is a live owner.
+    constexpr float kScreenMultiX = 1.0f;
+    constexpr float kScreenMultiY = 0.85f;
+    view_check::State state;
+    state.pending_logic_ticks = pending_logic_ticks();
+    state.draw_minimum = view_.negative_near_distance;
+    state.draw_maximum = view_.negative_far_distance;
+    state.screen_distance = view_.sprite_scale;
+    state.screen_center_x = projection_center_x_;
+    state.screen_center_y = projection_center_y_;
+    state.ratio_x = horizontal_scale_;
+    state.ratio_y = vertical_scale_;
+    state.multi_x = kScreenMultiX;
+    state.multi_y = kScreenMultiY;
+    return state;
+}
 bool Display::convert_player_to_global(const PlayerOrientation &orientation, NinjaVector &vector) {
     PlayerCoordinates coordinates(sine_, runtime::engine_code_tables().unit_matrix, matrices_);
     return static_cast<bool>(coordinates.task_to_world(&orientation, vector, arithmetic_));

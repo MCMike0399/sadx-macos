@@ -3,6 +3,7 @@
 #include "engine/collision_component.hpp"
 #include "player/player_vertex_weld.hpp"
 #include "player/player_underwater.hpp"
+#include "engine/view_check.hpp"
 #include "game/game_mode.hpp"
 #include "runtime/native_sonic_fields.hpp"
 #include <cstring>
@@ -408,7 +409,15 @@ void update_rod(Context &context, const TaskWorkHandle &) {
     second.z = add(second.z, first.z).rounded();
     display.pop_current_matrix();
 }
-bool check_view(Context &, Primary) { missing("native_big_check_view"); }
+bool check_view(Context &context, Primary view) {
+    auto &display = context.rendering;
+    view_check::Services services{[&display](const NinjaVector &point) {
+        return display.calculate_current_point(point);
+    }};
+    constexpr float kViewRadius = 25.0f;
+    return view_check::check_view(view.position, kViewRadius, display.view_check_state(), services,
+                                  display.arithmetic());
+}
 [[noreturn]] void missing_display_submit(Context &) { missing("native_big_display_submit"); }
 void destroy(Context &, const TaskHandle &) { missing("native_big_destruct"); }
 void update_held_task(Context &, const TaskWorkHandle &) { missing("native_big_held_task"); }

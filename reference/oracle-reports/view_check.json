@@ -1,0 +1,28 @@
+{
+ "passed": true,
+ "values_match": true,
+ "cases": 116,
+ "completed": 116,
+ "mismatches": 0,
+ "faults": 0,
+ "holdout": {
+  "cases": 64,
+  "mismatches": 0,
+  "faults": 0,
+  "seed": "0x781670"
+ },
+ "source_range_sha256": "7c83a22a21249d29e4f244b3d6802bd06350504fdbc84446badbc511e4116f24",
+ "source": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "entry": "0x403330",
+ "samples": [],
+ "limits": [
+  "njCalcPoint is replaced by the fixture view-space point; its matrix math is owned by the ninja matrix oracle.",
+  "x87 status flags are not compared; the boolean result and captured point are."
+ ],
+ "tracked_summary": {
+  "full_sha256": "a1dd95fb305812b8e9aa695b4eb077f379cc1cd299fd4ee8bceb1b2aa8b6e462",
+  "full_bytes": 646,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

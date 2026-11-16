@@ -50,9 +50,16 @@ void object_callback(object_draw::Context &context, ObjectId id) {
         throw flow::UnrecoveredGameFlowCall("native_animated_model_object_callback");
     context.animated_callback(id);
 }
-bool check_view(object_draw::Context &context, object_draw::ModelId id, float) {
-    if (context.environment.pack.model(id).radius == 0)
-        return true;
-    throw flow::UnrecoveredGameFlowCall("native_animated_model_nonzero_clip_scale_dsCheckViewV");
+bool check_view(object_draw::Context &context, object_draw::ModelId id, float clip_scale) {
+    const auto model = context.environment.pack.model(id);
+    auto &display = context.display;
+    view_check::Services services{[&display](const NinjaVector &point) {
+        return display.calculate_current_point(point);
+    }};
+    const auto radius = (fidelity::ExactFloat(context.arithmetic(), model.radius) *
+                         fidelity::ExactFloat(context.arithmetic(), clip_scale))
+                            .rounded();
+    return view_check::check_view({model.center[0], model.center[1], model.center[2]}, radius,
+                                  display.view_check_state(), services, context.arithmetic());
 }
 } // namespace sadx::animated_model

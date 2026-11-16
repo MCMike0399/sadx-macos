@@ -1,0 +1,27 @@
+[
+  [
+    "radius is not scaled",
+    "constexpr float kRadiusScale = 1.2f;",
+    "constexpr float kRadiusScale = 1.0f;"
+  ],
+  [
+    "pending ticks are inverted",
+    "state.pending_logic_ticks != 0",
+    "state.pending_logic_ticks == 0"
+  ],
+  [
+    "perspective sign is flipped",
+    "fidelity::ExactFloat(arithmetic, -1.0f)",
+    "fidelity::ExactFloat(arithmetic, 1.0f)"
+  ],
+  [
+    "far bound uses the near value",
+    "state.draw_maximum",
+    "state.draw_minimum"
+  ],
+  [
+    "screen width is 480",
+    "constexpr float kScreenWidth = 640.0f;",
+    "constexpr float kScreenWidth = 480.0f;"
+  ]
+]

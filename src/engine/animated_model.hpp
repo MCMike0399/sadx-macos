@@ -44,7 +44,7 @@ struct State {
 fidelity::Context &arithmetic(object_draw::Context &);
 // NOTSA: dispatches the animated callback slot, distinct from njSetObjectCallback.
 void object_callback(object_draw::Context &, ObjectId);
-// STUB: SONIC 0x403330 dsCheckViewV nonzero callback clip scale not composed
+// NOTSA: native/reference binding to the canonical dsCheckViewV owner.
 bool check_view(object_draw::Context &, object_draw::ModelId, float);
 
 // NOTSA: adapters defer action payload access until the source loop guard passes.
