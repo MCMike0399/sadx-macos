@@ -10,6 +10,7 @@ import struct
 from gamma_actor_resources import pack_bytes
 from sonic_actor_resources import bss, digest
 from character_actions import export
+from character_actions import export
 from big_declarations import (ACTION_SLOT, CONSTRUCTED_ADDRESS, DECLARATIONS,
                               OBJECT_SLOT, recipes, weld)
 
@@ -115,6 +116,16 @@ def append_big(dll, exe, importer, actions):
         if inverse != weld_raw[24 * index:24 * (index + 1)]:
             raise ValueError('Big weld inverse proof failed')
         joins.append(entry)
+    # Equipment tail identities: BIG_OBJECTS rows 31..36 and BIG_MODELS rows
+    # 2..3 are the only table entries the common tail reads.
+    objects_table = export(dll, '___BIG_OBJECTS')
+    models_table = export(dll, '___BIG_MODELS')
+    equipment_objects = [{'index': index,
+                          'object': importer.object(dll.unpack('<I', objects_table + 4 * index)[0])}
+                         for index in range(31, 37)]
+    equipment_models = [{'index': index,
+                         'model': importer.model(dll.unpack('<I', models_table + 4 * index)[0])}
+                        for index in range(2, 4)]
     collision = exe.read(COLLISION_ADDRESS, COLLISION_BYTES)
     importer.verify_round_trip()
     if importer.records[:len(old_records)] != old_records or actions != old_bindings:
@@ -127,6 +138,7 @@ def append_big(dll, exe, importer, actions):
         'initial_animation_action': initial,
         'declarations': declaration_metadata, 'constructed_action': construction,
         'recipes': rows, 'joins': joins,
+        'equipment_objects': equipment_objects, 'equipment_models': equipment_models,
         'collision_words': list(struct.unpack('<36I', collision)),
         'texture_character': 7}
     proof = {'version': 1, 'source_dll_sha256': dll.sha256, 'source_game_sha256': exe.sha256,

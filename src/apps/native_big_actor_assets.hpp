@@ -111,6 +111,24 @@ inline BigActorAssets load_big_actor_assets(const std::filesystem::path &directo
             result.join_pairs[index].push_back(value);
         }
     }
+    const auto equipment_objects = array(metadata[@"equipment_objects"], 6, "Big equipment objects");
+    for (std::size_t index = 0; index < result.equipment_objects.size(); ++index) {
+        const auto row = dictionary(equipment_objects[index], "Big equipment object");
+        (void)integer(row[@"index"], 31 + index, 31 + index, "Big equipment object row");
+        const auto object = static_cast<character_pack::ResourceId>(
+            integer(row[@"object"], 1, pack.record_count(), "Big equipment object identity"));
+        (void)pack.object(object);
+        result.equipment_objects[index] = object;
+    }
+    const auto equipment_models = array(metadata[@"equipment_models"], 2, "Big equipment models");
+    for (std::size_t index = 0; index < result.equipment_models.size(); ++index) {
+        const auto row = dictionary(equipment_models[index], "Big equipment model");
+        (void)integer(row[@"index"], 2 + index, 2 + index, "Big equipment model row");
+        const auto model = static_cast<character_pack::ResourceId>(
+            integer(row[@"model"], 1, pack.record_count(), "Big equipment model identity"));
+        (void)pack.model(model);
+        result.equipment_models[index] = model;
+    }
     const auto collision = array(metadata[@"collision_words"], 36, "Big collision records");
     std::array<std::uint32_t, 36> collision_words{};
     for (std::size_t index = 0; index < collision_words.size(); ++index)

@@ -25,6 +25,9 @@ struct BigActorAssets {
     std::array<BigJoinDeclaration, 17> joins{};
     // Decoded pair arrays, parallel to joins; empty where the row has none.
     std::array<std::vector<std::uint16_t>, 17> join_pairs{};
+    // BIG_OBJECTS rows 31..36 and BIG_MODELS rows 2..3, in table order.
+    std::array<character_pack::ResourceId, 6> equipment_objects{};
+    std::array<character_pack::ResourceId, 2> equipment_models{};
     std::vector<collision_component::Info> collision_info;
 };
 } // namespace sadx::native
