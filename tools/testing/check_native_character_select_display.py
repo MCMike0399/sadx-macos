@@ -63,10 +63,12 @@ def semantic_state(state):
             not gamma.get('retired'), 'initialized Gamma preview actor missing')
 
 
-# Selection preview is list 3; actor callbacks are list 1. Gamma is 1/2 at this stop.
+# Selection preview is list 3; actor callbacks are list 1. Gamma is 1/2 and
+# Big is 1/3 at this stop; Big's two level-3 children precede the preview task.
 EXPECTED_TASKS = {**{f'1/{index}': {'exec': True} for index in range(1, 8)},
                   '1/2': {'exec': True, 'display': True, 'destructor': True},
-                  '3/0': {'exec': True, 'display': True, 'destructor': True},
+                  '1/3': {'exec': True, 'display': True, 'destructor': True},
+                  '3/2': {'exec': True, 'display': True, 'destructor': True},
                   '0/0': {'exec': True}}
 
 
