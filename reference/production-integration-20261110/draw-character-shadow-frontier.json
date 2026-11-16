@@ -1,0 +1,15 @@
+{
+  "worktree_private_assets": false,
+  "assets_source": "/Users/burbujamc/Developer/sadx-macos/build/cs-private-assets",
+  "save_source": "/Users/burbujamc/Developer/sadx-macos/reference/updated-pc-reference/game/savedata",
+  "app": "build/sadx-native",
+  "before": "native_big_shadow_draw",
+  "after": "native_big_underwater_binding",
+  "exit": 1,
+  "frame": 1332,
+  "screenshot_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427",
+  "mode": "drawn-goal",
+  "error": "scheduled task 3/0 flags differ",
+  "command": "python3 tools/testing/check_native_character_select_display.py --app build/sadx-native --assets /Users/burbujamc/Developer/sadx-macos/build/cs-private-assets --save-source /Users/burbujamc/Developer/sadx-macos/reference/updated-pc-reference/game/savedata --output build/cs-display-check-shadow-draw",
+  "note": "The isolated worktree has no build/cs-private-assets tree, so the checker ran directly against the main checkout pinned private tree with this worktree's binary. The run still stops on the outgoing title image. The stop moved past DrawCharacterShadow to the Big underwater binding."
+}

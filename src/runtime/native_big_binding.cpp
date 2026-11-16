@@ -1,5 +1,6 @@
 #include "runtime/native_player_system.hpp"
 #include "runtime/native_display.hpp"
+#include "runtime/object_draw_context.hpp"
 #include "engine/collision_component.hpp"
 #include "player/player_vertex_weld.hpp"
 #include "player/player_underwater.hpp"
@@ -56,6 +57,13 @@ native::PlayerSystem::BigExtraWork &extra(Context &context, const Player &player
     return context.players.big_work.back();
 }
 constexpr unsigned kMotionPlayerField = 0, kCollisionField = 56;
+// DrawCharacterShadow's source literals and late queue facts.
+constexpr float kShadowDepthCull = 20000.0f;
+constexpr float kShadowFalloffPerUnit = 0.03f;
+constexpr float kShadowGroundLift = 0.3f;
+constexpr float kShadowVerticalSquash = 0.8f;
+constexpr std::uint8_t kLateShadowFlags = 6;
+constexpr float kShadowSortBias = -27952.0f;
 constexpr unsigned kDirectMotionBytes = 0x88;
 constexpr unsigned kCopiedWordsOffset = 0x58;
 constexpr std::int32_t kHalfTurn = 0x8000;
@@ -445,7 +453,10 @@ void character_shadow(Context &context, Primary task, const Player &player) {
                             task.rotation[1], task.player_index};
     struct Product final : shadow::Services {
         Context &context;
-        explicit Product(Context &context) : context(context) {}
+        const shadow::Body &body;
+        shadow::ShadowWork &work;
+        Product(Context &context, const shadow::Body &body, shadow::ShadowWork &work)
+            : context(context), body(body), work(work) {}
         // The source land table has no entries on the reached selection path.
         // A loaded table takes the unrecovered walk instead of inventing land.
         shadow::LandCandidates list_land(const NinjaVector &, float) override {
@@ -468,8 +479,84 @@ void character_shadow(Context &context, Primary task, const Player &player) {
                     const std::array<std::int32_t, 3> &) override {
             missing("native_big_shadow_ripple");
         }
-        void draw_shadow() override { missing("native_big_shadow_draw"); }
-    } services(context);
+        // NOTSA: native boundary for DrawCharacterShadow. The source draws the
+        // common shadow blob through the late queue after selecting the common
+        // texture list and composing the task position with the shadow angles.
+        void draw_shadow() override {
+            if (context.rendering.pending_logic_ticks() != 0)
+                return;
+            auto &arithmetic = context.rendering.arithmetic();
+            const auto vertical =
+                fidelity::ExactFloat(arithmetic, body.y) - kShadowDepthCull;
+            if (vertical.compare(work.bottom_y) != X87Comparison::less)
+                return;
+            const auto difference =
+                fidelity::ExactFloat(arithmetic, body.y) - work.bottom_y;
+            auto gap = difference + 1.0f;
+            // FABS clears the sign without quieting a signaling NaN.
+            if (gap.is_negative())
+                gap = -gap;
+            const auto denominator = gap * kShadowFalloffPerUnit + 1.0f;
+            const auto scale =
+                (fidelity::ExactFloat(arithmetic, work.scale) / denominator).rounded();
+            // SetRegularTexture selects the common list. An unloaded list is an
+            // absent selection, as in the recovered Gamma shadow binding.
+            if (context.texture_state && context.texture_state->common)
+                context.rendering.output().select_texture_list(*context.texture_state->common);
+            if (!context.rendering.push_current_matrix())
+                missing("native_big_shadow_matrix_capacity");
+            const auto lifted =
+                (fidelity::ExactFloat(arithmetic, work.bottom_y) + kShadowGroundLift).rounded();
+            context.rendering.translate_current_matrix(body.x, lifted, body.z);
+            if (work.angle_z != 0)
+                context.rendering.rotate_current_z(static_cast<std::uint16_t>(work.angle_z));
+            if (work.angle_x != 0)
+                context.rendering.rotate_current_x(static_cast<std::uint16_t>(work.angle_x));
+            if (body.yaw != 0) {
+                // The source tests the full word, then negates the low 16 bits.
+                const auto angle =
+                    static_cast<std::uint16_t>(-static_cast<std::uint16_t>(body.yaw));
+                context.rendering.rotate_current_y(angle);
+            }
+            const auto flattened =
+                (fidelity::ExactFloat(arithmetic, scale) * kShadowVerticalSquash).rounded();
+            context.rendering.scale_current_matrix(scale, scale, flattened);
+            draw_late();
+            context.rendering.pop_current_matrix();
+        }
+        // A missing queued texture list returns and the caller pops. A ready
+        // list allocates the type-1 late model node for the imported shadow
+        // blob; the frame consumes the mesh after the matrix stack unwinds.
+        void draw_late() {
+            if (context.rendering.late_texture_list_not_ready())
+                return;
+            // BigActorAssets has no shadow object of its own; the common
+            // object_shadow import lives in the Gamma actor content.
+            if (!context.players.gamma_assets)
+                missing("native_big_shadow_asset_owner");
+            const auto shadow_object = context.players.gamma_assets->shadow_object;
+            if (!shadow_object)
+                missing("native_big_shadow_object");
+            if (!context.model_environment)
+                missing("native_big_shadow_environment");
+            const auto model = context.scene.objects.object(*shadow_object).model;
+            const auto environment = *context.model_environment;
+            auto &display = context.rendering;
+            const auto *list = context.texture_state ? context.texture_state->common : nullptr;
+            auto draw_mesh = [&display, environment, model, list] {
+                if (list)
+                    display.output().select_texture_list(*list);
+                object_draw::Context draw{display, environment};
+                object_draw::draw_model(draw, model);
+            };
+            const auto queued = context.rendering.queue_late_model(
+                model, kLateShadowFlags, kShadowSortBias, std::move(draw_mesh));
+            if (!queued)
+                missing("native_big_shadow_model_queue");
+            if (queued.route != LateModelRoute::queued)
+                missing("native_late_model_immediate");
+        }
+    } services(context, body, work);
     shadow::update(body, work, services, context.rendering.arithmetic());
 }
 void stand_tail(Context &, const TaskWorkHandle &) { missing("native_big_stand_tail"); }

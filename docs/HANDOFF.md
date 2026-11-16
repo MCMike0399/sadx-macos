@@ -1309,3 +1309,11 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Verified: oracle pass with 118 development cases and a separate 64 case holdout seed, zero mismatches; nine of nine mutants are caught; character-shadow, player-startup, player-initialization, gamma-shadow, view-check and player-underwater units pass; the Gamma display composition passes 106 draws and 3060 vertices. Provenance, readability, layer, owner and profile checks pass. The frontier ran with the main checkout private assets because this worktree has none.
 * Limits: the effect, polygon, scalar and draw callees are fixture seams; the land walk is the next real recovery. Unicorn 2.1.4 misreports one NaN FCOMPP cull, so that branch is held by the unit test.
 * Next: recover DrawCharacterShadow and the land walk, then the BigDisplay animated submit and the stand checkers.
+
+### 2026-11-16 — DrawCharacterShadow bound in the Big tail (no gate)
+
+* Outcome: the private-asset CharacterSelect frontier still exits 1 at frame 1332 on the title hash c7d02f64, but the stop moved from native_big_shadow_draw to native_big_underwater_binding. The empty land table leaves the bottom at its default, so the source visibility gate skips the blob on this frame.
+* Changed: native_big_binding owns DrawCharacterShadow. The service gates on pending ticks and the ordered depth comparison, computes the scale in x87 order, selects the common texture list, pushes and composes the matrix in source Z/X/Y order, queues the common shadow blob through the late model queue, and pops. BigActorAssets has no shadow object of its own, so the binding borrows the imported object_shadow from GammaActorAssets.
+* Verified: make -j10 build/sadx-native exits 0. Provenance, readability and layer checks exit 0. character-shadow, gamma-shadow and view-check units exit 0. The checker ran against the main checkout private assets with this worktree's binary. The retained dossier is draw-character-shadow-49f0b0.disasm.txt.
+* Limits: the draw is not observed on this frame because the unrecovered land walk leaves bottom_y at the source default. No oracle covers DrawCharacterShadow; the retained assembly is the evidence.
+* Next: the Big underwater binding, then the land walk that produces a real shadow contact.
