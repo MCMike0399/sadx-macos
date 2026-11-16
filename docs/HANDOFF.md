@@ -1298,3 +1298,7 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Changed: view_check owns dsCheckViewV with the exact pending-tick, depth and projected-bound comparisons, including the perspective reciprocal. The animated model clip check now delegates to it with the model center and clip-scaled radius instead of throwing for nonzero radius. Display supplies the live view facts and point transform.
 * Verified: the view check oracle passes 116 development cases plus its separate holdout seed, five of five mutants are caught, and the unit checks pass. The Gamma display composition still passes. Source checks pass.
 * Next: CharacterShadow, then the BigDisplay animated submit and the stand checkers in stop order.
+
+### 2026-11-10 — MarathonRecomp review recorded (docs only)
+
+* A delegated review of sonicnext-dev/marathonrecomp is recorded in docs/RESEARCH-marathonrecomp.md. Its static-recompilation product shape does not transfer (ADR-0005 to 0007 stand). The useful transfers are engineering discipline: a host-owned texture cache with upload-on-change (the Metal backend re-uploads per frame today), a transactional importer with a pack manifest and verify mode, and typed guest-layout headers. These are backlog packets behind N3b, not route work.
