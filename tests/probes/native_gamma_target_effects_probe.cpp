@@ -6,6 +6,8 @@
 #include <vector>
 
 namespace {
+using LaserMode = sadx::gamma_target_effects::LaserMode;
+
 enum Input : unsigned {
     Mode = 0, Gun, LockCount, LockCombo, ShotCombo, LaserTimer, LockTimer,
     PositionX, PositionY, PositionZ, AimX, AimY, AimZ, Distance, Scope, SearchPresent,
@@ -112,7 +114,7 @@ extern "C" int sadx_native_gamma_target_effects(const std::uint32_t *input, std:
     try {
         Adapter services(input);
         sadx::gamma_target_effects::LaserTarget target;
-        target.mode = byte_at(input[Mode]);
+        target.mode = static_cast<LaserMode>(byte_at(input[Mode]));
         target.gun_mode = byte_at(input[Gun]);
         target.lock_count = byte_at(input[LockCount]);
         target.lock_combo = word_at(input[LockCombo]);

@@ -452,7 +452,8 @@ void update_target_effects(Context &context, Primary task, const Player &,
         missing("native_gamma_E102WK_allocation_identity");
     auto &memory = arena(context);
     gamma_target_effects::LaserTarget target;
-    target.mode = static_cast<std::int8_t>(owned->laser_mode);
+    target.mode = static_cast<gamma_target_effects::LaserMode>(
+        static_cast<std::int8_t>(owned->laser_mode));
     target.gun_mode = static_cast<std::int8_t>(load_work<std::uint8_t>(memory, allocation, 1));
     target.lock_count = static_cast<std::int8_t>(load_work<std::uint8_t>(memory, allocation, 4));
     target.lock_combo = load_work<std::int16_t>(memory, allocation, kLockCombo);
@@ -472,11 +473,17 @@ void update_target_effects(Context &context, Primary task, const Player &,
         Context &context;
         native::GammaExtraWork &owned;
         TaskWorkHandle block;
+        std::uint8_t task_slot = 0;
         Product(Context &context, native::GammaExtraWork &owned) : context(context), owned(owned) {}
-        std::uint8_t controller_slot() override { return 0; }
-        std::uint32_t button_mask() override { return 0; }
-        std::uint32_t held(std::uint8_t) override { return 0; }
-        std::uint32_t pressed(std::uint8_t) override { return 0; }
+        Context::ControllerSample sample(std::uint8_t slot) {
+            if (!context.controller)
+                missing("native_gamma_target_effects_controller");
+            return context.controller(slot);
+        }
+        std::uint8_t controller_slot() override { return task_slot; }
+        std::uint32_t button_mask() override { return sample(task_slot).mask; }
+        std::uint32_t held(std::uint8_t slot) override { return sample(slot).held; }
+        std::uint32_t pressed(std::uint8_t slot) override { return sample(slot).pressed; }
         bool event_sounds_enabled() override { return state(context).event_enabled != 0; }
         std::uintptr_t create_search_task() override {
             const auto created = context.scheduler.create_element(0, 6, unrecovered_search_task);
@@ -543,43 +550,10 @@ void update_target_effects(Context &context, Primary task, const Player &,
         std::uintptr_t locked_subject(int) override { missing("native_gamma_target_release_lock"); }
         void release_locked_target(std::uintptr_t) override { missing("native_gamma_target_release_lock"); }
     } services(context, *owned);
-    // The slot and button words are filled below; the overrides above are replaced
-    // once the controller sample is known. A missing controller is the live boundary.
-    struct Connected final : gamma_target_effects::Services {
-        Product &product;
-        Context &context;
-        explicit Connected(Product &product, Context &context) : product(product), context(context) {}
-        Context::ControllerSample sample(std::uint8_t slot) {
-            if (!context.controller)
-                missing("native_gamma_target_effects_controller");
-            return context.controller(slot);
-        }
-        std::uint8_t controller_slot() override { return task_slot; }
-        std::uint32_t button_mask() override { return sample(task_slot).mask; }
-        std::uint32_t held(std::uint8_t slot) override { return sample(slot).held; }
-        std::uint32_t pressed(std::uint8_t slot) override { return sample(slot).pressed; }
-        bool event_sounds_enabled() override { return product.event_sounds_enabled(); }
-        std::uintptr_t create_search_task() override { return product.create_search_task(); }
-        std::uintptr_t allocate_search_block() override { return product.allocate_search_block(); }
-        void attach_search_block(std::uintptr_t task, std::uintptr_t block) override {
-            product.attach_search_block(task, block);
-        }
-        void destroy_task(std::uintptr_t task) override { product.destroy_task(task); }
-        void play_lock_sound() override { product.play_lock_sound(); }
-        void stop_lock_sound() override { product.stop_lock_sound(); }
-        std::uintptr_t create_aim_task() override { return product.create_aim_task(); }
-        void store_aim(std::uintptr_t task, const gamma_target_effects::AimPose &pose) override {
-            product.store_aim(task, pose);
-        }
-        std::int32_t read_lock_table(std::int8_t mode) override { return product.read_lock_table(mode); }
-        std::uintptr_t locked_subject(int index) override { return product.locked_subject(index); }
-        void release_locked_target(std::uintptr_t subject) override {
-            product.release_locked_target(subject);
-        }
-        std::uint8_t task_slot = 0;
-    } connected(services, context);
-    connected.task_slot = task.player_index;
-    gamma_target_effects::update(target, static_cast<std::int8_t>(task.mode), connected,
+    // The controller sample is only meaningful once the task slot is known.
+    // A missing controller is the live boundary.
+    services.task_slot = task.player_index;
+    gamma_target_effects::update(target, static_cast<std::int8_t>(task.mode), services,
                                  context.rendering.arithmetic());
     owned->laser_mode = static_cast<std::uint8_t>(target.mode);
     store_work(memory, allocation, 0, static_cast<std::uint8_t>(target.mode));
@@ -606,7 +580,8 @@ void update_gun_effects(Context &context, const TaskHandle &, const Player &,
     auto &memory = arena(context);
     gamma_gun_effects::GunState state;
     state.laser_mode = static_cast<std::int8_t>(load_work<std::uint8_t>(memory, allocation, 0));
-    state.mode = static_cast<std::int8_t>(load_work<std::uint8_t>(memory, allocation, 1));
+    state.mode = static_cast<gamma_gun_effects::Mode>(
+        static_cast<std::int8_t>(load_work<std::uint8_t>(memory, allocation, 1)));
     state.marker = static_cast<std::int8_t>(load_work<std::uint8_t>(memory, allocation, 2));
     state.lock_count = static_cast<std::int8_t>(load_work<std::uint8_t>(memory, allocation, 4));
     state.armed = static_cast<std::int8_t>(load_work<std::uint8_t>(memory, allocation, 5));

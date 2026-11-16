@@ -5,7 +5,6 @@
 
 namespace sadx::gamma_gun_effects {
 namespace {
-constexpr int kLastMode = 5;
 constexpr float kChargeStep = 1.0f;
 constexpr float kReadyCharge = 15.0f;
 constexpr float kHotCharge = 30.0f;
@@ -60,7 +59,7 @@ void track_ready(GunState &state, const fidelity::ExactFloat &charge, Services &
         finish(state);
         return;
     }
-    state.mode = 5;
+    state.mode = Mode::Mode5;
     if (select_lock(state, 1, services) == 0) {
         finish(state);
         return;
@@ -78,7 +77,7 @@ void track_hot(GunState &state, const fidelity::ExactFloat &charge, Services &se
             return;
         }
         state.charge = 0.0f;
-        state.mode = 3;
+        state.mode = Mode::Mode3;
         finish(state);
         return;
     }
@@ -88,16 +87,16 @@ void track_hot(GunState &state, const fidelity::ExactFloat &charge, Services &se
 
 void update(GunState &state, Services &services, fidelity::Context &arithmetic) {
     const auto selector = static_cast<std::uint32_t>(static_cast<std::int32_t>(state.mode));
-    if (selector > kLastMode) {
+    if (selector > static_cast<std::uint32_t>(Mode::Mode5)) {
         finish(state);
         return;
     }
     switch (state.mode) {
-    case 0:
+    case Mode::Mode0:
         state.fade = 0.0f;
-        state.mode = 1;
+        state.mode = Mode::Mode1;
         [[fallthrough]];
-    case 1: {
+    case Mode::Mode1: {
         const auto selected = select_lock(state, 0, services);
         remember_variant(state, selected, services);
         if (selected == 0 || state.lock_count <= 0 || state.laser_mode != 1) {
@@ -105,32 +104,32 @@ void update(GunState &state, Services &services, fidelity::Context &arithmetic) 
             return;
         }
         // The image stores mode 2 and the ready charge before the first task create.
-        state.mode = 2;
+        state.mode = Mode::Mode2;
         state.charge = 14.0f;
         services.open_volley(state, selected);
         return;
     }
-    case 2:
+    case Mode::Mode2:
         state.charge = 14.0f;
         services.open_volley(state, 0);
         return;
-    case 3: {
+    case Mode::Mode3: {
         state.fade = 0.0f;
         const auto selected = select_lock(state, 1, services);
         if (selected == 0) {
-            state.mode = 0;
+            state.mode = Mode::Mode0;
             finish(state);
             return;
         }
         remember_variant(state, selected, services);
-        state.mode = 4;
+        state.mode = Mode::Mode4;
         track_ready(state, advance_charge(state, arithmetic), services);
         return;
     }
-    case 4:
+    case Mode::Mode4:
         track_ready(state, advance_charge(state, arithmetic), services);
         return;
-    case 5:
+    case Mode::Mode5:
         track_hot(state, advance_charge(state, arithmetic), services, arithmetic);
         return;
     default:

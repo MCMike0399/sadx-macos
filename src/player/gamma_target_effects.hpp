@@ -5,11 +5,25 @@
 #include <cstdint>
 
 namespace sadx::gamma_target_effects {
+// Source E102WK +0 mode byte, signed. The recovered arms are the seven
+// numeric values below; a byte outside 0..6 skips the switch, because the
+// original sign-extends it and compares the result as unsigned. Mode 0 has no
+// recovered source name, so it keeps its numeric enumerator.
+enum class LaserMode : std::int8_t {
+    Mode0 = 0, // clears scope, lock timer and distance, then becomes Ready
+    Ready = 1,
+    Acquire = 2,
+    Locked = 3,
+    Release = 4,
+    Clear = 5,
+    Finished = 6,
+};
+
 // NOTSA: the E102WK fields this update reads and writes, in source order.
 // Task and sound owners stay behind Services so the product and the oracle
 // share one body.
 struct LaserTarget {
-    std::int8_t mode = 0;
+    LaserMode mode = LaserMode::Mode0;
     std::int8_t gun_mode = 0;
     std::int8_t lock_count = 0;
     std::int16_t lock_combo = 0;
@@ -48,7 +62,8 @@ struct Services {
     virtual void stop_lock_sound() = 0;
     virtual std::uintptr_t create_aim_task() = 0;
     virtual void store_aim(std::uintptr_t task, const AimPose &pose) = 0;
-    // The lock table is unrecovered. It reads the task mode, then one table byte.
+    // The lock table is unrecovered. It reads the source task mode byte, then
+    // one table byte; that task mode is distinct from the E102WK laser mode.
     virtual std::int32_t read_lock_table(std::int8_t task_mode) = 0;
     // E102WK+0xf4 list. Zero means the auxiliary pointer was null and the
     // source skips the call. A null task pointer is a source fault.

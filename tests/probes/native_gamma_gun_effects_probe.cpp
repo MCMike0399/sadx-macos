@@ -4,6 +4,8 @@
 #include <cstring>
 
 namespace {
+using GunMode = sadx::gamma_gun_effects::Mode;
+
 enum Input : unsigned {
     Mode = 0, Laser, Marker, LockCount, Armed, Variant, Charge, Value, Fade, ControlWord, Words
 };
@@ -35,7 +37,7 @@ extern "C" int sadx_native_gamma_gun_effects(const std::uint32_t *input, std::ui
     try {
         Adapter services;
         sadx::gamma_gun_effects::GunState state;
-        state.mode = byte_at(input[Mode]);
+        state.mode = static_cast<GunMode>(byte_at(input[Mode]));
         state.laser_mode = byte_at(input[Laser]);
         state.marker = byte_at(input[Marker]);
         state.lock_count = byte_at(input[LockCount]);

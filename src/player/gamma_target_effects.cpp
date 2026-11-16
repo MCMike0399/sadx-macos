@@ -7,13 +7,6 @@
 
 namespace sadx::gamma_target_effects {
 namespace {
-constexpr int kReady = 1;
-constexpr int kAcquire = 2;
-constexpr int kLocked = 3;
-constexpr int kRelease = 4;
-constexpr int kClear = 5;
-constexpr int kFinished = 6;
-constexpr int kLastMode = 6;
 constexpr std::int16_t kLockHold = 180;
 constexpr double kTurnsPerRadian = 65536.0;
 
@@ -36,7 +29,7 @@ void consider_acquisition(LaserTarget &target, std::int8_t task_mode, Services &
     if ((services.pressed(services.controller_slot()) & services.button_mask()) == 0)
         return;
     if (services.read_lock_table(task_mode) != 0)
-        target.mode = kAcquire;
+        target.mode = LaserMode::Acquire;
 }
 
 void adjust_scope(LaserTarget &target, Services &services, fidelity::Context &arithmetic) {
@@ -80,7 +73,7 @@ void acquire(LaserTarget &target, Services &services) {
         if (block != 0) {
             services.attach_search_block(task, block);
             target.laser_timer = kLockHold;
-            target.mode = kLocked;
+            target.mode = LaserMode::Locked;
         } else {
             services.destroy_task(task);
         }
@@ -95,7 +88,7 @@ void track(LaserTarget &target, std::int8_t task_mode, Services &services,
     if (aim != 0)
         services.store_aim(aim, aim_at(target, arithmetic));
     if ((services.held(services.controller_slot()) & services.button_mask()) == 0) {
-        target.mode = kClear;
+        target.mode = LaserMode::Clear;
         target.lock_combo = 0;
         target.shot_combo = 0;
     }
@@ -104,7 +97,7 @@ void track(LaserTarget &target, std::int8_t task_mode, Services &services,
         return;
     target.lock_combo = 0;
     target.shot_combo = 0;
-    target.mode = kRelease;
+    target.mode = LaserMode::Release;
 }
 
 void release_locks(LaserTarget &target, Services &services) {
@@ -115,14 +108,14 @@ void release_locks(LaserTarget &target, Services &services) {
                 services.release_locked_target(subject);
         }
     }
-    target.mode = kFinished;
+    target.mode = LaserMode::Finished;
     target.gun_mode = 0;
 }
 
 void clear_search(LaserTarget &target, std::int8_t task_mode, Services &services) {
     services.destroy_task(target.search);
     target.search = 0;
-    target.mode = kReady;
+    target.mode = LaserMode::Ready;
     services.stop_lock_sound();
     consider_acquisition(target, task_mode, services);
 }
@@ -130,26 +123,26 @@ void clear_search(LaserTarget &target, std::int8_t task_mode, Services &services
 void apply_mode(LaserTarget &target, std::int8_t task_mode, Services &services,
                 fidelity::Context &arithmetic) {
     switch (target.mode) {
-    case 0:
+    case LaserMode::Mode0:
         target.scope = 0.0f;
         target.lock_timer = 0;
         target.distance = 0.0f;
-        target.mode = kReady;
+        target.mode = LaserMode::Ready;
         break;
-    case 1:
+    case LaserMode::Ready:
         consider_acquisition(target, task_mode, services);
         break;
-    case 2:
+    case LaserMode::Acquire:
         acquire(target, services);
         break;
-    case 3:
+    case LaserMode::Locked:
         track(target, task_mode, services, arithmetic);
         break;
-    case 4:
+    case LaserMode::Release:
         release_locks(target, services);
         break;
-    case 5:
-    case 6:
+    case LaserMode::Clear:
+    case LaserMode::Finished:
         clear_search(target, task_mode, services);
         break;
     default:
@@ -161,7 +154,7 @@ void apply_mode(LaserTarget &target, std::int8_t task_mode, Services &services,
 void update(LaserTarget &target, std::int8_t task_mode, Services &services,
             fidelity::Context &arithmetic) {
     const auto selector = static_cast<std::uint32_t>(static_cast<std::int32_t>(target.mode));
-    if (selector <= kLastMode)
+    if (selector <= static_cast<std::uint32_t>(LaserMode::Finished))
         apply_mode(target, task_mode, services, arithmetic);
     adjust_scope(target, services, arithmetic);
 }

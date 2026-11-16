@@ -7,6 +7,8 @@
 #include <vector>
 
 namespace {
+using LaserMode = sadx::gamma_target_effects::LaserMode;
+
 void require(bool value, const std::string &message) {
     if (!value)
         throw std::runtime_error(message);
@@ -70,9 +72,9 @@ void ready_scope_stays_zero_until_the_button_is_held() {
     target.distance = 9;
     target.lock_timer = 3;
     sadx::gamma_target_effects::update(target, 0, services, arithmetic);
-    require(target.mode == 1 && target.scope == 0 && target.distance == 0 && target.lock_timer == 0,
+    require(target.mode == LaserMode::Ready && target.scope == 0 && target.distance == 0 && target.lock_timer == 0,
             "mode 0 clears the scope, distance and lock timer, then the release clamps it");
-    target.mode = 1;
+    target.mode = LaserMode::Ready;
     target.scope = 5;
     services.held_bits = 1;
     sadx::gamma_target_effects::update(target, 0, services, arithmetic);
@@ -91,13 +93,13 @@ void an_unlisted_mode_only_moves_the_scope() {
     Fake services;
     services.held_bits = 1;
     sadx::gamma_target_effects::LaserTarget target;
-    target.mode = 7;
+    target.mode = static_cast<LaserMode>(7);
     target.scope = 2;
     sadx::gamma_target_effects::update(target, 0, services, arithmetic);
-    require(target.mode == 7 && target.scope == 3.0f, "modes above 6 skip the switch");
-    target.mode = -1;
+    require(target.mode == static_cast<LaserMode>(7) && target.scope == 3.0f, "modes above 6 skip the switch");
+    target.mode = static_cast<LaserMode>(-1);
     sadx::gamma_target_effects::update(target, 0, services, arithmetic);
-    require(target.mode == -1 && target.scope == 4.0f, "a negative mode byte is above the switch");
+    require(target.mode == static_cast<LaserMode>(-1) && target.scope == 4.0f, "a negative mode byte is above the switch");
 }
 
 void pressed_input_asks_the_lock_table_before_acquiring() {
@@ -106,15 +108,15 @@ void pressed_input_asks_the_lock_table_before_acquiring() {
     services.pressed_bits = 1;
     services.table = 0;
     sadx::gamma_target_effects::LaserTarget target;
-    target.mode = 1;
+    target.mode = LaserMode::Ready;
     target.scope = 1;
     sadx::gamma_target_effects::update(target, 4, services, arithmetic);
-    require(target.mode == 1 && services.seen_mode == 4 && services.calls == std::vector<std::string>{"table"},
+    require(target.mode == LaserMode::Ready && services.seen_mode == 4 && services.calls == std::vector<std::string>{"table"},
             "a zero table read leaves ready mode");
     services.calls.clear();
     services.table = 1;
     sadx::gamma_target_effects::update(target, 4, services, arithmetic);
-    require(target.mode == 2, "a nonzero table read requests acquisition");
+    require(target.mode == LaserMode::Acquire, "a nonzero table read requests acquisition");
 }
 
 void acquisition_keeps_source_order_including_a_failed_block() {
@@ -122,37 +124,37 @@ void acquisition_keeps_source_order_including_a_failed_block() {
     Fake services;
     services.sounds = true;
     sadx::gamma_target_effects::LaserTarget target;
-    target.mode = 2;
+    target.mode = LaserMode::Acquire;
     target.scope = 1;
     sadx::gamma_target_effects::update(target, 0, services, arithmetic);
     require(services.calls == std::vector<std::string>{"search", "block", "attach", "play"},
             "search, block, attach, then the event sound");
-    require(target.mode == 3 && target.laser_timer == 180 && target.search == 11, "a linked search locks");
+    require(target.mode == LaserMode::Locked && target.laser_timer == 180 && target.search == 11, "a linked search locks");
     services.calls.clear();
     services.fail_block = true;
-    target.mode = 2;
+    target.mode = LaserMode::Acquire;
     sadx::gamma_target_effects::update(target, 0, services, arithmetic);
     require(services.calls == std::vector<std::string>{"search", "block", "destroy", "play"},
             "a failed block destroys the search and still plays the event sound");
-    require(target.mode == 2 && target.search == 11, "the failed search id is stored and not cleared");
+    require(target.mode == LaserMode::Acquire && target.search == 11, "the failed search id is stored and not cleared");
 }
 
 void empty_release_finishes_without_a_callee() {
     sadx::X87Context arithmetic(0x007f);
     Fake services;
     sadx::gamma_target_effects::LaserTarget target;
-    target.mode = 4;
+    target.mode = LaserMode::Release;
     target.gun_mode = 9;
     target.scope = 1;
     sadx::gamma_target_effects::update(target, 0, services, arithmetic);
-    require(target.mode == 6 && target.gun_mode == 0 && services.calls.empty(),
+    require(target.mode == LaserMode::Finished && target.gun_mode == 0 && services.calls.empty(),
             "no locks finishes the laser without a release call");
     services.subjects = {0, 5};
-    target.mode = 4;
+    target.mode = LaserMode::Release;
     target.gun_mode = 9;
     target.lock_count = 2;
     sadx::gamma_target_effects::update(target, 0, services, arithmetic);
-    require(target.mode == 6 && target.gun_mode == 0 &&
+    require(target.mode == LaserMode::Finished && target.gun_mode == 0 &&
                 services.calls == std::vector<std::string>{"release-5"},
             "a null auxiliary is skipped and the next subject is released");
 }
@@ -161,20 +163,20 @@ void clear_forgets_the_search_then_can_reacquire() {
     sadx::X87Context arithmetic(0x007f);
     Fake services;
     sadx::gamma_target_effects::LaserTarget target;
-    target.mode = 5;
+    target.mode = LaserMode::Clear;
     target.search = 11;
     target.scope = 1;
     sadx::gamma_target_effects::update(target, 4, services, arithmetic);
-    require(target.mode == 1 && target.search == 0 &&
+    require(target.mode == LaserMode::Ready && target.search == 0 &&
                 services.calls == std::vector<std::string>{"destroy", "stop"},
             "clear destroys, stores zero, returns to ready, and stops the sound");
     services.calls.clear();
     services.pressed_bits = 1;
     services.table = 7;
-    target.mode = 6;
+    target.mode = LaserMode::Finished;
     target.search = 11;
     sadx::gamma_target_effects::update(target, 4, services, arithmetic);
-    require(target.mode == 2 && target.search == 0 && services.seen_mode == 4 &&
+    require(target.mode == LaserMode::Acquire && target.search == 0 && services.seen_mode == 4 &&
                 services.calls == std::vector<std::string>{"destroy", "stop", "table"},
             "a pressed lock after clear asks the table and can request acquisition");
 }
@@ -183,7 +185,7 @@ void aim_stores_the_horizontal_length_before_pitch() {
     sadx::X87Context arithmetic(0x007f);
     Fake services;
     sadx::gamma_target_effects::LaserTarget target;
-    target.mode = 3;
+    target.mode = LaserMode::Locked;
     target.scope = 1;
     target.position_x = 8;
     target.aim_x = 3;
@@ -197,9 +199,9 @@ void aim_stores_the_horizontal_length_before_pitch() {
     require(services.stored.yaw == 0 && services.stored.pitch == 9672,
             "yaw " + std::to_string(services.stored.yaw) + " pitch " +
                 std::to_string(services.stored.pitch));
-    require(target.mode == 4 && target.laser_timer == 0, "an expired timer releases without the table");
+    require(target.mode == LaserMode::Release && target.laser_timer == 0, "an expired timer releases without the table");
     services.calls.clear();
-    target.mode = 3;
+    target.mode = LaserMode::Locked;
     target.laser_timer = 1;
     target.aim_x = 0;
     target.aim_z = 3;
