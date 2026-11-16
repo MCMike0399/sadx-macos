@@ -79,11 +79,13 @@ inline std::int32_t actor_signed_word(std::uint32_t word) {
     std::memcpy(&value, &word, sizeof(value));
     return value;
 }
-// NOTSA: decode every field of the source's three 48-byte CCL_INFO templates.
+// NOTSA: decode every field of the source's 48-byte CCL_INFO templates.
 // Work receives the source memcpy copy; these imported templates are never live collision state.
+template <std::size_t N>
 inline std::vector<collision_component::Info> gamma_collision_info(
-    const std::array<std::uint32_t, 36> &words) {
-    constexpr std::size_t kInfoCount = 3, kWordsPerInfo = 12;
+    const std::array<std::uint32_t, N> &words) {
+    static_assert(N % 12 == 0, "collision info records are twelve words");
+    constexpr std::size_t kInfoCount = N / 12, kWordsPerInfo = 12;
     constexpr unsigned kBitsPerByte = 8;
     constexpr std::uint32_t kByteMask = 0xff;
     std::vector<collision_component::Info> result;

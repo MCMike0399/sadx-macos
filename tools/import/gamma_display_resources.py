@@ -7,6 +7,7 @@ from gamma_actor_resources import (PEImage, SOURCE_SHA, SOURCE_SHA256, append_ga
     atomic_json, atomic_pack, build_sonic_actor_resources, digest, export, pack_bytes)
 from big_actor_resources import append_big
 from amy_actor_resources import append_amy
+from miles_actor_resources import append_miles
 
 # Only the table rows consumed by E102Display. Existing constructor rows stay intact.
 DISPLAY_ROWS = (2, 13, 14, 16, 18, 20, 22, 23)
@@ -95,6 +96,8 @@ def import_display(model_dll, game_exe, output):
     proof['display_append']['new_records'] = len(importer.records) - proof['display_append']['prefix_records']
     amy_metadata, amy_proof = append_amy(dll, exe, importer, actions)
     proof['amy_append'] = amy_proof
+    miles_metadata, miles_proof = append_miles(dll, exe, importer, actions)
+    proof['miles_append'] = miles_proof
     proof['display_append']['new_records'] = len(importer.records) - proof['display_append']['prefix_records']
     proof['records'] = importer.evidence
     proof['pack_sha256'] = atomic_pack(importer, actions, output)
@@ -102,6 +105,7 @@ def import_display(model_dll, game_exe, output):
     atomic_json(output.parent / 'gamma-actor.json', metadata)
     atomic_json(output.parent / 'big-actor.json', big_metadata)
     atomic_json(output.parent / 'amy-actor.json', amy_metadata)
+    atomic_json(output.parent / 'miles-actor.json', miles_metadata)
     return {'records': len(importer.records), 'bytes': output.stat().st_size,
             'sha256': proof['pack_sha256'], 'append': proof['display_append']}
 

@@ -322,3 +322,4 @@ SONIC	0x485380	function	AmyCheckGrab	int	(taskwk*, playerwk*, motionwk2*)		ev_a6
 SONIC	0x485040	function	AmyCheckHandle	int	(taskwk*, playerwk*, motionwk2*)		ev_a63dd9765792ebefb6df190014d489929d0dd5ac2d41dc90ada4e338e8e3fa81	Inferred role: attack-mask and playerwk+0x82 bit-0 HNDL transition.
 SONIC	0x4850c0	function	AmyCheckBalance	int	(taskwk*, playerwk*)		ev_a63dd9765792ebefb6df190014d489929d0dd5ac2d41dc90ada4e338e8e3fa81	Inferred role: playerwk+0x82 bit-1 BLNC balance transition.
 SONIC	0x485800	function	AmyCheckHat	int	(taskwk*, playerwk*)		ev_a63dd9765792ebefb6df190014d489929d0dd5ac2d41dc90ada4e338e8e3fa81	Inferred role: attack-mask HAT_ transition that clears the free speed words and held-face field.
+SONIC	0x7d2370	function	MilesConstructAction	void	()	31	miles-constructed-7d2370-capstone	Inferred role: static initializer writes the constructed Miles action at 0x3c5d540 from MILES_OBJECTS[0] and motion 0x9c1fc0; no Ghidra procedure at entry.
