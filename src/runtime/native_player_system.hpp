@@ -11,6 +11,7 @@
 #include "player/gamma_setup_resource.hpp"
 #include "player/gamma_effects.hpp"
 #include "player/player_underwater.hpp"
+#include "runtime/big_actor_assets.hpp"
 #include "player/scene_input_producer.hpp"
 #include "game/game_bootstrap.hpp"
 #include "game/editor_state.hpp"
@@ -46,6 +47,8 @@ struct PlayerSystem {
     gamma_setup::State gamma_setup;
     std::unique_ptr<gamma_effects::Asset> gamma_effects_asset;
     gamma_effects::State gamma_effects;
+    std::unique_ptr<BigActorAssets> big_assets;
+    PlayerJoinTable big_weld;
     player_underwater::State underwater;
 };
 // NOTSA: existing session asset load binds imported declarations to its shared scene owners.
@@ -56,6 +59,8 @@ void bind_gamma_setup_resources(PlayerSystem &, const CharacterTextureAssets &,
 // NOTSA: imported effects borrow the existing E102HIT list and stable mutable declarations.
 void bind_gamma_effects_resources(PlayerSystem &, const CharacterTextureAssets &,
     std::array<std::vector<regular_textures::List>, 9> &, const std::vector<std::uint8_t> &);
+// NOTSA: Big weld declarations bind to the same shared scene objects.
+void bind_big_resources(PlayerSystem &, character_pack::SceneState &, const BigActorAssets &);
 } // namespace sadx::native
 
 namespace sadx::gamma_selection {

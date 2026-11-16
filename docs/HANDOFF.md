@@ -1263,3 +1263,10 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Changed: direct basic models now draw PositionNormalUv triangles through the recovered polybuff function. The Gamma shadow callback captures the model environment and the common texture list selected at queue time, re-selects that list at consumption, and draws the imported shadow blob model. The display composition loads regular group 0 like the product title flow, so the common list is real in the test.
 * Verified: the display composition completes and then draws one shadow draw with six vertices through consume_draw_queue. The basic model oracle still matches on all 2427 cases with the same 172 FP flag partials; the new triangles target has its own event tag. Both dispatch swap mutants are caught. Source checks pass.
 * Next: BigTheCat mode zero and its reached tail. Miles, Knuckles and Amy controllers remain stubs. The gun and shadow holdout audit remains open.
+
+### 2026-11-10 — Big asset closure imported (no gate)
+
+* Outcome: nothing new is visible. The frontier still exits 1 at frame 1332 and stops at native_big_player_controller on the title hash.
+* Changed: the private pack append now folds BigAnimData and BigWeldInfo from their pinned initializers, imports the request-zero Stand action and the weld pair arrays, and records every other declaration with an explicit unavailable boundary. The session loads big-actor.json when present and binds the weld rows to the shared scene. The private pack hash is now 91914982.
+* Verified: the Big assets unit checks all 90 declarations, 105 recipes, the constructed row 96 boundary, weld pairs and the Stand motion identity. The Gamma display composition still passes on the regenerated pack. Source checks pass.
+* Next: the Big selection core and binding. Its physics callees and equipment tail remain explicit dependencies.

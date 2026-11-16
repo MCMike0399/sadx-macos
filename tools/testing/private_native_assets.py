@@ -105,6 +105,9 @@ def build_tree(source, output, append=None, expected_sha256=CANONICAL_SHA256):
                         json.loads(paths[2].read_text()))
         replacements = list(zip(paths, [PACK, PACK.with_suffix('.provenance.json'),
                                         Path('characters/gamma-actor.json')]))
+        big_actor = append.parent / 'big-actor.json'
+        if big_actor.is_file() and not big_actor.is_symlink():
+            replacements.append((big_actor, Path('characters/big-actor.json')))
     shutil.copytree(source, output, copy_function=clone_or_copy)
     for path, relative in replacements:
         # Unlink before cp: do not depend on cp's overwrite/clone behavior.
