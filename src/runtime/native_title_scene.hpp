@@ -81,6 +81,7 @@ class TitleScene final : private title_menu::Calls,
   private:
     InputServices input_;
     friend struct SonicCallbackProbe; // test-only observation of actual callback owners
+    friend struct MilesCallbackProbe; // test-only observation of the Miles exec stop
     Session &session_;
     Display &display_;
     const TitleAssets &assets_;
@@ -102,6 +103,8 @@ class TitleScene final : private title_menu::Calls,
     static void exec_selection_camera(TaskScheduler &, const TaskHandle &);
     static void exec_selection_sonic(TaskScheduler &, const TaskHandle &);
     static void exec_selection_miles(TaskScheduler &, const TaskHandle &);
+    static void display_selection_miles(TaskScheduler &, const TaskHandle &);
+    static void destroy_selection_miles(TaskScheduler &, const TaskHandle &);
     static void exec_selection_knuckles(TaskScheduler &, const TaskHandle &);
     static void exec_selection_amy(TaskScheduler &, const TaskHandle &);
     static void display_selection_amy(TaskScheduler &, const TaskHandle &);

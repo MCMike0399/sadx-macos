@@ -17,6 +17,9 @@
 #include "player/amy_selection_core.hpp"
 #include "runtime/amy_actor_assets.hpp"
 #include "runtime/amy_motion.hpp"
+#include "player/miles_selection_core.hpp"
+#include "runtime/miles_actor_assets.hpp"
+#include "runtime/miles_motion.hpp"
 #include "player/scene_input_producer.hpp"
 #include "game/game_bootstrap.hpp"
 #include "game/editor_state.hpp"
@@ -79,6 +82,10 @@ struct PlayerSystem {
         std::uint8_t byte_80 = 0, byte_81 = 0, byte_82 = 0;
     };
     std::deque<AmyExtraWork> amy_work;
+    std::unique_ptr<MilesActorAssets> miles_assets;
+    std::unique_ptr<MilesMotionAssets> miles_motion_assets;
+    PlayerJoinTable miles_weld;
+    miles_selection::State miles;
     player_underwater::State underwater;
 };
 // NOTSA: existing session asset load binds imported declarations to its shared scene owners.
@@ -93,6 +100,8 @@ void bind_gamma_effects_resources(PlayerSystem &, const CharacterTextureAssets &
 void bind_big_resources(PlayerSystem &, character_pack::SceneState &, const BigActorAssets &);
 // NOTSA: Amy weld and tail-object declarations bind to the same shared scene objects.
 void bind_amy_resources(PlayerSystem &, character_pack::SceneState &, const AmyActorAssets &);
+// NOTSA: Miles weld and tail-object declarations bind to the same shared scene objects.
+void bind_miles_resources(PlayerSystem &, character_pack::SceneState &, const MilesActorAssets &);
 } // namespace sadx::native
 
 namespace sadx::gamma_selection {
@@ -178,3 +187,26 @@ struct Context {
     std::int16_t land_candidate_count = 0;
 };
 } // namespace sadx::amy_selection
+
+namespace sadx::miles_selection {
+// NOTSA: borrowed real owners for this source callback invocation. No pose copy.
+struct Context {
+    native::PlayerSystem &players;
+    TaskScheduler &scheduler;
+    bootstrap::State &bootstrap;
+    native::Display &rendering;
+    const TaskHandle &task;
+    const std::int16_t &stage, &act;
+    TaskCallback display, destructor, auxiliary;
+    regular_textures::CharacterCatalog character_textures;
+    regular_textures::State *texture_state;
+    regular_textures::Services *texture_services;
+    character_pack::SceneState &scene;
+    const native::ModelDrawEnvironment *model_environment = nullptr;
+    // Borrowed session collision-entry owner; never a per-callback copy.
+    collision_component::EntryState *collision_entries = nullptr;
+    // Source land-candidate count. Zero is the empty table; a positive count
+    // still takes the unrecovered shadow land walk.
+    std::int16_t land_candidate_count = 0;
+};
+} // namespace sadx::miles_selection

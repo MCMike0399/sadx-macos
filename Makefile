@@ -628,6 +628,10 @@ build/sonic-physics-capture-native-test: tests/unit/sonic_physics_capture_native
 build/native-sonic-callback-test: tests/unit/native_sonic_callback.mm build/libsadx-native.a
 	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) $< build/libsadx-native.a -framework Foundation -o $@
 
+build/native-miles-assets-test: tests/unit/native_miles_assets.mm src/apps/native_miles_actor_assets.hpp build/libsadx-native.a
+	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) $< build/libsadx-native.a -framework Foundation -o $@
+build/native-miles-assets-test: src/runtime/native_session.hpp src/runtime/native_player_system.hpp
+
 build/native-gamma-effects-probe.dylib: tests/probes/native_gamma_effects_probe.cpp src/player/gamma_effects.cpp src/player/gamma_effects.hpp src/engine/particle_pool.cpp src/engine/particle_pool.hpp src/engine/task.cpp src/engine/task.hpp src/engine/task_work.cpp src/engine/task_work.hpp src/cpu/x87_math.cpp src/cpu/crt_integer.cpp build/softfloat/softfloat.a
 	$(CXX) $(CXXFLAGS) -dynamiclib $(INCLUDES) tests/probes/native_gamma_effects_probe.cpp src/player/gamma_effects.cpp src/engine/particle_pool.cpp src/engine/task.cpp src/engine/task_work.cpp src/cpu/x87_math.cpp src/cpu/crt_integer.cpp build/softfloat/softfloat.a -o $@
 build/gamma-effects-test: tests/unit/gamma_effects.cpp src/player/gamma_effects.hpp src/engine/particle_pool.hpp build/libsadx-native.a

@@ -1,5 +1,8 @@
-// Existing imported Miles contract only. No actor behavior is supplied.
+// Existing imported Miles contract plus its scheduled exec stop. No actor pose is supplied.
 #include "apps/native_miles_actor_assets.hpp"
+#include "runtime/native_display.hpp"
+#include "runtime/native_session.hpp"
+#include "runtime/native_title_scene.hpp"
 #include <iostream>
 
 namespace {
@@ -13,6 +16,29 @@ std::uint32_t bits(float value) {
     return result;
 }
 } // namespace
+namespace sadx::native {
+// NOTSA: observe the real private Miles callback reaching its named seam.
+struct MilesCallbackProbe {
+    static void run(Session &session, TitleScene &scene) {
+        session.logo_.initialize_heap();
+        session.logo_.initialize_tasks();
+        auto &scheduler = session.logo_.task_scheduler();
+        const auto task = scene.create_task(7, 1, TitleScene::exec_selection_miles);
+        player_initialization::establish_zeroed_primary(scheduler, task);
+        player_initialization::establish_zeroed_motion(scheduler, task);
+        bool stopped = false;
+        try {
+            task->exec(scheduler, task);
+        } catch (const flow::UnrecoveredGameFlowCall &error) {
+            stopped = std::string(error.what()) == "native_miles_action_update";
+            if (!stopped)
+                throw std::runtime_error(std::string("Miles exec stopped at: ") + error.what());
+        }
+        if (!stopped)
+            throw std::runtime_error("Miles exec does not reach its named action-update seam");
+    }
+};
+} // namespace sadx::native
 int main(int argc, char **argv) {
     @autoreleasepool {
         try {
@@ -70,7 +96,21 @@ int main(int argc, char **argv) {
                         motion.frame_count == 16 && motion.channels == 3 &&
                         motion.interpolation == 2,
                     "Stand motion identity");
-            std::cout << "Miles assets: 114 declarations, 136 recipes, 30 weld rows\n";
+            const auto render_assets = native::app::load_assets(directory);
+            auto shared_pack = std::make_shared<const character_pack::CharacterPack>(pack);
+            frame::ModeState mode;
+            native::Display display(directory / "system", mode);
+            native::Session session(display.output(), shared_pack, display.frame_state(),
+                                    display.arithmetic(), mode, render_assets.character_textures,
+                                    1, [](std::uint32_t) {});
+            audio::AudioConfiguration configuration{false, false, 0, 0, 0};
+            session.attach_cleanup(display, configuration);
+            session.load_miles_assets(native::app::load_miles_actor_assets(directory, pack));
+            const native::TitleAssets titles{};
+            native::TitleScene scene(session, display, titles);
+            native::MilesCallbackProbe::run(session, scene);
+            std::cout << "Miles assets: 114 declarations, 136 recipes, 30 weld rows; "
+                         "exec stops at native_miles_action_update\n";
             return 0;
         } catch (const std::exception &error) {
             std::cerr << "native Miles assets: " << error.what() << '\n';
