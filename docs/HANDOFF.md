@@ -1270,3 +1270,10 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Changed: the private pack append now folds BigAnimData and BigWeldInfo from their pinned initializers, imports the request-zero Stand action and the weld pair arrays, and records every other declaration with an explicit unavailable boundary. The session loads big-actor.json when present and binds the weld rows to the shared scene. The private pack hash is now 91914982.
 * Verified: the Big assets unit checks all 90 declarations, 105 recipes, the constructed row 96 boundary, weld pairs and the Stand motion identity. The Gamma display composition still passes on the regenerated pack. Source checks pass.
 * Next: the Big selection core and binding. Its physics callees and equipment tail remain explicit dependencies.
+
+### 2026-11-10 — Big selection core reaches its action update (no gate)
+
+* Outcome: the frontier still exits 1 at frame 1332 on the title hash. Big now runs its entry prefix and stops at native_big_update_action_state, the first unrecovered callee inside BigTheCat. No CharacterSelect frame is presented.
+* Changed: big_selection_core owns the entry, mode zero, stand mode and the common tail in source order. Shared physics and display callees are named seams; the session binding supplies the initialized player, animation table, weld table, collision and underwater owners. Other modes fail by name.
+* Verified: the app builds, source checks pass, and the frontier stop moved from the whole-controller stub to the action update with semantic state still passing. No Big oracle yet; the Ghidra dossier for the action update is being imported after seeding its entry.
+* Next: recover the reached idle path of BigUpdateActionState, then the mode-one physics bindings in the order they stop the frame.

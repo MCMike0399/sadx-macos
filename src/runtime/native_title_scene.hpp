@@ -105,6 +105,8 @@ class TitleScene final : private title_menu::Calls,
     static void exec_selection_knuckles(TaskScheduler &, const TaskHandle &);
     static void exec_selection_amy(TaskScheduler &, const TaskHandle &);
     static void exec_selection_big(TaskScheduler &, const TaskHandle &);
+    static void display_selection_big(TaskScheduler &, const TaskHandle &);
+    static void destroy_selection_big(TaskScheduler &, const TaskHandle &);
     static void exec_selection_gamma(TaskScheduler &, const TaskHandle &);
     static void display_selection_gamma(TaskScheduler &, const TaskHandle &);
     static void destroy_selection_gamma(TaskScheduler &, const TaskHandle &);

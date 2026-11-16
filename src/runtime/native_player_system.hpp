@@ -11,6 +11,7 @@
 #include "player/gamma_setup_resource.hpp"
 #include "player/gamma_effects.hpp"
 #include "player/player_underwater.hpp"
+#include "player/big_selection_core.hpp"
 #include "runtime/big_actor_assets.hpp"
 #include "player/scene_input_producer.hpp"
 #include "game/game_bootstrap.hpp"
@@ -49,6 +50,14 @@ struct PlayerSystem {
     gamma_effects::State gamma_effects;
     std::unique_ptr<BigActorAssets> big_assets;
     PlayerJoinTable big_weld;
+    big_selection::State big;
+    // NOTSA: typed fields share the identity of the actual player allocation.
+    struct BigExtraWork {
+        TaskWorkHandle allocation;
+        std::uint32_t free_flags = 0;
+        TaskHandle lure;
+    };
+    std::deque<BigExtraWork> big_work;
     player_underwater::State underwater;
 };
 // NOTSA: existing session asset load binds imported declarations to its shared scene owners.
@@ -98,3 +107,23 @@ struct Context {
     collision_component::EntryState *collision_entries = nullptr;
 };
 } // namespace sadx::gamma_selection
+
+namespace sadx::big_selection {
+// NOTSA: borrowed real owners for this source callback invocation. No pose copy.
+struct Context {
+    native::PlayerSystem &players;
+    TaskScheduler &scheduler;
+    bootstrap::State &bootstrap;
+    native::Display &rendering;
+    const TaskHandle &task;
+    const std::int16_t &stage, &act;
+    TaskCallback display, destructor, auxiliary;
+    regular_textures::CharacterCatalog character_textures;
+    regular_textures::State *texture_state;
+    regular_textures::Services *texture_services;
+    character_pack::SceneState &scene;
+    const native::ModelDrawEnvironment *model_environment = nullptr;
+    // Borrowed session collision-entry owner; never a per-callback copy.
+    collision_component::EntryState *collision_entries = nullptr;
+};
+} // namespace sadx::big_selection
