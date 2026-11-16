@@ -96,6 +96,8 @@ struct Player {
 using PlayerHandle = std::shared_ptr<Player>;
 // NOTSA: borrow the existing join word; generic uninitialized state stays unknown.
 std::int16_t &bind_join_vertex_mode(const PlayerHandle &);
+// NOTSA: semantic borrow of the task wait timer from its canonical primary owner.
+std::uint16_t &bind_wait_timer(const TaskHandle &);
 // NOTSA: native consumers borrow the initialized legacy fields through semantic names.
 // Missing initialization is rejected here, before a game callback consumes the value.
 struct InitializedPlayerView {

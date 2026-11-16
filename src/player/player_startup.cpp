@@ -435,6 +435,9 @@ std::shared_ptr<PlayerMotionState> bind_existing_motion(const TaskHandle &task) 
         throw Error(Boundary::MotionState);
     return task->motion_state;
 }
+std::uint16_t &bind_wait_timer(const TaskHandle &task) {
+    return required(required_primary(task)->control_timer_at_6, Boundary::Parameters);
+}
 std::int16_t &bind_join_vertex_mode(const PlayerHandle &record) {
     if (!record || !record->physics)
         throw Error(Boundary::PlayerAllocation);

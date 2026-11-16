@@ -56,6 +56,8 @@ class Display {
     void rotate_current_y(std::int32_t angle);
     void rotate_current_z(std::int32_t angle);
     void scale_current_matrix(float x, float y, float z);
+    // NOTSA: njCalcVector over the live current matrix.
+    NinjaVector calculate_current_vector(const NinjaVector &input);
     // True when the current queued texture list would make the late blob return.
     bool late_texture_list_not_ready() const;
     // NOTSA: PConvertVector_P2G through the recovered PlayerCoordinates owner

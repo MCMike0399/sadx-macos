@@ -13,6 +13,7 @@
 #include "player/player_underwater.hpp"
 #include "player/big_selection_core.hpp"
 #include "runtime/big_actor_assets.hpp"
+#include "runtime/big_motion.hpp"
 #include "player/scene_input_producer.hpp"
 #include "game/game_bootstrap.hpp"
 #include "game/editor_state.hpp"
@@ -49,6 +50,7 @@ struct PlayerSystem {
     std::unique_ptr<gamma_effects::Asset> gamma_effects_asset;
     gamma_effects::State gamma_effects;
     std::unique_ptr<BigActorAssets> big_assets;
+    std::unique_ptr<BigMotionAssets> big_motion_assets;
     PlayerJoinTable big_weld;
     big_selection::State big;
     // NOTSA: typed fields share the identity of the actual player allocation.
@@ -56,6 +58,10 @@ struct PlayerSystem {
         TaskWorkHandle allocation;
         std::uint32_t free_flags = 0;
         TaskHandle lure;
+        // The free-work float the stand slide check compares with the
+        // analog magnitude; its producer is unrecovered.
+        float slide_threshold = 0;
+        float morph_amount = 0;
     };
     std::deque<BigExtraWork> big_work;
     player_underwater::State underwater;

@@ -1,9 +1,11 @@
 #include "runtime/native_player_system.hpp"
 #include "runtime/native_display.hpp"
 #include "engine/collision_component.hpp"
+#include "player/player_vertex_weld.hpp"
 #include "player/player_underwater.hpp"
 #include "game/game_mode.hpp"
 #include "runtime/native_sonic_fields.hpp"
+#include <cstring>
 #include <stdexcept>
 
 namespace sadx::big_selection {
@@ -52,6 +54,26 @@ native::PlayerSystem::BigExtraWork &extra(Context &context, const Player &player
     return context.players.big_work.back();
 }
 constexpr unsigned kMotionPlayerField = 0, kCollisionField = 56;
+constexpr unsigned kDirectMotionBytes = 0x88;
+constexpr unsigned kCopiedWordsOffset = 0x58;
+constexpr std::int32_t kHalfTurn = 0x8000;
+void unrecovered_big_direct(TaskScheduler &, const TaskHandle &) {
+    missing("native_big_direct_ahead");
+}
+void unrecovered_big_child_a(TaskScheduler &, const TaskHandle &) {
+    missing("native_big_child_a");
+}
+void unrecovered_big_child_b(TaskScheduler &, const TaskHandle &) {
+    missing("native_big_child_b");
+}
+void unrecovered_big_hud(TaskScheduler &, const TaskHandle &) {
+    missing("native_big_hud_main");
+}
+// NOTSA: store the source player-index byte into a created child's primary.
+void store_child_index(Context &context, const TaskHandle &child, std::uint8_t index) {
+    player_initialization::establish_zeroed_primary(context.scheduler, child);
+    player_initialization::bind_primary_view(child).player_index = index;
+}
 } // namespace
 
 State &state(Context &context) { return context.players.big; }
@@ -223,13 +245,95 @@ void underwater(Context &, Primary, const TaskWorkHandle &, const Player &) {
 [[noreturn]] void unrecovered_mode(Context &, std::uint8_t) {
     missing("native_big_unrecovered_mode");
 }
-void update_action_state(Context &, Primary, const TaskWorkHandle &) {
-    missing("native_big_update_action_state");
+bool check_damage(Context &, const TaskWorkHandle &) { missing("native_big_check_damage"); }
+void hurt_reaction(Context &, const TaskWorkHandle &) { missing("native_big_hurt_reaction"); }
+void scatter_rings(Context &, std::uint8_t) { missing("native_big_scatter_rings"); }
+bool stand_check_a(Context &, const TaskWorkHandle &) { missing("native_big_stand_check_a"); }
+bool stand_check_b(Context &) { missing("native_big_stand_check_b"); }
+bool stand_check_c(Context &, const TaskWorkHandle &) { missing("native_big_stand_check_c"); }
+bool stand_check_d(Context &, const TaskWorkHandle &) { missing("native_big_stand_check_d"); }
+bool stand_check_e(Context &, const TaskWorkHandle &) { missing("native_big_stand_check_e"); }
+bool stand_check_f(Context &, const TaskWorkHandle &) { missing("native_big_stand_check_f"); }
+bool stage_pickup(Context &context, Primary, const TaskWorkHandle &, const Player &) {
+    // The recovered owner returns zero outside the Chao stages.
+    if (context.stage < 39 || context.stage > 42)
+        return false;
+    missing("native_big_stage_pickup");
+}
+bool stage_action(Context &context, Primary, const Player &) {
+    if (context.stage < 39 || context.stage > 42)
+        return false;
+    missing("native_big_stage_action");
+}
+void chao_setup(Context &, const TaskWorkHandle &, std::uint8_t) { missing("native_big_chao_setup"); }
+bool analog_input(Context &, Primary) { missing("native_big_analog_input"); }
+float analog_magnitude(Context &) { missing("native_big_analog_magnitude"); }
+float contact_depth(Context &, const Player &player) {
+    const auto &contact = physics(player).contact_work;
+    if (!contact)
+        missing("native_big_contact_depth");
+    const auto &[direction, radius, center, displacement, angle_x, angle_z, count, selected,
+                 v1, v2, v3, v4, v5, v6] = *contact;
+    (void)radius;
+    (void)center;
+    (void)displacement;
+    (void)angle_x;
+    (void)angle_z;
+    (void)count;
+    (void)selected;
+    (void)v1;
+    (void)v2;
+    (void)v3;
+    (void)v4;
+    (void)v5;
+    (void)v6;
+    if (!direction)
+        missing("native_big_contact_depth");
+    return direction->y;
+}
+float &slide_threshold(Context &context, const Player &player) {
+    return extra(context, player).slide_threshold;
+}
+std::uint16_t &wait_timer(Context &context) {
+    try {
+        return player_initialization::bind_wait_timer(context.task);
+    } catch (const player_initialization::Error &) {
+        missing("native_big_wait_timer");
+    }
 }
 TaskHandle create_flag_task(Context &, const TaskHandle &) {
     missing("native_big_create_flag_task");
 }
-void setup_for_player(Context &, std::uint8_t) { missing("native_big_setup_for_player"); }
+void setup_for_player(Context &context, const TaskWorkHandle &motion, std::uint8_t index) {
+    const auto created = context.scheduler.create_element(2, 2, unrecovered_big_direct);
+    if (!created || !created.task)
+        return;
+    auto allocation = arena(context).allocate(kDirectMotionBytes);
+    if (!allocation) {
+        (void)context.scheduler.destroy_task(created.task);
+        return;
+    }
+    created.task->motion_work = allocation.work;
+    store_child_index(context, created.task, index);
+    // The source copies the parent's first three motion words into the new
+    // motion work at +0x58: the player pointer word has no native identity
+    // yet, so the typed speed words are copied and the pointer word stays
+    // zero until the child callback that consumes it is recovered.
+    const auto parent_motion = player_initialization::bind_existing_motion(context.task);
+    const auto word_of = [](float value) {
+        std::uint32_t word = 0;
+        std::memcpy(&word, &value, sizeof(word));
+        return word;
+    };
+    const std::array<std::uint32_t, 3> words{0, word_of(parent_motion->motion.speed.x),
+                                             word_of(parent_motion->motion.speed.y)};
+    for (unsigned word = 0; word < words.size(); ++word) {
+        if (!arena(context).write(allocation.work, kCopiedWordsOffset + word * 4, &words[word],
+                                  sizeof(words[word])))
+            missing("native_big_setup_motion_copy");
+    }
+    (void)motion;
+}
 void get_rotation(Context &, Primary, const TaskWorkHandle &, const Player &) {
     missing("native_big_get_rotation");
 }
@@ -245,19 +349,114 @@ std::int32_t set_position(Context &, Primary, const TaskWorkHandle &, const Play
 void reset_position(Context &, Primary, const TaskWorkHandle &, const Player &) {
     missing("native_big_reset_position");
 }
-void set_motion(Context &, const Player &) { missing("native_big_set_motion"); }
-void join_vertices(Context &, Primary, const TaskWorkHandle &, const Player &) {
-    missing("native_big_join_vertices");
+void set_motion(Context &context, const Player &player) {
+    if (!context.players.big_motion_assets)
+        missing("native_big_set_motion");
+    animation::View view{physics(player), player_allocation(context, player)};
+    animation::Runtime runtime{&arena(context), context.players.big_motion_assets->resources(),
+                               &context.scene.objects};
+    const auto result = animation::update(view, runtime, context.rendering.arithmetic());
+    if (!result)
+        missing("native_big_set_motion_failed");
 }
-void update_rod(Context &, const TaskWorkHandle &) { missing("native_big_update_rod"); }
+void join_vertices(Context &context, Primary, const TaskWorkHandle &, const Player &player) {
+    auto &join_mode = player_initialization::bind_join_vertex_mode(player);
+    const auto mode = join_mode;
+    if (mode == 1) {
+        // Active processing reaches the real motion-matrix producer before it
+        // consumes the join table, including when the table is empty.
+        missing("native_big_join_vertices_CalcMMMatrix");
+    }
+    auto &table = physics(player).animation_tail.join_table;
+    if (!table)
+        missing("native_big_weld_table_field");
+    if (!*table)
+        missing("native_big_weld_null_table");
+    if (mode == 0) {
+        vertex_weld::initialize(**table, arena(context), context.scene);
+        join_mode = 1;
+    } else {
+        vertex_weld::restore(**table, arena(context), context.scene);
+    }
+}
+void update_rod(Context &context, const TaskWorkHandle &) {
+    const auto view = player_initialization::bind_primary_view(context.task);
+    auto work = collision(context, context.task->primary_work);
+    if (work->info.size() < 2)
+        missing("native_big_rod_collision_info");
+    auto &display = context.rendering;
+    if (!display.push_current_matrix())
+        missing("native_big_rod_matrix_capacity");
+    if (view.rotation[2] != 0)
+        display.rotate_current_z(view.rotation[2]);
+    if (view.rotation[0] != 0)
+        display.rotate_current_x(view.rotation[0]);
+    if (view.rotation[1] != kHalfTurn)
+        display.rotate_current_y(view.rotation[1]);
+    auto &first = work->info[0].center;
+    first = display.calculate_current_vector(first);
+    const auto add = [&display](float left, float right) {
+        return fidelity::ExactFloat(display.arithmetic(), left) + right;
+    };
+    first.x = add(first.x, view.position.x).rounded();
+    first.y = add(first.y, view.position.y).rounded();
+    first.z = add(first.z, view.position.z).rounded();
+    auto &second = work->info[1].center;
+    second = display.calculate_current_vector(second);
+    second.x = add(second.x, first.x).rounded();
+    second.y = add(second.y, first.y).rounded();
+    second.z = add(second.z, first.z).rounded();
+    display.pop_current_matrix();
+}
 void display(Context &, const TaskHandle &) { missing("native_big_display"); }
 void destroy(Context &, const TaskHandle &) { missing("native_big_destruct"); }
 void update_held_task(Context &, const TaskWorkHandle &) { missing("native_big_held_task"); }
 void character_shadow(Context &, Primary, const Player &) { missing("native_big_character_shadow"); }
 void stand_tail(Context &, const TaskWorkHandle &) { missing("native_big_stand_tail"); }
-void update_equipment(Context &, const Player &) { missing("native_big_equipment"); }
-TaskHandle create_child_task(Context &, unsigned, std::int32_t) {
-    missing("native_big_child_task");
+character_pack::ObjectResource &equipment_object(Context &context, unsigned table_index) {
+    if (table_index < 31 || table_index >= 37)
+        missing("native_big_equipment_object_row");
+    return context.scene.objects.object(assets(context).equipment_objects[table_index - 31]);
+}
+character_pack::ResourceId equipment_identity(Context &context, unsigned table_index) {
+    if (table_index < 31 || table_index >= 37)
+        missing("native_big_equipment_object_row");
+    return assets(context).equipment_objects[table_index - 31];
+}
+character_pack::ResourceId equipment_model(Context &context, unsigned table_index) {
+    if (table_index < 2 || table_index >= 4)
+        missing("native_big_equipment_model_row");
+    return assets(context).equipment_models[table_index - 2];
+}
+float &morph_amount(Context &context, const Player &player) {
+    return extra(context, player).morph_amount;
+}
+bool check_morph(Context &, const TaskWorkHandle &) { missing("native_big_check_morph"); }
+void morph_vertices(Context &, unsigned, float) { missing("native_big_morph_vertices"); }
+TaskHandle create_child_task(Context &context, unsigned kind, std::int32_t level, std::uint8_t index) {
+    TaskCallback callback = nullptr;
+    std::uint32_t flags = 0;
+    switch (kind) {
+    case 0:
+        flags = 2;
+        callback = unrecovered_big_child_a;
+        break;
+    case 1:
+        flags = 3;
+        callback = unrecovered_big_child_b;
+        break;
+    case 2:
+        flags = 2;
+        callback = unrecovered_big_hud;
+        break;
+    default:
+        missing("native_big_child_task_kind");
+    }
+    const auto created = context.scheduler.create_element(flags, level, callback);
+    if (!created || !created.task)
+        return {};
+    store_child_index(context, created.task, index);
+    return created.task;
 }
 TaskHandle create_lure_task(Context &, const TaskHandle &) { missing("native_big_lure_task"); }
 } // namespace sadx::big_selection

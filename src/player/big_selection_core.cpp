@@ -22,7 +22,11 @@ constexpr std::uint8_t kDamageClassClear = 0xf0;
 constexpr std::uint16_t kStatusGroundReference = 0x400;
 constexpr std::uint16_t kActHighByteMask = 0xff00;
 constexpr std::uint16_t kStage19Word = 0x1300;
+constexpr std::uint16_t kHurtStatusKeep = 0xceff;
+constexpr std::uint16_t kItemLowBitsClear = 0xfffc;
 constexpr std::uint16_t kSwimAnimation = 0x30;
+constexpr std::uint16_t kRodEquipped = 0x1000;
+constexpr std::uint16_t kHolderEquipped = 0x800;
 
 // NOTSA: named entry step; captured primary/motion/player are source locals.
 void enter(Context &context, Primary task, const TaskWorkHandle &primary_work,
@@ -107,21 +111,15 @@ Player initialize(Context &context, const TaskHandle &object, Primary task,
         load_big_pvm_textures(context);
     else
         load_character_textures(context, kBig);
-    setup_for_player(context, index);
+    setup_for_player(context, motion, index);
     bind_weld_table(context, player);
-    if (const auto child = create_child_task(context, 0, 3)) {
-        auto child_primary = primary(context, child->primary_work);
-        child_primary.player_index = index;
-    }
-    if (const auto child = create_child_task(context, 1, 3)) {
-        auto child_primary = primary(context, child->primary_work);
-        child_primary.player_index = index;
-    }
+    (void)create_child_task(context, 0, 3, index);
+    (void)create_child_task(context, 1, 3, index);
     if (index == 0) {
         globals.lure_task = create_lure_task(context, object);
         lure_handle(context, player) = globals.lure_task;
         if (index == 0)
-            (void)create_child_task(context, 2, 6);
+            (void)create_child_task(context, 2, 6, index);
     }
     globals.fish_count = 0;
     globals.stage12_flag = 0;
@@ -131,12 +129,100 @@ Player initialize(Context &context, const TaskHandle &object, Primary task,
     return player;
 }
 
+// NOTSA: named entry step of BigUpdateActionState; the checker callees stay
+// seams until their bodies are recovered in stop order.
+void update_action_state(Context &context, Primary task, const TaskWorkHandle &motion,
+                         const Player &player) {
+    auto &globals = state(context);
+    const auto current_stage = stage(context);
+    if (current_stage >= 39 && current_stage <= 42)
+        chao_setup(context, motion, task.player_index);
+    if (player) {
+        if ((item_word(context, player) & kItemHighBit) == 0) {
+            auto &wait = wait_timer(context);
+            if (wait == 0) {
+                if (!check_damage(context, motion)) {
+                    task.status = task.status & ~kFishFlagHighBit;
+                } else {
+                    task.status = task.status | kFishFlagHighBit;
+                    if ((task.status & kStatusGroundReference) != 0)
+                        hurt_reaction(context, motion);
+                    task.status = task.status & kHurtStatusKeep;
+                    if ((globals.fish_flag & 1) != 0)
+                        globals.fish_flag = static_cast<std::int16_t>(globals.fish_flag | 4);
+                    auto &item = item_word(context, player);
+                    if ((item & 3) == 0)
+                        scatter_rings(context, task.player_index);
+                    else
+                        item = item & kItemLowBitsClear;
+                }
+            } else {
+                task.status = task.status & ~4u;
+                wait = static_cast<std::uint16_t>(wait - 1);
+            }
+        } else {
+            task.status = task.status | kFishFlagHighBit;
+            wait_timer(context) = 0;
+        }
+    }
+    if (static_cast<Mode>(task.mode) == Mode::Stand) {
+        if (stand_check_a(context, motion) || stand_check_b(context) ||
+            stand_check_c(context, motion) || stand_check_d(context, motion) ||
+            stand_check_e(context, motion) || stand_check_f(context, motion))
+            return;
+        if (stage_pickup(context, task, motion, player)) {
+            task.mode = 51; // MD_BIG_CNADE_START
+            requested_animation(context, player) = 101;
+        } else if (stage_action(context, task, player)) {
+            return;
+        }
+        if (analog_input(context, task))
+            return;
+        if (exact(context, contact_depth(context, player)).compare(0.77f) == X87Comparison::less &&
+            exact(context, slide_threshold(context, player))
+                    .compare(analog_magnitude(context)) == X87Comparison::less) {
+            task.mode = 13; // MD_BIG_SLID
+            requested_animation(context, player) = 25;
+        }
+    }
+}
+
+// NOTSA: named equipment step of the common tail; the morph vertex writer
+// stays a seam until its body is recovered.
+void update_equipment(Context &context, const TaskWorkHandle &motion, const Player &player) {
+    const auto equipped = equipment(context, player);
+    auto &rod = equipment_object(context, 33);
+    if ((equipped & kRodEquipped) == 0) {
+        rod.sibling = equipment_identity(context, 32);
+    } else {
+        rod.sibling = equipment_identity(context, 31);
+        auto &morph = morph_amount(context, player);
+        if (!check_morph(context, motion)) {
+            morph = morph <= 0.0f ? 0.0f : (exact(context, morph) - 0.05f).rounded();
+        } else if (morph >= 1.0f) {
+            morph = 1.0f;
+        } else {
+            morph = (exact(context, morph) + 0.05f).rounded();
+        }
+        morph_vertices(context, 0, morph);
+        morph_vertices(context, 1, morph);
+    }
+    auto &holder = equipment_object(context, 34);
+    if ((equipped & kHolderEquipped) == 0) {
+        holder.model = equipment_model(context, 2);
+        holder.child = equipment_identity(context, 35);
+    } else {
+        holder.model = equipment_model(context, 3);
+        holder.child = equipment_identity(context, 36);
+    }
+}
+
 // NOTSA: named common tail step; runs after every mode in source order.
 void common_tail(Context &context, const TaskHandle &object, Primary task,
                  const TaskWorkHandle &primary_work, const TaskWorkHandle &motion,
                  const Player &player) {
     set_motion(context, player);
-    update_equipment(context, player);
+    update_equipment(context, motion, player);
     join_vertices(context, task, motion, player);
     update_rod(context, motion);
     display(context, object);
@@ -159,7 +245,7 @@ void run(Context &context, const TaskHandle &object) {
     auto task = primary(context, primary_work);
     enter(context, task, primary_work, motion, player);
     if (static_cast<Mode>(task.mode) != Mode::Kill)
-        update_action_state(context, task, motion);
+        update_action_state(context, task, motion, player);
     consume_flags(context, object, player);
     prepare_collision(context, task, primary_work, player);
     switch (static_cast<Mode>(task.mode)) {

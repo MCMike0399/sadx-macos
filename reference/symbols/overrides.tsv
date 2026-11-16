@@ -289,3 +289,14 @@ SONIC	0x4909a0	function	BigSetupForPlayer	undefined4	(uint8 player)		ev_c725f09c
 SONIC	0x48b790	function	BigUpdateRod	void	(motionwk2*)		ev_d5502da5656951511b0d1a9c1c5c5ddadc6c0b35809eeec96f3c118512429a18	Inferred role: Big common-tail update between PJoinVertexes and BigDisplay.
 SONIC	0x48e000	function	BigUpdateHeldTask	void	(motionwk2*)		ev_6f8b305564804363b83dc8c85ada63007caae3a90f7efc3ebdc7ec9ef8eb29fc	Inferred role: Big held-object update called when the player held-task pointer is nonnull.
 SONIC	0x48ba80	function	BigStandTail	void	(motionwk2*)		ev_e432cbdc669d6f935aa7bfac92e3a196a2e2516c8882b9f83290c9ec16be244e	Inferred role: MD_BIG_STND tail after the shared physics calls.
+SONIC	0x48d1f0	function	BigCheckDamage	int	(motionwk2*)		big-update-48e640-capstone	Inferred role: nonzero result takes the hurt status, fish-flag and ring-scatter path in BigUpdateActionState.
+SONIC	0x48c550	function	BigHurtReaction	void	(motionwk2*)		big-update-48e640-capstone	Inferred role: called after a damage result when the status ground-reference bit is set.
+SONIC	0x48d400	function	BigStandCheckA	int	(motionwk2*)		big-update-48e640-capstone	Inferred role: first MD_BIG_STND transition checker; nonzero handles the transition.
+SONIC	0x48c190	function	BigStandCheckB	int	()		big-update-48e640-capstone	Inferred role: second MD_BIG_STND transition checker; nonzero handles the transition.
+SONIC	0x48db90	function	BigStandCheckC	int	(motionwk2*)		big-update-48e640-capstone	Inferred role: third MD_BIG_STND transition checker; nonzero handles the transition.
+SONIC	0x48d2a0	function	BigStandCheckD	int	(motionwk2*)		big-update-48e640-capstone	Inferred role: fourth MD_BIG_STND transition checker; nonzero handles the transition.
+SONIC	0x48c1c0	function	BigStandCheckE	int	(motionwk2*)		big-update-48e640-capstone	Inferred role: fifth MD_BIG_STND transition checker; nonzero handles the transition.
+SONIC	0x48d380	function	BigStandCheckF	int	(motionwk2*)		big-update-48e640-capstone	Inferred role: sixth MD_BIG_STND transition checker; nonzero handles the transition.
+SONIC	0x48b690	function	BigChaoSetup	undefined4	(motionwk2*)		ev_1f625639e42c80933eec2edc9d525bdc9913124016adebb1fb4e14a5f766235b	Inferred role: Chao-garden branch setup whose result feeds the 442720 callback in BigUpdateActionState.
+SONIC	0x48c0c0	function	BigCheckMorph	int	(motionwk2*)		big-update-48e640-capstone	Inferred role: equipment morph direction check in the Big common tail.
+SONIC	0x4385b0	function	BigMorphVertices	void	(NJS_POINT3*, NJS_POINT3*, NJS_POINT3*, float, undefined4)		big-update-48e640-capstone	Inferred role: blends BIG_POINTS vertex sets by the morph amount in the Big common tail.

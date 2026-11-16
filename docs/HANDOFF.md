@@ -1277,3 +1277,10 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Changed: big_selection_core owns the entry, mode zero, stand mode and the common tail in source order. Shared physics and display callees are named seams; the session binding supplies the initialized player, animation table, weld table, collision and underwater owners. Other modes fail by name.
 * Verified: the app builds, source checks pass, and the frontier stop moved from the whole-controller stub to the action update with semantic state still passing. No Big oracle yet; the Ghidra dossier for the action update is being imported after seeding its entry.
 * Next: recover the reached idle path of BigUpdateActionState, then the mode-one physics bindings in the order they stop the frame.
+
+### 2026-11-10 — Big runs mode zero and its tail to BigDisplay (no gate)
+
+* Outcome: the frontier still exits 1 at frame 1332 on the title hash. Big now runs its entry, action update entry, mode zero, set motion, equipment swaps, vertex weld initialize and rod update, then stops at native_big_display. No CharacterSelect frame is presented.
+* Changed: the Big core covers the entry prefix, mode zero, the stand checker chain as named seams, and the common tail in source order. The binding supplies the initialized player, animation and weld tables, collision entry, underwater services pending, child tasks with their source callbacks as explicit stops, and the rod tip matrix work over the live collision centers.
+* Verified: the app builds and the frontier stop moved in order through the action update, setup, set motion, equipment and weld boundaries. Source checks pass. No Big oracle yet; the checker dossiers are retained for the next recovery steps.
+* Next: BigDisplay, then CharacterShadow. The stand checkers and mode-one physics bindings stop the following frames in that order.

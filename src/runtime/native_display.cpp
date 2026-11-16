@@ -28,6 +28,14 @@ void Display::rotate_current_z(std::int32_t angle) {
 void Display::scale_current_matrix(float x, float y, float z) {
     coordinates_->scale_matrix(coordinates_->current_matrix(), x, y, z, arithmetic_);
 }
+NinjaVector Display::calculate_current_vector(const NinjaVector &input) {
+    NinjaVector output{};
+    const auto result =
+        coordinates_->calculate_vector(coordinates_->current_matrix(), input, output, arithmetic_);
+    if (!result)
+        throw std::runtime_error("native current vector transformation failed");
+    return output;
+}
 bool Display::convert_player_to_global(const PlayerOrientation &orientation, NinjaVector &vector) {
     PlayerCoordinates coordinates(sine_, runtime::engine_code_tables().unit_matrix, matrices_);
     return static_cast<bool>(coordinates.task_to_world(&orientation, vector, arithmetic_));

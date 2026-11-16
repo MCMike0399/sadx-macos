@@ -1,6 +1,7 @@
 #pragma once
 
 #include "cpu/fidelity_float.hpp"
+#include "engine/character_pack.hpp"
 #include "player/player_initialization.hpp"
 
 #include <cstdint>
@@ -76,12 +77,41 @@ void underwater(Context &, Primary, const TaskWorkHandle &, const Player &);
 // NOTSA: marks an unrecovered source mode body; must fail loudly.
 [[noreturn]] void unrecovered_mode(Context &, std::uint8_t mode);
 
-// STUB: SONIC 0x48e640 BigUpdateActionState
-void update_action_state(Context &, Primary, const TaskWorkHandle &);
+// The reached entry and stand paths of BigUpdateActionState are recovered in
+// the core; its checker callees stay named seams until their bodies land.
+// STUB: SONIC 0x48d1f0 BigCheckDamage
+bool check_damage(Context &, const TaskWorkHandle &);
+// STUB: SONIC 0x48c550 BigHurtReaction
+void hurt_reaction(Context &, const TaskWorkHandle &);
+// STUB: SONIC 0x4506f0 DamegeRingScatter
+void scatter_rings(Context &, std::uint8_t index);
+// STUB: SONIC 0x48d400 BigStandCheckA
+bool stand_check_a(Context &, const TaskWorkHandle &);
+// STUB: SONIC 0x48c190 BigStandCheckB
+bool stand_check_b(Context &);
+// STUB: SONIC 0x48db90 BigStandCheckC
+bool stand_check_c(Context &, const TaskWorkHandle &);
+// STUB: SONIC 0x48d2a0 BigStandCheckD
+bool stand_check_d(Context &, const TaskWorkHandle &);
+// STUB: SONIC 0x48c1c0 BigStandCheckE
+bool stand_check_e(Context &, const TaskWorkHandle &);
+// STUB: SONIC 0x48d380 BigStandCheckF
+bool stand_check_f(Context &, const TaskWorkHandle &);
+// NOTSA: native/reference bindings to the canonical stage pickup/action owners.
+bool stage_pickup(Context &, Primary, const TaskWorkHandle &, const Player &);
+bool stage_action(Context &, Primary, const Player &);
+// STUB: SONIC 0x48b690 BigChaoSetup
+void chao_setup(Context &, const TaskWorkHandle &, std::uint8_t index);
+// NOTSA: native/reference binding to the canonical analog input gate.
+bool analog_input(Context &, Primary);
+float analog_magnitude(Context &);
+float contact_depth(Context &, const Player &);
+float &slide_threshold(Context &, const Player &);
+std::uint16_t &wait_timer(Context &);
 // STUB: SONIC 0x470330 BigCreateFlagTask
 TaskHandle create_flag_task(Context &, const TaskHandle &);
 // STUB: SONIC 0x4909a0 BigSetupForPlayer
-void setup_for_player(Context &, std::uint8_t index);
+void setup_for_player(Context &, const TaskWorkHandle &motion, std::uint8_t index);
 // NOTSA: native/reference binding to the canonical PGetRotation owner.
 void get_rotation(Context &, Primary, const TaskWorkHandle &, const Player &);
 // NOTSA: native/reference binding to the canonical PGetAcceleration owner.
@@ -108,12 +138,19 @@ void update_held_task(Context &, const TaskWorkHandle &);
 void character_shadow(Context &, Primary, const Player &);
 // STUB: SONIC 0x48ba80 BigStandTail
 void stand_tail(Context &, const TaskWorkHandle &);
-// NOTSA: the equipment model swaps read BIG_OBJECTS/BIG_MODELS/BIG_POINTS
-// scene identities; they stay one seam until those owners are imported.
-void update_equipment(Context &, const Player &);
+// NOTSA: borrowed mutable scene object rows for the equipment tail swaps.
+character_pack::ObjectResource &equipment_object(Context &, unsigned table_index);
+character_pack::ResourceId equipment_identity(Context &, unsigned table_index);
+character_pack::ResourceId equipment_model(Context &, unsigned table_index);
+float &morph_amount(Context &, const Player &);
+// STUB: SONIC 0x48c0c0 BigCheckMorph
+bool check_morph(Context &, const TaskWorkHandle &);
+// STUB: SONIC 0x4385b0 BigMorphVertices
+void morph_vertices(Context &, unsigned target, float amount);
 // NOTSA: child tasks Big creates in mode 0 keep their source callbacks as
-// seams until those callbacks are recovered.
-TaskHandle create_child_task(Context &, unsigned kind, std::int32_t level);
+// seams until those callbacks are recovered. The binding stores the player
+// index byte into each created child's primary work, as the source does.
+TaskHandle create_child_task(Context &, unsigned kind, std::int32_t level, std::uint8_t index);
 // STUB: SONIC 0x471ed0 FishingHud_Load
 TaskHandle create_lure_task(Context &, const TaskHandle &);
 // NOTSA: the stage-19 texture branch loads texlist_big directly instead of
