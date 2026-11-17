@@ -114,6 +114,9 @@ def build_tree(source, output, append=None, expected_sha256=CANONICAL_SHA256):
         miles_actor = append.parent / 'miles-actor.json'
         if miles_actor.is_file() and not miles_actor.is_symlink():
             replacements.append((miles_actor, Path('characters/miles-actor.json')))
+        knuckles_actor = append.parent / 'knuckles-actor.json'
+        if knuckles_actor.is_file() and not knuckles_actor.is_symlink():
+            replacements.append((knuckles_actor, Path('characters/knuckles-actor.json')))
     shutil.copytree(source, output, copy_function=clone_or_copy)
     for path, relative in replacements:
         # Unlink before cp: do not depend on cp's overwrite/clone behavior.

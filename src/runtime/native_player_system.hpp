@@ -20,6 +20,8 @@
 #include "player/miles_selection_core.hpp"
 #include "runtime/miles_actor_assets.hpp"
 #include "runtime/miles_motion.hpp"
+#include "runtime/knuckles_actor_assets.hpp"
+#include "runtime/knuckles_motion.hpp"
 #include "player/scene_input_producer.hpp"
 #include "game/game_bootstrap.hpp"
 #include "game/editor_state.hpp"
@@ -88,6 +90,9 @@ struct PlayerSystem {
     std::unique_ptr<MilesMotionAssets> miles_motion_assets;
     PlayerJoinTable miles_weld;
     miles_selection::State miles;
+    std::unique_ptr<KnucklesActorAssets> knuckles_assets;
+    std::unique_ptr<KnucklesMotionAssets> knuckles_motion_assets;
+    PlayerJoinTable knuckles_weld;
     player_underwater::State underwater;
 };
 // NOTSA: existing session asset load binds imported declarations to its shared scene owners.
@@ -104,6 +109,9 @@ void bind_big_resources(PlayerSystem &, character_pack::SceneState &, const BigA
 void bind_amy_resources(PlayerSystem &, character_pack::SceneState &, const AmyActorAssets &);
 // NOTSA: Miles weld and tail-object declarations bind to the same shared scene objects.
 void bind_miles_resources(PlayerSystem &, character_pack::SceneState &, const MilesActorAssets &);
+// NOTSA: Knuckles weld declarations bind to the same shared scene objects.
+void bind_knuckles_resources(PlayerSystem &, character_pack::SceneState &,
+                             const KnucklesActorAssets &);
 } // namespace sadx::native
 
 namespace sadx::gamma_selection {

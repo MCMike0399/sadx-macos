@@ -29,6 +29,7 @@
 #include "apps/native_big_actor_assets.hpp"
 #include "apps/native_amy_actor_assets.hpp"
 #include "apps/native_miles_actor_assets.hpp"
+#include "apps/native_knuckles_actor_assets.hpp"
 #include "apps/native_sonic_animation_assets.hpp"
 #include "apps/native_character_select_label_assets.hpp"
 #include "apps/native_character_completion_assets.hpp"
@@ -226,6 +227,9 @@ class Application {
                 this->configuration.assets, *characters));
         if (std::filesystem::exists(this->configuration.assets / "characters/miles-actor.json"))
             session.load_miles_assets(sadx::native::app::load_miles_actor_assets(
+                this->configuration.assets, *characters));
+        if (std::filesystem::exists(this->configuration.assets / "characters/knuckles-actor.json"))
+            session.load_knuckles_assets(sadx::native::app::load_knuckles_actor_assets(
                 this->configuration.assets, *characters));
         session.attach_character_labels(sadx::native::app::load_character_label_textures(
             this->configuration.assets));

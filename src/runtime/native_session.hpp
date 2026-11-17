@@ -150,6 +150,7 @@ class Session final : private flow::NativeServices {
     void load_big_assets(BigActorAssets assets);
     void load_amy_assets(AmyActorAssets assets);
     void load_miles_assets(MilesActorAssets assets);
+    void load_knuckles_assets(KnucklesActorAssets assets);
     void attach_character_completion(character_completion::Catalog catalog) {
         if (character_completion_)
             throw std::runtime_error("native character completion resources already attached");
@@ -201,6 +202,7 @@ class Session final : private flow::NativeServices {
     friend class TitleScene;
     friend struct SonicCallbackProbe; // test-only observation of actual callback owners
     friend struct MilesCallbackProbe; // test-only observation of the Miles exec stop
+    friend struct KnucklesCallbackProbe; // test-only observation of the Knuckles exec stop
     void attach_logo_scaling(Display &);
     flow::GameFlowState flow_;
     std::uint32_t global_timer_ = 0;
