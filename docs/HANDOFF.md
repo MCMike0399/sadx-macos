@@ -1342,3 +1342,13 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Changed: the first three Amy mode-zero auxiliaries run with their source gates. The event task requires the current character and global mode to match, one word is cleared, and the stage-event table scan finds no CharacterSelect entry. usPlayer has a bootstrap owner.
 * Verified: the app builds and the frontier stop moved with semantic state still passing.
 * Next: the remaining Amy auxiliaries in stop order, then Knuckles. The Miles kRows table needs its constexpr review entry at the next gate.
+
+### 2026-11-16 — Knuckles asset closure and selection controller (no gate)
+
+* Outcome: Knuckles has an imported request-0 action and weld closure, a selection core and binding. The private app loads it when knuckles-actor.json is present; the frontier still stops inside Amy.
+* Changed: InitKnucklesAnimData folds 115 PL_ACTION rows from 90 declarations and InitKnucklesWeldInfo its 30 join rows; recipe 36's constructor is statically proved. The core recovers the entry prefix, modes zero and one and the common tail; unrecovered callees stay named seams.
+* Verified: build/sadx-native exits 0. The unit test loads 90 declarations, 115 recipes and 30 weld rows, then drives exec_selection_knuckles to native_knuckles_idle_state.
+* Verified: player-underwater, character-shadow, gamma-shadow, view-check, native-gamma-display and the Big/Amy/Miles asset units exit 0 against the main private assets.
+* Verified: the frontier boundary stays at native_amy_initialize_auxiliary_d, frame 1332, title hash c7d02f64 with semantic state passing, against both private asset trees.
+* Not run: full gate. Provenance reports the two pre-existing usPlayer overlaps from the base commit; readability, layers and profile patches are 0. KnucklesDestruct 0x472180 has no Ghidra procedure and stays an explicit stop.
+* Next: the Knuckles idle-state and action-update seams in stop order.

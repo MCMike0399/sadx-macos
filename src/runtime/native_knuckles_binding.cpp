@@ -1,0 +1,452 @@
+#include "engine/collision_component.hpp"
+#include "engine/view_check.hpp"
+#include "game/game_mode.hpp"
+#include "player/character_shadow.hpp"
+#include "player/player_vertex_weld.hpp"
+#include "player/selection_player_queries.hpp"
+#include "runtime/native_player_system.hpp"
+#include "runtime/native_sonic_fields.hpp"
+#include "runtime/native_underwater_binding.hpp"
+#include "runtime/object_draw_context.hpp"
+#include <algorithm>
+#include <array>
+#include <cstring>
+#include <stdexcept>
+
+namespace sadx::knuckles_selection {
+namespace {
+[[noreturn]] void missing(const char *boundary) { throw flow::UnrecoveredGameFlowCall(boundary); }
+TaskWorkArena &arena(Context &context) {
+    const auto owner = context.scheduler.work_arena();
+    if (!owner)
+        missing("native_knuckles_task_arena");
+    return *owner;
+}
+native::KnucklesActorAssets &assets(Context &context) {
+    if (!context.players.knuckles_assets)
+        missing("native_knuckles_actor_assets");
+    return *context.players.knuckles_assets;
+}
+PlayerPhysicsState &physics(const Player &player) {
+    if (!player || !player->physics)
+        missing("native_knuckles_player_physics");
+    return *player->physics;
+}
+std::shared_ptr<collision_component::Work> collision(Context &context,
+                                                     const TaskWorkHandle &primary_work) {
+    auto component = collision_component::component(arena(context), primary_work);
+    if (!component)
+        missing("native_knuckles_null_collision_component");
+    return component;
+}
+collision_component::Info &collision_info(Context &context, const TaskWorkHandle &primary_work,
+                                          unsigned record) {
+    auto component = collision(context, primary_work);
+    if (record >= component->info_count || record >= component->info.size())
+        missing("native_knuckles_collision_info_record");
+    return component->info[record];
+}
+constexpr unsigned kMotionPlayerField = 0, kCollisionField = 56;
+// DrawCharacterShadow's source literals and late queue facts.
+constexpr float kShadowDepthCull = 20000.0f;
+constexpr float kShadowFalloffPerUnit = 0.03f;
+constexpr float kShadowGroundLift = 0.3f;
+constexpr float kShadowVerticalSquash = 0.8f;
+constexpr std::uint8_t kLateShadowFlags = 6;
+constexpr float kShadowSortBias = -27952.0f;
+// STUB: SONIC 0x475660 Knuckles_ChildTaskA
+void unrecovered_child_a(TaskScheduler &, const TaskHandle &) { missing("native_knuckles_child_a"); }
+// STUB: SONIC 0x473ce0 Knuckles_ChildTaskB
+void unrecovered_child_b(TaskScheduler &, const TaskHandle &) { missing("native_knuckles_child_b"); }
+// The seam declaration in the Knuckles core owns this source entry.
+void unrecovered_radar(TaskScheduler &, const TaskHandle &) { missing("native_knuckles_radar"); }
+// STUB: SONIC 0x474070 InitKnucklesMaximumHeatAttack
+void unrecovered_heat_attack(TaskScheduler &, const TaskHandle &) {
+    missing("native_knuckles_heat_attack");
+}
+// NOTSA: store the source player-index byte into a created child's primary.
+void store_child_index(Context &context, const TaskHandle &child, std::uint8_t index) {
+    player_initialization::establish_zeroed_primary(context.scheduler, child);
+    player_initialization::bind_primary_view(child).player_index = index;
+}
+} // namespace
+
+State &state(Context &context) { return context.players.knuckles; }
+Primary primary(Context &context, const TaskWorkHandle &work) {
+    if (work != context.task->primary_work)
+        missing("native_knuckles_primary_identity");
+    return player_initialization::bind_primary_view(context.task);
+}
+Player player_for_motion(Context &context, const TaskWorkHandle &motion) {
+    const auto reference = arena(context).reference(motion, kMotionPlayerField);
+    if (!reference)
+        missing("native_knuckles_motion_player_reference");
+    if (!reference.work)
+        return {};
+    const auto found = context.players.registry.allocations.find(reference.work.get());
+    if (found == context.players.registry.allocations.end())
+        missing("native_knuckles_player_allocation_identity");
+    return found->second;
+}
+TaskWorkHandle player_allocation(Context &, const Player &player) {
+    return player ? player->allocation : TaskWorkHandle{};
+}
+std::uint16_t &requested_animation(Context &, const Player &player) {
+    return player_initialization::bind_initialized_player(player).requested_animation;
+}
+std::uint16_t &idle_timer(Context &, const Player &player) {
+    auto fields = sonic::native_fields::player(physics(player));
+    if (!fields.idle_timer)
+        missing("native_knuckles_idle_timer");
+    return *fields.idle_timer;
+}
+bool has_held_task(Context &, const Player &player) {
+    return bool(player_initialization::bind_initialized_player(player).held_task);
+}
+bool has_collision(Context &context, const TaskWorkHandle &primary_work) {
+    const auto reference = arena(context).reference(primary_work, kCollisionField);
+    if (!reference)
+        missing("native_knuckles_collision_reference");
+    return bool(reference.work);
+}
+std::uint32_t &collision_attributes(Context &context, const TaskWorkHandle &primary_work,
+                                    unsigned record) {
+    return collision_info(context, primary_work, record).attributes;
+}
+float &collision_first_extent(Context &context, const TaskWorkHandle &primary_work) {
+    return collision_info(context, primary_work, 0).a;
+}
+std::int32_t floor_angle(Context &context, const TaskWorkHandle &primary_work, unsigned axis) {
+    const auto task = collision(context, primary_work)->task.lock();
+    if (!task)
+        missing("native_knuckles_collision_task_backlink");
+    return player_initialization::bind_primary_view(task).rotation.at(axis);
+}
+float vertical_speed(Context &context, const TaskWorkHandle &motion) {
+    if (motion != context.task->motion_work)
+        missing("native_knuckles_motion_identity");
+    return player_initialization::bind_existing_motion(context.task)->motion.speed.y;
+}
+float player_radius(Context &, const Player &player) {
+    if (!player)
+        missing("native_knuckles_player_parameters");
+    return player->parameters.rad;
+}
+TaskCallback display_callback(Context &context) {
+    if (!context.display)
+        missing("native_knuckles_display_callback");
+    return context.display;
+}
+TaskCallback destructor_callback(Context &context) {
+    if (!context.destructor)
+        missing("native_knuckles_destructor_callback");
+    return context.destructor;
+}
+fidelity::ExactFloat exact(Context &context, float value) {
+    return {context.rendering.arithmetic(), value};
+}
+std::int32_t game_mode(Context &context) { return context.bootstrap.game_mode; }
+std::int32_t check_edit_mode(Context &context) {
+    if (!context.editor_state)
+        missing("native_knuckles_check_edit_mode");
+    return editor::check_mode(*context.editor_state);
+}
+std::int32_t event_cancel(Context &context) {
+    return selection_player_queries::event_cancel(context.bootstrap.cutscene_task);
+}
+
+void initialize_player(Context &context, std::int32_t index, const TaskHandle &task) {
+    if (!context.players.gamma_assets)
+        missing("native_knuckles_parameters");
+    player_initialization::NativeAccess access(context.players.gamma_assets->parameters,
+                                               context.bootstrap.event_work, context.auxiliary);
+    Player record;
+    player_initialization::initialize(
+        index, task, player_initialization::bind_existing_motion(task), context.scheduler,
+        context.players.registry, access, context.rendering.arithmetic(), record);
+}
+void bind_animation_table(Context &context, const Player &player) {
+    const auto &table = assets(context).animation_table;
+    if (!table || table->records.size() != 115)
+        missing("native_knuckles_complete_animation_table");
+    player_initialization::bind_initialized_player(player).animation_table = table;
+}
+void bind_weld_table(Context &context, const Player &player) {
+    if (context.players.knuckles_weld.rows.size() != 30)
+        missing("native_knuckles_imported_weld_table");
+    player_initialization::bind_initialized_player(player).join_table =
+        &context.players.knuckles_weld;
+}
+void initialize_collision(Context &context, const TaskHandle &task, unsigned records,
+                          std::uint8_t id) {
+    auto view = player_initialization::bind_primary_view(task);
+    (void)collision_component::initialize(
+        arena(context), task, view.status, assets(context).collision_info,
+        static_cast<std::int32_t>(records), id, context.rendering.arithmetic());
+}
+void load_character_textures(Context &context, std::uint8_t character) {
+    if (!context.texture_state || !context.texture_services)
+        missing("native_knuckles_character_texture_owner");
+    regular_textures::load_character(character, context.character_textures, *context.texture_state,
+                                     *context.texture_services);
+}
+void calculate_collision_range(Context &context, Primary) {
+    if (!context.task)
+        missing("native_knuckles_calculate_collision_range");
+    auto work = collision(context, context.task->primary_work);
+    collision_component::calculate_range(work.get(), context.rendering.arithmetic());
+}
+void enter_collision_list(Context &context, Primary view) {
+    if (!context.task)
+        missing("native_knuckles_null_collision_task");
+    if (!context.collision_entries)
+        missing("native_knuckles_collision_entries");
+    auto work = collision(context, context.task->primary_work);
+    collision_component::enter_list(*context.collision_entries, work, view.status, context.stage);
+}
+// NOTSA: native boundary for RunUnderwaterStuff; the shared product owner is
+// native::run_underwater.
+void underwater(Context &context, Primary primary, const TaskWorkHandle &motion_work,
+                const Player &player) {
+    if (motion_work != context.task->motion_work)
+        missing("native_knuckles_motion_identity");
+    auto &body = physics(player);
+    native::run_underwater(context.players, context.rendering, context.task, primary, body, player);
+}
+void set_motion(Context &context, const Player &player) {
+    if (!context.players.knuckles_motion_assets)
+        missing("native_knuckles_set_motion");
+    animation::View view{physics(player), player_allocation(context, player)};
+    animation::Runtime runtime{&arena(context), context.players.knuckles_motion_assets->resources(),
+                               &context.scene.objects};
+    const auto result = animation::update(view, runtime, context.rendering.arithmetic());
+    if (!result)
+        missing("native_knuckles_set_motion_failed");
+}
+void join_vertices(Context &context, Primary, const TaskWorkHandle &, const Player &player) {
+    auto &join_mode = player_initialization::bind_join_vertex_mode(player);
+    const auto mode = join_mode;
+    if (mode == 1) {
+        // Active processing reaches the real motion-matrix producer before it
+        // consumes the join table, including when the table is empty.
+        missing("native_knuckles_join_vertices_CalcMMMatrix");
+    }
+    auto &table = physics(player).animation_tail.join_table;
+    if (!table)
+        missing("native_knuckles_weld_table_field");
+    if (!*table)
+        missing("native_knuckles_weld_null_table");
+    if (mode == 0) {
+        vertex_weld::initialize(**table, arena(context), context.scene);
+        join_mode = 1;
+    } else {
+        vertex_weld::restore(**table, arena(context), context.scene);
+    }
+}
+// NOTSA: native boundary for CharacterShadow; source seam declared in the
+// Knuckles core.
+void character_shadow(Context &context, Primary task, const Player &player) {
+    auto &state = physics(player);
+    const auto field = [](auto &value, const char *boundary) -> auto & {
+        if (!value)
+            missing(boundary);
+        return *value;
+    };
+    namespace shadow = sadx::character_shadow;
+    shadow::ShadowWork work{
+        field(state.shadow_angle_x, "native_knuckles_shadow_angle_x"),
+        field(state.shadow_angle_z, "native_knuckles_shadow_angle_z"),
+        state.shadow_attributes_top,
+        field(state.shadow_attributes_bottom, "native_knuckles_shadow_attributes_bottom"),
+        field(state.shadow_top_y, "native_knuckles_shadow_top_y"),
+        field(state.shadow_bottom_y, "native_knuckles_shadow_bottom_y"),
+        field(state.shadow_prior_attributes_top, "native_knuckles_shadow_prior_attributes_top"),
+        field(state.shadow_prior_attributes_bottom,
+              "native_knuckles_shadow_prior_attributes_bottom"),
+        field(state.shadow_scale, "native_knuckles_shadow_scale")};
+    const shadow::Body body{task.position.x, task.position.y, task.position.z, task.rotation[1],
+                            task.player_index};
+    struct Product final : shadow::Services {
+        Context &context;
+        const shadow::Body &body;
+        shadow::ShadowWork &work;
+        Product(Context &context, const shadow::Body &body, shadow::ShadowWork &work)
+            : context(context), body(body), work(work) {}
+        // The source land table has no entries on the reached selection path.
+        // A loaded table takes the unrecovered walk instead of inventing land.
+        shadow::LandCandidates list_land(const NinjaVector &, float) override {
+            if (context.land_candidate_count > 0)
+                missing("native_knuckles_shadow_land_list");
+            return {};
+        }
+        fidelity::ExactFloat horizontal_distance(const NinjaVector &) override {
+            missing("native_knuckles_shadow_distance");
+        }
+        shadow::ShadowHit get_zx_shadow(const NinjaVector &,
+                                        const shadow::LandCandidate &) override {
+            missing("native_knuckles_shadow_water_polygon");
+        }
+        shadow::ShadowHit polygon_test(const NinjaVector &,
+                                       const shadow::LandCandidate &) override {
+            missing("native_knuckles_shadow_polygon");
+        }
+        void splash() override { missing("native_knuckles_shadow_splash"); }
+        void ripple(std::uint8_t, const NinjaVector &,
+                    const std::array<std::int32_t, 3> &) override {
+            missing("native_knuckles_shadow_ripple");
+        }
+        // NOTSA: native boundary for DrawCharacterShadow; the source draws the
+        // common shadow blob through the late queue.
+        void draw_shadow() override {
+            if (context.rendering.pending_logic_ticks() != 0)
+                return;
+            auto &arithmetic = context.rendering.arithmetic();
+            const auto vertical = fidelity::ExactFloat(arithmetic, body.y) - kShadowDepthCull;
+            if (vertical.compare(work.bottom_y) != X87Comparison::less)
+                return;
+            const auto difference = fidelity::ExactFloat(arithmetic, body.y) - work.bottom_y;
+            auto gap = difference + 1.0f;
+            // FABS clears the sign without quieting a signaling NaN.
+            if (gap.is_negative())
+                gap = -gap;
+            const auto denominator = gap * kShadowFalloffPerUnit + 1.0f;
+            const auto scale =
+                (fidelity::ExactFloat(arithmetic, work.scale) / denominator).rounded();
+            if (context.texture_state && context.texture_state->common)
+                context.rendering.output().select_texture_list(*context.texture_state->common);
+            if (!context.rendering.push_current_matrix())
+                missing("native_knuckles_shadow_matrix_capacity");
+            const auto lifted =
+                (fidelity::ExactFloat(arithmetic, work.bottom_y) + kShadowGroundLift).rounded();
+            context.rendering.translate_current_matrix(body.x, lifted, body.z);
+            if (work.angle_z != 0)
+                context.rendering.rotate_current_z(static_cast<std::uint16_t>(work.angle_z));
+            if (work.angle_x != 0)
+                context.rendering.rotate_current_x(static_cast<std::uint16_t>(work.angle_x));
+            if (body.yaw != 0) {
+                const auto angle =
+                    static_cast<std::uint16_t>(-static_cast<std::uint16_t>(body.yaw));
+                context.rendering.rotate_current_y(angle);
+            }
+            const auto flattened =
+                (fidelity::ExactFloat(arithmetic, scale) * kShadowVerticalSquash).rounded();
+            context.rendering.scale_current_matrix(scale, scale, flattened);
+            draw_late();
+            context.rendering.pop_current_matrix();
+        }
+        void draw_late() {
+            if (context.rendering.late_texture_list_not_ready())
+                return;
+            if (!context.players.gamma_assets)
+                missing("native_knuckles_shadow_asset_owner");
+            const auto shadow_object = context.players.gamma_assets->shadow_object;
+            if (!shadow_object)
+                missing("native_knuckles_shadow_object");
+            if (!context.model_environment)
+                missing("native_knuckles_shadow_environment");
+            const auto model = context.scene.objects.object(*shadow_object).model;
+            const auto environment = *context.model_environment;
+            auto &display = context.rendering;
+            const auto *list = context.texture_state ? context.texture_state->common : nullptr;
+            auto draw_mesh = [&display, environment, model, list] {
+                if (list)
+                    display.output().select_texture_list(*list);
+                object_draw::Context draw{display, environment};
+                object_draw::draw_model(draw, model);
+            };
+            const auto queued = context.rendering.queue_late_model(
+                model, kLateShadowFlags, kShadowSortBias, std::move(draw_mesh));
+            if (!queued)
+                missing("native_knuckles_shadow_model_queue");
+            if (queued.route != LateModelRoute::queued)
+                missing("native_late_model_immediate");
+        }
+    } services(context, body, work);
+    shadow::update(body, work, services, context.rendering.arithmetic());
+}
+void update_idle_state(Context &, Primary, const Player &) {
+    missing("native_knuckles_idle_state");
+}
+void update_action_state(Context &, Primary, const TaskWorkHandle &, const Player &) {
+    missing("native_knuckles_action_update");
+}
+void initialize_auxiliary(Context &, std::uint8_t) { missing("native_knuckles_auxiliary"); }
+void update_upgrades(Context &, Primary, const TaskWorkHandle &) {
+    missing("native_knuckles_upgrades");
+}
+void stand_tail(Context &, const TaskWorkHandle &) { missing("native_knuckles_stand_tail"); }
+void update_held_task(Context &, const TaskWorkHandle &) { missing("native_knuckles_held_task"); }
+void update_collision_shape(Context &, Primary, const Player &) {
+    missing("native_knuckles_collision_shape");
+}
+void update_reference_position(Context &, Primary) {
+    missing("native_knuckles_reference_position");
+}
+bool is_in_death_zone(Context &, Primary) { missing("native_knuckles_death_zone"); }
+void other_player_position(Context &, std::uint8_t, std::int8_t, NinjaVector &) {
+    missing("native_knuckles_player_position");
+}
+bool check_view(Context &context, Primary view, float radius) {
+    auto &display = context.rendering;
+    view_check::Services services{[&display](const NinjaVector &point) {
+        return display.calculate_current_point(point);
+    }};
+    return view_check::check_view(view.position, radius, display.view_check_state(), services,
+                                  display.arithmetic());
+}
+[[noreturn]] void missing_display_submit(Context &) { missing("native_knuckles_display_submit"); }
+void destroy(Context &, const TaskHandle &) { missing("native_knuckles_destruct"); }
+void get_rotation(Context &, Primary, const TaskWorkHandle &, const Player &) {
+    missing("native_knuckles_get_rotation");
+}
+void get_acceleration(Context &, Primary, const TaskWorkHandle &, const Player &) {
+    missing("native_knuckles_get_acceleration");
+}
+void get_speed(Context &, Primary, const TaskWorkHandle &, const Player &) {
+    missing("native_knuckles_get_speed");
+}
+std::int32_t set_position(Context &, Primary, const TaskWorkHandle &, const Player &) {
+    missing("native_knuckles_set_position");
+}
+void reset_position(Context &, Primary, const TaskWorkHandle &, const Player &) {
+    missing("native_knuckles_reset_position");
+}
+[[noreturn]] void unrecovered_mode(Context &, std::uint8_t) {
+    missing("native_knuckles_unrecovered_mode");
+}
+TaskHandle create_child_task(Context &context, unsigned kind, std::int32_t level,
+                             std::uint8_t index) {
+    TaskCallback callback = nullptr;
+    std::uint32_t flags = 0;
+    switch (kind) {
+    case 0:
+        flags = 2;
+        callback = unrecovered_child_a;
+        break;
+    case 1:
+        flags = 3;
+        callback = unrecovered_child_b;
+        break;
+    case 2:
+        flags = 2;
+        callback = unrecovered_heat_attack;
+        // The source also stores a pointer to the player idle timer at primary
+        // +0x10 for this child. Its consumer is unrecovered and the idle timer
+        // is not a task allocation, so no raw pointer is published.
+        break;
+    default:
+        missing("native_knuckles_child_task_kind");
+    }
+    const auto created = context.scheduler.create_element(flags, level, callback);
+    if (!created || !created.task)
+        return {};
+    store_child_index(context, created.task, index);
+    return created.task;
+}
+TaskHandle create_radar_task(Context &context) {
+    const auto created = context.scheduler.create_element(2, 6, unrecovered_radar);
+    if (!created || !created.task)
+        return {};
+    return created.task;
+}
+} // namespace sadx::knuckles_selection
