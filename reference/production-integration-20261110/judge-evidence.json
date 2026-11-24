@@ -50,5 +50,23 @@
     ],
     "change": "Big asset closure, selection core and binding, equipment identities, rod update, and the dsCheckViewV recovery shared with animated draws. New tests: native-big-assets, view-check unit, view_check oracle (116 dev + separate holdout seed, 5 of 5 mutants). Existing display composition gains a queue-consume shadow assertion at unchanged 106 body draws.",
     "frontier": "frame 1332 stop native_big_character_shadow, title c7d02f64"
+  },
+  "actor_packets": {
+    "commits": [
+      "11a403e1",
+      "b1792373",
+      "080ae875",
+      "8f018ede",
+      "a6e561d1",
+      "c337f75f",
+      "af6f2f36",
+      "862899a0",
+      "b4dce64b",
+      "cb8ec866",
+      "73f0a36c",
+      "4ed914b5"
+    ],
+    "change": "Big/Amy/Miles/Knuckles asset closures and selection cores, CharacterShadow and dsCheckViewV recoveries with oracles (character_shadow pass 118+64, view_check pass 116+holdout), shared underwater binding, frontier semantic graph update for Big children. New judge inputs are new tests/probes/oracle scripts and tracked summaries; the frontier checker preview-task match is by callbacks because actor children shift its list index (historical fixture and current graph both pass). Constexpr reviews added for Miles row tables, Amy stage words and Miles weld patches; declarations unchanged in meaning. usPlayer counterpart separates the bootstrap owner from the reference fixture.",
+    "frontier": "frame 1332 stop native_amy_initialize_auxiliary_d -> native_amy_display after auxiliaries; title c7d02f64; semantic_state_passed true"
   }
 }
