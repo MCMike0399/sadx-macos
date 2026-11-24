@@ -1359,3 +1359,9 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Changed: Amy setup creates its direct-ahead child with the copied motion words and clears the player work-word bit. The three stage auxiliaries run behind their character, global-mode and stage-word gates. The post-shadow collision adjustments and the final cleared word run in source order.
 * Verified: the app builds and the frontier stop moved through the setup, auxiliaries, display, post-shadow and finish boundaries with semantic state still passing.
 * Next: Knuckles idle state, then Miles in traversal order. Frame two work follows once every actor finishes frame one.
+
+### 2026-11-10 — Knuckles auxiliary setup runs (no gate)
+
+* Outcome: the frontier still exits 1 at frame 1332 on the title hash. Knuckles mode zero now stops at the next seam after its auxiliary setup. No CharacterSelect frame is presented.
+* Changed: the auxiliary task is created with its copied motion words and player index, mirroring the Amy and Big setups.
+* Verified: the app builds and the frontier stop moved with semantic state still passing.

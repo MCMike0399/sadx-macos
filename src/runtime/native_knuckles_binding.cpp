@@ -503,7 +503,38 @@ bool analog_input(Context &, Primary, const TaskWorkHandle &, const Player &) {
     // and event-work facts are not composed in the Knuckles context yet.
     missing("native_knuckles_analog_input");
 }
-void initialize_auxiliary(Context &, std::uint8_t) { missing("native_knuckles_auxiliary"); }
+void unrecovered_knuckles_auxiliary_task(TaskScheduler &, const TaskHandle &) {
+    missing("native_knuckles_auxiliary_task");
+}
+void initialize_auxiliary(Context &context, std::uint8_t index) {
+    const auto created = context.scheduler.create_element(2, 2, unrecovered_knuckles_auxiliary_task);
+    if (!created || !created.task)
+        return;
+    constexpr unsigned kDirectMotionBytes = 0x88;
+    constexpr unsigned kCopiedWordsOffset = 0x58;
+    auto allocation = arena(context).allocate(kDirectMotionBytes);
+    if (!allocation) {
+        (void)context.scheduler.destroy_task(created.task);
+        return;
+    }
+    created.task->motion_work = allocation.work;
+    store_child_index(context, created.task, index);
+    const auto parent_motion = player_initialization::bind_existing_motion(context.task);
+    const auto word_of = [](float value) {
+        std::uint32_t word = 0;
+        std::memcpy(&word, &value, sizeof(word));
+        return word;
+    };
+    // The player pointer word has no native identity yet; the typed speed
+    // words copy exactly, as in the Amy/Big setups.
+    const std::array<std::uint32_t, 3> words{0, word_of(parent_motion->motion.speed.x),
+                                             word_of(parent_motion->motion.speed.y)};
+    for (unsigned word = 0; word < words.size(); ++word) {
+        if (!arena(context).write(allocation.work, kCopiedWordsOffset + word * 4, &words[word],
+                                  sizeof(words[word])))
+            missing("native_knuckles_auxiliary_motion_copy");
+    }
+}
 void update_upgrades(Context &, Primary, const TaskWorkHandle &) {
     missing("native_knuckles_upgrades");
 }
