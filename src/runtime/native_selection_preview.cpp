@@ -268,6 +268,8 @@ void TitleScene::exec_selection_knuckles(TaskScheduler &scheduler, const TaskHan
     const editor::View editor_state{scene.session_.editor_status_,
                                     scene.session_.mission_editor_status_};
     context.editor_state = &editor_state;
+    context.held_buttons = scene.input_.pad_held;
+    context.attack_buttons = scene.input_.action_mask;
     if (scene.session_.lighting_ && scene.session_.character_pack_) {
         const ModelDrawEnvironment environment{*scene.session_.character_pack_,
             scene.session_.character_scene_, scene.session_.bootstrap_.material_callback,

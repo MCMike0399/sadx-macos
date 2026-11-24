@@ -30,12 +30,12 @@ struct KnucklesCallbackProbe {
         try {
             task->exec(scheduler, task);
         } catch (const flow::UnrecoveredGameFlowCall &error) {
-            stopped = std::string(error.what()) == "native_knuckles_idle_state";
+            stopped = std::string(error.what()) == "native_knuckles_action_update";
             if (!stopped)
                 throw std::runtime_error(std::string("Knuckles exec stopped at: ") + error.what());
         }
         if (!stopped)
-            throw std::runtime_error("Knuckles exec does not reach its named idle-state seam");
+            throw std::runtime_error("Knuckles exec does not reach its named action-update seam");
     }
 };
 } // namespace sadx::native
@@ -99,7 +99,7 @@ int main(int argc, char **argv) {
             native::TitleScene scene(session, display, titles);
             native::KnucklesCallbackProbe::run(session, scene);
             std::cout << "Knuckles assets: 90 declarations, 115 recipes, 30 weld rows; "
-                         "exec stops at native_knuckles_idle_state\n";
+                         "exec stops at native_knuckles_action_update\n";
             return 0;
         } catch (const std::exception &error) {
             std::cerr << "native Knuckles assets: " << error.what() << '\n';

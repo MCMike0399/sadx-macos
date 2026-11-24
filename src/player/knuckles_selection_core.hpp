@@ -32,6 +32,11 @@ Player player_for_motion(Context &, const TaskWorkHandle &);
 TaskWorkHandle player_allocation(Context &, const Player &);
 std::uint16_t &requested_animation(Context &, const Player &);
 std::uint16_t &idle_timer(Context &, const Player &);
+std::uint16_t &equipment(Context &, const Player &);
+std::uint16_t &task_timer(Context &, Primary);
+std::uint32_t held_buttons(Context &, std::uint8_t player_index);
+std::uint32_t attack_buttons(Context &);
+float &speed_x(Context &, const Player &);
 bool has_held_task(Context &, const Player &);
 bool has_collision(Context &, const TaskWorkHandle &);
 std::uint32_t &collision_attributes(Context &, const TaskWorkHandle &, unsigned record);
@@ -43,6 +48,8 @@ TaskCallback display_callback(Context &);
 TaskCallback destructor_callback(Context &);
 fidelity::ExactFloat exact(Context &, float);
 std::int32_t game_mode(Context &);
+std::int16_t stage(Context &);
+std::int16_t act(Context &);
 std::int32_t check_edit_mode(Context &);
 // NOTSA: the shared EV_CheckCansel leaf declared by the Gamma core.
 std::int32_t event_cancel(Context &);
@@ -82,10 +89,28 @@ bool check_view(Context &, Primary, float radius);
 // NOTSA: marks an unrecovered source mode body; must fail loudly.
 [[noreturn]] void unrecovered_mode(Context &, std::uint8_t mode);
 
-// The reached entry prefix, mode zero, mode one and common tail are recovered
-// in the core; these callees stay named seams until their bodies land.
-// STUB: SONIC 0x472010 Knuckles_IdleState
+// The reached entry prefix, mode zero, mode one, the idle state and common tail
+// are recovered in the core; the remaining callees stay named seams until their
+// bodies land.
+// FUNCTION: SONIC 0x472010 Knuckles_IdleState
 void update_idle_state(Context &, Primary, const Player &);
+// STUB: SONIC 0x437bf0 CameraSetEventCamera
+void set_event_camera(Context &, std::int16_t mode, std::int8_t adjust_type);
+// The source dsPlay_oneshot is owned by game/sound_effects.hpp; this binding
+// seam still fails loudly.
+void play_one_shot(Context &, std::int32_t tone, std::int32_t id, std::int32_t priority,
+                   std::int32_t volume_offset);
+// STUB: SONIC 0x423e20 dsPlay_iloop
+void play_loop(Context &, std::int32_t tone, std::int32_t id, std::int32_t priority,
+               std::int32_t volume_offset);
+// STUB: SONIC 0x424240 dsStop_id
+void stop_id(Context &);
+// STUB: SONIC 0x4c2260 CameraStartIdleEffect camera task setup remains open
+void start_idle_camera_effect(Context &);
+// STUB: SONIC 0x4c14e0 CameraResetIdleEffect camera counter reset remains open
+void reset_idle_camera_effect(Context &);
+// STUB: SONIC 0x4c2210 CameraStartHeldEffect held-path camera task remains open
+void start_held_camera_effect(Context &);
 // STUB: SONIC 0x478020 Knuckles_Act1
 void update_action_state(Context &, Primary, const TaskWorkHandle &, const Player &);
 // STUB: SONIC 0x477d30 Knuckles_AuxiliaryTask

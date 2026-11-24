@@ -8,6 +8,17 @@ constexpr std::uint16_t kOnCollision = 2;
 constexpr std::uint16_t kSkipVertexJoin = 256;
 constexpr std::uint32_t kCollisionEnable = 16;
 constexpr std::uint16_t kIdleTimerReset = 65535;
+constexpr std::uint16_t kIdleTimerLimit = 0x78;
+constexpr std::uint16_t kIdleEquipmentFlag = 0x20;
+constexpr std::uint16_t kActionBitsMask = 3;
+constexpr std::uint16_t kIdleLoopMask = 15;
+constexpr std::uint16_t kIdleTaskTimer = 0x00b4;
+constexpr std::uint16_t kIdleRequestedAnimation = 0x23;
+constexpr std::int32_t kIdleCameraStageLimit = 0xf00;
+constexpr std::int16_t kIdleCameraMode = 0x44;
+constexpr std::int32_t kIdleTransitionSound = 0x319;
+constexpr std::int32_t kIdleLoopSound = 0x318;
+constexpr std::int32_t kIdleClampSound = 0x15;
 constexpr std::uint16_t kThruAnimation = 39;
 constexpr std::uint16_t kShakAnimation = 40;
 constexpr float kViewRadius = 20.0f;
@@ -16,8 +27,14 @@ constexpr float kDeathZoneSeparation = 0.010000001f;
 enum class Mode : std::uint8_t { // MD_KNUCK, SADXEnumsNew.h names
     Initialize = 0,              // MD_KNUCK_INIT
     Stand = 1,                   // MD_KNUCK_STND
+    Walk = 2,                    // MD_KNUCK_WALK
+    Stop = 10,                   // MD_KNUCK_STOP
     Glide = 11,                  // MD_KNUCK_GLID
     Turn = 12,                   // MD_KNUCK_GTRN
+    Hmg0 = 18,                   // MD_KNUCK_HMG0
+    Dig = 19,                    // MD_KNUCK_DIGD
+    Punch = 26,                  // MD_KNUCK_PUNC
+    Doza = 50,                   // MD_KNUCK_DOZA
     Kill = 51,                   // MD_KNUCK_KILL
     CnadeLoop = 54,              // MD_KNUCK_CNADE_LOOP
     Edit = 57                    // MD_KNUCK_EDIT forced by CheckEditMode
@@ -156,6 +173,66 @@ void common_tail(Context &context, const TaskHandle &object, Primary task,
     underwater(context, task, motion, player);
 }
 } // namespace
+
+void update_idle_state(Context &context, Primary task, const Player &player) {
+    if (!player)
+        return;
+    if ((equipment(context, player) & kIdleEquipmentFlag) == 0) {
+        idle_timer(context, player) = kIdleTimerReset;
+        return;
+    }
+    const auto mode = static_cast<Mode>(task.mode);
+    if (mode == Mode::Doza || mode == Mode::Kill || mode == Mode::Punch ||
+        mode == Mode::Hmg0)
+        return;
+    const auto timer = static_cast<std::int16_t>(idle_timer(context, player));
+    if (timer < 0)
+        return;
+    const auto attack_held =
+        (held_buttons(context, task.player_index) & attack_buttons(context)) != 0;
+    const auto action_bits = (task.status & kActionBitsMask) != 0;
+    const auto action_mode = mode == Mode::Stand || mode == Mode::Walk || mode == Mode::Stop;
+    if (!attack_held || !action_bits || !action_mode) {
+        if (timer == static_cast<std::int16_t>(kIdleTimerLimit)) {
+            const auto stage_word = (static_cast<std::int32_t>(stage(context)) << 8) |
+                                    static_cast<std::int32_t>(act(context));
+            if (stage_word < kIdleCameraStageLimit)
+                set_event_camera(context, kIdleCameraMode, 0);
+            start_idle_camera_effect(context);
+            reset_idle_camera_effect(context);
+            task_timer(context, task) = kIdleTaskTimer;
+            task.mode = static_cast<std::uint8_t>(Mode::Hmg0);
+            requested_animation(context, player) = kIdleRequestedAnimation;
+        }
+        idle_timer(context, player) = kIdleTimerReset;
+        stop_id(context);
+        if (static_cast<Mode>(task.mode) != Mode::Dig)
+            play_one_shot(context, kIdleTransitionSound, 0, 0, 0);
+        return;
+    }
+    // The source increments through the 16-bit timer word, then tests the signed result.
+    const auto incremented = static_cast<std::uint16_t>(static_cast<std::uint16_t>(timer) + 1U);
+    idle_timer(context, player) = incremented;
+    if (static_cast<std::int16_t>(incremented) < static_cast<std::int16_t>(kIdleTimerLimit)) {
+        if ((incremented & kIdleLoopMask) == 0)
+            play_loop(context, kIdleLoopSound, 0, 0, 0);
+    } else {
+        idle_timer(context, player) = kIdleTimerLimit;
+        if (timer != static_cast<std::int16_t>(kIdleTimerLimit)) {
+            start_held_camera_effect(context);
+            stop_id(context);
+            play_one_shot(context, kIdleClampSound, 0, 0, 0);
+        }
+    }
+    auto &speed = speed_x(context, player);
+    if (0.5f < speed) {
+        const auto half = exact(context, 0.5f);
+        auto adjusted = half - speed;
+        adjusted = adjusted * 0.5f;
+        adjusted = adjusted + speed;
+        speed = adjusted.rounded();
+    }
+}
 
 void run(Context &context, const TaskHandle &object) {
     const auto motion = object->motion_work;

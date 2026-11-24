@@ -27,6 +27,16 @@ native::KnucklesActorAssets &assets(Context &context) {
         missing("native_knuckles_actor_assets");
     return *context.players.knuckles_assets;
 }
+// NOTSA: the typed free-work fields share the actual player allocation identity.
+native::PlayerSystem::KnucklesExtraWork &extra(Context &context, const Player &player) {
+    if (!player)
+        missing("native_knuckles_null_player_free_work");
+    for (auto &work : context.players.knuckles_work)
+        if (work.allocation == player->allocation)
+            return work;
+    context.players.knuckles_work.push_back({player->allocation, 0});
+    return context.players.knuckles_work.back();
+}
 PlayerPhysicsState &physics(const Player &player) {
     if (!player || !player->physics)
         missing("native_knuckles_player_physics");
@@ -94,12 +104,29 @@ TaskWorkHandle player_allocation(Context &, const Player &player) {
 std::uint16_t &requested_animation(Context &, const Player &player) {
     return player_initialization::bind_initialized_player(player).requested_animation;
 }
-std::uint16_t &idle_timer(Context &, const Player &player) {
-    auto fields = sonic::native_fields::player(physics(player));
-    if (!fields.idle_timer)
-        missing("native_knuckles_idle_timer");
-    return *fields.idle_timer;
+std::uint16_t &idle_timer(Context &context, const Player &player) {
+    return extra(context, player).idle_timer;
 }
+std::uint16_t &equipment(Context &, const Player &player) {
+    auto &value = physics(player).equipment;
+    if (!value)
+        missing("native_knuckles_equipment");
+    return *value;
+}
+std::uint16_t &task_timer(Context &context, Primary) {
+    return player_initialization::bind_task_timer_high(context.task);
+}
+std::uint32_t held_buttons(Context &context, std::uint8_t player_index) {
+    if (!context.held_buttons)
+        missing("native_knuckles_held_buttons");
+    return context.held_buttons(player_index);
+}
+std::uint32_t attack_buttons(Context &context) {
+    if (!context.attack_buttons)
+        missing("native_knuckles_attack_buttons");
+    return context.attack_buttons();
+}
+float &speed_x(Context &, const Player &player) { return physics(player).motion.speed.x; }
 bool has_held_task(Context &, const Player &player) {
     return bool(player_initialization::bind_initialized_player(player).held_task);
 }
@@ -146,6 +173,8 @@ fidelity::ExactFloat exact(Context &context, float value) {
     return {context.rendering.arithmetic(), value};
 }
 std::int32_t game_mode(Context &context) { return context.bootstrap.game_mode; }
+std::int16_t stage(Context &context) { return context.stage; }
+std::int16_t act(Context &context) { return context.act; }
 std::int32_t check_edit_mode(Context &context) {
     if (!context.editor_state)
         missing("native_knuckles_check_edit_mode");
@@ -364,9 +393,19 @@ void character_shadow(Context &context, Primary task, const Player &player) {
     } services(context, body, work);
     shadow::update(body, work, services, context.rendering.arithmetic());
 }
-void update_idle_state(Context &, Primary, const Player &) {
-    missing("native_knuckles_idle_state");
+void set_event_camera(Context &, std::int16_t, std::int8_t) {
+    missing("native_knuckles_camera_event");
 }
+void play_one_shot(Context &, std::int32_t, std::int32_t, std::int32_t, std::int32_t) {
+    missing("native_knuckles_ds_play_oneshot");
+}
+void play_loop(Context &, std::int32_t, std::int32_t, std::int32_t, std::int32_t) {
+    missing("native_knuckles_ds_play_iloop");
+}
+void stop_id(Context &) { missing("native_knuckles_ds_stop_id"); }
+void start_idle_camera_effect(Context &) { missing("native_knuckles_camera_idle_start"); }
+void reset_idle_camera_effect(Context &) { missing("native_knuckles_camera_idle_reset"); }
+void start_held_camera_effect(Context &) { missing("native_knuckles_camera_held_start"); }
 void update_action_state(Context &, Primary, const TaskWorkHandle &, const Player &) {
     missing("native_knuckles_action_update");
 }

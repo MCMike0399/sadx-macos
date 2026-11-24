@@ -100,6 +100,8 @@ std::int16_t &bind_join_vertex_mode(const PlayerHandle &);
 std::uint16_t &bind_wait_timer(const TaskHandle &);
 // NOTSA: semantic borrow of the source task counter, distinct from the player index.
 std::int32_t &bind_task_counter(const TaskHandle &);
+// NOTSA: borrow the upper 16-bit timer word inside that counter (taskwk+0x0e).
+std::uint16_t &bind_task_timer_high(const TaskHandle &);
 // NOTSA: native consumers borrow the initialized legacy fields through semantic names.
 // Missing initialization is rejected here, before a game callback consumes the value.
 struct InitializedPlayerView {

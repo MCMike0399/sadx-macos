@@ -447,6 +447,11 @@ std::uint16_t &bind_wait_timer(const TaskHandle &task) {
 std::int32_t &bind_task_counter(const TaskHandle &task) {
     return required(required_primary(task)->source_counter_at_c, Boundary::Parameters);
 }
+std::uint16_t &bind_task_timer_high(const TaskHandle &task) {
+    auto &counter = bind_task_counter(task);
+    // The source timer union writes only its high word at taskwk+0x0e.
+    return reinterpret_cast<std::uint16_t *>(&counter)[1];
+}
 std::int16_t &bind_join_vertex_mode(const PlayerHandle &record) {
     if (!record || !record->physics)
         throw Error(Boundary::PlayerAllocation);

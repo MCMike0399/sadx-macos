@@ -97,6 +97,13 @@ struct PlayerSystem {
     std::unique_ptr<KnucklesMotionAssets> knuckles_motion_assets;
     PlayerJoinTable knuckles_weld;
     knuckles_selection::State knuckles;
+    // NOTSA: typed fields share the identity of the actual player allocation.
+    struct KnucklesExtraWork {
+        TaskWorkHandle allocation;
+        // playerwk free+0x0a (playerwk+0x86), the idle timer.
+        std::uint16_t idle_timer = 0;
+    };
+    std::deque<KnucklesExtraWork> knuckles_work;
     player_underwater::State underwater;
 };
 // NOTSA: existing session asset load binds imported declarations to its shared scene owners.
@@ -249,5 +256,8 @@ struct Context {
     // Source land-candidate count. Zero is the empty table; a positive count
     // still takes the unrecovered shadow land walk.
     std::int16_t land_candidate_count = 0;
+    // NOTSA: borrowed engine-pad held word and the source attack mask.
+    std::function<std::uint32_t(std::uint8_t)> held_buttons = {};
+    std::function<std::uint32_t()> attack_buttons = {};
 };
 } // namespace sadx::knuckles_selection
