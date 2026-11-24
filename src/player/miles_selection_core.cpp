@@ -12,13 +12,30 @@ constexpr std::uint16_t kEquipmentSkip = 256;
 constexpr std::uint32_t kCollisionEnable = 16;
 constexpr std::uint16_t kEquipmentSiblingBit = 8;
 constexpr std::uint16_t kEquipmentModelBit = 16;
+constexpr std::uint16_t kHurt = 4;
+constexpr std::uint16_t kHurtReactionStatus = 0x800;
+constexpr std::uint16_t kStatusHighBit = 0x8000;
+constexpr std::uint16_t kStatusHighClear = 0x7fff;
+constexpr std::uint16_t kDamageHighByteKeep = 0xc6ff;
+constexpr std::uint16_t kItemHighBit = 0x8000;
+constexpr std::uint16_t kItemLowBitsClear = 0xfffc;
+constexpr std::int16_t kChaoGardenFirstStage = 39;
+constexpr std::int16_t kChaoGardenLastStage = 42;
+constexpr std::uint32_t kStageActionArgument = 0x00874201;
+constexpr std::uint16_t kStagePickupAnimation = 0x84;
+constexpr std::uint16_t kWalkAnimation = 9;
+constexpr std::uint16_t kSlideAnimation = 0x17;
 constexpr std::int32_t kCharacterSelectGameMode = 12;
 constexpr float kViewRadius = 10.0f;
+constexpr float kSlideContactDepth = 0.77f;
 enum class Mode : std::uint8_t { // MD_MILES, SADXEnumsNew.h names
-    Initialize = 0, // MD_MILES_INIT
-    Stand = 1, // MD_MILES_STND
-    Kill = 60, // MD_MILES_KILL
-    CnadeLoop = 64 // MD_MILES_CNADE_LOOP
+    Initialize = 0,  // MD_MILES_INIT
+    Stand = 1,       // MD_MILES_STND
+    Walk = 2,        // MD_MILES_WALK
+    Slide = 17,      // MD_MILES_SLID
+    CnadeStart = 63, // MD_MILES_CNADE_START
+    Kill = 60,       // MD_MILES_KILL
+    CnadeLoop = 64   // MD_MILES_CNADE_LOOP
 };
 struct WeldPatch {
     std::size_t row;
@@ -198,6 +215,78 @@ void common_tail(Context &context, const TaskHandle &object, Primary task,
     underwater(context, task, motion, player);
 }
 } // namespace
+
+// The reached prefix of Tails_Act1: the Chao branch, the damage gate and
+// MD_MILES_STND's transition chain. The chain's first nonzero result stops the
+// frame; every later mode body stays unrecovered and fails loudly.
+void update_action_state(Context &context, Primary task, const TaskWorkHandle &motion,
+                         const Player &player) {
+    const auto current_stage = stage(context);
+    if (current_stage >= kChaoGardenFirstStage && current_stage <= kChaoGardenLastStage)
+        chao_setup(context, motion, player, task.player_index);
+    const bool damage_item = player && (item_word(context, player) & kItemHighBit) != 0;
+    if (!damage_item) {
+        auto &wait = wait_timer(context);
+        if (wait == 0) {
+            if (!check_damage(context, task, motion, player)) {
+                task.status = static_cast<std::uint16_t>(task.status & kStatusHighClear);
+            } else {
+                task.status = static_cast<std::uint16_t>(task.status | kStatusHighBit);
+                if ((task.status & kHurtReactionStatus) != 0)
+                    hurt_reaction(context, task, player);
+                task.status = static_cast<std::uint16_t>(task.status & kDamageHighByteKeep);
+                auto &item = item_word(context, player);
+                if ((item & 3) == 0)
+                    scatter_rings(context, task.player_index);
+                else
+                    item = static_cast<std::uint16_t>(item & kItemLowBitsClear);
+            }
+        } else {
+            task.status = static_cast<std::uint16_t>(task.status & ~kHurt);
+            wait = static_cast<std::uint16_t>(wait - 1U);
+        }
+    } else {
+        task.status = static_cast<std::uint16_t>(task.status | kStatusHighBit);
+        wait_timer(context) = 0;
+    }
+    switch (static_cast<Mode>(task.mode)) {
+    case Mode::Initialize:
+        // The source switch has no case 0; mode zero's work is the run switch.
+        break;
+    case Mode::Stand:
+        // Source order: the five transition checkers, then the Chao-stage
+        // pickup/action pair, then GetAnalog and the contact/speed slide gate.
+        if (check_next_action(context, task, motion, player) ||
+            check_fall(context, task, motion, player) ||
+            check_jump(context, task, motion, player) ||
+            check_grab(context, task, motion, player) ||
+            check_attack(context, task, motion, player))
+            return;
+        if (stage_pickup(context, task, motion, player)) {
+            task.mode = static_cast<std::uint8_t>(Mode::CnadeStart);
+            requested_animation(context, player) = kStagePickupAnimation;
+        } else if (stage_action(context, task, motion, player, kStageActionArgument)) {
+            return;
+        }
+        // GetAnalog is consumed before the contact/speed slide gate. The input
+        // owner stays a seam; the slide gate itself is source arithmetic.
+        if (analog_input(context, task)) {
+            task.mode = static_cast<std::uint8_t>(Mode::Walk);
+            requested_animation(context, player) = kWalkAnimation;
+            return;
+        }
+        if (exact(context, contact_depth(context, player)).compare(kSlideContactDepth) ==
+                X87Comparison::less &&
+            speed_magnitude(context, motion).compare(slide_speed(context, player)) ==
+                X87Comparison::greater) {
+            task.mode = static_cast<std::uint8_t>(Mode::Slide);
+            requested_animation(context, player) = kSlideAnimation;
+        }
+        break;
+    default:
+        unrecovered_mode(context, task.mode);
+    }
+}
 
 void run(Context &context, const TaskHandle &object) {
     const auto motion = object->motion_work;

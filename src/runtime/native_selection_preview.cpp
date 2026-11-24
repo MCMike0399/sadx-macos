@@ -233,6 +233,9 @@ void TitleScene::exec_selection_miles(TaskScheduler &scheduler, const TaskHandle
         scene.session_.regular_resources_.state(), &texture_services,
         scene.session_.character_scene_};
     context.collision_entries = &scene.session_.collision_entries_;
+    context.held_buttons = scene.input_.pad_held;
+    context.attack_buttons = scene.input_.action_mask;
+    context.grab_buttons = scene.input_.grab_mask;
     if (scene.session_.lighting_ && scene.session_.character_pack_) {
         const ModelDrawEnvironment environment{*scene.session_.character_pack_,
             scene.session_.character_scene_, scene.session_.bootstrap_.material_callback,

@@ -231,6 +231,10 @@ struct Context {
     // Source land-candidate count. Zero is the empty table; a positive count
     // still takes the unrecovered shadow land walk.
     std::int16_t land_candidate_count = 0;
+    // NOTSA: borrowed engine-pad held word and the source attack/grab masks.
+    std::function<std::uint32_t(std::uint8_t)> held_buttons = {};
+    std::function<std::uint32_t()> attack_buttons = {};
+    std::function<std::uint32_t()> grab_buttons = {};
 };
 } // namespace sadx::miles_selection
 

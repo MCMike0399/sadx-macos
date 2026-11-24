@@ -88,8 +88,47 @@ bool check_view(Context &, Primary, float radius);
 
 // The reached entry prefix, mode zero, mode one and common tail are recovered
 // in the core; these callees stay named seams until their bodies land.
-// STUB: SONIC 0x45e5d0 Tails_Act1
+// FUNCTION: SONIC 0x45e5d0 Tails_Act1
 void update_action_state(Context &, Primary, const TaskWorkHandle &, const Player &);
+// The source passes MilesChaoSetup's returned garden value to the per-player
+// store; the store remains part of this seam until its body lands.
+// STUB: SONIC 0x459b50 FUN_00459b50
+void chao_setup(Context &, const TaskWorkHandle &, const Player &, std::uint8_t index);
+// STUB: SONIC 0x45bf10 FUN_0045bf10
+bool check_damage(Context &, Primary, const TaskWorkHandle &, const Player &);
+// STUB: SONIC 0x45aa80 FUN_0045aa80
+void hurt_reaction(Context &, Primary, const Player &);
+// Source seam owned by the Big core's identical DamegeRingScatter declaration.
+void scatter_rings(Context &, std::uint8_t index);
+// The stand chain stops at the first nonzero transition. Only the checkers whose
+// preview branch a source guard proves stay zero; transition bodies are
+// missing() seams.
+// STUB: SONIC 0x45c100 FUN_0045c100
+bool check_next_action(Context &, Primary, const TaskWorkHandle &, const Player &);
+// STUB: SONIC 0x45ce30 FUN_0045ce30
+bool check_fall(Context &, Primary, const TaskWorkHandle &, const Player &);
+// STUB: SONIC 0x45bfe0 FUN_0045bfe0
+bool check_jump(Context &, Primary, const TaskWorkHandle &, const Player &);
+// STUB: SONIC 0x45a9c0 FUN_0045a9c0
+bool check_grab(Context &, Primary, const TaskWorkHandle &, const Player &);
+// STUB: SONIC 0x45d6d0 FUN_0045d6d0
+bool check_attack(Context &, Primary, const TaskWorkHandle &, const Player &);
+// NOTSA: native/reference bindings to the canonical stage pickup/action owners.
+bool stage_pickup(Context &, Primary, const TaskWorkHandle &, const Player &);
+bool stage_action(Context &, Primary, const TaskWorkHandle &, const Player &,
+                  std::uint32_t argument);
+// NOTSA: native/reference binding to the canonical GetAnalog input gate.
+bool analog_input(Context &, Primary);
+// NOTSA: the slide gate reads the source contact normal and the player speed
+// through the recovered njScalor owner.
+float contact_depth(Context &, const Player &);
+fidelity::ExactFloat speed_magnitude(Context &, const TaskWorkHandle &);
+float slide_speed(Context &, const Player &);
+// NOTSA: source playerwk item and wait word consumed by the damage gate.
+std::uint16_t &item_word(Context &, const Player &);
+std::uint16_t &wait_timer(Context &);
+// NOTSA: native stage owner consumed by the Chao branch and stage seams.
+std::int16_t stage(Context &);
 // STUB: SONIC 0x461450 FUN_00461450
 void initialize_auxiliary_a(Context &, std::uint8_t index);
 // STUB: SONIC 0x4614b0 FUN_004614b0

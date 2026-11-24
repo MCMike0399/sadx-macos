@@ -46,6 +46,26 @@ collision_component::Info &collision_info(Context &context, const TaskWorkHandle
     return component->info[record];
 }
 constexpr unsigned kMotionPlayerField = 0, kCollisionField = 56;
+constexpr std::uint16_t kHurt = 4;
+constexpr std::uint32_t kDamageAttribute = 0x10000;
+constexpr std::uint16_t kAttackLocked = 0x2000;
+constexpr std::int16_t kChaoGardenFirstStage = 39;
+constexpr std::int16_t kChaoGardenLastStage = 42;
+std::uint32_t held_buttons(Context &context, std::uint8_t index) {
+    if (!context.held_buttons)
+        missing("native_miles_held_buttons");
+    return context.held_buttons(index);
+}
+std::uint32_t attack_buttons(Context &context) {
+    if (!context.attack_buttons)
+        missing("native_miles_attack_buttons");
+    return context.attack_buttons();
+}
+std::uint32_t grab_buttons(Context &context) {
+    if (!context.grab_buttons)
+        missing("native_miles_grab_buttons");
+    return context.grab_buttons();
+}
 // DrawCharacterShadow's source literals and late queue facts.
 constexpr float kShadowDepthCull = 20000.0f;
 constexpr float kShadowFalloffPerUnit = 0.03f;
@@ -385,8 +405,113 @@ void character_shadow(Context &context, Primary task, const Player &player) {
     } services(context, body, work);
     shadow::update(body, work, services, context.rendering.arithmetic());
 }
-void update_action_state(Context &, Primary, const TaskWorkHandle &, const Player &) {
-    missing("native_miles_action_update");
+std::uint16_t &item_word(Context &, const Player &player) {
+    auto fields = sonic::native_fields::player(physics(player));
+    if (!fields.item)
+        missing("native_miles_item_word");
+    return *fields.item;
+}
+std::uint16_t &wait_timer(Context &context) {
+    try {
+        return player_initialization::bind_wait_timer(context.task);
+    } catch (const player_initialization::Error &) {
+        missing("native_miles_wait_timer");
+    }
+}
+std::int16_t stage(Context &context) { return context.stage; }
+void chao_setup(Context &, const TaskWorkHandle &, const Player &, std::uint8_t) {
+    missing("native_miles_chao_setup");
+}
+bool check_damage(Context &, Primary task, const TaskWorkHandle &, const Player &player) {
+    // MilesCheckDamage returns zero when playerwk is absent (the pre-initialization
+    // frame), and when the task hurt bit and the player's damage-contact attribute
+    // are both clear. Only the remaining branch can store a damage mode.
+    if (!player)
+        return false;
+    const auto flags = task.status;
+    const auto attributes = physics(player).attributes;
+    if ((flags & kHurt) == 0 && (attributes & kDamageAttribute) == 0)
+        return false;
+    missing("native_miles_check_damage");
+}
+void hurt_reaction(Context &, Primary, const Player &) {
+    missing("native_miles_hurt_reaction");
+}
+void scatter_rings(Context &, std::uint8_t) { missing("native_miles_scatter_rings"); }
+bool check_next_action(Context &, Primary, const TaskWorkHandle &, const Player &) {
+    // MilesCheckNextAction is the event/next-action state machine: its ewp
+    // move/path prefix and the smode jump table can both store a new mode, so
+    // it is not a preview-zero predicate.
+    missing("native_miles_check_next_action");
+}
+bool check_fall(Context &, Primary task, const TaskWorkHandle &, const Player &) {
+    // MilesCheckFall's first guard returns zero when either low status bit is
+    // set. The preview task starts with status 7 and the entry step clears only
+    // the on-collision bit, leaving bit 0 set; only the clear branch can store
+    // MD_MILES_FALL.
+    if ((task.status & 3) != 0)
+        return false;
+    missing("native_miles_check_fall");
+}
+bool check_jump(Context &, Primary, const TaskWorkHandle &, const Player &) {
+    // MilesCheckJump calls JumpAllowed, which reads the held jump mask and the
+    // task disable-control bit, then can store MD_MILES_JUMP.
+    missing("native_miles_check_jump");
+}
+bool check_grab(Context &context, Primary task, const TaskWorkHandle &, const Player &) {
+    // MilesCheckGrab tests the held word against GrabButtons before any holder
+    // query or mode store; the selection preview holds no button.
+    if ((held_buttons(context, task.player_index) & grab_buttons(context)) == 0)
+        return false;
+    missing("native_miles_check_grab");
+}
+bool check_attack(Context &context, Primary task, const TaskWorkHandle &, const Player &) {
+    // MilesCheckAttack tests the held word against AttackButtons and the task
+    // 0x2000 lock before any mode store; the preview holds no button and never
+    // sets that bit.
+    if ((held_buttons(context, task.player_index) & attack_buttons(context)) == 0 ||
+        (task.status & kAttackLocked) != 0)
+        return false;
+    missing("native_miles_check_attack");
+}
+bool stage_pickup(Context &context, Primary, const TaskWorkHandle &, const Player &) {
+    // The stage pickup owner returns zero outside the Chao stages before any other test.
+    if (context.stage < kChaoGardenFirstStage || context.stage > kChaoGardenLastStage)
+        return false;
+    missing("native_miles_stage_pickup");
+}
+bool stage_action(Context &context, Primary, const TaskWorkHandle &, const Player &,
+                  std::uint32_t) {
+    // The stage action owner returns zero outside the Chao stages before any other test.
+    if (context.stage < kChaoGardenFirstStage || context.stage > kChaoGardenLastStage)
+        return false;
+    missing("native_miles_stage_action");
+}
+bool analog_input(Context &, Primary) {
+    // The recovered GetAnalog owner exists, but this path's normalized-input
+    // and event-work facts are not composed in the Miles context yet.
+    missing("native_miles_analog_input");
+}
+float contact_depth(Context &, const Player &player) {
+    const auto *direction = player_contact_direction(physics(player));
+    if (!direction)
+        missing("native_miles_contact_depth");
+    return direction->y;
+}
+fidelity::ExactFloat speed_magnitude(Context &context, const TaskWorkHandle &motion) {
+    if (motion != context.task->motion_work)
+        missing("native_miles_motion_identity");
+    const auto &speed =
+        player_initialization::bind_existing_motion(context.task)->motion.speed;
+    auto &arithmetic = context.rendering.arithmetic();
+    return fidelity::ExactFloat::retained(
+        arithmetic,
+        fidelity::ExactFloat::vector_length_return(arithmetic, speed.x, speed.y, speed.z));
+}
+float slide_speed(Context &, const Player &player) {
+    if (!player)
+        missing("native_miles_player_parameters");
+    return player->parameters.slide_speed;
 }
 void initialize_auxiliary_a(Context &, std::uint8_t) { missing("native_miles_auxiliary_a"); }
 void initialize_auxiliary_b(Context &, std::uint8_t) { missing("native_miles_auxiliary_b"); }

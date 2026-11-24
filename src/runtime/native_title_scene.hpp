@@ -56,8 +56,9 @@ class TitleScene final : private title_menu::Calls,
         std::function<std::int32_t(std::int32_t)> key_pressed;
         std::function<std::uint32_t()> pressed_buttons;
         std::array<NativeAnalogInput, 8> *normalized_input = nullptr;
-        // The engine pad's held word, pressed word, and the first button mask.
+        // The engine pad's held word, pressed word, and the first and grab button masks.
         std::function<std::uint32_t()> action_mask;
+        std::function<std::uint32_t()> grab_mask;
         std::function<std::uint32_t(std::uint8_t slot)> pad_held;
         std::function<std::uint32_t(std::uint8_t slot)> pad_pressed;
     };

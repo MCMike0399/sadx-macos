@@ -282,6 +282,7 @@ class Application {
             [this] { return input->pressed(0); },
             &input->normalized_analogs(),
             [this] { return input->button_masks()[0]; },
+            [this] { return input->button_masks()[2]; },
             [this](std::uint8_t slot) { return input->engine_snapshot(slot).held; },
             [this](std::uint8_t slot) { return input->engine_snapshot(slot).pressed; }
         });

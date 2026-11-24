@@ -30,12 +30,12 @@ struct MilesCallbackProbe {
         try {
             task->exec(scheduler, task);
         } catch (const flow::UnrecoveredGameFlowCall &error) {
-            stopped = std::string(error.what()) == "native_miles_action_update";
+            stopped = std::string(error.what()) == "native_miles_parameters";
             if (!stopped)
                 throw std::runtime_error(std::string("Miles exec stopped at: ") + error.what());
         }
         if (!stopped)
-            throw std::runtime_error("Miles exec does not reach its named action-update seam");
+            throw std::runtime_error("Miles exec does not reach its named parameter seam");
     }
 };
 } // namespace sadx::native
@@ -110,7 +110,7 @@ int main(int argc, char **argv) {
             native::TitleScene scene(session, display, titles);
             native::MilesCallbackProbe::run(session, scene);
             std::cout << "Miles assets: 114 declarations, 136 recipes, 30 weld rows; "
-                         "exec stops at native_miles_action_update\n";
+                         "exec stops at native_miles_parameters\n";
             return 0;
         } catch (const std::exception &error) {
             std::cerr << "native Miles assets: " << error.what() << '\n';
