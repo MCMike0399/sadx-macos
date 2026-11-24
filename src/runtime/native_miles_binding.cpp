@@ -248,18 +248,18 @@ void join_vertices(Context &context, Primary, const TaskWorkHandle &, const Play
     }
 }
 character_pack::ObjectResource &tail_object(Context &context, unsigned table_index) {
-    constexpr std::array<unsigned, 6> kRows = {28, 31, 48, 51, 62, 63};
-    const auto index = row_index(kRows, table_index, "native_miles_tail_object_row");
+    constexpr std::array<unsigned, 6> kTailObjectRows = {28, 31, 48, 51, 62, 63};
+    const auto index = row_index(kTailObjectRows, table_index, "native_miles_tail_object_row");
     return context.scene.objects.object(assets(context).tail_objects[index]);
 }
 character_pack::ResourceId sibling_object(Context &context, unsigned table_index) {
-    constexpr std::array<unsigned, 8> kRows = {32, 34, 52, 54, 60, 61, 64, 65};
-    const auto index = row_index(kRows, table_index, "native_miles_sibling_object_row");
+    constexpr std::array<unsigned, 8> kSiblingObjectRows = {32, 34, 52, 54, 60, 61, 64, 65};
+    const auto index = row_index(kSiblingObjectRows, table_index, "native_miles_sibling_object_row");
     return assets(context).sibling_objects[index];
 }
 character_pack::ResourceId tail_model(Context &context, unsigned table_index) {
-    constexpr std::array<unsigned, 3> kRows = {0, 1, 14};
-    const auto index = row_index(kRows, table_index, "native_miles_tail_model_row");
+    constexpr std::array<unsigned, 3> kTailModelRows = {0, 1, 14};
+    const auto index = row_index(kTailModelRows, table_index, "native_miles_tail_model_row");
     return assets(context).tail_models[index];
 }
 character_pack::ObjectResource &scene_object(Context &context, character_pack::ResourceId id) {

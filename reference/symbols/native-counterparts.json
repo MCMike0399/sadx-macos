@@ -11,6 +11,17 @@
       "reason": "The product Session owns the source low word. The reference-only Sonic adapter retains its independent optional fixture fact; it is not another product owner. Both preserve the two-byte source extent.",
       "evidence": "reference/packets/sonic-editor-native/check-edit-mode-evidence.json",
       "evidence_sha256": "f63d5e27a227cc3d3f1972b5c98868b79ff25dbb62d328c97948ffd748a1c7ba"
+    },
+    {
+      "module": "SONIC",
+      "address": "0x3b22dc0",
+      "size": 2,
+      "native_path": "src/game/game_bootstrap.hpp",
+      "native_member": "player_number",
+      "reference": "src/guest/game_mode_leaves_reference.hpp:GameModeLeafState.character_at_3b22dc0",
+      "reason": "The product bootstrap State owns usPlayer (read by GetPlayerNumber 0x4144e0). The reference-only game-mode leaf retains its independent optional fixture fact; it is not another product owner. Both preserve the two-byte source extent.",
+      "evidence": "reference/inventory-raw/amy-rose.json",
+      "evidence_sha256": "1521103308c6c0cfb7a9f312ea4036cd3f59e3a65421937b53065dd5af7ca90b"
     }
   ]
 }

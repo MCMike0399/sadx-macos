@@ -889,6 +889,86 @@
         "tools/oracles/verify_original_sonic_actions.py"
       ],
       "verification_limit": "Accepted source packet plus current complete old/current records. Not native sound composition or a completed actor frame."
+    },
+    "src/runtime/native_miles_binding.cpp::kTailObjectRows": {
+      "sha256": "f1efd017611dfdf7a7807440a472d1011c3c696348066e97a1ae1568d8fc557f",
+      "classification": "numeric_encoding",
+      "purpose": "Miles tail object table rows the binding may address, in MILES_OBJECTS table order.",
+      "evidence": [
+        {
+          "path": "src/runtime/native_miles_binding.cpp",
+          "line": 251,
+          "sha256": "eb010cf9a12f061e2015036e93f53e604f5451af645faa099fb9111664b204cf"
+        }
+      ],
+      "verification": [
+        "tests/unit/native_miles_assets.mm"
+      ],
+      "verification_limit": "Asset closure tests bind the imported identities; row reachability in gameplay is not claimed."
+    },
+    "src/runtime/native_miles_binding.cpp::kSiblingObjectRows": {
+      "sha256": "08a553d37921bbb309c6817ea06bb36733aefae99a75e0843c57873b3b9d3c62",
+      "classification": "numeric_encoding",
+      "purpose": "Miles sibling object table rows the tail swaps may address, in MILES_OBJECTS table order.",
+      "evidence": [
+        {
+          "path": "src/runtime/native_miles_binding.cpp",
+          "line": 256,
+          "sha256": "eb010cf9a12f061e2015036e93f53e604f5451af645faa099fb9111664b204cf"
+        }
+      ],
+      "verification": [
+        "tests/unit/native_miles_assets.mm"
+      ],
+      "verification_limit": "Asset closure tests bind the imported identities; row reachability in gameplay is not claimed."
+    },
+    "src/runtime/native_miles_binding.cpp::kTailModelRows": {
+      "sha256": "6a8f9ab44c732a4eba7b4018f236c5024da0ca9e161c9a64562bf72e6b14363c",
+      "classification": "numeric_encoding",
+      "purpose": "Miles tail model table rows the binding may address, in MILES_MODELS table order.",
+      "evidence": [
+        {
+          "path": "src/runtime/native_miles_binding.cpp",
+          "line": 261,
+          "sha256": "eb010cf9a12f061e2015036e93f53e604f5451af645faa099fb9111664b204cf"
+        }
+      ],
+      "verification": [
+        "tests/unit/native_miles_assets.mm"
+      ],
+      "verification_limit": "Asset closure tests bind the imported identities; row reachability in gameplay is not claimed."
+    },
+    "src/runtime/native_amy_binding.cpp::kStageWords": {
+      "sha256": "c1fa7929a222f7b921c6f249cd74809ab8109723addcf13a1062757392bad8a7",
+      "classification": "numeric_encoding",
+      "purpose": "The Amy stage-event table stage words (stage<<8|act) scanned by the 0x486a40 initializer, in source order: 0x0a00, 0x0a00, 0x0301.",
+      "evidence": [
+        {
+          "path": "src/runtime/native_amy_binding.cpp",
+          "line": 415,
+          "sha256": "b1dbc9ec369b16ecef730fbef7e9667afb25bf9bf601343be56d177b3103d99c"
+        }
+      ],
+      "verification": [
+        "tests/unit/native_amy_assets.mm"
+      ],
+      "verification_limit": "Asset closure tests bind the imported identities; row reachability in gameplay is not claimed."
+    },
+    "src/player/miles_selection_core.cpp::kWeldPatches": {
+      "sha256": "650de236cb09faf32306062fe58bf0dadea7598f562c8630e53b43ca671b06d8",
+      "classification": "named_structure",
+      "purpose": "Miles weld patch rows (object row, source row, destination row) applied by the selection core equipment step, in source order.",
+      "evidence": [
+        {
+          "path": "src/player/miles_selection_core.cpp",
+          "line": 28,
+          "sha256": "781cccece0e00a2b6aa051c5e9a9c02d94dfeef7ca333b4ea000f47ca4bc2a47"
+        }
+      ],
+      "verification": [
+        "tests/unit/native_miles_assets.mm"
+      ],
+      "verification_limit": "Asset closure tests bind the imported identities; weld reachability in gameplay is not claimed."
     }
   },
   "retired": {
