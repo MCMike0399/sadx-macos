@@ -513,10 +513,72 @@ float slide_speed(Context &, const Player &player) {
         missing("native_miles_player_parameters");
     return player->parameters.slide_speed;
 }
-void initialize_auxiliary_a(Context &, std::uint8_t) { missing("native_miles_auxiliary_a"); }
-void initialize_auxiliary_b(Context &, std::uint8_t) { missing("native_miles_auxiliary_b"); }
+void unrecovered_miles_auxiliary_a_task(TaskScheduler &, const TaskHandle &) {
+    missing("native_miles_auxiliary_a_task");
+}
+void unrecovered_miles_auxiliary_b_task(TaskScheduler &, const TaskHandle &) {
+    missing("native_miles_auxiliary_b_task");
+}
+// NOTSA: the shared elemental-child setup both Miles auxiliaries perform.
+void create_auxiliary(Context &context, TaskCallback callback, std::uint8_t index) {
+    const auto created = context.scheduler.create_element(2, 2, callback);
+    if (!created || !created.task)
+        return;
+    constexpr unsigned kDirectMotionBytes = 0x88;
+    constexpr unsigned kCopiedWordsOffset = 0x58;
+    auto allocation = arena(context).allocate(kDirectMotionBytes);
+    if (!allocation) {
+        (void)context.scheduler.destroy_task(created.task);
+        return;
+    }
+    created.task->motion_work = allocation.work;
+    store_child_index(context, created.task, index);
+    const auto parent_motion = player_initialization::bind_existing_motion(context.task);
+    const auto word_of = [](float value) {
+        std::uint32_t word = 0;
+        std::memcpy(&word, &value, sizeof(word));
+        return word;
+    };
+    // The player pointer word has no native identity yet; the typed speed
+    // words copy exactly, as in the Amy/Big setups.
+    const std::array<std::uint32_t, 3> words{0, word_of(parent_motion->motion.speed.x),
+                                             word_of(parent_motion->motion.speed.y)};
+    for (unsigned word = 0; word < words.size(); ++word) {
+        if (!arena(context).write(allocation.work, kCopiedWordsOffset + word * 4, &words[word],
+                                  sizeof(words[word])))
+            missing("native_miles_auxiliary_motion_copy");
+    }
+}
+void initialize_auxiliary_a(Context &context, std::uint8_t index) {
+    create_auxiliary(context, unrecovered_miles_auxiliary_a_task, index);
+}
+void initialize_auxiliary_b(Context &context, std::uint8_t index) {
+    create_auxiliary(context, unrecovered_miles_auxiliary_b_task, index);
+}
 void stand_tail(Context &, const TaskWorkHandle &) { missing("native_miles_stand_tail"); }
-void update_collision_center(Context &) { missing("native_miles_collision_center"); }
+void update_collision_center(Context &context) {
+    // The collision center is the converted center-height offset plus the
+    // task position, stored back into the first collision record.
+    const auto view = player_initialization::bind_primary_view(context.task);
+    const auto player = player_for_motion(context, context.task->motion_work);
+    if (!player)
+        missing("native_miles_collision_center_player");
+    if (!has_collision(context, context.task->primary_work))
+        missing("native_miles_collision_center_info");
+    NinjaVector local{0.0f, player->parameters.center_height, 0.0f};
+    const PlayerOrientation orientation{view.status, view.rotation};
+    if (!context.rendering.convert_player_to_global(orientation, local))
+        missing("native_miles_collision_center_convert");
+    auto &center = collision_info(context, context.task->primary_work, 0).center;
+    const auto add = [&context](float left, float right) {
+        return (fidelity::ExactFloat(context.rendering.arithmetic(), left) +
+                fidelity::ExactFloat(context.rendering.arithmetic(), right))
+            .rounded();
+    };
+    center.x = add(view.position.x, local.x);
+    center.y = add(view.position.y, local.y);
+    center.z = add(view.position.z, local.z);
+}
 void update_held_task(Context &, const TaskWorkHandle &) { missing("native_miles_held_task"); }
 void update_collision_range(Context &, Primary) { missing("native_miles_collision_range"); }
 void set_collision_range(Context &, const TaskWorkHandle &, const Player &) {

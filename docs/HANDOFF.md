@@ -1388,3 +1388,9 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Verified: make -j10 build/sadx-native exits 0. The native-miles-assets test stops at native_miles_parameters because its probe has no Gamma parameters; player-underwater, character-shadow and view-check units exit 0; provenance, readability, layers and profile patches are 0. The checker ran against the main checkout private assets with this worktree's binary: frame 1332, title c7d02f64, semantic state passed, boundary stop native_miles_auxiliary_a.
 * Limits: only the entry and stand prefix are recovered; the other mode bodies and the GetAnalog composition remain explicit seams. The probe's parameter stop precedes the app's auxiliary stop.
 * Next: the Miles auxiliary setup, then the next named stop in the character-select frame.
+
+### 2026-11-10 — Miles auxiliaries and collision center run (no gate)
+
+* Outcome: the frontier still exits 1 at frame 1332 on the title hash. Miles mode zero now stops at native_miles_collision_range after its display view check. No CharacterSelect frame is presented.
+* Changed: both Miles auxiliaries create their elemental children with copied motion words. The collision center is the converted center-height offset plus the task position in the first record.
+* Verified: the app builds and the frontier stop moved with semantic state still passing.
