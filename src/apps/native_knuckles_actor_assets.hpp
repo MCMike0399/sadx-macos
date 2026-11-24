@@ -124,6 +124,26 @@ inline KnucklesActorAssets load_knuckles_actor_assets(const std::filesystem::pat
             result.join_pairs[index].push_back(value);
         }
     }
+    const auto equipment_objects =
+        array(metadata[@"equipment_objects"], 16, "Knuckles equipment objects");
+    for (std::size_t index = 0; index < result.equipment_objects.size(); ++index) {
+        const auto row = dictionary(equipment_objects[index], "Knuckles equipment object");
+        (void)integer(row[@"index"], 58 + index, 58 + index, "Knuckles equipment object row");
+        const auto object = static_cast<character_pack::ResourceId>(
+            integer(row[@"object"], 1, pack.record_count(), "Knuckles equipment object identity"));
+        (void)pack.object(object);
+        result.equipment_objects[index] = object;
+    }
+    const auto equipment_models =
+        array(metadata[@"equipment_models"], 23, "Knuckles equipment models");
+    for (std::size_t index = 0; index < result.equipment_models.size(); ++index) {
+        const auto row = dictionary(equipment_models[index], "Knuckles equipment model");
+        (void)integer(row[@"index"], index, index, "Knuckles equipment model row");
+        const auto model = static_cast<character_pack::ResourceId>(
+            integer(row[@"model"], 1, pack.record_count(), "Knuckles equipment model identity"));
+        (void)pack.model(model);
+        result.equipment_models[index] = model;
+    }
     const auto collision = array(metadata[@"collision_words"], 60, "Knuckles collision records");
     std::array<std::uint32_t, 60> collision_words{};
     for (std::size_t index = 0; index < collision_words.size(); ++index)

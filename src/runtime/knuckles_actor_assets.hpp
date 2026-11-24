@@ -25,6 +25,9 @@ struct KnucklesActorAssets {
     std::array<KnucklesJoinDeclaration, 30> joins{};
     // Decoded pair arrays, parallel to joins; empty where the row has none.
     std::array<std::vector<std::uint16_t>, 30> join_pairs{};
+    // KNUCKLES_OBJECTS rows 58..73 and KNUCKLES_MODELS rows 0..22, in table order.
+    std::array<character_pack::ResourceId, 16> equipment_objects{};
+    std::array<character_pack::ResourceId, 23> equipment_models{};
     std::vector<collision_component::Info> collision_info;
 };
 } // namespace sadx::native

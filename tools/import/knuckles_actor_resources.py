@@ -120,6 +120,27 @@ def append_knuckles(dll, exe, importer, actions):
         if inverse != weld_raw[24 * index:24 * (index + 1)]:
             raise ValueError('Knuckles weld inverse proof failed')
         joins.append(entry)
+    # Equipment tail identities: KNUCKLES_OBJECTS rows 58..73 and
+    # KNUCKLES_MODELS rows 0..22 are the only table entries the upgrade update
+    # reads. The source object rows are all live pointers on this build.
+    models_table = export(dll, '___KNUCKLES_MODELS')
+    equipment_objects = []
+    for index in range(58, 74):
+        address = dll.unpack('<I', object_table + 4 * index)[0]
+        if not address:
+            raise ValueError(f'Knuckles equipment object row {index} is null')
+        equipment_objects.append({'index': index, 'object': importer.object(address)})
+    equipment_models = []
+    for index in range(23):
+        address = dll.unpack('<I', models_table + 4 * index)[0]
+        if not address:
+            raise ValueError(f'Knuckles equipment model row {index} is null')
+        equipment_models.append({'index': index, 'model': importer.model(address)})
+    equipment_source = {
+        'objects': {'export': hex(object_table), 'rows': list(range(58, 74)),
+                    'bytes': dll.read(object_table + 4 * 58, 4 * 16).hex()},
+        'models': {'export': hex(models_table), 'rows': list(range(23)),
+                   'bytes': dll.read(models_table, 4 * 23).hex()}}
     collision = exe.read(COLLISION_ADDRESS, COLLISION_BYTES)
     importer.verify_round_trip()
     if importer.records[:len(old_records)] != old_records or actions != old_bindings:
@@ -132,6 +153,7 @@ def append_knuckles(dll, exe, importer, actions):
         'initial_animation_action': initial,
         'declarations': declaration_metadata, 'constructed_action': construction,
         'recipes': rows, 'joins': joins,
+        'equipment_objects': equipment_objects, 'equipment_models': equipment_models,
         'collision_words': list(struct.unpack('<%dI' % (COLLISION_BYTES // 4), collision)),
         'texture_character': 3}
     proof = {'version': 1, 'source_dll_sha256': dll.sha256, 'source_game_sha256': exe.sha256,
@@ -143,7 +165,7 @@ def append_knuckles(dll, exe, importer, actions):
                   'motion': hex(stand_motion), 'object_count': stand_count,
                   'frames': stand_frames, 'channels': stand_channels,
                   'interpolation': stand_interpolation},
-        'constructed_action': construction,
+        'constructed_action': construction, 'equipment_tables': equipment_source,
         'source_declarations': [
             {'address': hex(COLLISION_ADDRESS), 'size': len(collision),
              'sha256': digest(collision), 'bytes': collision.hex()}],

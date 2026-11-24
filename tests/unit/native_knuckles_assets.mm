@@ -77,6 +77,10 @@ int main(int argc, char **argv) {
             require(assets.joins.size() == 30 && assets.joins[0].vertex_pairs != 0 &&
                         assets.join_pairs[0].size() == 8 && assets.joins[29].object == 0,
                     "weld rows and pair arrays bind");
+            require(assets.equipment_objects.size() == 16 && assets.equipment_objects[0] != 0 &&
+                        assets.equipment_objects[15] != 0 && assets.equipment_models.size() == 23 &&
+                        assets.equipment_models[0] != 0 && assets.equipment_models[22] != 0,
+                    "equipment object and model rows bind");
             require(assets.collision_info.size() == 5, "five collision records");
             const auto stand = pack.resolve(assets.stand);
             const auto motion = pack.motion(stand.motion);
@@ -98,7 +102,8 @@ int main(int argc, char **argv) {
             const native::TitleAssets titles{};
             native::TitleScene scene(session, display, titles);
             native::KnucklesCallbackProbe::run(session, scene);
-            std::cout << "Knuckles assets: 90 declarations, 115 recipes, 30 weld rows; "
+            std::cout << "Knuckles assets: 90 declarations, 115 recipes, 30 weld rows, "
+                         "16 equipment objects, 23 equipment models; "
                          "exec stops at native_knuckles_parameters\n";
             return 0;
         } catch (const std::exception &error) {
