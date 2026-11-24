@@ -547,8 +547,40 @@ character_pack::ResourceId equipment_model(Context &context, unsigned table_inde
 }
 void stand_tail(Context &, const TaskWorkHandle &) { missing("native_knuckles_stand_tail"); }
 void update_held_task(Context &, const TaskWorkHandle &) { missing("native_knuckles_held_task"); }
-void update_collision_shape(Context &, Primary, const Player &) {
-    missing("native_knuckles_collision_shape");
+void update_collision_shape(Context &context, Primary view, const Player &player) {
+    // Knuckles_CollisionShape: outside the glide animation range it enables
+    // every collision record and rewrites the first damage byte; the glide
+    // shape rewrite stays a seam below.
+    const auto requested = requested_animation(context, player);
+    if (requested >= 0x36 && requested <= 0x45)
+        return;
+    if (!has_collision(context, context.task->primary_work)) {
+        if (requested == 0x33)
+            missing("native_knuckles_collision_shape_info");
+        return;
+    }
+    if (requested == 0x33)
+        missing("native_knuckles_collision_shape_glide");
+    constexpr std::uint32_t kEnabled = 16;
+    collision_attributes(context, context.task->primary_work, 1) |= kEnabled;
+    collision_attributes(context, context.task->primary_work, 2) |= kEnabled;
+    collision_attributes(context, context.task->primary_work, 3) |= kEnabled;
+    std::uint8_t low = 0;
+    std::uint8_t klass = 0;
+    if ((item_word(context, player) & 0x8000) != 0) {
+        low = 3;
+        klass = 3;
+    } else if ((view.status & 0x100) != 0) {
+        low = 1;
+        klass = 1;
+    } else if (view.mode == 0x12) {
+        low = 3;
+        klass = 1;
+    } else if (view.mode == 0x34) {
+        klass = 1;
+    }
+    auto &damage = collision_info(context, context.task->primary_work, 0).damage;
+    damage = static_cast<std::uint8_t>((klass << 2) | (damage & 0xf0) | low);
 }
 void update_reference_position(Context &, Primary) {
     missing("native_knuckles_reference_position");

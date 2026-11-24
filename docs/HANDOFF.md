@@ -1365,3 +1365,9 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Outcome: the frontier still exits 1 at frame 1332 on the title hash. Knuckles mode zero now stops at the next seam after its auxiliary setup. No CharacterSelect frame is presented.
 * Changed: the auxiliary task is created with its copied motion words and player index, mirroring the Amy and Big setups.
 * Verified: the app builds and the frontier stop moved with semantic state still passing.
+
+### 2026-11-10 — Knuckles collision shape runs (no gate)
+
+* Outcome: the frontier still exits 1 at frame 1332 on the title hash. It now stops after the Knuckles collision shape update. No CharacterSelect frame is presented.
+* Changed: the shape update enables the collision records and rewrites the first damage byte outside the glide animation range. The glide rewrite stays an explicit seam.
+* Verified: the app builds and the frontier stop moved with semantic state still passing.
