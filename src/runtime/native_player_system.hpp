@@ -60,6 +60,8 @@ struct PlayerSystem {
     gamma_effects::State gamma_effects;
     // The unnamed character-region word Amy mode zero clears; role unknown.
     std::uint32_t amy_event_word = 0;
+    // The unnamed character-region word the Amy tail clears last; role unknown.
+    std::uint32_t amy_finish_word = 0;
     std::unique_ptr<BigActorAssets> big_assets;
     std::unique_ptr<BigMotionAssets> big_motion_assets;
     PlayerJoinTable big_weld;

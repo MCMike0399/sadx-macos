@@ -470,10 +470,35 @@ void initialize_auxiliary_e(Context &context) {
         missing("native_amy_stage_event_task");
 }
 void stand_tail(Context &, const TaskWorkHandle &) { missing("native_amy_stand_tail"); }
-void post_display(Context &, const TaskWorkHandle &) { missing("native_amy_post_display"); }
+void post_display(Context &context, const TaskWorkHandle &) {
+    // The hammer-matrix update runs only with the equipment bit set on a
+    // non-catch-up tick; the preview equipment word is clear.
+    const auto player = player_for_motion(context, context.task->motion_work);
+    if (!player || (equipment(context, player) & 0x100) == 0 ||
+        context.rendering.pending_logic_ticks() != 0)
+        return;
+    missing("native_amy_post_display_matrix");
+}
 void update_held_task(Context &, const TaskWorkHandle &) { missing("native_amy_held_task"); }
-void post_shadow(Context &) { missing("native_amy_post_shadow"); }
-void finish_frame(Context &) { missing("native_amy_finish_frame"); }
+void post_shadow(Context &context) {
+    // Collision-info adjustments after CharacterShadow; the special
+    // animation matrix work stays a seam for its four reqactions.
+    auto view = player_initialization::bind_primary_view(context.task);
+    const auto player = player_for_motion(context, context.task->motion_work);
+    const auto requested = requested_animation(context, player);
+    if (requested == 0x56 || requested == 0x5a || requested == 0x5d || requested == 99)
+        missing("native_amy_post_shadow_matrix");
+    if (!has_collision(context, context.task->primary_work))
+        return;
+    collision_attributes(context, context.task->primary_work, 1) |= 16;
+    view.status = view.status & ~0x0400u;
+    const bool item_high = (item_word(context, player) & 0x8000) != 0;
+    const std::uint8_t low = item_high ? 3 : 0;
+    const std::uint8_t klass = item_high ? 3 : (view.mode == 0x30 ? 1 : 0);
+    auto &damage = collision_info(context, context.task->primary_work, 0).damage;
+    damage = static_cast<std::uint8_t>((klass << 2) | (damage & 0xf0) | low);
+}
+void finish_frame(Context &context) { context.players.amy_finish_word = 0; }
 void set_z_compare(Context &context, std::uint32_t mode) {
     context.rendering.set_depth_comparison(mode);
 }

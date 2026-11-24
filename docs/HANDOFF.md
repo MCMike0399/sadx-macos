@@ -1352,3 +1352,10 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Verified: the frontier boundary stays at native_amy_initialize_auxiliary_d, frame 1332, title hash c7d02f64 with semantic state passing, against both private asset trees.
 * Not run: full gate. Provenance reports the two pre-existing usPlayer overlaps from the base commit; readability, layers and profile patches are 0. KnucklesDestruct 0x472180 has no Ghidra procedure and stays an explicit stop.
 * Next: the Knuckles idle-state and action-update seams in stop order.
+
+### 2026-11-10 — Amy completes its first frame (no gate)
+
+* Outcome: the frontier still exits 1 at frame 1332 on the title hash. Amy now runs mode zero and the full common tail; the stop is native_knuckles_idle_state. No CharacterSelect frame is presented.
+* Changed: Amy setup creates its direct-ahead child with the copied motion words and clears the player work-word bit. The three stage auxiliaries run behind their character, global-mode and stage-word gates. The post-shadow collision adjustments and the final cleared word run in source order.
+* Verified: the app builds and the frontier stop moved through the setup, auxiliaries, display, post-shadow and finish boundaries with semantic state still passing.
+* Next: Knuckles idle state, then Miles in traversal order. Frame two work follows once every actor finishes frame one.
