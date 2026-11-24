@@ -10,6 +10,7 @@ namespace sadx::amy_selection {
 struct Context;
 using Player = player_initialization::PlayerHandle;
 using Primary = player_initialization::PrimaryView;
+enum class Axis { X, Y, Z };
 
 // NOTSA: per-player free fields mode zero clears and the display prefix reads.
 struct ExtraView {
@@ -142,7 +143,42 @@ void update_held_task(Context &, const TaskWorkHandle &);
 void post_shadow(Context &);
 // STUB: SONIC 0x4c56c0 FUN_004c56c0
 void finish_frame(Context &);
-// STUB: SONIC 0x487260 AmyDisplay
+// NOTSA: display-prefix and body bindings to the canonical renderer owners.
+void set_z_compare(Context &, std::uint32_t);
+void reset_z_compare(Context &);
+std::int32_t event_cancel(Context &);
+std::uint16_t animation_mode(Context &, const Player &);
+float animation_frame(Context &, const Player &);
+float player_height(Context &, const Player &);
+bool has_event_action(Context &, const TaskWorkHandle &);
+character_pack::ObjectResource &tail_sibling(Context &);
+character_pack::ObjectResource &tail_sibling_child(Context &);
+void select_palette(Context &, std::int32_t);
+void select_body_textures(Context &);
+void save_control(Context &);
+void set_control(Context &, std::uint32_t);
+void restore_control(Context &);
+void set_white_material(Context &);
+void restore_material(Context &);
+void push_current_frame(Context &);
+void push_unit_frame(Context &);
+void pop_frame(Context &);
+void rotate(Context &, Axis axis, std::int32_t angle);
+NinjaVector calculate_vector(Context &, const NinjaVector &);
+void translate(Context &, const NinjaVector &);
+void scale(Context &, const NinjaVector &);
+void store_collision_center(Context &, const TaskWorkHandle &, const NinjaVector &);
+void draw_action(Context &, const Player &, std::uint16_t animation, float frame);
+// NOTSA: generated-action display path awaiting a native owner.
+[[noreturn]] void draw_generated_action(Context &, const Player &, float frame);
+// STUB: SONIC 0x4187d0 DrawEventModel awaiting recovery
+[[noreturn]] void draw_event_model(Context &);
+// STUB: SONIC 0x486cd0 AmyDrawSpecialBody special modes awaiting recovery
+bool special_body(Context &, std::uint8_t mode);
+bool paused(Context &);
+void draw_character_shadow(Context &, const Player &, const TaskHandle &);
+
+// FUNCTION: SONIC 0x487260 AmyDisplay
 void display(Context &, const TaskHandle &);
 // STUB: SONIC 0x484360 AmyDestruct
 void destroy(Context &, const TaskHandle &);

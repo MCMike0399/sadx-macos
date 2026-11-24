@@ -190,6 +190,8 @@ struct Context {
     regular_textures::Services *texture_services;
     character_pack::SceneState &scene;
     const native::ModelDrawEnvironment *model_environment = nullptr;
+    // NOTSA: borrowed palette operation uses the Session lighting/time owners.
+    std::function<void(std::int32_t)> display_palette = {};
     // NOTSA: borrowed mission/editor words for CheckEditMode.
     const editor::View *editor_state = nullptr;
     // Borrowed session collision-entry owner; never a per-callback copy.

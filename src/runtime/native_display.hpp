@@ -32,6 +32,7 @@
 #include <memory>
 
 namespace sadx::gamma_display { struct Context; }
+namespace sadx::amy_selection { struct DisplayContext; }
 
 namespace sadx::native {
 // NOTSA: native presentation owners initialized by the recovered camera/device operations.
@@ -140,6 +141,7 @@ class Display {
     friend struct DisplayModelProbe;
     friend struct object_draw::Context;
     friend struct gamma_display::Context;
+    friend struct amy_selection::DisplayContext;
     friend struct polybuff::Context;
     friend struct basic_model::Context;
     friend struct material_correction::Context;

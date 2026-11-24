@@ -1,4 +1,5 @@
 #include "player/amy_selection_core.hpp"
+#include <cstring>
 
 namespace sadx::amy_selection {
 namespace {
@@ -28,6 +29,22 @@ constexpr std::uint16_t kItemLowBitsClear = 0xfffc;
 constexpr std::uint8_t kCandyStartMode = 0x31; // MD_AMY_CNADE_START
 constexpr std::uint16_t kCandyStartAnimation = 0x51;
 constexpr std::uint16_t kWalkAnimation = 9;
+// AmyDisplay's fade, z-compare and body literals.
+constexpr std::uint16_t kFadeOneAction = 0xd;
+constexpr std::uint16_t kFadeKeepAction = 0x54;
+constexpr float kFadeStep = 0.1f;
+constexpr std::uint32_t kDisplayZCompare = 3;
+constexpr std::uint32_t kDisplayFlagZero = 8;
+constexpr std::uint32_t kDisplayFlagOne = 4;
+constexpr std::uint32_t kOneFloatBits = 0x3f800000U;
+constexpr std::uint16_t kDisplayGate = 2;
+constexpr std::uint32_t kEnableConstantMaterial = 16;
+constexpr std::uint16_t kScaleAnimation = 14;
+constexpr std::uint16_t kScaleStatus = 3;
+constexpr std::int32_t kHalfTurn = 0x8000;
+constexpr std::int32_t kScaleRotation = 0x2000;
+constexpr float kModelCenterHeight = 0.5f;
+constexpr float kScaleX = 0.7f, kScaleY = 1.1f, kScaleZ = 0.8f;
 
 // NOTSA: named entry step; captured primary/motion/player are source locals.
 void enter(Context &context, Primary task, const TaskWorkHandle &primary_work,
@@ -113,6 +130,132 @@ void common_tail(Context &context, const TaskHandle &object, Primary task,
     underwater(context, task, motion, player);
     finish_frame(context);
     extra(context, player).byte_82 = 0;
+}
+// NOTSA: AmyDisplay's fade target gate. The reached branch is the source's
+// unsigned request comparison; byte 0x81 keeps the target and the cancel leaf
+// falls through to zero.
+void update_fade(Context &context, const Player &player, const ExtraView &fields) {
+    if (fields.byte_81 == 1)
+        return;
+    if (event_cancel(context) != 1) {
+        const auto request = requested_animation(context, player);
+        if (request == kFadeOneAction) {
+            fields.display_target = 1.0f;
+            return;
+        }
+        if (request > kFadeKeepAction)
+            return;
+    }
+    fields.display_target = 0.0f;
+}
+
+// NOTSA: the source compares the extended sum against the target memory word,
+// then either stores the sum or clamps the reversed difference.
+void step_display(Context &context, const ExtraView &fields) {
+    auto forward = exact(context, fields.display_current) + kFadeStep;
+    const auto forward_comparison = forward.compare(fields.display_target);
+    if (forward_comparison != X87Comparison::greater &&
+        forward_comparison != X87Comparison::unordered) {
+        fields.display_current = forward.rounded();
+        return;
+    }
+    auto backward = exact(context, fields.display_current) - kFadeStep;
+    const auto backward_comparison = backward.compare(fields.display_target);
+    if (backward_comparison == X87Comparison::less ||
+        backward_comparison == X87Comparison::equal ||
+        backward_comparison == X87Comparison::unordered) {
+        fields.display_current = fields.display_target;
+    } else {
+        fields.display_current = backward.rounded();
+    }
+}
+
+// NOTSA: AMY_OBJECTS row 36 selects its sibling (row 37 or 38); the scale pair
+// is that sibling and its child, not row 36 itself.
+void write_display_scale(Context &context, const ExtraView &fields) {
+    const auto value = fields.display_current;
+    auto &root = tail_sibling(context);
+    auto &child = tail_sibling_child(context);
+    root.scale = {value, value, value};
+    child.scale = {value, value, value};
+    const auto zero = exact(context, value).compare(0.0f) == X87Comparison::equal;
+    if (zero) {
+        root.evaluation_flags |= kDisplayFlagZero;
+        child.evaluation_flags |= kDisplayFlagZero;
+        return;
+    }
+    root.evaluation_flags &= ~kDisplayFlagZero;
+    child.evaluation_flags &= ~kDisplayFlagZero;
+    std::uint32_t bits = 0;
+    std::memcpy(&bits, &value, sizeof(bits));
+    if (bits == kOneFloatBits) {
+        root.evaluation_flags |= kDisplayFlagOne;
+        child.evaluation_flags |= kDisplayFlagOne;
+    } else {
+        root.evaluation_flags &= ~kDisplayFlagOne;
+        child.evaluation_flags &= ~kDisplayFlagOne;
+    }
+}
+
+// NOTSA: the source guards each full angle word before narrowing the store.
+void rotate_task(Context &context, Primary task, Axis axis) {
+    const auto value = task.rotation.at(static_cast<unsigned>(axis));
+    if (value != 0)
+        rotate(context, axis, static_cast<std::uint16_t>(value));
+}
+
+// NOTSA: the body's unit-frame carry places the player center at half height.
+void place_body(Context &context, Primary task, const TaskWorkHandle &primary_work,
+                const Player &player) {
+    push_unit_frame(context);
+    const auto center = (exact(context, player_height(context, player)) * kModelCenterHeight).rounded();
+    const NinjaVector local{0, center, 0};
+    rotate_task(context, task, Axis::Z);
+    rotate_task(context, task, Axis::X);
+    const auto yaw = 0U - static_cast<std::uint32_t>(task.rotation[1]);
+    if (yaw != 0)
+        rotate(context, Axis::Y, static_cast<std::uint16_t>(yaw));
+    auto offset = calculate_vector(context, local);
+    pop_frame(context);
+    offset.x = (exact(context, offset.x) + task.position.x).rounded();
+    offset.y = (exact(context, offset.y) + task.position.y).rounded();
+    offset.z = (exact(context, offset.z) + task.position.z).rounded();
+    translate(context, offset);
+    store_collision_center(context, primary_work, offset);
+    rotate_task(context, task, Axis::Z);
+    rotate_task(context, task, Axis::X);
+    const auto facing =
+        static_cast<std::uint32_t>(kHalfTurn) - static_cast<std::uint32_t>(task.rotation[1]);
+    if (facing != 0)
+        rotate(context, Axis::Y, static_cast<std::uint16_t>(facing));
+}
+
+// NOTSA: the ordinary body frame; the special body modes still fail there.
+void draw_body(Context &context, Primary task, const TaskWorkHandle &primary_work,
+               const Player &player, std::uint16_t animation, bool special) {
+    select_palette(context, 2);
+    save_control(context);
+    set_control(context, kEnableConstantMaterial);
+    set_white_material(context);
+    push_current_frame(context);
+    place_body(context, task, primary_work, player);
+    if (!special) {
+        if (animation == kScaleAnimation && (task.status & kScaleStatus) != 0) {
+            translate(context, {0, -1.0f, 0});
+            rotate(context, Axis::Z, kScaleRotation);
+            scale(context, {kScaleX, kScaleY, kScaleZ});
+        }
+        if (has_event_action(context, primary_work))
+            draw_event_model(context);
+        else if (animation_mode(context, player) == 2)
+            draw_generated_action(context, player, animation_frame(context, player));
+        else
+            draw_action(context, player, animation, animation_frame(context, player));
+    }
+    pop_frame(context);
+    restore_material(context);
+    restore_control(context);
+    select_palette(context, 0);
 }
 } // namespace
 
@@ -211,5 +354,29 @@ void run(Context &context, const TaskHandle &object) {
         unrecovered_mode(context, task.mode);
     }
     common_tail(context, object, task, motion, player);
+}
+// NOTSA: the recovered AmyDisplay body. The special-mode preamble and the
+// event/generated action branches remain named seams; the reached selection
+// path draws the Stand table action and runs the source shadow tail.
+void display(Context &context, const TaskHandle &object) {
+    const auto player = player_for_motion(context, object->motion_work);
+    const auto primary_work = object->primary_work;
+    auto task = primary(context, primary_work);
+    set_z_compare(context, kDisplayZCompare);
+    auto fields = extra(context, player);
+    update_fade(context, player, fields);
+    step_display(context, fields);
+    write_display_scale(context, fields);
+    const auto animation = animation_mode(context, player) == 2
+                               ? current_animation(context, player)
+                               : requested_animation(context, player);
+    if ((wait_timer(context) & kDisplayGate) == 0) {
+        select_body_textures(context);
+        const bool special = special_body(context, task.mode);
+        draw_body(context, task, primary_work, player, animation, special);
+    }
+    reset_z_compare(context);
+    if (paused(context))
+        draw_character_shadow(context, player, object);
 }
 } // namespace sadx::amy_selection
