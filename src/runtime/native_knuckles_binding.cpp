@@ -535,8 +535,15 @@ void initialize_auxiliary(Context &context, std::uint8_t index) {
             missing("native_knuckles_auxiliary_motion_copy");
     }
 }
-void update_upgrades(Context &, Primary, const TaskWorkHandle &) {
-    missing("native_knuckles_upgrades");
+character_pack::ObjectResource &equipment_object(Context &context, unsigned table_index) {
+    if (table_index < 58 || table_index >= 74)
+        missing("native_knuckles_equipment_object_row");
+    return context.scene.objects.object(assets(context).equipment_objects[table_index - 58]);
+}
+character_pack::ResourceId equipment_model(Context &context, unsigned table_index) {
+    if (table_index >= 23)
+        missing("native_knuckles_equipment_model_row");
+    return assets(context).equipment_models[table_index];
 }
 void stand_tail(Context &, const TaskWorkHandle &) { missing("native_knuckles_stand_tail"); }
 void update_held_task(Context &, const TaskWorkHandle &) { missing("native_knuckles_held_task"); }

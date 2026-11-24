@@ -1,5 +1,8 @@
 #include "player/knuckles_selection_core.hpp"
 
+#include <array>
+#include <cstddef>
+
 namespace sadx::knuckles_selection {
 namespace {
 constexpr std::uint8_t kKnuckles = 3;
@@ -35,6 +38,21 @@ constexpr std::uint8_t kStagePickupMode = 0x35;   // MD_KNUCK_CNADE_START
 constexpr std::uint16_t kStagePickupAnimation = 0x6f;
 constexpr std::uint32_t kStageActionArgument = 0x723801;
 constexpr std::uint16_t kWalkAnimation = 9;
+// Knuckles_Upgrades: playerwk+4 equipment bits and the two model lists they
+// select. KNUCKLES_OBJECTS rows 58..73 receive one model each in table order.
+constexpr std::uint16_t kUpgradeMask = 0x60;
+constexpr std::uint16_t kFightingGloves = 0x20;
+constexpr std::uint16_t kShovelClaw = 0x40;
+constexpr unsigned kFirstEquipmentObjectRow = 58;
+using EquipmentModels = std::array<std::uint8_t, 16>;
+constexpr EquipmentModels kNoUpgradeModels = {
+    7, 8, 9, 10, 11, 12, 13, 14, 7, 8, 9, 10, 11, 12, 13, 14};
+constexpr EquipmentModels kFightingGlovesModels = {
+    15, 16, 17, 18, 19, 20, 21, 22, 15, 16, 17, 18, 19, 20, 21, 22};
+constexpr EquipmentModels kShovelClawModels = {
+    7, 8, 0, 10, 11, 12, 2, 14, 7, 8, 0, 10, 11, 12, 2, 14};
+constexpr EquipmentModels kFightingGlovesShovelClawModels = {
+    15, 16, 1, 18, 19, 20, 3, 22, 15, 16, 1, 18, 19, 20, 3, 22};
 // The death-zone rescue probes the other player positions within 0.01 units.
 constexpr float kDeathZoneSeparation = 0.010000001f;
 enum class Mode : std::uint8_t { // MD_KNUCK, SADXEnumsNew.h names
@@ -169,7 +187,7 @@ void rescue_from_death_zone(Context &context, Primary task) {
 void common_tail(Context &context, const TaskHandle &object, Primary task,
                  const TaskWorkHandle &motion, const Player &player) {
     set_motion(context, player);
-    update_upgrades(context, task, motion);
+    update_upgrades(context, player);
     if ((task.status & kSkipVertexJoin) == 0)
         join_vertices(context, task, motion, player);
     display(context, object);
@@ -312,6 +330,37 @@ void update_action_state(Context &context, Primary task, const TaskWorkHandle &m
     default:
         unrecovered_mode(context, task.mode);
     }
+}
+
+// The source switch masks the equipment byte with the two Knuckles upgrade
+// bits. It writes the model rows first, then the shared hand-index block.
+void update_upgrades(Context &context, const Player &player) {
+    const EquipmentModels *models = nullptr;
+    auto hand_index_set = HandIndexSet::Hand;
+    switch (equipment(context, player) & kUpgradeMask) {
+    case 0:
+        models = &kNoUpgradeModels;
+        break;
+    case kFightingGloves:
+        models = &kFightingGlovesModels;
+        break;
+    case kShovelClaw:
+        models = &kShovelClawModels;
+        hand_index_set = HandIndexSet::ShovelClaw;
+        break;
+    case kFightingGloves | kShovelClaw:
+        models = &kFightingGlovesShovelClawModels;
+        hand_index_set = HandIndexSet::ShovelClaw;
+        break;
+    }
+    if (!models)
+        return;
+    for (std::size_t index = 0; index < models->size(); ++index) {
+        auto &object = equipment_object(
+            context, kFirstEquipmentObjectRow + static_cast<unsigned>(index));
+        object.model = equipment_model(context, (*models)[index]);
+    }
+    state(context).hand_index_set = hand_index_set;
 }
 
 void run(Context &context, const TaskHandle &object) {

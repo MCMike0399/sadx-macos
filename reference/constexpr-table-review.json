@@ -945,8 +945,8 @@
       "evidence": [
         {
           "path": "src/runtime/native_amy_binding.cpp",
-          "line": 415,
-          "sha256": "b1dbc9ec369b16ecef730fbef7e9667afb25bf9bf601343be56d177b3103d99c"
+          "line": 459,
+          "sha256": "6bb2271b80bbd38eb50c30a2789e922f4e3c07aeae499258b1b017c775a3bd0c"
         }
       ],
       "verification": [
@@ -969,6 +969,74 @@
         "tests/unit/native_miles_assets.mm"
       ],
       "verification_limit": "Asset closure tests bind the imported identities; weld reachability in gameplay is not claimed."
+    },
+    "src/player/knuckles_selection_core.cpp::kNoUpgradeModels": {
+      "sha256": "3624287ea5bf6bb9ef3ec77953c58a311c5e4859559d6df8450ca4cc92f4f59f",
+      "classification": "numeric_encoding",
+      "purpose": "KNUCKLES_MODELS row indices written into KNUCKLES_OBJECTS rows 58..73 when neither Knuckles upgrade bit is set, in source store order.",
+      "evidence": [
+        {
+          "path": "src/player/knuckles_selection_core.cpp",
+          "line": 48,
+          "sha256": "235c353ec5c8cdffcff3f7c8248b43988976cf9e6397967957b233f79444b6b6"
+        }
+      ],
+      "verification": [
+        "tests/unit/native_knuckles_assets.mm",
+        "tools/import/knuckles_actor_resources.py"
+      ],
+      "verification_limit": "The asset closure test binds the imported model identities; the native upgrade update is not covered by an oracle."
+    },
+    "src/player/knuckles_selection_core.cpp::kFightingGlovesModels": {
+      "sha256": "f0b11c55e774d3a08b4c456285ba8179a60db84207a2e0afd826b1144fec1b18",
+      "classification": "numeric_encoding",
+      "purpose": "KNUCKLES_MODELS row indices written when the Fighting Gloves bit is set, in source store order.",
+      "evidence": [
+        {
+          "path": "src/player/knuckles_selection_core.cpp",
+          "line": 50,
+          "sha256": "235c353ec5c8cdffcff3f7c8248b43988976cf9e6397967957b233f79444b6b6"
+        }
+      ],
+      "verification": [
+        "tests/unit/native_knuckles_assets.mm",
+        "tools/import/knuckles_actor_resources.py"
+      ],
+      "verification_limit": "The asset closure test binds the imported model identities; the native upgrade update is not covered by an oracle."
+    },
+    "src/player/knuckles_selection_core.cpp::kShovelClawModels": {
+      "sha256": "e50434c424006e4f9db2d83cd570c6c82c002d3d3167082a6949ba19bc9237ea",
+      "classification": "numeric_encoding",
+      "purpose": "KNUCKLES_MODELS row indices written when the Shovel Claw bit is set, including the two claw model rows that replace the hand rows, in source store order.",
+      "evidence": [
+        {
+          "path": "src/player/knuckles_selection_core.cpp",
+          "line": 52,
+          "sha256": "235c353ec5c8cdffcff3f7c8248b43988976cf9e6397967957b233f79444b6b6"
+        }
+      ],
+      "verification": [
+        "tests/unit/native_knuckles_assets.mm",
+        "tools/import/knuckles_actor_resources.py"
+      ],
+      "verification_limit": "The asset closure test binds the imported model identities; the native upgrade update is not covered by an oracle."
+    },
+    "src/player/knuckles_selection_core.cpp::kFightingGlovesShovelClawModels": {
+      "sha256": "e331a67562f6bcee7155f2254af8deb0bdedfb12bbf84dfb33b1982dbfca2580",
+      "classification": "numeric_encoding",
+      "purpose": "KNUCKLES_MODELS row indices written when both Knuckles upgrade bits are set, in source store order.",
+      "evidence": [
+        {
+          "path": "src/player/knuckles_selection_core.cpp",
+          "line": 54,
+          "sha256": "235c353ec5c8cdffcff3f7c8248b43988976cf9e6397967957b233f79444b6b6"
+        }
+      ],
+      "verification": [
+        "tests/unit/native_knuckles_assets.mm",
+        "tools/import/knuckles_actor_resources.py"
+      ],
+      "verification_limit": "The asset closure test binds the imported model identities; the native upgrade update is not covered by an oracle."
     }
   },
   "retired": {

@@ -12,6 +12,14 @@ struct Context;
 using Player = player_initialization::PlayerHandle;
 using Primary = player_initialization::PrimaryView;
 
+// The upgrade tail points eight source globals at one of the two hand-index
+// arrays. No native consumer reads them yet, so the selected array is one
+// typed fact instead of invented pointer storage.
+enum class HandIndexSet : std::uint8_t {
+    Hand,      // Knuckles_HandIndices
+    ShovelClaw // Knuckles_ShovelClawIndices
+};
+
 struct State {
     // The tail clears this source word every frame; its readers are unrecovered,
     // so no annotated owner is claimed yet.
@@ -22,6 +30,9 @@ struct State {
     // Mode zero clears the reference point the unrecovered tail helper compares
     // against. The roles are not established, so no annotated owner is claimed.
     float reference_x = 0, reference_y = 0, reference_z = 0;
+    // The source stores the selected array through eight pointer globals; the
+    // readers are unrecovered, so no annotated owner is claimed yet.
+    HandIndexSet hand_index_set = HandIndexSet::Hand;
 };
 
 // NOTSA: per-consumption bindings into existing native owners. Missing native
@@ -33,6 +44,9 @@ TaskWorkHandle player_allocation(Context &, const Player &);
 std::uint16_t &requested_animation(Context &, const Player &);
 std::uint16_t &idle_timer(Context &, const Player &);
 std::uint16_t &equipment(Context &, const Player &);
+// NOTSA: borrowed mutable scene object rows for the equipment table.
+character_pack::ObjectResource &equipment_object(Context &, unsigned table_index);
+character_pack::ResourceId equipment_model(Context &, unsigned table_index);
 std::uint16_t &task_timer(Context &, Primary);
 // NOTSA: the source item word at playerwk+6, distinct from the +0x10 status flag.
 std::uint16_t &item_word(Context &, const Player &);
@@ -153,8 +167,11 @@ bool stage_action(Context &, Primary, const TaskWorkHandle &motion, const Player
 bool analog_input(Context &, Primary, const TaskWorkHandle &motion, const Player &);
 // STUB: SONIC 0x477d30 Knuckles_AuxiliaryTask
 void initialize_auxiliary(Context &, std::uint8_t index);
-// STUB: SONIC 0x4726a0 Knuckles_Upgrades
-void update_upgrades(Context &, Primary, const TaskWorkHandle &);
+// The equipment tail rewrites KNUCKLES_OBJECTS rows 58..73 from the
+// KNUCKLES_MODELS list selected by the Fighting Gloves and Shovel Claw bits,
+// then records the hand-index set. Other equipment values do nothing.
+// FUNCTION: SONIC 0x4726a0 Knuckles_Upgrades
+void update_upgrades(Context &, const Player &);
 // STUB: SONIC 0x472d60 Knuckles_Something_A
 void stand_tail(Context &, const TaskWorkHandle &);
 // STUB: SONIC 0x477700 Knuckles_HeldObject
