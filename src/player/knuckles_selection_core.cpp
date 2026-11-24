@@ -22,12 +22,26 @@ constexpr std::int32_t kIdleClampSound = 0x15;
 constexpr std::uint16_t kThruAnimation = 39;
 constexpr std::uint16_t kShakAnimation = 40;
 constexpr float kViewRadius = 20.0f;
+// Knuckles_Act1's damage gate and stand-chain literals.
+constexpr std::uint16_t kHurt = 4;
+constexpr std::uint16_t kHurtReactionStatus = 0x800;
+constexpr std::uint16_t kStatusHighBit = 0x8000;
+constexpr std::uint16_t kStatusHighClear = 0x7fff;
+constexpr std::uint16_t kItemHighBit = 0x8000;
+constexpr std::uint16_t kItemLowBitsClear = 0xfffc;
+constexpr std::uint16_t kDamageHighByteKeep = 0xc6ff;
+constexpr std::uint16_t kWaitTimerKeep = 0x7ff0;
+constexpr std::uint8_t kStagePickupMode = 0x35;   // MD_KNUCK_CNADE_START
+constexpr std::uint16_t kStagePickupAnimation = 0x6f;
+constexpr std::uint32_t kStageActionArgument = 0x723801;
+constexpr std::uint16_t kWalkAnimation = 9;
 // The death-zone rescue probes the other player positions within 0.01 units.
 constexpr float kDeathZoneSeparation = 0.010000001f;
 enum class Mode : std::uint8_t { // MD_KNUCK, SADXEnumsNew.h names
     Initialize = 0,              // MD_KNUCK_INIT
     Stand = 1,                   // MD_KNUCK_STND
     Walk = 2,                    // MD_KNUCK_WALK
+    Roll = 4,                    // MD_KNUCK_ROLL
     Stop = 10,                   // MD_KNUCK_STOP
     Glide = 11,                  // MD_KNUCK_GLID
     Turn = 12,                   // MD_KNUCK_GTRN
@@ -231,6 +245,72 @@ void update_idle_state(Context &context, Primary task, const Player &player) {
         adjusted = adjusted * 0.5f;
         adjusted = adjusted + speed;
         speed = adjusted.rounded();
+    }
+}
+
+// The reached prefix of Knuckles_Act1: the Chao branch, the damage gate and
+// MD_KNUCK_STND's transition chain. The chain's first nonzero result stops the
+// frame; every later mode body stays unrecovered and fails loudly.
+void update_action_state(Context &context, Primary task, const TaskWorkHandle &motion,
+                         const Player &player) {
+    const auto current_stage = stage(context);
+    if (current_stage >= 39 && current_stage <= 42)
+        chao_setup(context, motion, player, task.player_index);
+    // The source takes the no-damage branch when playerwk is null (the
+    // pre-initialization frame) or when the item high bit is clear.
+    const bool damage_item = player && (item_word(context, player) & kItemHighBit) != 0;
+    if (!damage_item) {
+        auto &wait = wait_timer(context);
+        if (wait == 0) {
+            if (!check_damage(context, task, player)) {
+                task.status = static_cast<std::uint16_t>(task.status & kStatusHighClear);
+            } else {
+                task.status = static_cast<std::uint16_t>(task.status | kStatusHighBit);
+                if ((task.status & kHurtReactionStatus) != 0)
+                    hurt_reaction(context, motion);
+                task.status = static_cast<std::uint16_t>(task.status & kDamageHighByteKeep);
+                auto &item = item_word(context, player);
+                if ((item & 3) == 0)
+                    scatter_rings(context, task.player_index);
+                else
+                    item = static_cast<std::uint16_t>(item & kItemLowBitsClear);
+            }
+        } else if (wait != kWaitTimerKeep) {
+            task.status = static_cast<std::uint16_t>(task.status & ~kHurt);
+            wait = static_cast<std::uint16_t>(wait - 1U);
+        }
+    } else {
+        task.status = static_cast<std::uint16_t>(task.status | kStatusHighBit);
+        wait_timer(context) = 0;
+    }
+    switch (static_cast<Mode>(task.mode)) {
+    case Mode::Initialize:
+        // The source switch has no case 0; mode zero's work is the run switch.
+        break;
+    case Mode::Stand:
+        // Source order: the six transition checkers, then the Chao-stage
+        // pickup/action pair, then the analog/speed walk gate.
+        if (check_next_action(context, task, motion, player) ||
+            check_fall(context, motion) || check_dig(context, motion, player) ||
+            check_jump(context, task, player) || check_grab(context, task, motion) ||
+            check_attack(context, task))
+            return;
+        if (stage_pickup(context, task, motion, player)) {
+            task.mode = kStagePickupMode;
+            requested_animation(context, player) = kStagePickupAnimation;
+        } else if (stage_action(context, task, motion, player, kStageActionArgument)) {
+            return;
+        }
+        if (analog_input(context, task, motion, player) ||
+            exact(context, speed_x(context, player)).compare(0.0f) != X87Comparison::equal) {
+            task.mode = static_cast<std::uint8_t>(Mode::Walk);
+            requested_animation(context, player) = kWalkAnimation;
+            return;
+        }
+        // Source case 1 ends here; the idle path has no timer or animation store.
+        break;
+    default:
+        unrecovered_mode(context, task.mode);
     }
 }
 

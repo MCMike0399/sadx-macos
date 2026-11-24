@@ -34,6 +34,12 @@ std::uint16_t &requested_animation(Context &, const Player &);
 std::uint16_t &idle_timer(Context &, const Player &);
 std::uint16_t &equipment(Context &, const Player &);
 std::uint16_t &task_timer(Context &, Primary);
+// NOTSA: the source item word at playerwk+6, distinct from the +0x10 status flag.
+std::uint16_t &item_word(Context &, const Player &);
+// NOTSA: the source task wait timer at taskwk+6.
+std::uint16_t &wait_timer(Context &);
+// NOTSA: the source player status word at playerwk+0x10 consumed by the dig gate.
+std::uint16_t &player_flags(Context &, const Player &);
 std::uint32_t held_buttons(Context &, std::uint8_t player_index);
 std::uint32_t attack_buttons(Context &);
 float &speed_x(Context &, const Player &);
@@ -111,8 +117,40 @@ void start_idle_camera_effect(Context &);
 void reset_idle_camera_effect(Context &);
 // STUB: SONIC 0x4c2210 CameraStartHeldEffect held-path camera task remains open
 void start_held_camera_effect(Context &);
-// STUB: SONIC 0x478020 Knuckles_Act1
+// The reached prefix of Knuckles_Act1: the Chao branch, the damage gate and
+// MD_KNUCK_STND's transition chain. The chain's first nonzero result stops the
+// frame; every later mode body and every transition callee stays a named seam.
+// FUNCTION: SONIC 0x478020 Knuckles_Act1
 void update_action_state(Context &, Primary, const TaskWorkHandle &, const Player &);
+// STUB: SONIC 0x471f70 KnucklesChaoSetup
+void chao_setup(Context &, const TaskWorkHandle &motion, const Player &, std::uint8_t index);
+// STUB: SONIC 0x4735b0 KnucklesCheckDamage
+bool check_damage(Context &, Primary, const Player &);
+// Source seam owned by the Sonic core's identical drop_held declaration.
+void hurt_reaction(Context &, const TaskWorkHandle &motion);
+// Source seam owned by the Big core's identical DamegeRingScatter declaration.
+void scatter_rings(Context &, std::uint8_t index);
+// The stand chain stops at the first nonzero transition. Only the checkers
+// whose preview branch a source guard proves stay zero; transition bodies are
+// missing() seams.
+// STUB: SONIC 0x476970 KnucklesCheckNextAction
+bool check_next_action(Context &, Primary, const TaskWorkHandle &motion, const Player &);
+// STUB: SONIC 0x473b90 KnucklesCheckFall
+bool check_fall(Context &, const TaskWorkHandle &motion);
+// STUB: SONIC 0x474d30 KnucklesCheckDig
+bool check_dig(Context &, const TaskWorkHandle &motion, const Player &);
+// STUB: SONIC 0x476830 KnucklesCheckJump
+bool check_jump(Context &, Primary, const Player &);
+// STUB: SONIC 0x4737e0 KnucklesCheckGrab
+bool check_grab(Context &, Primary, const TaskWorkHandle &motion);
+// STUB: SONIC 0x473c50 KnucklesCheckAttack
+bool check_attack(Context &, Primary);
+// NOTSA: native/reference bindings to the canonical stage pickup/action owners.
+bool stage_pickup(Context &, Primary, const TaskWorkHandle &motion, const Player &);
+bool stage_action(Context &, Primary, const TaskWorkHandle &motion, const Player &,
+                  std::uint32_t argument);
+// NOTSA: native/reference binding to the canonical GetAnalog input gate.
+bool analog_input(Context &, Primary, const TaskWorkHandle &motion, const Player &);
 // STUB: SONIC 0x477d30 Knuckles_AuxiliaryTask
 void initialize_auxiliary(Context &, std::uint8_t index);
 // STUB: SONIC 0x4726a0 Knuckles_Upgrades

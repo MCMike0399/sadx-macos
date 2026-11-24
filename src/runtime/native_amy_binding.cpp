@@ -63,6 +63,16 @@ native::PlayerSystem::AmyExtraWork &extra_work(Context &context, const Player &p
 constexpr unsigned kMotionPlayerField = 0, kCollisionField = 56;
 constexpr std::uint8_t kSpecialBodyModeA = 17, kSpecialBodyModeB = 18;
 constexpr std::uint16_t kPlayerFacingMask = 0x80;
+// AmyPostDisplay/AmyPostShadow source literals.
+constexpr std::uint16_t kHammerEquipment = 0x100;
+constexpr std::uint16_t kPostShadowRequestA = 0x56;
+constexpr std::uint16_t kPostShadowRequestB = 0x5a;
+constexpr std::uint16_t kPostShadowRequestC = 0x5d;
+constexpr std::uint16_t kPostShadowRequestD = 99;
+constexpr std::uint16_t kStatusClearAttack = 0x0400;
+constexpr std::uint16_t kItemHighBit = 0x8000;
+constexpr std::uint8_t kPostShadowMode30 = 0x30;
+constexpr std::uint8_t kDamageClassMask = 0xf0;
 // DrawCharacterShadow's source literals and late queue facts.
 constexpr float kShadowDepthCull = 20000.0f;
 constexpr float kShadowFalloffPerUnit = 0.03f;
@@ -474,7 +484,7 @@ void post_display(Context &context, const TaskWorkHandle &) {
     // The hammer-matrix update runs only with the equipment bit set on a
     // non-catch-up tick; the preview equipment word is clear.
     const auto player = player_for_motion(context, context.task->motion_work);
-    if (!player || (equipment(context, player) & 0x100) == 0 ||
+    if (!player || (equipment(context, player) & kHammerEquipment) == 0 ||
         context.rendering.pending_logic_ticks() != 0)
         return;
     missing("native_amy_post_display_matrix");
@@ -486,17 +496,18 @@ void post_shadow(Context &context) {
     auto view = player_initialization::bind_primary_view(context.task);
     const auto player = player_for_motion(context, context.task->motion_work);
     const auto requested = requested_animation(context, player);
-    if (requested == 0x56 || requested == 0x5a || requested == 0x5d || requested == 99)
+    if (requested == kPostShadowRequestA || requested == kPostShadowRequestB ||
+        requested == kPostShadowRequestC || requested == kPostShadowRequestD)
         missing("native_amy_post_shadow_matrix");
     if (!has_collision(context, context.task->primary_work))
         return;
     collision_attributes(context, context.task->primary_work, 1) |= 16;
-    view.status = view.status & ~0x0400u;
-    const bool item_high = (item_word(context, player) & 0x8000) != 0;
+    view.status = view.status & ~kStatusClearAttack;
+    const bool item_high = (item_word(context, player) & kItemHighBit) != 0;
     const std::uint8_t low = item_high ? 3 : 0;
-    const std::uint8_t klass = item_high ? 3 : (view.mode == 0x30 ? 1 : 0);
+    const std::uint8_t klass = item_high ? 3 : (view.mode == kPostShadowMode30 ? 1 : 0);
     auto &damage = collision_info(context, context.task->primary_work, 0).damage;
-    damage = static_cast<std::uint8_t>((klass << 2) | (damage & 0xf0) | low);
+    damage = static_cast<std::uint8_t>((klass << 2) | (damage & kDamageClassMask) | low);
 }
 void finish_frame(Context &context) { context.players.amy_finish_word = 0; }
 void set_z_compare(Context &context, std::uint32_t mode) {

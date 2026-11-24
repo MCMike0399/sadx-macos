@@ -57,6 +57,12 @@ collision_component::Info &collision_info(Context &context, const TaskWorkHandle
     return component->info[record];
 }
 constexpr unsigned kMotionPlayerField = 0, kCollisionField = 56;
+// KnucklesCheckDamage's source status and attribute tests.
+constexpr std::uint16_t kHurt = 4;
+constexpr std::uint32_t kDamageAttribute = 0x10000;
+constexpr std::uint8_t kRollMode = 4;
+// KnucklesCheckDig's playerwk+0x10 Status_Unknown4 gate.
+constexpr std::uint16_t kDigStatus = 0x40;
 // DrawCharacterShadow's source literals and late queue facts.
 constexpr float kShadowDepthCull = 20000.0f;
 constexpr float kShadowFalloffPerUnit = 0.03f;
@@ -115,6 +121,25 @@ std::uint16_t &equipment(Context &, const Player &player) {
 }
 std::uint16_t &task_timer(Context &context, Primary) {
     return player_initialization::bind_task_timer_high(context.task);
+}
+std::uint16_t &item_word(Context &, const Player &player) {
+    auto fields = sonic::native_fields::player(physics(player));
+    if (!fields.item)
+        missing("native_knuckles_item_word");
+    return *fields.item;
+}
+std::uint16_t &wait_timer(Context &context) {
+    try {
+        return player_initialization::bind_wait_timer(context.task);
+    } catch (const player_initialization::Error &) {
+        missing("native_knuckles_wait_timer");
+    }
+}
+std::uint16_t &player_flags(Context &, const Player &player) {
+    auto fields = sonic::native_fields::player(physics(player));
+    if (!fields.flags)
+        missing("native_knuckles_player_status");
+    return *fields.flags;
 }
 std::uint32_t held_buttons(Context &context, std::uint8_t player_index) {
     if (!context.held_buttons)
@@ -406,8 +431,77 @@ void stop_id(Context &) { missing("native_knuckles_ds_stop_id"); }
 void start_idle_camera_effect(Context &) { missing("native_knuckles_camera_idle_start"); }
 void reset_idle_camera_effect(Context &) { missing("native_knuckles_camera_idle_reset"); }
 void start_held_camera_effect(Context &) { missing("native_knuckles_camera_held_start"); }
-void update_action_state(Context &, Primary, const TaskWorkHandle &, const Player &) {
-    missing("native_knuckles_action_update");
+void chao_setup(Context &, const TaskWorkHandle &, const Player &, std::uint8_t) {
+    missing("native_knuckles_chao_setup");
+}
+bool check_damage(Context &, Primary task, const Player &player) {
+    // The damage checker returns 0 when playerwk is null (the pre-initialization frame),
+    // or when neither the task hurt bit nor the player's damage-contact
+    // attribute (0x10000) is set, or in MD_KNUCK_ROLL. Only that branch stores
+    // MD_KNUCK_DAMG, so the guard below is the full source zero branch.
+    if (!player)
+        return false;
+    const auto flags = task.status;
+    const auto attributes = physics(player).attributes;
+    if ((((flags & kHurt) == 0) && ((attributes & kDamageAttribute) == 0)) ||
+        task.mode == kRollMode)
+        return false;
+    missing("native_knuckles_check_damage");
+}
+void hurt_reaction(Context &, const TaskWorkHandle &) {
+    missing("native_knuckles_hurt_reaction");
+}
+void scatter_rings(Context &, std::uint8_t) { missing("native_knuckles_scatter_rings"); }
+bool check_next_action(Context &, Primary, const TaskWorkHandle &, const Player &) {
+    // The next-action checker's ewp move/path prefix and its kNextAction/smode table can both
+    // store a new mode, including the smode 0x0c case the preview injects.
+    missing("native_knuckles_check_next_action");
+}
+bool check_fall(Context &, const TaskWorkHandle &) {
+    // The fall checker stores MD_KNUCK_FALL and reqaction 0x13 whenever the status low
+    // bits are clear, which is the preview's first stand condition.
+    missing("native_knuckles_check_fall");
+}
+bool check_dig(Context &context, const TaskWorkHandle &, const Player &player) {
+    // The dig checker's whole body is gated on playerwk+0x10 bit 0x40; the preview's
+    // status word starts at zero and no contact owner sets that bit.
+    if ((player_flags(context, player) & kDigStatus) == 0)
+        return false;
+    missing("native_knuckles_check_dig");
+}
+bool check_jump(Context &, Primary, const Player &) {
+    // The jump checker calls JumpAllowed and stores MD_KNUCK_JUMP / HJMP / PNJP.
+    missing("native_knuckles_check_jump");
+}
+bool check_grab(Context &, Primary, const TaskWorkHandle &) {
+    // The grab checker reads the grab mask, PCheckHoldObject and the wall form, then
+    // stores MD_KNUCK_TOCH / PICK.
+    missing("native_knuckles_check_grab");
+}
+bool check_attack(Context &context, Primary task) {
+    // The attack checker tests the pad held word against the AttackButtons mask before
+    // any store; the selection preview holds no attack button.
+    if ((held_buttons(context, task.player_index) & attack_buttons(context)) == 0)
+        return false;
+    missing("native_knuckles_check_attack");
+}
+bool stage_pickup(Context &context, Primary, const TaskWorkHandle &, const Player &) {
+    // The stage pickup owner returns zero outside the Chao stages before any other test.
+    if (context.stage < 39 || context.stage > 42)
+        return false;
+    missing("native_knuckles_stage_pickup");
+}
+bool stage_action(Context &context, Primary, const TaskWorkHandle &, const Player &,
+                  std::uint32_t) {
+    // The stage action owner returns zero outside the Chao stages before any other test.
+    if (context.stage < 39 || context.stage > 42)
+        return false;
+    missing("native_knuckles_stage_action");
+}
+bool analog_input(Context &, Primary, const TaskWorkHandle &, const Player &) {
+    // The recovered GetAnalog owner exists, but this path's normalized-input
+    // and event-work facts are not composed in the Knuckles context yet.
+    missing("native_knuckles_analog_input");
 }
 void initialize_auxiliary(Context &, std::uint8_t) { missing("native_knuckles_auxiliary"); }
 void update_upgrades(Context &, Primary, const TaskWorkHandle &) {
