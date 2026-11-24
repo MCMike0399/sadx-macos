@@ -138,10 +138,10 @@ Player initialize(Context &context, const TaskHandle &object, Primary task,
     // the binding publishes the player index only.
     (void)create_child_task(context, 2, 3, index);
     // Source order: z, y, then x.
-    auto &globals = state(context);
-    globals.reference_z = 0;
-    globals.reference_y = 0;
-    globals.reference_x = 0;
+    auto &reference = state(context).position_reference;
+    reference.z = 0;
+    reference.y = 0;
+    reference.x = 0;
     return player;
 }
 

@@ -978,7 +978,7 @@
         {
           "path": "src/player/knuckles_selection_core.cpp",
           "line": 48,
-          "sha256": "235c353ec5c8cdffcff3f7c8248b43988976cf9e6397967957b233f79444b6b6"
+          "sha256": "b1b0da763f90e6896e3f1f41789e756a13a25d37e64905fcd0c309a054aacaf0"
         }
       ],
       "verification": [
@@ -995,7 +995,7 @@
         {
           "path": "src/player/knuckles_selection_core.cpp",
           "line": 50,
-          "sha256": "235c353ec5c8cdffcff3f7c8248b43988976cf9e6397967957b233f79444b6b6"
+          "sha256": "b1b0da763f90e6896e3f1f41789e756a13a25d37e64905fcd0c309a054aacaf0"
         }
       ],
       "verification": [
@@ -1012,7 +1012,7 @@
         {
           "path": "src/player/knuckles_selection_core.cpp",
           "line": 52,
-          "sha256": "235c353ec5c8cdffcff3f7c8248b43988976cf9e6397967957b233f79444b6b6"
+          "sha256": "b1b0da763f90e6896e3f1f41789e756a13a25d37e64905fcd0c309a054aacaf0"
         }
       ],
       "verification": [
@@ -1029,7 +1029,7 @@
         {
           "path": "src/player/knuckles_selection_core.cpp",
           "line": 54,
-          "sha256": "235c353ec5c8cdffcff3f7c8248b43988976cf9e6397967957b233f79444b6b6"
+          "sha256": "b1b0da763f90e6896e3f1f41789e756a13a25d37e64905fcd0c309a054aacaf0"
         }
       ],
       "verification": [
@@ -1037,6 +1037,71 @@
         "tools/import/knuckles_actor_resources.py"
       ],
       "verification_limit": "The asset closure test binds the imported model identities; the native upgrade update is not covered by an oracle."
+    },
+    "src/runtime/native_knuckles_binding.cpp::kReferenceLevels": {
+      "sha256": "3aa4516da4a1b5f6653c4e872362251e1b5440db6bdaa585f4976c0b67d711bf",
+      "classification": "numeric_encoding",
+      "purpose": "Knuckles_PositionReference far-distance binary32 levels copied when the reference displacement is at least 20 units, in source store order.",
+      "evidence": [
+        {
+          "path": "src/runtime/native_knuckles_binding.cpp",
+          "line": 91,
+          "sha256": "78ccb55bd9fae982907cb10e186fe7ddb078502e175ec5fd6275d13a4a6d513c"
+        }
+      ],
+      "verification": [
+        "reference/production-integration-20261110/dossiers/knuckles-position-reference-death-zone.disasm.txt"
+      ],
+      "verification_limit": "The dossier retains the emulator comparison of the three level branches. The frontier exercises the writer but does not compare its levels, and no differential oracle covers the function."
+    },
+    "src/runtime/native_knuckles_binding.cpp::kReferenceWrappedMiddleLevels": {
+      "sha256": "717ec3e2f1bc0d94b7e6d576cc2d35256df6c18fea7c60f4ef0391c73e5da56d",
+      "classification": "numeric_encoding",
+      "purpose": "Knuckles_PositionReference binary32 levels copied when the raw-to-wrapped offset is between four and twenty units, in source store order.",
+      "evidence": [
+        {
+          "path": "src/runtime/native_knuckles_binding.cpp",
+          "line": 93,
+          "sha256": "78ccb55bd9fae982907cb10e186fe7ddb078502e175ec5fd6275d13a4a6d513c"
+        }
+      ],
+      "verification": [
+        "reference/production-integration-20261110/dossiers/knuckles-position-reference-death-zone.disasm.txt"
+      ],
+      "verification_limit": "The dossier retains the emulator comparison of the three level branches. The frontier exercises the writer but does not compare its levels, and no differential oracle covers the function."
+    },
+    "src/runtime/native_knuckles_binding.cpp::kReferenceWrappedNearLevels": {
+      "sha256": "bf38cd8712d2126291273c5954cbe7da3e793c1e390532bef54791d182829617",
+      "classification": "numeric_encoding",
+      "purpose": "Knuckles_PositionReference binary32 levels copied when the raw-to-wrapped offset is under four units, in source store order.",
+      "evidence": [
+        {
+          "path": "src/runtime/native_knuckles_binding.cpp",
+          "line": 95,
+          "sha256": "78ccb55bd9fae982907cb10e186fe7ddb078502e175ec5fd6275d13a4a6d513c"
+        }
+      ],
+      "verification": [
+        "reference/production-integration-20261110/dossiers/knuckles-position-reference-death-zone.disasm.txt"
+      ],
+      "verification_limit": "The dossier retains the emulator comparison of the three level branches. The frontier exercises the writer but does not compare its levels, and no differential oracle covers the function."
+    },
+    "src/runtime/native_knuckles_binding.cpp::kDeathZoneCharacters": {
+      "sha256": "8744b8cedbe9fbe9ce34dd26632f95409c8cfccbb907b427ace21f1dcadbdd7b",
+      "classification": "named_structure",
+      "purpose": "Stage and act index into the source killing-collision list. Each value is the OR of the PL_KILLCOLLI character masks; zero is a null stage or act entry, including the absent fourth act slot of the three-act stage arrays.",
+      "evidence": [
+        {
+          "path": "src/runtime/native_knuckles_binding.cpp",
+          "line": 101,
+          "sha256": "78ccb55bd9fae982907cb10e186fe7ddb078502e175ec5fd6275d13a4a6d513c"
+        }
+      ],
+      "verification": [
+        "tools/testing/check_native_character_select_display.py",
+        "reference/production-integration-20261110/dossiers/knuckles-position-reference-death-zone.disasm.txt"
+      ],
+      "verification_limit": "The CharacterSelect frontier stage zero exercises the null entry only. A matching nonzero mask reports the unrecovered TestObjectIntersect boundary; no oracle covers non-null stages."
     }
   },
   "retired": {

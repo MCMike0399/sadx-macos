@@ -1,0 +1,347 @@
+=== Knuckles_PositionReference 0x474f80 and IsInDeathZone_ 0x4751b0 ===
+Source sha256 6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74; recovered 2026-11-24 from the pinned PE.
+
+0x474f80 Knuckles_PositionReference (0x474f80..0x4751af, 560 bytes)
+0x4751b0 IsInDeathZone_ (0x4751b0..0x475257, 168 bytes)
+
+Constants (binary32 unless noted):
+  0x007dd574: 00004842 = 50.0
+  0x007e012c: 00007041 = 15.0
+  0x007ddc48: 00000041 = 8.0
+  0x007dcb2c: 00000000 = 0.0
+  0x007dff88: 0000003e = 0.125
+  0x007debe0: 0000a041 = 20.0
+  0x007dcc74: 00008040 = 4.0
+  0x007e0b90: 00000000 = 0.0
+  0x007e0b94: cdcc4c3e = 0.20000000298023224
+  0x007e0b98: 8fc2f53d = 0.11999999731779099
+  0x007e0b9c: 0ad7a33d = 0.07999999821186066
+  0x007e0ba0: 8fc2f53c = 0.029999999329447746
+  0x007e0ba4: cdcc4c3d = 0.05000000074505806
+  0x007e0ba8: 0ad7a33c = 0.019999999552965164
+  0x007e0bac: 00000000 = 0.0
+  0x007e0bb0: 3333333f = 0.699999988079071
+  0x007e0bc8: 00000000 = 0.0
+  0x007e0bcc: 9a99193e = 0.15000000596046448
+  0x007e0bd0: 0ad7233d = 0.03999999910593033
+  0x007e0bd4: 0ad7233c = 0.009999999776482582
+  0x007e0bd8: 00000000 = 0.0
+  0x007e0bdc: 00000000 = 0.0
+  0x007e0be0: 9a99993e = 0.30000001192092896
+
+0x4393c0 fmod helper: args (dividend, divisor); divisor 0 or unordered -> 0;
+otherwise floor(double(dividend/divisor)) * divisor, reverse-subtracted.
+0x7871f0 njSqrt: negative input uses sqrt(x * -1) then negates; else fsqrt.
+
+7e0b90 table (0.0, 0.2, 0.12, 0.08, 0.03, 0.05, 0.02)
+7e0bac table (0.0, 0.7, 0.0, 0.0, 0.0, 0.0, 0.0)
+7e0bc8 table (0.0, 0.15, 0.04, 0.01, 0.0, 0.0, 0.3)
+
+--- Knuckles_PositionReference 0x00474f80 ---
+0x00474f80: SUB      esp, 0x10
+0x00474f83: FLD      dword ptr [esi + 0x20]
+0x00474f86: PUSH     0x42c80000
+0x00474f8b: FADD     dword ptr [0x7dd574]
+0x00474f91: FSTP     dword ptr [esp + 8]
+0x00474f95: MOV      eax, dword ptr [esp + 8]
+0x00474f99: PUSH     eax
+0x00474f9a: CALL     0x4393c0
+0x00474f9f: FSUBR    dword ptr [esp + 0xc]
+0x00474fa3: MOV      ecx, dword ptr [esi + 0x24]
+0x00474fa6: PUSH     0x42c80000
+0x00474fab: FSTP     dword ptr [esp + 0x10]
+0x00474faf: MOV      dword ptr [esp + 0x14], ecx
+0x00474fb3: FLD      dword ptr [esi + 0x28]
+0x00474fb6: FADD     dword ptr [0x7dd574]
+0x00474fbc: FSTP     dword ptr [esp + 0x18]
+0x00474fc0: MOV      edx, dword ptr [esp + 0x18]
+0x00474fc4: PUSH     edx
+0x00474fc5: CALL     0x4393c0
+0x00474fca: FSUBR    dword ptr [esp + 0x1c]
+0x00474fce: ADD      esp, 0xc
+0x00474fd1: FSTP     dword ptr [esp + 0x10]
+0x00474fd5: FLD      dword ptr [esi + 0x28]
+0x00474fd8: FSUB     dword ptr [0x3c52be4]
+0x00474fde: FLD      dword ptr [esi + 0x24]
+0x00474fe1: FSUB     dword ptr [0x3c52be0]
+0x00474fe7: FLD      dword ptr [esi + 0x20]
+0x00474fea: FSUB     dword ptr [0x3c52bdc]
+0x00474ff0: FLD      st(0)
+0x00474ff2: FMUL     st(1)
+0x00474ff4: FLD      st(2)
+0x00474ff6: FMUL     st(3)
+0x00474ff8: FADDP    st(1)
+0x00474ffa: FLD      st(3)
+0x00474ffc: FMUL     st(4)
+0x00474ffe: FADDP    st(1)
+0x00475000: FSTP     dword ptr [esp]
+0x00475003: FSTP     st(0)
+0x00475005: FSTP     st(0)
+0x00475007: FSTP     st(0)
+0x00475009: CALL     0x7871f0
+0x0047500e: FST      dword ptr [esp]
+0x00475012: FCOMP    dword ptr [0x7e012c]
+0x00475018: FNSTSW   ax
+0x0047501a: TEST     ah, 5
+0x0047501d: JP       0x4750b4
+0x00475023: FLD      dword ptr [esp]
+0x00475027: FCOMP    dword ptr [0x7ddc48]
+0x0047502d: FNSTSW   ax
+0x0047502f: TEST     ah, 5
+0x00475032: JP       0x47503c
+0x00475034: FLD      dword ptr [0x7dcb2c]
+0x0047503a: JMP      0x47504c
+0x0047503c: FLD      dword ptr [esp]
+0x00475040: FSUB     dword ptr [0x7ddc48]
+0x00475046: FMUL     dword ptr [0x7dff88]
+0x0047504c: FLD      dword ptr [0x7e0b90]
+0x00475052: FMUL     st(1)
+0x00475054: FSTP     dword ptr [0x3c52be8]
+0x0047505a: FLD      dword ptr [0x7e0b94]
+0x00475060: FMUL     st(1)
+0x00475062: FSTP     dword ptr [0x3c52bec]
+0x00475068: FLD      dword ptr [0x7e0b98]
+0x0047506e: FMUL     st(1)
+0x00475070: FSTP     dword ptr [0x3c52bf0]
+0x00475076: FLD      dword ptr [0x7e0b9c]
+0x0047507c: FMUL     st(1)
+0x0047507e: FSTP     dword ptr [0x3c52bf4]
+0x00475084: FLD      dword ptr [0x7e0ba0]
+0x0047508a: FMUL     st(1)
+0x0047508c: FSTP     dword ptr [0x3c52bf8]
+0x00475092: FLD      dword ptr [0x7e0ba4]
+0x00475098: FMUL     st(1)
+0x0047509a: FSTP     dword ptr [0x3c52bfc]
+0x004750a0: FLD      dword ptr [0x7e0ba8]
+0x004750a6: FMUL     st(1)
+0x004750a8: FSTP     dword ptr [0x3c52c00]
+0x004750ae: FSTP     st(0)
+0x004750b0: ADD      esp, 0x10
+0x004750b3: RET      
+0x004750b4: FLD      dword ptr [esi + 0x28]
+0x004750b7: PUSH     ecx
+0x004750b8: FSUB     dword ptr [esp + 0x10]
+0x004750bc: FLD      dword ptr [esi + 0x24]
+0x004750bf: FSUB     dword ptr [esp + 0xc]
+0x004750c3: FLD      dword ptr [esi + 0x20]
+0x004750c6: FSUB     dword ptr [esp + 8]
+0x004750ca: FLD      st(0)
+0x004750cc: FMUL     st(1)
+0x004750ce: FLD      st(2)
+0x004750d0: FMUL     st(3)
+0x004750d2: FADDP    st(1)
+0x004750d4: FLD      st(3)
+0x004750d6: FMUL     st(4)
+0x004750d8: FADDP    st(1)
+0x004750da: FSTP     dword ptr [esp]
+0x004750dd: FSTP     st(0)
+0x004750df: FSTP     st(0)
+0x004750e1: FSTP     st(0)
+0x004750e3: CALL     0x7871f0
+0x004750e8: FCOM     dword ptr [0x7debe0]
+0x004750ee: FNSTSW   ax
+0x004750f0: TEST     ah, 5
+0x004750f3: JP       0x475158
+0x004750f5: FCOMP    dword ptr [0x7dcc74]
+0x004750fb: FNSTSW   ax
+0x004750fd: TEST     ah, 5
+0x00475100: MOV      eax, 0x7e0bc8
+0x00475105: JNP      0x47510c
+0x00475107: MOV      eax, 0x7e0bac
+0x0047510c: MOV      ecx, dword ptr [eax]
+0x0047510e: MOV      edx, dword ptr [eax + 4]
+0x00475111: ADD      eax, 4
+0x00475114: ADD      eax, 4
+0x00475117: MOV      dword ptr [0x3c52be8], ecx
+0x0047511d: MOV      ecx, dword ptr [eax]
+0x0047511f: ADD      eax, 4
+0x00475122: MOV      dword ptr [0x3c52bec], edx
+0x00475128: MOV      edx, dword ptr [eax]
+0x0047512a: ADD      eax, 4
+0x0047512d: MOV      dword ptr [0x3c52bf0], ecx
+0x00475133: MOV      ecx, dword ptr [eax]
+0x00475135: ADD      eax, 4
+0x00475138: MOV      dword ptr [0x3c52bf4], edx
+0x0047513e: MOV      edx, dword ptr [eax]
+0x00475140: MOV      eax, dword ptr [eax + 4]
+0x00475143: MOV      dword ptr [0x3c52bf8], ecx
+0x00475149: MOV      dword ptr [0x3c52bfc], edx
+0x0047514f: MOV      dword ptr [0x3c52c00], eax
+0x00475154: ADD      esp, 0x10
+0x00475157: RET      
+0x00475158: MOV      ecx, dword ptr [0x7e0b90]
+0x0047515e: FSTP     st(0)
+0x00475160: MOV      edx, dword ptr [0x7e0b94]
+0x00475166: MOV      eax, dword ptr [0x7e0b98]
+0x0047516b: MOV      dword ptr [0x3c52be8], ecx
+0x00475171: MOV      ecx, dword ptr [0x7e0b9c]
+0x00475177: MOV      dword ptr [0x3c52bec], edx
+0x0047517d: MOV      edx, dword ptr [0x7e0ba0]
+0x00475183: MOV      dword ptr [0x3c52bf0], eax
+0x00475188: MOV      eax, dword ptr [0x7e0ba4]
+0x0047518d: MOV      dword ptr [0x3c52bf4], ecx
+0x00475193: MOV      ecx, dword ptr [0x7e0ba8]
+0x00475199: MOV      dword ptr [0x3c52bf8], edx
+0x0047519f: MOV      dword ptr [0x3c52bfc], eax
+0x004751a4: MOV      dword ptr [0x3c52c00], ecx
+0x004751aa: ADD      esp, 0x10
+0x004751ad: RET      
+0x004751ae: NOP      
+0x004751af: NOP      
+
+--- IsInDeathZone_ 0x004751b0 ---
+0x004751b0: XOR      eax, eax
+0x004751b2: MOV      ah, byte ptr [0x3b22dcc]
+0x004751b8: XOR      ecx, ecx
+0x004751ba: SUB      esp, 0x4c
+0x004751bd: PUSH     edi
+0x004751be: OR       ax, word ptr [0x3b22dec]
+0x004751c5: MOV      cl, al
+0x004751c7: MOVZX    edx, ax
+0x004751ca: SHR      edx, 8
+0x004751cd: MOV      eax, dword ptr [edx*4 + 0x915908]
+0x004751d4: AND      ecx, 0xff
+0x004751da: TEST     eax, eax
+0x004751dc: JNE      0x4751e3
+0x004751de: POP      edi
+0x004751df: ADD      esp, 0x4c
+0x004751e2: RET      
+0x004751e3: MOVZX    ecx, cx
+0x004751e6: PUSH     esi
+0x004751e7: MOV      esi, dword ptr [eax + ecx*4]
+0x004751ea: TEST     esi, esi
+0x004751ec: JE       0x475250
+0x004751ee: MOV      eax, dword ptr [esi + 4]
+0x004751f1: TEST     eax, eax
+0x004751f3: JE       0x475250
+0x004751f5: CALL     0x4144e0
+0x004751fa: MOV      edx, dword ptr [esp + 0x58]
+0x004751fe: ADD      edx, 0x20
+0x00475201: MOV      ecx, eax
+0x00475203: MOV      eax, dword ptr [edx]
+0x00475205: MOV      edi, 1
+0x0047520a: SHL      edi, cl
+0x0047520c: MOV      ecx, dword ptr [edx + 4]
+0x0047520f: MOV      edx, dword ptr [edx + 8]
+0x00475212: MOV      dword ptr [esp + 8], eax
+0x00475216: MOV      eax, dword ptr [esi + 4]
+0x00475219: TEST     eax, eax
+0x0047521b: MOV      dword ptr [esp + 0xc], ecx
+0x0047521f: MOV      dword ptr [esp + 0x10], edx
+0x00475223: JE       0x475245
+0x00475225: TEST     dword ptr [esi], edi
+0x00475227: JE       0x47523b
+0x00475229: PUSH     eax
+0x0047522a: LEA      eax, [esp + 0xc]
+0x0047522e: PUSH     eax
+0x0047522f: CALL     0x456510
+0x00475234: ADD      esp, 8
+0x00475237: TEST     eax, eax
+0x00475239: JNE      0x475250
+0x0047523b: MOV      eax, dword ptr [esi + 0xc]
+0x0047523e: ADD      esi, 8
+0x00475241: TEST     eax, eax
+0x00475243: JNE      0x475225
+0x00475245: POP      esi
+0x00475246: MOV      eax, 1
+0x0047524b: POP      edi
+0x0047524c: ADD      esp, 0x4c
+0x0047524f: RET      
+0x00475250: POP      esi
+0x00475251: XOR      eax, eax
+0x00475253: POP      edi
+0x00475254: ADD      esp, 0x4c
+0x00475257: RET      
+0x00475258: NOP      
+0x00475259: NOP      
+0x0047525a: NOP      
+0x0047525b: NOP      
+0x0047525c: NOP      
+0x0047525d: NOP      
+0x0047525e: NOP      
+0x0047525f: NOP      
+
+--- fmod helper 0x004393c0 ---
+0x004393c0: FLD      dword ptr [esp + 8]
+0x004393c4: FCOMP    dword ptr [0x7dcb2c]
+0x004393ca: FNSTSW   ax
+0x004393cc: TEST     ah, 0x44
+0x004393cf: JP       0x4393d8
+0x004393d1: FLD      dword ptr [0x7dcb2c]
+0x004393d7: RET      
+0x004393d8: FLD      dword ptr [esp + 4]
+0x004393dc: SUB      esp, 8
+0x004393df: FDIV     dword ptr [esp + 0x10]
+0x004393e3: FSTP     qword ptr [esp]
+0x004393e6: CALL     0x6449f0
+0x004393eb: FMUL     dword ptr [esp + 0x10]
+0x004393ef: ADD      esp, 8
+0x004393f2: FSUBR    dword ptr [esp + 4]
+0x004393f6: RET      
+0x004393f7: NOP      
+
+--- njSqrt 0x007871f0 ---
+0x007871f0: FLD      dword ptr [esp + 4]
+0x007871f4: FCOMP    qword ptr [0x7e0048]
+0x007871fa: FNSTSW   ax
+0x007871fc: TEST     ah, 5
+0x007871ff: JP       0x787212
+0x00787201: FLD      dword ptr [esp + 4]
+0x00787205: FMUL     dword ptr [0x7dcb0c]
+0x0078720b: FSQRT    
+0x0078720d: FCHS     
+0x0078720f: RET      4
+0x00787212: FLD      dword ptr [esp + 4]
+0x00787216: FSQRT    
+0x00787218: RET      4
+0x0078721b: INT3     
+
+DeathZoneList 0x915908: 43 stage entries, four act slots each. Each act
+entry is a PL_KILLCOLLI array of {int character; NJS_OBJECT* object},
+terminated by a null object. Extracted character-mask ORs:
+  stage  0: [0, 0, 0, 0]
+  stage  1: [255, 255, 255, 0]
+  stage  2: [255, 255, 255, 0]
+  stage  3: [255, 255, 255, 0]
+  stage  4: [255, 255, 255, 0]
+  stage  5: [1, 65, 8, 0]
+  stage  6: [5, 5, 9, 0]
+  stage  7: [255, 255, 255, 0]
+  stage  8: [0, 255, 255, 255]
+  stage  9: [255, 255, 0, 0]
+  stage 10: [255, 255, 255, 255]
+  stage 11: [0, 0, 0, 0]
+  stage 12: [255, 255, 255, 0]
+  stage 13: [0, 0, 0, 0]
+  stage 14: [0, 0, 0, 0]
+  stage 15: [0, 0, 0, 0]
+  stage 16: [0, 0, 0, 0]
+  stage 17: [0, 0, 0, 0]
+  stage 18: [0, 0, 0, 0]
+  stage 19: [0, 0, 0, 0]
+  stage 20: [0, 0, 0, 0]
+  stage 21: [0, 0, 0, 0]
+  stage 22: [0, 0, 0, 0]
+  stage 23: [0, 0, 0, 0]
+  stage 24: [0, 0, 0, 0]
+  stage 25: [0, 0, 0, 0]
+  stage 26: [255, 255, 255, 255]
+  stage 27: [0, 0, 0, 0]
+  stage 28: [0, 0, 0, 0]
+  stage 29: [255, 255, 255, 255]
+  stage 30: [0, 0, 0, 0]
+  stage 31: [0, 0, 0, 0]
+  stage 32: [255, 255, 255, 255]
+  stage 33: [255, 255, 255, 255]
+  stage 34: [255, 255, 255, 4294967295]
+  stage 35: [255, 255, 255, 255]
+  stage 36: [0, 0, 0, 0]
+  stage 37: [0, 0, 0, 0]
+  stage 38: [0, 0, 0, 0]
+  stage 39: [0, 0, 0, 0]
+  stage 40: [0, 0, 0, 0]
+  stage 41: [0, 0, 0, 0]
+  stage 42: [0, 0, 0, 0]
+
+Stages 4, 6 and 34 allocate only three act entries; the source act byte
+would read adjacent data for act 3. The native table leaves that slot zero.

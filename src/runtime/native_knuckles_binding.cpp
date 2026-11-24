@@ -10,6 +10,7 @@
 #include "runtime/object_draw_context.hpp"
 #include <algorithm>
 #include <array>
+#include <cmath>
 #include <cstring>
 #include <stdexcept>
 
@@ -63,6 +64,15 @@ constexpr std::uint32_t kDamageAttribute = 0x10000;
 constexpr std::uint8_t kRollMode = 4;
 // KnucklesCheckDig's playerwk+0x10 Status_Unknown4 gate.
 constexpr std::uint16_t kDigStatus = 0x40;
+// Knuckles_CollisionShape's glide range, item/status gates and damage nibble.
+constexpr std::uint16_t kFirstGlideAnimation = 0x36;
+constexpr std::uint16_t kLastGlideAnimation = 0x45;
+constexpr std::uint16_t kGlideAnimation = 0x33;
+constexpr std::uint16_t kItemHighBit = 0x8000;
+constexpr std::uint16_t kStatusHighBit = 0x100;
+constexpr std::uint8_t kPunchMode = 0x12;
+constexpr std::uint8_t kDigMode = 0x34;
+constexpr std::uint8_t kDamageLowNibble = 0xf0;
 // DrawCharacterShadow's source literals and late queue facts.
 constexpr float kShadowDepthCull = 20000.0f;
 constexpr float kShadowFalloffPerUnit = 0.03f;
@@ -70,6 +80,99 @@ constexpr float kShadowGroundLift = 0.3f;
 constexpr float kShadowVerticalSquash = 0.8f;
 constexpr std::uint8_t kLateShadowFlags = 6;
 constexpr float kShadowSortBias = -27952.0f;
+// Knuckles_PositionReference's source literals and level tables.
+constexpr float kReferenceHalfPeriod = 50.0f;
+constexpr float kReferencePeriod = 100.0f;
+constexpr float kReferenceNearDistance = 8.0f;
+constexpr float kReferenceMiddleDistance = 15.0f;
+constexpr float kReferenceWrappedNearDistance = 4.0f;
+constexpr float kReferenceWrappedFarDistance = 20.0f;
+constexpr float kReferenceLevelRamp = 0.125f;
+constexpr std::array<float, 7> kReferenceLevels = {
+    0.0f, 0.2f, 0.12f, 0.08f, 0.03f, 0.05f, 0.02f};
+constexpr std::array<float, 7> kReferenceWrappedMiddleLevels = {
+    0.0f, 0.7f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f};
+constexpr std::array<float, 7> kReferenceWrappedNearLevels = {
+    0.0f, 0.15f, 0.04f, 0.01f, 0.0f, 0.0f, 0.3f};
+// Per-stage and per-act OR of the source killing-collision character masks.
+// Zero is a null stage list, a null act entry, or the absent fourth act slot of
+// a three-act list. A nonzero mask still needs the source object intersection,
+// which no native stage object supplies yet.
+constexpr std::array<std::array<std::uint8_t, 4>, 43> kDeathZoneCharacters = {{
+    {0x00, 0x00, 0x00, 0x00}, // 0
+    {0xff, 0xff, 0xff, 0x00}, // 1
+    {0xff, 0xff, 0xff, 0x00}, // 2
+    {0xff, 0xff, 0xff, 0x00}, // 3
+    {0xff, 0xff, 0xff, 0x00}, // 4, three source acts
+    {0x01, 0x41, 0x08, 0x00}, // 5
+    {0x05, 0x05, 0x09, 0x00}, // 6, three source acts
+    {0xff, 0xff, 0xff, 0x00}, // 7
+    {0x00, 0xff, 0xff, 0xff}, // 8
+    {0xff, 0xff, 0x00, 0x00}, // 9
+    {0xff, 0xff, 0xff, 0xff}, // 10
+    {0x00, 0x00, 0x00, 0x00}, // 11
+    {0xff, 0xff, 0xff, 0x00}, // 12
+    {0x00, 0x00, 0x00, 0x00}, // 13
+    {0x00, 0x00, 0x00, 0x00}, // 14
+    {0x00, 0x00, 0x00, 0x00}, // 15
+    {0x00, 0x00, 0x00, 0x00}, // 16
+    {0x00, 0x00, 0x00, 0x00}, // 17
+    {0x00, 0x00, 0x00, 0x00}, // 18
+    {0x00, 0x00, 0x00, 0x00}, // 19
+    {0x00, 0x00, 0x00, 0x00}, // 20
+    {0x00, 0x00, 0x00, 0x00}, // 21
+    {0x00, 0x00, 0x00, 0x00}, // 22
+    {0x00, 0x00, 0x00, 0x00}, // 23
+    {0x00, 0x00, 0x00, 0x00}, // 24
+    {0x00, 0x00, 0x00, 0x00}, // 25
+    {0xff, 0xff, 0xff, 0xff}, // 26
+    {0x00, 0x00, 0x00, 0x00}, // 27
+    {0x00, 0x00, 0x00, 0x00}, // 28
+    {0xff, 0xff, 0xff, 0xff}, // 29
+    {0x00, 0x00, 0x00, 0x00}, // 30
+    {0x00, 0x00, 0x00, 0x00}, // 31
+    {0xff, 0xff, 0xff, 0xff}, // 32
+    {0xff, 0xff, 0xff, 0xff}, // 33
+    {0xff, 0xff, 0xff, 0x00}, // 34, three source acts
+    {0xff, 0xff, 0xff, 0xff}, // 35
+    {0x00, 0x00, 0x00, 0x00}, // 36
+    {0x00, 0x00, 0x00, 0x00}, // 37
+    {0x00, 0x00, 0x00, 0x00}, // 38
+    {0x00, 0x00, 0x00, 0x00}, // 39
+    {0x00, 0x00, 0x00, 0x00}, // 40
+    {0x00, 0x00, 0x00, 0x00}, // 41
+    {0x00, 0x00, 0x00, 0x00}, // 42
+}};
+
+// NOTSA: the source helper wraps one axis into the [0, 100) reference period.
+float wrap_reference_axis(Context &context, float value) {
+    auto &arithmetic = context.rendering.arithmetic();
+    const auto offset =
+        (fidelity::ExactFloat(arithmetic, value) + kReferenceHalfPeriod).rounded();
+    const auto quotient =
+        (fidelity::ExactFloat(arithmetic, offset) / kReferencePeriod).rounded_double();
+    const auto multiple = fidelity::ExactFloat::wide(arithmetic, std::floor(quotient)) *
+                          kReferencePeriod;
+    const auto remainder = offset - multiple;
+    return (offset - remainder).rounded();
+}
+
+// NOTSA: the far branch measures the raw-to-wrapped offset, not the reference
+// displacement. The source subtracts in z, y, x order and squares x first.
+fidelity::ExactFloat wrapped_offset_distance(Context &context, Primary view,
+                                            float wrapped_x, float wrapped_z) {
+    auto &arithmetic = context.rendering.arithmetic();
+    const auto dx = fidelity::ExactFloat(arithmetic, view.position.x) - wrapped_x;
+    const auto dy = fidelity::ExactFloat(arithmetic, view.position.y) - view.position.y;
+    const auto dz = fidelity::ExactFloat(arithmetic, view.position.z) - wrapped_z;
+    // Named in source order because the two sides of + are not sequenced.
+    const auto xx = dx * dx;
+    const auto yy = dy * dy;
+    const auto zz = dz * dz;
+    const auto squared = ((xx + yy) + zz).rounded();
+    return fidelity::ExactFloat(arithmetic, squared).square_root();
+}
+
 // STUB: SONIC 0x475660 Knuckles_ChildTaskA
 void unrecovered_child_a(TaskScheduler &, const TaskHandle &) { missing("native_knuckles_child_a"); }
 // STUB: SONIC 0x473ce0 Knuckles_ChildTaskB
@@ -552,14 +655,14 @@ void update_collision_shape(Context &context, Primary view, const Player &player
     // every collision record and rewrites the first damage byte; the glide
     // shape rewrite stays a seam below.
     const auto requested = requested_animation(context, player);
-    if (requested >= 0x36 && requested <= 0x45)
+    if (requested >= kFirstGlideAnimation && requested <= kLastGlideAnimation)
         return;
     if (!has_collision(context, context.task->primary_work)) {
-        if (requested == 0x33)
+        if (requested == kGlideAnimation)
             missing("native_knuckles_collision_shape_info");
         return;
     }
-    if (requested == 0x33)
+    if (requested == kGlideAnimation)
         missing("native_knuckles_collision_shape_glide");
     constexpr std::uint32_t kEnabled = 16;
     collision_attributes(context, context.task->primary_work, 1) |= kEnabled;
@@ -567,25 +670,88 @@ void update_collision_shape(Context &context, Primary view, const Player &player
     collision_attributes(context, context.task->primary_work, 3) |= kEnabled;
     std::uint8_t low = 0;
     std::uint8_t klass = 0;
-    if ((item_word(context, player) & 0x8000) != 0) {
+    if ((item_word(context, player) & kItemHighBit) != 0) {
         low = 3;
         klass = 3;
-    } else if ((view.status & 0x100) != 0) {
+    } else if ((view.status & kStatusHighBit) != 0) {
         low = 1;
         klass = 1;
-    } else if (view.mode == 0x12) {
+    } else if (view.mode == kPunchMode) {
         low = 3;
         klass = 1;
-    } else if (view.mode == 0x34) {
+    } else if (view.mode == kDigMode) {
         klass = 1;
     }
     auto &damage = collision_info(context, context.task->primary_work, 0).damage;
-    damage = static_cast<std::uint8_t>((klass << 2) | (damage & 0xf0) | low);
+    damage = static_cast<std::uint8_t>((klass << 2) | (damage & kDamageLowNibble) | low);
 }
-void update_reference_position(Context &, Primary) {
-    missing("native_knuckles_reference_position");
+void update_reference_position(Context &context, Primary view) {
+    auto &arithmetic = context.rendering.arithmetic();
+    auto &reference = state(context).position_reference;
+    const auto wrapped_x = wrap_reference_axis(context, view.position.x);
+    const auto wrapped_z = wrap_reference_axis(context, view.position.z);
+    const auto dx = fidelity::ExactFloat(arithmetic, view.position.x) - reference.x;
+    const auto dy = fidelity::ExactFloat(arithmetic, view.position.y) - reference.y;
+    const auto dz = fidelity::ExactFloat(arithmetic, view.position.z) - reference.z;
+    // Named in source order because the two sides of + are not sequenced.
+    const auto xx = dx * dx;
+    const auto yy = dy * dy;
+    const auto zz = dz * dz;
+    const auto squared = ((xx + yy) + zz).rounded();
+    const auto distance = fidelity::ExactFloat(arithmetic, squared).square_root();
+    // The source stores the root before comparing the retained extended value,
+    // then reloads the binary32 word for the near-distance decision and ramp.
+    const auto stored_distance = distance.rounded();
+    if (distance.compare(kReferenceMiddleDistance) == X87Comparison::less) {
+        const auto stored = fidelity::ExactFloat(arithmetic, stored_distance);
+        if (stored.compare(kReferenceNearDistance) == X87Comparison::less) {
+            for (std::size_t index = 0; index < reference.levels.size(); ++index)
+                reference.levels[index] =
+                    (fidelity::ExactFloat(arithmetic, kReferenceLevels[index]) *
+                     fidelity::ExactFloat(arithmetic, 0.0f))
+                        .rounded();
+            return;
+        }
+        const auto scale = (stored - kReferenceNearDistance) * kReferenceLevelRamp;
+        for (std::size_t index = 0; index < reference.levels.size(); ++index)
+            reference.levels[index] =
+                (fidelity::ExactFloat(arithmetic, kReferenceLevels[index]) * scale).rounded();
+        return;
+    }
+    const auto wrapped_distance =
+        wrapped_offset_distance(context, view, wrapped_x, wrapped_z);
+    if (wrapped_distance.compare(kReferenceWrappedFarDistance) != X87Comparison::less) {
+        for (std::size_t index = 0; index < reference.levels.size(); ++index)
+            reference.levels[index] = kReferenceLevels[index];
+        return;
+    }
+    if (wrapped_distance.compare(kReferenceWrappedNearDistance) == X87Comparison::less) {
+        for (std::size_t index = 0; index < reference.levels.size(); ++index)
+            reference.levels[index] = kReferenceWrappedNearLevels[index];
+        return;
+    }
+    for (std::size_t index = 0; index < reference.levels.size(); ++index)
+        reference.levels[index] = kReferenceWrappedMiddleLevels[index];
 }
-bool is_in_death_zone(Context &, Primary) { missing("native_knuckles_death_zone"); }
+bool is_in_death_zone(Context &context, Primary) {
+    const auto stage_index = static_cast<std::uint8_t>(stage(context));
+    if (stage_index >= kDeathZoneCharacters.size())
+        missing("native_knuckles_death_zone_stage");
+    const auto act_index = static_cast<std::uint8_t>(act(context));
+    if (act_index >= kDeathZoneCharacters[stage_index].size())
+        missing("native_knuckles_death_zone_act");
+    const auto characters = kDeathZoneCharacters[stage_index][act_index];
+    if (characters == 0)
+        return false;
+    const auto player_bit =
+        std::uint32_t{1} << (static_cast<unsigned>(context.bootstrap.player_number) & 31U);
+    if ((characters & player_bit) == 0)
+        return true;
+    // TestObjectIntersect is the source's remaining body for a matching record.
+    // The native scene has no killing-collision object for the source pointer,
+    // so the hit test is the explicit boundary.
+    missing("native_knuckles_death_zone_intersection");
+}
 void other_player_position(Context &, std::uint8_t, std::int8_t, NinjaVector &) {
     missing("native_knuckles_player_position");
 }

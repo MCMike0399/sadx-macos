@@ -5,6 +5,7 @@
 #include "player/player_initialization.hpp"
 #include "player/player_join_vertices.hpp"
 
+#include <array>
 #include <cstdint>
 
 namespace sadx::knuckles_selection {
@@ -20,6 +21,14 @@ enum class HandIndexSet : std::uint8_t {
     ShovelClaw // Knuckles_ShovelClawIndices
 };
 
+// The contiguous source block is a reference point followed by seven
+// distance-scaled levels. Mode zero clears only the point; the frame helper
+// rewrites all ten words. The readers of the levels are unrecovered.
+struct PositionReference {
+    float x = 0, y = 0, z = 0;
+    std::array<float, 7> levels = {};
+};
+
 struct State {
     // The tail clears this source word every frame; its readers are unrecovered,
     // so no annotated owner is claimed yet.
@@ -27,9 +36,8 @@ struct State {
     // The post-dispatch store marks the current mode active; its readers are
     // unrecovered, so no annotated owner is claimed yet.
     std::int32_t action_active = 0;
-    // Mode zero clears the reference point the unrecovered tail helper compares
-    // against. The roles are not established, so no annotated owner is claimed.
-    float reference_x = 0, reference_y = 0, reference_z = 0;
+    // GLOBAL: SONIC 0x3c52bdc KnucklesPositionReference size=40
+    PositionReference position_reference;
     // The source stores the selected array through eight pointer globals; the
     // readers are unrecovered, so no annotated owner is claimed yet.
     HandIndexSet hand_index_set = HandIndexSet::Hand;
@@ -178,9 +186,9 @@ void stand_tail(Context &, const TaskWorkHandle &);
 void update_held_task(Context &, const TaskWorkHandle &);
 // STUB: SONIC 0x474ba0 Knuckles_CollisionShape
 void update_collision_shape(Context &, Primary, const Player &);
-// STUB: SONIC 0x474f80 Knuckles_PositionReference
+// FUNCTION: SONIC 0x474f80 Knuckles_PositionReference
 void update_reference_position(Context &, Primary);
-// STUB: SONIC 0x4751b0 IsInDeathZone_
+// FUNCTION: SONIC 0x4751b0 IsInDeathZone_
 bool is_in_death_zone(Context &, Primary);
 // STUB: SONIC 0x4419c0 GetPlayerPosition
 void other_player_position(Context &, std::uint8_t player, std::int8_t frame, NinjaVector &);

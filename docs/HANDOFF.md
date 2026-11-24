@@ -1371,3 +1371,11 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Outcome: the frontier still exits 1 at frame 1332 on the title hash. It now stops after the Knuckles collision shape update. No CharacterSelect frame is presented.
 * Changed: the shape update enables the collision records and rewrites the first damage byte outside the glide animation range. The glide rewrite stays an explicit seam.
 * Verified: the app builds and the frontier stop moved with semantic state still passing.
+
+### 2026-11-24 — Knuckles reference point and death-zone index recovered (no gate)
+
+* Outcome: the private-asset CharacterSelect frontier still exits 1 at frame 1332 on the title hash c7d02f64, but the stop moved from native_knuckles_reference_position to native_miles_action_update. No CharacterSelect frame is presented.
+* Changed: Knuckles_PositionReference wraps x and z through the source 100-unit period, measures the reference displacement, and writes the seven level words from the three source tables. The reference point and levels share one typed State owner. IsInDeathZone_ indexes the 43-stage character-mask table and returns zero on a null entry; a matching character reports the unrecovered object intersection.
+* Verified: make -j10 build/sadx-native exits 0. The native-knuckles-assets test still stops at native_knuckles_parameters; player-underwater, character-shadow and view-check units exit 0; provenance, readability, layers and constexpr tables are 0. The checker ran against the main checkout private assets with this worktree's binary: frame 1332, title c7d02f64, semantic state passed, stop native_miles_action_update. The retained dossier is knuckles-position-reference-death-zone.disasm.txt, and the far branch matched a Unicorn execution of the original instruction stream bit for bit.
+* Limits: the CharacterSelect path is game mode 12, so the source death-zone gate never calls IsInDeathZone_ here; its non-null object intersection and other stages remain untested. The level writer has no differential oracle, only the retained emulator comparison.
+* Next: native Miles action update, then the next named stop in the character-select frame.
