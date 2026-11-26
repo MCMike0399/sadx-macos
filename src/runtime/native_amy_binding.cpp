@@ -294,16 +294,24 @@ void set_motion(Context &context, const Player &player) {
 void join_vertices(Context &context, Primary, const TaskWorkHandle &, const Player &player) {
     auto &join_mode = player_initialization::bind_join_vertex_mode(player);
     const auto mode = join_mode;
-    if (mode == 1) {
-        // Active processing reaches the real motion-matrix producer before it
-        // consumes the join table, including when the table is empty.
-        missing("native_amy_join_vertices_CalcMMMatrix");
-    }
     auto &table = physics(player).animation_tail.join_table;
     if (!table)
         missing("native_amy_weld_table_field");
     if (!*table)
         missing("native_amy_weld_null_table");
+    if (mode == 1) {
+        if (!context.model_matrices)
+            missing("native_amy_join_vertices_model_matrices");
+        if (!context.players.amy_motion_assets)
+            missing("native_amy_join_vertices_motion_assets");
+        if (!vertex_weld::run_active(**table, arena(context), context.scene, physics(player),
+                                     *context.model_matrices, context.rendering.matrix_primitives(),
+                                     context.players.amy_motion_assets->resources(),
+                                     context.players.weld_matrices,
+                                     context.rendering.arithmetic()))
+            missing("native_amy_join_vertices_motion_source");
+        return;
+    }
     if (mode == 0) {
         vertex_weld::initialize(**table, arena(context), context.scene);
         join_mode = 1;

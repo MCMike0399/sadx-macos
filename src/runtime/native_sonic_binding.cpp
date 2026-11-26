@@ -689,10 +689,26 @@ struct Binding {
                 missing("sonic_character_scene");
             operation(*table, arena(), *context.scene);
         };
-        vertex_weld::update_prefix(
-            mode, [] { missing("sonic_join_vertices_CalcMMMatrix"); },
-            [&] { with_table(vertex_weld::initialize); },
-            [&] { with_table(vertex_weld::restore); });
+        const auto process_active = [&] {
+            if (!context.model_matrices)
+                missing("sonic_join_vertices_model_matrices");
+            if (!context.matrix_primitives)
+                missing("sonic_join_vertices_matrix_primitives");
+            if (!context.players.sonic_animation_assets)
+                missing("sonic_join_vertices_motion_assets");
+            auto &table = require(physics(player).animation_tail.join_table, "sonic_join_table");
+            if (!table)
+                missing("sonic_null_join_table");
+            if (!context.scene)
+                missing("sonic_character_scene");
+            if (!vertex_weld::run_active(*table, arena(), *context.scene, physics(player),
+                                         *context.model_matrices, *context.matrix_primitives,
+                                         context.players.sonic_animation_assets->resources(),
+                                         context.players.weld_matrices, fp()))
+                missing("sonic_join_vertices_motion_source");
+        };
+        vertex_weld::update_prefix(mode, process_active, [&] { with_table(vertex_weld::initialize); },
+                                   [&] { with_table(vertex_weld::restore); });
     }
     [[noreturn]] void initialize_model(Site site) {
         if (!context.model)

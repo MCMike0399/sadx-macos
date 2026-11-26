@@ -1,0 +1,37 @@
+{
+  "source": "src/player/player_vertex_weld.cpp",
+  "probe": "tests/probes/native_player_vertex_weld_probe.cpp",
+  "oracle": "tools/oracles/verify_original_player_vertex_weld.py",
+  "mutants": [
+    {
+      "name": "root-object-gate",
+      "before": "if (join.object != action_object || join.input_mode == 0)",
+      "after": "(void)action_object; if (join.input_mode == 0)"
+    },
+    {
+      "name": "source-depth-fill",
+      "before": "join.source_depth = static_cast<std::uint8_t>(depth);",
+      "after": "(void)depth; join.source_depth = 0;"
+    },
+    {
+      "name": "destination-depth-fill",
+      "before": "join.destination_depth = static_cast<std::uint8_t>(depth);",
+      "after": "(void)depth; join.destination_depth = 0;"
+    },
+    {
+      "name": "source-inverse-point",
+      "before": "operations.calculate_point(matrices.source_inverse, midpoint, source_target);",
+      "after": "source_target = midpoint;"
+    },
+    {
+      "name": "destination-normal-pair",
+      "before": "const auto destination_backup_normal = read_backup(arena, join, vertex, 3, index);\n                NinjaVector source_normal, destination_normal;",
+      "after": "const auto destination_backup_normal = read_backup(arena, join, vertex, 1, index);\n                NinjaVector source_normal, destination_normal;"
+    },
+    {
+      "name": "attachment-axis-count-one",
+      "before": "else if (join.vertex_count == 1)\n                direction.y = 1.0f;",
+      "after": "else if (join.vertex_count == 1)\n                direction.z = 1.0f;"
+    }
+  ]
+}

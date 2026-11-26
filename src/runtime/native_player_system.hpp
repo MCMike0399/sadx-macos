@@ -8,6 +8,7 @@
 #include "engine/collision_component.hpp"
 #include "player/actor_current.hpp"
 #include "player/gamma_selection_core.hpp"
+#include "player/player_vertex_weld.hpp"
 #include "player/gamma_setup_resource.hpp"
 #include "player/gamma_effects.hpp"
 #include "player/player_underwater.hpp"
@@ -47,6 +48,8 @@ struct PlayerSystem {
     actor_current::State current;
     player_initialization::Registry registry;
     gamma_selection::State gamma;
+    // NOTSA: the shared GetMMMatrix destinations and their inverse scratch.
+    vertex_weld::Matrices weld_matrices = {};
     // GLOBAL: SONIC 0x3c54558 GammaWeldInfo size=120
     PlayerJoinTable gamma_weld;
     gamma_cursors::Templates gamma_cursor_templates;
@@ -189,6 +192,8 @@ struct Context {
     // Source land-candidate count. Zero is the empty table; a positive count
     // still takes the unrecovered shadow land walk.
     std::int16_t land_candidate_count = 0;
+    // Borrowed source InstanceMatrices for CalcMMMatrix output and GetMMMatrix reads.
+    model_matrices::State *model_matrices = nullptr;
 };
 } // namespace sadx::big_selection
 
@@ -216,6 +221,8 @@ struct Context {
     // Source land-candidate count. Zero is the empty table; a positive count
     // still takes the unrecovered shadow land walk.
     std::int16_t land_candidate_count = 0;
+    // Borrowed source InstanceMatrices for CalcMMMatrix output and GetMMMatrix reads.
+    model_matrices::State *model_matrices = nullptr;
 };
 } // namespace sadx::amy_selection
 
@@ -243,6 +250,8 @@ struct Context {
     std::function<std::uint32_t(std::uint8_t)> held_buttons = {};
     std::function<std::uint32_t()> attack_buttons = {};
     std::function<std::uint32_t()> grab_buttons = {};
+    // Borrowed source InstanceMatrices for CalcMMMatrix output and GetMMMatrix reads.
+    model_matrices::State *model_matrices = nullptr;
 };
 } // namespace sadx::miles_selection
 
@@ -271,5 +280,7 @@ struct Context {
     // NOTSA: borrowed engine-pad held word and the source attack mask.
     std::function<std::uint32_t(std::uint8_t)> held_buttons = {};
     std::function<std::uint32_t()> attack_buttons = {};
+    // Borrowed source InstanceMatrices for CalcMMMatrix output and GetMMMatrix reads.
+    model_matrices::State *model_matrices = nullptr;
 };
 } // namespace sadx::knuckles_selection

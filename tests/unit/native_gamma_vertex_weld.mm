@@ -168,19 +168,19 @@ int main(int argc, char **argv) {
     gamma_selection::join_vertices(context, pose, task->motion_work, player);
     assert(state.join_vertex_mode_at_122 == 1 && !previous->released());
     assert(!players.gamma_weld.rows[0].original_vertices && !players.current.player);
-    // Active processing must fail before a sentinel could hide missing matrices.
+    // Active processing still reports the missing table at its named boundary.
     const auto saved = tail.join_table;
     tail.join_table.reset();
-    bool matrix_missing = false;
+    bool table_missing = false;
     try {
         gamma_selection::join_vertices(context, pose, task->motion_work, player);
     } catch (const flow::UnrecoveredGameFlowCall &error) {
-        matrix_missing = std::string(error.what()) == "native_gamma_join_vertices_CalcMMMatrix";
+        table_missing = std::string(error.what()) == "native_gamma_weld_table_field";
     }
-    assert(matrix_missing && !tail.join_table);
+    assert(table_missing && !tail.join_table);
     tail.join_table = saved;
     assert(players.current.primary == task->primary_work && !players.current.player);
     std::cout
         << "Actual Gamma common tail initializes canonical weld nodes and reaches laser targets; "
-           "captured null alias and active matrix boundary preserved\n";
+           "captured null alias and active table boundary preserved\n";
 }

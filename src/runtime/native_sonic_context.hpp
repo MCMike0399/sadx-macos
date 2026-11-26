@@ -58,6 +58,10 @@ struct Context {
     native::SonicModelAssets *model = nullptr;
     const std::int16_t *act = nullptr;
     character_pack::SceneState *scene = nullptr;
+    // Borrowed source InstanceMatrices for CalcMMMatrix output and the display's
+    // shared Ninja matrix stack for the active weld's transforms.
+    model_matrices::State *model_matrices = nullptr;
+    NinjaMatrixPrimitives *matrix_primitives = nullptr;
     regular_textures::CharacterCatalog character_textures{nullptr, nullptr, 0};
     regular_textures::State *texture_state = nullptr;
     regular_textures::Services *texture_services = nullptr;

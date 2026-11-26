@@ -1,0 +1,73 @@
+{
+  "slug": "player_vertex_weld",
+  "cases": 1200,
+  "seed": 1196903492,
+  "original_development_cohort": {
+    "cases": 1024,
+    "stream_sha256": [
+      "a45f646455b27f5c53591dd70fb36506ee19f2ffe0387f48ef37b7eb2a96bfff",
+      "a45f646455b27f5c53591dd70fb36506ee19f2ffe0387f48ef37b7eb2a96bfff"
+    ],
+    "inputs_sha256": "e024fb197533f785fd7c3ff817df05c4b9547080e0e08931bea0108bdad49061"
+  },
+  "all_inputs_sha256": "ef768f9131ba22d587a1779f096952724ee01d0aa34be3dd6eb8e0ac72bad1f9",
+  "observer_schema": 3,
+  "passed": true,
+  "mismatch_count": 0,
+  "values_match": true,
+  "failure_prefix_cases": 248,
+  "active_matrix_boundary_cases": 170,
+  "allocator_receipts": 258,
+  "source_stream_sha256": "9efde391d8a56f18f3127a59ffda78f15c1427e6592ec3f91482ced669557b4c",
+  "native_stream_sha256": "9efde391d8a56f18f3127a59ffda78f15c1427e6592ec3f91482ced669557b4c",
+  "node_stream_sha256": "15c38860578831073a023215aee0d73304c9ddd4121c479b20dc06dd47c745f4",
+  "active": {
+    "cases": 512,
+    "seed": 1464159300,
+    "inputs_sha256": "8f91a2d2fe15538e52e6aa93b9c76b69c3b623b2fb4ddca4b92d0abd48338e5b",
+    "source_stream_sha256": "910f4a7d3cfed00f833b87e5db5d6aaaf1a38613ecfb4a461dcc7aecbc081421",
+    "native_stream_sha256": "910f4a7d3cfed00f833b87e5db5d6aaaf1a38613ecfb4a461dcc7aecbc081421",
+    "mismatch_count": 0,
+    "mismatches": []
+  },
+  "holdout": {
+    "cases": 512,
+    "seed": 1213156420,
+    "inputs_sha256": "bea1b4db3e08734f9902dc4deed129d09de7229f1a2ac931e22a41ed76969ec3",
+    "mismatch_count": 0,
+    "mismatches": [],
+    "passed": true
+  },
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "exe_ranges": [
+    [
+      "0x43fa90",
+      "0x440375"
+    ],
+    [
+      "0x439f60",
+      "0x439fb8"
+    ],
+    [
+      "0x439360",
+      "0x4393b2"
+    ]
+  ],
+  "original_ranges_sha256": {
+    "43fa90-440375": "573e7d4c5928c572594462f57e59929b5a2dbef946146ab2b2a3eea46e255393",
+    "439f60-439fb8": "7fad57af897c3bec580f7da3981465048c824fb571fad04cb67a5f5d685893ad",
+    "439360-4393b2": "fb6d1e7e8d49cf9990a45e3d0c95d184802dd6c5e97b40728c526b035cc06253"
+  },
+  "probe_sha256": "8c35504c591534bbc31be23f27c16504a230ed9dff8f3d67f28b729f7b3d9288",
+  "mismatches": [],
+  "imported_gamma": null,
+  "limits": [
+    "Initialization and backup restoration keep the earlier boundary cohort.",
+    "Active math callees are scripted fixture events; their owners have separate oracles.",
+    "Geometry words, backup bytes, row fields, attachments, matrices and event order compare.",
+    "MAlloc/FreeMemory are ordered receipts; actual native arena owns all backups.",
+    "One invocation per case; native unit separately exercises repeated cleanup.",
+    "All 48 scene words, both backup images, depths and owner identities compared.",
+    "Original x86 instructions execute; node flags and child/sibling order are varied."
+  ]
+}

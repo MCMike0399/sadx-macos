@@ -77,6 +77,9 @@ class Display {
         return NinjaMath(sine_, arithmetic_).cos_extended(angle);
     }
     X87Context &arithmetic() { return arithmetic_; }
+    // NOTSA: the active weld borrows the same source matrix stack and primitives
+    // as the display's model draws.
+    NinjaMatrixPrimitives &matrix_primitives() { return *coordinates_; }
     SseContext &sse() { return sse_; }
     void set_camera();
     void set_perspective(std::int32_t, std::uint32_t &pause_state);

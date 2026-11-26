@@ -1,5 +1,6 @@
 #include "player/player_vertex_weld.hpp"
 #include "vertex_weld_fixture.hpp"
+#include "vertex_weld_active_fixture.hpp"
 #include <algorithm>
 
 extern "C" int sadx_native_player_vertex_weld(const std::uint32_t *input, std::uint32_t *output) {
@@ -93,5 +94,51 @@ extern "C" int sadx_native_player_node_index(const std::uint32_t *input, std::in
         output[0] = 0;
         output[1] = 1;
     }
+    return 1;
+}
+
+extern "C" int sadx_native_player_vertex_weld_active(const std::uint32_t *input,
+                                                     std::uint32_t *output) {
+    using namespace sadx;
+    std::fill_n(output, weld_active::kOutputWords, 0);
+    const auto pack = weld_fixture::pack(input);
+    character_pack::SceneState scene(pack);
+    weld_fixture::topology(scene, input);
+    TaskWorkArena arena;
+    auto previous = arena.allocate(96).work;
+    if (!previous)
+        return 0;
+    if (!arena.write(previous, 0, input + weld_active::kBackup, 24 * sizeof(std::uint32_t)))
+        return 0;
+    std::vector<std::uint16_t> pairs;
+    for (unsigned index = 0; index < 4; ++index)
+        pairs.push_back(static_cast<std::uint16_t>(input[weld_active::kPairs + index]));
+    PlayerJoinVertex row{};
+    row.object = weld_fixture::object(scene, input[weld_active::kRowObject]);
+    row.source_object = weld_fixture::object(scene, input[weld_active::kRowSource]);
+    row.destination_object = weld_fixture::object(scene, input[weld_active::kRowDestination]);
+    row.vertex_count = static_cast<std::uint8_t>(input[weld_active::kVertexCount]);
+    row.input_mode = static_cast<std::int8_t>(input[weld_active::kMode]);
+    row.source_depth = static_cast<std::uint8_t>(input[weld_active::kSourceDepth]);
+    row.destination_depth = static_cast<std::uint8_t>(input[weld_active::kDestinationDepth]);
+    row.original_vertices = previous;
+    row.vertex_pairs = input[30] ? nullptr : &pairs;
+    PlayerJoinTable table{{row, {}}};
+    PlayerAttachmentVectors attachments{};
+    vertex_weld::Matrices matrices{};
+    std::vector<weld_active::Event> events;
+    weld_active::ScriptedMotionMatrices motion(scene, input, events);
+    weld_active::ScriptedOperations operations(events);
+    X87Context fp(0x007f);
+    std::uint32_t result = 0;
+    try {
+        vertex_weld::process_active(table, arena, scene, attachments, matrices,
+                                    weld_active::value(input[weld_active::kFrame]),
+                                    input[weld_active::kNodeCount], motion, operations, fp);
+    } catch (...) {
+        result = 2;
+    }
+    weld_active::write_output(output, table.rows[0], arena, scene, attachments, matrices,
+                              events, result);
     return 1;
 }

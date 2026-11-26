@@ -187,6 +187,8 @@ void TitleScene::exec_selection_sonic(TaskScheduler &scheduler, const TaskHandle
     auto &scene = callback_scene(scheduler, exec_selection_sonic);
     scene.register_callback(initialize_player_auxiliary);
     sonic::Context context{scene.session_.players_, scheduler, task, scene.display_.arithmetic()};
+    context.model_matrices = &scene.session_.model_matrices_;
+    context.matrix_primitives = &scene.display_.matrix_primitives();
     context.stage = &scene.session_.stage_;
     sonic::bind_editor_state(context,
         {scene.session_.editor_status_, scene.session_.mission_editor_status_});
@@ -232,6 +234,7 @@ void TitleScene::exec_selection_miles(TaskScheduler &scheduler, const TaskHandle
         texture_views.catalog(scene.session_.character_resources_.loaded()),
         scene.session_.regular_resources_.state(), &texture_services,
         scene.session_.character_scene_};
+    context.model_matrices = &scene.session_.model_matrices_;
     context.collision_entries = &scene.session_.collision_entries_;
     context.held_buttons = scene.input_.pad_held;
     context.attack_buttons = scene.input_.action_mask;
@@ -267,6 +270,7 @@ void TitleScene::exec_selection_knuckles(TaskScheduler &scheduler, const TaskHan
         texture_views.catalog(scene.session_.character_resources_.loaded()),
         scene.session_.regular_resources_.state(), &texture_services,
         scene.session_.character_scene_};
+    context.model_matrices = &scene.session_.model_matrices_;
     context.collision_entries = &scene.session_.collision_entries_;
     const editor::View editor_state{scene.session_.editor_status_,
                                     scene.session_.mission_editor_status_};
@@ -304,6 +308,7 @@ void TitleScene::exec_selection_amy(TaskScheduler &scheduler, const TaskHandle &
         texture_views.catalog(scene.session_.character_resources_.loaded()),
         scene.session_.regular_resources_.state(), &texture_services,
         scene.session_.character_scene_};
+    context.model_matrices = &scene.session_.model_matrices_;
     context.collision_entries = &scene.session_.collision_entries_;
     const editor::View editor_state{scene.session_.editor_status_,
                                     scene.session_.mission_editor_status_};
@@ -334,6 +339,7 @@ void TitleScene::display_selection_amy(TaskScheduler &scheduler, const TaskHandl
         texture_views.catalog(scene.session_.character_resources_.loaded()),
         scene.session_.regular_resources_.state(), &texture_services,
         scene.session_.character_scene_};
+    context.model_matrices = &scene.session_.model_matrices_;
     context.collision_entries = &scene.session_.collision_entries_;
     const editor::View editor_state{scene.session_.editor_status_,
                                     scene.session_.mission_editor_status_};
@@ -367,6 +373,7 @@ void TitleScene::exec_selection_big(TaskScheduler &scheduler, const TaskHandle &
         texture_views.catalog(scene.session_.character_resources_.loaded()),
         scene.session_.regular_resources_.state(), &texture_services,
         scene.session_.character_scene_};
+    context.model_matrices = &scene.session_.model_matrices_;
     context.collision_entries = &scene.session_.collision_entries_;
     if (scene.session_.lighting_ && scene.session_.character_pack_) {
         const ModelDrawEnvironment environment{*scene.session_.character_pack_,
