@@ -669,8 +669,12 @@ struct Binding {
             return binding.word(player, Word::Equipment, Site::CommonAnimation);
         }
         sonic_model::ObjectId model_slot(unsigned index) override {
-            // The importer currently declares slots 5, 6 and 22 only.
-            // Do not infer the other export slots from a similar object.
+            // Only importer-declared export slots resolve; do not infer the
+            // other slots from a similar object.
+            if (binding.context.model) {
+                if (const auto slot = binding.context.model->common_slot(index))
+                    return *slot;
+            }
             const auto boundary = "sonic_common_model_slot_" + std::to_string(index);
             throw Unavailable(boundary.c_str());
         }

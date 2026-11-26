@@ -1,6 +1,8 @@
 #pragma once
 #include "engine/collision_component.hpp"
 #include "player/sonic_model.hpp"
+#include <map>
+#include <optional>
 
 namespace sadx::native {
 // NOTSA: pointer-free declarations from the existing sonic-actor metadata.
@@ -13,6 +15,8 @@ struct SonicJoinDeclaration {
 };
 struct SonicModelDeclarations {
     character_pack::ResourceId attach = 0, root = 0, join_target = 0;
+    // SONIC_OBJECTS rows beyond the constructor three, keyed by table index.
+    std::map<unsigned, character_pack::ResourceId> common_slots;
     std::array<character_pack::ResourceId, 3> direct_ahead{};
     std::array<SonicJoinDeclaration, 8> metal_joins{};
     std::array<SonicJoinDeclaration, 37> joins{};
@@ -32,6 +36,12 @@ class SonicModelAssets {
     character_pack::ResourceId attach() const { return declarations_.attach; }
     character_pack::ResourceId root() const { return declarations_.root; }
     character_pack::ResourceId join_target() const { return declarations_.join_target; }
+    std::optional<character_pack::ResourceId> common_slot(unsigned index) const {
+        const auto found = declarations_.common_slots.find(index);
+        if (found == declarations_.common_slots.end())
+            return std::nullopt;
+        return found->second;
+    }
     const std::vector<collision_component::Info> &collision() const {
         return declarations_.collision;
     }

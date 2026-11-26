@@ -1400,3 +1400,9 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Outcome: the frontier still exits 1 at frame 1332 on the title hash. Every preview actor now finishes its first frame; the stop is sonic_common_model_slot_20 on the following Sonic tick. No CharacterSelect frame is presented.
 * Changed: the Miles collision shape writes its record enables, damage byte and mode centers. SET_COLLI_RANGE stores the speed length plus player height on the collision work.
 * Verified: the app builds and the frontier stop moved with semantic state still passing.
+
+### 2026-11-10 — Sonic common model slots imported (no gate)
+
+* Outcome: the frontier still exits 1 at frame 1332 on the title hash. Every actor finishes frame one; Sonic now stops on the next tick at sonic_join_vertices_CalcMMMatrix. No CharacterSelect frame is presented.
+* Changed: the Sonic importer declarations now include common-tail object slots 3, 14, 15, 19, 20, 58, 60, 62 and 63 after the initial action, preserving the exact Sonic prefix bytes and Stand identity. The Sonic binding resolves declared slots and keeps undeclared ones explicit.
+* Verified: the canonical and private packs regenerate with the original prefix digest, the app builds, and the frontier stop moved with semantic state still passing.

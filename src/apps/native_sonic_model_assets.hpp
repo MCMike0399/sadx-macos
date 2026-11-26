@@ -11,7 +11,10 @@ load_sonic_model_assets(NSDictionary *actor, const character_pack::CharacterPack
     if (string(actor[@"pack_schema"], "Sonic actor schema") != "SDXACT03")
         throw std::runtime_error("unsupported Sonic actor schema");
     SonicModelDeclarations result;
-    const auto objects = array(actor[@"objects"], 3, "Sonic object declarations");
+    id objects_value = actor[@"objects"];
+    if (![objects_value isKindOfClass:NSArray.class] || [objects_value count] < 3)
+        throw std::runtime_error("invalid imported array: Sonic object declarations");
+    NSArray *objects = objects_value;
     for (std::size_t index = 0; index < 2; ++index) {
         const auto row = dictionary(objects[index], "Sonic object declaration");
         (void)integer(row[@"index"], index + 5, index + 5, "Sonic object slot");
@@ -24,6 +27,14 @@ load_sonic_model_assets(NSDictionary *actor, const character_pack::CharacterPack
                 "Sonic join target identity"));
     (void)integer(dictionary(objects[2], "Sonic join target")[@"index"], 22, 22,
                   "Sonic join target slot");
+    for (std::size_t index = 3; index < [objects count]; ++index) {
+        const auto row = dictionary(objects[index], "Sonic common object declaration");
+        const auto slot = static_cast<unsigned>(integer(row[@"index"], 0, 78, "Sonic common slot"));
+        const auto identity = static_cast<character_pack::ResourceId>(
+            integer(row[@"object"], 1, pack.record_count(), "Sonic common object identity"));
+        (void)pack.object(identity);
+        result.common_slots[slot] = identity;
+    }
     const auto direct = array(actor[@"direct_ahead_objects"], 3, "Sonic direct-ahead objects");
     for (std::size_t index = 0; index < result.direct_ahead.size(); ++index)
         result.direct_ahead[index] = static_cast<character_pack::ResourceId>(
