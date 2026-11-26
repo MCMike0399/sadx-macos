@@ -1,5 +1,6 @@
 #pragma once
 
+#include "player/player_join_vertices.hpp"
 #include "player/player_motion.hpp"
 #include "player/player_contact.hpp"
 #include "engine/task.hpp"
@@ -47,7 +48,10 @@ struct PlayerPhysicsState {
     std::optional<std::uint32_t> shadow_attributes_bottom = {}; // shadowwk Attr_bottom, +0x1e8
     std::optional<float> shadow_bottom_y = {}; // shadowwk y_bottom, +0x1f0
     std::optional<std::uint32_t> shadow_prior_attributes_bottom = {}; // shadowwk _Attr_bottom, +0x1f8
-
+    // playerwk +0x14c..+0x1d8. PJoinVertexes modes 4..9 are the only writers
+    // recovered so far; display attachment code still reads these through the
+    // original allocation in the reference adapter.
+    PlayerAttachmentVectors attachment_vectors = {};
 };
 
 inline const NinjaVector* player_contact_direction(const PlayerPhysicsState& player) noexcept {
