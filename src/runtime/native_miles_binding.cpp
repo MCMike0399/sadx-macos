@@ -580,9 +580,69 @@ void update_collision_center(Context &context) {
     center.z = add(view.position.z, local.z);
 }
 void update_held_task(Context &, const TaskWorkHandle &) { missing("native_miles_held_task"); }
-void update_collision_range(Context &, Primary) { missing("native_miles_collision_range"); }
-void set_collision_range(Context &, const TaskWorkHandle &, const Player &) {
-    missing("native_miles_set_collision_range");
+// NOTSA: the typed free-work fields share the actual player allocation identity.
+native::PlayerSystem::MilesExtraWork &miles_extra(Context &context, const Player &player) {
+    if (!player)
+        missing("native_miles_null_player_free_work");
+    for (auto &work : context.players.miles_work)
+        if (work.allocation == player->allocation)
+            return work;
+    context.players.miles_work.push_back({player->allocation, {}, {}});
+    return context.players.miles_work.back();
+}
+void update_collision_range(Context &context, Primary view) {
+    // Miles collision shape: every record enables, the first damage byte is
+    // rewritten from the status bit, and two modes move record centers.
+    if (!has_collision(context, context.task->primary_work))
+        missing("native_miles_collision_range_info");
+    const auto player = player_for_motion(context, context.task->motion_work);
+    auto &first = collision_info(context, context.task->primary_work, 0);
+    first.a = 4.0f;
+    first.damage = first.damage & 0xfc;
+    first.damage = first.damage & 0xf3;
+    constexpr std::uint32_t kEnabled = 16;
+    collision_attributes(context, context.task->primary_work, 1) |= kEnabled;
+    collision_attributes(context, context.task->primary_work, 2) |= kEnabled;
+    collision_attributes(context, context.task->primary_work, 3) |= kEnabled;
+    if ((view.status & 0x100) != 0) {
+        first.damage = static_cast<std::uint8_t>((first.damage & 0xfd) | 1);
+        first.damage = static_cast<std::uint8_t>((first.damage & 0xf7) | 4);
+    }
+    auto &display = context.rendering;
+    const auto exact = [&display](float value) {
+        return fidelity::ExactFloat(display.arithmetic(), value);
+    };
+    if (view.mode == 0x0f) {
+        first.a = 2.25f;
+        collision_attributes(context, context.task->primary_work, 3) &= ~kEnabled;
+        const auto yaw = view.rotation[1];
+        auto &third = collision_info(context, context.task->primary_work, 3).center;
+        const auto cos_value = fidelity::ExactFloat::retained(display.arithmetic(), display.cosine(yaw));
+        third.x = (exact(view.position.x) - (cos_value + cos_value)).rounded();
+        third.y = (exact(view.position.y) + 8.25f).rounded();
+        const auto sin_value = fidelity::ExactFloat::retained(display.arithmetic(), display.sine(yaw));
+        const auto doubled_sin = sin_value + sin_value;
+        third.z = (exact(view.position.z) - doubled_sin).rounded();
+    } else if (view.mode == 0x14) {
+        collision_attributes(context, context.task->primary_work, 1) &= ~kEnabled;
+        collision_attributes(context, context.task->primary_work, 2) &= ~kEnabled;
+        auto &extra_work = miles_extra(context, player);
+        collision_info(context, context.task->primary_work, 1).center = extra_work.tail_a;
+        collision_info(context, context.task->primary_work, 2).center = extra_work.tail_b;
+    }
+}
+void set_collision_range(Context &context, const TaskWorkHandle &, const Player &player) {
+    // SET_COLLI_RANGE stores the computed range on the collision work.
+    if (!has_collision(context, context.task->primary_work))
+        return;
+    auto work = collision(context, context.task->primary_work);
+    const auto motion = player_initialization::bind_existing_motion(context.task);
+    auto &arithmetic = context.rendering.arithmetic();
+    const auto length = fidelity::ExactFloat::retained(
+        arithmetic, fidelity::ExactFloat::vector_length_return(
+                        arithmetic, motion->motion.speed.x, motion->motion.speed.y,
+                        motion->motion.speed.z));
+    work->range = (length + fidelity::ExactFloat(arithmetic, player->parameters.height)).rounded();
 }
 void set_default_normal_camera_mode(std::int32_t, std::int32_t) {
     missing("native_miles_default_camera_mode");

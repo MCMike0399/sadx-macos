@@ -93,6 +93,14 @@ struct PlayerSystem {
     std::unique_ptr<MilesMotionAssets> miles_motion_assets;
     PlayerJoinTable miles_weld;
     miles_selection::State miles;
+    // NOTSA: typed fields share the identity of the actual player allocation.
+    struct MilesExtraWork {
+        TaskWorkHandle allocation;
+        // playerwk free+0x00 and free+0x0c tail anchor points.
+        NinjaVector tail_a{};
+        NinjaVector tail_b{};
+    };
+    std::deque<MilesExtraWork> miles_work;
     std::unique_ptr<KnucklesActorAssets> knuckles_assets;
     std::unique_ptr<KnucklesMotionAssets> knuckles_motion_assets;
     PlayerJoinTable knuckles_weld;
