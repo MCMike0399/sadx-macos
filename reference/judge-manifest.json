@@ -1,14 +1,14 @@
 {
   "change": {
-    "base_commit": "49fa3adfb42c920dacaee260d231d0abb591fafe",
+    "base_commit": "61d2724557feb9ea008dc2eff12222527a37c330",
     "evidence": "reference/production-integration-20261110/judge-evidence.json",
-    "evidence_sha256": "0089f4a602cd08a50c43f38534fc25b41a29324d40b589552737a8bcfadfc7df",
-    "reason": "Register Big/Amy/Miles/Knuckles verification inputs and view-check/character-shadow oracles; frontier checker preview match by callbacks. No tolerance or existing expected value loosened."
+    "evidence_sha256": "874115ff1caac49563f9256c1e4f1bc2f8107c3c9f6d8c545ad6530ca6b5346c",
+    "reason": "Register Amy/Miles/Knuckles tests and character-shadow oracle; frontier checker matches preview by callbacks. No tolerance or existing expected value loosened."
   },
   "files": {
     "Makefile": "db71bdc51211e440b8efe0f6b72cdb47d77439b4ac9177766e3eff191a08a0bc",
     "reference/address-dispatch-baseline-v1.json": "a55df9d554f6fc3e37a8916a3795c590f3b0daa5a7e4daed81156f7ae8fc7a64",
-    "reference/constexpr-table-review.json": "d7d9e1a118cc12a43a3f2560033dc31cdbce4344def75be1253167943c0447e1",
+    "reference/constexpr-table-review.json": "f5377c91a5f09fe2a6b8d4f9930e329f0e8be578b2840d9cff1678a167f2f228",
     "reference/fp-control-census.json": "6e3c48227461edbcdc6a9c807a1596b8870178df7511981ee779c71dee09a505",
     "reference/frame-control-corpus.json": "407e2960c4f77d04ae4f56fe8fddbd8f3de9f29d514ae5ec297f24775046c952",
     "reference/frame-control-corpus.tsv": "01eb9909e91fc405588010c17253888caa9cf66541fb5e76862acc9b570960ae",
@@ -1016,7 +1016,7 @@
     "tests/unit/native_ground_acceleration.cpp": "af1f5cd4b49a4bfcb46d4bab16b3d1e92e16f34be6c5177f7b37a39d58b3414f",
     "tests/unit/native_input.cpp": "bd1f8ba81532f403ac4804d84893a45ab6a2a7666e1636dce01dcfb1372c3355",
     "tests/unit/native_input_reset.cpp": "1ef601cad5d660990c9dfcc9b31dd3ea609133d01bb3086ac8a59a0444277773",
-    "tests/unit/native_knuckles_assets.mm": "24fdbe0d4e8e11010102277bd1dc95faa376b03a2ff278bb31ab8c43996c5d78",
+    "tests/unit/native_knuckles_assets.mm": "c4536e4af2ef9dae397727afddafec567e6254115a22315bd3c7dcbf221b6710",
     "tests/unit/native_lighting_assets.mm": "e09869435b6032d670cf0d7129148c3096cf15dab3b25d9c6170689686edf8d4",
     "tests/unit/native_logo_scene.cpp": "89a899c81a773dd96aad9cb872cb848323e4201040b5029398deecdae53d692c",
     "tests/unit/native_main_menu_assets.mm": "ed552df8fd866d48572f97450c44a4015e3c1ea7f3d90d076e663502a32812c9",
@@ -1026,7 +1026,7 @@
     "tests/unit/native_menu_voice_catalog.mm": "6ae3ca3b646394b2f4f7e13caf0cf7b8d1580ae4ed26d54f1e266aabe68cf191",
     "tests/unit/native_message_texture.cpp": "28510de7728ab76ac0dc55dec4ed9d5c404d66e63ae754ca853120d2f64388f6",
     "tests/unit/native_message_texture_metal.mm": "00334b08d39071cd65b447de189a0a05d4014160f57a0332071f9473059f50f2",
-    "tests/unit/native_miles_assets.mm": "68e5131540f7794b136da37a7e096fb486403165194cd727964af35bd60767d8",
+    "tests/unit/native_miles_assets.mm": "2fe6116e92c429f43ffa868dd9cbd43645536d3b0bdecabffaec58e8872d74f3",
     "tests/unit/native_music_assets.mm": "aab89fe4e900e6797f975922de0af74c0402eb6abf1433e051aea5ec225072a5",
     "tests/unit/native_preview_events.mm": "0d2eaac33fe7030c3746b39517f3871fe63e78596ed6f7f3a4cb236a37b25413",
     "tests/unit/native_regular_resources.cpp": "e33012a41ae27418c14ddaa23d13f587b6603e06104e1d84a28ff5bbaa4e8ecc",

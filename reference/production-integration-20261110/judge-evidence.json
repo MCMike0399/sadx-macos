@@ -68,5 +68,9 @@
     ],
     "change": "Big/Amy/Miles/Knuckles asset closures and selection cores, CharacterShadow and dsCheckViewV recoveries with oracles (character_shadow pass 118+64, view_check pass 116+holdout), shared underwater binding, frontier semantic graph update for Big children. New judge inputs are new tests/probes/oracle scripts and tracked summaries; the frontier checker preview-task match is by callbacks because actor children shift its list index (historical fixture and current graph both pass). Constexpr reviews added for Miles row tables, Amy stage words and Miles weld patches; declarations unchanged in meaning. usPlayer counterpart separates the bootstrap owner from the reference fixture.",
     "frontier": "frame 1332 stop native_amy_initialize_auxiliary_d -> native_amy_display after auxiliaries; title c7d02f64; semantic_state_passed true"
+  },
+  "actor_batch_2": {
+    "change": "Register Amy/Miles/Knuckles asset tests, character_shadow oracle/probe/unit, and the frontier checker preview-by-callbacks update. Oracles: character_shadow pass 118 dev + 64 holdout; view_check pass. Frontier now stops at native_knuckles_reference_position then native_miles_collision_range/native_knuckles_collision_shape sequence in traversal order; semantic state passes.",
+    "frontier": "frame 1332, title c7d02f64, all preview actors complete frame one"
   }
 }
