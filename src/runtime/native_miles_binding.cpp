@@ -250,16 +250,24 @@ void set_motion(Context &context, const Player &player) {
 void join_vertices(Context &context, Primary, const TaskWorkHandle &, const Player &player) {
     auto &join_mode = player_initialization::bind_join_vertex_mode(player);
     const auto mode = join_mode;
-    if (mode == 1) {
-        // Active processing reaches the real motion-matrix producer before it
-        // consumes the join table, including when the table is empty.
-        missing("native_miles_join_vertices_CalcMMMatrix");
-    }
     auto &table = physics(player).animation_tail.join_table;
     if (!table)
         missing("native_miles_weld_table_field");
     if (!*table)
         missing("native_miles_weld_null_table");
+    if (mode == 1) {
+        if (!context.model_matrices)
+            missing("native_miles_join_vertices_model_matrices");
+        if (!context.players.miles_motion_assets)
+            missing("native_miles_join_vertices_motion_assets");
+        if (!vertex_weld::run_active(**table, arena(context), context.scene, physics(player),
+                                     *context.model_matrices, context.rendering.matrix_primitives(),
+                                     context.players.miles_motion_assets->resources(),
+                                     context.players.weld_matrices,
+                                     context.rendering.arithmetic()))
+            missing("native_miles_join_vertices_motion_source");
+        return;
+    }
     if (mode == 0) {
         vertex_weld::initialize(**table, arena(context), context.scene);
         join_mode = 1;
@@ -597,22 +605,29 @@ void update_collision_range(Context &context, Primary view) {
         missing("native_miles_collision_range_info");
     const auto player = player_for_motion(context, context.task->motion_work);
     auto &first = collision_info(context, context.task->primary_work, 0);
+    constexpr std::uint8_t kDamageClearLow = 0xfc;
+    constexpr std::uint8_t kDamageClearHigh = 0xf3;
+    constexpr std::uint8_t kDamageClearLowBit = 0xfd;
+    constexpr std::uint8_t kDamageClearHighBit = 0xf7;
+    constexpr std::uint16_t kStatusDamageBit = 0x100;
+    constexpr std::int16_t kRangeModeNear = 0x0f;
+    constexpr std::int16_t kRangeModeFar = 0x14;
     first.a = 4.0f;
-    first.damage = first.damage & 0xfc;
-    first.damage = first.damage & 0xf3;
+    first.damage = first.damage & kDamageClearLow;
+    first.damage = first.damage & kDamageClearHigh;
     constexpr std::uint32_t kEnabled = 16;
     collision_attributes(context, context.task->primary_work, 1) |= kEnabled;
     collision_attributes(context, context.task->primary_work, 2) |= kEnabled;
     collision_attributes(context, context.task->primary_work, 3) |= kEnabled;
-    if ((view.status & 0x100) != 0) {
-        first.damage = static_cast<std::uint8_t>((first.damage & 0xfd) | 1);
-        first.damage = static_cast<std::uint8_t>((first.damage & 0xf7) | 4);
+    if ((view.status & kStatusDamageBit) != 0) {
+        first.damage = static_cast<std::uint8_t>((first.damage & kDamageClearLowBit) | 1);
+        first.damage = static_cast<std::uint8_t>((first.damage & kDamageClearHighBit) | 4);
     }
     auto &display = context.rendering;
     const auto exact = [&display](float value) {
         return fidelity::ExactFloat(display.arithmetic(), value);
     };
-    if (view.mode == 0x0f) {
+    if (view.mode == kRangeModeNear) {
         first.a = 2.25f;
         collision_attributes(context, context.task->primary_work, 3) &= ~kEnabled;
         const auto yaw = view.rotation[1];
@@ -623,7 +638,7 @@ void update_collision_range(Context &context, Primary view) {
         const auto sin_value = fidelity::ExactFloat::retained(display.arithmetic(), display.sine(yaw));
         const auto doubled_sin = sin_value + sin_value;
         third.z = (exact(view.position.z) - doubled_sin).rounded();
-    } else if (view.mode == 0x14) {
+    } else if (view.mode == kRangeModeFar) {
         collision_attributes(context, context.task->primary_work, 1) &= ~kEnabled;
         collision_attributes(context, context.task->primary_work, 2) &= ~kEnabled;
         auto &extra_work = miles_extra(context, player);
