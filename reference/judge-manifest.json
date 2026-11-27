@@ -1,9 +1,9 @@
 {
   "change": {
-    "base_commit": "044aa0ca46ca430e8a9e2f3df35f9956c83e786f",
+    "base_commit": "baea6d4e622720c6513f6af66a6eccb8ea4b4989",
     "evidence": "reference/production-integration-20261110/judge-evidence.json",
     "evidence_sha256": "a9bb0298f4df2f72411709e07b7fe10b069f92fe9964d07cb70d9b5e775f6d31",
-    "reason": "Gamma input-buffer active weld stop is now the weld table field after active recovery. No tolerance loosened."
+    "reason": "Sonic scenario stops advance past declared common slots and active weld. No tolerance loosened."
   },
   "files": {
     "Makefile": "47cabdd2da1608b199d7586ff5d70f84fa71c425d98bf2088aa40ade81923ef2",
@@ -1146,8 +1146,8 @@
     "tests/unit/sonic_animation_table.cpp": "eb232f14205aa862b3e831ff338204f3d64acef62bf6a92be6c7a90268db1ee0",
     "tests/unit/sonic_controller_native.cpp": "135c0a66ec10065ac72a3c86e90262559c1a85c47a05e3077a8d3e0f7a2b3257",
     "tests/unit/sonic_controller_reference.cpp": "0c000a8a069498f5e92ef00f22083b7faba48b62633cf085b34e020a78bdfec2",
-    "tests/unit/sonic_initialization_native.mm": "c12ef1899c864b69ce439ccadbee587066279d634af8bf23a718406f2128dd01",
-    "tests/unit/sonic_model_native.mm": "98ef73fa692941cb1e2352197598e55a193c1d55182c5aeefc0ad2e2292084ac",
+    "tests/unit/sonic_initialization_native.mm": "169dcab5b9e660e45f3abb490dad0b917d2b1a3374967174bc1d44d5cdaf3bd3",
+    "tests/unit/sonic_model_native.mm": "67835c558d922f15190b9e74d55909d9b689eb94087d26c612b732333458ad16",
     "tests/unit/sonic_physics_capture_native.cpp": "d66f87dc8283db63c22b227b1a6da8eaaa9edce7d680da5927c838cd5a635393",
     "tests/unit/sonic_physics_capture_reference.cpp": "68cf014efd76a68bbc5ac14251515721ce48495dc84e0735b61a3a753129a4fd",
     "tests/unit/sonic_player.cpp": "02c2004bbe6aa633ac3c0681c90f4506bad1edd6f136f446a069c71e03df4cd5",
