@@ -57,7 +57,7 @@ struct SonicCallbackProbe {
         assert(&owner->table() == table_member && owner->table() == table);
         assert(&owner->resources() == resources);
         const auto entry_player = session.players_.registry.players[0]->allocation;
-        initialization_stop("sonic_common_model_slot_20");
+        initialization_stop("sonic_common_remaining_tail");
         assert(task->primary_state->action_at_0 == 1); // Source stores Stand before textures.
         assert(session.players_.current.player == entry_player);
         assert(session.players_.registry.players[0]->physics->animation_tail.table_at_140 == table);
