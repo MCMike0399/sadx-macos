@@ -72,5 +72,14 @@
   "actor_batch_2": {
     "change": "Register Amy/Miles/Knuckles asset tests, character_shadow oracle/probe/unit, and the frontier checker preview-by-callbacks update. Oracles: character_shadow pass 118 dev + 64 holdout; view_check pass. Frontier now stops at native_knuckles_reference_position then native_miles_collision_range/native_knuckles_collision_shape sequence in traversal order; semantic state passes.",
     "frontier": "frame 1332, title c7d02f64, all preview actors complete frame one"
+  },
+  "weld_active": {
+    "commits": [
+      "a195684b",
+      "b51316ec",
+      "4ddb066d"
+    ],
+    "change": "PJoinVertexes active processing recovered in player_vertex_weld with CalcMMMatrix/GetMMMatrix owners; oracle extended from dev-only to 1200 dev + 512 holdout cases, prior cases and expectations retained; 6 of 6 active mutants caught. Makefile weld probe/test link the native archive. Fragment of prior partial coverage is retained in the report limits.",
+    "frontier": "frame 1332 stop sonic_common_remaining_tail, title c7d02f64, semantic true"
   }
 }
