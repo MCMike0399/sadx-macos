@@ -21,7 +21,7 @@ class Tests(unittest.TestCase):
   # Previously qualified SDXACT03 selection graph2949 records, excluding its368-byte descriptor header.
   self.assertEqual(hashlib.sha256(self.output.read_bytes()[368:687528]).hexdigest(),'58541b2d3367502c2221269512eed05d5c894eea99003334315ccc188433d045')
  def test_exact_requested_model_slots_and_initial_action(self):
-  m=self.result['metadata'];self.assertEqual([r['index'] for r in m['objects']],[5,6,22]);proof={r['id']:r for r in self.result['proof']['records']};table=s.export(self.dll,'___SONIC_OBJECTS')
+  m=self.result['metadata'];self.assertEqual([r['index'] for r in m['objects']],[5,6,22,3,14,15,19,20,58,60,62,63]);proof={r['id']:r for r in self.result['proof']['records']};table=s.export(self.dll,'___SONIC_OBJECTS')
   for row in m['objects']:self.assertEqual(int(proof[row['object']]['source_address'],16),self.dll.unpack('<I',table+row['index']*4)[0])
   action=self.dll.unpack('<I',s.export(self.dll,'___SONIC_ACTIONS')+4)[0];self.assertEqual(int(proof[m['initial_animation_action']]['source_address'],16),action)
   self.assertEqual([int(proof[i]['source_address'],16) for i in m['direct_ahead_objects']],[self.dll.unpack('<I',table+4*i)[0] for i in [50,52,51]])
