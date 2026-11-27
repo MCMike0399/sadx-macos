@@ -287,9 +287,9 @@ struct SonicCallbackProbe {
             assert(!player->physics->animation_tail.buffer_at_148.value());
             return;
         }
-        assert(boundary == (scenario == 7 ? "sonic_common_remaining_tail" :
-                scenario == 1 || scenario == 2 ? "sonic_join_vertices_CalcMMMatrix"
-                                                           : "sonic_common_model_slot_20"));
+        assert(boundary == (scenario == 4 || scenario == 6
+                                   ? "sonic_join_vertices_model_matrices"
+                                   : "sonic_common_remaining_tail"));
         auto physics = captured_physics ? captured_physics : player->physics;
         assert(player && player->stage == player_initialization::Stage::Complete);
         assert(task->primary_work == primary && task->motion_work == motion);

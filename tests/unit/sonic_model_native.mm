@@ -55,9 +55,9 @@ struct SonicCallbackProbe {
         catch (const sonic::Unavailable &error) { boundary = error.what(); }
         std::cerr << "scenario " << scenario << " boundary " << boundary << "\n";
         assert(boundary == (scenario == 2 ? "sonic_model_graph" :
-                            scenario == 0 ? "sonic_common_model_slot_20" :
+                            scenario == 0 ? "sonic_common_remaining_tail" :
                             scenario == 1 ? "sonic_motion_phase_27_failure_10:" :
-                                            "sonic_join_vertices_CalcMMMatrix"));
+                                            "sonic_common_remaining_tail"));
         assert(display.arithmetic().control_word() == control);
         const auto player = session.players_.registry.players[0];
         assert(player && player->stage == player_initialization::Stage::Complete);
