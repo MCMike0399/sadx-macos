@@ -215,7 +215,7 @@ int main(int argc, char **argv) {
     try {
         gamma_selection::join_vertices(context, pose, task->motion_work, player);
     } catch (const flow::UnrecoveredGameFlowCall &error) {
-        matrix_missing = std::string(error.what()) == "native_gamma_join_vertices_CalcMMMatrix";
+        matrix_missing = std::string(error.what()) == "native_gamma_weld_table_field";
     }
     assert(matrix_missing && !tail.join_table);
     tail.join_table = saved;
